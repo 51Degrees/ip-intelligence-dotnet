@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Platforms>AnyCPU;x86;x64</Platforms>
+    <AssemblyName>FiftyOne.IpIntelligence.Examples.OnPremise.Performance</AssemblyName>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <DefineConstants>NETCORE</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\..\Framework\OnPremise\Performance\Program.cs" Link="Program.cs" />
+  </ItemGroup>
+	
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\FiftyOne.IpIntelligence.Engine.OnPremise\FiftyOne.IpIntelligence.Engine.OnPremise.csproj" />
+    <ProjectReference Include="..\..\..\..\FiftyOne.IpIntelligence\FiftyOne.IpIntelligence.csproj" />
+    <ProjectReference Include="..\..\..\FiftyOne.IpIntelligence.Examples\FiftyOne.IpIntelligence.Examples.csproj" />
+  </ItemGroup>
+	
+</Project>

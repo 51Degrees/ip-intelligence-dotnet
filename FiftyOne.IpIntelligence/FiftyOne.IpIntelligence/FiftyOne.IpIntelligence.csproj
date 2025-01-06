@@ -1,0 +1,71 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Platforms>AnyCPU;x86;x64</Platforms>
+	<PublishRepositoryUrl>true</PublishRepositoryUrl>
+	<EmbedUntrackedSources>true</EmbedUntrackedSources>
+	<DocumentationFile>FiftyOne.IpIntelligence.xml</DocumentationFile>
+	<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+	<WarningsAsErrors />
+
+	<!-- NuGet package properties -->
+	<PackageId>FiftyOne.IpIntelligence</PackageId>
+	<Title>Shared code library for IP intelligence services for the 51Degrees Pipeline API</Title>
+	<Description>The 51Degrees Pipeline API provides a fast, modern architecture for consuming real-time digital data services. IP intelligence will provide detailed information about about the source IP address of the requests that were received by your website or service, such as location, Autonomous System Number and etc.</Description>
+	<Authors>51D_Steve;Ben51Degrees;Joseph51Degrees;TungPham51D</Authors>
+	<PackageLicenseExpression>EUPL-1.2</PackageLicenseExpression>
+	<PackageIconUrl>https://51degrees.com/portals/0/Logos/Square%20Logo.png?width=64</PackageIconUrl>
+	<Copyright>51Degrees Mobile Experts Limited</Copyright>
+	<PackageTags>51degrees,pipeline,data service,ip intelligence,ip address</PackageTags>
+	<RepositoryUrl>https://github.com/51Degrees/ip-intelligence-dotnet</RepositoryUrl>
+	<PackageProjectUrl>www.51degrees.com</PackageProjectUrl>
+	<RepositoryType>git</RepositoryType>
+	<PackageIcon>51d-logo.png</PackageIcon>
+	<NeutralLanguage>en</NeutralLanguage>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FiftyOne.IpIntelligence.Cloud\FiftyOne.IpIntelligence.Cloud.csproj" />
+    <ProjectReference Include="..\FiftyOne.IpIntelligence.Engine.OnPremise\FiftyOne.IpIntelligence.Engine.OnPremise.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Messages.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Messages.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Messages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+	
+  <ItemGroup>
+    <None Include="..\..\Images\51d-logo.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+	
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.SourceLink.AzureRepos.Git" Version="1.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+	
+</Project>

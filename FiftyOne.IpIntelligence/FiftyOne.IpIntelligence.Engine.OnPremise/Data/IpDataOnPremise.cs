@@ -1,0 +1,376 @@
+﻿/* *********************************************************************
+ * This Original Work is copyright of 51 Degrees Mobile Experts Limited.
+ * Copyright 2020 51 Degrees Mobile Experts Limited, 5 Charlotte Close,
+ * Caversham, Reading, Berkshire, United Kingdom RG4 7BY.
+ *
+ * This Original Work is licensed under the European Union Public Licence (EUPL) 
+ * v.1.2 and is subject to its terms as set out below.
+ *
+ * If a copy of the EUPL was not distributed with this file, You can obtain
+ * one at https://opensource.org/licenses/EUPL-1.2.
+ *
+ * The 'Compatible Licences' set out in the Appendix to the EUPL (as may be
+ * amended by the European Commission) shall be deemed incompatible for
+ * the purposes of the Work and the provisions of the compatibility
+ * clause in Article 5 of the EUPL shall not apply.
+ * 
+ * If using the Work as, or as part of, a network application, by 
+ * including the attribution notice(s) required under Article 5 of the EUPL
+ * in the end user terms of the application under an appropriate heading, 
+ * such notice(s) shall fulfill the requirements of that article.
+ * ********************************************************************* */
+
+using FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements;
+using FiftyOne.IpIntelligence.Engine.OnPremise.Interop;
+using FiftyOne.IpIntelligence.Engine.OnPremise.Wrappers;
+using FiftyOne.IpIntelligence.Shared;
+using FiftyOne.IpIntelligence.Shared.Data;
+using FiftyOne.Pipeline.Core.Data.Types;
+using FiftyOne.Pipeline.Core.Exceptions;
+using FiftyOne.Pipeline.Core.FlowElements;
+using FiftyOne.Pipeline.Engines.Data;
+using FiftyOne.Pipeline.Engines.Services;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+
+namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
+{
+    /// <summary>
+    /// Class used for on-premise results
+    /// </summary>
+    internal class IpDataOnPremise : IpDataBaseOnPremise<ResultsIpiSwig>, IIpDataOnPremise
+    {
+        #region Constructor
+
+        /// <summary>
+        /// Construct a new instance of the wrapper.
+        /// </summary>
+        /// <param name="logger">
+        /// The logger instance to use.
+        /// </param>
+        /// <param name="pipeline">
+        /// The Pipeline that created this data instance.
+        /// </param>
+        /// <param name="engine">
+        /// The engine that create this data instance.
+        /// </param>
+        /// <param name="missingPropertyService">
+        /// The <see cref="IMissingPropertyService"/> to use if a requested
+        /// property does not exist.
+        /// </param>
+        internal IpDataOnPremise(
+            ILogger<AspectDataBase> logger,
+            IPipeline pipeline,
+            IpiOnPremiseEngine engine,
+            IMissingPropertyService missingPropertyService)
+            : base(logger, pipeline, engine, missingPropertyService)
+        {
+        }
+
+        #endregion
+
+        #region Internal Methods
+        internal void SetResults(ResultsIpiSwig results)
+        {
+            Results.AddResult(results);
+        }
+        #endregion
+
+        #region Private Methods
+
+        private ResultsIpiSwig GetResultsContainingProperty(string propertyName)
+        {
+            foreach (var results in Results.ResultsList)
+            {
+                if (results.containsProperty(propertyName))
+                {
+                    return results;
+                }
+            }
+            return null;
+        }
+
+        #endregion
+
+        #region Protected Methods
+
+        protected override bool PropertyIsAvailable(string propertyName)
+        {
+            return Results.ResultsList
+                .Any(r => r.containsProperty(propertyName));
+        }
+
+        protected override IAspectPropertyValue<IReadOnlyList<WeightedValue<bool>>> GetValuesAsWeightedBoolList(string propertyName)
+        {
+            var result = new AspectPropertyValue<IReadOnlyList<WeightedValue<bool>>>();
+            var results = GetResultsContainingProperty(propertyName);
+
+            if (results != null)
+            {
+                using (var value = results.getValuesAsWeightedBoolList(propertyName))
+                {
+                    if (value.hasValue())
+                    {
+                        result.Value = new WeightedBoolListSwigWrapper(value.getValue());
+                    }
+                    else
+                    {
+                        result.NoValueMessage = value.getNoValueMessage();
+                    }
+                }
+            }
+            return result;
+        }
+
+        protected override IAspectPropertyValue<IReadOnlyList<WeightedValue<double>>> GetValuesAsWeightedDoubleList(string propertyName)
+        {
+            var result = new AspectPropertyValue<IReadOnlyList<WeightedValue<double>>>();
+            var results = GetResultsContainingProperty(propertyName);
+
+            if (results != null)
+            {
+                using (var value = results.getValuesAsWeightedDoubleList(propertyName))
+                {
+                    if (value.hasValue())
+                    {
+                        result.Value = new WeightedDoubleListSwigWrapper(value.getValue());
+                    }
+                    else
+                    {
+                        result.NoValueMessage = value.getNoValueMessage();
+                    }
+                }
+            }
+            return result;
+        }
+
+        protected override IAspectPropertyValue<IReadOnlyList<WeightedValue<int>>> GetValuesAsWeightedIntegerList(string propertyName)
+        {
+            var result = new AspectPropertyValue<IReadOnlyList<WeightedValue<int>>>();
+            var results = GetResultsContainingProperty(propertyName);
+
+            if (results != null)
+            {
+                using (var value = results.getValuesAsWeightedIntegerList(propertyName))
+                {
+                    if (value.hasValue())
+                    {
+                        result.Value = new WeightedIntListSwigWrapper(value.getValue());
+                    }
+                    else
+                    {
+                        result.NoValueMessage = value.getNoValueMessage();
+                    }
+                }
+            }
+            return result;
+        }
+
+        public override IAspectPropertyValue<IReadOnlyList<string>> GetValues(string propertyName)
+        {
+            var result = new AspectPropertyValue<IReadOnlyList<string>>();
+            var results = GetResultsContainingProperty(propertyName);
+
+            if (results != null)
+            {
+                using (var value = results.getValues(propertyName))
+                {
+                    if (value.hasValue())
+                    {
+                        using (var vector = value.getValue())
+                        {
+                            result.Value = vector.ToList();
+                        }
+                    }
+                    else
+                    {
+                        result.NoValueMessage = value.getNoValueMessage();
+                    }
+                }
+            }
+            return result;
+        }
+
+        protected override IAspectPropertyValue<IReadOnlyList<WeightedValue<string>>> GetValuesAsWeightedStringList(string propertyName)
+        {
+            var result = new AspectPropertyValue<IReadOnlyList<WeightedValue<string>>>();
+            var results = GetResultsContainingProperty(propertyName);
+
+            if (results != null)
+            {
+                using (var value = results.getValuesAsWeightedStringList(propertyName))
+                {
+                    if (value.hasValue())
+                    {
+                        result.Value = new WeightedStringListSwigWrapper(value.getValue());
+                    }
+                    else
+                    {
+                        result.NoValueMessage = value.getNoValueMessage();
+                    }
+                }
+            }
+            return result;
+        }
+
+        protected override IAspectPropertyValue<Coordinate> GetValueAsCoordinate(string propertyName)
+        {
+            var result = new AspectPropertyValue<Coordinate>();
+            var results = GetResultsContainingProperty(propertyName);
+
+            if (results != null)
+            {
+                using (var value = results.getValueAsCoordinate(propertyName))
+                {
+                    if (value.hasValue())
+                    {
+                        using (var coordinate = value.getValue())
+                        {
+                            result.Value = new Coordinate(coordinate.lat, coordinate.lon);
+                        }
+                    }
+                    else
+                    {
+                        result.NoValueMessage = value.getNoValueMessage();
+                    }
+                }
+            }
+            return result;
+        }
+
+        protected override IAspectPropertyValue<IPAddress> GetValueAsIpAddress(string propertyName)
+        {
+            var result = new AspectPropertyValue<IPAddress>();
+            var results = GetResultsContainingProperty(propertyName);
+
+            if (results != null)
+            {
+                using (var value = results.getValueAsIpAddress(propertyName))
+                {
+                    if (value.hasValue())
+                    {
+                        using (var addressSwig = value.getValue())
+                        {
+                            if (addressSwig.getType() != IpTypeSwig.FIFTYONE_DEGREES_EVIDENCE_IP_TYPE_INVALID) 
+                            {
+                                byte[] address = new byte[Constants.IPV6_LENGTH];
+                                addressSwig.getCopyOfIpAddress(address, (uint)address.Length);
+                                if (addressSwig.getType() == IpTypeSwig.FIFTYONE_DEGREES_EVIDENCE_IP_TYPE_IPV4)
+                                {
+                                    // Downsize the array if it is ipv4
+                                    Array.Resize(ref address, Constants.IPV4_LENGTH);
+                                }
+                                result.Value = new IPAddress(address);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        result.NoValueMessage = value.getNoValueMessage();
+                    }
+                }
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Try to get the value for the specified key.
+        /// This overrides the base implementation to get values using
+        /// the abstract methods on this class rather than using the
+        /// dictionary-based storage mechanism from the base-class.
+        /// </summary>
+        /// <typeparam name="T">
+        /// The expected type of the resulting value.
+        /// </typeparam>
+        /// <param name="key">
+        /// The key to use to retrieve the value.
+        /// </param>
+        /// <param name="value">
+        /// Out parameter that will be populated with the value.
+        /// </param>
+        /// <returns>
+        /// True if that value was retrieved successfully. False if not.
+        /// </returns>
+        /// <exception cref="PipelineException">
+        /// Thrown if the value was not of the expected type.
+        /// </exception>
+        protected override bool TryGetValue<T>(string key, out T value)
+        {
+            var result = base.TryGetValue(key, out value);
+            if (result == false &&
+                Results.HasResults())
+            {
+                object obj = null;
+                if (key != null && key.Equals("NetworkId", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    obj = GetNetworkId();
+                    result = true;
+                }
+
+                // Result value if result is found
+                if (result)
+                {
+                    try
+                    {
+                        value = (T)obj;
+                    }
+                    catch (InvalidCastException)
+                    {
+                        throw new PipelineException(
+                            $"Expected property '{key}' to be of " +
+                            $"type '{typeof(T).Name}' but it is " +
+                            $"'{obj.GetType().Name}'");
+                    }
+                }
+            }
+            return result;
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private IAspectPropertyValue<string> GetNetworkId()
+        {
+            if (Results.ResultsList.Count == 1)
+            {
+                // Only one Engine has added results, so return the network
+                // id from those results.
+                return new AspectPropertyValue<string>(
+                    Results.ResultsList[0].getNetworkId());
+            }
+            else
+            {
+                // Multiple Engines have added results, so construct a network
+                // id from the results.
+                var result = new List<string>();
+                var networkIds = new List<IList<string>>();
+                foreach (var results in Results.ResultsList)
+                {
+                    networkIds.Add(results.getNetworkId().Split('|'));
+                }
+                for (var i = 0; i < networkIds.Max(d => d.Count); i++)
+                {
+                    var weightedProfileId = "0:0";
+                    foreach (var networkId in networkIds)
+                    {
+                        if (networkId.Count > i &&
+                            networkId[i].Equals("0:0", StringComparison.Ordinal) == false)
+                        {
+                            weightedProfileId = networkId[i];
+                            break;
+                        }
+                    }
+                    result.Add(weightedProfileId);
+                }
+                return new AspectPropertyValue<string>(
+                    string.Join("|", result));
+            }
+        }
+
+        #endregion
+    }
+}

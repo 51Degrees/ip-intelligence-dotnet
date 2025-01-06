@@ -1,0 +1,154 @@
+trigger: none
+
+variables:
+  - group: InternalKeys
+
+stages:
+
+- stage: Data
+  jobs:
+  - job: Get_Enterprise_DataFile
+    pool:
+      name: Hosted Ubuntu 1604
+
+    steps:
+    
+    - script: |
+        curl "https://distributor.51degrees.com/api/v2/download?LicenseKeys=$(IpiLicenseKey)&Type=IPIV41&Download=True&Product=V4Enterprise" --output Enterprise-ListV41.ipi.gz
+      displayName: 'Download Latest Data File'
+
+    - task: ExtractFiles@1
+      displayName: 'Extract Data File'
+      inputs:
+        archiveFilePatterns: 'Enterprise-ListV41.ipi.gz'
+        cleanDestinationFolder: false
+
+    - script: |
+          mv $(Build.SourcesDirectory)/Enterprise-ListV41.ipi  $(Build.ArtifactStagingDirectory)/Enterprise-ListV41.ipi
+      displayName: 'Move Data File'
+
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'enterpriseFile'
+        publishLocation: 'Container'
+
+- stage: BuildAndTest
+  jobs:
+  - job:
+
+    timeoutInMinutes: 180
+    
+    pool:
+      vmImage: 'windows-2019'
+    
+    # Configure this to run for both Debug and Release configurations
+    strategy:
+      maxParallel: 4
+      matrix:
+        debug x64:
+          BuildConfiguration: Debug
+          BuildPlatform: x64
+        release x64:
+          BuildConfiguration: Release  
+          BuildPlatform: x64      
+    
+    
+    variables: 
+      RestoreBuildProjects: '*.sln'
+      TestProjects: '**/*[Tt]ests/**/*.csproj'
+    
+    steps:
+    # Get the data files that are required for IP intelligence automated system tests.    
+    - checkout: self
+      lfs: true
+      submodules: recursive
+
+    - task: DownloadBuildArtifacts@0
+      displayName: 'Download Enterprise Data File'
+      inputs:
+        buildType: 'current'
+        downloadType: 'single'
+        artifactName: 'enterpriseFile'
+        downloadPath: '$(System.ArtifactsDirectory)'
+
+    - script: |
+          mv $(System.ArtifactsDirectory)\enterpriseFile\Enterprise-ListV41.ipi  $(Build.SourcesDirectory)\FiftyOne.IpIntelligence\ip-intelligence-cxx\ip-intelligence-data\51Degrees-LiteV4.1.ipi
+          ls $(Build.SourcesDirectory)\FiftyOne.IpIntelligence\ip-intelligence-cxx\ip-intelligence-data
+      displayName: 'Move Data File'
+    
+    # Install NuGet and restore packages
+    - task: NuGetToolInstaller@0
+      displayName: 'Use NuGet 5.5.1'
+      inputs:
+        versionSpec: 5.5.1
+    
+    - task: NuGetCommand@2
+      displayName: 'NuGet restore'
+      inputs:
+        command: 'restore'
+        restoreSolution: '$(RestoreBuildProjects)'
+        feedsToUse: 'select'
+        vstsFeed: 'd2431f86-c1e6-4d8b-8d27-311cf3614847'
+    
+    # Build
+    - task: VSBuild@1
+      displayName: 'Build solutions'
+      inputs:
+        solution: '$(RestoreBuildProjects)'
+        vsVersion: '16.0'
+        platform: '$(BuildPlatform)'
+        configuration: '$(BuildConfiguration)'
+        clean: true
+        msbuildArchitecture: '$(BuildPlatform)'
+    
+    
+    - task: VisualStudioTestPlatformInstaller@1
+      displayName: 'Visual Studio Test Platform Installer'
+      inputs:
+        versionSelector: latestStable
+        
+    - task: VSTest@2
+      displayName: 'VsTest - testAssemblies - dotnet framework'
+      inputs:
+        testSelector: 'testAssemblies'
+        testAssemblyVer2: |
+          **\$(BuildPlatform)\**\net4*\*Tests*.dll
+          !**\*TestAdapter*.dll
+          !**\*TestFramework*.dll
+          !**\obj\**
+        searchFolder: '$(System.DefaultWorkingDirectory)'
+        otherConsoleOptions: '/Framework:net462 /Platform:$(BuildPlatform) /logger:console;verbosity="normal"'
+        platform: '$(BuildPlatform)'
+        configuration: '$(BuildConfiguration)'
+        diagnosticsEnabled: true
+        testRunTitle: 'framework-$(BuildConfiguration)-$(BuildPlatform)'
+        vsTestVersion: toolsInstaller
+        # Disabled these options for now as it is not finding the framework tests correctly on the build agent.
+        #minimumExpectedTests: '1'
+        #failOnMinTestsNotRun: true
+    
+    - task: VSTest@2
+      displayName: 'VsTest - testAssemblies - dotnet core'
+      inputs:
+        testSelector: 'testAssemblies'
+        testAssemblyVer2: |
+          **\$(BuildPlatform)\**\netcoreapp*\*Tests*.dll
+          !**\*TestAdapter*.dll
+          !**\*TestFramework*.dll
+          !**\obj\**
+        searchFolder: '$(System.DefaultWorkingDirectory)'
+        codeCoverageEnabled: true
+        otherConsoleOptions: '/Framework:netcoreapp3.1 /Platform:$(BuildPlatform) /logger:console;verbosity="normal"'
+        platform: '$(BuildPlatform)'
+        configuration: '$(BuildConfiguration)'
+        diagnosticsEnabled: true
+        testRunTitle: 'core-$(BuildConfiguration)-$(BuildPlatform)'
+        minimumExpectedTests: '1'
+        failOnMinTestsNotRun: true
+        vsTestVersion: toolsInstaller
+      condition: succeededOrFailed()
+    
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Artifact'
+      condition: succeededOrFailed()

@@ -1,0 +1,483 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FiftyOne.IpIntelligence</name>
+    </assembly>
+    <members>
+        <member name="T:FiftyOne.IpIntelligence.IpiCloudPipelineBuilder">
+            <summary>
+            Builder used to create pipelines with an cloud-based 
+            IP intelligence engine.
+            </summary>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.IpiCloudPipelineBuilder.#ctor(Microsoft.Extensions.Logging.ILoggerFactory,System.Net.Http.HttpClient)">
+            <summary>
+            Internal Constructor.
+            This builder should only be created through the 
+            <see cref="T:FiftyOne.IpIntelligence.IpiPipelineBuilder"/> 
+            </summary>
+            <param name="loggerFactory"></param>
+            <param name="httpClient"></param>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.IpiCloudPipelineBuilder.Build">
+            <summary>
+            Build the pipeline using the configured values.
+            </summary>
+            <returns>
+            A new <see cref="T:FiftyOne.Pipeline.Core.FlowElements.IPipeline"/> instance that contains a 
+            <see cref="T:FiftyOne.Pipeline.CloudRequestEngine.FlowElements.CloudRequestEngine"/> for making requests
+            to the 51Degrees cloud service and a 
+            <see cref="T:FiftyOne.IpIntelligence.Cloud.FlowElements.IpiCloudEngine"/> to interpret the
+            IP intelligence results.
+            </returns>
+        </member>
+        <member name="T:FiftyOne.IpIntelligence.IpiOnPremisePipelineBuilder">
+            <summary>
+            Builder used to create pipelines with an on-premise 
+            IP intelligence engine.
+            </summary>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.IpiOnPremisePipelineBuilder.#ctor(Microsoft.Extensions.Logging.ILoggerFactory,FiftyOne.Pipeline.Engines.Services.IDataUpdateService,System.Net.Http.HttpClient)">
+            <summary>
+            Internal constructor
+            This builder should only be created through the 
+            <see cref="T:FiftyOne.IpIntelligence.IpiPipelineBuilder"/> 
+            </summary>
+            <param name="loggerFactory">
+            The <see cref="T:Microsoft.Extensions.Logging.ILoggerFactory"/> to use when creating loggers.
+            </param>
+            <param name="dataUpdateService">
+            The <see cref="T:FiftyOne.Pipeline.Engines.Services.IDataUpdateService"/> to use when registering 
+            data files for automatic updates.
+            </param>
+            <param name="httpClient">
+            The <see cref="T:System.Net.Http.HttpClient"/> to use for any web requests.
+            </param>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.IpiOnPremisePipelineBuilder.SetFilename(System.String,System.Boolean)">
+            <summary>
+            Set the filename of the IP intelligence data file that the
+            engine should use.
+            </summary>
+            <param name="filename">
+            The data file
+            </param>
+            <param name="createTempDataCopy">
+            </param>
+            <returns>
+            This builder instance.
+            </returns>
+            <exception cref="T:FiftyOne.Pipeline.Core.Exceptions.PipelineConfigurationException">
+            Thrown if the filename has an unknown extension.
+            </exception>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.IpiOnPremisePipelineBuilder.SetFilename(System.String,System.String,System.Boolean)">
+            <summary>
+            Set the filename of the IP intelligence data file that the
+            engine should use.
+            </summary>
+            <param name="filename">
+            The data file
+            </param>
+            <param name="key">
+            The license key to use when checking for updates to the
+            data file.
+            This parameter can be set to null, but doing so will disable 
+            automatic updates. 
+            </param>
+            <param name="createTempDataCopy">
+            True to create a temporary copy of the data file when 
+            the engine is built.
+            This is required in order for automatic updates
+            to work correctly.
+            </param>
+            <returns>
+            This builder instance.
+            </returns>
+            <exception cref="T:FiftyOne.Pipeline.Core.Exceptions.PipelineConfigurationException">
+            Thrown if the filename has an unknown extension.
+            </exception>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.IpiOnPremisePipelineBuilder.SetEngineData(System.IO.Stream)">
+            <summary>
+            Set the byte array to use as a data source when 
+            creating the engine.
+            </summary>
+            <param name="dataStream">
+            The entire IP intelligence data file as a <see cref="T:System.IO.Stream"/>.
+            </param>
+            <returns>
+            This builder instance.
+            </returns>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.IpiOnPremisePipelineBuilder.SetEngineData(System.IO.Stream,System.String)">
+            <summary>
+            Set the byte array to use as a data source when 
+            creating the engine.
+            </summary>
+            <param name="dataStream">
+            The entire IP intelligence data file as a <see cref="T:System.IO.Stream"/>.
+            </param>
+            <param name="key">
+            The license key to use when checking for updates to the
+            data file.
+            This parameter can be set to null, but doing so will disable 
+            automatic updates. 
+            </param>
+            <returns>
+            This builder instance.
+            </returns>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.IpiOnPremisePipelineBuilder.SetShareUsage(System.Boolean)">
+            <summary>
+            Set share usage enabled/disabled.
+            Defaults to enabled.
+            </summary>
+            <param name="enabled">
+            true to enable usage sharing. False to disable.
+            </param>
+            <returns>
+            This builder instance.
+            </returns>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.IpiOnPremisePipelineBuilder.SetAutoUpdate(System.Boolean)">
+            <summary>
+            Enable/Disable auto update.
+            Defaults to enabled.
+            If enabled, the auto update system will automatically download
+            and apply new data files for IP Intelligence.
+            </summary>
+            <param name="enabled">
+            true to enable auto update. False to disable.
+            </param>
+            <returns>
+            This builder instance.
+            </returns>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.IpiOnPremisePipelineBuilder.SetDataUpdateOnStartUp(System.Boolean)">
+            <summary>
+            Enable/Disable update on startup.
+            Defaults to enabled.
+            If enabled, the auto update system will be used to check for
+            an update before the IP intelligence engine is created.
+            If an update is available, it will be downloaded and applied
+            before the pipeline is built and returned for use so this may 
+            take some time.
+            </summary>
+            <param name="enabled">
+            True to enable update on startup. False to disable.
+            </param>
+            <returns>
+            This builder.
+            </returns>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.IpiOnPremisePipelineBuilder.SetDataUpdateLicenseKey(System.String)">
+            <summary>
+            Set the license key used when checking for new 
+            IP intelligence data files.
+            Defaults to null.
+            </summary>
+            <param name="key">
+            The license key
+            </param>
+            <returns>
+            This builder instance.
+            </returns>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.IpiOnPremisePipelineBuilder.SetUpdatePollingInterval(System.Int32)">
+            <summary>
+            Set the time between checks for a new data file made by the FiftyOne.Pipeline.Engines.Services.DataUpdateService.
+            Default = 30 minutes.
+            </summary>
+            <param name="pollingIntervalSeconds">
+            The number of seconds between checks.
+            </param>
+            <returns>
+            This builder instance.
+            </returns>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.IpiOnPremisePipelineBuilder.SetUpdatePollingInterval(System.TimeSpan)">
+            <summary>
+            Set the time between checks for a new data file made by the FiftyOne.Pipeline.Engines.Services.DataUpdateService.
+            Default = 30 minutes.
+            </summary>
+            <param name="pollingInterval">
+            The time between checks.
+            </param>
+            <returns>
+            This builder instance.
+            </returns>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.IpiOnPremisePipelineBuilder.SetUpdateRandomisationMax(System.Int32)">
+            <summary>
+            A random element can be added to the FiftyOne.Pipeline.Engines.Services.DataUpdateService
+            polling interval. This option sets the maximum length of this random addition.
+            Default = 10 minutes.
+            </summary>
+            <param name="maximumDeviationSeconds">
+            The maximum time added to the data update polling interval.
+            </param>
+            <returns>
+            This builder instance.
+            </returns>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.IpiOnPremisePipelineBuilder.SetUpdateRandomisationMax(System.TimeSpan)">
+            <summary>
+            A random element can be added to the FiftyOne.Pipeline.Engines.Services.DataUpdateService
+            polling interval. This option sets the maximum length of this random addition.
+            Default = 10 minutes.
+            </summary>
+            <param name="maximumDeviation">
+            The maximum time added to the data update polling interval.
+            </param>
+            <returns>
+            This builder instance.
+            </returns>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.IpiOnPremisePipelineBuilder.SetPerformanceProfile(FiftyOne.Pipeline.Engines.PerformanceProfiles)">
+            <summary>
+            Set the performance profile for the IP intelligence engine.
+            Defaults to balanced.
+            </summary>
+            <param name="profile">
+            The performance profile to use.
+            </param>
+            <returns>
+            This builder instance.
+            </returns>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.IpiOnPremisePipelineBuilder.SetConcurrency(System.UInt16)">
+            <summary>
+            Set the expected number of concurrent operations using the engine.
+            This sets the concurrency of the internal caches to avoid excessive
+            locking.
+            </summary>
+            <param name="concurrency">Expected concurrent accesses</param>
+            <returns>This builder</returns>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.IpiOnPremisePipelineBuilder.SetDataFileSystemWatcher(System.Boolean)">
+            <summary>
+            The <see cref="T:FiftyOne.Pipeline.Engines.Services.DataUpdateService"/> has the ability to watch a 
+            file on disk and refresh the engine as soon as that file is 
+            updated.
+            This setting enables/disables that feature.
+            </summary>
+            <param name="enabled">
+            Pass true to enable the feature.
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.IpiOnPremisePipelineBuilder.Build">
+            <summary>
+            Build and return a pipeline that can perform IP intelligence.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.IpiOnPremisePipelineBuilder.ConfigureAndBuild``2(FiftyOne.IpIntelligence.Shared.FlowElements.OnPremiseIpiEngineBuilderBase{``0,``1})">
+            <summary>
+            Private method used to set configuration options
+            </summary>
+            <typeparam name="TBuilder">
+            The type of the builder. Can be inferred from the builder parameter.
+            </typeparam>
+            <typeparam name="TEngine">
+            The type of the engine. Can be inferred from the builder parameter.
+            </typeparam>
+            <param name="builder">
+            The builder to configure.
+            </param>
+            <returns>
+            A new IP intelligence engine instance.
+            </returns>
+        </member>
+        <member name="T:FiftyOne.IpIntelligence.IpiPipelineBuilder">
+            <summary>
+            Builder used to create a Pipeline with a IP intelligence engine.
+            </summary>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.IpiPipelineBuilder.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.IpiPipelineBuilder.#ctor(Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="loggerFactory">
+            The factory to use for creating loggers within the pipeline.
+            </param>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.IpiPipelineBuilder.#ctor(Microsoft.Extensions.Logging.ILoggerFactory,System.Net.Http.HttpClient)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="loggerFactory">
+            The factory to use for creating loggers within the pipeline.
+            </param>
+            <param name="httpClient">
+            The HTTP client to use within the pipeline.
+            </param>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.IpiPipelineBuilder.#ctor(Microsoft.Extensions.Logging.ILoggerFactory,System.Net.Http.HttpClient,FiftyOne.Pipeline.Engines.Services.IDataUpdateService)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="loggerFactory">
+            The factory to use for creating loggers within the pipeline.
+            </param>
+            <param name="httpClient">
+            The HTTP client to use within the pipeline.
+            </param>
+            <param name="dataUpdateService">
+            The DataUpdateService to use when checking for data updates.
+            </param>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.IpiPipelineBuilder.UseCloud(System.String)">
+            <summary>
+            Use the 51Degrees Cloud service to perform IP intelligence.
+            </summary>
+            <param name="resourceKey">
+            The resource key to use when querying the cloud service. 
+            Obtain one from https://configure.51degrees.com
+            </param>
+            <returns>
+            A builder that can be used to configure and build a pipeline
+            that will use the cloud IP intelligence engine.
+            </returns>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.IpiPipelineBuilder.UseCloud(System.String,System.String)">
+            <summary>
+            Use the 51Degrees Cloud service to perform IP intelligence.
+            </summary>
+            <param name="resourceKey">
+            The resource key to use when querying the cloud service. 
+            Obtain one from https://configure.51degrees.com
+            </param>
+            <param name="endpoint">
+            The 51Degrees Cloud URL.
+            </param>
+            <returns>
+            A builder that can be used to configure and build a pipeline
+            that will use the cloud IP intelligence engine.
+            </returns>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.IpiPipelineBuilder.UseOnPremise(System.String,System.Boolean)">
+            <summary>
+            Use a 51Degrees on-premise IP intelligence engine to 
+            perform IP intelligence.
+            </summary>
+            <param name="datafile">
+            The full path to the IP intelligence data file.
+            </param>
+            <param name="createTempDataCopy">
+            If true, the engine will create a temporary copy of the data 
+            file rather than using the data file directly.
+            </param>
+            <returns>
+            A builder that can be used to configure and build a pipeline
+            that will use the on-premise IP intelligence engine.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown if a required parameter is null
+            </exception>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.IpiPipelineBuilder.UseOnPremise(System.String,System.String,System.Boolean)">
+            <summary>
+            Use a 51Degrees on-premise IP intelligence engine to 
+            perform IP intelligence.
+            </summary>
+            <param name="datafile">
+            The full path to the IP intelligence data file.
+            </param>
+            <param name="key">
+            The license key to use when checking for updates to the
+            data file.
+            A license key can be obtained from the 
+            [51Degrees website](https://www.51degrees.com/pricing).
+            If you have no license key then this parameter can be 
+            set to null, but doing so will disable automatic updates. 
+            </param>
+            <param name="createTempDataCopy">
+            If true, the engine will create a temporary copy of the data 
+            file rather than using the data file directly.
+            This is required in order for automatic updates to work 
+            correctly.
+            </param>
+            <returns>
+            A builder that can be used to configure and build a pipeline
+            that will use the on-premise IP intelligence engine.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown if a required parameter is null
+            </exception>
+            <seealso cref="M:FiftyOne.IpIntelligence.IpiPipelineBuilder.UseOnPremise(System.IO.Stream,System.String)"/>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.IpiPipelineBuilder.UseOnPremise(System.IO.Stream)">
+            <summary>
+            Use a 51Degrees on-premise IP intelligence engine to 
+            perform IP intelligence.
+            </summary>
+            <param name="dataStream">
+            The IP intelligence data file as a <see cref="T:System.IO.Stream"/>.
+            </param>
+            <returns>
+            A builder that can be used to configure and build a pipeline
+            that will use the on-premise IP intelligence engine.
+            </returns>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.IpiPipelineBuilder.UseOnPremise(System.IO.Stream,System.String)">
+            <summary>
+            Use a 51Degrees on-premise IP intelligence engine to 
+            perform IP intelligence.
+            </summary>
+            <param name="dataStream">
+            The IP intelligence data file as a <see cref="T:System.IO.Stream"/>.
+            </param>
+            <param name="key">
+            The license key to use when checking for updates to the
+            data file.
+            A license key can be obtained from the 
+            [51Degrees website](https://www.51degrees.com/pricing).
+            If you have no license key then this parameter can be 
+            set to null, but doing so will disable automatic updates. 
+            </param>
+            <returns>
+            A builder that can be used to configure and build a pipeline
+            that will use the on-premise IP intelligence engine.
+            </returns>
+            <seealso cref="M:FiftyOne.IpIntelligence.IpiPipelineBuilder.UseOnPremise(System.String,System.String,System.Boolean)"/>
+        </member>
+        <member name="T:FiftyOne.IpIntelligence.Messages">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Messages.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Messages.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Messages.ExceptionErrorOnStartup">
+            <summary>
+              Looks up a localized string similar to Unexpected error creating IP intelligence engine..
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Messages.ExceptionNoEngineData">
+            <summary>
+              Looks up a localized string similar to No source for engine data. Use SetFilename or SetEngineData to configure this..
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Messages.ExceptionUnrecognizedFileExtension">
+            <summary>
+              Looks up a localized string similar to Unrecognized filename &apos;{0}&apos;. Expected a &apos;*.ipi&apos; IP intelligence data file..
+            </summary>
+        </member>
+    </members>
+</doc>

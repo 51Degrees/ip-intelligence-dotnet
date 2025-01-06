@@ -1,0 +1,3 @@
+[submodule "FiftyOne.IpIntelligence/ip-intelligence-cxx"]
+	path = FiftyOne.IpIntelligence/ip-intelligence-cxx
+url=../ip-intelligence-cxx
