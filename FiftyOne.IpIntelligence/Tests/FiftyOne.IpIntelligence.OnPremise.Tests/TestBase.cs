@@ -67,10 +67,10 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests
         protected void TestInitialize(PerformanceProfiles profile)
         {
             Wrapper = new WrapperOnPremise(
-                Utils.GetFilePath(Constants.IPI_DATA_FILE_NAME),
+                TestHelpers.Utils.GetFilePath(Constants.IPI_DATA_FILE_NAME),
                 profile);
             IpAddresses = new IpAddressGenerator(
-                Utils.GetFilePath(Constants.IP_FILE_NAME));
+                TestHelpers.Utils.GetFilePath(Constants.IP_FILE_NAME));
         }
 
     }

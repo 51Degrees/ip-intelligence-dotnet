@@ -19,6 +19,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="FiftyOne.Pipeline.Engines" Version="4.4.122" />
+    <PackageReference Include="FiftyOne.Pipeline.Engines.FiftyOne" Version="4.4.122" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\..\..\..\FiftyOne.IpIntelligence.Engine.OnPremise\FiftyOne.IpIntelligence.Engine.OnPremise.csproj" />
     <ProjectReference Include="..\..\..\..\..\FiftyOne.IpIntelligence\FiftyOne.IpIntelligence.csproj" />
     <ProjectReference Include="..\..\..\..\FiftyOne.IpIntelligence.Examples\FiftyOne.IpIntelligence.Examples.csproj" />

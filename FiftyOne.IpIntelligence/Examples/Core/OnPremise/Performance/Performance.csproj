@@ -14,6 +14,10 @@
   <ItemGroup>
     <Compile Include="..\..\..\Framework\OnPremise\Performance\Program.cs" Link="Program.cs" />
   </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FiftyOne.Pipeline.Core" Version="4.4.122" />
+  </ItemGroup>
 	
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\FiftyOne.IpIntelligence.Engine.OnPremise\FiftyOne.IpIntelligence.Engine.OnPremise.csproj" />

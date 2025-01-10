@@ -21,7 +21,7 @@
  * ********************************************************************* */
 
 using FiftyOne.IpIntelligence.Engine.OnPremise.Interop;
-using FiftyOne.Pipeline.Core.Data.Types;
+using FiftyOne.IpIntelligence.Shared.Data;
 using System;
 using System.Collections;
 using System.Collections.Generic;

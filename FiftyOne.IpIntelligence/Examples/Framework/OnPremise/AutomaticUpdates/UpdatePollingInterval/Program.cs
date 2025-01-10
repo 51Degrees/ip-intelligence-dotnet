@@ -22,6 +22,7 @@
 
 using FiftyOne.IpIntelligence;
 using FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements;
+using FiftyOne.Pipeline.Core;
 using FiftyOne.Pipeline.Core.FlowElements;
 using FiftyOne.Pipeline.Engines.Services;
 using Microsoft.Extensions.Logging;

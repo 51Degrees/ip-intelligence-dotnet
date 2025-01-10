@@ -20,7 +20,7 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
-using FiftyOne.Pipeline.Core.Data.Types;
+using FiftyOne.IpIntelligence.Shared.Data;
 using FiftyOne.Pipeline.Engines;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;

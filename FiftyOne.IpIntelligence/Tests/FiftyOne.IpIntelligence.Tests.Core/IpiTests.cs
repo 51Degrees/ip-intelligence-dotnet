@@ -42,7 +42,7 @@ namespace FiftyOne.IpIntelligence.Tests.Core
     public class IpiTests
     {
         private static IpAddressGenerator IP_ADDRESSES = new IpAddressGenerator(
-            Utils.GetFilePath(Constants.IP_FILE_NAME));
+            TestHelpers.Utils.GetFilePath(Constants.IP_FILE_NAME));
 
         [DataTestMethod]
         // ******** IP intelligence with a single thread *********
@@ -130,7 +130,7 @@ namespace FiftyOne.IpIntelligence.Tests.Core
             bool useLazyLoading,
             bool multiThreaded)
         {
-            var datafile = Utils.GetFilePath(datafileName);
+            var datafile = TestHelpers.Utils.GetFilePath(datafileName);
             var updateService = new Mock<IDataUpdateService>();
 
             // Configure the pipeline builder based on the 
