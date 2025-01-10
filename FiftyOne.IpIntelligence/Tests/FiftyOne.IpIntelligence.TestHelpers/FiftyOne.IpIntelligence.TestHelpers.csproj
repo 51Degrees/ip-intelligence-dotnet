@@ -10,9 +10,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\..\ip-intelligence-cxx\ip-intelligence-data\20000 IP Addresses.csv" Link="20000 IP Addresses.csv">
+    <!-- <None Include="..\..\ip-intelligence-cxx\ip-intelligence-data\20000 IP Addresses.csv" Link="20000 IP Addresses.csv">
     	<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </None> -->
     <None Include="..\..\ip-intelligence-cxx\ip-intelligence-data\51Degrees-LiteV4.1.ipi" Link="51Degrees-LiteV4.1.ipi">
     	<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
