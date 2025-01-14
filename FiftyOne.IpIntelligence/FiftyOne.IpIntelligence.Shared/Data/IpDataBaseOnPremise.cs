@@ -369,7 +369,7 @@ namespace FiftyOne.IpIntelligence.Shared.Data
                                     $"type {property.Type.Name}");
                             }
                         };
-                        PopulateFromDictionary(dict);
+                        PopulateFrom(dict);
                         _dictionaryPopulated = true;
                     }
                 }

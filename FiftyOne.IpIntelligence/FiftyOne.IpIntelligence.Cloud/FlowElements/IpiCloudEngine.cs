@@ -126,7 +126,7 @@ namespace FiftyOne.IpIntelligence.Cloud.FlowElements
                     });
 
                 var ip = CreateAPVDictionary(propertyValues, Properties.ToList());
-                aspectData.PopulateFromDictionary(ip);
+                aspectData.PopulateFrom(ip);
             }
         }
 
