@@ -71,7 +71,7 @@ using Microsoft.Extensions.DependencyInjection;
 ///       {
 ///         "BuilderName": "IpiOnPremiseEngineBuilder",
 ///         "BuildParameters": {
-///           "DataFile": "51Degrees-LiteV4.1.ipi",
+///           "DataFile": "IpIntelligence-LiteV4.1.ipi",
 ///           "CreateTempDataCopy": false,
 ///           "AutoUpdate": false,
 ///           "PerformanceProfile": "LowMemory",
