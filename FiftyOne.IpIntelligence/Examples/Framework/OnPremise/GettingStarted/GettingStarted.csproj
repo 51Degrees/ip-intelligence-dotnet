@@ -137,13 +137,13 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="FiftyOne.Caching">
-      <Version>4.1.9</Version>
+      <Version>4.4.20</Version>
     </PackageReference>
     <PackageReference Include="FiftyOne.Common">
-      <Version>4.1.7</Version>
+      <Version>4.4.22</Version>
     </PackageReference>
     <PackageReference Include="FiftyOne.Pipeline.Engines.FiftyOne">
-      <Version>4.4.122</Version>
+      <Version>4.5.0-alpha.3</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder">
       <Version>2.1.10</Version>
@@ -152,7 +152,7 @@
       <Version>6.0.1</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
-      <Version>11.0.2</Version>
+      <Version>13.0.3</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
