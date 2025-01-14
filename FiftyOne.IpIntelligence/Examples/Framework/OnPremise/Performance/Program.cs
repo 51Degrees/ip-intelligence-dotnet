@@ -166,10 +166,10 @@ namespace FiftyOne.IpIntelligence.Examples.OnPremise.Performance
         static void Main(string[] args)
         {
 #if NETCORE
-            var defaultDataFile = "..\\..\\..\\..\\..\\..\\..\\..\\ip-intelligence-cxx\\ip-intelligence-data\\IpIntelligence-LiteV4.1.ipi";
+            var defaultDataFile = "..\\..\\..\\..\\..\\..\\..\\..\\ip-intelligence-cxx\\ip-intelligence-data\\51Degrees-LiteV4.1.ipi";
             var defaultIpFile = "..\\..\\..\\..\\..\\..\\..\\..\\ip-intelligence-cxx\\ip-intelligence-data\\20000 IP Addresses.csv";
 #else
-            var defaultDataFile = "..\\..\\..\\..\\..\\..\\..\\ip-intelligence-cxx\\ip-intelligence-data\\IpIntelligence-LiteV4.1.ipi";
+            var defaultDataFile = "..\\..\\..\\..\\..\\..\\..\\ip-intelligence-cxx\\ip-intelligence-data\\51Degrees-LiteV4.1.ipi";
             var defaultIpFile = "..\\..\\..\\..\\..\\..\\..\\ip-intelligence-cxx\\ip-intelligence-data\\20000 IP Addresses.csv";
 #endif
             var dataFile = args.Length > 0 ? args[0] : defaultDataFile;

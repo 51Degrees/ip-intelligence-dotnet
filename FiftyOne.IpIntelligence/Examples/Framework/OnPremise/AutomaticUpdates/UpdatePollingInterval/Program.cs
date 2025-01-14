@@ -46,7 +46,7 @@ using System.Net.Http;
 /// 
 /// Expected output:
 /// ```
-/// Using data file at 'IpIntelligence-LiteV4.1.ipi'
+/// Using data file at '51Degrees-LiteV4.1.ipi'
 /// Data file published date: 13/04/2020 00:00:00
 /// The pipeline has now been set up to poll for updates every ...
 /// Update started for ...
@@ -159,9 +159,9 @@ namespace FiftyOne.IpIntelligence.Examples.OnPremise.AutomaticUpdates.UpdatePoll
             }
 
 #if NETCORE
-            var defaultDataFile = "..\\..\\..\\..\\..\\..\\..\\..\\..\\ip-intelligence-cxx\\ip-intelligence-data\\IpIntelligence-LiteV4.1.ipi";
+            var defaultDataFile = "..\\..\\..\\..\\..\\..\\..\\..\\..\\ip-intelligence-cxx\\ip-intelligence-data\\51Degrees-LiteV4.1.ipi";
 #else
-            var defaultDataFile = "..\\..\\..\\..\\..\\..\\..\\..\\ip-intelligence-cxx\\ip-intelligence-data\\IpIntelligence-LiteV4.1.ipi";
+            var defaultDataFile = "..\\..\\..\\..\\..\\..\\..\\..\\ip-intelligence-cxx\\ip-intelligence-data\\51Degrees-LiteV4.1.ipi";
 #endif
             var dataFile = args.Length > 0 ? args[0] : defaultDataFile;
             new Example().Run(dataFile, licenseKey);
