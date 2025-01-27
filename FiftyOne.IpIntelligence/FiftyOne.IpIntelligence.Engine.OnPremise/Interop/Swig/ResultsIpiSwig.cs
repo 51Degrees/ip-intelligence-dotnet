@@ -107,6 +107,18 @@ internal class ResultsIpiSwig : ResultsBaseSwig {
     return ret;
   }
 
+  public WeightedCoordinateListValueSwig getValuesAsWeightedCoordinateList(string propertyName) {
+    WeightedCoordinateListValueSwig ret = new WeightedCoordinateListValueSwig(IpIntelligenceEngineModulePINVOKE.ResultsIpiSwig_getValuesAsWeightedCoordinateList__SWIG_0(swigCPtr, propertyName), true);
+    if (IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Pending) throw IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Retrieve();
+    return ret;
+  }
+
+  public WeightedCoordinateListValueSwig getValuesAsWeightedCoordinateList(int requiredPropertyIndex) {
+    WeightedCoordinateListValueSwig ret = new WeightedCoordinateListValueSwig(IpIntelligenceEngineModulePINVOKE.ResultsIpiSwig_getValuesAsWeightedCoordinateList__SWIG_1(swigCPtr, requiredPropertyIndex), true);
+    if (IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Pending) throw IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Retrieve();
+    return ret;
+  }
+
   public CoordinateValueSwig getValueAsCoordinate(string propertyName) {
     CoordinateValueSwig ret = new CoordinateValueSwig(IpIntelligenceEngineModulePINVOKE.ResultsIpiSwig_getValueAsCoordinate__SWIG_0(swigCPtr, propertyName), true);
     if (IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Pending) throw IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Retrieve();

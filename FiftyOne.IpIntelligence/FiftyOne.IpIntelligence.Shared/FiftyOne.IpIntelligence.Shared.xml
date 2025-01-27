@@ -545,16 +545,29 @@
             <see cref="T:FiftyOne.Pipeline.Engines.Data.IAspectPropertyValue"/> instance.
             </returns>
         </member>
-        <member name="M:FiftyOne.IpIntelligence.Shared.Data.IpDataBaseOnPremise`1.GetValuesAsWeightedIntegerList(System.String)">
+        <member name="M:FiftyOne.IpIntelligence.Shared.Data.IpDataBaseOnPremise`1.GetValuesAsWeightedCoordinateList(System.String)">
             <summary>
-            Get weighted integer values this instance has for the specified property
+            Get weighted double values this instance has for the specified property
             </summary>
             <param name="propertyName">
             The name of the property to get value for.
             </param>
             <returns>
             A list of <see cref="T:FiftyOne.IpIntelligence.Shared.Data.WeightedValue`1"/> of
-            <see cref="T:System.Int32"/> wrapped in a 
+            <see cref="T:System.Double"/> wrapped in a 
+            <see cref="T:FiftyOne.Pipeline.Engines.Data.IAspectPropertyValue"/> instance.
+            </returns>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Shared.Data.IpDataBaseOnPremise`1.GetValuesAsWeightedIntegerList(System.String)">
+            <summary>
+            Get weighted Coordinate values this instance has for the specified property
+            </summary>
+            <param name="propertyName">
+            The name of the property to get value for.
+            </param>
+            <returns>
+            A list of <see cref="T:FiftyOne.IpIntelligence.Shared.Data.WeightedValue`1"/> of
+            <see cref="T:FiftyOne.IpIntelligence.Shared.Data.Coordinate"/> wrapped in a 
             <see cref="T:FiftyOne.Pipeline.Engines.Data.IAspectPropertyValue"/> instance.
             </returns>
         </member>
@@ -1111,6 +1124,11 @@
             Network name
             </summary>
         </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpDataBase.Coordinate">
+            <summary>
+            Coordinate
+            </summary>
+        </member>
         <member name="T:FiftyOne.IpIntelligence.Shared.Messages">
             <summary>
               A strongly-typed resource class, for looking up localized strings, etc.
@@ -1376,6 +1394,11 @@
         <member name="P:FiftyOne.IpIntelligence.IIpData.NetworkName">
             <summary>
             Network name
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpData.Coordinate">
+            <summary>
+            Coordinate
             </summary>
         </member>
     </members>

@@ -798,6 +798,21 @@ class IpIntelligenceEngineModulePINVOKE {
   [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_delete_WeightedValueDoubleSwig___")]
   public static extern void delete_WeightedValueDoubleSwig(global::System.Runtime.InteropServices.HandleRef jarg1);
 
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueCoordinateSwig_getValue___")]
+  public static extern global::System.IntPtr WeightedValueCoordinateSwig_getValue(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueCoordinateSwig_setValue___")]
+  public static extern void WeightedValueCoordinateSwig_setValue(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueCoordinateSwig_getWeight___")]
+  public static extern float WeightedValueCoordinateSwig_getWeight(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueCoordinateSwig_setWeight___")]
+  public static extern void WeightedValueCoordinateSwig_setWeight(global::System.Runtime.InteropServices.HandleRef jarg1, float jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_delete_WeightedValueCoordinateSwig___")]
+  public static extern void delete_WeightedValueCoordinateSwig(global::System.Runtime.InteropServices.HandleRef jarg1);
+
   [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_new_IpAddressSwig__SWIG_0___")]
   public static extern global::System.IntPtr new_IpAddressSwig__SWIG_0(byte[] jarg1, int jarg2);
 
@@ -1089,6 +1104,75 @@ class IpIntelligenceEngineModulePINVOKE {
   [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_delete_WeightedDoubleListSwig___")]
   public static extern void delete_WeightedDoubleListSwig(global::System.Runtime.InteropServices.HandleRef jarg1);
 
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_new_WeightedCoordinateListSwig__SWIG_0___")]
+  public static extern global::System.IntPtr new_WeightedCoordinateListSwig__SWIG_0();
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_new_WeightedCoordinateListSwig__SWIG_1___")]
+  public static extern global::System.IntPtr new_WeightedCoordinateListSwig__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedCoordinateListSwig_Clear___")]
+  public static extern void WeightedCoordinateListSwig_Clear(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedCoordinateListSwig_Add___")]
+  public static extern void WeightedCoordinateListSwig_Add(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedCoordinateListSwig_size___")]
+  public static extern uint WeightedCoordinateListSwig_size(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedCoordinateListSwig_empty___")]
+  public static extern bool WeightedCoordinateListSwig_empty(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedCoordinateListSwig_capacity___")]
+  public static extern uint WeightedCoordinateListSwig_capacity(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedCoordinateListSwig_reserve___")]
+  public static extern void WeightedCoordinateListSwig_reserve(global::System.Runtime.InteropServices.HandleRef jarg1, uint jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_new_WeightedCoordinateListSwig__SWIG_2___")]
+  public static extern global::System.IntPtr new_WeightedCoordinateListSwig__SWIG_2(int jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedCoordinateListSwig_getitemcopy___")]
+  public static extern global::System.IntPtr WeightedCoordinateListSwig_getitemcopy(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedCoordinateListSwig_getitem___")]
+  public static extern global::System.IntPtr WeightedCoordinateListSwig_getitem(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedCoordinateListSwig_setitem___")]
+  public static extern void WeightedCoordinateListSwig_setitem(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedCoordinateListSwig_AddRange___")]
+  public static extern void WeightedCoordinateListSwig_AddRange(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedCoordinateListSwig_GetRange___")]
+  public static extern global::System.IntPtr WeightedCoordinateListSwig_GetRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedCoordinateListSwig_Insert___")]
+  public static extern void WeightedCoordinateListSwig_Insert(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedCoordinateListSwig_InsertRange___")]
+  public static extern void WeightedCoordinateListSwig_InsertRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedCoordinateListSwig_RemoveAt___")]
+  public static extern void WeightedCoordinateListSwig_RemoveAt(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedCoordinateListSwig_RemoveRange___")]
+  public static extern void WeightedCoordinateListSwig_RemoveRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedCoordinateListSwig_Repeat___")]
+  public static extern global::System.IntPtr WeightedCoordinateListSwig_Repeat(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedCoordinateListSwig_Reverse__SWIG_0___")]
+  public static extern void WeightedCoordinateListSwig_Reverse__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedCoordinateListSwig_Reverse__SWIG_1___")]
+  public static extern void WeightedCoordinateListSwig_Reverse__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedCoordinateListSwig_SetRange___")]
+  public static extern void WeightedCoordinateListSwig_SetRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_delete_WeightedCoordinateListSwig___")]
+  public static extern void delete_WeightedCoordinateListSwig(global::System.Runtime.InteropServices.HandleRef jarg1);
+
   [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_new_WeightedStringListValueSwig___")]
   public static extern global::System.IntPtr new_WeightedStringListValueSwig();
 
@@ -1148,6 +1232,21 @@ class IpIntelligenceEngineModulePINVOKE {
 
   [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_delete_WeightedDoubleListValueSwig___")]
   public static extern void delete_WeightedDoubleListValueSwig(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_new_WeightedCoordinateListValueSwig___")]
+  public static extern global::System.IntPtr new_WeightedCoordinateListValueSwig();
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedCoordinateListValueSwig_hasValue___")]
+  public static extern bool WeightedCoordinateListValueSwig_hasValue(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedCoordinateListValueSwig_getNoValueMessage___")]
+  public static extern string WeightedCoordinateListValueSwig_getNoValueMessage(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedCoordinateListValueSwig_getValue___")]
+  public static extern global::System.IntPtr WeightedCoordinateListValueSwig_getValue(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_delete_WeightedCoordinateListValueSwig___")]
+  public static extern void delete_WeightedCoordinateListValueSwig(global::System.Runtime.InteropServices.HandleRef jarg1);
 
   [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_new_CoordinateValueSwig___")]
   public static extern global::System.IntPtr new_CoordinateValueSwig();
@@ -1211,6 +1310,12 @@ class IpIntelligenceEngineModulePINVOKE {
 
   [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ResultsIpiSwig_getValuesAsWeightedDoubleList__SWIG_1___")]
   public static extern global::System.IntPtr ResultsIpiSwig_getValuesAsWeightedDoubleList__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ResultsIpiSwig_getValuesAsWeightedCoordinateList__SWIG_0___")]
+  public static extern global::System.IntPtr ResultsIpiSwig_getValuesAsWeightedCoordinateList__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1, string jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ResultsIpiSwig_getValuesAsWeightedCoordinateList__SWIG_1___")]
+  public static extern global::System.IntPtr ResultsIpiSwig_getValuesAsWeightedCoordinateList__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
   [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ResultsIpiSwig_getValueAsCoordinate__SWIG_0___")]
   public static extern global::System.IntPtr ResultsIpiSwig_getValueAsCoordinate__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1, string jarg2);

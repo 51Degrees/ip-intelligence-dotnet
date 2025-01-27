@@ -246,14 +246,27 @@ namespace FiftyOne.IpIntelligence.Shared.Data
         protected abstract IAspectPropertyValue<IReadOnlyList<WeightedValue<double>>> GetValuesAsWeightedDoubleList(string propertyName);
 
         /// <summary>
-        /// Get weighted integer values this instance has for the specified property
+        /// Get weighted double values this instance has for the specified property
         /// </summary>
         /// <param name="propertyName">
         /// The name of the property to get value for.
         /// </param>
         /// <returns>
         /// A list of <see cref="WeightedValue{T}"/> of
-        /// <see cref="int"/> wrapped in a 
+        /// <see cref="double"/> wrapped in a 
+        /// <see cref="IAspectPropertyValue"/> instance.
+        /// </returns>
+        protected abstract IAspectPropertyValue<IReadOnlyList<WeightedValue<Coordinate>>> GetValuesAsWeightedCoordinateList(string propertyName);
+
+        /// <summary>
+        /// Get weighted Coordinate values this instance has for the specified property
+        /// </summary>
+        /// <param name="propertyName">
+        /// The name of the property to get value for.
+        /// </param>
+        /// <returns>
+        /// A list of <see cref="WeightedValue{T}"/> of
+        /// <see cref="Coordinate"/> wrapped in a 
         /// <see cref="IAspectPropertyValue"/> instance.
         /// </returns>
         protected abstract IAspectPropertyValue<IReadOnlyList<WeightedValue<int>>> GetValuesAsWeightedIntegerList(string propertyName);
@@ -478,6 +491,11 @@ namespace FiftyOne.IpIntelligence.Shared.Data
                             innerType == typeof(IReadOnlyList<WeightedValue<bool>>))
                         {
                             obj = GetValuesAsWeightedBoolList(key);
+                        }
+                        else if (innerType == typeof(bool) ||
+                            innerType == typeof(IReadOnlyList<WeightedValue<Coordinate>>))
+                        {
+                            obj = GetValuesAsWeightedCoordinateList(key);
                         }
                         else if (innerType == typeof(Coordinate))
                         {

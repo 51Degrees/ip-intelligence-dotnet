@@ -965,6 +965,97 @@ SWIGINTERN void std_vector_Sl_WeightedValue_Sl_double_Sg__Sg__SetRange(std::vect
           throw std::out_of_range("index");
         std::copy(values.begin(), values.end(), self->begin()+index);
       }
+SWIGINTERN std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *new_std_vector_Sl_WeightedValue_Sl_fiftyoneDegreesCoordinate_Sg__Sg___SWIG_2(int capacity){
+        std::vector< WeightedValue< fiftyoneDegreesCoordinate > >* pv = 0;
+        if (capacity >= 0) {
+          pv = new std::vector< WeightedValue< fiftyoneDegreesCoordinate > >();
+          pv->reserve(capacity);
+       } else {
+          throw std::out_of_range("capacity");
+       }
+       return pv;
+      }
+SWIGINTERN WeightedValue< fiftyoneDegreesCoordinate > std_vector_Sl_WeightedValue_Sl_fiftyoneDegreesCoordinate_Sg__Sg__getitemcopy(std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *self,int index){
+        if (index>=0 && index<(int)self->size())
+          return (*self)[index];
+        else
+          throw std::out_of_range("index");
+      }
+SWIGINTERN std::vector< WeightedValue< fiftyone_degrees_ipi_coordinate_t > >::value_type const &std_vector_Sl_WeightedValue_Sl_fiftyoneDegreesCoordinate_Sg__Sg__getitem(std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *self,int index){
+        if (index>=0 && index<(int)self->size())
+          return (*self)[index];
+        else
+          throw std::out_of_range("index");
+      }
+SWIGINTERN void std_vector_Sl_WeightedValue_Sl_fiftyoneDegreesCoordinate_Sg__Sg__setitem(std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *self,int index,WeightedValue< fiftyoneDegreesCoordinate > const &val){
+        if (index>=0 && index<(int)self->size())
+          (*self)[index] = val;
+        else
+          throw std::out_of_range("index");
+      }
+SWIGINTERN void std_vector_Sl_WeightedValue_Sl_fiftyoneDegreesCoordinate_Sg__Sg__AddRange(std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *self,std::vector< WeightedValue< fiftyoneDegreesCoordinate > > const &values){
+        self->insert(self->end(), values.begin(), values.end());
+      }
+SWIGINTERN std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *std_vector_Sl_WeightedValue_Sl_fiftyoneDegreesCoordinate_Sg__Sg__GetRange(std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *self,int index,int count){
+        if (index < 0)
+          throw std::out_of_range("index");
+        if (count < 0)
+          throw std::out_of_range("count");
+        if (index >= (int)self->size()+1 || index+count > (int)self->size())
+          throw std::invalid_argument("invalid range");
+        return new std::vector< WeightedValue< fiftyoneDegreesCoordinate > >(self->begin()+index, self->begin()+index+count);
+      }
+SWIGINTERN void std_vector_Sl_WeightedValue_Sl_fiftyoneDegreesCoordinate_Sg__Sg__Insert(std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *self,int index,WeightedValue< fiftyoneDegreesCoordinate > const &x){
+        if (index>=0 && index<(int)self->size()+1)
+          self->insert(self->begin()+index, x);
+        else
+          throw std::out_of_range("index");
+      }
+SWIGINTERN void std_vector_Sl_WeightedValue_Sl_fiftyoneDegreesCoordinate_Sg__Sg__InsertRange(std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *self,int index,std::vector< WeightedValue< fiftyoneDegreesCoordinate > > const &values){
+        if (index>=0 && index<(int)self->size()+1)
+          self->insert(self->begin()+index, values.begin(), values.end());
+        else
+          throw std::out_of_range("index");
+      }
+SWIGINTERN void std_vector_Sl_WeightedValue_Sl_fiftyoneDegreesCoordinate_Sg__Sg__RemoveAt(std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *self,int index){
+        if (index>=0 && index<(int)self->size())
+          self->erase(self->begin() + index);
+        else
+          throw std::out_of_range("index");
+      }
+SWIGINTERN void std_vector_Sl_WeightedValue_Sl_fiftyoneDegreesCoordinate_Sg__Sg__RemoveRange(std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *self,int index,int count){
+        if (index < 0)
+          throw std::out_of_range("index");
+        if (count < 0)
+          throw std::out_of_range("count");
+        if (index >= (int)self->size()+1 || index+count > (int)self->size())
+          throw std::invalid_argument("invalid range");
+        self->erase(self->begin()+index, self->begin()+index+count);
+      }
+SWIGINTERN std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *std_vector_Sl_WeightedValue_Sl_fiftyoneDegreesCoordinate_Sg__Sg__Repeat(WeightedValue< fiftyoneDegreesCoordinate > const &value,int count){
+        if (count < 0)
+          throw std::out_of_range("count");
+        return new std::vector< WeightedValue< fiftyoneDegreesCoordinate > >(count, value);
+      }
+SWIGINTERN void std_vector_Sl_WeightedValue_Sl_fiftyoneDegreesCoordinate_Sg__Sg__Reverse__SWIG_0(std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *self){
+        std::reverse(self->begin(), self->end());
+      }
+SWIGINTERN void std_vector_Sl_WeightedValue_Sl_fiftyoneDegreesCoordinate_Sg__Sg__Reverse__SWIG_1(std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *self,int index,int count){
+        if (index < 0)
+          throw std::out_of_range("index");
+        if (count < 0)
+          throw std::out_of_range("count");
+        if (index >= (int)self->size()+1 || index+count > (int)self->size())
+          throw std::invalid_argument("invalid range");
+        std::reverse(self->begin()+index, self->begin()+index+count);
+      }
+SWIGINTERN void std_vector_Sl_WeightedValue_Sl_fiftyoneDegreesCoordinate_Sg__Sg__SetRange(std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *self,int index,std::vector< WeightedValue< fiftyoneDegreesCoordinate > > const &values){
+        if (index < 0)
+          throw std::out_of_range("index");
+        if (index+values.size() > self->size())
+          throw std::out_of_range("index");
+        std::copy(values.begin(), values.end(), self->begin()+index);
+      }
 
 #ifdef __cplusplus
 extern "C" {
@@ -2027,11 +2118,11 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
 
 SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_new_StringValueSwig___() {
   void * jresult ;
-  Value< std::string > *result = 0 ;
+  FiftyoneDegrees::Common::Value< std::string > *result = 0 ;
   
   {
     try {
-      result = (Value< std::string > *)new Value< std::string >();;
+      result = (FiftyoneDegrees::Common::Value< std::string > *)new FiftyoneDegrees::Common::Value< std::string >();;
     }
     catch(FatalException& e) {
       {
@@ -2086,10 +2177,10 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
 
 SWIGEXPORT unsigned int SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_StringValueSwig_hasValue___(void * jarg1) {
   unsigned int jresult ;
-  Value< std::string > *arg1 = (Value< std::string > *) 0 ;
+  FiftyoneDegrees::Common::Value< std::string > *arg1 = (FiftyoneDegrees::Common::Value< std::string > *) 0 ;
   bool result;
   
-  arg1 = (Value< std::string > *)jarg1; 
+  arg1 = (FiftyoneDegrees::Common::Value< std::string > *)jarg1; 
   {
     try {
       result = (bool)(arg1)->hasValue();;
@@ -2147,10 +2238,10 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPrem
 
 SWIGEXPORT char * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_StringValueSwig_getNoValueMessage___(void * jarg1) {
   char * jresult ;
-  Value< std::string > *arg1 = (Value< std::string > *) 0 ;
+  FiftyoneDegrees::Common::Value< std::string > *arg1 = (FiftyoneDegrees::Common::Value< std::string > *) 0 ;
   char *result = 0 ;
   
-  arg1 = (Value< std::string > *)jarg1; 
+  arg1 = (FiftyoneDegrees::Common::Value< std::string > *)jarg1; 
   {
     try {
       result = (char *)(arg1)->getNoValueMessage();;
@@ -2208,10 +2299,10 @@ SWIGEXPORT char * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
 
 SWIGEXPORT const char * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_StringValueSwig_getValue___(void * jarg1) {
   const char * jresult ;
-  Value< std::string > *arg1 = (Value< std::string > *) 0 ;
+  FiftyoneDegrees::Common::Value< std::string > *arg1 = (FiftyoneDegrees::Common::Value< std::string > *) 0 ;
   std::string result;
   
-  arg1 = (Value< std::string > *)jarg1; 
+  arg1 = (FiftyoneDegrees::Common::Value< std::string > *)jarg1; 
   {
     try {
       result = (arg1)->getValue();;
@@ -2268,9 +2359,9 @@ SWIGEXPORT const char * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPrem
 
 
 SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_delete_StringValueSwig___(void * jarg1) {
-  Value< std::string > *arg1 = (Value< std::string > *) 0 ;
+  FiftyoneDegrees::Common::Value< std::string > *arg1 = (FiftyoneDegrees::Common::Value< std::string > *) 0 ;
   
-  arg1 = (Value< std::string > *)jarg1; 
+  arg1 = (FiftyoneDegrees::Common::Value< std::string > *)jarg1; 
   {
     try {
       delete arg1;;
@@ -2326,11 +2417,11 @@ SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInte
 
 SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_new_BoolValueSwig___() {
   void * jresult ;
-  Value< bool > *result = 0 ;
+  FiftyoneDegrees::Common::Value< bool > *result = 0 ;
   
   {
     try {
-      result = (Value< bool > *)new Value< bool >();;
+      result = (FiftyoneDegrees::Common::Value< bool > *)new FiftyoneDegrees::Common::Value< bool >();;
     }
     catch(FatalException& e) {
       {
@@ -2385,10 +2476,10 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
 
 SWIGEXPORT unsigned int SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_BoolValueSwig_hasValue___(void * jarg1) {
   unsigned int jresult ;
-  Value< bool > *arg1 = (Value< bool > *) 0 ;
+  FiftyoneDegrees::Common::Value< bool > *arg1 = (FiftyoneDegrees::Common::Value< bool > *) 0 ;
   bool result;
   
-  arg1 = (Value< bool > *)jarg1; 
+  arg1 = (FiftyoneDegrees::Common::Value< bool > *)jarg1; 
   {
     try {
       result = (bool)(arg1)->hasValue();;
@@ -2446,10 +2537,10 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPrem
 
 SWIGEXPORT char * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_BoolValueSwig_getNoValueMessage___(void * jarg1) {
   char * jresult ;
-  Value< bool > *arg1 = (Value< bool > *) 0 ;
+  FiftyoneDegrees::Common::Value< bool > *arg1 = (FiftyoneDegrees::Common::Value< bool > *) 0 ;
   char *result = 0 ;
   
-  arg1 = (Value< bool > *)jarg1; 
+  arg1 = (FiftyoneDegrees::Common::Value< bool > *)jarg1; 
   {
     try {
       result = (char *)(arg1)->getNoValueMessage();;
@@ -2507,10 +2598,10 @@ SWIGEXPORT char * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
 
 SWIGEXPORT unsigned int SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_BoolValueSwig_getValue___(void * jarg1) {
   unsigned int jresult ;
-  Value< bool > *arg1 = (Value< bool > *) 0 ;
+  FiftyoneDegrees::Common::Value< bool > *arg1 = (FiftyoneDegrees::Common::Value< bool > *) 0 ;
   bool result;
   
-  arg1 = (Value< bool > *)jarg1; 
+  arg1 = (FiftyoneDegrees::Common::Value< bool > *)jarg1; 
   {
     try {
       result = (bool)(arg1)->getValue();;
@@ -2567,9 +2658,9 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPrem
 
 
 SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_delete_BoolValueSwig___(void * jarg1) {
-  Value< bool > *arg1 = (Value< bool > *) 0 ;
+  FiftyoneDegrees::Common::Value< bool > *arg1 = (FiftyoneDegrees::Common::Value< bool > *) 0 ;
   
-  arg1 = (Value< bool > *)jarg1; 
+  arg1 = (FiftyoneDegrees::Common::Value< bool > *)jarg1; 
   {
     try {
       delete arg1;;
@@ -2625,11 +2716,11 @@ SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInte
 
 SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_new_IntegerValueSwig___() {
   void * jresult ;
-  Value< int > *result = 0 ;
+  FiftyoneDegrees::Common::Value< int > *result = 0 ;
   
   {
     try {
-      result = (Value< int > *)new Value< int >();;
+      result = (FiftyoneDegrees::Common::Value< int > *)new FiftyoneDegrees::Common::Value< int >();;
     }
     catch(FatalException& e) {
       {
@@ -2684,10 +2775,10 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
 
 SWIGEXPORT unsigned int SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_IntegerValueSwig_hasValue___(void * jarg1) {
   unsigned int jresult ;
-  Value< int > *arg1 = (Value< int > *) 0 ;
+  FiftyoneDegrees::Common::Value< int > *arg1 = (FiftyoneDegrees::Common::Value< int > *) 0 ;
   bool result;
   
-  arg1 = (Value< int > *)jarg1; 
+  arg1 = (FiftyoneDegrees::Common::Value< int > *)jarg1; 
   {
     try {
       result = (bool)(arg1)->hasValue();;
@@ -2745,10 +2836,10 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPrem
 
 SWIGEXPORT char * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_IntegerValueSwig_getNoValueMessage___(void * jarg1) {
   char * jresult ;
-  Value< int > *arg1 = (Value< int > *) 0 ;
+  FiftyoneDegrees::Common::Value< int > *arg1 = (FiftyoneDegrees::Common::Value< int > *) 0 ;
   char *result = 0 ;
   
-  arg1 = (Value< int > *)jarg1; 
+  arg1 = (FiftyoneDegrees::Common::Value< int > *)jarg1; 
   {
     try {
       result = (char *)(arg1)->getNoValueMessage();;
@@ -2806,10 +2897,10 @@ SWIGEXPORT char * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
 
 SWIGEXPORT int SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_IntegerValueSwig_getValue___(void * jarg1) {
   int jresult ;
-  Value< int > *arg1 = (Value< int > *) 0 ;
+  FiftyoneDegrees::Common::Value< int > *arg1 = (FiftyoneDegrees::Common::Value< int > *) 0 ;
   int result;
   
-  arg1 = (Value< int > *)jarg1; 
+  arg1 = (FiftyoneDegrees::Common::Value< int > *)jarg1; 
   {
     try {
       result = (int)(arg1)->getValue();;
@@ -2866,9 +2957,9 @@ SWIGEXPORT int SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInter
 
 
 SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_delete_IntegerValueSwig___(void * jarg1) {
-  Value< int > *arg1 = (Value< int > *) 0 ;
+  FiftyoneDegrees::Common::Value< int > *arg1 = (FiftyoneDegrees::Common::Value< int > *) 0 ;
   
-  arg1 = (Value< int > *)jarg1; 
+  arg1 = (FiftyoneDegrees::Common::Value< int > *)jarg1; 
   {
     try {
       delete arg1;;
@@ -2924,11 +3015,11 @@ SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInte
 
 SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_new_VectorStringValuesSwig___() {
   void * jresult ;
-  Value< std::vector< std::string > > *result = 0 ;
+  FiftyoneDegrees::Common::Value< std::vector< std::string > > *result = 0 ;
   
   {
     try {
-      result = (Value< std::vector< std::string > > *)new Value< std::vector< std::string > >();;
+      result = (FiftyoneDegrees::Common::Value< std::vector< std::string > > *)new FiftyoneDegrees::Common::Value< std::vector< std::string > >();;
     }
     catch(FatalException& e) {
       {
@@ -2983,10 +3074,10 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
 
 SWIGEXPORT unsigned int SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_VectorStringValuesSwig_hasValue___(void * jarg1) {
   unsigned int jresult ;
-  Value< std::vector< std::string > > *arg1 = (Value< std::vector< std::string > > *) 0 ;
+  FiftyoneDegrees::Common::Value< std::vector< std::string > > *arg1 = (FiftyoneDegrees::Common::Value< std::vector< std::string > > *) 0 ;
   bool result;
   
-  arg1 = (Value< std::vector< std::string > > *)jarg1; 
+  arg1 = (FiftyoneDegrees::Common::Value< std::vector< std::string > > *)jarg1; 
   {
     try {
       result = (bool)(arg1)->hasValue();;
@@ -3044,10 +3135,10 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPrem
 
 SWIGEXPORT char * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_VectorStringValuesSwig_getNoValueMessage___(void * jarg1) {
   char * jresult ;
-  Value< std::vector< std::string > > *arg1 = (Value< std::vector< std::string > > *) 0 ;
+  FiftyoneDegrees::Common::Value< std::vector< std::string > > *arg1 = (FiftyoneDegrees::Common::Value< std::vector< std::string > > *) 0 ;
   char *result = 0 ;
   
-  arg1 = (Value< std::vector< std::string > > *)jarg1; 
+  arg1 = (FiftyoneDegrees::Common::Value< std::vector< std::string > > *)jarg1; 
   {
     try {
       result = (char *)(arg1)->getNoValueMessage();;
@@ -3105,10 +3196,10 @@ SWIGEXPORT char * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
 
 SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_VectorStringValuesSwig_getValue___(void * jarg1) {
   void * jresult ;
-  Value< std::vector< std::string > > *arg1 = (Value< std::vector< std::string > > *) 0 ;
+  FiftyoneDegrees::Common::Value< std::vector< std::string > > *arg1 = (FiftyoneDegrees::Common::Value< std::vector< std::string > > *) 0 ;
   std::vector< std::string > result;
   
-  arg1 = (Value< std::vector< std::string > > *)jarg1; 
+  arg1 = (FiftyoneDegrees::Common::Value< std::vector< std::string > > *)jarg1; 
   {
     try {
       result = (arg1)->getValue();;
@@ -3165,9 +3256,9 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
 
 
 SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_delete_VectorStringValuesSwig___(void * jarg1) {
-  Value< std::vector< std::string > > *arg1 = (Value< std::vector< std::string > > *) 0 ;
+  FiftyoneDegrees::Common::Value< std::vector< std::string > > *arg1 = (FiftyoneDegrees::Common::Value< std::vector< std::string > > *) 0 ;
   
-  arg1 = (Value< std::vector< std::string > > *)jarg1; 
+  arg1 = (FiftyoneDegrees::Common::Value< std::vector< std::string > > *)jarg1; 
   {
     try {
       delete arg1;;
@@ -3223,11 +3314,11 @@ SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInte
 
 SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_new_DoubleValueSwig___() {
   void * jresult ;
-  Value< double > *result = 0 ;
+  FiftyoneDegrees::Common::Value< double > *result = 0 ;
   
   {
     try {
-      result = (Value< double > *)new Value< double >();;
+      result = (FiftyoneDegrees::Common::Value< double > *)new FiftyoneDegrees::Common::Value< double >();;
     }
     catch(FatalException& e) {
       {
@@ -3282,10 +3373,10 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
 
 SWIGEXPORT unsigned int SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_DoubleValueSwig_hasValue___(void * jarg1) {
   unsigned int jresult ;
-  Value< double > *arg1 = (Value< double > *) 0 ;
+  FiftyoneDegrees::Common::Value< double > *arg1 = (FiftyoneDegrees::Common::Value< double > *) 0 ;
   bool result;
   
-  arg1 = (Value< double > *)jarg1; 
+  arg1 = (FiftyoneDegrees::Common::Value< double > *)jarg1; 
   {
     try {
       result = (bool)(arg1)->hasValue();;
@@ -3343,10 +3434,10 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPrem
 
 SWIGEXPORT char * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_DoubleValueSwig_getNoValueMessage___(void * jarg1) {
   char * jresult ;
-  Value< double > *arg1 = (Value< double > *) 0 ;
+  FiftyoneDegrees::Common::Value< double > *arg1 = (FiftyoneDegrees::Common::Value< double > *) 0 ;
   char *result = 0 ;
   
-  arg1 = (Value< double > *)jarg1; 
+  arg1 = (FiftyoneDegrees::Common::Value< double > *)jarg1; 
   {
     try {
       result = (char *)(arg1)->getNoValueMessage();;
@@ -3404,10 +3495,10 @@ SWIGEXPORT char * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
 
 SWIGEXPORT double SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_DoubleValueSwig_getValue___(void * jarg1) {
   double jresult ;
-  Value< double > *arg1 = (Value< double > *) 0 ;
+  FiftyoneDegrees::Common::Value< double > *arg1 = (FiftyoneDegrees::Common::Value< double > *) 0 ;
   double result;
   
-  arg1 = (Value< double > *)jarg1; 
+  arg1 = (FiftyoneDegrees::Common::Value< double > *)jarg1; 
   {
     try {
       result = (double)(arg1)->getValue();;
@@ -3464,9 +3555,9 @@ SWIGEXPORT double SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
 
 
 SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_delete_DoubleValueSwig___(void * jarg1) {
-  Value< double > *arg1 = (Value< double > *) 0 ;
+  FiftyoneDegrees::Common::Value< double > *arg1 = (FiftyoneDegrees::Common::Value< double > *) 0 ;
   
-  arg1 = (Value< double > *)jarg1; 
+  arg1 = (FiftyoneDegrees::Common::Value< double > *)jarg1; 
   {
     try {
       delete arg1;;
@@ -3834,7 +3925,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
   void * jresult ;
   ResultsBase *arg1 = (ResultsBase *) 0 ;
   std::string *arg2 = 0 ;
-  Value< std::vector< std::string > > result;
+  FiftyoneDegrees::Common::Value< std::vector< std::string > > result;
   
   arg1 = (ResultsBase *)jarg1; 
   if (!jarg2) {
@@ -3893,7 +3984,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
       };
     }
   }
-  jresult = new Value< std::vector< std::string > >(result); 
+  jresult = new FiftyoneDegrees::Common::Value< std::vector< std::string > >(result); 
   return jresult;
 }
 
@@ -3902,7 +3993,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
   void * jresult ;
   ResultsBase *arg1 = (ResultsBase *) 0 ;
   int arg2 ;
-  Value< std::vector< std::string > > result;
+  FiftyoneDegrees::Common::Value< std::vector< std::string > > result;
   
   arg1 = (ResultsBase *)jarg1; 
   arg2 = (int)jarg2; 
@@ -3956,7 +4047,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
       };
     }
   }
-  jresult = new Value< std::vector< std::string > >(result); 
+  jresult = new FiftyoneDegrees::Common::Value< std::vector< std::string > >(result); 
   return jresult;
 }
 
@@ -3965,7 +4056,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
   void * jresult ;
   ResultsBase *arg1 = (ResultsBase *) 0 ;
   std::string *arg2 = 0 ;
-  Value< std::string > result;
+  FiftyoneDegrees::Common::Value< std::string > result;
   
   arg1 = (ResultsBase *)jarg1; 
   if (!jarg2) {
@@ -4024,7 +4115,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
       };
     }
   }
-  jresult = new Value< std::string >(result); 
+  jresult = new FiftyoneDegrees::Common::Value< std::string >(result); 
   return jresult;
 }
 
@@ -4033,7 +4124,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
   void * jresult ;
   ResultsBase *arg1 = (ResultsBase *) 0 ;
   int arg2 ;
-  Value< std::string > result;
+  FiftyoneDegrees::Common::Value< std::string > result;
   
   arg1 = (ResultsBase *)jarg1; 
   arg2 = (int)jarg2; 
@@ -4087,7 +4178,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
       };
     }
   }
-  jresult = new Value< std::string >(result); 
+  jresult = new FiftyoneDegrees::Common::Value< std::string >(result); 
   return jresult;
 }
 
@@ -4096,7 +4187,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
   void * jresult ;
   ResultsBase *arg1 = (ResultsBase *) 0 ;
   std::string *arg2 = 0 ;
-  Value< bool > result;
+  FiftyoneDegrees::Common::Value< bool > result;
   
   arg1 = (ResultsBase *)jarg1; 
   if (!jarg2) {
@@ -4155,7 +4246,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
       };
     }
   }
-  jresult = new Value< bool >(result); 
+  jresult = new FiftyoneDegrees::Common::Value< bool >(result); 
   return jresult;
 }
 
@@ -4164,7 +4255,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
   void * jresult ;
   ResultsBase *arg1 = (ResultsBase *) 0 ;
   int arg2 ;
-  Value< bool > result;
+  FiftyoneDegrees::Common::Value< bool > result;
   
   arg1 = (ResultsBase *)jarg1; 
   arg2 = (int)jarg2; 
@@ -4218,7 +4309,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
       };
     }
   }
-  jresult = new Value< bool >(result); 
+  jresult = new FiftyoneDegrees::Common::Value< bool >(result); 
   return jresult;
 }
 
@@ -4227,7 +4318,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
   void * jresult ;
   ResultsBase *arg1 = (ResultsBase *) 0 ;
   std::string *arg2 = 0 ;
-  Value< int > result;
+  FiftyoneDegrees::Common::Value< int > result;
   
   arg1 = (ResultsBase *)jarg1; 
   if (!jarg2) {
@@ -4286,7 +4377,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
       };
     }
   }
-  jresult = new Value< int >(result); 
+  jresult = new FiftyoneDegrees::Common::Value< int >(result); 
   return jresult;
 }
 
@@ -4295,7 +4386,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
   void * jresult ;
   ResultsBase *arg1 = (ResultsBase *) 0 ;
   int arg2 ;
-  Value< int > result;
+  FiftyoneDegrees::Common::Value< int > result;
   
   arg1 = (ResultsBase *)jarg1; 
   arg2 = (int)jarg2; 
@@ -4349,7 +4440,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
       };
     }
   }
-  jresult = new Value< int >(result); 
+  jresult = new FiftyoneDegrees::Common::Value< int >(result); 
   return jresult;
 }
 
@@ -4358,7 +4449,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
   void * jresult ;
   ResultsBase *arg1 = (ResultsBase *) 0 ;
   std::string *arg2 = 0 ;
-  Value< double > result;
+  FiftyoneDegrees::Common::Value< double > result;
   
   arg1 = (ResultsBase *)jarg1; 
   if (!jarg2) {
@@ -4417,7 +4508,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
       };
     }
   }
-  jresult = new Value< double >(result); 
+  jresult = new FiftyoneDegrees::Common::Value< double >(result); 
   return jresult;
 }
 
@@ -4426,7 +4517,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
   void * jresult ;
   ResultsBase *arg1 = (ResultsBase *) 0 ;
   int arg2 ;
-  Value< double > result;
+  FiftyoneDegrees::Common::Value< double > result;
   
   arg1 = (ResultsBase *)jarg1; 
   arg2 = (int)jarg2; 
@@ -4480,7 +4571,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
       };
     }
   }
-  jresult = new Value< double >(result); 
+  jresult = new FiftyoneDegrees::Common::Value< double >(result); 
   return jresult;
 }
 
@@ -10668,17 +10759,320 @@ SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInte
 }
 
 
+SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueCoordinateSwig_getValue___(void * jarg1) {
+  void * jresult ;
+  WeightedValue< fiftyoneDegreesCoordinate > *arg1 = (WeightedValue< fiftyoneDegreesCoordinate > *) 0 ;
+  fiftyone_degrees_ipi_coordinate_t result;
+  
+  arg1 = (WeightedValue< fiftyoneDegreesCoordinate > *)jarg1; 
+  {
+    try {
+      result = (arg1)->getValue();;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = new fiftyone_degrees_ipi_coordinate_t(result); 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueCoordinateSwig_setValue___(void * jarg1, void * jarg2) {
+  WeightedValue< fiftyoneDegreesCoordinate > *arg1 = (WeightedValue< fiftyoneDegreesCoordinate > *) 0 ;
+  fiftyone_degrees_ipi_coordinate_t arg2 ;
+  fiftyone_degrees_ipi_coordinate_t *argp2 ;
+  
+  arg1 = (WeightedValue< fiftyoneDegreesCoordinate > *)jarg1; 
+  argp2 = (fiftyone_degrees_ipi_coordinate_t *)jarg2; 
+  if (!argp2) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "Attempt to dereference null fiftyone_degrees_ipi_coordinate_t", 0);
+    return ;
+  }
+  arg2 = *argp2; 
+  {
+    try {
+      (arg1)->setValue(SWIG_STD_MOVE(arg2));;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return ; 
+      };
+    }
+  }
+}
+
+
+SWIGEXPORT float SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueCoordinateSwig_getWeight___(void * jarg1) {
+  float jresult ;
+  WeightedValue< fiftyoneDegreesCoordinate > *arg1 = (WeightedValue< fiftyoneDegreesCoordinate > *) 0 ;
+  float result;
+  
+  arg1 = (WeightedValue< fiftyoneDegreesCoordinate > *)jarg1; 
+  {
+    try {
+      result = (float)(arg1)->getWeight();;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueCoordinateSwig_setWeight___(void * jarg1, float jarg2) {
+  WeightedValue< fiftyoneDegreesCoordinate > *arg1 = (WeightedValue< fiftyoneDegreesCoordinate > *) 0 ;
+  float arg2 ;
+  
+  arg1 = (WeightedValue< fiftyoneDegreesCoordinate > *)jarg1; 
+  arg2 = (float)jarg2; 
+  {
+    try {
+      (arg1)->setWeight(arg2);;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return ; 
+      };
+    }
+  }
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_delete_WeightedValueCoordinateSwig___(void * jarg1) {
+  WeightedValue< fiftyoneDegreesCoordinate > *arg1 = (WeightedValue< fiftyoneDegreesCoordinate > *) 0 ;
+  
+  arg1 = (WeightedValue< fiftyoneDegreesCoordinate > *)jarg1; 
+  {
+    try {
+      delete arg1;;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return ; 
+      };
+    }
+  }
+}
+
+
 SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_new_IpAddressSwig__SWIG_0___(unsigned char* jarg1, int jarg2) {
   void * jresult ;
   unsigned char *arg1 = (unsigned char *) (unsigned char *)0 ;
   fiftyoneDegreesIpType arg2 ;
-  IpAddress *result = 0 ;
+  FiftyoneDegrees::IpIntelligence::IpAddress *result = 0 ;
   
   arg1 = (unsigned char *)jarg1; 
   arg2 = (fiftyoneDegreesIpType)jarg2; 
   {
     try {
-      result = (IpAddress *)new IpAddress((unsigned char const (*))arg1,arg2);;
+      result = (FiftyoneDegrees::IpIntelligence::IpAddress *)new FiftyoneDegrees::IpIntelligence::IpAddress((unsigned char const (*))arg1,arg2);;
     }
     catch(FatalException& e) {
       {
@@ -10734,12 +11128,12 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
 SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_new_IpAddressSwig__SWIG_1___(char * jarg1) {
   void * jresult ;
   char *arg1 = (char *) 0 ;
-  IpAddress *result = 0 ;
+  FiftyoneDegrees::IpIntelligence::IpAddress *result = 0 ;
   
   arg1 = (char *)jarg1; 
   {
     try {
-      result = (IpAddress *)new IpAddress((char const *)arg1);;
+      result = (FiftyoneDegrees::IpIntelligence::IpAddress *)new FiftyoneDegrees::IpIntelligence::IpAddress((char const *)arg1);;
     }
     catch(FatalException& e) {
       {
@@ -10793,11 +11187,11 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
 
 
 SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_IpAddressSwig_getCopyOfIpAddress___(void * jarg1, unsigned char* jarg2, unsigned int jarg3) {
-  IpAddress *arg1 = (IpAddress *) 0 ;
+  FiftyoneDegrees::IpIntelligence::IpAddress *arg1 = (FiftyoneDegrees::IpIntelligence::IpAddress *) 0 ;
   unsigned char *arg2 = (unsigned char *) (unsigned char *)0 ;
   uint32_t arg3 ;
   
-  arg1 = (IpAddress *)jarg1; 
+  arg1 = (FiftyoneDegrees::IpIntelligence::IpAddress *)jarg1; 
   arg2 = (unsigned char *)jarg2; 
   arg3 = (uint32_t)jarg3; 
   {
@@ -10855,10 +11249,10 @@ SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInte
 
 SWIGEXPORT int SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_IpAddressSwig_getType___(void * jarg1) {
   int jresult ;
-  IpAddress *arg1 = (IpAddress *) 0 ;
+  FiftyoneDegrees::IpIntelligence::IpAddress *arg1 = (FiftyoneDegrees::IpIntelligence::IpAddress *) 0 ;
   fiftyoneDegreesIpType result;
   
-  arg1 = (IpAddress *)jarg1; 
+  arg1 = (FiftyoneDegrees::IpIntelligence::IpAddress *)jarg1; 
   {
     try {
       result = (fiftyoneDegreesIpType)(arg1)->getType();;
@@ -10915,9 +11309,9 @@ SWIGEXPORT int SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInter
 
 
 SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_delete_IpAddressSwig___(void * jarg1) {
-  IpAddress *arg1 = (IpAddress *) 0 ;
+  FiftyoneDegrees::IpIntelligence::IpAddress *arg1 = (FiftyoneDegrees::IpIntelligence::IpAddress *) 0 ;
   
-  arg1 = (IpAddress *)jarg1; 
+  arg1 = (FiftyoneDegrees::IpIntelligence::IpAddress *)jarg1; 
   {
     try {
       delete arg1;;
@@ -16939,13 +17333,1505 @@ SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInte
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_new_WeightedStringListValueSwig___() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_new_WeightedCoordinateListSwig__SWIG_0___() {
   void * jresult ;
-  Value< std::vector< WeightedValue< std::string > > > *result = 0 ;
+  std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *result = 0 ;
   
   {
     try {
-      result = (Value< std::vector< WeightedValue< std::string > > > *)new Value< std::vector< WeightedValue< std::string > > >();;
+      result = (std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *)new std::vector< WeightedValue< fiftyoneDegreesCoordinate > >();;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_new_WeightedCoordinateListSwig__SWIG_1___(void * jarg1) {
+  void * jresult ;
+  std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *arg1 = 0 ;
+  std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *result = 0 ;
+  
+  arg1 = (std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *)jarg1;
+  if (!arg1) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "std::vector< WeightedValue< fiftyoneDegreesCoordinate > > const & is null", 0);
+    return 0;
+  } 
+  {
+    try {
+      result = (std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *)new std::vector< WeightedValue< fiftyoneDegreesCoordinate > >((std::vector< WeightedValue< fiftyoneDegreesCoordinate > > const &)*arg1);;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedCoordinateListSwig_Clear___(void * jarg1) {
+  std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *arg1 = (std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *) 0 ;
+  
+  arg1 = (std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *)jarg1; 
+  {
+    try {
+      (arg1)->clear();;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return ; 
+      };
+    }
+  }
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedCoordinateListSwig_Add___(void * jarg1, void * jarg2) {
+  std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *arg1 = (std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *) 0 ;
+  WeightedValue< fiftyoneDegreesCoordinate > *arg2 = 0 ;
+  
+  arg1 = (std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *)jarg1; 
+  arg2 = (WeightedValue< fiftyoneDegreesCoordinate > *)jarg2;
+  if (!arg2) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "WeightedValue< fiftyoneDegreesCoordinate > const & is null", 0);
+    return ;
+  } 
+  {
+    try {
+      (arg1)->push_back((WeightedValue< fiftyoneDegreesCoordinate > const &)*arg2);;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return ; 
+      };
+    }
+  }
+}
+
+
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedCoordinateListSwig_size___(void * jarg1) {
+  unsigned int jresult ;
+  std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *arg1 = (std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *) 0 ;
+  std::vector< WeightedValue< fiftyone_degrees_ipi_coordinate_t > >::size_type result;
+  
+  arg1 = (std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *)jarg1; 
+  {
+    try {
+      result = ((std::vector< WeightedValue< fiftyoneDegreesCoordinate > > const *)arg1)->size();;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = (unsigned int)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedCoordinateListSwig_empty___(void * jarg1) {
+  unsigned int jresult ;
+  std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *arg1 = (std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *) 0 ;
+  bool result;
+  
+  arg1 = (std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *)jarg1; 
+  {
+    try {
+      result = (bool)((std::vector< WeightedValue< fiftyoneDegreesCoordinate > > const *)arg1)->empty();;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedCoordinateListSwig_capacity___(void * jarg1) {
+  unsigned int jresult ;
+  std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *arg1 = (std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *) 0 ;
+  std::vector< WeightedValue< fiftyone_degrees_ipi_coordinate_t > >::size_type result;
+  
+  arg1 = (std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *)jarg1; 
+  {
+    try {
+      result = ((std::vector< WeightedValue< fiftyoneDegreesCoordinate > > const *)arg1)->capacity();;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = (unsigned int)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedCoordinateListSwig_reserve___(void * jarg1, unsigned int jarg2) {
+  std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *arg1 = (std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *) 0 ;
+  std::vector< WeightedValue< fiftyone_degrees_ipi_coordinate_t > >::size_type arg2 ;
+  
+  arg1 = (std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *)jarg1; 
+  arg2 = (std::vector< WeightedValue< fiftyone_degrees_ipi_coordinate_t > >::size_type)jarg2; 
+  {
+    try {
+      (arg1)->reserve(SWIG_STD_MOVE(arg2));;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return ; 
+      };
+    }
+  }
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_new_WeightedCoordinateListSwig__SWIG_2___(int jarg1) {
+  void * jresult ;
+  int arg1 ;
+  std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *result = 0 ;
+  
+  arg1 = (int)jarg1; 
+  {
+    try {
+      try {
+        result = (std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *)new_std_vector_Sl_WeightedValue_Sl_fiftyoneDegreesCoordinate_Sg__Sg___SWIG_2(arg1);
+      } catch(std::out_of_range &_e) {
+        SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
+        return 0;
+      };
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedCoordinateListSwig_getitemcopy___(void * jarg1, int jarg2) {
+  void * jresult ;
+  std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *arg1 = (std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *) 0 ;
+  int arg2 ;
+  WeightedValue< fiftyoneDegreesCoordinate > result;
+  
+  arg1 = (std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *)jarg1; 
+  arg2 = (int)jarg2; 
+  {
+    try {
+      try {
+        result = std_vector_Sl_WeightedValue_Sl_fiftyoneDegreesCoordinate_Sg__Sg__getitemcopy(arg1,arg2);
+      } catch(std::out_of_range &_e) {
+        SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
+        return 0;
+      };
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = new WeightedValue< fiftyoneDegreesCoordinate >(result); 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedCoordinateListSwig_getitem___(void * jarg1, int jarg2) {
+  void * jresult ;
+  std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *arg1 = (std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *) 0 ;
+  int arg2 ;
+  std::vector< WeightedValue< fiftyone_degrees_ipi_coordinate_t > >::value_type *result = 0 ;
+  
+  arg1 = (std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *)jarg1; 
+  arg2 = (int)jarg2; 
+  {
+    try {
+      try {
+        result = (std::vector< WeightedValue< fiftyone_degrees_ipi_coordinate_t > >::value_type *) &std_vector_Sl_WeightedValue_Sl_fiftyoneDegreesCoordinate_Sg__Sg__getitem(arg1,arg2);
+      } catch(std::out_of_range &_e) {
+        SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
+        return 0;
+      };
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedCoordinateListSwig_setitem___(void * jarg1, int jarg2, void * jarg3) {
+  std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *arg1 = (std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *) 0 ;
+  int arg2 ;
+  WeightedValue< fiftyoneDegreesCoordinate > *arg3 = 0 ;
+  
+  arg1 = (std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *)jarg1; 
+  arg2 = (int)jarg2; 
+  arg3 = (WeightedValue< fiftyoneDegreesCoordinate > *)jarg3;
+  if (!arg3) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "WeightedValue< fiftyoneDegreesCoordinate > const & is null", 0);
+    return ;
+  } 
+  {
+    try {
+      try {
+        std_vector_Sl_WeightedValue_Sl_fiftyoneDegreesCoordinate_Sg__Sg__setitem(arg1,arg2,(WeightedValue< fiftyone_degrees_ipi_coordinate_t > const &)*arg3);
+      } catch(std::out_of_range &_e) {
+        SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
+        return ;
+      };
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return ; 
+      };
+    }
+  }
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedCoordinateListSwig_AddRange___(void * jarg1, void * jarg2) {
+  std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *arg1 = (std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *) 0 ;
+  std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *arg2 = 0 ;
+  
+  arg1 = (std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *)jarg1; 
+  arg2 = (std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *)jarg2;
+  if (!arg2) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "std::vector< WeightedValue< fiftyoneDegreesCoordinate > > const & is null", 0);
+    return ;
+  } 
+  {
+    try {
+      std_vector_Sl_WeightedValue_Sl_fiftyoneDegreesCoordinate_Sg__Sg__AddRange(arg1,(std::vector< WeightedValue< fiftyone_degrees_ipi_coordinate_t > > const &)*arg2);;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return ; 
+      };
+    }
+  }
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedCoordinateListSwig_GetRange___(void * jarg1, int jarg2, int jarg3) {
+  void * jresult ;
+  std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *arg1 = (std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *result = 0 ;
+  
+  arg1 = (std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *)jarg1; 
+  arg2 = (int)jarg2; 
+  arg3 = (int)jarg3; 
+  {
+    try {
+      try {
+        result = (std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *)std_vector_Sl_WeightedValue_Sl_fiftyoneDegreesCoordinate_Sg__Sg__GetRange(arg1,arg2,arg3);
+      } catch(std::out_of_range &_e) {
+        SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
+        return 0;
+      } catch(std::invalid_argument &_e) {
+        SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentException, (&_e)->what(), "");
+        return 0;
+      };
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedCoordinateListSwig_Insert___(void * jarg1, int jarg2, void * jarg3) {
+  std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *arg1 = (std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *) 0 ;
+  int arg2 ;
+  WeightedValue< fiftyoneDegreesCoordinate > *arg3 = 0 ;
+  
+  arg1 = (std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *)jarg1; 
+  arg2 = (int)jarg2; 
+  arg3 = (WeightedValue< fiftyoneDegreesCoordinate > *)jarg3;
+  if (!arg3) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "WeightedValue< fiftyoneDegreesCoordinate > const & is null", 0);
+    return ;
+  } 
+  {
+    try {
+      try {
+        std_vector_Sl_WeightedValue_Sl_fiftyoneDegreesCoordinate_Sg__Sg__Insert(arg1,arg2,(WeightedValue< fiftyone_degrees_ipi_coordinate_t > const &)*arg3);
+      } catch(std::out_of_range &_e) {
+        SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
+        return ;
+      };
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return ; 
+      };
+    }
+  }
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedCoordinateListSwig_InsertRange___(void * jarg1, int jarg2, void * jarg3) {
+  std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *arg1 = (std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *) 0 ;
+  int arg2 ;
+  std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *arg3 = 0 ;
+  
+  arg1 = (std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *)jarg1; 
+  arg2 = (int)jarg2; 
+  arg3 = (std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *)jarg3;
+  if (!arg3) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "std::vector< WeightedValue< fiftyoneDegreesCoordinate > > const & is null", 0);
+    return ;
+  } 
+  {
+    try {
+      try {
+        std_vector_Sl_WeightedValue_Sl_fiftyoneDegreesCoordinate_Sg__Sg__InsertRange(arg1,arg2,(std::vector< WeightedValue< fiftyone_degrees_ipi_coordinate_t > > const &)*arg3);
+      } catch(std::out_of_range &_e) {
+        SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
+        return ;
+      };
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return ; 
+      };
+    }
+  }
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedCoordinateListSwig_RemoveAt___(void * jarg1, int jarg2) {
+  std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *arg1 = (std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *) 0 ;
+  int arg2 ;
+  
+  arg1 = (std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *)jarg1; 
+  arg2 = (int)jarg2; 
+  {
+    try {
+      try {
+        std_vector_Sl_WeightedValue_Sl_fiftyoneDegreesCoordinate_Sg__Sg__RemoveAt(arg1,arg2);
+      } catch(std::out_of_range &_e) {
+        SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
+        return ;
+      };
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return ; 
+      };
+    }
+  }
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedCoordinateListSwig_RemoveRange___(void * jarg1, int jarg2, int jarg3) {
+  std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *arg1 = (std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  
+  arg1 = (std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *)jarg1; 
+  arg2 = (int)jarg2; 
+  arg3 = (int)jarg3; 
+  {
+    try {
+      try {
+        std_vector_Sl_WeightedValue_Sl_fiftyoneDegreesCoordinate_Sg__Sg__RemoveRange(arg1,arg2,arg3);
+      } catch(std::out_of_range &_e) {
+        SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
+        return ;
+      } catch(std::invalid_argument &_e) {
+        SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentException, (&_e)->what(), "");
+        return ;
+      };
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return ; 
+      };
+    }
+  }
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedCoordinateListSwig_Repeat___(void * jarg1, int jarg2) {
+  void * jresult ;
+  WeightedValue< fiftyoneDegreesCoordinate > *arg1 = 0 ;
+  int arg2 ;
+  std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *result = 0 ;
+  
+  arg1 = (WeightedValue< fiftyoneDegreesCoordinate > *)jarg1;
+  if (!arg1) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "WeightedValue< fiftyoneDegreesCoordinate > const & is null", 0);
+    return 0;
+  } 
+  arg2 = (int)jarg2; 
+  {
+    try {
+      try {
+        result = (std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *)std_vector_Sl_WeightedValue_Sl_fiftyoneDegreesCoordinate_Sg__Sg__Repeat((WeightedValue< fiftyone_degrees_ipi_coordinate_t > const &)*arg1,arg2);
+      } catch(std::out_of_range &_e) {
+        SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
+        return 0;
+      };
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedCoordinateListSwig_Reverse__SWIG_0___(void * jarg1) {
+  std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *arg1 = (std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *) 0 ;
+  
+  arg1 = (std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *)jarg1; 
+  {
+    try {
+      std_vector_Sl_WeightedValue_Sl_fiftyoneDegreesCoordinate_Sg__Sg__Reverse__SWIG_0(arg1);;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return ; 
+      };
+    }
+  }
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedCoordinateListSwig_Reverse__SWIG_1___(void * jarg1, int jarg2, int jarg3) {
+  std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *arg1 = (std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  
+  arg1 = (std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *)jarg1; 
+  arg2 = (int)jarg2; 
+  arg3 = (int)jarg3; 
+  {
+    try {
+      try {
+        std_vector_Sl_WeightedValue_Sl_fiftyoneDegreesCoordinate_Sg__Sg__Reverse__SWIG_1(arg1,arg2,arg3);
+      } catch(std::out_of_range &_e) {
+        SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
+        return ;
+      } catch(std::invalid_argument &_e) {
+        SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentException, (&_e)->what(), "");
+        return ;
+      };
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return ; 
+      };
+    }
+  }
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedCoordinateListSwig_SetRange___(void * jarg1, int jarg2, void * jarg3) {
+  std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *arg1 = (std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *) 0 ;
+  int arg2 ;
+  std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *arg3 = 0 ;
+  
+  arg1 = (std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *)jarg1; 
+  arg2 = (int)jarg2; 
+  arg3 = (std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *)jarg3;
+  if (!arg3) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "std::vector< WeightedValue< fiftyoneDegreesCoordinate > > const & is null", 0);
+    return ;
+  } 
+  {
+    try {
+      try {
+        std_vector_Sl_WeightedValue_Sl_fiftyoneDegreesCoordinate_Sg__Sg__SetRange(arg1,arg2,(std::vector< WeightedValue< fiftyone_degrees_ipi_coordinate_t > > const &)*arg3);
+      } catch(std::out_of_range &_e) {
+        SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
+        return ;
+      };
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return ; 
+      };
+    }
+  }
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_delete_WeightedCoordinateListSwig___(void * jarg1) {
+  std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *arg1 = (std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *) 0 ;
+  
+  arg1 = (std::vector< WeightedValue< fiftyoneDegreesCoordinate > > *)jarg1; 
+  {
+    try {
+      delete arg1;;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return ; 
+      };
+    }
+  }
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_new_WeightedStringListValueSwig___() {
+  void * jresult ;
+  FiftyoneDegrees::Common::Value< std::vector< WeightedValue< std::string > > > *result = 0 ;
+  
+  {
+    try {
+      result = (FiftyoneDegrees::Common::Value< std::vector< WeightedValue< std::string > > > *)new FiftyoneDegrees::Common::Value< std::vector< WeightedValue< std::string > > >();;
     }
     catch(FatalException& e) {
       {
@@ -17000,10 +18886,10 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
 
 SWIGEXPORT unsigned int SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedStringListValueSwig_hasValue___(void * jarg1) {
   unsigned int jresult ;
-  Value< std::vector< WeightedValue< std::string > > > *arg1 = (Value< std::vector< WeightedValue< std::string > > > *) 0 ;
+  FiftyoneDegrees::Common::Value< std::vector< WeightedValue< std::string > > > *arg1 = (FiftyoneDegrees::Common::Value< std::vector< WeightedValue< std::string > > > *) 0 ;
   bool result;
   
-  arg1 = (Value< std::vector< WeightedValue< std::string > > > *)jarg1; 
+  arg1 = (FiftyoneDegrees::Common::Value< std::vector< WeightedValue< std::string > > > *)jarg1; 
   {
     try {
       result = (bool)(arg1)->hasValue();;
@@ -17061,10 +18947,10 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPrem
 
 SWIGEXPORT char * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedStringListValueSwig_getNoValueMessage___(void * jarg1) {
   char * jresult ;
-  Value< std::vector< WeightedValue< std::string > > > *arg1 = (Value< std::vector< WeightedValue< std::string > > > *) 0 ;
+  FiftyoneDegrees::Common::Value< std::vector< WeightedValue< std::string > > > *arg1 = (FiftyoneDegrees::Common::Value< std::vector< WeightedValue< std::string > > > *) 0 ;
   char *result = 0 ;
   
-  arg1 = (Value< std::vector< WeightedValue< std::string > > > *)jarg1; 
+  arg1 = (FiftyoneDegrees::Common::Value< std::vector< WeightedValue< std::string > > > *)jarg1; 
   {
     try {
       result = (char *)(arg1)->getNoValueMessage();;
@@ -17122,10 +19008,10 @@ SWIGEXPORT char * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
 
 SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedStringListValueSwig_getValue___(void * jarg1) {
   void * jresult ;
-  Value< std::vector< WeightedValue< std::string > > > *arg1 = (Value< std::vector< WeightedValue< std::string > > > *) 0 ;
+  FiftyoneDegrees::Common::Value< std::vector< WeightedValue< std::string > > > *arg1 = (FiftyoneDegrees::Common::Value< std::vector< WeightedValue< std::string > > > *) 0 ;
   std::vector< WeightedValue< std::string > > result;
   
-  arg1 = (Value< std::vector< WeightedValue< std::string > > > *)jarg1; 
+  arg1 = (FiftyoneDegrees::Common::Value< std::vector< WeightedValue< std::string > > > *)jarg1; 
   {
     try {
       result = (arg1)->getValue();;
@@ -17182,9 +19068,9 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
 
 
 SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_delete_WeightedStringListValueSwig___(void * jarg1) {
-  Value< std::vector< WeightedValue< std::string > > > *arg1 = (Value< std::vector< WeightedValue< std::string > > > *) 0 ;
+  FiftyoneDegrees::Common::Value< std::vector< WeightedValue< std::string > > > *arg1 = (FiftyoneDegrees::Common::Value< std::vector< WeightedValue< std::string > > > *) 0 ;
   
-  arg1 = (Value< std::vector< WeightedValue< std::string > > > *)jarg1; 
+  arg1 = (FiftyoneDegrees::Common::Value< std::vector< WeightedValue< std::string > > > *)jarg1; 
   {
     try {
       delete arg1;;
@@ -17240,11 +19126,11 @@ SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInte
 
 SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_new_WeightedBoolListValueSwig___() {
   void * jresult ;
-  Value< std::vector< WeightedValue< bool > > > *result = 0 ;
+  FiftyoneDegrees::Common::Value< std::vector< WeightedValue< bool > > > *result = 0 ;
   
   {
     try {
-      result = (Value< std::vector< WeightedValue< bool > > > *)new Value< std::vector< WeightedValue< bool > > >();;
+      result = (FiftyoneDegrees::Common::Value< std::vector< WeightedValue< bool > > > *)new FiftyoneDegrees::Common::Value< std::vector< WeightedValue< bool > > >();;
     }
     catch(FatalException& e) {
       {
@@ -17299,10 +19185,10 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
 
 SWIGEXPORT unsigned int SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedBoolListValueSwig_hasValue___(void * jarg1) {
   unsigned int jresult ;
-  Value< std::vector< WeightedValue< bool > > > *arg1 = (Value< std::vector< WeightedValue< bool > > > *) 0 ;
+  FiftyoneDegrees::Common::Value< std::vector< WeightedValue< bool > > > *arg1 = (FiftyoneDegrees::Common::Value< std::vector< WeightedValue< bool > > > *) 0 ;
   bool result;
   
-  arg1 = (Value< std::vector< WeightedValue< bool > > > *)jarg1; 
+  arg1 = (FiftyoneDegrees::Common::Value< std::vector< WeightedValue< bool > > > *)jarg1; 
   {
     try {
       result = (bool)(arg1)->hasValue();;
@@ -17360,10 +19246,10 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPrem
 
 SWIGEXPORT char * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedBoolListValueSwig_getNoValueMessage___(void * jarg1) {
   char * jresult ;
-  Value< std::vector< WeightedValue< bool > > > *arg1 = (Value< std::vector< WeightedValue< bool > > > *) 0 ;
+  FiftyoneDegrees::Common::Value< std::vector< WeightedValue< bool > > > *arg1 = (FiftyoneDegrees::Common::Value< std::vector< WeightedValue< bool > > > *) 0 ;
   char *result = 0 ;
   
-  arg1 = (Value< std::vector< WeightedValue< bool > > > *)jarg1; 
+  arg1 = (FiftyoneDegrees::Common::Value< std::vector< WeightedValue< bool > > > *)jarg1; 
   {
     try {
       result = (char *)(arg1)->getNoValueMessage();;
@@ -17421,10 +19307,10 @@ SWIGEXPORT char * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
 
 SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedBoolListValueSwig_getValue___(void * jarg1) {
   void * jresult ;
-  Value< std::vector< WeightedValue< bool > > > *arg1 = (Value< std::vector< WeightedValue< bool > > > *) 0 ;
+  FiftyoneDegrees::Common::Value< std::vector< WeightedValue< bool > > > *arg1 = (FiftyoneDegrees::Common::Value< std::vector< WeightedValue< bool > > > *) 0 ;
   std::vector< WeightedValue< bool > > result;
   
-  arg1 = (Value< std::vector< WeightedValue< bool > > > *)jarg1; 
+  arg1 = (FiftyoneDegrees::Common::Value< std::vector< WeightedValue< bool > > > *)jarg1; 
   {
     try {
       result = (arg1)->getValue();;
@@ -17481,9 +19367,9 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
 
 
 SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_delete_WeightedBoolListValueSwig___(void * jarg1) {
-  Value< std::vector< WeightedValue< bool > > > *arg1 = (Value< std::vector< WeightedValue< bool > > > *) 0 ;
+  FiftyoneDegrees::Common::Value< std::vector< WeightedValue< bool > > > *arg1 = (FiftyoneDegrees::Common::Value< std::vector< WeightedValue< bool > > > *) 0 ;
   
-  arg1 = (Value< std::vector< WeightedValue< bool > > > *)jarg1; 
+  arg1 = (FiftyoneDegrees::Common::Value< std::vector< WeightedValue< bool > > > *)jarg1; 
   {
     try {
       delete arg1;;
@@ -17539,11 +19425,11 @@ SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInte
 
 SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_new_WeightedIntListValueSwig___() {
   void * jresult ;
-  Value< std::vector< WeightedValue< int > > > *result = 0 ;
+  FiftyoneDegrees::Common::Value< std::vector< WeightedValue< int > > > *result = 0 ;
   
   {
     try {
-      result = (Value< std::vector< WeightedValue< int > > > *)new Value< std::vector< WeightedValue< int > > >();;
+      result = (FiftyoneDegrees::Common::Value< std::vector< WeightedValue< int > > > *)new FiftyoneDegrees::Common::Value< std::vector< WeightedValue< int > > >();;
     }
     catch(FatalException& e) {
       {
@@ -17598,10 +19484,10 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
 
 SWIGEXPORT unsigned int SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedIntListValueSwig_hasValue___(void * jarg1) {
   unsigned int jresult ;
-  Value< std::vector< WeightedValue< int > > > *arg1 = (Value< std::vector< WeightedValue< int > > > *) 0 ;
+  FiftyoneDegrees::Common::Value< std::vector< WeightedValue< int > > > *arg1 = (FiftyoneDegrees::Common::Value< std::vector< WeightedValue< int > > > *) 0 ;
   bool result;
   
-  arg1 = (Value< std::vector< WeightedValue< int > > > *)jarg1; 
+  arg1 = (FiftyoneDegrees::Common::Value< std::vector< WeightedValue< int > > > *)jarg1; 
   {
     try {
       result = (bool)(arg1)->hasValue();;
@@ -17659,10 +19545,10 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPrem
 
 SWIGEXPORT char * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedIntListValueSwig_getNoValueMessage___(void * jarg1) {
   char * jresult ;
-  Value< std::vector< WeightedValue< int > > > *arg1 = (Value< std::vector< WeightedValue< int > > > *) 0 ;
+  FiftyoneDegrees::Common::Value< std::vector< WeightedValue< int > > > *arg1 = (FiftyoneDegrees::Common::Value< std::vector< WeightedValue< int > > > *) 0 ;
   char *result = 0 ;
   
-  arg1 = (Value< std::vector< WeightedValue< int > > > *)jarg1; 
+  arg1 = (FiftyoneDegrees::Common::Value< std::vector< WeightedValue< int > > > *)jarg1; 
   {
     try {
       result = (char *)(arg1)->getNoValueMessage();;
@@ -17720,10 +19606,10 @@ SWIGEXPORT char * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
 
 SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedIntListValueSwig_getValue___(void * jarg1) {
   void * jresult ;
-  Value< std::vector< WeightedValue< int > > > *arg1 = (Value< std::vector< WeightedValue< int > > > *) 0 ;
+  FiftyoneDegrees::Common::Value< std::vector< WeightedValue< int > > > *arg1 = (FiftyoneDegrees::Common::Value< std::vector< WeightedValue< int > > > *) 0 ;
   std::vector< WeightedValue< int > > result;
   
-  arg1 = (Value< std::vector< WeightedValue< int > > > *)jarg1; 
+  arg1 = (FiftyoneDegrees::Common::Value< std::vector< WeightedValue< int > > > *)jarg1; 
   {
     try {
       result = (arg1)->getValue();;
@@ -17780,9 +19666,9 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
 
 
 SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_delete_WeightedIntListValueSwig___(void * jarg1) {
-  Value< std::vector< WeightedValue< int > > > *arg1 = (Value< std::vector< WeightedValue< int > > > *) 0 ;
+  FiftyoneDegrees::Common::Value< std::vector< WeightedValue< int > > > *arg1 = (FiftyoneDegrees::Common::Value< std::vector< WeightedValue< int > > > *) 0 ;
   
-  arg1 = (Value< std::vector< WeightedValue< int > > > *)jarg1; 
+  arg1 = (FiftyoneDegrees::Common::Value< std::vector< WeightedValue< int > > > *)jarg1; 
   {
     try {
       delete arg1;;
@@ -17838,11 +19724,11 @@ SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInte
 
 SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_new_WeightedDoubleListValueSwig___() {
   void * jresult ;
-  Value< std::vector< WeightedValue< double > > > *result = 0 ;
+  FiftyoneDegrees::Common::Value< std::vector< WeightedValue< double > > > *result = 0 ;
   
   {
     try {
-      result = (Value< std::vector< WeightedValue< double > > > *)new Value< std::vector< WeightedValue< double > > >();;
+      result = (FiftyoneDegrees::Common::Value< std::vector< WeightedValue< double > > > *)new FiftyoneDegrees::Common::Value< std::vector< WeightedValue< double > > >();;
     }
     catch(FatalException& e) {
       {
@@ -17897,10 +19783,10 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
 
 SWIGEXPORT unsigned int SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedDoubleListValueSwig_hasValue___(void * jarg1) {
   unsigned int jresult ;
-  Value< std::vector< WeightedValue< double > > > *arg1 = (Value< std::vector< WeightedValue< double > > > *) 0 ;
+  FiftyoneDegrees::Common::Value< std::vector< WeightedValue< double > > > *arg1 = (FiftyoneDegrees::Common::Value< std::vector< WeightedValue< double > > > *) 0 ;
   bool result;
   
-  arg1 = (Value< std::vector< WeightedValue< double > > > *)jarg1; 
+  arg1 = (FiftyoneDegrees::Common::Value< std::vector< WeightedValue< double > > > *)jarg1; 
   {
     try {
       result = (bool)(arg1)->hasValue();;
@@ -17958,10 +19844,10 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPrem
 
 SWIGEXPORT char * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedDoubleListValueSwig_getNoValueMessage___(void * jarg1) {
   char * jresult ;
-  Value< std::vector< WeightedValue< double > > > *arg1 = (Value< std::vector< WeightedValue< double > > > *) 0 ;
+  FiftyoneDegrees::Common::Value< std::vector< WeightedValue< double > > > *arg1 = (FiftyoneDegrees::Common::Value< std::vector< WeightedValue< double > > > *) 0 ;
   char *result = 0 ;
   
-  arg1 = (Value< std::vector< WeightedValue< double > > > *)jarg1; 
+  arg1 = (FiftyoneDegrees::Common::Value< std::vector< WeightedValue< double > > > *)jarg1; 
   {
     try {
       result = (char *)(arg1)->getNoValueMessage();;
@@ -18019,10 +19905,10 @@ SWIGEXPORT char * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
 
 SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedDoubleListValueSwig_getValue___(void * jarg1) {
   void * jresult ;
-  Value< std::vector< WeightedValue< double > > > *arg1 = (Value< std::vector< WeightedValue< double > > > *) 0 ;
+  FiftyoneDegrees::Common::Value< std::vector< WeightedValue< double > > > *arg1 = (FiftyoneDegrees::Common::Value< std::vector< WeightedValue< double > > > *) 0 ;
   std::vector< WeightedValue< double > > result;
   
-  arg1 = (Value< std::vector< WeightedValue< double > > > *)jarg1; 
+  arg1 = (FiftyoneDegrees::Common::Value< std::vector< WeightedValue< double > > > *)jarg1; 
   {
     try {
       result = (arg1)->getValue();;
@@ -18079,9 +19965,308 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
 
 
 SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_delete_WeightedDoubleListValueSwig___(void * jarg1) {
-  Value< std::vector< WeightedValue< double > > > *arg1 = (Value< std::vector< WeightedValue< double > > > *) 0 ;
+  FiftyoneDegrees::Common::Value< std::vector< WeightedValue< double > > > *arg1 = (FiftyoneDegrees::Common::Value< std::vector< WeightedValue< double > > > *) 0 ;
   
-  arg1 = (Value< std::vector< WeightedValue< double > > > *)jarg1; 
+  arg1 = (FiftyoneDegrees::Common::Value< std::vector< WeightedValue< double > > > *)jarg1; 
+  {
+    try {
+      delete arg1;;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return ; 
+      };
+    }
+  }
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_new_WeightedCoordinateListValueSwig___() {
+  void * jresult ;
+  FiftyoneDegrees::Common::Value< std::vector< WeightedValue< fiftyoneDegreesCoordinate > > > *result = 0 ;
+  
+  {
+    try {
+      result = (FiftyoneDegrees::Common::Value< std::vector< WeightedValue< fiftyoneDegreesCoordinate > > > *)new FiftyoneDegrees::Common::Value< std::vector< WeightedValue< fiftyoneDegreesCoordinate > > >();;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedCoordinateListValueSwig_hasValue___(void * jarg1) {
+  unsigned int jresult ;
+  FiftyoneDegrees::Common::Value< std::vector< WeightedValue< fiftyoneDegreesCoordinate > > > *arg1 = (FiftyoneDegrees::Common::Value< std::vector< WeightedValue< fiftyoneDegreesCoordinate > > > *) 0 ;
+  bool result;
+  
+  arg1 = (FiftyoneDegrees::Common::Value< std::vector< WeightedValue< fiftyoneDegreesCoordinate > > > *)jarg1; 
+  {
+    try {
+      result = (bool)(arg1)->hasValue();;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT char * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedCoordinateListValueSwig_getNoValueMessage___(void * jarg1) {
+  char * jresult ;
+  FiftyoneDegrees::Common::Value< std::vector< WeightedValue< fiftyoneDegreesCoordinate > > > *arg1 = (FiftyoneDegrees::Common::Value< std::vector< WeightedValue< fiftyoneDegreesCoordinate > > > *) 0 ;
+  char *result = 0 ;
+  
+  arg1 = (FiftyoneDegrees::Common::Value< std::vector< WeightedValue< fiftyoneDegreesCoordinate > > > *)jarg1; 
+  {
+    try {
+      result = (char *)(arg1)->getNoValueMessage();;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = SWIG_csharp_string_callback((const char *)result); 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedCoordinateListValueSwig_getValue___(void * jarg1) {
+  void * jresult ;
+  FiftyoneDegrees::Common::Value< std::vector< WeightedValue< fiftyoneDegreesCoordinate > > > *arg1 = (FiftyoneDegrees::Common::Value< std::vector< WeightedValue< fiftyoneDegreesCoordinate > > > *) 0 ;
+  std::vector< WeightedValue< fiftyoneDegreesCoordinate > > result;
+  
+  arg1 = (FiftyoneDegrees::Common::Value< std::vector< WeightedValue< fiftyoneDegreesCoordinate > > > *)jarg1; 
+  {
+    try {
+      result = (arg1)->getValue();;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = new std::vector< WeightedValue< fiftyoneDegreesCoordinate > >(result); 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_delete_WeightedCoordinateListValueSwig___(void * jarg1) {
+  FiftyoneDegrees::Common::Value< std::vector< WeightedValue< fiftyoneDegreesCoordinate > > > *arg1 = (FiftyoneDegrees::Common::Value< std::vector< WeightedValue< fiftyoneDegreesCoordinate > > > *) 0 ;
+  
+  arg1 = (FiftyoneDegrees::Common::Value< std::vector< WeightedValue< fiftyoneDegreesCoordinate > > > *)jarg1; 
   {
     try {
       delete arg1;;
@@ -18137,11 +20322,11 @@ SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInte
 
 SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_new_CoordinateValueSwig___() {
   void * jresult ;
-  Value< fiftyoneDegreesCoordinate > *result = 0 ;
+  FiftyoneDegrees::Common::Value< fiftyoneDegreesCoordinate > *result = 0 ;
   
   {
     try {
-      result = (Value< fiftyoneDegreesCoordinate > *)new Value< fiftyoneDegreesCoordinate >();;
+      result = (FiftyoneDegrees::Common::Value< fiftyoneDegreesCoordinate > *)new FiftyoneDegrees::Common::Value< fiftyoneDegreesCoordinate >();;
     }
     catch(FatalException& e) {
       {
@@ -18196,10 +20381,10 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
 
 SWIGEXPORT unsigned int SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_CoordinateValueSwig_hasValue___(void * jarg1) {
   unsigned int jresult ;
-  Value< fiftyoneDegreesCoordinate > *arg1 = (Value< fiftyoneDegreesCoordinate > *) 0 ;
+  FiftyoneDegrees::Common::Value< fiftyoneDegreesCoordinate > *arg1 = (FiftyoneDegrees::Common::Value< fiftyoneDegreesCoordinate > *) 0 ;
   bool result;
   
-  arg1 = (Value< fiftyoneDegreesCoordinate > *)jarg1; 
+  arg1 = (FiftyoneDegrees::Common::Value< fiftyoneDegreesCoordinate > *)jarg1; 
   {
     try {
       result = (bool)(arg1)->hasValue();;
@@ -18257,10 +20442,10 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPrem
 
 SWIGEXPORT char * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_CoordinateValueSwig_getNoValueMessage___(void * jarg1) {
   char * jresult ;
-  Value< fiftyoneDegreesCoordinate > *arg1 = (Value< fiftyoneDegreesCoordinate > *) 0 ;
+  FiftyoneDegrees::Common::Value< fiftyoneDegreesCoordinate > *arg1 = (FiftyoneDegrees::Common::Value< fiftyoneDegreesCoordinate > *) 0 ;
   char *result = 0 ;
   
-  arg1 = (Value< fiftyoneDegreesCoordinate > *)jarg1; 
+  arg1 = (FiftyoneDegrees::Common::Value< fiftyoneDegreesCoordinate > *)jarg1; 
   {
     try {
       result = (char *)(arg1)->getNoValueMessage();;
@@ -18318,10 +20503,10 @@ SWIGEXPORT char * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
 
 SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_CoordinateValueSwig_getValue___(void * jarg1) {
   void * jresult ;
-  Value< fiftyoneDegreesCoordinate > *arg1 = (Value< fiftyoneDegreesCoordinate > *) 0 ;
+  FiftyoneDegrees::Common::Value< fiftyoneDegreesCoordinate > *arg1 = (FiftyoneDegrees::Common::Value< fiftyoneDegreesCoordinate > *) 0 ;
   fiftyone_degrees_ipi_coordinate_t result;
   
-  arg1 = (Value< fiftyoneDegreesCoordinate > *)jarg1; 
+  arg1 = (FiftyoneDegrees::Common::Value< fiftyoneDegreesCoordinate > *)jarg1; 
   {
     try {
       result = (arg1)->getValue();;
@@ -18378,9 +20563,9 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
 
 
 SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_delete_CoordinateValueSwig___(void * jarg1) {
-  Value< fiftyoneDegreesCoordinate > *arg1 = (Value< fiftyoneDegreesCoordinate > *) 0 ;
+  FiftyoneDegrees::Common::Value< fiftyoneDegreesCoordinate > *arg1 = (FiftyoneDegrees::Common::Value< fiftyoneDegreesCoordinate > *) 0 ;
   
-  arg1 = (Value< fiftyoneDegreesCoordinate > *)jarg1; 
+  arg1 = (FiftyoneDegrees::Common::Value< fiftyoneDegreesCoordinate > *)jarg1; 
   {
     try {
       delete arg1;;
@@ -18436,11 +20621,11 @@ SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInte
 
 SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_new_IpAddressValueSwig___() {
   void * jresult ;
-  Value< IpAddress > *result = 0 ;
+  FiftyoneDegrees::Common::Value< FiftyoneDegrees::IpIntelligence::IpAddress > *result = 0 ;
   
   {
     try {
-      result = (Value< IpAddress > *)new Value< IpAddress >();;
+      result = (FiftyoneDegrees::Common::Value< FiftyoneDegrees::IpIntelligence::IpAddress > *)new FiftyoneDegrees::Common::Value< FiftyoneDegrees::IpIntelligence::IpAddress >();;
     }
     catch(FatalException& e) {
       {
@@ -18495,10 +20680,10 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
 
 SWIGEXPORT unsigned int SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_IpAddressValueSwig_hasValue___(void * jarg1) {
   unsigned int jresult ;
-  Value< IpAddress > *arg1 = (Value< IpAddress > *) 0 ;
+  FiftyoneDegrees::Common::Value< FiftyoneDegrees::IpIntelligence::IpAddress > *arg1 = (FiftyoneDegrees::Common::Value< FiftyoneDegrees::IpIntelligence::IpAddress > *) 0 ;
   bool result;
   
-  arg1 = (Value< IpAddress > *)jarg1; 
+  arg1 = (FiftyoneDegrees::Common::Value< FiftyoneDegrees::IpIntelligence::IpAddress > *)jarg1; 
   {
     try {
       result = (bool)(arg1)->hasValue();;
@@ -18556,10 +20741,10 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPrem
 
 SWIGEXPORT char * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_IpAddressValueSwig_getNoValueMessage___(void * jarg1) {
   char * jresult ;
-  Value< IpAddress > *arg1 = (Value< IpAddress > *) 0 ;
+  FiftyoneDegrees::Common::Value< FiftyoneDegrees::IpIntelligence::IpAddress > *arg1 = (FiftyoneDegrees::Common::Value< FiftyoneDegrees::IpIntelligence::IpAddress > *) 0 ;
   char *result = 0 ;
   
-  arg1 = (Value< IpAddress > *)jarg1; 
+  arg1 = (FiftyoneDegrees::Common::Value< FiftyoneDegrees::IpIntelligence::IpAddress > *)jarg1; 
   {
     try {
       result = (char *)(arg1)->getNoValueMessage();;
@@ -18617,10 +20802,10 @@ SWIGEXPORT char * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
 
 SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_IpAddressValueSwig_getValue___(void * jarg1) {
   void * jresult ;
-  Value< IpAddress > *arg1 = (Value< IpAddress > *) 0 ;
-  SwigValueWrapper< IpAddress > result;
+  FiftyoneDegrees::Common::Value< FiftyoneDegrees::IpIntelligence::IpAddress > *arg1 = (FiftyoneDegrees::Common::Value< FiftyoneDegrees::IpIntelligence::IpAddress > *) 0 ;
+  SwigValueWrapper< FiftyoneDegrees::IpIntelligence::IpAddress > result;
   
-  arg1 = (Value< IpAddress > *)jarg1; 
+  arg1 = (FiftyoneDegrees::Common::Value< FiftyoneDegrees::IpIntelligence::IpAddress > *)jarg1; 
   {
     try {
       result = (arg1)->getValue();;
@@ -18671,15 +20856,15 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
       };
     }
   }
-  jresult = new IpAddress(result); 
+  jresult = new FiftyoneDegrees::IpIntelligence::IpAddress(result);
   return jresult;
 }
 
 
 SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_delete_IpAddressValueSwig___(void * jarg1) {
-  Value< IpAddress > *arg1 = (Value< IpAddress > *) 0 ;
+  FiftyoneDegrees::Common::Value< FiftyoneDegrees::IpIntelligence::IpAddress > *arg1 = (FiftyoneDegrees::Common::Value< FiftyoneDegrees::IpIntelligence::IpAddress > *) 0 ;
   
-  arg1 = (Value< IpAddress > *)jarg1; 
+  arg1 = (FiftyoneDegrees::Common::Value< FiftyoneDegrees::IpIntelligence::IpAddress > *)jarg1; 
   {
     try {
       delete arg1;;
@@ -18918,7 +21103,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
   void * jresult ;
   ResultsIpi *arg1 = (ResultsIpi *) 0 ;
   std::string *arg2 = 0 ;
-  Value< std::vector< WeightedValue< std::string > > > result;
+  FiftyoneDegrees::Common::Value< std::vector< WeightedValue< std::string > > > result;
   
   arg1 = (ResultsIpi *)jarg1; 
   if (!jarg2) {
@@ -18977,7 +21162,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
       };
     }
   }
-  jresult = new Value< std::vector< WeightedValue< std::string > > >(result); 
+  jresult = new FiftyoneDegrees::Common::Value< std::vector< WeightedValue< std::string > > >(result); 
   return jresult;
 }
 
@@ -18986,7 +21171,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
   void * jresult ;
   ResultsIpi *arg1 = (ResultsIpi *) 0 ;
   int arg2 ;
-  Value< std::vector< WeightedValue< std::string > > > result;
+  FiftyoneDegrees::Common::Value< std::vector< WeightedValue< std::string > > > result;
   
   arg1 = (ResultsIpi *)jarg1; 
   arg2 = (int)jarg2; 
@@ -19040,7 +21225,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
       };
     }
   }
-  jresult = new Value< std::vector< WeightedValue< std::string > > >(result); 
+  jresult = new FiftyoneDegrees::Common::Value< std::vector< WeightedValue< std::string > > >(result); 
   return jresult;
 }
 
@@ -19049,7 +21234,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
   void * jresult ;
   ResultsIpi *arg1 = (ResultsIpi *) 0 ;
   std::string *arg2 = 0 ;
-  Value< std::vector< WeightedValue< bool > > > result;
+  FiftyoneDegrees::Common::Value< std::vector< WeightedValue< bool > > > result;
   
   arg1 = (ResultsIpi *)jarg1; 
   if (!jarg2) {
@@ -19108,7 +21293,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
       };
     }
   }
-  jresult = new Value< std::vector< WeightedValue< bool > > >(result); 
+  jresult = new FiftyoneDegrees::Common::Value< std::vector< WeightedValue< bool > > >(result); 
   return jresult;
 }
 
@@ -19117,7 +21302,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
   void * jresult ;
   ResultsIpi *arg1 = (ResultsIpi *) 0 ;
   int arg2 ;
-  Value< std::vector< WeightedValue< bool > > > result;
+  FiftyoneDegrees::Common::Value< std::vector< WeightedValue< bool > > > result;
   
   arg1 = (ResultsIpi *)jarg1; 
   arg2 = (int)jarg2; 
@@ -19171,7 +21356,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
       };
     }
   }
-  jresult = new Value< std::vector< WeightedValue< bool > > >(result); 
+  jresult = new FiftyoneDegrees::Common::Value< std::vector< WeightedValue< bool > > >(result); 
   return jresult;
 }
 
@@ -19180,7 +21365,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
   void * jresult ;
   ResultsIpi *arg1 = (ResultsIpi *) 0 ;
   std::string *arg2 = 0 ;
-  Value< std::vector< WeightedValue< int > > > result;
+  FiftyoneDegrees::Common::Value< std::vector< WeightedValue< int > > > result;
   
   arg1 = (ResultsIpi *)jarg1; 
   if (!jarg2) {
@@ -19239,7 +21424,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
       };
     }
   }
-  jresult = new Value< std::vector< WeightedValue< int > > >(result); 
+  jresult = new FiftyoneDegrees::Common::Value< std::vector< WeightedValue< int > > >(result); 
   return jresult;
 }
 
@@ -19248,7 +21433,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
   void * jresult ;
   ResultsIpi *arg1 = (ResultsIpi *) 0 ;
   int arg2 ;
-  Value< std::vector< WeightedValue< int > > > result;
+  FiftyoneDegrees::Common::Value< std::vector< WeightedValue< int > > > result;
   
   arg1 = (ResultsIpi *)jarg1; 
   arg2 = (int)jarg2; 
@@ -19302,7 +21487,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
       };
     }
   }
-  jresult = new Value< std::vector< WeightedValue< int > > >(result); 
+  jresult = new FiftyoneDegrees::Common::Value< std::vector< WeightedValue< int > > >(result); 
   return jresult;
 }
 
@@ -19311,7 +21496,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
   void * jresult ;
   ResultsIpi *arg1 = (ResultsIpi *) 0 ;
   std::string *arg2 = 0 ;
-  Value< std::vector< WeightedValue< double > > > result;
+  FiftyoneDegrees::Common::Value< std::vector< WeightedValue< double > > > result;
   
   arg1 = (ResultsIpi *)jarg1; 
   if (!jarg2) {
@@ -19370,7 +21555,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
       };
     }
   }
-  jresult = new Value< std::vector< WeightedValue< double > > >(result); 
+  jresult = new FiftyoneDegrees::Common::Value< std::vector< WeightedValue< double > > >(result); 
   return jresult;
 }
 
@@ -19379,7 +21564,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
   void * jresult ;
   ResultsIpi *arg1 = (ResultsIpi *) 0 ;
   int arg2 ;
-  Value< std::vector< WeightedValue< double > > > result;
+  FiftyoneDegrees::Common::Value< std::vector< WeightedValue< double > > > result;
   
   arg1 = (ResultsIpi *)jarg1; 
   arg2 = (int)jarg2; 
@@ -19433,7 +21618,138 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
       };
     }
   }
-  jresult = new Value< std::vector< WeightedValue< double > > >(result); 
+  jresult = new FiftyoneDegrees::Common::Value< std::vector< WeightedValue< double > > >(result); 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ResultsIpiSwig_getValuesAsWeightedCoordinateList__SWIG_0___(void * jarg1, const char * jarg2) {
+  void * jresult ;
+  ResultsIpi *arg1 = (ResultsIpi *) 0 ;
+  std::string *arg2 = 0 ;
+  FiftyoneDegrees::Common::Value< std::vector< WeightedValue< fiftyoneDegreesCoordinate > > > result;
+  
+  arg1 = (ResultsIpi *)jarg1; 
+  if (!jarg2) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "null string", 0);
+    return 0;
+  }
+  std::string arg2_str(jarg2);
+  arg2 = &arg2_str; 
+  {
+    try {
+      result = (arg1)->getValuesAsWeightedCoordinateList((std::string const &)*arg2);;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = new FiftyoneDegrees::Common::Value< std::vector< WeightedValue< fiftyoneDegreesCoordinate > > >(result); 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ResultsIpiSwig_getValuesAsWeightedCoordinateList__SWIG_1___(void * jarg1, int jarg2) {
+  void * jresult ;
+  ResultsIpi *arg1 = (ResultsIpi *) 0 ;
+  int arg2 ;
+  FiftyoneDegrees::Common::Value< std::vector< WeightedValue< fiftyoneDegreesCoordinate > > > result;
+  
+  arg1 = (ResultsIpi *)jarg1; 
+  arg2 = (int)jarg2; 
+  {
+    try {
+      result = (arg1)->getValuesAsWeightedCoordinateList(arg2);;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = new FiftyoneDegrees::Common::Value< std::vector< WeightedValue< fiftyoneDegreesCoordinate > > >(result); 
   return jresult;
 }
 
@@ -19442,7 +21758,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
   void * jresult ;
   ResultsIpi *arg1 = (ResultsIpi *) 0 ;
   std::string *arg2 = 0 ;
-  Value< fiftyoneDegreesCoordinate > result;
+  FiftyoneDegrees::Common::Value< fiftyoneDegreesCoordinate > result;
   
   arg1 = (ResultsIpi *)jarg1; 
   if (!jarg2) {
@@ -19501,7 +21817,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
       };
     }
   }
-  jresult = new Value< fiftyoneDegreesCoordinate >(result); 
+  jresult = new FiftyoneDegrees::Common::Value< fiftyoneDegreesCoordinate >(result); 
   return jresult;
 }
 
@@ -19510,7 +21826,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
   void * jresult ;
   ResultsIpi *arg1 = (ResultsIpi *) 0 ;
   int arg2 ;
-  Value< fiftyoneDegreesCoordinate > result;
+  FiftyoneDegrees::Common::Value< fiftyoneDegreesCoordinate > result;
   
   arg1 = (ResultsIpi *)jarg1; 
   arg2 = (int)jarg2; 
@@ -19564,7 +21880,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
       };
     }
   }
-  jresult = new Value< fiftyoneDegreesCoordinate >(result); 
+  jresult = new FiftyoneDegrees::Common::Value< fiftyoneDegreesCoordinate >(result); 
   return jresult;
 }
 
@@ -19573,7 +21889,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
   void * jresult ;
   ResultsIpi *arg1 = (ResultsIpi *) 0 ;
   std::string *arg2 = 0 ;
-  Value< IpAddress > result;
+  FiftyoneDegrees::Common::Value< FiftyoneDegrees::IpIntelligence::IpAddress > result;
   
   arg1 = (ResultsIpi *)jarg1; 
   if (!jarg2) {
@@ -19632,7 +21948,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
       };
     }
   }
-  jresult = new Value< IpAddress >(result); 
+  jresult = new FiftyoneDegrees::Common::Value< FiftyoneDegrees::IpIntelligence::IpAddress >(result); 
   return jresult;
 }
 
@@ -19641,7 +21957,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
   void * jresult ;
   ResultsIpi *arg1 = (ResultsIpi *) 0 ;
   int arg2 ;
-  Value< IpAddress > result;
+  FiftyoneDegrees::Common::Value< FiftyoneDegrees::IpIntelligence::IpAddress > result;
   
   arg1 = (ResultsIpi *)jarg1; 
   arg2 = (int)jarg2; 
@@ -19695,7 +22011,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
       };
     }
   }
-  jresult = new Value< IpAddress >(result); 
+  jresult = new FiftyoneDegrees::Common::Value< FiftyoneDegrees::IpIntelligence::IpAddress >(result); 
   return jresult;
 }
 

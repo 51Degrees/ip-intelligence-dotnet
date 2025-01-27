@@ -204,5 +204,10 @@ namespace FiftyOne.IpIntelligence.Shared
         /// Network name
         /// </summary>
         public IAspectPropertyValue<IReadOnlyList<WeightedValue<string>>> NetworkName { get { return GetAs<IAspectPropertyValue<IReadOnlyList<WeightedValue<string>>>>("networkname"); } }
+
+        /// <summary>
+        /// Coordinate
+        /// </summary>
+        public IAspectPropertyValue<IReadOnlyList<WeightedValue<Coordinate>>> Coordinate { get { return GetAs<IAspectPropertyValue<IReadOnlyList<WeightedValue<Coordinate>>>>("coordinate"); } }
     }
 }

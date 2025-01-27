@@ -147,6 +147,28 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
             return result;
         }
 
+        protected override IAspectPropertyValue<IReadOnlyList<WeightedValue<Coordinate>>> GetValuesAsWeightedCoordinateList(string propertyName)
+        {
+            var result = new AspectPropertyValue<IReadOnlyList<WeightedValue<Coordinate>>>();
+            var results = GetResultsContainingProperty(propertyName);
+
+            if (results != null)
+            {
+                using (var value = results.getValuesAsWeightedCoordinateList(propertyName))
+                {
+                    if (value.hasValue())
+                    {
+                        result.Value = new WeightedCoordinateListSwigWrapper(value.getValue());
+                    }
+                    else
+                    {
+                        result.NoValueMessage = value.getNoValueMessage();
+                    }
+                }
+            }
+            return result;
+        }
+
         protected override IAspectPropertyValue<IReadOnlyList<WeightedValue<int>>> GetValuesAsWeightedIntegerList(string propertyName)
         {
             var result = new AspectPropertyValue<IReadOnlyList<WeightedValue<int>>>();

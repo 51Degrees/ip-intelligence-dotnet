@@ -180,5 +180,10 @@ namespace FiftyOne.IpIntelligence
         /// </summary>
         IAspectPropertyValue<IReadOnlyList<WeightedValue<string>>> NetworkName { get; }
 
+        /// <summary>
+        /// Coordinate
+        /// </summary>
+        IAspectPropertyValue<IReadOnlyList<WeightedValue<Coordinate>>> Coordinate { get; }
+
     }
 }
