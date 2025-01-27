@@ -199,5 +199,10 @@ namespace FiftyOne.IpIntelligence.Shared
 		/// e.g. '123:90.0|321:10.0|0:1.0'
 		/// </summary>
 		public IAspectPropertyValue<string> NetworkId { get { return GetAs<IAspectPropertyValue<string>>("NetworkId"); } }
-	}
+
+        /// <summary>
+        /// Network name
+        /// </summary>
+        public IAspectPropertyValue<IReadOnlyList<WeightedValue<string>>> NetworkName { get { return GetAs<IAspectPropertyValue<IReadOnlyList<WeightedValue<string>>>>("networkname"); } }
+    }
 }

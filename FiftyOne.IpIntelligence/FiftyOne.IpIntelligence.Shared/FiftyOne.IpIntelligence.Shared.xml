@@ -1106,6 +1106,11 @@
             e.g. '123:90.0|321:10.0|0:1.0'
             </summary>
         </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpDataBase.NetworkName">
+            <summary>
+            Network name
+            </summary>
+        </member>
         <member name="T:FiftyOne.IpIntelligence.Shared.Messages">
             <summary>
               A strongly-typed resource class, for looking up localized strings, etc.
@@ -1366,6 +1371,11 @@
             The format represents a collection of the profile IDs and their percentages. Where the component is 
             dynamic, the profile ID will be 0 and its' percentage is 1
             e.g. '123:90.0|321:10.0|0:1.0'
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpData.NetworkName">
+            <summary>
+            Network name
             </summary>
         </member>
     </members>

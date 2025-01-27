@@ -22,6 +22,7 @@
 
 using FiftyOne.IpIntelligence.Shared.Data;
 using FiftyOne.Pipeline.Engines.Data;
+using System;
 using System.Collections.Generic;
 using System.Net;
 
@@ -173,5 +174,11 @@ namespace FiftyOne.IpIntelligence
 		/// e.g. '123:90.0|321:10.0|0:1.0'
 		/// </summary>
 		IAspectPropertyValue<string> NetworkId { get; }
-	}
+
+        /// <summary>
+        /// Network name
+        /// </summary>
+        IAspectPropertyValue<IReadOnlyList<WeightedValue<string>>> NetworkName { get; }
+
+    }
 }
