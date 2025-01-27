@@ -254,11 +254,11 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
                     {
                         using (var addressSwig = value.getValue())
                         {
-                            if (addressSwig.getType() != IpTypeSwig.FIFTYONE_DEGREES_EVIDENCE_IP_TYPE_INVALID) 
+                            if (addressSwig.getType() != IpTypeSwig.FIFTYONE_DEGREES_IP_TYPE_INVALID) 
                             {
                                 byte[] address = new byte[Constants.IPV6_LENGTH];
                                 addressSwig.getCopyOfIpAddress(address, (uint)address.Length);
-                                if (addressSwig.getType() == IpTypeSwig.FIFTYONE_DEGREES_EVIDENCE_IP_TYPE_IPV4)
+                                if (addressSwig.getType() == IpTypeSwig.FIFTYONE_DEGREES_IP_TYPE_IPV4)
                                 {
                                     // Downsize the array if it is ipv4
                                     Array.Resize(ref address, Constants.IPV4_LENGTH);
