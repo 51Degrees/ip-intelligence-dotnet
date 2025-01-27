@@ -26,6 +26,7 @@ using FiftyOne.Pipeline.Engines;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 /// <summary>
 /// @example OnPremise/GettingStarted/Program.cs
@@ -114,6 +115,21 @@ namespace FiftyOne.IpIntelligence.Examples.OnPremise.GettingStarted
                 data.Process();
                 // Get IP data from the flow data.
                 var ip = data.Get<IIpData>();
+
+                // TODO: Revert to reading other properties
+                var networkName = ip.NetworkName;
+                Console.WriteLine($"0. What is the network name that is matched for '{ipAddress}'?");
+                if (!networkName.HasValue)
+                {
+                    Console.WriteLine($"\t{networkName.NoValueMessage} - {networkName.NoValueMessage}");
+                }
+                else
+                {
+                    var networkNameValues = string.Join(", ", networkName.Value.Select(x => $"('{x.Value}' @ {x.Weight})"));
+                    Console.WriteLine($"\t[{networkName.Value.Count}]: {networkNameValues}");
+                }
+                return;
+
                 var rangeStart = ip.IpRangeStart;
                 var rangeEnd = ip.IpRangeEnd;
                 Console.WriteLine($"1. What is the IP address range that is matched for '{ipAddress}'?");
