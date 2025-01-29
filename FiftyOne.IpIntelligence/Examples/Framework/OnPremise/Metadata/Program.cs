@@ -117,6 +117,9 @@ namespace FiftyOne.IpIntelligence.Examples.OnPremise.Metadata
                         Console.WriteLine($"[Category: {property.Category}]" +
                             $"({property.Type.Name}) - {property.Description}");
 
+                        // TODO: Handle possible values
+                        continue;
+
                         // Next, output a list of the possible values this 
                         // property can have.
                         // Most properties in the IP Metrics category do
