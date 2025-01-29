@@ -127,7 +127,7 @@ namespace FiftyOne.IpIntelligence.Examples.OnPremise.Performance
 
                             // Update the counters depending on the CountryCode
                             // result.
-                            var countries = ip.CountryCode;
+                            var countries = ip.NetworkName; // TODO: Use CountryCode again
                             if (countries.HasValue)
                             {
                                 if (countries.Value.Count > 1)
