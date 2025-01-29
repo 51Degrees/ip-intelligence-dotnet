@@ -133,6 +133,24 @@ namespace FiftyOne.IpIntelligence.Examples.OnPremise.ConfigureFromFile
                 data.Process();
                 // Get IP data from the flow data.
                 var ip = data.Get<IIpData>();
+
+
+                // TODO: Revert to reading other properties
+                {
+                    var networkName = ip.NetworkName;
+                    Console.WriteLine($"0.1. What is the network name that is matched for '{ipAddress}'?");
+                    if (!networkName.HasValue)
+                    {
+                        Console.WriteLine($"\t{networkName.NoValueMessage} - {networkName.NoValueMessage}");
+                    }
+                    else
+                    {
+                        var networkNameValues = string.Join(", ", networkName.Value.Select(x => $"('{x.Value}' @ {x.Weight})"));
+                        Console.WriteLine($"\t[{networkName.Value.Count}]: {networkNameValues}");
+                    }
+                }
+                return;
+
                 var rangeStart = ip.IpRangeStart;
                 Console.WriteLine($"1. What is the RangeStart of '{ipAddress}'?");
                 // Output the value of the 'RangeStart' property.
