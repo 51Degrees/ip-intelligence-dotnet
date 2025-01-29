@@ -25,6 +25,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Microsoft.Extensions.Logging;
+using YamlDotNet.Core;
+using YamlDotNet.Core.Events;
+using YamlDotNet.Serialization;
 
 namespace FiftyOne.IpIntelligence.Examples
 {
@@ -44,13 +48,22 @@ namespace FiftyOne.IpIntelligence.Examples
             int count)
         {
             var index = 0;
-            var ipAddresses = File.ReadAllLines(ipAddressesFile);
-            for (var i = 0; i < Math.Min(count, ipAddresses.Length); i++)
+            IList<string> ipAddresses;
+            using (var stream = File.OpenRead(ipAddressesFile))
+            using (var reader = new StreamReader(stream))
+            {
+                ipAddresses = GetEvidence(reader)
+                    .SelectMany(x => x.Values)
+                    .Select(x => x as string)
+                    .Where(x => x is object)
+                    .ToList();
+            }
+            for (var i = 0; i < Math.Min(count, ipAddresses.Count); i++)
             {
                 yield return ipAddresses[index++];
 
                 // Reset the IpAddresses if all the list has been returned.
-                if (index >= ipAddresses.Length)
+                if (index >= ipAddresses.Count)
                 {
                     index = 0;
                 }
@@ -83,6 +96,66 @@ namespace FiftyOne.IpIntelligence.Examples
                     array[index]++;
                 }
                 yield return new string(array);
+            }
+        }
+
+        /// <summary>
+        /// Read the specified yaml-formatted stream and return evidence collections.
+        /// </summary>
+        /// <param name="evidenceReader">
+        /// A <see cref="TextReader"/> containing the yaml-formatted evidence data to be ingested.
+        /// </param>
+        /// <param name="logger">
+        /// A logger instance. If null is passed then progress messages will not be logged.
+        /// </param>
+        /// <returns></returns>
+        private static IEnumerable<Dictionary<string, object>> GetEvidence(
+            TextReader evidenceReader,
+            ILogger logger = null)
+        {
+            var deserializer = new Deserializer();
+            var yamlReader = new Parser(evidenceReader);
+
+            // Consume the stream start event.
+            yamlReader.Consume<StreamStart>();
+            int records = 0;
+            int skipped = 0;
+            // Keep going as long as we have more document records.
+            while (yamlReader.TryConsume<DocumentStart>(out _))
+            {
+                // Output progress.
+                records++;
+                if (logger != null && records % 1000 == 0)
+                {
+                    logger.LogInformation($"Processed {records} records ({skipped} skipped)");
+                }
+
+                // Deserialize the record
+                var data = deserializer.Deserialize<Dictionary<string, object>>(yamlReader);
+                if (data is null)
+                {
+                    break;
+                }
+
+                // Remove null values
+                foreach(var keyWithNullValue in data.Where(kvp => kvp.Value is null).Select(kvp => kvp.Key).ToList())
+                {
+                    logger.LogWarning($"Document at offset {records-1} contains null value for key: '{keyWithNullValue}'!");
+                    data.Remove(keyWithNullValue);
+                }
+
+                if (data.Count > 0)
+                {
+                    yield return data;
+                }
+                else
+                {
+                    logger.LogWarning($"Document at offset {records - 1} contains no usable evidence!");
+                    ++skipped;
+                }
+
+                // Required to move to the start of the next record.
+                yamlReader.TryConsume<DocumentEnd>(out _);
             }
         }
 
