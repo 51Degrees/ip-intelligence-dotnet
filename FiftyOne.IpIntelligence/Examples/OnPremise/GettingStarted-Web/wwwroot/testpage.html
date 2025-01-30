@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Page</title>
+    <!-- Port is fixed to allow for cross origin and same origin tests -->
+    <script async src="https://localhost:5001/51Degrees.core.js"></script>
+</head>
+<body>
+
+    <div id="content"></div>
+
+    <script>
+        // Used by the VerifyExample_GetHighEntropyValues_Fod_Completes
+        // test. See test comments for details.
+        var test = 'loading';
+        var browserName = null;
+        var browserVersion = null;
+        window.onload = function () {
+            fod.complete(function (data) {
+
+                // Record the complete data for developer inspection.
+                console.log(data);
+
+                // Change the values to indicate that the complete event
+                // has been called.
+                test = 'complete';
+                browserName = data.device.browsername;
+                browserVersion = data.device.browserversion;
+
+                // Provide some indication that the test completed when being 
+                // viewed by a human.
+                var complete = document.createElement("div");
+                complete.innerText = test;
+                document.getElementById("content").appendChild(complete);
+            });
+        }
+    </script>
+</body>
+</html>

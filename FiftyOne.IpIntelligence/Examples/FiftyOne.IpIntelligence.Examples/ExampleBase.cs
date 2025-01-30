@@ -24,6 +24,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using Microsoft.Extensions.Logging;
 using YamlDotNet.Core;
@@ -109,7 +110,7 @@ namespace FiftyOne.IpIntelligence.Examples
         /// A logger instance. If null is passed then progress messages will not be logged.
         /// </param>
         /// <returns></returns>
-        private static IEnumerable<Dictionary<string, object>> GetEvidence(
+        protected static IEnumerable<Dictionary<string, object>> GetEvidence(
             TextReader evidenceReader,
             ILogger logger = null)
         {

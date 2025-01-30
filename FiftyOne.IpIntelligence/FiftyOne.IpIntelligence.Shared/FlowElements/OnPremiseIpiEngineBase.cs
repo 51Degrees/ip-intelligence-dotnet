@@ -95,12 +95,15 @@ namespace FiftyOne.IpIntelligence.Shared.FlowElements
             }
             else
             {
+                int stillToRead = data.Length;
                 int bytesRead = 1024;
                 int counter = 0;
                 while (bytesRead == 1024)
                 {
-                    bytesRead = stream.Read(data, 0 + counter * 1024, 1024);
+                    int toReadNext = stillToRead < 1024 ? stillToRead : 1024;
+                    bytesRead = stream.Read(data, 0 + counter * 1024, toReadNext);
                     counter++;
+                    stillToRead -= bytesRead;
                 }
             }
 
