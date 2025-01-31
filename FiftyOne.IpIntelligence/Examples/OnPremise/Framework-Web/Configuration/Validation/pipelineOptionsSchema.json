@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/51Degrees/configuration-validation/main/pipelineOptionsSchema.json",
+  "title": "51Degrees Pipeline API configuration",
+  "description": "51Degrees Pipeline API configuration",
+  "type": "object",
+  "properties": {
+    "PipelineOptions": {
+      "type": "object",
+      "description": "Container for all Pipeline API configuration options",
+      "properties": {
+        "Elements": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "",
+            "properties": {
+              "BuilderName": {
+                "type": "string",
+                "description": "The name of the builder to use when building this element"
+              },
+              "BuildParameters": {
+                "type": "object",
+                "description": "Configuration options for this element"
+              }
+            },
+            "required": [ "BuilderName" ],
+            "minProperties": 1,
+            "maxProperties": 2,
+            "additionalProperties": false
+          },
+          "minItems": 1
+        },
+        "PipelineBuilderParameters": {
+          "type": "object",
+          "description": "Configuration options for this pipeline (This is a legacy property name. Please use BuildParameters instead)"
+        },
+        "BuildParameters": {
+          "type": "object",
+          "description": "Configuration options for this pipeline"
+        },
+        "ClientSideEvidenceEnabled": {
+            "type": "boolean",
+            "description": "Enable/Disable client-side features (web integration only)"
+        },
+        "UseAsyncScript": {
+            "type": "boolean",
+            "description": "Enable/Disable 'async' tag on client-side script include (web integration only)"
+        },
+        "UseSetHeaderProperties": {
+            "type": "boolean",
+            "description": "Enable/Disable automatic setting of HTTP header properties (web integration only)"
+        }
+      },
+      "required": [ "Elements" ],
+      "additionalProperties": false
+    }
+  }
+}

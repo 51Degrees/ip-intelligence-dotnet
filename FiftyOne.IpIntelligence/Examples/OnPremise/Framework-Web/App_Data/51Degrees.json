@@ -1,0 +1,36 @@
+{  
+  // For a sample configuration file demonstrating all available options, see 
+  // https://github.com/51Degrees/device-detection-dotnet-examples/blob/main/Examples/sample-configuration.json
+  "PipelineOptions": {
+    "Elements": [
+      {
+        "BuilderName": "IpiOnPremiseEngine",
+        "BuildParameters": {
+          "DataFile": "C:\\Projects\\Work\\ip-intelligence-dotnet\\FiftyOne.IpIntelligence\\ip-intelligence-cxx\\ip-intelligence-data\\51Degrees-LiteV4.1.ipi",
+          "CreateTempDataCopy": false,
+          "AutoUpdate": false,
+          "PerformanceProfile": "LowMemory",
+          "DataFileSystemWatcher": false,
+          "DataUpdateOnStartUp": false,
+          // Explicitly include just the properties used by the example.
+          "Properties": "NetworkName"
+        }
+      },
+      {
+        "BuilderName": "JavaScriptBuilderElement",
+        "BuildParameters": {
+          "Minify": true
+        }
+      }
+    ],
+    // Both these options default to true anyway.
+    // They are specified here for illustrative purposes.
+    "ClientSideEvidenceEnabled": true,
+    "UseAsyncScript": true,
+    "BuildParameters": {
+      "ClientSideEnabled": true,
+      "ClientSideEvidenceEnabled": true,
+      "UseAsyncScript": true
+    }
+  }
+}
