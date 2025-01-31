@@ -272,7 +272,7 @@ namespace FiftyOne.IpIntelligence.Shared.Data
         protected abstract IAspectPropertyValue<IReadOnlyList<WeightedValue<int>>> GetValuesAsWeightedIntegerList(string propertyName);
 
         /// <summary>
-        /// Get weighted integer values this instance has for the specified property
+        /// Get weighted string values this instance has for the specified property
         /// </summary>
         /// <param name="propertyName">
         /// The name of the property to get value for.
@@ -283,6 +283,23 @@ namespace FiftyOne.IpIntelligence.Shared.Data
         /// <see cref="IAspectPropertyValue"/> instance.
         /// </returns>
         protected abstract IAspectPropertyValue<IReadOnlyList<WeightedValue<string>>> GetValuesAsWeightedStringList(string propertyName);
+
+        /// <summary>
+        /// Get weighted WKT string values this instance has for the specified property
+        /// </summary>
+        /// <param name="propertyName">
+        /// The name of the property to get value for.
+        /// </param>
+        /// <param name="decimalPlaces">
+        /// The number of decimal places for float formatting.
+        /// </param>
+        /// <returns>
+        /// A list of <see cref="WeightedValue{T}"/> of
+        /// <see cref="int"/> wrapped in a 
+        /// <see cref="IAspectPropertyValue"/> instance.
+        /// </returns>
+        protected abstract IAspectPropertyValue<IReadOnlyList<WeightedValue<string>>> GetValuesAsWeightedWKTStringList(
+            string propertyName, byte decimalPlaces);
 
         /// <summary>
         /// Get the Coordinate value this instance has for the specified proprety

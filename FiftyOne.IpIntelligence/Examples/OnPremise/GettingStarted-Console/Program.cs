@@ -135,6 +135,18 @@ namespace FiftyOne.IpIntelligence.Examples.OnPremise.GettingStartedConsole
                             message.AppendLine($"\t{nameof(ipData.NetworkName)}  ({networkName.Value.Count}): {networkNameValues}");
                         }
                     }
+                    {
+                        var coordinate = ipData.Coordinate;
+                        if (!coordinate.HasValue)
+                        {
+                            message.AppendLine($"\t{nameof(ipData.Coordinate)}: {coordinate.NoValueMessage} - {coordinate.NoValueMessage}");
+                        }
+                        else
+                        {
+                            var areas = string.Join(", ", coordinate.Value.Select(x => $"('{x.Value}' @ {x.Weight})"));
+                            message.AppendLine($"\t{nameof(ipData.Coordinate)}  ({coordinate.Value.Count}): {areas}");
+                        }
+                    }
                     output.WriteLine(message.ToString());
                 }
             }

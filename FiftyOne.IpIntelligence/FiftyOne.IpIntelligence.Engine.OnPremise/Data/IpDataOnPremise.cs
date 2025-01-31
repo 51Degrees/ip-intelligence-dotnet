@@ -238,6 +238,29 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
             return result;
         }
 
+        protected override IAspectPropertyValue<IReadOnlyList<WeightedValue<string>>> GetValuesAsWeightedWKTStringList(
+            string propertyName, byte decimalPlaces)
+        {
+            var result = new AspectPropertyValue<IReadOnlyList<WeightedValue<string>>>();
+            var results = GetResultsContainingProperty(propertyName);
+
+            if (results != null)
+            {
+                using (var value = results.getValuesAsWeightedWKTStringList(propertyName, decimalPlaces))
+                {
+                    if (value.hasValue())
+                    {
+                        result.Value = new WeightedStringListSwigWrapper(value.getValue());
+                    }
+                    else
+                    {
+                        result.NoValueMessage = value.getNoValueMessage();
+                    }
+                }
+            }
+            return result;
+        }
+
         protected override IAspectPropertyValue<Coordinate> GetValueAsCoordinate(string propertyName)
         {
             var result = new AspectPropertyValue<Coordinate>();

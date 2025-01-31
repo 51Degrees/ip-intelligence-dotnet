@@ -183,7 +183,7 @@ namespace FiftyOne.IpIntelligence
         /// <summary>
         /// Coordinate
         /// </summary>
-        IAspectPropertyValue<IReadOnlyList<WeightedValue<Coordinate>>> Coordinate { get; }
+        IAspectPropertyValue<IReadOnlyList<WeightedValue<string>>> Coordinate { get; }
 
     }
 }

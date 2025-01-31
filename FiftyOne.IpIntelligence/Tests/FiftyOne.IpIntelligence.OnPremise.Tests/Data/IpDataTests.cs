@@ -142,6 +142,20 @@ namespace FiftyOne.IpIntelligence.Tests.Core.Data
                 }
             }
 
+            protected override IAspectPropertyValue<IReadOnlyList<WeightedValue<string>>> 
+                GetValuesAsWeightedWKTStringList(string propertyName, byte decimalPlaces)
+            {
+                if (propertyName == _testPropertyName)
+                {
+                    return new AspectPropertyValue<IReadOnlyList<WeightedValue<string>>>(
+                        (IReadOnlyList<WeightedValue<string>>)_value);
+                }
+                else
+                {
+                    throw new PropertyMissingException();
+                }
+            }
+
             protected override IAspectPropertyValue<Coordinate>
                 GetValueAsCoordinate(string propertyName)
             {

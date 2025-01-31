@@ -1293,6 +1293,12 @@ class IpIntelligenceEngineModulePINVOKE {
   [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ResultsIpiSwig_getValuesAsWeightedStringList__SWIG_1___")]
   public static extern global::System.IntPtr ResultsIpiSwig_getValuesAsWeightedStringList__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ResultsIpiSwig_getValuesAsWeightedWKTStringList__SWIG_0___")]
+  public static extern global::System.IntPtr ResultsIpiSwig_getValuesAsWeightedWKTStringList__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1, string jarg2, byte jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ResultsIpiSwig_getValuesAsWeightedWKTStringList__SWIG_1___")]
+  public static extern global::System.IntPtr ResultsIpiSwig_getValuesAsWeightedWKTStringList__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, byte jarg3);
+
   [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ResultsIpiSwig_getValuesAsWeightedBoolList__SWIG_0___")]
   public static extern global::System.IntPtr ResultsIpiSwig_getValuesAsWeightedBoolList__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1, string jarg2);
 

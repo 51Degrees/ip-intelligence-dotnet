@@ -208,6 +208,6 @@ namespace FiftyOne.IpIntelligence.Shared
         /// <summary>
         /// Coordinate
         /// </summary>
-        public IAspectPropertyValue<IReadOnlyList<WeightedValue<Coordinate>>> Coordinate { get { return GetAs<IAspectPropertyValue<IReadOnlyList<WeightedValue<Coordinate>>>>("coordinate"); } }
+        public IAspectPropertyValue<IReadOnlyList<WeightedValue<string>>> Coordinate { get { return GetAs<IAspectPropertyValue<IReadOnlyList<WeightedValue<string>>>>("coordinate"); } }
     }
 }
