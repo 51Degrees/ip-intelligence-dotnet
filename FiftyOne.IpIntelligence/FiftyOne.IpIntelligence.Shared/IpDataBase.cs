@@ -21,6 +21,7 @@
  * ********************************************************************* */
 
 using FiftyOne.IpIntelligence.Shared.Data;
+using FiftyOne.Pipeline.Core.Data;
 using FiftyOne.Pipeline.Core.FlowElements;
 using FiftyOne.Pipeline.Engines.Data;
 using FiftyOne.Pipeline.Engines.FlowElements;

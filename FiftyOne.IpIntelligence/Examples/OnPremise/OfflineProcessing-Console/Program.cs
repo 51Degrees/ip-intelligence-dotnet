@@ -20,6 +20,7 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
+using FiftyOne.Pipeline.Core.Data;
 using FiftyOne.Pipeline.Core.FlowElements;
 using FiftyOne.Pipeline.Engines;
 using Microsoft.Extensions.Logging;
@@ -175,7 +176,7 @@ namespace FiftyOne.IpIntelligence.Examples.OnPremise.OfflineProcessing
                         }
                         else
                         {
-                            var networkNameValues = string.Join(", ", networkName.Value.Select(x => $"('{x.Value}' @ {x.Weight})"));
+                            var networkNameValues = string.Join(", ", networkName.Value.Select(x => $"('{x.Value}' @ {x.Weighting()})"));
                             output.Add(nameof(ipData.NetworkName), 
                                 $"\t{nameof(ipData.NetworkName)}  ({networkName.Value.Count}): {networkNameValues}");
                         }

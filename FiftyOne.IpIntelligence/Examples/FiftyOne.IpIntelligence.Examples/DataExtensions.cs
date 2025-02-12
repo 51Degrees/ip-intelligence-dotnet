@@ -73,7 +73,7 @@ namespace FiftyOne.IpIntelligence.Examples
         }
         public static string GetHumanReadable(this IAspectPropertyValue<IReadOnlyList<WeightedValue<string>>> apv)
         {
-            return apv.HasValue ? string.Join(", ", apv.Value.Select(x => $"{x.Weight}x'{x.Value}'")) : $"Unknown ({apv.NoValueMessage})";
+            return apv.HasValue ? string.Join(", ", apv.Value.Select(x => $"{x.Weighting()}x'{x.Value}'")) : $"Unknown ({apv.NoValueMessage})";
         }
         public static string GetHumanReadable(this IAspectPropertyValue<int> apv)
         {

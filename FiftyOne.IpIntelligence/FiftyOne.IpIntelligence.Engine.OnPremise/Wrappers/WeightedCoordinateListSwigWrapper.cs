@@ -22,6 +22,7 @@
 
 using FiftyOne.IpIntelligence.Engine.OnPremise.Interop;
 using FiftyOne.IpIntelligence.Shared.Data;
+using FiftyOne.Pipeline.Core.Data;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -48,7 +49,7 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Wrappers
             using (var coordinateSwig = this._object[index].getValue())
             {
                 var coordinate = new Coordinate(coordinateSwig.lat, coordinateSwig.lon);
-                return new WeightedValue<Coordinate>(coordinate, this._object[index].getWeight());
+                return new WeightedValue<Coordinate>(this._object[index].getRawWeight(), coordinate);
             }
         }
 

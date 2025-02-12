@@ -29,6 +29,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using FiftyOne.Pipeline.Core.Data;
 
 /// <summary>
 /// @example OnPremise/ConfigureFromFile/Program.cs
@@ -145,7 +146,7 @@ namespace FiftyOne.IpIntelligence.Examples.OnPremise.ConfigureFromFile
                     }
                     else
                     {
-                        var networkNameValues = string.Join(", ", networkName.Value.Select(x => $"('{x.Value}' @ {x.Weight})"));
+                        var networkNameValues = string.Join(", ", networkName.Value.Select(x => $"('{x.Value}' @ {x.Weighting()})"));
                         Console.WriteLine($"\t[{networkName.Value.Count}]: {networkNameValues}");
                     }
                 }
@@ -171,7 +172,7 @@ namespace FiftyOne.IpIntelligence.Examples.OnPremise.ConfigureFromFile
                     IEnumerator<WeightedValue<string>> enumerator = countries.Value.GetEnumerator();
                     while (enumerator.MoveNext())
                     {
-                        Console.WriteLine($"\t'{enumerator.Current.Value}', {enumerator.Current.Weight * 100}%");
+                        Console.WriteLine($"\t'{enumerator.Current.Value}', {enumerator.Current.Weighting() * 100}%");
                     }
                 }
                 else

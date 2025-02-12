@@ -74,8 +74,14 @@ internal class WeightedValueCoordinateSwig : global::System.IDisposable {
     return ret;
   }
 
-  public void setWeight(float w) {
-    IpIntelligenceEngineModulePINVOKE.WeightedValueCoordinateSwig_setWeight(swigCPtr, w);
+  public ushort getRawWeight() {
+    ushort ret = IpIntelligenceEngineModulePINVOKE.WeightedValueCoordinateSwig_getRawWeight(swigCPtr);
+    if (IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Pending) throw IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Retrieve();
+    return ret;
+  }
+
+  public void setRawWeight(ushort w) {
+    IpIntelligenceEngineModulePINVOKE.WeightedValueCoordinateSwig_setRawWeight(swigCPtr, w);
     if (IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Pending) throw IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Retrieve();
   }
 

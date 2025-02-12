@@ -21,6 +21,7 @@
  * ********************************************************************* */
 
 using FiftyOne.IpIntelligence.Shared.Data;
+using FiftyOne.Pipeline.Core.Data;
 using FiftyOne.Pipeline.Engines;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;

@@ -1,6 +1,7 @@
 ﻿﻿@using FiftyOne.IpIntelligence.Shared.Data
 
 @using FiftyOne.IpIntelligence.Shared.Data
+@using FiftyOne.Pipeline.Core.Data
 @model FiftyOne.IpIntelligence.IIpData
 @{
     ViewData["Title"] = "IP Intelligence example";
@@ -24,7 +25,7 @@
         <ol>
             @foreach (WeightedValue<string> country in countryCodes.Value)
             {
-                <li>@country.Value, @country.Weight</li>
+                <li>@country.Value, @country.Weighting()</li>
             }
         </ol>
     }
@@ -34,7 +35,7 @@
         <ol>
             @foreach (WeightedValue<string> city in cities.Value)
             {
-                <li>@city.Value, @city.Weight</li>
+                <li>@city.Value, @city.Weighting()</li>
             }
         </ol>
     }

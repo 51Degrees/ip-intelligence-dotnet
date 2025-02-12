@@ -123,8 +123,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="FiftyOne.Pipeline.JavaScriptBuilder" Version="4.5.0-alpha.13" />
-    <PackageReference Include="FiftyOne.Pipeline.Web" Version="4.5.0-alpha.13" />
+    <PackageReference Include="FiftyOne.Pipeline.JavaScriptBuilder" Version="4.5.0-alpha.17" />
+    <PackageReference Include="FiftyOne.Pipeline.Web" Version="4.5.0-alpha.17" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json">

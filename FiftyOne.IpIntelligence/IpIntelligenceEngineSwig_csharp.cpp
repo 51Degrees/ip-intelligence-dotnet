@@ -9752,15 +9752,76 @@ SWIGEXPORT float SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInt
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueStringSwig_setWeight___(void * jarg1, float jarg2) {
+SWIGEXPORT unsigned short SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueStringSwig_getRawWeight___(void * jarg1) {
+  unsigned short jresult ;
   WeightedValue< std::string > *arg1 = (WeightedValue< std::string > *) 0 ;
-  float arg2 ;
+  uint16_t result;
   
   arg1 = (WeightedValue< std::string > *)jarg1; 
-  arg2 = (float)jarg2; 
   {
     try {
-      (arg1)->setWeight(arg2);;
+      result = (uint16_t)(arg1)->getRawWeight();;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueStringSwig_setRawWeight___(void * jarg1, unsigned short jarg2) {
+  WeightedValue< std::string > *arg1 = (WeightedValue< std::string > *) 0 ;
+  uint16_t arg2 ;
+  
+  arg1 = (WeightedValue< std::string > *)jarg1; 
+  arg2 = (uint16_t)jarg2; 
+  {
+    try {
+      (arg1)->setRawWeight(arg2);;
     }
     catch(FatalException& e) {
       {
@@ -10049,15 +10110,76 @@ SWIGEXPORT float SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInt
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueBoolSwig_setWeight___(void * jarg1, float jarg2) {
+SWIGEXPORT unsigned short SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueBoolSwig_getRawWeight___(void * jarg1) {
+  unsigned short jresult ;
   WeightedValue< bool > *arg1 = (WeightedValue< bool > *) 0 ;
-  float arg2 ;
+  uint16_t result;
   
   arg1 = (WeightedValue< bool > *)jarg1; 
-  arg2 = (float)jarg2; 
   {
     try {
-      (arg1)->setWeight(arg2);;
+      result = (uint16_t)(arg1)->getRawWeight();;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueBoolSwig_setRawWeight___(void * jarg1, unsigned short jarg2) {
+  WeightedValue< bool > *arg1 = (WeightedValue< bool > *) 0 ;
+  uint16_t arg2 ;
+  
+  arg1 = (WeightedValue< bool > *)jarg1; 
+  arg2 = (uint16_t)jarg2; 
+  {
+    try {
+      (arg1)->setRawWeight(arg2);;
     }
     catch(FatalException& e) {
       {
@@ -10346,15 +10468,76 @@ SWIGEXPORT float SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInt
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueIntSwig_setWeight___(void * jarg1, float jarg2) {
+SWIGEXPORT unsigned short SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueIntSwig_getRawWeight___(void * jarg1) {
+  unsigned short jresult ;
   WeightedValue< int > *arg1 = (WeightedValue< int > *) 0 ;
-  float arg2 ;
+  uint16_t result;
   
   arg1 = (WeightedValue< int > *)jarg1; 
-  arg2 = (float)jarg2; 
   {
     try {
-      (arg1)->setWeight(arg2);;
+      result = (uint16_t)(arg1)->getRawWeight();;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueIntSwig_setRawWeight___(void * jarg1, unsigned short jarg2) {
+  WeightedValue< int > *arg1 = (WeightedValue< int > *) 0 ;
+  uint16_t arg2 ;
+  
+  arg1 = (WeightedValue< int > *)jarg1; 
+  arg2 = (uint16_t)jarg2; 
+  {
+    try {
+      (arg1)->setRawWeight(arg2);;
     }
     catch(FatalException& e) {
       {
@@ -10643,15 +10826,76 @@ SWIGEXPORT float SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInt
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueDoubleSwig_setWeight___(void * jarg1, float jarg2) {
+SWIGEXPORT unsigned short SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueDoubleSwig_getRawWeight___(void * jarg1) {
+  unsigned short jresult ;
   WeightedValue< double > *arg1 = (WeightedValue< double > *) 0 ;
-  float arg2 ;
+  uint16_t result;
   
   arg1 = (WeightedValue< double > *)jarg1; 
-  arg2 = (float)jarg2; 
   {
     try {
-      (arg1)->setWeight(arg2);;
+      result = (uint16_t)(arg1)->getRawWeight();;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueDoubleSwig_setRawWeight___(void * jarg1, unsigned short jarg2) {
+  WeightedValue< double > *arg1 = (WeightedValue< double > *) 0 ;
+  uint16_t arg2 ;
+  
+  arg1 = (WeightedValue< double > *)jarg1; 
+  arg2 = (uint16_t)jarg2; 
+  {
+    try {
+      (arg1)->setRawWeight(arg2);;
     }
     catch(FatalException& e) {
       {
@@ -10946,15 +11190,76 @@ SWIGEXPORT float SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInt
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueCoordinateSwig_setWeight___(void * jarg1, float jarg2) {
+SWIGEXPORT unsigned short SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueCoordinateSwig_getRawWeight___(void * jarg1) {
+  unsigned short jresult ;
   WeightedValue< fiftyoneDegreesCoordinate > *arg1 = (WeightedValue< fiftyoneDegreesCoordinate > *) 0 ;
-  float arg2 ;
+  uint16_t result;
   
   arg1 = (WeightedValue< fiftyoneDegreesCoordinate > *)jarg1; 
-  arg2 = (float)jarg2; 
   {
     try {
-      (arg1)->setWeight(arg2);;
+      result = (uint16_t)(arg1)->getRawWeight();;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueCoordinateSwig_setRawWeight___(void * jarg1, unsigned short jarg2) {
+  WeightedValue< fiftyoneDegreesCoordinate > *arg1 = (WeightedValue< fiftyoneDegreesCoordinate > *) 0 ;
+  uint16_t arg2 ;
+  
+  arg1 = (WeightedValue< fiftyoneDegreesCoordinate > *)jarg1; 
+  arg2 = (uint16_t)jarg2; 
+  {
+    try {
+      (arg1)->setRawWeight(arg2);;
     }
     catch(FatalException& e) {
       {
@@ -20856,7 +21161,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
       };
     }
   }
-  jresult = new FiftyoneDegrees::IpIntelligence::IpAddress(result);
+  jresult = new FiftyoneDegrees::IpIntelligence::IpAddress(result); 
   return jresult;
 }
 
@@ -21225,7 +21530,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
       };
     }
   }
-  jresult = new FiftyoneDegrees::Common::Value< std::vector< WeightedValue< std::string > > >(result);
+  jresult = new FiftyoneDegrees::Common::Value< std::vector< WeightedValue< std::string > > >(result); 
   return jresult;
 }
 
@@ -21295,7 +21600,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
       };
     }
   }
-  jresult = new FiftyoneDegrees::Common::Value< std::vector< WeightedValue< std::string > > >(result);
+  jresult = new FiftyoneDegrees::Common::Value< std::vector< WeightedValue< std::string > > >(result); 
   return jresult;
 }
 
@@ -21360,7 +21665,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
       };
     }
   }
-  jresult = new FiftyoneDegrees::Common::Value< std::vector< WeightedValue< std::string > > >(result);
+  jresult = new FiftyoneDegrees::Common::Value< std::vector< WeightedValue< std::string > > >(result); 
   return jresult;
 }
 

@@ -527,7 +527,7 @@
             The name of the property to get value for.
             </param>
             <returns>
-            A list of <see cref="T:FiftyOne.IpIntelligence.Shared.Data.WeightedValue`1"/> of
+            A list of <see cref="T:FiftyOne.Pipeline.Core.Data.WeightedValue`1"/> of
             <see cref="T:System.Boolean"/> wrapped in a 
             <see cref="T:FiftyOne.Pipeline.Engines.Data.IAspectPropertyValue"/> instance.
             </returns>
@@ -540,7 +540,7 @@
             The name of the property to get value for.
             </param>
             <returns>
-            A list of <see cref="T:FiftyOne.IpIntelligence.Shared.Data.WeightedValue`1"/> of
+            A list of <see cref="T:FiftyOne.Pipeline.Core.Data.WeightedValue`1"/> of
             <see cref="T:System.Double"/> wrapped in a 
             <see cref="T:FiftyOne.Pipeline.Engines.Data.IAspectPropertyValue"/> instance.
             </returns>
@@ -553,7 +553,7 @@
             The name of the property to get value for.
             </param>
             <returns>
-            A list of <see cref="T:FiftyOne.IpIntelligence.Shared.Data.WeightedValue`1"/> of
+            A list of <see cref="T:FiftyOne.Pipeline.Core.Data.WeightedValue`1"/> of
             <see cref="T:System.Double"/> wrapped in a 
             <see cref="T:FiftyOne.Pipeline.Engines.Data.IAspectPropertyValue"/> instance.
             </returns>
@@ -566,20 +566,36 @@
             The name of the property to get value for.
             </param>
             <returns>
-            A list of <see cref="T:FiftyOne.IpIntelligence.Shared.Data.WeightedValue`1"/> of
+            A list of <see cref="T:FiftyOne.Pipeline.Core.Data.WeightedValue`1"/> of
             <see cref="T:FiftyOne.IpIntelligence.Shared.Data.Coordinate"/> wrapped in a 
             <see cref="T:FiftyOne.Pipeline.Engines.Data.IAspectPropertyValue"/> instance.
             </returns>
         </member>
         <member name="M:FiftyOne.IpIntelligence.Shared.Data.IpDataBaseOnPremise`1.GetValuesAsWeightedStringList(System.String)">
             <summary>
-            Get weighted integer values this instance has for the specified property
+            Get weighted string values this instance has for the specified property
             </summary>
             <param name="propertyName">
             The name of the property to get value for.
             </param>
             <returns>
-            A list of <see cref="T:FiftyOne.IpIntelligence.Shared.Data.WeightedValue`1"/> of
+            A list of <see cref="T:FiftyOne.Pipeline.Core.Data.WeightedValue`1"/> of
+            <see cref="T:System.Int32"/> wrapped in a 
+            <see cref="T:FiftyOne.Pipeline.Engines.Data.IAspectPropertyValue"/> instance.
+            </returns>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Shared.Data.IpDataBaseOnPremise`1.GetValuesAsWeightedWKTStringList(System.String,System.Byte)">
+            <summary>
+            Get weighted WKT string values this instance has for the specified property
+            </summary>
+            <param name="propertyName">
+            The name of the property to get value for.
+            </param>
+            <param name="decimalPlaces">
+            The number of decimal places for float formatting.
+            </param>
+            <returns>
+            A list of <see cref="T:FiftyOne.Pipeline.Core.Data.WeightedValue`1"/> of
             <see cref="T:System.Int32"/> wrapped in a 
             <see cref="T:FiftyOne.Pipeline.Engines.Data.IAspectPropertyValue"/> instance.
             </returns>
@@ -806,29 +822,6 @@
             <summary>
             Dispose
             </summary>
-        </member>
-        <member name="T:FiftyOne.IpIntelligence.Shared.Data.WeightedValue`1">
-            <summary>
-            Stub for compilation
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="P:FiftyOne.IpIntelligence.Shared.Data.WeightedValue`1.Value">
-            <summary>
-            Value
-            </summary>
-        </member>
-        <member name="P:FiftyOne.IpIntelligence.Shared.Data.WeightedValue`1.Weight">
-            <summary>
-            Weight
-            </summary>
-        </member>
-        <member name="M:FiftyOne.IpIntelligence.Shared.Data.WeightedValue`1.#ctor(`0,System.Single)">
-            <summary>
-            Designated constructor
-            </summary>
-            <param name="value"></param>
-            <param name="weight"></param>
         </member>
         <member name="T:FiftyOne.IpIntelligence.Shared.FlowElements.IOnPremiseIpiEngine">
             <summary>

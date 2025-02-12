@@ -21,6 +21,7 @@
  * ********************************************************************* */
 
 using FiftyOne.IpIntelligence.Shared.Data;
+using FiftyOne.Pipeline.Core.Data;
 using FiftyOne.Pipeline.Core.FlowElements;
 using System;
 using System.Collections.Generic;
@@ -142,7 +143,7 @@ namespace FiftyOne.IpIntelligence.Examples.Cloud.GettingStarted
                 IEnumerator<WeightedValue<string>> enumerator = countries.Value.GetEnumerator();
                 while (enumerator.MoveNext())
                 {
-                    Console.WriteLine($"\t'{enumerator.Current.Value}', {enumerator.Current.Weight * 100}%");
+                    Console.WriteLine($"\t'{enumerator.Current.Value}', {enumerator.Current.Weighting() * 100}%");
                 }
             }
             else

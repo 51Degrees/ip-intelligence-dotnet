@@ -22,6 +22,7 @@
 
 using FiftyOne.IpIntelligence.Engine.OnPremise.Interop;
 using FiftyOne.IpIntelligence.Shared.Data;
+using FiftyOne.Pipeline.Core.Data;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -45,7 +46,7 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Wrappers
 
         private WeightedValue<int> GetWeightedValue(int index)
         {
-            return new WeightedValue<int>(this._object[index].getValue(), this._object[index].getWeight());
+            return new WeightedValue<int>(this._object[index].getRawWeight(), this._object[index].getValue());
         }
 
         public IEnumerator<WeightedValue<int>> GetEnumerator()

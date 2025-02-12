@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FiftyOne.Pipeline.Core" Version="4.5.0-alpha.3" />
+    <PackageReference Include="FiftyOne.Pipeline.Core" Version="4.5.0-alpha.17" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.4" />
     <PackageReference Include="YamlDotNet" Version="16.3.0" />
