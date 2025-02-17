@@ -168,9 +168,6 @@ namespace FiftyOne.IpIntelligence.Examples.OnPremise.Metadata
                     output.WriteLine($"[Category: {property.Category}]" +
                         $"({property.Type.Name}) - {property.Description}");
 
-                    // TODO: Restore showing possible values
-                    continue;
-
                     // Next, output a list of the possible values this property can have.
                     // Most properties in the Device Metrics category do not have defined
                     // values so exclude them.
