@@ -31,7 +31,7 @@ namespace FiftyOne.IpIntelligence.Examples.OnPremise.GettingStartedWeb.Model
 {
     public class IndexModel
     {
-        public string NetworkName { get; private set; }
+        public string Name { get; private set; }
 
         public IFlowData FlowData { get; private set; }
 
@@ -68,7 +68,7 @@ namespace FiftyOne.IpIntelligence.Examples.OnPremise.GettingStartedWeb.Model
             // property values. These helpers handle situations such as the property missing
             // due to using a lite data file or the property not having a value because device
             // detection didn't find a match.
-            NetworkName = deviceData.TryGetValue(d => d.NetworkName.GetHumanReadable());
+            Name = deviceData.TryGetValue(d => d.Name.GetHumanReadable());
         }
     }
 }

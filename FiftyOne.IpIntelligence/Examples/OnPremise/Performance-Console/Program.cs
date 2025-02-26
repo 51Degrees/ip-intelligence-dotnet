@@ -188,7 +188,7 @@ namespace FiftyOne.IpIntelligence.Examples.OnPremise.Performance
                             result.Count++;
                             // Access a property to ensure compiler optimizer doesn't optimize
                             // out the very method that the benchmark is testing.
-                            foreach (var nextName in ipData.NetworkName.Value)
+                            foreach (var nextName in ipData.Name.Value)
                             {
                                 result.HashSum += nextName.Value[0].GetHashCode();
                             }
@@ -247,7 +247,7 @@ namespace FiftyOne.IpIntelligence.Examples.OnPremise.Performance
                         // for just platform or "IsCrawler" for the crawler component.
                         if (config.AllProperties == false)
                         {
-                            builder.SetProperty("NetworkName");
+                            builder.SetProperty("Name");
                         }
 
                         // The data file can be loaded directly from disk or from a byte array

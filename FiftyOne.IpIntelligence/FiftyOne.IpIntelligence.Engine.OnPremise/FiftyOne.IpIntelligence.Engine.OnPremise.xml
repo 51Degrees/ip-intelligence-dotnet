@@ -236,29 +236,6 @@
             property does not exist.
             </param>
         </member>
-        <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.Data.IpDataOnPremise.TryGetValue``1(System.String,``0@)">
-            <summary>
-            Try to get the value for the specified key.
-            This overrides the base implementation to get values using
-            the abstract methods on this class rather than using the
-            dictionary-based storage mechanism from the base-class.
-            </summary>
-            <typeparam name="T">
-            The expected type of the resulting value.
-            </typeparam>
-            <param name="key">
-            The key to use to retrieve the value.
-            </param>
-            <param name="value">
-            Out parameter that will be populated with the value.
-            </param>
-            <returns>
-            True if that value was retrieved successfully. False if not.
-            </returns>
-            <exception cref="T:FiftyOne.Pipeline.Core.Exceptions.PipelineException">
-            Thrown if the value was not of the expected type.
-            </exception>
-        </member>
         <member name="T:FiftyOne.IpIntelligence.Engine.OnPremise.Data.ProfileMetaData">
             <summary>
             Data class that contains meta-data relating to a specific 

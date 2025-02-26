@@ -117,35 +117,6 @@ namespace FiftyOne.IpIntelligence.Examples.OnPremise.GettingStarted
                 // Get IP data from the flow data.
                 var ip = data.Get<IIpData>();
 
-                // TODO: Revert to reading other properties
-                {
-                    var networkName = ip.NetworkName;
-                    Console.WriteLine($"0.1. What is the network name that is matched for '{ipAddress}'?");
-                    if (!networkName.HasValue)
-                    {
-                        Console.WriteLine($"\t{networkName.NoValueMessage} - {networkName.NoValueMessage}");
-                    }
-                    else
-                    {
-                        var networkNameValues = string.Join(", ", networkName.Value.Select(x => $"('{x.Value}' @ {x.Weighting()})"));
-                        Console.WriteLine($"\t[{networkName.Value.Count}]: {networkNameValues}");
-                    }
-                }
-                //{
-                //    var coordinate = ip.Coordinate;
-                //    Console.WriteLine($"0.2. What is the coordinate that is matched for '{ipAddress}'?");
-                //    if (!coordinate.HasValue)
-                //    {
-                //        Console.WriteLine($"\t{coordinate.NoValueMessage} - {coordinate.NoValueMessage}");
-                //    }
-                //    else
-                //    {
-                //        var coordinateValues = string.Join(", ", coordinate.Value.Select(x => $"(lat = {x.Value.Latitude}, long = {x.Value.Longitude}) @ {x.Weight})"));
-                //        Console.WriteLine($"\t[{coordinate.Value.Count}]: {coordinateValues}");
-                //    }
-                //}
-                return;
-
                 var rangeStart = ip.IpRangeStart;
                 var rangeEnd = ip.IpRangeEnd;
                 Console.WriteLine($"1. What is the IP address range that is matched for '{ipAddress}'?");

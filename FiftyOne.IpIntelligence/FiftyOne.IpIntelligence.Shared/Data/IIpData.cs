@@ -179,7 +179,7 @@ namespace FiftyOne.IpIntelligence
         /// <summary>
         /// Network name
         /// </summary>
-        IAspectPropertyValue<IReadOnlyList<WeightedValue<string>>> NetworkName { get; }
+        IAspectPropertyValue<IReadOnlyList<WeightedValue<string>>> Name { get; }
 
         /// <summary>
         /// Coordinate

@@ -168,17 +168,17 @@ namespace FiftyOne.IpIntelligence.Examples.OnPremise.OfflineProcessing
                     // Now add the values that we want to store against the record.
                     // TODO: Read other properties
                     {
-                        var networkName = ipData.NetworkName;
-                        if (!networkName.HasValue)
+                        var name = ipData.Name;
+                        if (!name.HasValue)
                         {
-                            output.Add(nameof(ipData.NetworkName),
-                                $"\t{nameof(ipData.NetworkName)}: {networkName.NoValueMessage} - {networkName.NoValueMessage}");
+                            output.Add(nameof(ipData.Name),
+                                $"\t{nameof(ipData.Name)}: {name.NoValueMessage} - {name.NoValueMessage}");
                         }
                         else
                         {
-                            var networkNameValues = string.Join(", ", networkName.Value.Select(x => $"('{x.Value}' @ {x.Weighting()})"));
-                            output.Add(nameof(ipData.NetworkName), 
-                                $"\t{nameof(ipData.NetworkName)}  ({networkName.Value.Count}): {networkNameValues}");
+                            var nameValues = string.Join(", ", name.Value.Select(x => $"('{x.Value}' @ {x.Weighting()})"));
+                            output.Add(nameof(ipData.Name), 
+                                $"\t{nameof(ipData.Name)}  ({name.Value.Count}): {nameValues}");
                         }
                     }
                     // DeviceId is a unique identifier for the combination of hardware, operating

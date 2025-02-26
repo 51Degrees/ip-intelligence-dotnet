@@ -204,11 +204,11 @@ namespace FiftyOne.IpIntelligence.Shared
         /// <summary>
         /// Network name
         /// </summary>
-        public IAspectPropertyValue<IReadOnlyList<WeightedValue<string>>> NetworkName { get { return GetAs<IAspectPropertyValue<IReadOnlyList<WeightedValue<string>>>>("networkname"); } }
+        public IAspectPropertyValue<IReadOnlyList<WeightedValue<string>>> Name { get { return GetAs<IAspectPropertyValue<IReadOnlyList<WeightedValue<string>>>>("Name"); } }
 
         /// <summary>
         /// Coordinate
         /// </summary>
-        public IAspectPropertyValue<IReadOnlyList<WeightedValue<string>>> Coordinate { get { return GetAs<IAspectPropertyValue<IReadOnlyList<WeightedValue<string>>>>("coordinate"); } }
+        public IAspectPropertyValue<IReadOnlyList<WeightedValue<string>>> Coordinate { get { return GetAs<IAspectPropertyValue<IReadOnlyList<WeightedValue<string>>>>("areas"); } }
     }
 }

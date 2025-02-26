@@ -47,18 +47,6 @@ internal class ResultsIpiSwig : ResultsBaseSwig {
     }
   }
 
-  public string getNetworkId() {
-    string ret = IpIntelligenceEngineModulePINVOKE.ResultsIpiSwig_getNetworkId__SWIG_0(swigCPtr);
-    if (IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Pending) throw IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Retrieve();
-    return ret;
-  }
-
-  public string getNetworkId(uint resultsIndex) {
-    string ret = IpIntelligenceEngineModulePINVOKE.ResultsIpiSwig_getNetworkId__SWIG_1(swigCPtr, resultsIndex);
-    if (IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Pending) throw IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Retrieve();
-    return ret;
-  }
-
   public WeightedStringListValueSwig getValuesAsWeightedStringList(string propertyName) {
     WeightedStringListValueSwig ret = new WeightedStringListValueSwig(IpIntelligenceEngineModulePINVOKE.ResultsIpiSwig_getValuesAsWeightedStringList__SWIG_0(swigCPtr, propertyName), true);
     if (IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Pending) throw IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Retrieve();

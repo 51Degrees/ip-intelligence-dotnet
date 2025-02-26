@@ -59,6 +59,9 @@ namespace FiftyOne.IpIntelligence.Shared
 			IMissingPropertyService missingPropertyService)
 			: base(logger, pipeline, engine, missingPropertyService) { }
 
+		/// <summary>
+		/// Types of properties.
+		/// </summary>
 		protected static readonly IReadOnlyDictionary<string, Type> PropertyTypes =
 			new Dictionary<string, Type>()
 			{

@@ -125,15 +125,15 @@ namespace FiftyOne.IpIntelligence.Examples.OnPremise.GettingStartedConsole
 
                     // TODO: Read other properties
                     {
-                        var networkName = ipData.NetworkName;
-                        if (!networkName.HasValue)
+                        var name = ipData.Name;
+                        if (!name.HasValue)
                         {
-                            message.AppendLine($"\t{nameof(ipData.NetworkName)}: {networkName.NoValueMessage} - {networkName.NoValueMessage}");
+                            message.AppendLine($"\t{nameof(ipData.Name)}: {name.NoValueMessage} - {name.NoValueMessage}");
                         }
                         else
                         {
-                            var networkNameValues = string.Join(", ", networkName.Value.Select(x => $"('{x.Value}' @ {x.Weighting()})"));
-                            message.AppendLine($"\t{nameof(ipData.NetworkName)}  ({networkName.Value.Count}): {networkNameValues}");
+                            var nameValues = string.Join(", ", name.Value.Select(x => $"('{x.Value}' @ {x.Weighting()})"));
+                            message.AppendLine($"\t{nameof(ipData.Name)}  ({name.Value.Count}): {nameValues}");
                         }
                     }
                     {

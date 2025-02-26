@@ -1296,12 +1296,6 @@ class IpIntelligenceEngineModulePINVOKE {
   [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_delete_ResultsIpiSwig___")]
   public static extern void delete_ResultsIpiSwig(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ResultsIpiSwig_getNetworkId__SWIG_0___")]
-  public static extern string ResultsIpiSwig_getNetworkId__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ResultsIpiSwig_getNetworkId__SWIG_1___")]
-  public static extern string ResultsIpiSwig_getNetworkId__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1, uint jarg2);
-
   [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ResultsIpiSwig_getValuesAsWeightedStringList__SWIG_0___")]
   public static extern global::System.IntPtr ResultsIpiSwig_getValuesAsWeightedStringList__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1, string jarg2);
 

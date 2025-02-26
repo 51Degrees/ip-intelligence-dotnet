@@ -1112,7 +1112,7 @@
             e.g. '123:90.0|321:10.0|0:1.0'
             </summary>
         </member>
-        <member name="P:FiftyOne.IpIntelligence.Shared.IpDataBase.NetworkName">
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpDataBase.Name">
             <summary>
             Network name
             </summary>
@@ -1120,6 +1120,115 @@
         <member name="P:FiftyOne.IpIntelligence.Shared.IpDataBase.Coordinate">
             <summary>
             Coordinate
+            </summary>
+        </member>
+        <member name="T:FiftyOne.IpIntelligence.Shared.IpIntelligenceData">
+            <summary>
+            Abstract base class for properties relating to an IP.
+            This includes the network, and location.
+            </summary>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.#ctor(Microsoft.Extensions.Logging.ILogger{FiftyOne.Pipeline.Engines.Data.AspectDataBase},FiftyOne.Pipeline.Core.FlowElements.IPipeline,FiftyOne.Pipeline.Engines.FlowElements.IAspectEngine,FiftyOne.Pipeline.Engines.Services.IMissingPropertyService)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="logger">
+            The logger for this instance to use.
+            </param>
+            <param name="pipeline">
+            The Pipeline this data instance has been created by.
+            </param>
+            <param name="engine">
+            The engine this data instance has been created by.
+            </param>
+            <param name="missingPropertyService">
+            The missing property service to use when a requested property
+            does not exist.
+            </param>
+        </member>
+        <member name="F:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.PropertyTypes">
+            <summary>
+            Types of properties.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.AccuracyRadius">
+            <summary>
+            Accuracy radius of the matched location in meters.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.IpRangeStart">
+            <summary>
+            Start of the IP range to which the evidence IP belongs.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.IpRangeEnd">
+            <summary>
+            End of the IP range to which the evidence IP belongs.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.Latitude">
+            <summary>
+            Average latitude of the IP. For privacy, this is randomized within around 1 mile of the result. Randomized result will change only once per day.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.Longitude">
+            <summary>
+            Average longitude of the IP. For privacy, this is randomized within around 1 mile of the result. Randomized result will change only once per day.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.Name">
+            <summary>
+            Name of the IP range. This is usually the owner.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.Owner">
+            <summary>
+            Registered owner of the range.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.Areas">
+            <summary>
+            Any shapes associated with the location. Usually this is the area which the IP range covers.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.Country">
+            <summary>
+            The name of the country that the supplied location is in.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.CountryCode">
+            <summary>
+            The 2-character ISO 3166-1 code of the country that the supplied location is in.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.CountryCode3">
+            <summary>
+            The 3-character ISO 3166-1 alpha-3 code of the country that the supplied location is in.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.Region">
+            <summary>
+            The name of the geographical region that the supplied location is in.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.TimeZoneOffset">
+            <summary>
+            The offset from UTC in minutes in the supplied location, at the time that the value is produced.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.Town">
+            <summary>
+            The name of the town that the supplied location is in.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.State">
+            <summary>
+            The name of the state that the supplied location in in.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.NetworkId">
+            <summary>
+            Consists of a list of ID and Weight pairs, separated by a vertical bar symbol. Each pair represents an ID of a corresponding Profile and its weight. The ID and weight are subsequently seperated by a colon: Profile1:Weight1|Profile2:Weight2...
             </summary>
         </member>
         <member name="T:FiftyOne.IpIntelligence.Shared.Messages">
@@ -1384,7 +1493,7 @@
             e.g. '123:90.0|321:10.0|0:1.0'
             </summary>
         </member>
-        <member name="P:FiftyOne.IpIntelligence.IIpData.NetworkName">
+        <member name="P:FiftyOne.IpIntelligence.IIpData.Name">
             <summary>
             Network name
             </summary>
@@ -1392,6 +1501,92 @@
         <member name="P:FiftyOne.IpIntelligence.IIpData.Coordinate">
             <summary>
             Coordinate
+            </summary>
+        </member>
+        <member name="T:FiftyOne.IpIntelligence.IIpIntelligenceData">
+            <summary>
+            Represents a data object containing values relating to an IP.
+            This includes the network, and location.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.AccuracyRadius">
+            <summary>
+            Accuracy radius of the matched location in meters.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.Areas">
+            <summary>
+            Any shapes associated with the location. Usually this is the area which the IP range covers.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.Country">
+            <summary>
+            The name of the country that the supplied location is in.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.CountryCode">
+            <summary>
+            The 2-character ISO 3166-1 code of the country that the supplied location is in.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.CountryCode3">
+            <summary>
+            The 3-character ISO 3166-1 alpha-3 code of the country that the supplied location is in.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.IpRangeEnd">
+            <summary>
+            End of the IP range to which the evidence IP belongs.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.IpRangeStart">
+            <summary>
+            Start of the IP range to which the evidence IP belongs.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.Latitude">
+            <summary>
+            Average latitude of the IP. For privacy, this is randomized within around 1 mile of the result. Randomized result will change only once per day.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.Longitude">
+            <summary>
+            Average longitude of the IP. For privacy, this is randomized within around 1 mile of the result. Randomized result will change only once per day.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.Name">
+            <summary>
+            Name of the IP range. This is usually the owner.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.NetworkId">
+            <summary>
+            Consists of a list of ID and Weight pairs, separated by a vertical bar symbol. Each pair represents an ID of a corresponding Profile and its weight. The ID and weight are subsequently seperated by a colon: Profile1:Weight1|Profile2:Weight2...
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.Owner">
+            <summary>
+            Registered owner of the range.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.Region">
+            <summary>
+            The name of the geographical region that the supplied location is in.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.State">
+            <summary>
+            The name of the state that the supplied location in in.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.TimeZoneOffset">
+            <summary>
+            The offset from UTC in minutes in the supplied location, at the time that the value is produced.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.Town">
+            <summary>
+            The name of the town that the supplied location is in.
             </summary>
         </member>
     </members>

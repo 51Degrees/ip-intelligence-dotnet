@@ -138,16 +138,16 @@ namespace FiftyOne.IpIntelligence.Examples.OnPremise.ConfigureFromFile
 
                 // TODO: Revert to reading other properties
                 {
-                    var networkName = ip.NetworkName;
+                    var name = ip.Name;
                     Console.WriteLine($"0.1. What is the network name that is matched for '{ipAddress}'?");
-                    if (!networkName.HasValue)
+                    if (!name.HasValue)
                     {
-                        Console.WriteLine($"\t{networkName.NoValueMessage} - {networkName.NoValueMessage}");
+                        Console.WriteLine($"\t{name.NoValueMessage} - {name.NoValueMessage}");
                     }
                     else
                     {
-                        var networkNameValues = string.Join(", ", networkName.Value.Select(x => $"('{x.Value}' @ {x.Weighting()})"));
-                        Console.WriteLine($"\t[{networkName.Value.Count}]: {networkNameValues}");
+                        var nameValues = string.Join(", ", name.Value.Select(x => $"('{x.Value}' @ {x.Weighting()})"));
+                        Console.WriteLine($"\t[{name.Value.Count}]: {nameValues}");
                     }
                 }
                 return;
