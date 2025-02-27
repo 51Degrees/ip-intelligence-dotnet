@@ -7,10 +7,10 @@ param (
 )
 
 # Fetch the TAC data file for testing with
-./steps/fetch-hash-assets.ps1 -RepoName $RepoName -LicenseKey $DeviceDetection -Url $DeviceDetectionUrl
+$DataFileName = "TAC-IpIntelligenceV41.ipi"
+./steps/fetch-hash-assets.ps1 -RepoName $RepoName -LicenseKey $DeviceDetection -Url $DeviceDetectionUrl -DataType "IpIntelligenceV41" -ArchiveName $DataFileName
 
 # Move the data file to the correct location
-$DataFileName = "TAC-IpIntelligenceV41.ipi"
 $DataFileSource = [IO.Path]::Combine($pwd, $RepoName, $DataFileName)
 $DataFileDir = [IO.Path]::Combine($pwd, $RepoName, "FiftyOne.IpIntelligence", "ip-intelligence-cxx", "ip-intelligence-data")
 $DataFileDestination = [IO.Path]::Combine($DataFileDir, $DataFileName)
