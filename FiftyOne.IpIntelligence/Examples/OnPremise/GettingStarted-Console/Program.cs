@@ -137,15 +137,51 @@ namespace FiftyOne.IpIntelligence.Examples.OnPremise.GettingStartedConsole
                         }
                     }
                     {
-                        var coordinate = ipData.Coordinate;
-                        if (!coordinate.HasValue)
+                        var latitude = ipData.Latitude;
+                        if (!latitude.HasValue)
                         {
-                            message.AppendLine($"\t{nameof(ipData.Coordinate)}: {coordinate.NoValueMessage} - {coordinate.NoValueMessage}");
+                            message.AppendLine($"\t{nameof(ipData.Latitude)}: {latitude.NoValueMessage} - {latitude.NoValueMessage}");
                         }
                         else
                         {
-                            var areas = string.Join(", ", coordinate.Value.Select(x => $"('{x.Value}' @ {x.Weighting()})"));
-                            message.AppendLine($"\t{nameof(ipData.Coordinate)}  ({coordinate.Value.Count}): {areas}");
+                            var valuesString = string.Join(", ", latitude.Value.Select(x => $"('{x.Value}' @ {x.Weighting()})"));
+                            message.AppendLine($"\t{nameof(ipData.Latitude)}  ({latitude.Value.Count}): {valuesString}");
+                        }
+                    }
+                    {
+                        var longitude = ipData.Longitude;
+                        if (!longitude.HasValue)
+                        {
+                            message.AppendLine($"\t{nameof(ipData.Longitude)}: {longitude.NoValueMessage} - {longitude.NoValueMessage}");
+                        }
+                        else
+                        {
+                            var valuesString = string.Join(", ", longitude.Value.Select(x => $"('{x.Value}' @ {x.Weighting()})"));
+                            message.AppendLine($"\t{nameof(ipData.Longitude)}  ({longitude.Value.Count}): {valuesString}");
+                        }
+                    }
+                    {
+                        var areas = ipData.Areas;
+                        if (!areas.HasValue)
+                        {
+                            message.AppendLine($"\t{nameof(ipData.Areas)}: {areas.NoValueMessage} - {areas.NoValueMessage}");
+                        }
+                        else
+                        {
+                            var valuesString = string.Join(", ", areas.Value.Select(x => $"('{x.Value}' @ {x.Weighting()})"));
+                            message.AppendLine($"\t{nameof(ipData.Areas)}  ({areas.Value.Count}): {valuesString}");
+                        }
+                    }
+                    {
+                        var accuracyRadius = ipData.AccuracyRadius;
+                        if (!accuracyRadius.HasValue)
+                        {
+                            message.AppendLine($"\t{nameof(ipData.AccuracyRadius)}: {accuracyRadius.NoValueMessage} - {accuracyRadius.NoValueMessage}");
+                        }
+                        else
+                        {
+                            var valuesString = string.Join(", ", accuracyRadius.Value.Select(x => $"('{x.Value}' @ {x.Weighting()})"));
+                            message.AppendLine($"\t{nameof(ipData.AccuracyRadius)}  ({accuracyRadius.Value.Count}): {valuesString}");
                         }
                     }
                     output.WriteLine(message.ToString());

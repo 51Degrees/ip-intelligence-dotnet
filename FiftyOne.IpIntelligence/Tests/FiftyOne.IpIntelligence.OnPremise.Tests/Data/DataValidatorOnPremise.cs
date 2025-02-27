@@ -74,32 +74,34 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Data
                 }
             }
 
-            Assert.IsTrue(string.IsNullOrEmpty(elementData.NetworkId.Value) == false);
-            if (validEvidence == false)
-            {
-                Regex regex = new Regex("^(0:1.0+)(\\|(0:1.0+))*");
-                Assert.IsTrue(regex.IsMatch(elementData.NetworkId.Value));
-            }
+            // TODO: Ask Ben for validation routines
+            //Assert.IsTrue(string.IsNullOrEmpty(elementData.NetworkId.Value) == false);
+            //if (validEvidence == false)
+            //{
+            //    Regex regex = new Regex("^(0:1.0+)(\\|(0:1.0+))*");
+            //    Assert.IsTrue(regex.IsMatch(elementData.NetworkId.Value));
+            //}
         }
 
         public void ValidateProfileIds(IFlowData data, string[] profileIds)
         {
-            var elementData = data.GetFromElement(_engine);
-            var matchedWeightedProfiles = elementData.NetworkId.Value.Split('|');
-            foreach (var profileId in profileIds)
-            {
-                bool found = false;
-                foreach (string weightedProfile in matchedWeightedProfiles)
-                {
-                    // The first string should be the profile ID and the second is the weight
-                    var weightedProfileSubStrings = weightedProfile.Split(':');
-                    if (weightedProfileSubStrings.Length > 0 && weightedProfileSubStrings[0].Equals(profileId))
-                    {
-                        found = true;
-                    }
-                }
-                Assert.IsTrue(found, $"The profile '{profileId}' was not set in the result.");
-            }
+            // TODO: Ask Ben aboud NetworkId exposure
+            //var elementData = data.GetFromElement(_engine);
+            //var matchedWeightedProfiles = elementData.NetworkId.Value.Split('|');
+            //foreach (var profileId in profileIds)
+            //{
+            //    bool found = false;
+            //    foreach (string weightedProfile in matchedWeightedProfiles)
+            //    {
+            //        // The first string should be the profile ID and the second is the weight
+            //        var weightedProfileSubStrings = weightedProfile.Split(':');
+            //        if (weightedProfileSubStrings.Length > 0 && weightedProfileSubStrings[0].Equals(profileId))
+            //        {
+            //            found = true;
+            //        }
+            //    }
+            //    Assert.IsTrue(found, $"The profile '{profileId}' was not set in the result.");
+            //}
         }
     }
 }

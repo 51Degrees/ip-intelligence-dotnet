@@ -117,39 +117,79 @@ namespace FiftyOne.IpIntelligence.Examples.OnPremise.GettingStarted
                 // Get IP data from the flow data.
                 var ip = data.Get<IIpIntelligenceData>();
 
-                var rangeStart = ip.IpRangeStart;
-                var rangeEnd = ip.IpRangeEnd;
-                Console.WriteLine($"1. What is the IP address range that is matched for '{ipAddress}'?");
-                // Output the value of the 'RangeStart' and 'RangeEnd' properties.
-                Console.WriteLine($"\t{(rangeStart.HasValue ? rangeStart.ToString() : rangeStart.NoValueMessage)}" +
-                    $" - {(rangeEnd.HasValue ? rangeEnd.ToString() : rangeEnd.NoValueMessage)}");
-
-                // Obtain the list of countries where the IP address is possibly from
-                var countries = ip.CountryCode;
-                Console.WriteLine($"2. What are the source countries for requests in this IP range?");
-                if (countries.HasValue)
                 {
-                    IEnumerator<IWeightedValue<string>> enumerator = countries.Value.GetEnumerator();
-                    while (enumerator.MoveNext()) 
+                    var rangeStart = ip.IpRangeStart;
+                    var rangeEnd = ip.IpRangeEnd;
+                    Console.WriteLine($"1. What is the IP address range that is matched for '{ipAddress}'?");
+                    // Output the value of the 'RangeStart' and 'RangeEnd' properties.
+                    Console.WriteLine($"\t{(rangeStart.HasValue ? rangeStart.ToString() : rangeStart.NoValueMessage)}" +
+                        $" - {(rangeEnd.HasValue ? rangeEnd.ToString() : rangeEnd.NoValueMessage)}");
+                }
+                {
+                    // Obtain the list of countries where the IP address is possibly from
+                    var countries = ip.CountryCode;
+                    Console.WriteLine($"2. What are the source countries for requests in this IP range?");
+                    if (countries.HasValue)
                     {
-                        Console.WriteLine($"\t'{enumerator.Current.Value}', {enumerator.Current.Weighting() * 100}%");
+                        IEnumerator<IWeightedValue<string>> enumerator = countries.Value.GetEnumerator();
+                        while (enumerator.MoveNext())
+                        {
+                            Console.WriteLine($"\t'{enumerator.Current.Value}', {enumerator.Current.Weighting() * 100}%");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine($"\t{countries.NoValueMessage}");
                     }
                 }
-                else 
-                {
-                    Console.WriteLine($"\t{rangeStart.NoValueMessage}");
-                }
-
                 // Obtain the Average Location of the IP address
-                var averageLocation = ip.AverageLocation;
-                Console.WriteLine($"3. What is the average location for requests in this IP range?");
-                if (averageLocation.HasValue)
                 {
-                    Console.WriteLine($"\t{averageLocation.Value.Latitude},{averageLocation.Value.Longitude}");
+                    var latitude = ip.Latitude;
+                    Console.WriteLine($"3. What is the latitude for requests in this IP range?");
+
+                    if (latitude.HasValue)
+                    {
+                        foreach (var nextValue in latitude.Value)
+                        {
+                            Console.WriteLine($"\t'{nextValue.Value}', {nextValue.Weighting() * 100}%");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine($"\t{latitude.NoValueMessage}");
+                    }
                 }
-                else
                 {
-                    Console.WriteLine($"\t{averageLocation.NoValueMessage}");
+                    var longitude = ip.Longitude;
+                    Console.WriteLine($"4. What is the longitude for requests in this IP range?");
+
+                    if (longitude.HasValue)
+                    {
+                        foreach (var nextValue in longitude.Value)
+                        {
+                            Console.WriteLine($"\t'{nextValue.Value}', {nextValue.Weighting() * 100}%");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine($"\t{longitude.NoValueMessage}");
+                    }
+                }
+                {
+                    var accuracyRadius = ip.AccuracyRadius;
+                    Console.WriteLine($"4. What is the accuracy radius for requests in this IP range?");
+
+                    if (accuracyRadius.HasValue)
+                    {
+                        foreach (var nextValue in accuracyRadius.Value)
+                        {
+                            Console.WriteLine($"\t'{nextValue.Value}', {nextValue.Weighting() * 100}%");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine($"\t{accuracyRadius.NoValueMessage}");
+                    }
                 }
             }
         }
