@@ -6,6 +6,8 @@ param(
     [string]$Configuration = "Release",
     [string]$Arch = "x64"
 )
+$ErrorActionPreference = "Stop"
+$PSNativeCommandUseErrorActionPreference = $true
 
 
 Write-Output "No tests yet"

@@ -5,6 +5,9 @@ param(
     [string]$RepoName,
     [string]$Arch
 )
+$ErrorActionPreference = "Stop"
+$PSNativeCommandUseErrorActionPreference = $true
+
 $RepoPath = [IO.Path]::Combine($pwd, $RepoName)
 
 $NativeName = "FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll"

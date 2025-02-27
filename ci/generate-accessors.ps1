@@ -1,3 +1,5 @@
+$ErrorActionPreference = "Stop"
+$PSNativeCommandUseErrorActionPreference = $true
 
 ./tools/ci/generate-dd-accessors.ps1
 

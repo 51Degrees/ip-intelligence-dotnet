@@ -10,5 +10,7 @@ param(
     [string]$OrgName,
     [string]$Branch = "main"
 )
+$ErrorActionPreference = "Stop"
+$PSNativeCommandUseErrorActionPreference = $true
 
 Write-Output "No tests yet"

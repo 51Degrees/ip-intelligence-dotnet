@@ -8,6 +8,9 @@ param(
     [string]$BuildMethod,
     [hashtable]$Keys
 )
+$ErrorActionPreference = "Stop"
+$PSNativeCommandUseErrorActionPreference = $true
+
 $RepoPath = [IO.Path]::Combine($pwd, $RepoName)
 
 if ($BuildMethod -ne "dotnet") {

@@ -9,6 +9,8 @@ param(
     [Parameter(Mandatory=$true)]
     [Hashtable]$Keys
 )
+$ErrorActionPreference = "Stop"
+$PSNativeCommandUseErrorActionPreference = $true
 
 # Path to this repository
 $BinaryFilesFolder = [IO.Path]::Combine($pwd, $RepoName)

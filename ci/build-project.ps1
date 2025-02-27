@@ -7,6 +7,8 @@ param(
     [string]$Arch = "x64",
     [string]$BuildMethod = "msbuild"
 )
+$ErrorActionPreference = "Stop"
+$PSNativeCommandUseErrorActionPreference = $true
 
 if ($BuildMethod -eq "dotnet"){
 

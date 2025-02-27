@@ -5,6 +5,8 @@ param (
     [string]$DeviceDetection,
     [string]$DeviceDetectionUrl
 )
+$ErrorActionPreference = "Stop"
+$PSNativeCommandUseErrorActionPreference = $true
 
 # Fetch the TAC data file for testing with
 $DataFileName = "TAC-IpIntelligenceV41.ipi"
