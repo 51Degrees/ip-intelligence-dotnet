@@ -35,7 +35,7 @@
         "Name": "Ubuntu_x64_Release",
         "Configuration": "Release",
         "Arch": "x64",
-        "BuildMethod": "dotnet",
+        "BuildMethod": "msbuild",
         "PackageRequirement" : true,
         "RunPerformance": true
     },
@@ -44,7 +44,7 @@
         "Name": "Ubuntu_x64_Debug",
         "Configuration": "Debug",
         "Arch": "x64",
-        "BuildMethod": "dotnet"
+        "BuildMethod": "msbuild"
     },
     {
         "Image": "macos-13",
@@ -52,7 +52,7 @@
         "Configuration": "Release",
         "Arch": "x64",
         "PackageRequirement": true,
-        "BuildMethod": "dotnet"
+        "BuildMethod": "msbuild"
     },
     {
         "Image": "macos-latest",
@@ -60,6 +60,6 @@
         "Configuration": "Release",
         "Arch": "arm64",
         "PackageRequirement" : true,
-        "BuildMethod": "dotnet"
+        "BuildMethod": "msbuild"
     }
 ]
