@@ -53,17 +53,40 @@
     </PackageReference>
   </ItemGroup>
 
+  <!-- 
+    Debug or Release are the only two outputs from the CMake / PreBuild.ps1 
+    scripts. The $Configuration parameter might contain a wider range of options
+    which will always in the string Debug or Release. The following sets a new
+    parameter called BuildType to Debug or Release based on the content of the
+    $Configuration parameter. This is then used to choose the target compiled
+    binary.
+  -->
+  <PropertyGroup Condition="$([System.Text.RegularExpressions.Regex]::IsMatch('$(Configuration)', 'Debug'))">
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <BuildType>Debug</BuildType>
+  </PropertyGroup>
+  <PropertyGroup Condition="$([System.Text.RegularExpressions.Regex]::IsMatch('$(Configuration)', 'Release'))">
+    <BuildType>Release</BuildType>
+  </PropertyGroup>
+
   <ItemGroup>
-    <None Include="$(ProjectDir)\..\FiftyOne.IpIntelligence.Engine.OnPremise.Native\$(Platform)\$(Configuration)\FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll" Condition="'$(Platform)' == 'x64'" Link="FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll">
+    <Compile Remove="build\**" />
+    <Compile Remove="device-detection-cxx\**" />
+    <EmbeddedResource Remove="build\**" />
+    <EmbeddedResource Remove="device-detection-cxx\**" />
+    <None Remove="build\**" />
+    <None Remove="device-detection-cxx\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="$(ProjectDir)\build\windows\$(Platform)\$(BuildType)\FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll" Condition="$([MSBuild]::IsOsPlatform('Windows')) AND '$(Platform)' != 'AnyCPU'" Link="FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="$(ProjectDir)\..\FiftyOne.IpIntelligence.Engine.OnPremise.Native\Win32\$(Configuration)\FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll" Condition="'$(Platform)'=='x86'" Link="FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll">
+    <None Include="$(ProjectDir)\build\linux\$(Platform)\$(BuildType)\FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll" Condition="$([MSBuild]::IsOsPlatform('Linux')) AND '$(Platform)' != 'AnyCPU'" Link="FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="$(ProjectDir)\..\FiftyOne.IpIntelligence.Engine.OnPremise.Native\$(Platform)\$(Configuration)\FiftyOne.IpIntelligence.Engine.OnPremise.Native.pdb" Condition="'$(Platform)' == 'x64'" Link="FiftyOne.IpIntelligence.Engine.OnPremise.Native.pdb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="$(ProjectDir)\..\FiftyOne.IpIntelligence.Engine.OnPremise.Native\Win32\$(Configuration)\FiftyOne.IpIntelligence.Engine.OnPremise.Native.pdb" Condition="'$(Platform)'=='x86'" Link="FiftyOne.IpIntelligence.Engine.OnPremise.Native.pdb">
+    <None Include="$(ProjectDir)\build\macos\$(Platform)\$(BuildType)\FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll" Condition="$([MSBuild]::IsOsPlatform('OSX')) AND '$(Platform)' != 'AnyCPU'" Link="FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="..\..\Images\51d-logo.png">
@@ -104,5 +127,9 @@
       <PackagePath>runtimes\linux-x86\native</PackagePath>
     </_PackageFiles>
   </ItemGroup>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent" Condition="'$(Platform)' != 'AnyCPU'">
+    <Exec Command="pwsh $(ProjectDir)PreBuild.ps1 -BuildType $(BuildType) -Arch $(Platform)" />
+  </Target>
 
 </Project>
