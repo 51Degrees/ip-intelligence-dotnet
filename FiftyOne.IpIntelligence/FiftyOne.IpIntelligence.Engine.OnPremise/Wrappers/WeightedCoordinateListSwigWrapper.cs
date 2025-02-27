@@ -30,11 +30,11 @@ using System.Text;
 
 namespace FiftyOne.IpIntelligence.Engine.OnPremise.Wrappers
 {
-    internal class WeightedCoordinateListSwigWrapper : IReadOnlyList<WeightedValue<Coordinate>>
+    internal class WeightedCoordinateListSwigWrapper : IReadOnlyList<IWeightedValue<Coordinate>>
     {
         private WeightedCoordinateListSwig _object;
 
-        public WeightedValue<Coordinate> this[int index] => GetWeightedValue(index);
+        public IWeightedValue<Coordinate> this[int index] => GetWeightedValue(index);
 
         public int Count => _object.Count;
 
@@ -44,7 +44,7 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Wrappers
             _object = instance;
         }
 
-        private WeightedValue<Coordinate> GetWeightedValue(int index)
+        private IWeightedValue<Coordinate> GetWeightedValue(int index)
         {
             using (var coordinateSwig = this._object[index].getValue())
             {
@@ -53,7 +53,7 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Wrappers
             }
         }
 
-        public IEnumerator<WeightedValue<Coordinate>> GetEnumerator()
+        public IEnumerator<IWeightedValue<Coordinate>> GetEnumerator()
         {
             for (int i = 0; i < _object.Count; i++)
             {

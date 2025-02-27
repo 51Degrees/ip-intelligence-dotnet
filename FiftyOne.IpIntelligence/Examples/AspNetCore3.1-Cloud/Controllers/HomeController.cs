@@ -44,7 +44,7 @@ namespace IpIntelligenceWebDemoNetCore3_1Cloud.Controllers
 
         public IActionResult Index()
         {
-            var data = _flow.GetFlowData().Get<IIpData>();
+            var data = _flow.GetFlowData().Get<IIpIntelligenceData>();
             return View(data);
         }
     }

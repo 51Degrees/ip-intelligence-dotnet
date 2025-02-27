@@ -63,7 +63,7 @@ namespace FiftyOne.IpIntelligence.Examples.OnPremise.GettingStartedWeb.Model
                 .ToList();
 
             // Get the results of device detection.
-            var deviceData = FlowData.Get<IIpData>();
+            var deviceData = FlowData.Get<IIpIntelligenceData>();
             // Use helper functions to get a human-readable string representation of various
             // property values. These helpers handle situations such as the property missing
             // due to using a lite data file or the property not having a value because device

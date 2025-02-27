@@ -30,11 +30,11 @@ using System.Text;
 
 namespace FiftyOne.IpIntelligence.Engine.OnPremise.Wrappers
 {
-    internal class WeightedIntListSwigWrapper : IReadOnlyList<WeightedValue<int>>
+    internal class WeightedIntListSwigWrapper : IReadOnlyList<IWeightedValue<int>>
     {
         private WeightedIntListSwig _object;
 
-        public WeightedValue<int> this[int index] => GetWeightedValue(index);
+        public IWeightedValue<int> this[int index] => GetWeightedValue(index);
 
         public int Count => _object.Count;
 
@@ -44,12 +44,12 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Wrappers
             _object = instance;
         }
 
-        private WeightedValue<int> GetWeightedValue(int index)
+        private IWeightedValue<int> GetWeightedValue(int index)
         {
             return new WeightedValue<int>(this._object[index].getRawWeight(), this._object[index].getValue());
         }
 
-        public IEnumerator<WeightedValue<int>> GetEnumerator()
+        public IEnumerator<IWeightedValue<int>> GetEnumerator()
         {
             for (int i = 0; i < _object.Count; i++)
             {

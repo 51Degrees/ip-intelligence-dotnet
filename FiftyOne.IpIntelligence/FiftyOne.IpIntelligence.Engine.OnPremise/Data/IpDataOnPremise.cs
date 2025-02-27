@@ -104,9 +104,9 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
                 .Any(r => r.containsProperty(propertyName));
         }
 
-        protected override IAspectPropertyValue<IReadOnlyList<WeightedValue<bool>>> GetValuesAsWeightedBoolList(string propertyName)
+        protected override IAspectPropertyValue<IReadOnlyList<IWeightedValue<bool>>> GetValuesAsWeightedBoolList(string propertyName)
         {
-            var result = new AspectPropertyValue<IReadOnlyList<WeightedValue<bool>>>();
+            var result = new AspectPropertyValue<IReadOnlyList<IWeightedValue<bool>>>();
             var results = GetResultsContainingProperty(propertyName);
 
             if (results != null)
@@ -126,9 +126,9 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
             return result;
         }
 
-        protected override IAspectPropertyValue<IReadOnlyList<WeightedValue<double>>> GetValuesAsWeightedDoubleList(string propertyName)
+        protected override IAspectPropertyValue<IReadOnlyList<IWeightedValue<double>>> GetValuesAsWeightedDoubleList(string propertyName)
         {
-            var result = new AspectPropertyValue<IReadOnlyList<WeightedValue<double>>>();
+            var result = new AspectPropertyValue<IReadOnlyList<IWeightedValue<double>>>();
             var results = GetResultsContainingProperty(propertyName);
 
             if (results != null)
@@ -148,9 +148,9 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
             return result;
         }
 
-        protected override IAspectPropertyValue<IReadOnlyList<WeightedValue<Coordinate>>> GetValuesAsWeightedCoordinateList(string propertyName)
+        protected override IAspectPropertyValue<IReadOnlyList<IWeightedValue<Coordinate>>> GetValuesAsWeightedCoordinateList(string propertyName)
         {
-            var result = new AspectPropertyValue<IReadOnlyList<WeightedValue<Coordinate>>>();
+            var result = new AspectPropertyValue<IReadOnlyList<IWeightedValue<Coordinate>>>();
             var results = GetResultsContainingProperty(propertyName);
 
             if (results != null)
@@ -170,9 +170,9 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
             return result;
         }
 
-        protected override IAspectPropertyValue<IReadOnlyList<WeightedValue<int>>> GetValuesAsWeightedIntegerList(string propertyName)
+        protected override IAspectPropertyValue<IReadOnlyList<IWeightedValue<int>>> GetValuesAsWeightedIntegerList(string propertyName)
         {
-            var result = new AspectPropertyValue<IReadOnlyList<WeightedValue<int>>>();
+            var result = new AspectPropertyValue<IReadOnlyList<IWeightedValue<int>>>();
             var results = GetResultsContainingProperty(propertyName);
 
             if (results != null)
@@ -217,9 +217,9 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
             return result;
         }
 
-        protected override IAspectPropertyValue<IReadOnlyList<WeightedValue<string>>> GetValuesAsWeightedStringList(string propertyName)
+        protected override IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> GetValuesAsWeightedStringList(string propertyName)
         {
-            var result = new AspectPropertyValue<IReadOnlyList<WeightedValue<string>>>();
+            var result = new AspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>();
             var results = GetResultsContainingProperty(propertyName);
 
             if (results != null)
@@ -239,10 +239,10 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
             return result;
         }
 
-        protected override IAspectPropertyValue<IReadOnlyList<WeightedValue<string>>> GetValuesAsWeightedWKTStringList(
+        protected override IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> GetValuesAsWeightedWKTStringList(
             string propertyName, byte decimalPlaces)
         {
-            var result = new AspectPropertyValue<IReadOnlyList<WeightedValue<string>>>();
+            var result = new AspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>();
             var results = GetResultsContainingProperty(propertyName);
 
             if (results != null)

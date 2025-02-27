@@ -133,7 +133,7 @@ namespace FiftyOne.IpIntelligence.Examples.OnPremise.ConfigureFromFile
                 // Process the supplied evidence.
                 data.Process();
                 // Get IP data from the flow data.
-                var ip = data.Get<IIpData>();
+                var ip = data.Get<IIpIntelligenceData>();
 
 
                 // TODO: Revert to reading other properties
@@ -169,7 +169,7 @@ namespace FiftyOne.IpIntelligence.Examples.OnPremise.ConfigureFromFile
                 Console.WriteLine($"2. What is the Country where the '{ipAddress}' is from?");
                 if (countries.HasValue)
                 {
-                    IEnumerator<WeightedValue<string>> enumerator = countries.Value.GetEnumerator();
+                    IEnumerator<IWeightedValue<string>> enumerator = countries.Value.GetEnumerator();
                     while (enumerator.MoveNext())
                     {
                         Console.WriteLine($"\t'{enumerator.Current.Value}', {enumerator.Current.Weighting() * 100}%");

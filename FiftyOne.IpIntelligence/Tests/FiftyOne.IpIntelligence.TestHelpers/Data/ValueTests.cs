@@ -62,19 +62,19 @@ namespace FiftyOne.IpIntelligence.TestHelpers.Data
                 Type expectedType = property.Type;
                 if (property.Type == typeof(string) && !property.Name.Equals("NetworkId"))
                 {
-                    expectedType = typeof(IReadOnlyList<WeightedValue<string>>);
+                    expectedType = typeof(IReadOnlyList<IWeightedValue<string>>);
                 }
                 else if (property.Type == typeof(int))
                 {
-                    expectedType = typeof(IReadOnlyList<WeightedValue<int>>);
+                    expectedType = typeof(IReadOnlyList<IWeightedValue<int>>);
                 }
                 else if (property.Type == typeof(double))
                 {
-                    expectedType = typeof(IReadOnlyList<WeightedValue<double>>);
+                    expectedType = typeof(IReadOnlyList<IWeightedValue<double>>);
                 }
                 else if (property.Type == typeof(bool))
                 {
-                    expectedType = typeof(IReadOnlyList<WeightedValue<bool>>);
+                    expectedType = typeof(IReadOnlyList<IWeightedValue<bool>>);
                 }
 
                 var value = elementData[property.Name];

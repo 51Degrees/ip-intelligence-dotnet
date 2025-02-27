@@ -98,7 +98,7 @@ namespace GetAllProperties
             // Process the supplied evidence.
             data.Process();
             // Get device data from the flow data.
-            var device = data.Get<IIpData>();
+            var device = data.Get<IIpIntelligenceData>();
             Console.WriteLine($"What property values are associated with " +
                 $"the IP address '{ipAddress}'?");
 

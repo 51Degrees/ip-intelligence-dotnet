@@ -158,7 +158,7 @@ namespace FiftyOne.IpIntelligence.Examples.OnPremise.OfflineProcessing
                     // Process the flow data.
                     data.Process();
 
-                    var ipData = data.Get<IIpData>();
+                    var ipData = data.Get<IIpIntelligenceData>();
                     Dictionary<string, string> output = new Dictionary<string, string>();
                     // Add the evidence values to the output
                     foreach(var entry in evidence)

@@ -122,7 +122,7 @@ namespace FiftyOne.IpIntelligence.Examples.Cloud.GettingStarted
             // Process the supplied evidence.
             data.Process();
             // Get IP data from the flow data.
-            var ip = data.Get<IIpData>();
+            var ip = data.Get<IIpIntelligenceData>();
             var rangeStart = ip.IpRangeStart;
             Console.WriteLine($"1. What is the RangeStart of '{ipAddress}'?");
             // Output the value of the 'IpRangeStart' property.
@@ -140,7 +140,7 @@ namespace FiftyOne.IpIntelligence.Examples.Cloud.GettingStarted
             Console.WriteLine($"2. What are the codes of the countries where the '{ipAddress}' is possibly from?");
             if (countries.HasValue)
             {
-                IEnumerator<WeightedValue<string>> enumerator = countries.Value.GetEnumerator();
+                IEnumerator<IWeightedValue<string>> enumerator = countries.Value.GetEnumerator();
                 while (enumerator.MoveNext())
                 {
                     Console.WriteLine($"\t'{enumerator.Current.Value}', {enumerator.Current.Weighting() * 100}%");
@@ -161,18 +161,6 @@ namespace FiftyOne.IpIntelligence.Examples.Cloud.GettingStarted
             else
             {
                 Console.WriteLine($"\t{averageLocation.NoValueMessage}");
-            }
-
-            // Obtain the network id of the IP address
-            var networkId = ip.NetworkId;
-            Console.WriteLine($"4. What is the NetworkId of the '{ipAddress}'?");
-            if (networkId.HasValue)
-            {
-                Console.WriteLine($"\t{networkId.Value}");
-            }
-            else
-            {
-                Console.WriteLine($"\t{networkId.NoValueMessage}");
             }
         }
     }

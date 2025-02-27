@@ -42,7 +42,7 @@ namespace FiftyOne.IpIntelligence.Shared.FlowElements
     /// </typeparam>
     public abstract class OnPremiseIpiEngineBase<T> :
         FiftyOneOnPremiseAspectEngineBase<T>, IOnPremiseIpiEngine
-        where T : IIpData
+        where T : IIpIntelligenceData
     {
         /// <summary>
         /// Constructor

@@ -146,7 +146,7 @@ using Microsoft.Extensions.Hosting;
 ///     ...
 ///     public IActionResult Index()
 ///     {
-///         var data = _flow.GetFlowData().Get<IIpData>();
+///         var data = _flow.GetFlowData().Get<IIpIntelligenceData>();
 ///         return View(data);
 ///     }
 ///     ...
@@ -154,7 +154,7 @@ using Microsoft.Extensions.Hosting;
 /// 
 /// 6. Display IP details in the view.
 /// ```{cs}
-/// @model FiftyOne.IpIntelligence.IIpData
+/// @model FiftyOne.IpIntelligence.IIpIntelligenceData
 /// ...
 /// var countries = Model.Countries;
 /// ...

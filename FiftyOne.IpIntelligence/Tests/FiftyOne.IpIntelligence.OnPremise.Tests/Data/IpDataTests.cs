@@ -72,13 +72,13 @@ namespace FiftyOne.IpIntelligence.Tests.Core.Data
                 Results.AddResult(null);
             }
 
-            protected override IAspectPropertyValue<IReadOnlyList<WeightedValue<bool>>> 
+            protected override IAspectPropertyValue<IReadOnlyList<IWeightedValue<bool>>> 
                 GetValuesAsWeightedBoolList(string propertyName)
             {
                 if (propertyName == _testPropertyName)
                 {
-                    return new AspectPropertyValue<IReadOnlyList<WeightedValue<bool>>>(
-                        (IReadOnlyList<WeightedValue<bool>>)_value);
+                    return new AspectPropertyValue<IReadOnlyList<IWeightedValue<bool>>>(
+                        (IReadOnlyList<IWeightedValue<bool>>)_value);
                 }
                 else
                 {
@@ -86,13 +86,13 @@ namespace FiftyOne.IpIntelligence.Tests.Core.Data
                 }
             }
 
-            protected override IAspectPropertyValue<IReadOnlyList<WeightedValue<double>>> 
+            protected override IAspectPropertyValue<IReadOnlyList<IWeightedValue<double>>> 
                 GetValuesAsWeightedDoubleList(string propertyName)
             {
                 if (propertyName == _testPropertyName)
                 {
-                    return new AspectPropertyValue<IReadOnlyList<WeightedValue<double>>>(
-                        (IReadOnlyList<WeightedValue<double>>)_value);
+                    return new AspectPropertyValue<IReadOnlyList<IWeightedValue<double>>>(
+                        (IReadOnlyList<IWeightedValue<double>>)_value);
                 }
                 else
                 {
@@ -100,13 +100,13 @@ namespace FiftyOne.IpIntelligence.Tests.Core.Data
                 }
             }
 
-            protected override IAspectPropertyValue<IReadOnlyList<WeightedValue<Coordinate>>>
+            protected override IAspectPropertyValue<IReadOnlyList<IWeightedValue<Coordinate>>>
                 GetValuesAsWeightedCoordinateList(string propertyName)
             {
                 if (propertyName == _testPropertyName)
                 {
-                    return new AspectPropertyValue<IReadOnlyList<WeightedValue<Coordinate>>>(
-                        (IReadOnlyList<WeightedValue<Coordinate>>)_value);
+                    return new AspectPropertyValue<IReadOnlyList<IWeightedValue<Coordinate>>>(
+                        (IReadOnlyList<IWeightedValue<Coordinate>>)_value);
                 }
                 else
                 {
@@ -114,13 +114,13 @@ namespace FiftyOne.IpIntelligence.Tests.Core.Data
                 }
             }
 
-            protected override IAspectPropertyValue<IReadOnlyList<WeightedValue<int>>> 
+            protected override IAspectPropertyValue<IReadOnlyList<IWeightedValue<int>>> 
                 GetValuesAsWeightedIntegerList(string propertyName)
             {
                 if (propertyName == _testPropertyName)
                 {
-                    return new AspectPropertyValue<IReadOnlyList<WeightedValue<int>>>(
-                        (IReadOnlyList<WeightedValue<int>>)_value);
+                    return new AspectPropertyValue<IReadOnlyList<IWeightedValue<int>>>(
+                        (IReadOnlyList<IWeightedValue<int>>)_value);
                 }
                 else
                 {
@@ -128,13 +128,13 @@ namespace FiftyOne.IpIntelligence.Tests.Core.Data
                 }
             }
 
-            protected override IAspectPropertyValue<IReadOnlyList<WeightedValue<string>>> 
+            protected override IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> 
                 GetValuesAsWeightedStringList(string propertyName)
             {
                 if (propertyName == _testPropertyName)
                 {
-                    return new AspectPropertyValue<IReadOnlyList<WeightedValue<string>>>(
-                        (IReadOnlyList<WeightedValue<string>>)_value);
+                    return new AspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>(
+                        (IReadOnlyList<IWeightedValue<string>>)_value);
                 }
                 else
                 {
@@ -142,13 +142,13 @@ namespace FiftyOne.IpIntelligence.Tests.Core.Data
                 }
             }
 
-            protected override IAspectPropertyValue<IReadOnlyList<WeightedValue<string>>> 
+            protected override IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> 
                 GetValuesAsWeightedWKTStringList(string propertyName, byte decimalPlaces)
             {
                 if (propertyName == _testPropertyName)
                 {
-                    return new AspectPropertyValue<IReadOnlyList<WeightedValue<string>>>(
-                        (IReadOnlyList<WeightedValue<string>>)_value);
+                    return new AspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>(
+                        (IReadOnlyList<IWeightedValue<string>>)_value);
                 }
                 else
                 {
@@ -243,9 +243,9 @@ namespace FiftyOne.IpIntelligence.Tests.Core.Data
         public void GetWeightedStringList()
         {
             SetupElementProperties(typeof(string));
-            IReadOnlyList<WeightedValue<string>> expected = new List<WeightedValue<string>>();
-            TestResults<IReadOnlyList<WeightedValue<string>>> results =
-                new TestResults<IReadOnlyList<WeightedValue<string>>>(
+            IReadOnlyList<IWeightedValue<string>> expected = new List<WeightedValue<string>>();
+            TestResults<IReadOnlyList<IWeightedValue<string>>> results =
+                new TestResults<IReadOnlyList<IWeightedValue<string>>>(
                     _logger.Object,
                     _flowData.Object.Pipeline,
                     _engine.Object,
@@ -270,9 +270,9 @@ namespace FiftyOne.IpIntelligence.Tests.Core.Data
         public void GetWeightedBoolList()
         {
             SetupElementProperties(typeof(bool));
-            IReadOnlyList<WeightedValue<bool>> expected = new List<WeightedValue<bool>>();
-            TestResults<IReadOnlyList<WeightedValue<bool>>> results =
-                new TestResults<IReadOnlyList<WeightedValue<bool>>>(
+            IReadOnlyList<IWeightedValue<bool>> expected = new List<WeightedValue<bool>>();
+            TestResults<IReadOnlyList<IWeightedValue<bool>>> results =
+                new TestResults<IReadOnlyList<IWeightedValue<bool>>>(
                     _logger.Object,
                     _flowData.Object.Pipeline,
                     _engine.Object,
@@ -297,9 +297,9 @@ namespace FiftyOne.IpIntelligence.Tests.Core.Data
         public void GetWeightedIntList()
         {
             SetupElementProperties(typeof(int));
-            IReadOnlyList<WeightedValue<int>> expected = new List<WeightedValue<int>>();
-            TestResults<IReadOnlyList<WeightedValue<int>>> results =
-                new TestResults<IReadOnlyList<WeightedValue<int>>>(
+            IReadOnlyList<IWeightedValue<int>> expected = new List<WeightedValue<int>>();
+            TestResults<IReadOnlyList<IWeightedValue<int>>> results =
+                new TestResults<IReadOnlyList<IWeightedValue<int>>>(
                     _logger.Object,
                     _flowData.Object.Pipeline,
                     _engine.Object,
@@ -324,9 +324,9 @@ namespace FiftyOne.IpIntelligence.Tests.Core.Data
         public void GetWeightedDoubleList()
         {
             SetupElementProperties(typeof(double));
-            IReadOnlyList<WeightedValue<double>> expected = new List<WeightedValue<double>>();
-            TestResults<IReadOnlyList<WeightedValue<double>>> results =
-                new TestResults<IReadOnlyList<WeightedValue<double>>>(
+            IReadOnlyList<IWeightedValue<double>> expected = new List<WeightedValue<double>>();
+            TestResults<IReadOnlyList<IWeightedValue<double>>> results =
+                new TestResults<IReadOnlyList<IWeightedValue<double>>>(
                     _logger.Object,
                     _flowData.Object.Pipeline,
                     _engine.Object,

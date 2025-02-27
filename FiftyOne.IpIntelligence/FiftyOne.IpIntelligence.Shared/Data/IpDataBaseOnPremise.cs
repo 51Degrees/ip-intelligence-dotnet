@@ -16,7 +16,7 @@ namespace FiftyOne.IpIntelligence.Shared.Data
     /// <summary>
     /// Base class used for all 51Degrees on-premise results classes.
     /// </summary>
-    public abstract class IpDataBaseOnPremise<TResult> : IpDataBase
+    public abstract class IpDataBaseOnPremise<TResult> : IpIntelligenceData
         where TResult : IDisposable
     {
         /// <summary>
@@ -231,7 +231,7 @@ namespace FiftyOne.IpIntelligence.Shared.Data
         /// <see cref="bool"/> wrapped in a 
         /// <see cref="IAspectPropertyValue"/> instance.
         /// </returns>
-        protected abstract IAspectPropertyValue<IReadOnlyList<WeightedValue<bool>>> GetValuesAsWeightedBoolList(string propertyName);
+        protected abstract IAspectPropertyValue<IReadOnlyList<IWeightedValue<bool>>> GetValuesAsWeightedBoolList(string propertyName);
 
         /// <summary>
         /// Get weighted double values this instance has for the specified property
@@ -244,7 +244,7 @@ namespace FiftyOne.IpIntelligence.Shared.Data
         /// <see cref="double"/> wrapped in a 
         /// <see cref="IAspectPropertyValue"/> instance.
         /// </returns>
-        protected abstract IAspectPropertyValue<IReadOnlyList<WeightedValue<double>>> GetValuesAsWeightedDoubleList(string propertyName);
+        protected abstract IAspectPropertyValue<IReadOnlyList<IWeightedValue<double>>> GetValuesAsWeightedDoubleList(string propertyName);
 
         /// <summary>
         /// Get weighted double values this instance has for the specified property
@@ -257,7 +257,7 @@ namespace FiftyOne.IpIntelligence.Shared.Data
         /// <see cref="double"/> wrapped in a 
         /// <see cref="IAspectPropertyValue"/> instance.
         /// </returns>
-        protected abstract IAspectPropertyValue<IReadOnlyList<WeightedValue<Coordinate>>> GetValuesAsWeightedCoordinateList(string propertyName);
+        protected abstract IAspectPropertyValue<IReadOnlyList<IWeightedValue<Coordinate>>> GetValuesAsWeightedCoordinateList(string propertyName);
 
         /// <summary>
         /// Get weighted Coordinate values this instance has for the specified property
@@ -270,7 +270,7 @@ namespace FiftyOne.IpIntelligence.Shared.Data
         /// <see cref="Coordinate"/> wrapped in a 
         /// <see cref="IAspectPropertyValue"/> instance.
         /// </returns>
-        protected abstract IAspectPropertyValue<IReadOnlyList<WeightedValue<int>>> GetValuesAsWeightedIntegerList(string propertyName);
+        protected abstract IAspectPropertyValue<IReadOnlyList<IWeightedValue<int>>> GetValuesAsWeightedIntegerList(string propertyName);
 
         /// <summary>
         /// Get weighted string values this instance has for the specified property
@@ -283,7 +283,7 @@ namespace FiftyOne.IpIntelligence.Shared.Data
         /// <see cref="int"/> wrapped in a 
         /// <see cref="IAspectPropertyValue"/> instance.
         /// </returns>
-        protected abstract IAspectPropertyValue<IReadOnlyList<WeightedValue<string>>> GetValuesAsWeightedStringList(string propertyName);
+        protected abstract IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> GetValuesAsWeightedStringList(string propertyName);
 
         /// <summary>
         /// Get weighted WKT string values this instance has for the specified property
@@ -299,7 +299,7 @@ namespace FiftyOne.IpIntelligence.Shared.Data
         /// <see cref="int"/> wrapped in a 
         /// <see cref="IAspectPropertyValue"/> instance.
         /// </returns>
-        protected abstract IAspectPropertyValue<IReadOnlyList<WeightedValue<string>>> GetValuesAsWeightedWKTStringList(
+        protected abstract IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> GetValuesAsWeightedWKTStringList(
             string propertyName, byte decimalPlaces);
 
         /// <summary>
@@ -366,23 +366,23 @@ namespace FiftyOne.IpIntelligence.Shared.Data
                                 else
                                 {
                                     dict[property.Name.ToLowerInvariant()] =
-                                        GetAs<AspectPropertyValue<IReadOnlyList<WeightedValue<string>>>>(property.Name);
+                                        GetAs<AspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>(property.Name);
                                 }
                             }
                             else if (property.Type == typeof(double))
                             {
                                 dict[property.Name.ToLowerInvariant()] =
-                                    GetAs<AspectPropertyValue<IReadOnlyList<WeightedValue<double>>>>(property.Name);
+                                    GetAs<AspectPropertyValue<IReadOnlyList<IWeightedValue<double>>>>(property.Name);
                             }
                             else if (property.Type == typeof(int))
                             {
                                 dict[property.Name.ToLowerInvariant()] =
-                                    GetAs<AspectPropertyValue<IReadOnlyList<WeightedValue<int>>>>(property.Name);
+                                    GetAs<AspectPropertyValue<IReadOnlyList<IWeightedValue<int>>>>(property.Name);
                             }
                             else if (property.Type == typeof(bool))
                             {
                                 dict[property.Name.ToLowerInvariant()] =
-                                    GetAs<AspectPropertyValue<IReadOnlyList<WeightedValue<bool>>>>(property.Name);
+                                    GetAs<AspectPropertyValue<IReadOnlyList<IWeightedValue<bool>>>>(property.Name);
                             }
                             else if (property.Type == typeof(Coordinate))
                             {
@@ -491,27 +491,27 @@ namespace FiftyOne.IpIntelligence.Shared.Data
                     lock (_getLock)
                     {
                         if (innerType == typeof(string) ||
-                            innerType == typeof(IReadOnlyList<WeightedValue<string>>))
+                            innerType == typeof(IReadOnlyList<IWeightedValue<string>>))
                         {
                             obj = GetValuesAsWeightedStringList(key);
                         }
                         else if (innerType == typeof(double) ||
-                            innerType == typeof(IReadOnlyList<WeightedValue<double>>))
+                            innerType == typeof(IReadOnlyList<IWeightedValue<double>>))
                         {
                             obj = GetValuesAsWeightedDoubleList(key);
                         }
                         else if (innerType == typeof(int) ||
-                            innerType == typeof(IReadOnlyList<WeightedValue<int>>))
+                            innerType == typeof(IReadOnlyList<IWeightedValue<int>>))
                         {
                             obj = GetValuesAsWeightedIntegerList(key);
                         }
                         else if (innerType == typeof(bool) ||
-                            innerType == typeof(IReadOnlyList<WeightedValue<bool>>))
+                            innerType == typeof(IReadOnlyList<IWeightedValue<bool>>))
                         {
                             obj = GetValuesAsWeightedBoolList(key);
                         }
                         else if (innerType == typeof(bool) ||
-                            innerType == typeof(IReadOnlyList<WeightedValue<Coordinate>>))
+                            innerType == typeof(IReadOnlyList<IWeightedValue<Coordinate>>))
                         {
                             obj = GetValuesAsWeightedCoordinateList(key);
                         }

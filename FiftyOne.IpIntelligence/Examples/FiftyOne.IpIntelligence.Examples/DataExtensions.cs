@@ -71,7 +71,7 @@ namespace FiftyOne.IpIntelligence.Examples
         {
             return apv.HasValue ? string.Join(", ", apv.Value) : $"Unknown ({apv.NoValueMessage})";
         }
-        public static string GetHumanReadable(this IAspectPropertyValue<IReadOnlyList<WeightedValue<string>>> apv)
+        public static string GetHumanReadable(this IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> apv)
         {
             return apv.HasValue ? string.Join(", ", apv.Value.Select(x => $"{x.Weighting()}x'{x.Value}'")) : $"Unknown ({apv.NoValueMessage})";
         }

@@ -123,7 +123,7 @@ namespace FiftyOne.IpIntelligence.Examples.OnPremise.Performance
                                         .Process();
 
                             // Get the IP data from the engine.
-                            var ip = data.Get<IIpData>();
+                            var ip = data.Get<IIpIntelligenceData>();
 
                             // Update the counters depending on the CountryCode
                             // result.

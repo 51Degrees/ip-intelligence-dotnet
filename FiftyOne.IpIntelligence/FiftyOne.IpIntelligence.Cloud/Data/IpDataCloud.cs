@@ -42,7 +42,7 @@ namespace FiftyOne.IpIntelligence.Cloud.Data
     /// A data class that makes working with IP data from cloud 
     /// services easier for the user.
     /// </summary>
-    public class IpDataCloud : IpDataBase, IIpData
+    public class IpDataCloud : IpIntelligenceData
     {
         /// <summary>
         /// Construct a new instance of the wrapper.

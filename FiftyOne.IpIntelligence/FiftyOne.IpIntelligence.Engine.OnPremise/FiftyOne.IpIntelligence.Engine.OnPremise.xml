@@ -833,7 +833,7 @@
             current request.
             </param>
             <param name="ipData">
-            The <see cref="T:FiftyOne.IpIntelligence.IIpData"/> instance to populate with
+            The <see cref="!:IIpData"/> instance to populate with
             property values
             </param>
             <exception cref="T:System.ArgumentNullException">

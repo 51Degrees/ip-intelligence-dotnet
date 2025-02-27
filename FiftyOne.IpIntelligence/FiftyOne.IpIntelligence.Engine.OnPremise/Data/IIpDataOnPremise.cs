@@ -29,7 +29,7 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
     /// Represents a data class that contains IP data from an 
     /// on-premise IP intelligence engine. 
     /// </summary>
-    public interface IIpDataOnPremise : IIpData
+    public interface IIpDataOnPremise : IIpIntelligenceData
     {
         /// <summary>
         /// Gets all values that this instance has for a specific property.

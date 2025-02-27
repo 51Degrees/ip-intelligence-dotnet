@@ -121,7 +121,7 @@ namespace FiftyOne.IpIntelligence.Examples.OnPremise.GettingStartedConsole
                     // Now that it's been processed, the flow data will have been populated with
                     // the result. In this case, we want information about the device, which we
                     // can get by asking for a result matching the `IDeviceData` interface.
-                    var ipData = data.Get<IIpData>();
+                    var ipData = data.Get<IIpIntelligenceData>();
 
                     // TODO: Read other properties
                     {

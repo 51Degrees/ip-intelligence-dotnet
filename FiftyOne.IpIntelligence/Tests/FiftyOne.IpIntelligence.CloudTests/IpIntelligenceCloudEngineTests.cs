@@ -72,7 +72,7 @@ namespace FiftyOne.IpIntelligence.Cloud.Tests
                     "185.28.167.78");
                 data.Process();
         
-                var ipData = data.Get<IIpData>();
+                var ipData = data.Get<IIpIntelligenceData>();
                 Assert.IsNotNull(ipData);
                 Assert.IsTrue(ipData.CountryCode.HasValue);
             }
@@ -185,7 +185,7 @@ namespace FiftyOne.IpIntelligence.Cloud.Tests
         //     testData.GetOrAdd("cloudrequestdata", CreateTestData);
         //     _engine.Process(testData);
         // 
-        //     var result = testData.Get<IIpData>();
+        //     var result = testData.Get<IIpIntelligenceData>();
         //     Assert.IsNotNull(result);
         // }
     }

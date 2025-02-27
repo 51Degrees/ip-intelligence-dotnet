@@ -183,7 +183,7 @@ namespace FiftyOne.IpIntelligence.Examples.OnPremise.Performance
                             data.AddEvidence(evidence).Process();
 
                             // Get the device from the engine.
-                            var ipData = data.Get<IIpData>();
+                            var ipData = data.Get<IIpIntelligenceData>();
 
                             result.Count++;
                             // Access a property to ensure compiler optimizer doesn't optimize

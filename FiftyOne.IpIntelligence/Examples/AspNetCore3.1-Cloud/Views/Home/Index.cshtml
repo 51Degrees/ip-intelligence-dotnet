@@ -1,16 +1,18 @@
 ﻿@using FiftyOne.IpIntelligence.Shared.Data;
-@using FiftyOne.Pipeline.Core.Data
+@using FiftyOne.Pipeline.Core.Data;
+@using System.Collections.Generic;
 
-@model FiftyOne.IpIntelligence.IIpData
+@model FiftyOne.IpIntelligence.IIpIntelligenceData
 @{
     ViewData["Title"] = "IP Intelligence example";
-    var rangeStart = Model.IpRangeStart;
-    var rangeEnd = Model.IpRangeEnd;
-    var countryCodes = Model.CountryCode;
-    var cities = Model.CityName;
-    var averageLocation = Model.AverageLocation;
-    var locationBoundNorthWest = Model.LocationBoundNorthWest;
-    var locationBoundSouthEast = Model.LocationBoundSouthEast;
+    var values = new Dictionary<string, FiftyOne.Pipeline.Engines.Data.IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>();
+    values.Add("rangeStart", Model.IpRangeStart);
+    values.Add("rangeEnd", Model.IpRangeEnd);
+    values.Add("countryCodes", Model.CountryCode);
+    values.Add("country", Model.Country);
+    values.Add("region", Model.Region);
+    values.Add("state", Model.State);
+    values.Add("town", Model.Town);
 }
 
 <h2>Example</h2>
@@ -21,31 +23,18 @@
         on the first request:
     </p>
     <p>
-        RangeStart: @(rangeStart.HasValue ? rangeStart.Value.ToString() : $"Unknown ({rangeStart.NoValueMessage})")<br />
-        RangeEnd: @(rangeEnd.HasValue ? rangeEnd.Value.ToString() : $"Unknown ({rangeEnd.NoValueMessage})")<br />
-        CountryCodes:
-        @if (countryCodes.HasValue)
-        {
-            <ol>
-                @foreach (WeightedValue<string> country in countryCodes.Value)
-                {
-                    <li>@country.Value, @country.Weighting()</li>
-                }
-            </ol>
+        @foreach (var nextPropertyValues in values) {
+            @nextPropertyValues.Key
+            @if(nextPropertyValues.Value.HasValue)
+            {
+                <ol>
+                    @foreach (IWeightedValue<string> nextValue in nextPropertyValues.Value.Value)
+                    {
+                        <li>@nextValue.Value, @nextValue.Weighting()</li>
+                    }
+                </ol>
+            }
         }
-        Cities:
-        @if (cities.HasValue)
-        {
-            <ol>
-                @foreach (WeightedValue<string> city in cities.Value)
-                {
-                    <li>@city.Value, @city.Weighting()</li>
-                }
-            </ol>
-        }
-        AverageLocation: @(averageLocation.HasValue ? averageLocation.Value.ToString() : $"Unknown ({averageLocation.NoValueMessage})")<br />
-        LocationBoundNorthWest: @(locationBoundNorthWest.HasValue ? locationBoundNorthWest.Value.ToString() : $"Unknown ({locationBoundNorthWest.NoValueMessage})")<br />
-        LocationBoundSouthEast: @(locationBoundSouthEast.HasValue ? locationBoundSouthEast.Value.ToString() : $"Unknown ({locationBoundSouthEast.NoValueMessage})")<br />
     </p>
 </div>
 

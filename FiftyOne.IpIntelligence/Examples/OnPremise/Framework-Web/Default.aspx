@@ -82,7 +82,7 @@
                 // Put the flow data and device data instances into local variables so we don't
                 // have to keep grabbing them.
                 var flowData = ((PipelineCapabilities)Request.Browser).FlowData;
-                var deviceData = flowData.Get<IIpData>();                
+                var deviceData = flowData.Get<IIpIntelligenceData>();                
                 // Get the engine that is used to make requests to the cloud service.
                 var engine = flowData.Pipeline.GetElement<IpiOnPremiseEngine>(); 
                 // Note that below we are using some helper methods from the

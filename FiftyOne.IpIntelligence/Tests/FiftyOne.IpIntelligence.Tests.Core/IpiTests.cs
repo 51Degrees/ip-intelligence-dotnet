@@ -194,7 +194,7 @@ namespace FiftyOne.IpIntelligence.Tests.Core
                         // Get the IP data instance and access the
                         // Countries property to ensure we can get 
                         // data out.
-                        var ipData = flowData.Get<IIpData>();
+                        var ipData = flowData.Get<IIpIntelligenceData>();
                         var result = ipData.CountryCode;
                     });
             }
