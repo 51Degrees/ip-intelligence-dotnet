@@ -64,16 +64,5 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Core.Data
             TestInitialize(profile);
             ValueTests.TypedGetters(Wrapper);
         }
-
-        [DataTestMethod]
-        [DataRow(PerformanceProfiles.HighPerformance)]
-        [DataRow(PerformanceProfiles.MaxPerformance)]
-        [DataRow(PerformanceProfiles.LowMemory)]
-        [DataRow(PerformanceProfiles.Balanced)]
-        public void Values_OnPremise_Core_NetworkId(PerformanceProfiles profile)
-        {
-            TestInitialize(profile);
-            ValueTests.NetworkId(Wrapper);
-        }
     }
 }

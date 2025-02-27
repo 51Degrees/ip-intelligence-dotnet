@@ -179,18 +179,6 @@ namespace FiftyOne.IpIntelligence.Examples.OnPremise.ConfigureFromFile
                 {
                     Console.WriteLine($"\t{rangeStart.NoValueMessage}");
                 }
-
-                // Obtain the network id of the IP address
-                var networkId = ip.NetworkId;
-                Console.WriteLine($"3. What is the NetworkId of the '{ipAddress}'?");
-                if (networkId.HasValue)
-                {
-                    Console.WriteLine($"\t{networkId.Value}");
-                }
-                else
-                {
-                    Console.WriteLine($"\t{networkId.NoValueMessage}");
-                }
             }
         }
 

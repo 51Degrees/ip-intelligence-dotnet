@@ -37,19 +37,6 @@ namespace FiftyOne.IpIntelligence.TestHelpers.Data
     public class ValueTests
     {
         // TODO: Add more tests
-        public static void NetworkId(IWrapper wrapper)
-        {
-            // TODO: Ask Ben aboud NetworkId exposure
-            //var data = wrapper.Pipeline.CreateFlowData();
-            //data.AddEvidence("query.client-ip-51d", Constants.Ipv4Address)
-            //    .Process();
-            //var elementData = data.Get(wrapper.GetEngine().ElementDataKey);
-            //IIpIntelligenceData ip = (IIpIntelligenceData)elementData;
-            //Assert.IsNotNull(ip.NetworkId,
-            //    "The network id should not be null.");
-            //Assert.IsTrue(string.IsNullOrEmpty(ip.NetworkId.Value) == false,
-            //    "The network id should not be empty.");
-        }
 
 
         public static void ValueTypes(IWrapper wrapper)

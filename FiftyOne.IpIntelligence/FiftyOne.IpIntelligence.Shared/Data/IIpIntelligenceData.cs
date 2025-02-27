@@ -74,10 +74,6 @@ namespace FiftyOne.IpIntelligence
 		/// </summary>
 		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> Name { get; }
 		/// <summary>
-		/// Consists of a list of ID and Weight pairs, separated by a vertical bar symbol. Each pair represents an ID of a corresponding Profile and its weight. The ID and weight are subsequently seperated by a colon: Profile1:Weight1|Profile2:Weight2...
-		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> NetworkId { get; }
-		/// <summary>
 		/// Registered owner of the range.
 		/// </summary>
 		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> Owner { get; }

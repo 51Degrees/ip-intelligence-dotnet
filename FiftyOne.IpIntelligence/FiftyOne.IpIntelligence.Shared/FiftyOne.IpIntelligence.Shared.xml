@@ -1029,11 +1029,6 @@
             The name of the state that the supplied location in in.
             </summary>
         </member>
-        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.NetworkId">
-            <summary>
-            Consists of a list of ID and Weight pairs, separated by a vertical bar symbol. Each pair represents an ID of a corresponding Profile and its weight. The ID and weight are subsequently seperated by a colon: Profile1:Weight1|Profile2:Weight2...
-            </summary>
-        </member>
         <member name="T:FiftyOne.IpIntelligence.Shared.Messages">
             <summary>
               A strongly-typed resource class, for looking up localized strings, etc.
@@ -1182,11 +1177,6 @@
         <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.Name">
             <summary>
             Name of the IP range. This is usually the owner.
-            </summary>
-        </member>
-        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.NetworkId">
-            <summary>
-            Consists of a list of ID and Weight pairs, separated by a vertical bar symbol. Each pair represents an ID of a corresponding Profile and its weight. The ID and weight are subsequently seperated by a colon: Profile1:Weight1|Profile2:Weight2...
             </summary>
         </member>
         <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.Owner">

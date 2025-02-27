@@ -30,6 +30,5 @@ namespace FiftyOne.IpIntelligence.TestHelpers.Data
     public interface IDataValidator
     {
         void ValidateData(IFlowData data, bool validEvidence = true);
-        void ValidateProfileIds(IFlowData data, string[] profileIds);
     }
 }

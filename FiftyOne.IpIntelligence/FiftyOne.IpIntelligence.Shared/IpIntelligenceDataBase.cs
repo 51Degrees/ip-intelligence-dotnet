@@ -143,9 +143,5 @@ namespace FiftyOne.IpIntelligence.Shared
 		/// The name of the state that the supplied location in in.
 		/// </summary>
 		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> State { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("State"); } }
-		/// <summary>
-		/// Consists of a list of ID and Weight pairs, separated by a vertical bar symbol. Each pair represents an ID of a corresponding Profile and its weight. The ID and weight are subsequently seperated by a colon: Profile1:Weight1|Profile2:Weight2...
-		/// </summary>
-		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> NetworkId { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("NetworkId"); } }
 	}
 }
