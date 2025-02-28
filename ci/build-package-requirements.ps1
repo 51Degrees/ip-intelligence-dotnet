@@ -1,5 +1,5 @@
 param(
-    [string]$ProjectDir = "FiftyOne.IpIntelligence/FiftyOne.IpIntelligence.Engine.OnPremise.Native",
+    [string]$ProjectDir = "FiftyOne.IpIntelligence/FiftyOne.IpIntelligence.Engine.OnPremise",
     [string]$Name = "Release_x64",
     [Parameter(Mandatory=$true)]
     [string]$RepoName,
