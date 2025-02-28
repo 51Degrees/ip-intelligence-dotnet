@@ -2,13 +2,6 @@
   "solution": {
     "path": "FiftyOne.IpIntelligence.sln",
     "projects": [
-      "Examples\\FiftyOne.IpIntelligence.Examples\\FiftyOne.IpIntelligence.Examples.csproj",
-      "Examples\\OnPremise\\GettingStarted-Console\\GettingStarted-Console.csproj",
-      "Examples\\OnPremise\\GettingStarted-Web\\GettingStarted-Web.csproj",
-      "Examples\\OnPremise\\Metadata-Console\\Metadata-Console.csproj",
-      "Examples\\OnPremise\\OfflineProcessing-Console\\OfflineProcessing-Console.csproj",
-      "Examples\\OnPremise\\Performance-Console\\Performance-Console.csproj",
-      "Examples\\OnPremise\\UpdateDataFile-Console\\UpdateDataFile-Console.csproj",
       "FiftyOne.IpIntelligence.Cloud\\FiftyOne.IpIntelligence.Cloud.csproj",
       "FiftyOne.IpIntelligence.Engine.OnPremise\\FiftyOne.IpIntelligence.Engine.OnPremise.csproj",
       "FiftyOne.IpIntelligence.Shared\\FiftyOne.IpIntelligence.Shared.csproj",
