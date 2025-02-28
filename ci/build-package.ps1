@@ -26,7 +26,7 @@ foreach($file in $Files){
 }
 
 ls $BinaryFilesFolder
-./dotnet/build-package-nuget.ps1 -RepoName $RepoName -ProjectDir $ProjectDir -Name $Name -Configuration $Configuration -Version $Version -SolutionName "FiftyOne.DeviceDetection.sln" `
+./dotnet/build-package-nuget.ps1 -RepoName $RepoName -ProjectDir $ProjectDir -Name $Name -Configuration $Configuration -Version $Version -SolutionName "FiftyOne.IpIntelligence.sln" `
     -CodeSigningKeyVaultUrl $Keys.CodeSigningKeyVaultUrl `
     -CodeSigningKeyVaultClientId $Keys.CodeSigningKeyVaultClientId `
     -CodeSigningKeyVaultTenantId $Keys.CodeSigningKeyVaultTenantId `
