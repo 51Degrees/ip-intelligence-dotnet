@@ -23,6 +23,9 @@
     <PackageIcon>51d-logo.png</PackageIcon>
     <NeutralLanguage>en</NeutralLanguage>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+
+    <!-- GitHub CI -->
+    <BuiltOnCI>false</BuiltOnCI>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='Debug'">
