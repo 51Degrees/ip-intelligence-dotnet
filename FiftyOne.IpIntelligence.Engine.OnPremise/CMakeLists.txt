@@ -71,7 +71,7 @@ if (RebuildSwig)
 endif()
 
 add_library(fiftyone-ipi-hash-dotnet SHARED
-    ${CMAKE_CURRENT_LIST_DIR}/../IpIntelligenceEngineSwig_csharp.cpp)
+    ${CMAKE_CURRENT_LIST_DIR}/IpIntelligenceEngineSwig_csharp.cpp)
 
 if(UNIX)
     set_target_properties(fiftyone-ipi-hash-dotnet
