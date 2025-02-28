@@ -11,39 +11,39 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OnPremise", "OnPremise", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{ECDB9D3A-5695-41C2-99D5-AB3562DA22B1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FiftyOne.IpIntelligence.Engine.OnPremise", "FiftyOne.IpIntelligence\FiftyOne.IpIntelligence.Engine.OnPremise\FiftyOne.IpIntelligence.Engine.OnPremise.csproj", "{7F0C9119-057E-4552-BCCB-3A00756154ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FiftyOne.IpIntelligence.Engine.OnPremise", "FiftyOne.IpIntelligence.Engine.OnPremise\FiftyOne.IpIntelligence.Engine.OnPremise.csproj", "{7F0C9119-057E-4552-BCCB-3A00756154ED}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FiftyOne.IpIntelligence.Shared", "FiftyOne.IpIntelligence\FiftyOne.IpIntelligence.Shared\FiftyOne.IpIntelligence.Shared.csproj", "{0D058D42-8120-43EE-9DAA-A017C8B8C935}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FiftyOne.IpIntelligence.Shared", "FiftyOne.IpIntelligence.Shared\FiftyOne.IpIntelligence.Shared.csproj", "{0D058D42-8120-43EE-9DAA-A017C8B8C935}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FiftyOne.IpIntelligence", "FiftyOne.IpIntelligence\FiftyOne.IpIntelligence\FiftyOne.IpIntelligence.csproj", "{E4F93519-34F3-48F6-9930-16F062F79EAD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FiftyOne.IpIntelligence", "FiftyOne.IpIntelligence\FiftyOne.IpIntelligence.csproj", "{E4F93519-34F3-48F6-9930-16F062F79EAD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FiftyOne.IpIntelligence.Cloud", "FiftyOne.IpIntelligence\FiftyOne.IpIntelligence.Cloud\FiftyOne.IpIntelligence.Cloud.csproj", "{2C74BAF4-73B3-4C0A-B5B2-0917BE6F6DBA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FiftyOne.IpIntelligence.Cloud", "FiftyOne.IpIntelligence.Cloud\FiftyOne.IpIntelligence.Cloud.csproj", "{2C74BAF4-73B3-4C0A-B5B2-0917BE6F6DBA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FiftyOne.IpIntelligence.Tests.Core", "FiftyOne.IpIntelligence\Tests\FiftyOne.IpIntelligence.Tests.Core\FiftyOne.IpIntelligence.Tests.Core.csproj", "{E039FAA1-583D-4D9B-9827-B84D0DFF76C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FiftyOne.IpIntelligence.Tests.Core", "Tests\FiftyOne.IpIntelligence.Tests.Core\FiftyOne.IpIntelligence.Tests.Core.csproj", "{E039FAA1-583D-4D9B-9827-B84D0DFF76C0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FiftyOne.IpIntelligence.TestHelpers", "FiftyOne.IpIntelligence\Tests\FiftyOne.IpIntelligence.TestHelpers\FiftyOne.IpIntelligence.TestHelpers.csproj", "{92AED47A-87F2-4DD3-95F0-4B5F8767A0AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FiftyOne.IpIntelligence.TestHelpers", "Tests\FiftyOne.IpIntelligence.TestHelpers\FiftyOne.IpIntelligence.TestHelpers.csproj", "{92AED47A-87F2-4DD3-95F0-4B5F8767A0AB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FiftyOne.IpIntelligence.Examples", "FiftyOne.IpIntelligence\Examples\FiftyOne.IpIntelligence.Examples\FiftyOne.IpIntelligence.Examples.csproj", "{6E062311-B25D-42F3-978F-6868CED67942}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FiftyOne.IpIntelligence.Examples", "Examples\FiftyOne.IpIntelligence.Examples\FiftyOne.IpIntelligence.Examples.csproj", "{6E062311-B25D-42F3-978F-6868CED67942}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FiftyOne.IpIntelligence.OnPremise.Tests", "FiftyOne.IpIntelligence\Tests\FiftyOne.IpIntelligence.OnPremise.Tests\FiftyOne.IpIntelligence.OnPremise.Tests.csproj", "{CFC9BCB7-1908-4413-8DEC-A2F83596192C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FiftyOne.IpIntelligence.OnPremise.Tests", "Tests\FiftyOne.IpIntelligence.OnPremise.Tests\FiftyOne.IpIntelligence.OnPremise.Tests.csproj", "{CFC9BCB7-1908-4413-8DEC-A2F83596192C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FiftyOne.IpIntelligence.CloudTests", "FiftyOne.IpIntelligence\Tests\FiftyOne.IpIntelligence.CloudTests\FiftyOne.IpIntelligence.CloudTests.csproj", "{4AC08D2B-48DD-4A36-B7F8-5FD768EDD5C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FiftyOne.IpIntelligence.CloudTests", "Tests\FiftyOne.IpIntelligence.CloudTests\FiftyOne.IpIntelligence.CloudTests.csproj", "{4AC08D2B-48DD-4A36-B7F8-5FD768EDD5C6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OnPremise", "OnPremise", "{C21687C0-CBEF-43B0-A950-2D0BF31F5B92}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GettingStarted-Console", "FiftyOne.IpIntelligence\Examples\OnPremise\GettingStarted-Console\GettingStarted-Console.csproj", "{D1EDC50D-2C53-4339-B3C3-A9B0FFD1347D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GettingStarted-Console", "Examples\OnPremise\GettingStarted-Console\GettingStarted-Console.csproj", "{D1EDC50D-2C53-4339-B3C3-A9B0FFD1347D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateDataFile-Console", "FiftyOne.IpIntelligence\Examples\OnPremise\UpdateDataFile-Console\UpdateDataFile-Console.csproj", "{FB95E20A-AB97-4799-9AC9-67D0C75769A3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateDataFile-Console", "Examples\OnPremise\UpdateDataFile-Console\UpdateDataFile-Console.csproj", "{FB95E20A-AB97-4799-9AC9-67D0C75769A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OfflineProcessing-Console", "FiftyOne.IpIntelligence\Examples\OnPremise\OfflineProcessing-Console\OfflineProcessing-Console.csproj", "{69E076B4-5D89-4342-976D-C2E09C63DDA3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OfflineProcessing-Console", "Examples\OnPremise\OfflineProcessing-Console\OfflineProcessing-Console.csproj", "{69E076B4-5D89-4342-976D-C2E09C63DDA3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Metadata-Console", "FiftyOne.IpIntelligence\Examples\OnPremise\Metadata-Console\Metadata-Console.csproj", "{95A12C9A-94F1-4E5A-A60D-AFBF92078302}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Metadata-Console", "Examples\OnPremise\Metadata-Console\Metadata-Console.csproj", "{95A12C9A-94F1-4E5A-A60D-AFBF92078302}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Performance-Console", "FiftyOne.IpIntelligence\Examples\OnPremise\Performance-Console\Performance-Console.csproj", "{78076324-C3CF-4698-A487-DF57DA0DD113}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Performance-Console", "Examples\OnPremise\Performance-Console\Performance-Console.csproj", "{78076324-C3CF-4698-A487-DF57DA0DD113}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GettingStarted-Web", "FiftyOne.IpIntelligence\Examples\OnPremise\GettingStarted-Web\GettingStarted-Web.csproj", "{3F6EF5A7-9C6E-4695-9B7B-30324CDC4066}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GettingStarted-Web", "Examples\OnPremise\GettingStarted-Web\GettingStarted-Web.csproj", "{3F6EF5A7-9C6E-4695-9B7B-30324CDC4066}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework-Web", "FiftyOne.IpIntelligence\Examples\OnPremise\Framework-Web\Framework-Web.csproj", "{8A145E60-3FAC-421B-9EBB-732F86A07395}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework-Web", "Examples\OnPremise\Framework-Web\Framework-Web.csproj", "{8A145E60-3FAC-421B-9EBB-732F86A07395}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
