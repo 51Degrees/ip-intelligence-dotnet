@@ -2,21 +2,21 @@
   "solution": {
     "path": "FiftyOne.IpIntelligence.sln",
     "projects": [
-      "FiftyOne.IpIntelligence\\Examples\\FiftyOne.IpIntelligence.Examples\\FiftyOne.IpIntelligence.Examples.csproj",
-      "FiftyOne.IpIntelligence\\Examples\\OnPremise\\GettingStarted-Console\\GettingStarted-Console.csproj",
-      "FiftyOne.IpIntelligence\\Examples\\OnPremise\\GettingStarted-Web\\GettingStarted-Web.csproj",
-      "FiftyOne.IpIntelligence\\Examples\\OnPremise\\Metadata-Console\\Metadata-Console.csproj",
-      "FiftyOne.IpIntelligence\\Examples\\OnPremise\\OfflineProcessing-Console\\OfflineProcessing-Console.csproj",
-      "FiftyOne.IpIntelligence\\Examples\\OnPremise\\Performance-Console\\Performance-Console.csproj",
-      "FiftyOne.IpIntelligence\\Examples\\OnPremise\\UpdateDataFile-Console\\UpdateDataFile-Console.csproj",
-      "FiftyOne.IpIntelligence\\FiftyOne.IpIntelligence.Cloud\\FiftyOne.IpIntelligence.Cloud.csproj",
-      "FiftyOne.IpIntelligence\\FiftyOne.IpIntelligence.Engine.OnPremise\\FiftyOne.IpIntelligence.Engine.OnPremise.csproj",
-      "FiftyOne.IpIntelligence\\FiftyOne.IpIntelligence.Shared\\FiftyOne.IpIntelligence.Shared.csproj",
-      "FiftyOne.IpIntelligence\\FiftyOne.IpIntelligence\\FiftyOne.IpIntelligence.csproj",
-      "FiftyOne.IpIntelligence\\Tests\\FiftyOne.IpIntelligence.CloudTests\\FiftyOne.IpIntelligence.CloudTests.csproj",
-      "FiftyOne.IpIntelligence\\Tests\\FiftyOne.IpIntelligence.OnPremise.Tests\\FiftyOne.IpIntelligence.OnPremise.Tests.csproj",
-      "FiftyOne.IpIntelligence\\Tests\\FiftyOne.IpIntelligence.TestHelpers\\FiftyOne.IpIntelligence.TestHelpers.csproj",
-      "FiftyOne.IpIntelligence\\Tests\\FiftyOne.IpIntelligence.Tests.Core\\FiftyOne.IpIntelligence.Tests.Core.csproj"
+      "Examples\\FiftyOne.IpIntelligence.Examples\\FiftyOne.IpIntelligence.Examples.csproj",
+      "Examples\\OnPremise\\GettingStarted-Console\\GettingStarted-Console.csproj",
+      "Examples\\OnPremise\\GettingStarted-Web\\GettingStarted-Web.csproj",
+      "Examples\\OnPremise\\Metadata-Console\\Metadata-Console.csproj",
+      "Examples\\OnPremise\\OfflineProcessing-Console\\OfflineProcessing-Console.csproj",
+      "Examples\\OnPremise\\Performance-Console\\Performance-Console.csproj",
+      "Examples\\OnPremise\\UpdateDataFile-Console\\UpdateDataFile-Console.csproj",
+      "FiftyOne.IpIntelligence.Cloud\\FiftyOne.IpIntelligence.Cloud.csproj",
+      "FiftyOne.IpIntelligence.Engine.OnPremise\\FiftyOne.IpIntelligence.Engine.OnPremise.csproj",
+      "FiftyOne.IpIntelligence.Shared\\FiftyOne.IpIntelligence.Shared.csproj",
+      "FiftyOne.IpIntelligence\\FiftyOne.IpIntelligence.csproj",
+      "Tests\\FiftyOne.IpIntelligence.CloudTests\\FiftyOne.IpIntelligence.CloudTests.csproj",
+      "Tests\\FiftyOne.IpIntelligence.OnPremise.Tests\\FiftyOne.IpIntelligence.OnPremise.Tests.csproj",
+      "Tests\\FiftyOne.IpIntelligence.TestHelpers\\FiftyOne.IpIntelligence.TestHelpers.csproj",
+      "Tests\\FiftyOne.IpIntelligence.Tests.Core\\FiftyOne.IpIntelligence.Tests.Core.csproj"
     ]
   }
 }

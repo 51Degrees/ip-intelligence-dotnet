@@ -55,7 +55,7 @@ elseif (APPLE)
 endif()
 message(STATUS "OS name: ${OS}")
 
-include(${CMAKE_CURRENT_LIST_DIR}/../ip-intelligence-cxx/CMakeLists.txt NO_POLICY_SCOPE)
+include(${CMAKE_CURRENT_LIST_DIR}/ip-intelligence-cxx/CMakeLists.txt NO_POLICY_SCOPE)
 
 if (RebuildSwig)
     find_package(SWIG 4.0 COMPONENTS csharp)
@@ -66,7 +66,7 @@ if (RebuildSwig)
     else()
         message(STATUS "Rebuilding SWIG interfaces")
         set(SRCOUT ${CMAKE_CURRENT_LIST_DIR}/Interop/Swig)
-        execute_process(COMMAND ${SWIG_EXECUTABLE} -c++ -csharp -namespace FiftyOne.IpIntelligence.Engine.OnPremise.Interop -module IpIntelligenceEngineModule -dllimport FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll -outdir ${CMAKE_CURRENT_LIST_DIR}/Interop/Swig -o ${CMAKE_CURRENT_LIST_DIR}/../IpIntelligenceEngineSwig_csharp.cpp ${CMAKE_CURRENT_LIST_DIR}/src/ipi.i)
+        execute_process(COMMAND ${SWIG_EXECUTABLE} -c++ -csharp -namespace FiftyOne.IpIntelligence.Engine.OnPremise.Interop -module IpIntelligenceEngineModule -dllimport FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll -outdir ${CMAKE_CURRENT_LIST_DIR}/Interop/Swig -o ${CMAKE_CURRENT_LIST_DIR}/IpIntelligenceEngineSwig_csharp.cpp ${CMAKE_CURRENT_LIST_DIR}/ipi_csharp.i)
     endif()
 endif()
 
