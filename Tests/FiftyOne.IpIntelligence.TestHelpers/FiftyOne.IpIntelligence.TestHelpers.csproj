@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Platforms>AnyCPU;x86;x64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\FiftyOne.IpIntelligence.Shared\FiftyOne.IpIntelligence.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- <None Include="..\..\ip-intelligence-cxx\ip-intelligence-data\20000 IP Addresses.csv" Link="20000 IP Addresses.csv">
+    	<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None> -->
+    <None Include="..\..\FiftyOne.IpIntelligence.Engine.OnPremise\ip-intelligence-cxx\ip-intelligence-data\51Degrees-LiteV4.1.ipi" Link="51Degrees-LiteV4.1.ipi">
+    	<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FiftyOne.Common.TestHelpers" Version="4.4.24" />
+    <PackageReference Include="MSTest.TestFramework" Version="3.8.2" />
+  </ItemGroup>
+
+</Project>
