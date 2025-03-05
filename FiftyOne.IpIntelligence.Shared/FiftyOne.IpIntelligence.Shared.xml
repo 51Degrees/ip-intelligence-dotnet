@@ -984,7 +984,17 @@
             Name of the IP range. This is usually the owner.
             </summary>
         </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.RegisteredName">
+            <summary>
+            Name of the IP range. This is usually the owner.
+            </summary>
+        </member>
         <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.Owner">
+            <summary>
+            Registered owner of the range.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.RegisteredOwner">
             <summary>
             Registered owner of the range.
             </summary>
@@ -1002,6 +1012,16 @@
         <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.CountryCode">
             <summary>
             The 2-character ISO 3166-1 code of the country that the supplied location is in.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.Mcc">
+            <summary>
+            Mcc.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.RegisteredCountry">
+            <summary>
+            Country code of the registered range.
             </summary>
         </member>
         <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.CountryCode3">
@@ -1154,6 +1174,16 @@
             The 3-character ISO 3166-1 alpha-3 code of the country that the supplied location is in.
             </summary>
         </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.Mcc">
+            <summary>
+            Mcc.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.RegisteredCountry">
+            <summary>
+            Country code of the registered range.
+            </summary>
+        </member>
         <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.IpRangeEnd">
             <summary>
             End of the IP range to which the evidence IP belongs.
@@ -1179,7 +1209,17 @@
             Name of the IP range. This is usually the owner.
             </summary>
         </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.RegisteredName">
+            <summary>
+            Name of the IP range. This is usually the owner.
+            </summary>
+        </member>
         <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.Owner">
+            <summary>
+            Registered owner of the range.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.RegisteredOwner">
             <summary>
             Registered owner of the range.
             </summary>

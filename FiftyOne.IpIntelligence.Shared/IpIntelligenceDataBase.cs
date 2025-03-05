@@ -80,7 +80,11 @@ namespace FiftyOne.IpIntelligence.Shared
 				{ "Region", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
 				{ "State", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
 				{ "TimeZoneOffset", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<int>>>) },
-				{ "Town", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) }
+				{ "Town", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
+				{ "RegisteredName", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
+				{ "RegisteredOwner", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
+				{ "RegisteredCountry", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
+				{ "Mcc", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
 			};
 
 		/// <summary>
@@ -107,10 +111,18 @@ namespace FiftyOne.IpIntelligence.Shared
 		/// Name of the IP range. This is usually the owner.
 		/// </summary>
 		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> Name { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("Name"); } }
+        /// <summary>
+        /// Name of the IP range. This is usually the owner.
+        /// </summary>
+        public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> RegisteredName { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("RegisteredName"); } }
 		/// <summary>
 		/// Registered owner of the range.
 		/// </summary>
 		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> Owner { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("Owner"); } }
+        /// <summary>
+        /// Registered owner of the range.
+        /// </summary>
+        public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> RegisteredOwner { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("RegisteredOwner"); } }
 		/// <summary>
 		/// Any shapes associated with the location. Usually this is the area which the IP range covers.
 		/// </summary>
@@ -123,6 +135,14 @@ namespace FiftyOne.IpIntelligence.Shared
 		/// The 2-character ISO 3166-1 code of the country that the supplied location is in.
 		/// </summary>
 		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> CountryCode { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("CountryCode"); } }
+        /// <summary>
+		/// Mcc.
+		/// </summary>
+		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> Mcc { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("Mcc"); } }
+        /// <summary>
+        /// Country code of the registered range.
+        /// </summary>
+        public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> RegisteredCountry { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("RegisteredCountry"); } }
 		/// <summary>
 		/// The 3-character ISO 3166-1 alpha-3 code of the country that the supplied location is in.
 		/// </summary>
