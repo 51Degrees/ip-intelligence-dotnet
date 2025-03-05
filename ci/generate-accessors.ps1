@@ -1,10 +1,11 @@
+param (
+    [Parameter(Mandatory)][string]$RepoName,
+    [string]$DataFile = "$PWD/$RepoName/51Degrees-EnterpriseV4.ipi"
+)
 $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
 
-./tools/ci/generate-dd-accessors.ps1
+./tools/ci/generate-accessors.ps1 @PSBoundParameters
 
-$ToolsPath = [IO.Path]::Combine($pwd, "tools")
-$DdPath = [IO.Path]::Combine($pwd, "ip-intelligence-dotnet")
-
-Copy-Item "$ToolsPath/CSharp/IIpIntelligenceData.cs" "$DdPath/FiftyOne.IpIntelligence.Data/Data/"
-Copy-Item "$ToolsPath/CSharp/IpIntelligenceDataBase.cs" "$DdPath/FiftyOne.IpIntelligence.Data/"
+Copy-Item "tools/CSharp/IIpIntelligenceData.cs" "ip-intelligence-dotnet/FiftyOne.IpIntelligence.Shared/Data/"
+Copy-Item "tools/CSharp/IpIntelligenceDataBase.cs" "ip-intelligence-dotnet/FiftyOne.IpIntelligence.Shared/"
