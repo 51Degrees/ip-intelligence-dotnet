@@ -316,7 +316,6 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
                     result.Add(property);
                 }
             }
-            result = result.Concat(GetMetricProperties()).ToList();
             return result;
         }
 
@@ -340,29 +339,7 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Reliability",
-           "CA2000:Dispose objects before losing scope",
-           Justification = "The created instances are used and disposed " +
-           "by the parent objects")]
-        private IEnumerable<IFiftyOneAspectPropertyMetaData> GetMetricProperties()
-        {
-            var dataFileList = new List<string>() { "Lite", "Premium", "Enterprise" };
-            yield return new FiftyOneAspectPropertyMetaDataIpi(
-                this,
-                "NetworkId",
-                typeof(string),
-                "IP Metrics",
-                dataFileList,
-                true,
-                _ipMetricsComponent,
-                new ValueMetaDataDefault("0:0"),
-                "Consists of a list of ID and Weight pairs, separated by " +
-                "a vertical bar symbol. Each pair represents an ID of a " +
-                "corresponding Profile and its weight. The ID and weight " +
-                "are subsequently seperated by a colon: Profile1:Weight1|Profile2:Weight2...");
-        }
-
-            private DateTime GetDataFilePublishedDate()
+        private DateTime GetDataFilePublishedDate()
         {
             if (_engine != null)
             {
