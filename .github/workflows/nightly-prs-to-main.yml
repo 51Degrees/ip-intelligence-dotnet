@@ -8,7 +8,9 @@ on:
         type: boolean
         default: false
   workflow_run:
-    workflows: [Nightly Submodule Update]
+    workflows: 
+      - Nightly Submodule Update
+      - Nightly Package Update
     types: [completed]
 
 jobs:
