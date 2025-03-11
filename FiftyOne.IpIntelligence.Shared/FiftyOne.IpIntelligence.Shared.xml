@@ -153,28 +153,6 @@
             Dispose of this instance.
             </summary>
         </member>
-        <member name="T:FiftyOne.IpIntelligence.Shared.Data.Coordinate">
-            <summary>
-            Stub for compilation
-            </summary>
-        </member>
-        <member name="P:FiftyOne.IpIntelligence.Shared.Data.Coordinate.Latitude">
-            <summary>
-            latitude
-            </summary>
-        </member>
-        <member name="P:FiftyOne.IpIntelligence.Shared.Data.Coordinate.Longitude">
-            <summary>
-            longitude
-            </summary>
-        </member>
-        <member name="M:FiftyOne.IpIntelligence.Shared.Data.Coordinate.#ctor(System.Single,System.Single)">
-            <summary>
-            Designated constructor
-            </summary>
-            <param name="lat"></param>
-            <param name="lon"></param>
-        </member>
         <member name="T:FiftyOne.IpIntelligence.Shared.Data.FiftyOneAspectPropertyMetaDataDefault">
             <summary>
             Data class that contains meta-data relating to a specific 
@@ -545,29 +523,16 @@
             <see cref="T:FiftyOne.Pipeline.Engines.Data.IAspectPropertyValue"/> instance.
             </returns>
         </member>
-        <member name="M:FiftyOne.IpIntelligence.Shared.Data.IpDataBaseOnPremise`1.GetValuesAsWeightedCoordinateList(System.String)">
-            <summary>
-            Get weighted double values this instance has for the specified property
-            </summary>
-            <param name="propertyName">
-            The name of the property to get value for.
-            </param>
-            <returns>
-            A list of <see cref="T:FiftyOne.Pipeline.Core.Data.WeightedValue`1"/> of
-            <see cref="T:System.Double"/> wrapped in a 
-            <see cref="T:FiftyOne.Pipeline.Engines.Data.IAspectPropertyValue"/> instance.
-            </returns>
-        </member>
         <member name="M:FiftyOne.IpIntelligence.Shared.Data.IpDataBaseOnPremise`1.GetValuesAsWeightedIntegerList(System.String)">
             <summary>
-            Get weighted Coordinate values this instance has for the specified property
+            Get weighted integer values this instance has for the specified property
             </summary>
             <param name="propertyName">
             The name of the property to get value for.
             </param>
             <returns>
             A list of <see cref="T:FiftyOne.Pipeline.Core.Data.WeightedValue`1"/> of
-            <see cref="T:FiftyOne.IpIntelligence.Shared.Data.Coordinate"/> wrapped in a 
+            <see cref="T:System.Int32"/> wrapped in a 
             <see cref="T:FiftyOne.Pipeline.Engines.Data.IAspectPropertyValue"/> instance.
             </returns>
         </member>
@@ -597,18 +562,6 @@
             <returns>
             A list of <see cref="T:FiftyOne.Pipeline.Core.Data.WeightedValue`1"/> of
             <see cref="T:System.Int32"/> wrapped in a 
-            <see cref="T:FiftyOne.Pipeline.Engines.Data.IAspectPropertyValue"/> instance.
-            </returns>
-        </member>
-        <member name="M:FiftyOne.IpIntelligence.Shared.Data.IpDataBaseOnPremise`1.GetValueAsCoordinate(System.String)">
-            <summary>
-            Get the Coordinate value this instance has for the specified proprety
-            </summary>
-            <param name="propertyName">
-            The name of the property to get value for.
-            </param>
-            <returns>
-            A <see cref="T:FiftyOne.IpIntelligence.Shared.Data.Coordinate"/> wrapped in a
             <see cref="T:FiftyOne.Pipeline.Engines.Data.IAspectPropertyValue"/> instance.
             </returns>
         </member>

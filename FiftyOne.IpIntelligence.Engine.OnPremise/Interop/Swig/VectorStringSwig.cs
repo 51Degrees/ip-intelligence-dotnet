@@ -10,7 +10,7 @@
 
 namespace FiftyOne.IpIntelligence.Engine.OnPremise.Interop {
 
-public class VectorStringSwig : global::System.IDisposable, global::System.Collections.IEnumerable, global::System.Collections.Generic.IList<string>
+internal class VectorStringSwig : global::System.IDisposable, global::System.Collections.IEnumerable, global::System.Collections.Generic.IList<string>
  {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
   protected bool swigCMemOwn;

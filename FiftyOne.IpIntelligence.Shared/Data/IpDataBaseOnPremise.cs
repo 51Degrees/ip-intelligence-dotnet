@@ -246,28 +246,16 @@ namespace FiftyOne.IpIntelligence.Shared.Data
         /// </returns>
         protected abstract IAspectPropertyValue<IReadOnlyList<IWeightedValue<double>>> GetValuesAsWeightedDoubleList(string propertyName);
 
-        /// <summary>
-        /// Get weighted double values this instance has for the specified property
-        /// </summary>
-        /// <param name="propertyName">
-        /// The name of the property to get value for.
-        /// </param>
-        /// <returns>
-        /// A list of <see cref="WeightedValue{T}"/> of
-        /// <see cref="double"/> wrapped in a 
-        /// <see cref="IAspectPropertyValue"/> instance.
-        /// </returns>
-        protected abstract IAspectPropertyValue<IReadOnlyList<IWeightedValue<Coordinate>>> GetValuesAsWeightedCoordinateList(string propertyName);
 
         /// <summary>
-        /// Get weighted Coordinate values this instance has for the specified property
+        /// Get weighted integer values this instance has for the specified property
         /// </summary>
         /// <param name="propertyName">
         /// The name of the property to get value for.
         /// </param>
         /// <returns>
         /// A list of <see cref="WeightedValue{T}"/> of
-        /// <see cref="Coordinate"/> wrapped in a 
+        /// <see cref="Int32"/> wrapped in a 
         /// <see cref="IAspectPropertyValue"/> instance.
         /// </returns>
         protected abstract IAspectPropertyValue<IReadOnlyList<IWeightedValue<int>>> GetValuesAsWeightedIntegerList(string propertyName);
@@ -301,18 +289,6 @@ namespace FiftyOne.IpIntelligence.Shared.Data
         /// </returns>
         protected abstract IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> GetValuesAsWeightedWKTStringList(
             string propertyName, byte decimalPlaces);
-
-        /// <summary>
-        /// Get the Coordinate value this instance has for the specified proprety
-        /// </summary>
-        /// <param name="propertyName">
-        /// The name of the property to get value for.
-        /// </param>
-        /// <returns>
-        /// A <see cref="Coordinate"/> wrapped in a
-        /// <see cref="IAspectPropertyValue"/> instance.
-        /// </returns>
-        protected abstract IAspectPropertyValue<Coordinate> GetValueAsCoordinate(string propertyName);
 
         /// <summary>
         /// Get the IP address value this instance has for the specified proprety
@@ -383,11 +359,6 @@ namespace FiftyOne.IpIntelligence.Shared.Data
                             {
                                 dict[property.Name.ToLowerInvariant()] =
                                     GetAs<AspectPropertyValue<IReadOnlyList<IWeightedValue<bool>>>>(property.Name);
-                            }
-                            else if (property.Type == typeof(Coordinate))
-                            {
-                                dict[property.Name.ToLowerInvariant()] =
-                                    GetAs<AspectPropertyValue<Coordinate>>(property.Name);
                             }
                             else if (property.Type == typeof(IPAddress))
                             {
@@ -509,15 +480,6 @@ namespace FiftyOne.IpIntelligence.Shared.Data
                             innerType == typeof(IReadOnlyList<IWeightedValue<bool>>))
                         {
                             obj = GetValuesAsWeightedBoolList(key);
-                        }
-                        else if (innerType == typeof(bool) ||
-                            innerType == typeof(IReadOnlyList<IWeightedValue<Coordinate>>))
-                        {
-                            obj = GetValuesAsWeightedCoordinateList(key);
-                        }
-                        else if (innerType == typeof(Coordinate))
-                        {
-                            obj = GetValueAsCoordinate(key);
                         }
                         else if (innerType == typeof(IPAddress))
                         {

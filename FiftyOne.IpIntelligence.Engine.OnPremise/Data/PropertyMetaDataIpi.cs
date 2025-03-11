@@ -190,9 +190,9 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
                     case "int": return typeof(int);
                     case "bool": return typeof(bool);
                     case "double": return typeof(double);
-                    case "coordinate": return typeof(Coordinate);
                     case "ipaddress": return typeof(IPAddress);
                     case "javascript": return typeof(JavaScript);
+                    case "wktstring": return typeof(WktString);
                     case "string[]": return typeof(IReadOnlyList<string>);
                     default: return typeof(string);
                 };

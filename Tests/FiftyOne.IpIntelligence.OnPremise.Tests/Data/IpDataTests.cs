@@ -100,20 +100,6 @@ namespace FiftyOne.IpIntelligence.Tests.Core.Data
                 }
             }
 
-            protected override IAspectPropertyValue<IReadOnlyList<IWeightedValue<Coordinate>>>
-                GetValuesAsWeightedCoordinateList(string propertyName)
-            {
-                if (propertyName == _testPropertyName)
-                {
-                    return new AspectPropertyValue<IReadOnlyList<IWeightedValue<Coordinate>>>(
-                        (IReadOnlyList<IWeightedValue<Coordinate>>)_value);
-                }
-                else
-                {
-                    throw new PropertyMissingException();
-                }
-            }
-
             protected override IAspectPropertyValue<IReadOnlyList<IWeightedValue<int>>> 
                 GetValuesAsWeightedIntegerList(string propertyName)
             {
@@ -149,20 +135,6 @@ namespace FiftyOne.IpIntelligence.Tests.Core.Data
                 {
                     return new AspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>(
                         (IReadOnlyList<IWeightedValue<string>>)_value);
-                }
-                else
-                {
-                    throw new PropertyMissingException();
-                }
-            }
-
-            protected override IAspectPropertyValue<Coordinate>
-                GetValueAsCoordinate(string propertyName)
-            {
-                if (propertyName == _testPropertyName)
-                {
-                    return new AspectPropertyValue<Coordinate>(
-                        (Coordinate)_value);
                 }
                 else
                 {
@@ -327,33 +299,6 @@ namespace FiftyOne.IpIntelligence.Tests.Core.Data
             IReadOnlyList<IWeightedValue<double>> expected = new List<WeightedValue<double>>();
             TestResults<IReadOnlyList<IWeightedValue<double>>> results =
                 new TestResults<IReadOnlyList<IWeightedValue<double>>>(
-                    _logger.Object,
-                    _flowData.Object.Pipeline,
-                    _engine.Object,
-                    _missingPropertyService.Object,
-                    expected);
-
-            var value = results[_testPropertyName];
-            Assert.IsTrue(value is IAspectPropertyValue);
-            Assert.IsTrue(typeof(IAspectPropertyValue).IsAssignableFrom(value.GetType()));
-            var dict = results.AsDictionary();
-            Assert.IsTrue(dict.ContainsKey(_testPropertyName));
-            var dictValue = dict[_testPropertyName];
-            Assert.IsTrue(typeof(IAspectPropertyValue).IsAssignableFrom(dictValue.GetType()));
-            Assert.AreEqual(expected, ((IAspectPropertyValue)dictValue).Value);
-        }
-
-        // <summary>
-        /// Check that a coordinate is returned from the internal results instance
-        /// using the correct get method.
-        /// </summary>
-        [TestMethod]
-        public void GetCoordinate()
-        {
-            SetupElementProperties(typeof(Coordinate));
-            Coordinate expected = new Coordinate(1, 1);
-            TestResults<Coordinate> results =
-                new TestResults<Coordinate>(
                     _logger.Object,
                     _flowData.Object.Pipeline,
                     _engine.Object,

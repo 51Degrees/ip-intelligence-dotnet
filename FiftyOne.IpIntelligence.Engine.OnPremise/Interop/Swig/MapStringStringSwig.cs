@@ -10,7 +10,7 @@
 
 namespace FiftyOne.IpIntelligence.Engine.OnPremise.Interop {
 
-public class MapStringStringSwig : global::System.IDisposable 
+internal class MapStringStringSwig : global::System.IDisposable 
     , global::System.Collections.Generic.IDictionary<string, string>
  {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;

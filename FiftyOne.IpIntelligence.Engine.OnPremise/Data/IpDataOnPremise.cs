@@ -148,28 +148,6 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
             return result;
         }
 
-        protected override IAspectPropertyValue<IReadOnlyList<IWeightedValue<Coordinate>>> GetValuesAsWeightedCoordinateList(string propertyName)
-        {
-            var result = new AspectPropertyValue<IReadOnlyList<IWeightedValue<Coordinate>>>();
-            var results = GetResultsContainingProperty(propertyName);
-
-            if (results != null)
-            {
-                using (var value = results.getValuesAsWeightedCoordinateList(propertyName))
-                {
-                    if (value.hasValue())
-                    {
-                        result.Value = new WeightedCoordinateListSwigWrapper(value.getValue());
-                    }
-                    else
-                    {
-                        result.NoValueMessage = value.getNoValueMessage();
-                    }
-                }
-            }
-            return result;
-        }
-
         protected override IAspectPropertyValue<IReadOnlyList<IWeightedValue<int>>> GetValuesAsWeightedIntegerList(string propertyName)
         {
             var result = new AspectPropertyValue<IReadOnlyList<IWeightedValue<int>>>();
@@ -252,31 +230,6 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
                     if (value.hasValue())
                     {
                         result.Value = new WeightedStringListSwigWrapper(value.getValue());
-                    }
-                    else
-                    {
-                        result.NoValueMessage = value.getNoValueMessage();
-                    }
-                }
-            }
-            return result;
-        }
-
-        protected override IAspectPropertyValue<Coordinate> GetValueAsCoordinate(string propertyName)
-        {
-            var result = new AspectPropertyValue<Coordinate>();
-            var results = GetResultsContainingProperty(propertyName);
-
-            if (results != null)
-            {
-                using (var value = results.getValueAsCoordinate(propertyName))
-                {
-                    if (value.hasValue())
-                    {
-                        using (var coordinate = value.getValue())
-                        {
-                            result.Value = new Coordinate(coordinate.lat, coordinate.lon);
-                        }
                     }
                     else
                     {
