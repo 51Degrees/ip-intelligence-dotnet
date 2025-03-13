@@ -19,6 +19,7 @@
  * in the end user terms of the application under an appropriate heading, 
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
+using System.Net;
 using FiftyOne.Pipeline.Core.Data;
 using FiftyOne.Pipeline.Core.FlowElements;
 using FiftyOne.Pipeline.Engines.Data;
@@ -70,10 +71,10 @@ namespace FiftyOne.IpIntelligence.Shared
 				{ "Country", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
 				{ "CountryCode", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
 				{ "CountryCode3", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
-				{ "IpRangeEnd", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
-				{ "IpRangeStart", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
-				{ "Latitude", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
-				{ "Longitude", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
+				{ "IpRangeEnd", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<IPAddress>>>) },
+				{ "IpRangeStart", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<IPAddress>>>) },
+				{ "Latitude", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<float>>>) },
+				{ "Longitude", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<float>>>) },
 				{ "Mcc", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
 				{ "Region", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
 				{ "RegisteredCountry", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
@@ -87,11 +88,11 @@ namespace FiftyOne.IpIntelligence.Shared
 		/// <summary>
 		/// End of the IP range to which the evidence IP belongs.
 		/// </summary>
-		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> IpRangeEnd { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("IpRangeEnd"); } }
+		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<IPAddress>>> IpRangeEnd { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<IPAddress>>>>("IpRangeEnd"); } }
 		/// <summary>
 		/// Start of the IP range to which the evidence IP belongs.
 		/// </summary>
-		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> IpRangeStart { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("IpRangeStart"); } }
+		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<IPAddress>>> IpRangeStart { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<IPAddress>>>>("IpRangeStart"); } }
 		/// <summary>
 		/// Country code of the registered range.
 		/// </summary>
@@ -127,11 +128,11 @@ namespace FiftyOne.IpIntelligence.Shared
 		/// <summary>
 		/// Average latitude of the IP. For privacy, this is randomized within around 1 mile of the result. Randomized result will change only once per day.
 		/// </summary>
-		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> Latitude { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("Latitude"); } }
+		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<float>>> Latitude { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<float>>>>("Latitude"); } }
 		/// <summary>
 		/// Average longitude of the IP. For privacy, this is randomized within around 1 mile of the result. Randomized result will change only once per day.
 		/// </summary>
-		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> Longitude { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("Longitude"); } }
+		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<float>>> Longitude { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<float>>>>("Longitude"); } }
 		/// <summary>
 		/// The name of the geographical region that the supplied location is in.
 		/// </summary>

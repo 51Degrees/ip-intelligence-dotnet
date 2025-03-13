@@ -19,6 +19,7 @@
  * in the end user terms of the application under an appropriate heading, 
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
+using System.Net;
 using FiftyOne.Pipeline.Core.Data;
 using FiftyOne.Pipeline.Engines.Data;
 using System.Collections.Generic;
@@ -56,19 +57,19 @@ namespace FiftyOne.IpIntelligence
 		/// <summary>
 		/// End of the IP range to which the evidence IP belongs.
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> IpRangeEnd { get; }
+		IAspectPropertyValue<IReadOnlyList<IWeightedValue<IPAddress>>> IpRangeEnd { get; }
 		/// <summary>
 		/// Start of the IP range to which the evidence IP belongs.
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> IpRangeStart { get; }
+		IAspectPropertyValue<IReadOnlyList<IWeightedValue<IPAddress>>> IpRangeStart { get; }
 		/// <summary>
 		/// Average latitude of the IP. For privacy, this is randomized within around 1 mile of the result. Randomized result will change only once per day.
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> Latitude { get; }
+		IAspectPropertyValue<IReadOnlyList<IWeightedValue<float>>> Latitude { get; }
 		/// <summary>
 		/// Average longitude of the IP. For privacy, this is randomized within around 1 mile of the result. Randomized result will change only once per day.
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> Longitude { get; }
+		IAspectPropertyValue<IReadOnlyList<IWeightedValue<float>>> Longitude { get; }
 		/// <summary>
 		/// The mobile country code of the network the device is connected to.
 		/// </summary>
