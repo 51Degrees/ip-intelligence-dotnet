@@ -189,10 +189,11 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
                     case "string": return typeof(string);
                     case "int": return typeof(int);
                     case "bool": return typeof(bool);
+                    case "single": return typeof(float);
                     case "double": return typeof(double);
                     case "ipaddress": return typeof(IPAddress);
                     case "javascript": return typeof(JavaScript);
-                    case "wktstring": return typeof(WktString);
+                    case "wkb": return typeof(WktString);
                     case "string[]": return typeof(IReadOnlyList<string>);
                     default: return typeof(string);
                 };
