@@ -53,18 +53,10 @@ namespace FiftyOne.IpIntelligence
 		/// The 3-character ISO 3166-1 alpha-3 code of the country that the supplied location is in.
 		/// </summary>
 		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> CountryCode3 { get; }
-        /// <summary>
-        /// Mcc.
-        /// </summary>
-        IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> Mcc { get; }
-        /// <summary>
-        /// Country code of the registered range.
-        /// </summary>
-        IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> RegisteredCountry { get; }
-        /// <summary>
-        /// End of the IP range to which the evidence IP belongs.
-        /// </summary>
-        IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> IpRangeEnd { get; }
+		/// <summary>
+		/// End of the IP range to which the evidence IP belongs.
+		/// </summary>
+		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> IpRangeEnd { get; }
 		/// <summary>
 		/// Start of the IP range to which the evidence IP belongs.
 		/// </summary>
@@ -78,25 +70,25 @@ namespace FiftyOne.IpIntelligence
 		/// </summary>
 		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> Longitude { get; }
 		/// <summary>
+		/// The mobile country code of the network the device is connected to.
+		/// </summary>
+		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> Mcc { get; }
+		/// <summary>
+		/// The name of the geographical region that the supplied location is in.
+		/// </summary>
+		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> Region { get; }
+		/// <summary>
+		/// Country code of the registered range.
+		/// </summary>
+		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> RegisteredCountry { get; }
+		/// <summary>
 		/// Name of the IP range. This is usually the owner.
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> Name { get; }
-        /// <summary>
-        /// Name of the IP range. This is usually the owner.
-        /// </summary>
-        IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> RegisteredName { get; }
-        /// <summary>
-        /// Registered owner of the range.
-        /// </summary>
-        IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> Owner { get; }
-        /// <summary>
-        /// Registered owner of the range.
-        /// </summary>
-        IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> RegisteredOwner { get; }
-        /// <summary>
-        /// The name of the geographical region that the supplied location is in.
-        /// </summary>
-        IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> Region { get; }
+		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> RegisteredName { get; }
+		/// <summary>
+		/// Registered owner of the range.
+		/// </summary>
+		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> RegisteredOwner { get; }
 		/// <summary>
 		/// The name of the state that the supplied location in in.
 		/// </summary>
