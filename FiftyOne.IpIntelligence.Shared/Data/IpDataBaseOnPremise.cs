@@ -274,6 +274,19 @@ namespace FiftyOne.IpIntelligence.Shared.Data
         protected abstract IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> GetValuesAsWeightedStringList(string propertyName);
 
         /// <summary>
+        /// Get weighted IP values this instance has for the specified property
+        /// </summary>
+        /// <param name="propertyName">
+        /// The name of the property to get value for.
+        /// </param>
+        /// <returns>
+        /// A list of <see cref="WeightedValue{T}"/> of
+        /// <see cref="IPAddress"/> wrapped in a 
+        /// <see cref="IAspectPropertyValue"/> instance.
+        /// </returns>
+        protected abstract IAspectPropertyValue<IReadOnlyList<IWeightedValue<IPAddress>>> GetValuesAsWeightedIPList(string propertyName);
+
+        /// <summary>
         /// Get weighted WKT string values this instance has for the specified property
         /// </summary>
         /// <param name="propertyName">
@@ -484,6 +497,10 @@ namespace FiftyOne.IpIntelligence.Shared.Data
                         else if (innerType == typeof(IPAddress))
                         {
                             obj = GetValueAsIpAddress(key);
+                        }
+                        else if (innerType == typeof(IReadOnlyList<IWeightedValue<IPAddress>>))
+                        {
+                            obj = GetValuesAsWeightedIPList(key);
                         }
                         else if (innerType == typeof(object))
                         {

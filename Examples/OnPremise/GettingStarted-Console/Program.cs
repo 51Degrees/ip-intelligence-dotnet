@@ -125,65 +125,89 @@ namespace FiftyOne.IpIntelligence.Examples.OnPremise.GettingStartedConsole
 
                     // TODO: Read other properties
                     {
-                        var name = ipData.Name;
+                        var ipRangeStart = ipData.IpRangeStart;
+                        if (!ipRangeStart.HasValue)
+                        {
+                            message.AppendLine($"\t{nameof(ipData.IpRangeStart)}: {ipRangeStart.NoValueMessage} - {ipRangeStart.NoValueMessage}");
+                        }
+                        else
+                        {
+                            var nameValues = string.Join(", ", ipRangeStart.Value.Select(x => $"('{x.Value}' @ {x.Weighting()})"));
+                            message.AppendLine($"\t{nameof(ipData.IpRangeStart)}  ({ipRangeStart.Value.Count}): {nameValues}");
+                        }
+                    }
+                    {
+                        var ipRangeEnd = ipData.IpRangeEnd;
+                        if (!ipRangeEnd.HasValue)
+                        {
+                            message.AppendLine($"\t{nameof(ipData.IpRangeEnd)}: {ipRangeEnd.NoValueMessage} - {ipRangeEnd.NoValueMessage}");
+                        }
+                        else
+                        {
+                            var nameValues = string.Join(", ", ipRangeEnd.Value.Select(x => $"('{x.Value}' @ {x.Weighting()})"));
+                            message.AppendLine($"\t{nameof(ipData.IpRangeEnd)}  ({ipRangeEnd.Value.Count}): {nameValues}");
+                        }
+                    }
+                    {
+                        var name = ipData.RegisteredName;
                         if (!name.HasValue)
                         {
-                            message.AppendLine($"\t{nameof(ipData.Name)}: {name.NoValueMessage} - {name.NoValueMessage}");
+                            message.AppendLine($"\t{nameof(ipData.RegisteredName)}: {name.NoValueMessage} - {name.NoValueMessage}");
                         }
                         else
                         {
                             var nameValues = string.Join(", ", name.Value.Select(x => $"('{x.Value}' @ {x.Weighting()})"));
-                            message.AppendLine($"\t{nameof(ipData.Name)}  ({name.Value.Count}): {nameValues}");
+                            message.AppendLine($"\t{nameof(ipData.RegisteredName)}  ({name.Value.Count}): {nameValues}");
                         }
                     }
-                    {
-                        var latitude = ipData.Latitude;
-                        if (!latitude.HasValue)
-                        {
-                            message.AppendLine($"\t{nameof(ipData.Latitude)}: {latitude.NoValueMessage} - {latitude.NoValueMessage}");
-                        }
-                        else
-                        {
-                            var valuesString = string.Join(", ", latitude.Value.Select(x => $"('{x.Value}' @ {x.Weighting()})"));
-                            message.AppendLine($"\t{nameof(ipData.Latitude)}  ({latitude.Value.Count}): {valuesString}");
-                        }
-                    }
-                    {
-                        var longitude = ipData.Longitude;
-                        if (!longitude.HasValue)
-                        {
-                            message.AppendLine($"\t{nameof(ipData.Longitude)}: {longitude.NoValueMessage} - {longitude.NoValueMessage}");
-                        }
-                        else
-                        {
-                            var valuesString = string.Join(", ", longitude.Value.Select(x => $"('{x.Value}' @ {x.Weighting()})"));
-                            message.AppendLine($"\t{nameof(ipData.Longitude)}  ({longitude.Value.Count}): {valuesString}");
-                        }
-                    }
-                    {
-                        var areas = ipData.Areas;
-                        if (!areas.HasValue)
-                        {
-                            message.AppendLine($"\t{nameof(ipData.Areas)}: {areas.NoValueMessage} - {areas.NoValueMessage}");
-                        }
-                        else
-                        {
-                            var valuesString = string.Join(", ", areas.Value.Select(x => $"('{x.Value}' @ {x.Weighting()})"));
-                            message.AppendLine($"\t{nameof(ipData.Areas)}  ({areas.Value.Count}): {valuesString}");
-                        }
-                    }
-                    {
-                        var accuracyRadius = ipData.AccuracyRadius;
-                        if (!accuracyRadius.HasValue)
-                        {
-                            message.AppendLine($"\t{nameof(ipData.AccuracyRadius)}: {accuracyRadius.NoValueMessage} - {accuracyRadius.NoValueMessage}");
-                        }
-                        else
-                        {
-                            var valuesString = string.Join(", ", accuracyRadius.Value.Select(x => $"('{x.Value}' @ {x.Weighting()})"));
-                            message.AppendLine($"\t{nameof(ipData.AccuracyRadius)}  ({accuracyRadius.Value.Count}): {valuesString}");
-                        }
-                    }
+                    //{
+                    //    var latitude = ipData.Latitude;
+                    //    if (!latitude.HasValue)
+                    //    {
+                    //        message.AppendLine($"\t{nameof(ipData.Latitude)}: {latitude.NoValueMessage} - {latitude.NoValueMessage}");
+                    //    }
+                    //    else
+                    //    {
+                    //        var valuesString = string.Join(", ", latitude.Value.Select(x => $"('{x.Value}' @ {x.Weighting()})"));
+                    //        message.AppendLine($"\t{nameof(ipData.Latitude)}  ({latitude.Value.Count}): {valuesString}");
+                    //    }
+                    //}
+                    //{
+                    //    var longitude = ipData.Longitude;
+                    //    if (!longitude.HasValue)
+                    //    {
+                    //        message.AppendLine($"\t{nameof(ipData.Longitude)}: {longitude.NoValueMessage} - {longitude.NoValueMessage}");
+                    //    }
+                    //    else
+                    //    {
+                    //        var valuesString = string.Join(", ", longitude.Value.Select(x => $"('{x.Value}' @ {x.Weighting()})"));
+                    //        message.AppendLine($"\t{nameof(ipData.Longitude)}  ({longitude.Value.Count}): {valuesString}");
+                    //    }
+                    //}
+                    //{
+                    //    var areas = ipData.Areas;
+                    //    if (!areas.HasValue)
+                    //    {
+                    //        message.AppendLine($"\t{nameof(ipData.Areas)}: {areas.NoValueMessage} - {areas.NoValueMessage}");
+                    //    }
+                    //    else
+                    //    {
+                    //        var valuesString = string.Join(", ", areas.Value.Select(x => $"('{x.Value}' @ {x.Weighting()})"));
+                    //        message.AppendLine($"\t{nameof(ipData.Areas)}  ({areas.Value.Count}): {valuesString}");
+                    //    }
+                    //}
+                    //{
+                    //    var accuracyRadius = ipData.AccuracyRadius;
+                    //    if (!accuracyRadius.HasValue)
+                    //    {
+                    //        message.AppendLine($"\t{nameof(ipData.AccuracyRadius)}: {accuracyRadius.NoValueMessage} - {accuracyRadius.NoValueMessage}");
+                    //    }
+                    //    else
+                    //    {
+                    //        var valuesString = string.Join(", ", accuracyRadius.Value.Select(x => $"('{x.Value}' @ {x.Weighting()})"));
+                    //        message.AppendLine($"\t{nameof(ipData.AccuracyRadius)}  ({accuracyRadius.Value.Count}): {valuesString}");
+                    //    }
+                    //}
                     output.WriteLine(message.ToString());
                 }
             }

@@ -68,7 +68,7 @@ namespace FiftyOne.IpIntelligence.Examples.OnPremise.GettingStartedWeb.Model
             // property values. These helpers handle situations such as the property missing
             // due to using a lite data file or the property not having a value because device
             // detection didn't find a match.
-            Name = deviceData.TryGetValue(d => d.Name.GetHumanReadable());
+            Name = deviceData.TryGetValue(d => d.RegisteredName.GetHumanReadable());
         }
     }
 }

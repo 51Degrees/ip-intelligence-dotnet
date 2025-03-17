@@ -217,6 +217,29 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
             return result;
         }
 
+        protected override IAspectPropertyValue<IReadOnlyList<IWeightedValue<IPAddress>>> GetValuesAsWeightedIPList(string propertyName)
+        {
+            var result = new AspectPropertyValue<IReadOnlyList<IWeightedValue<IPAddress>>>();
+            var results = GetResultsContainingProperty(propertyName);
+
+            if (results != null)
+            {
+                using (var value = results.getValuesAsWeightedStringList(propertyName))
+                {
+                    if (value.hasValue())
+                    {
+                        result.Value = new List<IWeightedValue<IPAddress>>(new WeightedStringListSwigWrapper(value.getValue())
+                            .Select(x => new WeightedValue<IPAddress>(x.RawWeighting, IPAddress.Parse(x.Value))));
+                    }
+                    else
+                    {
+                        result.NoValueMessage = value.getNoValueMessage();
+                    }
+                }
+            }
+            return result;
+        }
+
         protected override IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> GetValuesAsWeightedWKTStringList(
             string propertyName, byte decimalPlaces)
         {
