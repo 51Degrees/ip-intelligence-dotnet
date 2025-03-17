@@ -19,6 +19,7 @@
  * in the end user terms of the application under an appropriate heading, 
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
+using System.Net;
 using FiftyOne.Pipeline.Core.Data;
 using FiftyOne.Pipeline.Engines.Data;
 using System.Collections.Generic;
@@ -53,50 +54,42 @@ namespace FiftyOne.IpIntelligence
 		/// The 3-character ISO 3166-1 alpha-3 code of the country that the supplied location is in.
 		/// </summary>
 		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> CountryCode3 { get; }
-        /// <summary>
-        /// Mcc.
-        /// </summary>
-        IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> Mcc { get; }
-        /// <summary>
-        /// Country code of the registered range.
-        /// </summary>
-        IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> RegisteredCountry { get; }
-        /// <summary>
-        /// End of the IP range to which the evidence IP belongs.
-        /// </summary>
-        IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> IpRangeEnd { get; }
+		/// <summary>
+		/// End of the IP range to which the evidence IP belongs.
+		/// </summary>
+		IAspectPropertyValue<IReadOnlyList<IWeightedValue<IPAddress>>> IpRangeEnd { get; }
 		/// <summary>
 		/// Start of the IP range to which the evidence IP belongs.
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> IpRangeStart { get; }
+		IAspectPropertyValue<IReadOnlyList<IWeightedValue<IPAddress>>> IpRangeStart { get; }
 		/// <summary>
 		/// Average latitude of the IP. For privacy, this is randomized within around 1 mile of the result. Randomized result will change only once per day.
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> Latitude { get; }
+		IAspectPropertyValue<IReadOnlyList<IWeightedValue<float>>> Latitude { get; }
 		/// <summary>
 		/// Average longitude of the IP. For privacy, this is randomized within around 1 mile of the result. Randomized result will change only once per day.
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> Longitude { get; }
+		IAspectPropertyValue<IReadOnlyList<IWeightedValue<float>>> Longitude { get; }
+		/// <summary>
+		/// The mobile country code of the network the device is connected to.
+		/// </summary>
+		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> Mcc { get; }
+		/// <summary>
+		/// The name of the geographical region that the supplied location is in.
+		/// </summary>
+		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> Region { get; }
+		/// <summary>
+		/// Country code of the registered range.
+		/// </summary>
+		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> RegisteredCountry { get; }
 		/// <summary>
 		/// Name of the IP range. This is usually the owner.
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> Name { get; }
-        /// <summary>
-        /// Name of the IP range. This is usually the owner.
-        /// </summary>
-        IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> RegisteredName { get; }
-        /// <summary>
-        /// Registered owner of the range.
-        /// </summary>
-        IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> Owner { get; }
-        /// <summary>
-        /// Registered owner of the range.
-        /// </summary>
-        IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> RegisteredOwner { get; }
-        /// <summary>
-        /// The name of the geographical region that the supplied location is in.
-        /// </summary>
-        IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> Region { get; }
+		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> RegisteredName { get; }
+		/// <summary>
+		/// Registered owner of the range.
+		/// </summary>
+		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> RegisteredOwner { get; }
 		/// <summary>
 		/// The name of the state that the supplied location in in.
 		/// </summary>
