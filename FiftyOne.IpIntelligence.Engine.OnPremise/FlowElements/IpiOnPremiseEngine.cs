@@ -255,7 +255,7 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
         /// current request.
         /// </param>
         /// <param name="ipData">
-        /// The <see cref="IIpData"/> instance to populate with
+        /// The <see cref="IIpDataOnPremise"/> instance to populate with
         /// property values
         /// </param>
         /// <exception cref="ArgumentNullException">

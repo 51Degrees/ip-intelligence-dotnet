@@ -59,6 +59,18 @@ internal class ResultsIpiSwig : ResultsBaseSwig {
     return ret;
   }
 
+  public WeightedUTF8StringListValueSwig getValuesAsWeightedUTF8StringList(string propertyName) {
+    WeightedUTF8StringListValueSwig ret = new WeightedUTF8StringListValueSwig(IpIntelligenceEngineModulePINVOKE.ResultsIpiSwig_getValuesAsWeightedUTF8StringList__SWIG_0(swigCPtr, propertyName), true);
+    if (IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Pending) throw IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Retrieve();
+    return ret;
+  }
+
+  public WeightedUTF8StringListValueSwig getValuesAsWeightedUTF8StringList(int requiredPropertyIndex) {
+    WeightedUTF8StringListValueSwig ret = new WeightedUTF8StringListValueSwig(IpIntelligenceEngineModulePINVOKE.ResultsIpiSwig_getValuesAsWeightedUTF8StringList__SWIG_1(swigCPtr, requiredPropertyIndex), true);
+    if (IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Pending) throw IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Retrieve();
+    return ret;
+  }
+
   public WeightedStringListValueSwig getValuesAsWeightedWKTStringList(string propertyName, byte decimalPlaces) {
     WeightedStringListValueSwig ret = new WeightedStringListValueSwig(IpIntelligenceEngineModulePINVOKE.ResultsIpiSwig_getValuesAsWeightedWKTStringList__SWIG_0(swigCPtr, propertyName, decimalPlaces), true);
     if (IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Pending) throw IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Retrieve();

@@ -601,6 +601,122 @@ SWIGINTERN void SWIG_CSharpException(int code, const char *msg) {
 
 #include <utility>
 
+SWIGINTERN std::vector< uint8_t > *new_std_vector_Sl_uint8_t_Sg___SWIG_2(int capacity){
+        std::vector< unsigned char >* pv = 0;
+        if (capacity >= 0) {
+          pv = new std::vector< unsigned char >();
+          pv->reserve(capacity);
+       } else {
+          throw std::out_of_range("capacity");
+       }
+       return pv;
+      }
+SWIGINTERN unsigned char std_vector_Sl_uint8_t_Sg__getitemcopy(std::vector< uint8_t > *self,int index){
+        if (index>=0 && index<(int)self->size())
+          return (*self)[index];
+        else
+          throw std::out_of_range("index");
+      }
+SWIGINTERN std::vector< unsigned char >::value_type const &std_vector_Sl_uint8_t_Sg__getitem(std::vector< uint8_t > *self,int index){
+        if (index>=0 && index<(int)self->size())
+          return (*self)[index];
+        else
+          throw std::out_of_range("index");
+      }
+SWIGINTERN void std_vector_Sl_uint8_t_Sg__setitem(std::vector< uint8_t > *self,int index,unsigned char const &val){
+        if (index>=0 && index<(int)self->size())
+          (*self)[index] = val;
+        else
+          throw std::out_of_range("index");
+      }
+SWIGINTERN void std_vector_Sl_uint8_t_Sg__AddRange(std::vector< uint8_t > *self,std::vector< unsigned char > const &values){
+        self->insert(self->end(), values.begin(), values.end());
+      }
+SWIGINTERN std::vector< unsigned char > *std_vector_Sl_uint8_t_Sg__GetRange(std::vector< uint8_t > *self,int index,int count){
+        if (index < 0)
+          throw std::out_of_range("index");
+        if (count < 0)
+          throw std::out_of_range("count");
+        if (index >= (int)self->size()+1 || index+count > (int)self->size())
+          throw std::invalid_argument("invalid range");
+        return new std::vector< unsigned char >(self->begin()+index, self->begin()+index+count);
+      }
+SWIGINTERN void std_vector_Sl_uint8_t_Sg__Insert(std::vector< uint8_t > *self,int index,unsigned char const &x){
+        if (index>=0 && index<(int)self->size()+1)
+          self->insert(self->begin()+index, x);
+        else
+          throw std::out_of_range("index");
+      }
+SWIGINTERN void std_vector_Sl_uint8_t_Sg__InsertRange(std::vector< uint8_t > *self,int index,std::vector< unsigned char > const &values){
+        if (index>=0 && index<(int)self->size()+1)
+          self->insert(self->begin()+index, values.begin(), values.end());
+        else
+          throw std::out_of_range("index");
+      }
+SWIGINTERN void std_vector_Sl_uint8_t_Sg__RemoveAt(std::vector< uint8_t > *self,int index){
+        if (index>=0 && index<(int)self->size())
+          self->erase(self->begin() + index);
+        else
+          throw std::out_of_range("index");
+      }
+SWIGINTERN void std_vector_Sl_uint8_t_Sg__RemoveRange(std::vector< uint8_t > *self,int index,int count){
+        if (index < 0)
+          throw std::out_of_range("index");
+        if (count < 0)
+          throw std::out_of_range("count");
+        if (index >= (int)self->size()+1 || index+count > (int)self->size())
+          throw std::invalid_argument("invalid range");
+        self->erase(self->begin()+index, self->begin()+index+count);
+      }
+SWIGINTERN std::vector< unsigned char > *std_vector_Sl_uint8_t_Sg__Repeat(unsigned char const &value,int count){
+        if (count < 0)
+          throw std::out_of_range("count");
+        return new std::vector< unsigned char >(count, value);
+      }
+SWIGINTERN void std_vector_Sl_uint8_t_Sg__Reverse__SWIG_0(std::vector< uint8_t > *self){
+        std::reverse(self->begin(), self->end());
+      }
+SWIGINTERN void std_vector_Sl_uint8_t_Sg__Reverse__SWIG_1(std::vector< uint8_t > *self,int index,int count){
+        if (index < 0)
+          throw std::out_of_range("index");
+        if (count < 0)
+          throw std::out_of_range("count");
+        if (index >= (int)self->size()+1 || index+count > (int)self->size())
+          throw std::invalid_argument("invalid range");
+        std::reverse(self->begin()+index, self->begin()+index+count);
+      }
+SWIGINTERN void std_vector_Sl_uint8_t_Sg__SetRange(std::vector< uint8_t > *self,int index,std::vector< unsigned char > const &values){
+        if (index < 0)
+          throw std::out_of_range("index");
+        if (index+values.size() > self->size())
+          throw std::out_of_range("index");
+        std::copy(values.begin(), values.end(), self->begin()+index);
+      }
+SWIGINTERN bool std_vector_Sl_uint8_t_Sg__Contains(std::vector< uint8_t > *self,unsigned char const &value){
+        return std::find(self->begin(), self->end(), value) != self->end();
+      }
+SWIGINTERN int std_vector_Sl_uint8_t_Sg__IndexOf(std::vector< uint8_t > *self,unsigned char const &value){
+        int index = -1;
+        std::vector< unsigned char >::iterator it = std::find(self->begin(), self->end(), value);
+        if (it != self->end())
+          index = (int)(it - self->begin());
+        return index;
+      }
+SWIGINTERN int std_vector_Sl_uint8_t_Sg__LastIndexOf(std::vector< uint8_t > *self,unsigned char const &value){
+        int index = -1;
+        std::vector< unsigned char >::reverse_iterator rit = std::find(self->rbegin(), self->rend(), value);
+        if (rit != self->rend())
+          index = (int)(self->rend() - 1 - rit);
+        return index;
+      }
+SWIGINTERN bool std_vector_Sl_uint8_t_Sg__Remove(std::vector< uint8_t > *self,unsigned char const &value){
+        std::vector< unsigned char >::iterator it = std::find(self->begin(), self->end(), value);
+        if (it != self->end()) {
+          self->erase(it);
+          return true;
+        }
+        return false;
+      }
 SWIGINTERN std::vector< WeightedValue< std::string > > *new_std_vector_Sl_WeightedValue_Sl_std_string_Sg__Sg___SWIG_2(int capacity){
         std::vector< WeightedValue< std::string > >* pv = 0;
         if (capacity >= 0) {
@@ -686,6 +802,97 @@ SWIGINTERN void std_vector_Sl_WeightedValue_Sl_std_string_Sg__Sg__Reverse__SWIG_
         std::reverse(self->begin()+index, self->begin()+index+count);
       }
 SWIGINTERN void std_vector_Sl_WeightedValue_Sl_std_string_Sg__Sg__SetRange(std::vector< WeightedValue< std::string > > *self,int index,std::vector< WeightedValue< std::string > > const &values){
+        if (index < 0)
+          throw std::out_of_range("index");
+        if (index+values.size() > self->size())
+          throw std::out_of_range("index");
+        std::copy(values.begin(), values.end(), self->begin()+index);
+      }
+SWIGINTERN std::vector< WeightedValue< std::vector< uint8_t > > > *new_std_vector_Sl_WeightedValue_Sl_std_vector_Sl_uint8_t_Sg__Sg__Sg___SWIG_2(int capacity){
+        std::vector< WeightedValue< std::vector< uint8_t > > >* pv = 0;
+        if (capacity >= 0) {
+          pv = new std::vector< WeightedValue< std::vector< uint8_t > > >();
+          pv->reserve(capacity);
+       } else {
+          throw std::out_of_range("capacity");
+       }
+       return pv;
+      }
+SWIGINTERN WeightedValue< std::vector< uint8_t > > std_vector_Sl_WeightedValue_Sl_std_vector_Sl_uint8_t_Sg__Sg__Sg__getitemcopy(std::vector< WeightedValue< std::vector< uint8_t > > > *self,int index){
+        if (index>=0 && index<(int)self->size())
+          return (*self)[index];
+        else
+          throw std::out_of_range("index");
+      }
+SWIGINTERN std::vector< WeightedValue< std::vector< unsigned char > > >::value_type const &std_vector_Sl_WeightedValue_Sl_std_vector_Sl_uint8_t_Sg__Sg__Sg__getitem(std::vector< WeightedValue< std::vector< uint8_t > > > *self,int index){
+        if (index>=0 && index<(int)self->size())
+          return (*self)[index];
+        else
+          throw std::out_of_range("index");
+      }
+SWIGINTERN void std_vector_Sl_WeightedValue_Sl_std_vector_Sl_uint8_t_Sg__Sg__Sg__setitem(std::vector< WeightedValue< std::vector< uint8_t > > > *self,int index,WeightedValue< std::vector< uint8_t > > const &val){
+        if (index>=0 && index<(int)self->size())
+          (*self)[index] = val;
+        else
+          throw std::out_of_range("index");
+      }
+SWIGINTERN void std_vector_Sl_WeightedValue_Sl_std_vector_Sl_uint8_t_Sg__Sg__Sg__AddRange(std::vector< WeightedValue< std::vector< uint8_t > > > *self,std::vector< WeightedValue< std::vector< uint8_t > > > const &values){
+        self->insert(self->end(), values.begin(), values.end());
+      }
+SWIGINTERN std::vector< WeightedValue< std::vector< uint8_t > > > *std_vector_Sl_WeightedValue_Sl_std_vector_Sl_uint8_t_Sg__Sg__Sg__GetRange(std::vector< WeightedValue< std::vector< uint8_t > > > *self,int index,int count){
+        if (index < 0)
+          throw std::out_of_range("index");
+        if (count < 0)
+          throw std::out_of_range("count");
+        if (index >= (int)self->size()+1 || index+count > (int)self->size())
+          throw std::invalid_argument("invalid range");
+        return new std::vector< WeightedValue< std::vector< uint8_t > > >(self->begin()+index, self->begin()+index+count);
+      }
+SWIGINTERN void std_vector_Sl_WeightedValue_Sl_std_vector_Sl_uint8_t_Sg__Sg__Sg__Insert(std::vector< WeightedValue< std::vector< uint8_t > > > *self,int index,WeightedValue< std::vector< uint8_t > > const &x){
+        if (index>=0 && index<(int)self->size()+1)
+          self->insert(self->begin()+index, x);
+        else
+          throw std::out_of_range("index");
+      }
+SWIGINTERN void std_vector_Sl_WeightedValue_Sl_std_vector_Sl_uint8_t_Sg__Sg__Sg__InsertRange(std::vector< WeightedValue< std::vector< uint8_t > > > *self,int index,std::vector< WeightedValue< std::vector< uint8_t > > > const &values){
+        if (index>=0 && index<(int)self->size()+1)
+          self->insert(self->begin()+index, values.begin(), values.end());
+        else
+          throw std::out_of_range("index");
+      }
+SWIGINTERN void std_vector_Sl_WeightedValue_Sl_std_vector_Sl_uint8_t_Sg__Sg__Sg__RemoveAt(std::vector< WeightedValue< std::vector< uint8_t > > > *self,int index){
+        if (index>=0 && index<(int)self->size())
+          self->erase(self->begin() + index);
+        else
+          throw std::out_of_range("index");
+      }
+SWIGINTERN void std_vector_Sl_WeightedValue_Sl_std_vector_Sl_uint8_t_Sg__Sg__Sg__RemoveRange(std::vector< WeightedValue< std::vector< uint8_t > > > *self,int index,int count){
+        if (index < 0)
+          throw std::out_of_range("index");
+        if (count < 0)
+          throw std::out_of_range("count");
+        if (index >= (int)self->size()+1 || index+count > (int)self->size())
+          throw std::invalid_argument("invalid range");
+        self->erase(self->begin()+index, self->begin()+index+count);
+      }
+SWIGINTERN std::vector< WeightedValue< std::vector< uint8_t > > > *std_vector_Sl_WeightedValue_Sl_std_vector_Sl_uint8_t_Sg__Sg__Sg__Repeat(WeightedValue< std::vector< uint8_t > > const &value,int count){
+        if (count < 0)
+          throw std::out_of_range("count");
+        return new std::vector< WeightedValue< std::vector< uint8_t > > >(count, value);
+      }
+SWIGINTERN void std_vector_Sl_WeightedValue_Sl_std_vector_Sl_uint8_t_Sg__Sg__Sg__Reverse__SWIG_0(std::vector< WeightedValue< std::vector< uint8_t > > > *self){
+        std::reverse(self->begin(), self->end());
+      }
+SWIGINTERN void std_vector_Sl_WeightedValue_Sl_std_vector_Sl_uint8_t_Sg__Sg__Sg__Reverse__SWIG_1(std::vector< WeightedValue< std::vector< uint8_t > > > *self,int index,int count){
+        if (index < 0)
+          throw std::out_of_range("index");
+        if (count < 0)
+          throw std::out_of_range("count");
+        if (index >= (int)self->size()+1 || index+count > (int)self->size())
+          throw std::invalid_argument("invalid range");
+        std::reverse(self->begin()+index, self->begin()+index+count);
+      }
+SWIGINTERN void std_vector_Sl_WeightedValue_Sl_std_vector_Sl_uint8_t_Sg__Sg__Sg__SetRange(std::vector< WeightedValue< std::vector< uint8_t > > > *self,int index,std::vector< WeightedValue< std::vector< uint8_t > > > const &values){
         if (index < 0)
           throw std::out_of_range("index");
         if (index+values.size() > self->size())
@@ -9316,6 +9523,1750 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPrem
 }
 
 
+SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_new_UTF8StringSwig__SWIG_0___() {
+  void * jresult ;
+  std::vector< uint8_t > *result = 0 ;
+  
+  {
+    try {
+      result = (std::vector< uint8_t > *)new std::vector< uint8_t >();;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_new_UTF8StringSwig__SWIG_1___(void * jarg1) {
+  void * jresult ;
+  std::vector< uint8_t > *arg1 = 0 ;
+  std::vector< uint8_t > *result = 0 ;
+  
+  arg1 = (std::vector< uint8_t > *)jarg1;
+  if (!arg1) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "std::vector< uint8_t > const & is null", 0);
+    return 0;
+  } 
+  {
+    try {
+      result = (std::vector< uint8_t > *)new std::vector< uint8_t >((std::vector< uint8_t > const &)*arg1);;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_UTF8StringSwig_Clear___(void * jarg1) {
+  std::vector< uint8_t > *arg1 = (std::vector< uint8_t > *) 0 ;
+  
+  arg1 = (std::vector< uint8_t > *)jarg1; 
+  {
+    try {
+      (arg1)->clear();;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return ; 
+      };
+    }
+  }
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_UTF8StringSwig_Add___(void * jarg1, unsigned char jarg2) {
+  std::vector< uint8_t > *arg1 = (std::vector< uint8_t > *) 0 ;
+  unsigned char *arg2 = 0 ;
+  unsigned char temp2 ;
+  
+  arg1 = (std::vector< uint8_t > *)jarg1; 
+  temp2 = (unsigned char)jarg2; 
+  arg2 = &temp2; 
+  {
+    try {
+      (arg1)->push_back((unsigned char const &)*arg2);;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return ; 
+      };
+    }
+  }
+}
+
+
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_UTF8StringSwig_size___(void * jarg1) {
+  unsigned int jresult ;
+  std::vector< uint8_t > *arg1 = (std::vector< uint8_t > *) 0 ;
+  std::vector< unsigned char >::size_type result;
+  
+  arg1 = (std::vector< uint8_t > *)jarg1; 
+  {
+    try {
+      result = ((std::vector< uint8_t > const *)arg1)->size();;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = (unsigned int)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_UTF8StringSwig_empty___(void * jarg1) {
+  unsigned int jresult ;
+  std::vector< uint8_t > *arg1 = (std::vector< uint8_t > *) 0 ;
+  bool result;
+  
+  arg1 = (std::vector< uint8_t > *)jarg1; 
+  {
+    try {
+      result = (bool)((std::vector< uint8_t > const *)arg1)->empty();;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_UTF8StringSwig_capacity___(void * jarg1) {
+  unsigned int jresult ;
+  std::vector< uint8_t > *arg1 = (std::vector< uint8_t > *) 0 ;
+  std::vector< unsigned char >::size_type result;
+  
+  arg1 = (std::vector< uint8_t > *)jarg1; 
+  {
+    try {
+      result = ((std::vector< uint8_t > const *)arg1)->capacity();;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = (unsigned int)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_UTF8StringSwig_reserve___(void * jarg1, unsigned int jarg2) {
+  std::vector< uint8_t > *arg1 = (std::vector< uint8_t > *) 0 ;
+  std::vector< unsigned char >::size_type arg2 ;
+  
+  arg1 = (std::vector< uint8_t > *)jarg1; 
+  arg2 = (std::vector< unsigned char >::size_type)jarg2; 
+  {
+    try {
+      (arg1)->reserve(SWIG_STD_MOVE(arg2));;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return ; 
+      };
+    }
+  }
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_new_UTF8StringSwig__SWIG_2___(int jarg1) {
+  void * jresult ;
+  int arg1 ;
+  std::vector< uint8_t > *result = 0 ;
+  
+  arg1 = (int)jarg1; 
+  {
+    try {
+      try {
+        result = (std::vector< uint8_t > *)new_std_vector_Sl_uint8_t_Sg___SWIG_2(arg1);
+      } catch(std::out_of_range &_e) {
+        SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
+        return 0;
+      };
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT unsigned char SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_UTF8StringSwig_getitemcopy___(void * jarg1, int jarg2) {
+  unsigned char jresult ;
+  std::vector< uint8_t > *arg1 = (std::vector< uint8_t > *) 0 ;
+  int arg2 ;
+  unsigned char result;
+  
+  arg1 = (std::vector< uint8_t > *)jarg1; 
+  arg2 = (int)jarg2; 
+  {
+    try {
+      try {
+        result = (unsigned char)std_vector_Sl_uint8_t_Sg__getitemcopy(arg1,arg2);
+      } catch(std::out_of_range &_e) {
+        SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
+        return 0;
+      };
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT unsigned char SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_UTF8StringSwig_getitem___(void * jarg1, int jarg2) {
+  unsigned char jresult ;
+  std::vector< uint8_t > *arg1 = (std::vector< uint8_t > *) 0 ;
+  int arg2 ;
+  std::vector< unsigned char >::value_type *result = 0 ;
+  
+  arg1 = (std::vector< uint8_t > *)jarg1; 
+  arg2 = (int)jarg2; 
+  {
+    try {
+      try {
+        result = (std::vector< unsigned char >::value_type *) &std_vector_Sl_uint8_t_Sg__getitem(arg1,arg2);
+      } catch(std::out_of_range &_e) {
+        SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
+        return 0;
+      };
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = *result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_UTF8StringSwig_setitem___(void * jarg1, int jarg2, unsigned char jarg3) {
+  std::vector< uint8_t > *arg1 = (std::vector< uint8_t > *) 0 ;
+  int arg2 ;
+  unsigned char *arg3 = 0 ;
+  unsigned char temp3 ;
+  
+  arg1 = (std::vector< uint8_t > *)jarg1; 
+  arg2 = (int)jarg2; 
+  temp3 = (unsigned char)jarg3; 
+  arg3 = &temp3; 
+  {
+    try {
+      try {
+        std_vector_Sl_uint8_t_Sg__setitem(arg1,arg2,(unsigned char const &)*arg3);
+      } catch(std::out_of_range &_e) {
+        SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
+        return ;
+      };
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return ; 
+      };
+    }
+  }
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_UTF8StringSwig_AddRange___(void * jarg1, void * jarg2) {
+  std::vector< uint8_t > *arg1 = (std::vector< uint8_t > *) 0 ;
+  std::vector< unsigned char > *arg2 = 0 ;
+  
+  arg1 = (std::vector< uint8_t > *)jarg1; 
+  arg2 = (std::vector< unsigned char > *)jarg2;
+  if (!arg2) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "std::vector< unsigned char > const & is null", 0);
+    return ;
+  } 
+  {
+    try {
+      std_vector_Sl_uint8_t_Sg__AddRange(arg1,(std::vector< unsigned char > const &)*arg2);;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return ; 
+      };
+    }
+  }
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_UTF8StringSwig_GetRange___(void * jarg1, int jarg2, int jarg3) {
+  void * jresult ;
+  std::vector< uint8_t > *arg1 = (std::vector< uint8_t > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  std::vector< unsigned char > *result = 0 ;
+  
+  arg1 = (std::vector< uint8_t > *)jarg1; 
+  arg2 = (int)jarg2; 
+  arg3 = (int)jarg3; 
+  {
+    try {
+      try {
+        result = (std::vector< unsigned char > *)std_vector_Sl_uint8_t_Sg__GetRange(arg1,arg2,arg3);
+      } catch(std::out_of_range &_e) {
+        SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
+        return 0;
+      } catch(std::invalid_argument &_e) {
+        SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentException, (&_e)->what(), "");
+        return 0;
+      };
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_UTF8StringSwig_Insert___(void * jarg1, int jarg2, unsigned char jarg3) {
+  std::vector< uint8_t > *arg1 = (std::vector< uint8_t > *) 0 ;
+  int arg2 ;
+  unsigned char *arg3 = 0 ;
+  unsigned char temp3 ;
+  
+  arg1 = (std::vector< uint8_t > *)jarg1; 
+  arg2 = (int)jarg2; 
+  temp3 = (unsigned char)jarg3; 
+  arg3 = &temp3; 
+  {
+    try {
+      try {
+        std_vector_Sl_uint8_t_Sg__Insert(arg1,arg2,(unsigned char const &)*arg3);
+      } catch(std::out_of_range &_e) {
+        SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
+        return ;
+      };
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return ; 
+      };
+    }
+  }
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_UTF8StringSwig_InsertRange___(void * jarg1, int jarg2, void * jarg3) {
+  std::vector< uint8_t > *arg1 = (std::vector< uint8_t > *) 0 ;
+  int arg2 ;
+  std::vector< unsigned char > *arg3 = 0 ;
+  
+  arg1 = (std::vector< uint8_t > *)jarg1; 
+  arg2 = (int)jarg2; 
+  arg3 = (std::vector< unsigned char > *)jarg3;
+  if (!arg3) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "std::vector< unsigned char > const & is null", 0);
+    return ;
+  } 
+  {
+    try {
+      try {
+        std_vector_Sl_uint8_t_Sg__InsertRange(arg1,arg2,(std::vector< unsigned char > const &)*arg3);
+      } catch(std::out_of_range &_e) {
+        SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
+        return ;
+      };
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return ; 
+      };
+    }
+  }
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_UTF8StringSwig_RemoveAt___(void * jarg1, int jarg2) {
+  std::vector< uint8_t > *arg1 = (std::vector< uint8_t > *) 0 ;
+  int arg2 ;
+  
+  arg1 = (std::vector< uint8_t > *)jarg1; 
+  arg2 = (int)jarg2; 
+  {
+    try {
+      try {
+        std_vector_Sl_uint8_t_Sg__RemoveAt(arg1,arg2);
+      } catch(std::out_of_range &_e) {
+        SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
+        return ;
+      };
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return ; 
+      };
+    }
+  }
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_UTF8StringSwig_RemoveRange___(void * jarg1, int jarg2, int jarg3) {
+  std::vector< uint8_t > *arg1 = (std::vector< uint8_t > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  
+  arg1 = (std::vector< uint8_t > *)jarg1; 
+  arg2 = (int)jarg2; 
+  arg3 = (int)jarg3; 
+  {
+    try {
+      try {
+        std_vector_Sl_uint8_t_Sg__RemoveRange(arg1,arg2,arg3);
+      } catch(std::out_of_range &_e) {
+        SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
+        return ;
+      } catch(std::invalid_argument &_e) {
+        SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentException, (&_e)->what(), "");
+        return ;
+      };
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return ; 
+      };
+    }
+  }
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_UTF8StringSwig_Repeat___(unsigned char jarg1, int jarg2) {
+  void * jresult ;
+  unsigned char *arg1 = 0 ;
+  int arg2 ;
+  unsigned char temp1 ;
+  std::vector< unsigned char > *result = 0 ;
+  
+  temp1 = (unsigned char)jarg1; 
+  arg1 = &temp1; 
+  arg2 = (int)jarg2; 
+  {
+    try {
+      try {
+        result = (std::vector< unsigned char > *)std_vector_Sl_uint8_t_Sg__Repeat((unsigned char const &)*arg1,arg2);
+      } catch(std::out_of_range &_e) {
+        SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
+        return 0;
+      };
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_UTF8StringSwig_Reverse__SWIG_0___(void * jarg1) {
+  std::vector< uint8_t > *arg1 = (std::vector< uint8_t > *) 0 ;
+  
+  arg1 = (std::vector< uint8_t > *)jarg1; 
+  {
+    try {
+      std_vector_Sl_uint8_t_Sg__Reverse__SWIG_0(arg1);;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return ; 
+      };
+    }
+  }
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_UTF8StringSwig_Reverse__SWIG_1___(void * jarg1, int jarg2, int jarg3) {
+  std::vector< uint8_t > *arg1 = (std::vector< uint8_t > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  
+  arg1 = (std::vector< uint8_t > *)jarg1; 
+  arg2 = (int)jarg2; 
+  arg3 = (int)jarg3; 
+  {
+    try {
+      try {
+        std_vector_Sl_uint8_t_Sg__Reverse__SWIG_1(arg1,arg2,arg3);
+      } catch(std::out_of_range &_e) {
+        SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
+        return ;
+      } catch(std::invalid_argument &_e) {
+        SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentException, (&_e)->what(), "");
+        return ;
+      };
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return ; 
+      };
+    }
+  }
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_UTF8StringSwig_SetRange___(void * jarg1, int jarg2, void * jarg3) {
+  std::vector< uint8_t > *arg1 = (std::vector< uint8_t > *) 0 ;
+  int arg2 ;
+  std::vector< unsigned char > *arg3 = 0 ;
+  
+  arg1 = (std::vector< uint8_t > *)jarg1; 
+  arg2 = (int)jarg2; 
+  arg3 = (std::vector< unsigned char > *)jarg3;
+  if (!arg3) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "std::vector< unsigned char > const & is null", 0);
+    return ;
+  } 
+  {
+    try {
+      try {
+        std_vector_Sl_uint8_t_Sg__SetRange(arg1,arg2,(std::vector< unsigned char > const &)*arg3);
+      } catch(std::out_of_range &_e) {
+        SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
+        return ;
+      };
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return ; 
+      };
+    }
+  }
+}
+
+
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_UTF8StringSwig_Contains___(void * jarg1, unsigned char jarg2) {
+  unsigned int jresult ;
+  std::vector< uint8_t > *arg1 = (std::vector< uint8_t > *) 0 ;
+  unsigned char *arg2 = 0 ;
+  unsigned char temp2 ;
+  bool result;
+  
+  arg1 = (std::vector< uint8_t > *)jarg1; 
+  temp2 = (unsigned char)jarg2; 
+  arg2 = &temp2; 
+  {
+    try {
+      result = (bool)std_vector_Sl_uint8_t_Sg__Contains(arg1,(unsigned char const &)*arg2);;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT int SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_UTF8StringSwig_IndexOf___(void * jarg1, unsigned char jarg2) {
+  int jresult ;
+  std::vector< uint8_t > *arg1 = (std::vector< uint8_t > *) 0 ;
+  unsigned char *arg2 = 0 ;
+  unsigned char temp2 ;
+  int result;
+  
+  arg1 = (std::vector< uint8_t > *)jarg1; 
+  temp2 = (unsigned char)jarg2; 
+  arg2 = &temp2; 
+  {
+    try {
+      result = (int)std_vector_Sl_uint8_t_Sg__IndexOf(arg1,(unsigned char const &)*arg2);;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT int SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_UTF8StringSwig_LastIndexOf___(void * jarg1, unsigned char jarg2) {
+  int jresult ;
+  std::vector< uint8_t > *arg1 = (std::vector< uint8_t > *) 0 ;
+  unsigned char *arg2 = 0 ;
+  unsigned char temp2 ;
+  int result;
+  
+  arg1 = (std::vector< uint8_t > *)jarg1; 
+  temp2 = (unsigned char)jarg2; 
+  arg2 = &temp2; 
+  {
+    try {
+      result = (int)std_vector_Sl_uint8_t_Sg__LastIndexOf(arg1,(unsigned char const &)*arg2);;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_UTF8StringSwig_Remove___(void * jarg1, unsigned char jarg2) {
+  unsigned int jresult ;
+  std::vector< uint8_t > *arg1 = (std::vector< uint8_t > *) 0 ;
+  unsigned char *arg2 = 0 ;
+  unsigned char temp2 ;
+  bool result;
+  
+  arg1 = (std::vector< uint8_t > *)jarg1; 
+  temp2 = (unsigned char)jarg2; 
+  arg2 = &temp2; 
+  {
+    try {
+      result = (bool)std_vector_Sl_uint8_t_Sg__Remove(arg1,(unsigned char const &)*arg2);;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_delete_UTF8StringSwig___(void * jarg1) {
+  std::vector< uint8_t > *arg1 = (std::vector< uint8_t > *) 0 ;
+  
+  arg1 = (std::vector< uint8_t > *)jarg1; 
+  {
+    try {
+      delete arg1;;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return ; 
+      };
+    }
+  }
+}
+
+
 SWIGEXPORT const char * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueStringSwig_getValue___(void * jarg1) {
   const char * jresult ;
   WeightedValue< std::string > *arg1 = (WeightedValue< std::string > *) 0 ;
@@ -9625,6 +11576,370 @@ SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInte
   WeightedValue< std::string > *arg1 = (WeightedValue< std::string > *) 0 ;
   
   arg1 = (WeightedValue< std::string > *)jarg1; 
+  {
+    try {
+      delete arg1;;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return ; 
+      };
+    }
+  }
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueUTF8StringSwig_getValue___(void * jarg1) {
+  void * jresult ;
+  WeightedValue< std::vector< uint8_t > > *arg1 = (WeightedValue< std::vector< uint8_t > > *) 0 ;
+  std::vector< uint8_t > result;
+  
+  arg1 = (WeightedValue< std::vector< uint8_t > > *)jarg1; 
+  {
+    try {
+      result = (arg1)->getValue();;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = new std::vector< uint8_t >(result); 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueUTF8StringSwig_setValue___(void * jarg1, void * jarg2) {
+  WeightedValue< std::vector< uint8_t > > *arg1 = (WeightedValue< std::vector< uint8_t > > *) 0 ;
+  std::vector< uint8_t > arg2 ;
+  std::vector< uint8_t > *argp2 ;
+  
+  arg1 = (WeightedValue< std::vector< uint8_t > > *)jarg1; 
+  argp2 = (std::vector< uint8_t > *)jarg2; 
+  if (!argp2) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "Attempt to dereference null std::vector< uint8_t >", 0);
+    return ;
+  }
+  arg2 = *argp2; 
+  {
+    try {
+      (arg1)->setValue(SWIG_STD_MOVE(arg2));;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return ; 
+      };
+    }
+  }
+}
+
+
+SWIGEXPORT float SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueUTF8StringSwig_getWeight___(void * jarg1) {
+  float jresult ;
+  WeightedValue< std::vector< uint8_t > > *arg1 = (WeightedValue< std::vector< uint8_t > > *) 0 ;
+  float result;
+  
+  arg1 = (WeightedValue< std::vector< uint8_t > > *)jarg1; 
+  {
+    try {
+      result = (float)(arg1)->getWeight();;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT unsigned short SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueUTF8StringSwig_getRawWeight___(void * jarg1) {
+  unsigned short jresult ;
+  WeightedValue< std::vector< uint8_t > > *arg1 = (WeightedValue< std::vector< uint8_t > > *) 0 ;
+  uint16_t result;
+  
+  arg1 = (WeightedValue< std::vector< uint8_t > > *)jarg1; 
+  {
+    try {
+      result = (uint16_t)(arg1)->getRawWeight();;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueUTF8StringSwig_setRawWeight___(void * jarg1, unsigned short jarg2) {
+  WeightedValue< std::vector< uint8_t > > *arg1 = (WeightedValue< std::vector< uint8_t > > *) 0 ;
+  uint16_t arg2 ;
+  
+  arg1 = (WeightedValue< std::vector< uint8_t > > *)jarg1; 
+  arg2 = (uint16_t)jarg2; 
+  {
+    try {
+      (arg1)->setRawWeight(arg2);;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return ; 
+      };
+    }
+  }
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_delete_WeightedValueUTF8StringSwig___(void * jarg1) {
+  WeightedValue< std::vector< uint8_t > > *arg1 = (WeightedValue< std::vector< uint8_t > > *) 0 ;
+  
+  arg1 = (WeightedValue< std::vector< uint8_t > > *)jarg1; 
   {
     try {
       delete arg1;;
@@ -12494,6 +14809,1498 @@ SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInte
   std::vector< WeightedValue< std::string > > *arg1 = (std::vector< WeightedValue< std::string > > *) 0 ;
   
   arg1 = (std::vector< WeightedValue< std::string > > *)jarg1; 
+  {
+    try {
+      delete arg1;;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return ; 
+      };
+    }
+  }
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_new_WeightedUTF8StringListSwig__SWIG_0___() {
+  void * jresult ;
+  std::vector< WeightedValue< std::vector< uint8_t > > > *result = 0 ;
+  
+  {
+    try {
+      result = (std::vector< WeightedValue< std::vector< uint8_t > > > *)new std::vector< WeightedValue< std::vector< uint8_t > > >();;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_new_WeightedUTF8StringListSwig__SWIG_1___(void * jarg1) {
+  void * jresult ;
+  std::vector< WeightedValue< std::vector< uint8_t > > > *arg1 = 0 ;
+  std::vector< WeightedValue< std::vector< uint8_t > > > *result = 0 ;
+  
+  arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *)jarg1;
+  if (!arg1) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "std::vector< WeightedValue< std::vector< uint8_t > > > const & is null", 0);
+    return 0;
+  } 
+  {
+    try {
+      result = (std::vector< WeightedValue< std::vector< uint8_t > > > *)new std::vector< WeightedValue< std::vector< uint8_t > > >((std::vector< WeightedValue< std::vector< uint8_t > > > const &)*arg1);;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedUTF8StringListSwig_Clear___(void * jarg1) {
+  std::vector< WeightedValue< std::vector< uint8_t > > > *arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *) 0 ;
+  
+  arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *)jarg1; 
+  {
+    try {
+      (arg1)->clear();;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return ; 
+      };
+    }
+  }
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedUTF8StringListSwig_Add___(void * jarg1, void * jarg2) {
+  std::vector< WeightedValue< std::vector< uint8_t > > > *arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *) 0 ;
+  WeightedValue< std::vector< uint8_t > > *arg2 = 0 ;
+  
+  arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *)jarg1; 
+  arg2 = (WeightedValue< std::vector< uint8_t > > *)jarg2;
+  if (!arg2) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "WeightedValue< std::vector< uint8_t > > const & is null", 0);
+    return ;
+  } 
+  {
+    try {
+      (arg1)->push_back((WeightedValue< std::vector< uint8_t > > const &)*arg2);;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return ; 
+      };
+    }
+  }
+}
+
+
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedUTF8StringListSwig_size___(void * jarg1) {
+  unsigned int jresult ;
+  std::vector< WeightedValue< std::vector< uint8_t > > > *arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *) 0 ;
+  std::vector< WeightedValue< std::vector< unsigned char > > >::size_type result;
+  
+  arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *)jarg1; 
+  {
+    try {
+      result = ((std::vector< WeightedValue< std::vector< uint8_t > > > const *)arg1)->size();;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = (unsigned int)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedUTF8StringListSwig_empty___(void * jarg1) {
+  unsigned int jresult ;
+  std::vector< WeightedValue< std::vector< uint8_t > > > *arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *) 0 ;
+  bool result;
+  
+  arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *)jarg1; 
+  {
+    try {
+      result = (bool)((std::vector< WeightedValue< std::vector< uint8_t > > > const *)arg1)->empty();;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedUTF8StringListSwig_capacity___(void * jarg1) {
+  unsigned int jresult ;
+  std::vector< WeightedValue< std::vector< uint8_t > > > *arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *) 0 ;
+  std::vector< WeightedValue< std::vector< unsigned char > > >::size_type result;
+  
+  arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *)jarg1; 
+  {
+    try {
+      result = ((std::vector< WeightedValue< std::vector< uint8_t > > > const *)arg1)->capacity();;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = (unsigned int)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedUTF8StringListSwig_reserve___(void * jarg1, unsigned int jarg2) {
+  std::vector< WeightedValue< std::vector< uint8_t > > > *arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *) 0 ;
+  std::vector< WeightedValue< std::vector< unsigned char > > >::size_type arg2 ;
+  
+  arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *)jarg1; 
+  arg2 = (std::vector< WeightedValue< std::vector< unsigned char > > >::size_type)jarg2; 
+  {
+    try {
+      (arg1)->reserve(SWIG_STD_MOVE(arg2));;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return ; 
+      };
+    }
+  }
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_new_WeightedUTF8StringListSwig__SWIG_2___(int jarg1) {
+  void * jresult ;
+  int arg1 ;
+  std::vector< WeightedValue< std::vector< uint8_t > > > *result = 0 ;
+  
+  arg1 = (int)jarg1; 
+  {
+    try {
+      try {
+        result = (std::vector< WeightedValue< std::vector< uint8_t > > > *)new_std_vector_Sl_WeightedValue_Sl_std_vector_Sl_uint8_t_Sg__Sg__Sg___SWIG_2(arg1);
+      } catch(std::out_of_range &_e) {
+        SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
+        return 0;
+      };
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedUTF8StringListSwig_getitemcopy___(void * jarg1, int jarg2) {
+  void * jresult ;
+  std::vector< WeightedValue< std::vector< uint8_t > > > *arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *) 0 ;
+  int arg2 ;
+  WeightedValue< std::vector< uint8_t > > result;
+  
+  arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *)jarg1; 
+  arg2 = (int)jarg2; 
+  {
+    try {
+      try {
+        result = std_vector_Sl_WeightedValue_Sl_std_vector_Sl_uint8_t_Sg__Sg__Sg__getitemcopy(arg1,arg2);
+      } catch(std::out_of_range &_e) {
+        SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
+        return 0;
+      };
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = new WeightedValue< std::vector< uint8_t > >(result); 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedUTF8StringListSwig_getitem___(void * jarg1, int jarg2) {
+  void * jresult ;
+  std::vector< WeightedValue< std::vector< uint8_t > > > *arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *) 0 ;
+  int arg2 ;
+  std::vector< WeightedValue< std::vector< unsigned char > > >::value_type *result = 0 ;
+  
+  arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *)jarg1; 
+  arg2 = (int)jarg2; 
+  {
+    try {
+      try {
+        result = (std::vector< WeightedValue< std::vector< unsigned char > > >::value_type *) &std_vector_Sl_WeightedValue_Sl_std_vector_Sl_uint8_t_Sg__Sg__Sg__getitem(arg1,arg2);
+      } catch(std::out_of_range &_e) {
+        SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
+        return 0;
+      };
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedUTF8StringListSwig_setitem___(void * jarg1, int jarg2, void * jarg3) {
+  std::vector< WeightedValue< std::vector< uint8_t > > > *arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *) 0 ;
+  int arg2 ;
+  WeightedValue< std::vector< uint8_t > > *arg3 = 0 ;
+  
+  arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *)jarg1; 
+  arg2 = (int)jarg2; 
+  arg3 = (WeightedValue< std::vector< uint8_t > > *)jarg3;
+  if (!arg3) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "WeightedValue< std::vector< uint8_t > > const & is null", 0);
+    return ;
+  } 
+  {
+    try {
+      try {
+        std_vector_Sl_WeightedValue_Sl_std_vector_Sl_uint8_t_Sg__Sg__Sg__setitem(arg1,arg2,(WeightedValue< std::vector< unsigned char > > const &)*arg3);
+      } catch(std::out_of_range &_e) {
+        SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
+        return ;
+      };
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return ; 
+      };
+    }
+  }
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedUTF8StringListSwig_AddRange___(void * jarg1, void * jarg2) {
+  std::vector< WeightedValue< std::vector< uint8_t > > > *arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *) 0 ;
+  std::vector< WeightedValue< std::vector< uint8_t > > > *arg2 = 0 ;
+  
+  arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *)jarg1; 
+  arg2 = (std::vector< WeightedValue< std::vector< uint8_t > > > *)jarg2;
+  if (!arg2) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "std::vector< WeightedValue< std::vector< uint8_t > > > const & is null", 0);
+    return ;
+  } 
+  {
+    try {
+      std_vector_Sl_WeightedValue_Sl_std_vector_Sl_uint8_t_Sg__Sg__Sg__AddRange(arg1,(std::vector< WeightedValue< std::vector< unsigned char > > > const &)*arg2);;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return ; 
+      };
+    }
+  }
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedUTF8StringListSwig_GetRange___(void * jarg1, int jarg2, int jarg3) {
+  void * jresult ;
+  std::vector< WeightedValue< std::vector< uint8_t > > > *arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  std::vector< WeightedValue< std::vector< uint8_t > > > *result = 0 ;
+  
+  arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *)jarg1; 
+  arg2 = (int)jarg2; 
+  arg3 = (int)jarg3; 
+  {
+    try {
+      try {
+        result = (std::vector< WeightedValue< std::vector< uint8_t > > > *)std_vector_Sl_WeightedValue_Sl_std_vector_Sl_uint8_t_Sg__Sg__Sg__GetRange(arg1,arg2,arg3);
+      } catch(std::out_of_range &_e) {
+        SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
+        return 0;
+      } catch(std::invalid_argument &_e) {
+        SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentException, (&_e)->what(), "");
+        return 0;
+      };
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedUTF8StringListSwig_Insert___(void * jarg1, int jarg2, void * jarg3) {
+  std::vector< WeightedValue< std::vector< uint8_t > > > *arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *) 0 ;
+  int arg2 ;
+  WeightedValue< std::vector< uint8_t > > *arg3 = 0 ;
+  
+  arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *)jarg1; 
+  arg2 = (int)jarg2; 
+  arg3 = (WeightedValue< std::vector< uint8_t > > *)jarg3;
+  if (!arg3) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "WeightedValue< std::vector< uint8_t > > const & is null", 0);
+    return ;
+  } 
+  {
+    try {
+      try {
+        std_vector_Sl_WeightedValue_Sl_std_vector_Sl_uint8_t_Sg__Sg__Sg__Insert(arg1,arg2,(WeightedValue< std::vector< unsigned char > > const &)*arg3);
+      } catch(std::out_of_range &_e) {
+        SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
+        return ;
+      };
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return ; 
+      };
+    }
+  }
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedUTF8StringListSwig_InsertRange___(void * jarg1, int jarg2, void * jarg3) {
+  std::vector< WeightedValue< std::vector< uint8_t > > > *arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *) 0 ;
+  int arg2 ;
+  std::vector< WeightedValue< std::vector< uint8_t > > > *arg3 = 0 ;
+  
+  arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *)jarg1; 
+  arg2 = (int)jarg2; 
+  arg3 = (std::vector< WeightedValue< std::vector< uint8_t > > > *)jarg3;
+  if (!arg3) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "std::vector< WeightedValue< std::vector< uint8_t > > > const & is null", 0);
+    return ;
+  } 
+  {
+    try {
+      try {
+        std_vector_Sl_WeightedValue_Sl_std_vector_Sl_uint8_t_Sg__Sg__Sg__InsertRange(arg1,arg2,(std::vector< WeightedValue< std::vector< unsigned char > > > const &)*arg3);
+      } catch(std::out_of_range &_e) {
+        SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
+        return ;
+      };
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return ; 
+      };
+    }
+  }
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedUTF8StringListSwig_RemoveAt___(void * jarg1, int jarg2) {
+  std::vector< WeightedValue< std::vector< uint8_t > > > *arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *) 0 ;
+  int arg2 ;
+  
+  arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *)jarg1; 
+  arg2 = (int)jarg2; 
+  {
+    try {
+      try {
+        std_vector_Sl_WeightedValue_Sl_std_vector_Sl_uint8_t_Sg__Sg__Sg__RemoveAt(arg1,arg2);
+      } catch(std::out_of_range &_e) {
+        SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
+        return ;
+      };
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return ; 
+      };
+    }
+  }
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedUTF8StringListSwig_RemoveRange___(void * jarg1, int jarg2, int jarg3) {
+  std::vector< WeightedValue< std::vector< uint8_t > > > *arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  
+  arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *)jarg1; 
+  arg2 = (int)jarg2; 
+  arg3 = (int)jarg3; 
+  {
+    try {
+      try {
+        std_vector_Sl_WeightedValue_Sl_std_vector_Sl_uint8_t_Sg__Sg__Sg__RemoveRange(arg1,arg2,arg3);
+      } catch(std::out_of_range &_e) {
+        SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
+        return ;
+      } catch(std::invalid_argument &_e) {
+        SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentException, (&_e)->what(), "");
+        return ;
+      };
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return ; 
+      };
+    }
+  }
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedUTF8StringListSwig_Repeat___(void * jarg1, int jarg2) {
+  void * jresult ;
+  WeightedValue< std::vector< uint8_t > > *arg1 = 0 ;
+  int arg2 ;
+  std::vector< WeightedValue< std::vector< uint8_t > > > *result = 0 ;
+  
+  arg1 = (WeightedValue< std::vector< uint8_t > > *)jarg1;
+  if (!arg1) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "WeightedValue< std::vector< uint8_t > > const & is null", 0);
+    return 0;
+  } 
+  arg2 = (int)jarg2; 
+  {
+    try {
+      try {
+        result = (std::vector< WeightedValue< std::vector< uint8_t > > > *)std_vector_Sl_WeightedValue_Sl_std_vector_Sl_uint8_t_Sg__Sg__Sg__Repeat((WeightedValue< std::vector< unsigned char > > const &)*arg1,arg2);
+      } catch(std::out_of_range &_e) {
+        SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
+        return 0;
+      };
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedUTF8StringListSwig_Reverse__SWIG_0___(void * jarg1) {
+  std::vector< WeightedValue< std::vector< uint8_t > > > *arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *) 0 ;
+  
+  arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *)jarg1; 
+  {
+    try {
+      std_vector_Sl_WeightedValue_Sl_std_vector_Sl_uint8_t_Sg__Sg__Sg__Reverse__SWIG_0(arg1);;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return ; 
+      };
+    }
+  }
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedUTF8StringListSwig_Reverse__SWIG_1___(void * jarg1, int jarg2, int jarg3) {
+  std::vector< WeightedValue< std::vector< uint8_t > > > *arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  
+  arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *)jarg1; 
+  arg2 = (int)jarg2; 
+  arg3 = (int)jarg3; 
+  {
+    try {
+      try {
+        std_vector_Sl_WeightedValue_Sl_std_vector_Sl_uint8_t_Sg__Sg__Sg__Reverse__SWIG_1(arg1,arg2,arg3);
+      } catch(std::out_of_range &_e) {
+        SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
+        return ;
+      } catch(std::invalid_argument &_e) {
+        SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentException, (&_e)->what(), "");
+        return ;
+      };
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return ; 
+      };
+    }
+  }
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedUTF8StringListSwig_SetRange___(void * jarg1, int jarg2, void * jarg3) {
+  std::vector< WeightedValue< std::vector< uint8_t > > > *arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *) 0 ;
+  int arg2 ;
+  std::vector< WeightedValue< std::vector< uint8_t > > > *arg3 = 0 ;
+  
+  arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *)jarg1; 
+  arg2 = (int)jarg2; 
+  arg3 = (std::vector< WeightedValue< std::vector< uint8_t > > > *)jarg3;
+  if (!arg3) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "std::vector< WeightedValue< std::vector< uint8_t > > > const & is null", 0);
+    return ;
+  } 
+  {
+    try {
+      try {
+        std_vector_Sl_WeightedValue_Sl_std_vector_Sl_uint8_t_Sg__Sg__Sg__SetRange(arg1,arg2,(std::vector< WeightedValue< std::vector< unsigned char > > > const &)*arg3);
+      } catch(std::out_of_range &_e) {
+        SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, 0, (&_e)->what());
+        return ;
+      };
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return ; 
+      };
+    }
+  }
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_delete_WeightedUTF8StringListSwig___(void * jarg1) {
+  std::vector< WeightedValue< std::vector< uint8_t > > > *arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *) 0 ;
+  
+  arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *)jarg1; 
   {
     try {
       delete arg1;;
@@ -17322,6 +21129,305 @@ SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInte
 }
 
 
+SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_new_WeightedUTF8StringListValueSwig___() {
+  void * jresult ;
+  Value< std::vector< WeightedValue< std::vector< uint8_t > > > > *result = 0 ;
+  
+  {
+    try {
+      result = (Value< std::vector< WeightedValue< std::vector< uint8_t > > > > *)new Value< std::vector< WeightedValue< std::vector< uint8_t > > > >();;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedUTF8StringListValueSwig_hasValue___(void * jarg1) {
+  unsigned int jresult ;
+  Value< std::vector< WeightedValue< std::vector< uint8_t > > > > *arg1 = (Value< std::vector< WeightedValue< std::vector< uint8_t > > > > *) 0 ;
+  bool result;
+  
+  arg1 = (Value< std::vector< WeightedValue< std::vector< uint8_t > > > > *)jarg1; 
+  {
+    try {
+      result = (bool)(arg1)->hasValue();;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT char * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedUTF8StringListValueSwig_getNoValueMessage___(void * jarg1) {
+  char * jresult ;
+  Value< std::vector< WeightedValue< std::vector< uint8_t > > > > *arg1 = (Value< std::vector< WeightedValue< std::vector< uint8_t > > > > *) 0 ;
+  char *result = 0 ;
+  
+  arg1 = (Value< std::vector< WeightedValue< std::vector< uint8_t > > > > *)jarg1; 
+  {
+    try {
+      result = (char *)(arg1)->getNoValueMessage();;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = SWIG_csharp_string_callback((const char *)result); 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedUTF8StringListValueSwig_getValue___(void * jarg1) {
+  void * jresult ;
+  Value< std::vector< WeightedValue< std::vector< uint8_t > > > > *arg1 = (Value< std::vector< WeightedValue< std::vector< uint8_t > > > > *) 0 ;
+  std::vector< WeightedValue< std::vector< uint8_t > > > result;
+  
+  arg1 = (Value< std::vector< WeightedValue< std::vector< uint8_t > > > > *)jarg1; 
+  {
+    try {
+      result = (arg1)->getValue();;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = new std::vector< WeightedValue< std::vector< uint8_t > > >(result); 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_delete_WeightedUTF8StringListValueSwig___(void * jarg1) {
+  Value< std::vector< WeightedValue< std::vector< uint8_t > > > > *arg1 = (Value< std::vector< WeightedValue< std::vector< uint8_t > > > > *) 0 ;
+  
+  arg1 = (Value< std::vector< WeightedValue< std::vector< uint8_t > > > > *)jarg1; 
+  {
+    try {
+      delete arg1;;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return ; 
+      };
+    }
+  }
+}
+
+
 SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_new_WeightedBoolListValueSwig___() {
   void * jresult ;
   Value< std::vector< WeightedValue< bool > > > *result = 0 ;
@@ -18702,6 +22808,137 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
     }
   }
   jresult = new Value< std::vector< WeightedValue< std::string > > >(result); 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ResultsIpiSwig_getValuesAsWeightedUTF8StringList__SWIG_0___(void * jarg1, const char * jarg2) {
+  void * jresult ;
+  ResultsIpi *arg1 = (ResultsIpi *) 0 ;
+  std::string *arg2 = 0 ;
+  Value< std::vector< WeightedValue< std::vector< uint8_t > > > > result;
+  
+  arg1 = (ResultsIpi *)jarg1; 
+  if (!jarg2) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "null string", 0);
+    return 0;
+  }
+  std::string arg2_str(jarg2);
+  arg2 = &arg2_str; 
+  {
+    try {
+      result = (arg1)->getValuesAsWeightedUTF8StringList((std::string const &)*arg2);;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = new Value< std::vector< WeightedValue< std::vector< uint8_t > > > >(result); 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ResultsIpiSwig_getValuesAsWeightedUTF8StringList__SWIG_1___(void * jarg1, int jarg2) {
+  void * jresult ;
+  ResultsIpi *arg1 = (ResultsIpi *) 0 ;
+  int arg2 ;
+  Value< std::vector< WeightedValue< std::vector< uint8_t > > > > result;
+  
+  arg1 = (ResultsIpi *)jarg1; 
+  arg2 = (int)jarg2; 
+  {
+    try {
+      result = (arg1)->getValuesAsWeightedUTF8StringList(arg2);;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = new Value< std::vector< WeightedValue< std::vector< uint8_t > > > >(result); 
   return jresult;
 }
 

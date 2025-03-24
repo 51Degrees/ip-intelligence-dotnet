@@ -720,6 +720,87 @@ class IpIntelligenceEngineModulePINVOKE {
   [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_EngineBaseSwig_getIsThreadSafe___")]
   public static extern bool EngineBaseSwig_getIsThreadSafe(global::System.Runtime.InteropServices.HandleRef jarg1);
 
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_new_UTF8StringSwig__SWIG_0___")]
+  public static extern global::System.IntPtr new_UTF8StringSwig__SWIG_0();
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_new_UTF8StringSwig__SWIG_1___")]
+  public static extern global::System.IntPtr new_UTF8StringSwig__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_UTF8StringSwig_Clear___")]
+  public static extern void UTF8StringSwig_Clear(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_UTF8StringSwig_Add___")]
+  public static extern void UTF8StringSwig_Add(global::System.Runtime.InteropServices.HandleRef jarg1, byte jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_UTF8StringSwig_size___")]
+  public static extern uint UTF8StringSwig_size(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_UTF8StringSwig_empty___")]
+  public static extern bool UTF8StringSwig_empty(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_UTF8StringSwig_capacity___")]
+  public static extern uint UTF8StringSwig_capacity(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_UTF8StringSwig_reserve___")]
+  public static extern void UTF8StringSwig_reserve(global::System.Runtime.InteropServices.HandleRef jarg1, uint jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_new_UTF8StringSwig__SWIG_2___")]
+  public static extern global::System.IntPtr new_UTF8StringSwig__SWIG_2(int jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_UTF8StringSwig_getitemcopy___")]
+  public static extern byte UTF8StringSwig_getitemcopy(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_UTF8StringSwig_getitem___")]
+  public static extern byte UTF8StringSwig_getitem(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_UTF8StringSwig_setitem___")]
+  public static extern void UTF8StringSwig_setitem(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, byte jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_UTF8StringSwig_AddRange___")]
+  public static extern void UTF8StringSwig_AddRange(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_UTF8StringSwig_GetRange___")]
+  public static extern global::System.IntPtr UTF8StringSwig_GetRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_UTF8StringSwig_Insert___")]
+  public static extern void UTF8StringSwig_Insert(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, byte jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_UTF8StringSwig_InsertRange___")]
+  public static extern void UTF8StringSwig_InsertRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_UTF8StringSwig_RemoveAt___")]
+  public static extern void UTF8StringSwig_RemoveAt(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_UTF8StringSwig_RemoveRange___")]
+  public static extern void UTF8StringSwig_RemoveRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_UTF8StringSwig_Repeat___")]
+  public static extern global::System.IntPtr UTF8StringSwig_Repeat(byte jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_UTF8StringSwig_Reverse__SWIG_0___")]
+  public static extern void UTF8StringSwig_Reverse__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_UTF8StringSwig_Reverse__SWIG_1___")]
+  public static extern void UTF8StringSwig_Reverse__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_UTF8StringSwig_SetRange___")]
+  public static extern void UTF8StringSwig_SetRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_UTF8StringSwig_Contains___")]
+  public static extern bool UTF8StringSwig_Contains(global::System.Runtime.InteropServices.HandleRef jarg1, byte jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_UTF8StringSwig_IndexOf___")]
+  public static extern int UTF8StringSwig_IndexOf(global::System.Runtime.InteropServices.HandleRef jarg1, byte jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_UTF8StringSwig_LastIndexOf___")]
+  public static extern int UTF8StringSwig_LastIndexOf(global::System.Runtime.InteropServices.HandleRef jarg1, byte jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_UTF8StringSwig_Remove___")]
+  public static extern bool UTF8StringSwig_Remove(global::System.Runtime.InteropServices.HandleRef jarg1, byte jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_delete_UTF8StringSwig___")]
+  public static extern void delete_UTF8StringSwig(global::System.Runtime.InteropServices.HandleRef jarg1);
+
   [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueStringSwig_getValue___")]
   public static extern string WeightedValueStringSwig_getValue(global::System.Runtime.InteropServices.HandleRef jarg1);
 
@@ -737,6 +818,24 @@ class IpIntelligenceEngineModulePINVOKE {
 
   [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_delete_WeightedValueStringSwig___")]
   public static extern void delete_WeightedValueStringSwig(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueUTF8StringSwig_getValue___")]
+  public static extern global::System.IntPtr WeightedValueUTF8StringSwig_getValue(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueUTF8StringSwig_setValue___")]
+  public static extern void WeightedValueUTF8StringSwig_setValue(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueUTF8StringSwig_getWeight___")]
+  public static extern float WeightedValueUTF8StringSwig_getWeight(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueUTF8StringSwig_getRawWeight___")]
+  public static extern ushort WeightedValueUTF8StringSwig_getRawWeight(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueUTF8StringSwig_setRawWeight___")]
+  public static extern void WeightedValueUTF8StringSwig_setRawWeight(global::System.Runtime.InteropServices.HandleRef jarg1, ushort jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_delete_WeightedValueUTF8StringSwig___")]
+  public static extern void delete_WeightedValueUTF8StringSwig(global::System.Runtime.InteropServices.HandleRef jarg1);
 
   [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueBoolSwig_getValue___")]
   public static extern bool WeightedValueBoolSwig_getValue(global::System.Runtime.InteropServices.HandleRef jarg1);
@@ -875,6 +974,75 @@ class IpIntelligenceEngineModulePINVOKE {
 
   [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_delete_WeightedStringListSwig___")]
   public static extern void delete_WeightedStringListSwig(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_new_WeightedUTF8StringListSwig__SWIG_0___")]
+  public static extern global::System.IntPtr new_WeightedUTF8StringListSwig__SWIG_0();
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_new_WeightedUTF8StringListSwig__SWIG_1___")]
+  public static extern global::System.IntPtr new_WeightedUTF8StringListSwig__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedUTF8StringListSwig_Clear___")]
+  public static extern void WeightedUTF8StringListSwig_Clear(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedUTF8StringListSwig_Add___")]
+  public static extern void WeightedUTF8StringListSwig_Add(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedUTF8StringListSwig_size___")]
+  public static extern uint WeightedUTF8StringListSwig_size(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedUTF8StringListSwig_empty___")]
+  public static extern bool WeightedUTF8StringListSwig_empty(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedUTF8StringListSwig_capacity___")]
+  public static extern uint WeightedUTF8StringListSwig_capacity(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedUTF8StringListSwig_reserve___")]
+  public static extern void WeightedUTF8StringListSwig_reserve(global::System.Runtime.InteropServices.HandleRef jarg1, uint jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_new_WeightedUTF8StringListSwig__SWIG_2___")]
+  public static extern global::System.IntPtr new_WeightedUTF8StringListSwig__SWIG_2(int jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedUTF8StringListSwig_getitemcopy___")]
+  public static extern global::System.IntPtr WeightedUTF8StringListSwig_getitemcopy(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedUTF8StringListSwig_getitem___")]
+  public static extern global::System.IntPtr WeightedUTF8StringListSwig_getitem(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedUTF8StringListSwig_setitem___")]
+  public static extern void WeightedUTF8StringListSwig_setitem(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedUTF8StringListSwig_AddRange___")]
+  public static extern void WeightedUTF8StringListSwig_AddRange(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedUTF8StringListSwig_GetRange___")]
+  public static extern global::System.IntPtr WeightedUTF8StringListSwig_GetRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedUTF8StringListSwig_Insert___")]
+  public static extern void WeightedUTF8StringListSwig_Insert(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedUTF8StringListSwig_InsertRange___")]
+  public static extern void WeightedUTF8StringListSwig_InsertRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedUTF8StringListSwig_RemoveAt___")]
+  public static extern void WeightedUTF8StringListSwig_RemoveAt(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedUTF8StringListSwig_RemoveRange___")]
+  public static extern void WeightedUTF8StringListSwig_RemoveRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedUTF8StringListSwig_Repeat___")]
+  public static extern global::System.IntPtr WeightedUTF8StringListSwig_Repeat(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedUTF8StringListSwig_Reverse__SWIG_0___")]
+  public static extern void WeightedUTF8StringListSwig_Reverse__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedUTF8StringListSwig_Reverse__SWIG_1___")]
+  public static extern void WeightedUTF8StringListSwig_Reverse__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedUTF8StringListSwig_SetRange___")]
+  public static extern void WeightedUTF8StringListSwig_SetRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_delete_WeightedUTF8StringListSwig___")]
+  public static extern void delete_WeightedUTF8StringListSwig(global::System.Runtime.InteropServices.HandleRef jarg1);
 
   [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_new_WeightedBoolListSwig__SWIG_0___")]
   public static extern global::System.IntPtr new_WeightedBoolListSwig__SWIG_0();
@@ -1098,6 +1266,21 @@ class IpIntelligenceEngineModulePINVOKE {
   [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_delete_WeightedStringListValueSwig___")]
   public static extern void delete_WeightedStringListValueSwig(global::System.Runtime.InteropServices.HandleRef jarg1);
 
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_new_WeightedUTF8StringListValueSwig___")]
+  public static extern global::System.IntPtr new_WeightedUTF8StringListValueSwig();
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedUTF8StringListValueSwig_hasValue___")]
+  public static extern bool WeightedUTF8StringListValueSwig_hasValue(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedUTF8StringListValueSwig_getNoValueMessage___")]
+  public static extern string WeightedUTF8StringListValueSwig_getNoValueMessage(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedUTF8StringListValueSwig_getValue___")]
+  public static extern global::System.IntPtr WeightedUTF8StringListValueSwig_getValue(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_delete_WeightedUTF8StringListValueSwig___")]
+  public static extern void delete_WeightedUTF8StringListValueSwig(global::System.Runtime.InteropServices.HandleRef jarg1);
+
   [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_new_WeightedBoolListValueSwig___")]
   public static extern global::System.IntPtr new_WeightedBoolListValueSwig();
 
@@ -1166,6 +1349,12 @@ class IpIntelligenceEngineModulePINVOKE {
 
   [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ResultsIpiSwig_getValuesAsWeightedStringList__SWIG_1___")]
   public static extern global::System.IntPtr ResultsIpiSwig_getValuesAsWeightedStringList__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ResultsIpiSwig_getValuesAsWeightedUTF8StringList__SWIG_0___")]
+  public static extern global::System.IntPtr ResultsIpiSwig_getValuesAsWeightedUTF8StringList__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1, string jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ResultsIpiSwig_getValuesAsWeightedUTF8StringList__SWIG_1___")]
+  public static extern global::System.IntPtr ResultsIpiSwig_getValuesAsWeightedUTF8StringList__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
   [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ResultsIpiSwig_getValuesAsWeightedWKTStringList__SWIG_0___")]
   public static extern global::System.IntPtr ResultsIpiSwig_getValuesAsWeightedWKTStringList__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1, string jarg2, byte jarg3);
