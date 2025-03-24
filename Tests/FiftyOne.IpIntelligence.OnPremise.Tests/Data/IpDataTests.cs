@@ -142,6 +142,19 @@ namespace FiftyOne.IpIntelligence.Tests.Core.Data
                 }
             }
 
+            protected override IAspectPropertyValue<IReadOnlyList<IWeightedValue<IPAddress>>> GetValuesAsWeightedIPList(string propertyName)
+            {
+                if (propertyName == _testPropertyName)
+                {
+                    return new AspectPropertyValue<IReadOnlyList<IWeightedValue<IPAddress>>>(
+                        (IReadOnlyList<IWeightedValue<IPAddress>>)_value);
+                }
+                else
+                {
+                    throw new PropertyMissingException();
+                }
+            }
+
             protected override IAspectPropertyValue<IPAddress>
                 GetValueAsIpAddress(string propertyName)
             {

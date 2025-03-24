@@ -34,7 +34,7 @@ namespace FiftyOne.IpIntelligence.Examples
         /// <summary>
         /// The default name of the free 'lite' device detection data file.
         /// </summary>
-        public const string LITE_IPI_DATA_FILE_NAME = "51Degrees-LiteV4.1.ipi";
+        public const string LITE_IPI_DATA_FILE_NAME = "51Degrees-LiteV41.ipi";
 
         /// <summary>
         /// Name of the file to use for the test evidence.

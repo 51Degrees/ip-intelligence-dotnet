@@ -37,14 +37,14 @@ namespace Framework_Web
         {
             // Modify the configuration to a full path to the data file if the standard example is being used.
             var configFile = new FileInfo(HttpContext.Current.Server.MapPath("~/App_Data/51Degrees.json"));
-            var fullPath = ExampleUtils.FindFile("51Degrees-LiteV4.1.ipi", configFile.Directory);
+            var fullPath = ExampleUtils.FindFile("51Degrees-LiteV41.ipi", configFile.Directory);
             if (String.IsNullOrEmpty(fullPath) == false)
             {
                 var config = File.ReadAllText(configFile.FullName);
                 File.WriteAllText(
                     configFile.FullName, 
                     config.Replace(
-                        "\"DataFile\": \"51Degrees-LiteV4.1.ipi\"",
+                        "\"DataFile\": \"51Degrees-LiteV41.ipi\"",
                         $"\"DataFile\": \"{fullPath.Replace("\\", "\\\\")}\""));
             }
 
