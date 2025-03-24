@@ -148,6 +148,29 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
             return result;
         }
 
+        protected override IAspectPropertyValue<IReadOnlyList<IWeightedValue<float>>> GetValuesAsWeightedFloatList(string propertyName)
+        {
+            var result = new AspectPropertyValue<IReadOnlyList<IWeightedValue<float>>>();
+            var results = GetResultsContainingProperty(propertyName);
+
+            if (results != null)
+            {
+                using (var value = results.getValuesAsWeightedDoubleList(propertyName))
+                {
+                    if (value.hasValue())
+                    {
+                        result.Value = new List<IWeightedValue<float>>(new WeightedDoubleListSwigWrapper(value.getValue())
+                            .Select(x => new WeightedValue<float>(x.RawWeighting, (float)x.Value)));
+                    }
+                    else
+                    {
+                        result.NoValueMessage = value.getNoValueMessage();
+                    }
+                }
+            }
+            return result;
+        }
+
         protected override IAspectPropertyValue<IReadOnlyList<IWeightedValue<int>>> GetValuesAsWeightedIntegerList(string propertyName)
         {
             var result = new AspectPropertyValue<IReadOnlyList<IWeightedValue<int>>>();
@@ -202,11 +225,11 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
 
             if (results != null)
             {
-                using (var value = results.getValuesAsWeightedStringList(propertyName))
+                using (var value = results.getValuesAsWeightedUTF8StringList(propertyName))
                 {
                     if (value.hasValue())
                     {
-                        result.Value = new WeightedStringListSwigWrapper(value.getValue());
+                        result.Value = new WeightedUTF8StringListSwigWrapper(value.getValue());
                     }
                     else
                     {

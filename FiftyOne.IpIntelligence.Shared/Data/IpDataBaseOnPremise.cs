@@ -248,6 +248,20 @@ namespace FiftyOne.IpIntelligence.Shared.Data
 
 
         /// <summary>
+        /// Get weighted double values this instance has for the specified property
+        /// </summary>
+        /// <param name="propertyName">
+        /// The name of the property to get value for.
+        /// </param>
+        /// <returns>
+        /// A list of <see cref="WeightedValue{T}"/> of
+        /// <see cref="float"/> wrapped in a 
+        /// <see cref="IAspectPropertyValue"/> instance.
+        /// </returns>
+        protected abstract IAspectPropertyValue<IReadOnlyList<IWeightedValue<float>>> GetValuesAsWeightedFloatList(string propertyName);
+
+
+        /// <summary>
         /// Get weighted integer values this instance has for the specified property
         /// </summary>
         /// <param name="propertyName">
@@ -483,6 +497,11 @@ namespace FiftyOne.IpIntelligence.Shared.Data
                             innerType == typeof(IReadOnlyList<IWeightedValue<double>>))
                         {
                             obj = GetValuesAsWeightedDoubleList(key);
+                        }
+                        else if (innerType == typeof(float) ||
+                            innerType == typeof(IReadOnlyList<IWeightedValue<float>>))
+                        {
+                            obj = GetValuesAsWeightedFloatList(key);
                         }
                         else if (innerType == typeof(int) ||
                             innerType == typeof(IReadOnlyList<IWeightedValue<int>>))

@@ -100,6 +100,20 @@ namespace FiftyOne.IpIntelligence.Tests.Core.Data
                 }
             }
 
+            protected override IAspectPropertyValue<IReadOnlyList<IWeightedValue<float>>> 
+                GetValuesAsWeightedFloatList(string propertyName)
+            {
+                if (propertyName == _testPropertyName)
+                {
+                    return new AspectPropertyValue<IReadOnlyList<IWeightedValue<float>>>(
+                        (IReadOnlyList<IWeightedValue<float>>)_value);
+                }
+                else
+                {
+                    throw new PropertyMissingException();
+                }
+            }
+
             protected override IAspectPropertyValue<IReadOnlyList<IWeightedValue<int>>> 
                 GetValuesAsWeightedIntegerList(string propertyName)
             {

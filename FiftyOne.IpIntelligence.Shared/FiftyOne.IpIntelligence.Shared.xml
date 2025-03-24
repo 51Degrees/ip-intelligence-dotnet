@@ -523,6 +523,19 @@
             <see cref="T:FiftyOne.Pipeline.Engines.Data.IAspectPropertyValue"/> instance.
             </returns>
         </member>
+        <member name="M:FiftyOne.IpIntelligence.Shared.Data.IpDataBaseOnPremise`1.GetValuesAsWeightedFloatList(System.String)">
+            <summary>
+            Get weighted double values this instance has for the specified property
+            </summary>
+            <param name="propertyName">
+            The name of the property to get value for.
+            </param>
+            <returns>
+            A list of <see cref="T:FiftyOne.Pipeline.Core.Data.WeightedValue`1"/> of
+            <see cref="T:System.Single"/> wrapped in a 
+            <see cref="T:FiftyOne.Pipeline.Engines.Data.IAspectPropertyValue"/> instance.
+            </returns>
+        </member>
         <member name="M:FiftyOne.IpIntelligence.Shared.Data.IpDataBaseOnPremise`1.GetValuesAsWeightedIntegerList(System.String)">
             <summary>
             Get weighted integer values this instance has for the specified property

@@ -346,7 +346,7 @@ namespace FiftyOne.IpIntelligence.Examples
         {
             new Dictionary<string, object>()
             {
-                { "query.client-ip", "185.28.167.77" }
+                { "query.client-ip", "116.154.188.222" }
             },
             new Dictionary<string, object>()
             {
