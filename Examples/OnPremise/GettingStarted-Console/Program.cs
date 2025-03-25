@@ -161,6 +161,18 @@ namespace FiftyOne.IpIntelligence.Examples.OnPremise.GettingStartedConsole
                         }
                     }
                     {
+                        var region = ipData.Region;
+                        if (!region.HasValue)
+                        {
+                            message.AppendLine($"\t{nameof(ipData.Region)}: {region.NoValueMessage} - {region.NoValueMessage}");
+                        }
+                        else
+                        {
+                            var valuesString = string.Join(", ", region.Value.Select(x => $"('{x.Value}' @ {x.Weighting()})"));
+                            message.AppendLine($"\t{nameof(ipData.Region)}  ({region.Value.Count}): {valuesString}");
+                        }
+                    }
+                    {
                         var latitude = ipData.Latitude;
                         if (!latitude.HasValue)
                         {
