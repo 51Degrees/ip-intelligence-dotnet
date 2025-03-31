@@ -92,7 +92,7 @@
                 // In a production scenario, you will probably want to handle these scenarios 
                 // differently. Feel free to copy these helpers if they are useful though.
             %>
-            <tr class="lightyellow"><td><b>Network Name:</b></td><td> <%= deviceData.TryGetValue(d => d.Name.GetHumanReadable()) %></td></tr>
+            <tr class="lightyellow"><td><b>Registered Name:</b></td><td> <%= deviceData.TryGetValue(d => d.RegisteredName.GetHumanReadable()) %></td></tr>
         </table>
         <br />
     
