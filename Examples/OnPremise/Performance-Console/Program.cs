@@ -76,8 +76,8 @@ namespace FiftyOne.IpIntelligence.Examples.OnPremise.Performance
         {
             new PerformanceConfiguration(true, PerformanceProfiles.MaxPerformance, false, true, false),
             new PerformanceConfiguration(true, PerformanceProfiles.MaxPerformance, true, true, false),
-            new PerformanceConfiguration(false, PerformanceProfiles.LowMemory, false, true, false),
-            new PerformanceConfiguration(false, PerformanceProfiles.LowMemory, true, true, false)
+            //new PerformanceConfiguration(false, PerformanceProfiles.LowMemory, false, true, false),
+            //new PerformanceConfiguration(false, PerformanceProfiles.LowMemory, true, true, false)
         };
 
         private const ushort DEFAULT_THREAD_COUNT = 4;
@@ -89,7 +89,7 @@ namespace FiftyOne.IpIntelligence.Examples.OnPremise.Performance
             var detections = results.Sum(r => r.Count);
             var milliseconds = results.Sum(r => r.Timer.ElapsedMilliseconds);
             // Calculate approx. real-time ms per detection. 
-            return (float)(milliseconds) / (detections * threadCount);
+            return milliseconds > 0 ? (float)(milliseconds) / (detections * threadCount) : 1f;
         }
 
         public class Example : ExampleBase
@@ -247,7 +247,7 @@ namespace FiftyOne.IpIntelligence.Examples.OnPremise.Performance
                         // for just platform or "IsCrawler" for the crawler component.
                         if (config.AllProperties == false)
                         {
-                            builder.SetProperty("Name");
+                            builder.SetProperty("RegisteredName");
                         }
 
                         // The data file can be loaded directly from disk or from a byte array
