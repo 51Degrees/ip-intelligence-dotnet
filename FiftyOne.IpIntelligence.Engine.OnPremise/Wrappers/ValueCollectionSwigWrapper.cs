@@ -54,11 +54,14 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Wrappers
 
         public IEnumerator<IValueMetaData> GetEnumerator()
         {
-            for (uint i = 0; i < _object.getSize(); i++)
+            uint size = _object.getSize();
+            for (uint i = 0; i < size; i++)
             {
                 yield return new ValueMetaData(_engine, _object.getByIndex(i));
             }
         }
+
+        public uint Count => _object.getSize();
 
         IEnumerator IEnumerable.GetEnumerator()
         {

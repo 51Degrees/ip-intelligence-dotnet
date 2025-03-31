@@ -487,6 +487,17 @@
             The values that this property can have.
             </returns>
         </member>
+        <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.Data.PropertyMetaDataIpi.GetValuesCount">
+            <summary>
+            The count of values that this property can have.
+            Note that this is based on information in the data file so it
+            is possible (or even likely, depending on the property) that a 
+            future data file will have different possible values.
+            </summary>
+            <returns>
+            The count of values that this property can have.
+            </returns>
+        </member>
         <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.Data.PropertyMetaDataIpi.GetValue(System.String)">
             <summary>
             Get the meta-data for an individual value entry.

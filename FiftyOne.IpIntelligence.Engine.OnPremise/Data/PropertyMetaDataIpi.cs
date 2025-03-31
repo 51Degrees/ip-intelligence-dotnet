@@ -234,6 +234,23 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
         }
 
         /// <summary>
+        /// The count of values that this property can have.
+        /// Note that this is based on information in the data file so it
+        /// is possible (or even likely, depending on the property) that a 
+        /// future data file will have different possible values.
+        /// </summary>
+        /// <returns>
+        /// The count of values that this property can have.
+        /// </returns>
+        public uint GetValuesCount()
+        {
+            using (var values = _engine.MetaData.getValuesForProperty(_source, _engine))
+            {
+                return values.Count;
+            }
+        }
+
+        /// <summary>
         /// Get the meta-data for an individual value entry.
         /// </summary>
         /// <param name="valueName">

@@ -31,5 +31,6 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Wrappers
         IDisposable, IEnumerable<IValueMetaData>
     {
         ValueMetaDataSwig getByKey(ValueMetaDataKeySwig key);
+        uint Count { get; }
     }
 }

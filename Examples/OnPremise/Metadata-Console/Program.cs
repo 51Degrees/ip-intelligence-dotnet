@@ -20,6 +20,7 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
+using FiftyOne.IpIntelligence.Engine.OnPremise.Data;
 using FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements;
 using FiftyOne.Pipeline.Core.Data;
 using FiftyOne.Pipeline.Engines;
@@ -174,7 +175,7 @@ namespace FiftyOne.IpIntelligence.Examples.OnPremise.Metadata
                     if (property.Category != "Device Metrics")
                     {
                         StringBuilder values = new StringBuilder("Possible values: ");
-                        foreach (var value in property.Values.Take(20))
+                        foreach (var value in property.GetValues().Take(20))
                         {
                             // add value
                             values.Append(TruncateToNl(value.Name));
@@ -185,9 +186,10 @@ namespace FiftyOne.IpIntelligence.Examples.OnPremise.Metadata
                             }
                             values.Append(",");
                         }
-                        if (property.Values.Count() > 20)
+                        long count = (property as PropertyMetaDataIpi)?.GetValuesCount() ?? (long)property.Values.Count();
+                        if (count > 20)
                         {
-                            values.Append($" + {property.Values.Count() - 20} more ...");
+                            values.Append($" + {count - 20} more ...");
                         }
                         output.WriteLine(values);
                     }
