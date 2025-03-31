@@ -103,7 +103,7 @@ namespace FiftyOne.IpIntelligence.Examples.OnPremise.OfflineProcessing
                     // https://51degrees.com/documentation/_device_detection__features__performance_options.html
                     // https://51degrees.com/documentation/_features__automatic_datafile_updates.html
                     // https://51degrees.com/documentation/_features__usage_sharing.html
-                    .SetPerformanceProfile(PerformanceProfiles.LowMemory)
+                    .SetPerformanceProfile(PerformanceProfiles.MaxPerformance)
                     // Inhibit sharing usage for this example.
                     // In general, off line processing usage should NOT be shared back to 51Degrees.
                     // This is because it will not contain the full set of information that is 
