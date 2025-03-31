@@ -48,7 +48,19 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Wrappers
             using (var value = _object[index].getValue())
             {
                 byte[] utf8bytes = value.ToArray();
-                string s = Encoding.UTF8.GetString(utf8bytes);
+                int length = utf8bytes.Length;
+                if (utf8bytes[length - 1] == 0)
+                {
+                    --length;
+                }
+                string s;
+                unsafe
+                {
+                    fixed (byte* ptr = &utf8bytes[0])
+                    {
+                        s = Encoding.UTF8.GetString(ptr, length);
+                    }
+                }
                 return new WeightedValue<string>(this._object[index].getRawWeight(), s);
             }
         }
