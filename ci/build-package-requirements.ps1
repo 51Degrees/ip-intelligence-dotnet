@@ -16,7 +16,7 @@ $NativeFile = [IO.Path]::Combine($RepoPath, $ProjectDir, "build", "Release", $Na
 if($IsLinux){
     $Subfolder = "linux"
     # Because .NET does not officially support the x86 architecture on Linux distributions, we are using the x64 job to build x86 binaries.
-    $Archs = @("x64")
+    $Archs = @("x86", "x64")
     foreach($a in $Archs){
         ./dotnet/build-package-requirement.ps1 -RepoName $RepoName -ProjectDir $ProjectDir -Name $Name -Configuration "Release" -Arch $a
         $PackageFolder = "package-files/$SubFolder/$a"
