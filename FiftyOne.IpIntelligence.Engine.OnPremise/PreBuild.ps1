@@ -46,7 +46,7 @@ try {
 		# the fiftyone-ipi-hash-dotnet.vxproj file to ensure it includes /O2 and
 		# other optimisations in Release configuration.
 
-		cmake ../../.. -A $Arch -DRebuildSwig=Off -DBUILD_TESTING=Off
+		cmake ../../.. -A $Arch -DRebuildSwig=Off -DBUILD_TESTING=Off -DLargeDataFileSupport:BOOL=ON
 		cmake --build . -t fiftyone-ipi-hash-dotnet --config $BuildType $Jargs
 		
 	}
