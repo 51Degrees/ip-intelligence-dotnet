@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+
+    <Platforms>AnyCPU;x64;x86</Platforms>
+
+    <Configurations>Debug;Release</Configurations>
+	
+	<DefineConstants>TRACE;NETCORE</DefineConstants>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector" Version="6.0.4">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="3.6.4" />
+    <PackageReference Include="MSTest.TestFramework" Version="3.6.4" />
+    <PackageReference Include="System.Text.Json" Version="8.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Examples\OnPremise\GettingStarted-Console\GettingStarted-Console.csproj" />
+    <ProjectReference Include="..\..\Examples\OnPremise\Metadata-Console\Metadata-Console.csproj" />
+    <ProjectReference Include="..\..\Examples\OnPremise\OfflineProcessing-Console\OfflineProcessing-Console.csproj" />
+    <ProjectReference Include="..\..\Examples\OnPremise\UpdateDataFile-Console\UpdateDataFile-Console.csproj" />
+  </ItemGroup>
+
+</Project>

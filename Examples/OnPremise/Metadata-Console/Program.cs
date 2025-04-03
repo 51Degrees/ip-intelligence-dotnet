@@ -80,7 +80,7 @@ namespace FiftyOne.IpIntelligence.Examples.OnPremise.Metadata
                     // configuration options:
                     // https://51degrees.com/documentation/_device_detection__features__performance_options.html
                     // https://51degrees.com/documentation/_features__automatic_datafile_updates.html
-                    .SetPerformanceProfile(PerformanceProfiles.LowMemory)
+                    .SetPerformanceProfile(PerformanceProfiles.MaxPerformance)
                     // inhibit auto-update of the data file for this test
                     .SetAutoUpdate(false)
                     .SetDataFileSystemWatcher(false)
