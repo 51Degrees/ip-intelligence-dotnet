@@ -72,6 +72,14 @@ namespace FiftyOne.IpIntelligence.Examples.OnPremise.GettingStartedConsole
                     .SetAutoUpdate(false)
                     .SetDataUpdateOnStartUp(false)
                     .SetDataFileSystemWatcher(false)
+                    .SetProperty("IpRangeStart")
+                    .SetProperty("IpRangeEnd")
+                    .SetProperty("RegisteredName")
+                    .SetProperty("Region")
+                    .SetProperty("Latitude")
+                    .SetProperty("Longitude")
+                    .SetProperty("Areas")
+                    .SetProperty("AccuracyRadius")
                     .Build())
                 {
                     // carry out some sample detections

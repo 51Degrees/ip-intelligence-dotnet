@@ -31,6 +31,7 @@ using FiftyOne.Pipeline.Engines.FlowElements;
 using FiftyOne.Pipeline.Engines.Services;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Net.Http;
@@ -58,6 +59,7 @@ namespace FiftyOne.IpIntelligence
         private PerformanceProfiles _performanceProfile =
             PerformanceProfiles.Balanced;
         private bool _shareUsageEnabled = true;
+        private List<string> _requestedProperties = new List<string>();
 
         private IDataUpdateService _dataUpdateService;
         private HttpClient _httpClient;
@@ -203,6 +205,24 @@ namespace FiftyOne.IpIntelligence
         public IpiOnPremisePipelineBuilder SetShareUsage(bool enabled)
         {
             _shareUsageEnabled = enabled;
+            return this;
+        }
+
+        /// <summary>
+        /// Add the specified property as one to be returned.
+        /// By default, all properties will be returned.
+        /// Reducing the properties that are returned can yield a performance improvement in some 
+        /// scenarios.
+        /// </summary>
+        /// <param name="property">
+        /// The property to be populated by.
+        /// </param>
+        /// <returns>
+        /// This builder instance.
+        /// </returns>
+        public IpiOnPremisePipelineBuilder SetProperty(string property)
+        {
+            _requestedProperties.Add(property);
             return this;
         }
 
@@ -461,6 +481,11 @@ namespace FiftyOne.IpIntelligence
             if (_updateRandomisationMax.HasValue)
             {
                 builder.SetUpdateRandomisationMax(_updateRandomisationMax.Value);
+            }
+            // Configure requested properties
+            foreach (var property in _requestedProperties)
+            {
+                builder.SetProperty(property);
             }
 
             builder.SetDataUpdateLicenseKey(_dataUpdateLicenseKey);

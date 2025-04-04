@@ -140,6 +140,20 @@
             This builder instance.
             </returns>
         </member>
+        <member name="M:FiftyOne.IpIntelligence.IpiOnPremisePipelineBuilder.SetProperty(System.String)">
+            <summary>
+            Add the specified property as one to be returned.
+            By default, all properties will be returned.
+            Reducing the properties that are returned can yield a performance improvement in some 
+            scenarios.
+            </summary>
+            <param name="property">
+            The property to be populated by.
+            </param>
+            <returns>
+            This builder instance.
+            </returns>
+        </member>
         <member name="M:FiftyOne.IpIntelligence.IpiOnPremisePipelineBuilder.SetAutoUpdate(System.Boolean)">
             <summary>
             Enable/Disable auto update.
