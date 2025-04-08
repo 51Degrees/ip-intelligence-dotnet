@@ -2,6 +2,10 @@ name: Nightly Publish Main
 
 on:
   workflow_dispatch:
+    inputs:
+      dryrun:
+        type: boolean
+        description: Dry Run
   workflow_run:
     workflows: [Nightly PRs to Main]
     types: [completed]
@@ -13,6 +17,7 @@ jobs:
     with:
       repo-name: ${{ github.event.repository.name }}
       org-name: ${{ github.event.repository.owner.login }}
+      dryrun: ${{ inputs.dryrun || false }}
       build-platform: windows-latest
     secrets: 
       token: ${{ secrets.ACCESS_TOKEN }}
