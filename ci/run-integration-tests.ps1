@@ -1,16 +1,50 @@
 param(
-    [Parameter(Mandatory=$true)]
-    [string]$RepoName,
+    [Parameter(Mandatory)][string]$RepoName,
+    [Parameter(Mandatory)][string]$OrgName,
+    [Parameter(Mandatory)][string]$DeviceDetection,
+    [Parameter(Mandatory)][string]$DeviceDetectionUrl,
     [string]$ProjectDir = ".",
     [string]$Name = "Release_x64",
     [string]$Configuration = "Release",
     [string]$Arch = "x64",
     [string]$Version,
-    [string]$BuildMethod,
-    [string]$OrgName,
-    [string]$Branch = "main"
+    [string]$BuildMethod = "dotnet",
+    [string]$Branch = "main",
+    [string]$ExamplesBranch = "main",
+    [string]$ExamplesRepo = "ip-intelligence-dotnet-examples"
 )
 $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
+Set-StrictMode -Version 1.0
 
-Write-Output "No tests yet"
+# If Version is not provided, the script is running in a workflow that doesn't build packages and the integration tests wil lbe skipped
+if (!$Version) {
+    Write-Host "Skipping integration tests"
+    exit 0
+}
+
+Write-Host "Fetching examples..."
+./steps/clone-repo.ps1 -RepoName $ExamplesRepo -OrgName $OrgName -Branch $ExamplesBranch
+& "./$ExamplesRepo/ci/fetch-assets.ps1" -RepoName $ExamplesRepo -DeviceDetection $DeviceDetection -DeviceDetectionUrl $DeviceDetectionUrl
+
+Push-Location package
+try {
+    $localFeed = New-Item -ItemType Directory -Force "$HOME/.nuget/packages"
+    dotnet nuget add source $localFeed
+    dotnet nuget push -s $localFeed '*.nupkg'
+} finally {
+    Pop-Location
+}
+
+Push-Location $ExamplesRepo
+try {
+    Write-Host "Restoring $ExamplesRepo..."
+    Get-ChildItem -Recurse -File -Filter '*.csproj' | ForEach-Object {
+        dotnet add $_ package "FiftyOne.IpIntelligence" --version $Version
+    }
+    dotnet restore
+} finally {
+    Pop-Location
+}
+
+./dotnet/run-integration-tests.ps1 -RepoName $ExamplesRepo -ProjectDir $ProjectDir -Name $Name -Configuration $Configuration -Arch $Arch -BuildMethod $BuildMethod -DirNameFormatForDotnet '*' -DirNameFormatForNotDotnet "*" -Filter ".*\.sln"
