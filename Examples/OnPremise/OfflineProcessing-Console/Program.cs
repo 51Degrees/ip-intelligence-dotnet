@@ -119,6 +119,7 @@ namespace FiftyOne.IpIntelligence.Examples.OnPremise.OfflineProcessing
                     .SetAutoUpdate(false)
                     .SetDataUpdateOnStartUp(false)
                     .SetDataFileSystemWatcher(false)
+                    .SetProperty("RegisteredName")
                     .Build())
                 {
                     var serializer = new Serializer();
