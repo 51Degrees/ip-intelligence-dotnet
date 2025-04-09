@@ -84,4 +84,21 @@ try {
     Pop-Location
 }
 
-./dotnet/run-integration-tests.ps1 -RepoName $ExamplesRepo -ProjectDir $ProjectDir -Name $Name -Configuration $Configuration -Arch $Arch -BuildMethod $BuildMethod -DirNameFormatForDotnet '*' -DirNameFormatForNotDotnet "*" -Filter ".*\.sln"
+$IntegrationTestParams = @{
+    RepoName = $ExamplesRepo
+    ProjectDir = $ProjectDir
+    Name = $Name
+    Configuration = $Configuration
+    Arch = $Arch
+    BuildMethod = $BuildMethod
+} + (
+    ($BuildMethod -eq "dotnet") ? @{
+        DirNameFormatForDotnet = '*'
+        DirNameFormatForNotDotnet = "*"
+        Filter = ".*\.slnf"
+    } : @{
+        Filter = ".*Tests(|\.OnPremise)(|\.Core)\.dll"
+    }
+)
+
+./dotnet/run-integration-tests.ps1 @IntegrationTestParams
