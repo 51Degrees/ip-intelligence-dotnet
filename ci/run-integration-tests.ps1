@@ -12,7 +12,8 @@ param(
     [string]$BuildMethod = "dotnet",
     [string]$Branch = "main",
     [string]$ExamplesBranch = "main",
-    [string]$ExamplesRepo = "ip-intelligence-dotnet-examples"
+    [string]$ExamplesRepo = "ip-intelligence-dotnet-examples",
+    [hashtable]$Keys
 )
 $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
@@ -37,11 +38,22 @@ try {
     Pop-Location
 }
 
+Write-Output "`n------- SETUP ENVIRONMENT BEGIN -------`n"
 
-./dotnet/add-nuget-source.ps1 `
-    -Source "https://nuget.pkg.github.com/$OrgName/index.json" `
-    -UserName $GitHubUser `
-    -Key $env:GITHUB_TOKEN
+$SetupArgs = @{
+    OrgName = $OrgName
+    GitHubUser = $GitHubUser
+    RepoName = $RepoName
+    Name = $Name
+    Arch = $Arch
+    Configuration = $Configuration
+    Keys = $Keys
+}
+./$ExamplesRepo/ci/setup-environment.ps1 @SetupArgs
+
+Write-Output "`n------- SETUP ENVIRONMENT END -------`n"
+
+Write-Output "`n------- PACKAGE REPLACEMENT BEGIN -------`n"
 
 Push-Location $ExamplesRepo
 try {
@@ -84,23 +96,21 @@ try {
     Pop-Location
 }
 
-$IntegrationTestParams = @{
+Write-Output "`n------- PACKAGE REPLACEMENT END -------`n"
+
+Write-Output "`n------- RUN INTEGRATION TESTS BEGIN -------`n"
+
+$RunTestsArgs = @{
     RepoName = $ExamplesRepo
     ProjectDir = $ProjectDir
     Name = $Name
     Configuration = $Configuration
     Arch = $Arch
     BuildMethod = $BuildMethod
-} + (
-    ($BuildMethod -eq "dotnet") ? @{
-        DirNameFormatForDotnet = '*'
-        DirNameFormatForNotDotnet = "*"
-        Filter = ".*\.slnf"
-    } : @{
-        Filter = ".*Tests(|\.OnPremise)(|\.Core)\.dll"
-    }
-)
+    OutputFolder = "integration"
+}
+./$ExamplesRepo/ci/setup-environment.ps1 @RunTestsArgs
 
-./dotnet/run-integration-tests.ps1 @IntegrationTestParams -Debug -ErrorAction 'Continue'
+Write-Output "`n------- RUN INTEGRATION TESTS END -------`n"
 
 exit $LASTEXITCODE
