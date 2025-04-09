@@ -62,11 +62,13 @@ try {
             Write-Error "LASTEXITCODE = $LASTEXITCODE"
         }
         $PackagesNow = ($PackagesRaw | ConvertFrom-Json)
-        $ToRemove = $PackagesNow.Projects[0].Frameworks | ForEach-Object {
+        $ToRemove = $PackagesNow.Projects | ForEach-Object {
+            $_.Frameworks
+        } | ForEach-Object {
             $_.TopLevelPackages
-        } | Select-Object id | ForEach-Object {
+        } | ForEach-Object {
             $_.id
-        } Where-Object {
+        } | Where-Object {
             $_.StartsWith("FiftyOne.IpIntelligence") 
         }
         foreach ($NextToRemove in $ToRemove) {
