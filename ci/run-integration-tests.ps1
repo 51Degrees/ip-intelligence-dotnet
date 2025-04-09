@@ -101,4 +101,6 @@ $IntegrationTestParams = @{
     }
 )
 
-./dotnet/run-integration-tests.ps1 @IntegrationTestParams
+./dotnet/run-integration-tests.ps1 @IntegrationTestParams -Debug -ErrorAction 'Continue'
+
+exit $LASTEXITCODE
