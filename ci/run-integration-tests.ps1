@@ -62,13 +62,10 @@ try {
             Write-Error "LASTEXITCODE = $LASTEXITCODE"
         }
         $PackagesNow = ($PackagesRaw | ConvertFrom-Json)
-        $ToRemove = $PackagesNow.Projects[0].Frameworks | ForEach-Object {
-            $_.TopLevelPackages
-        } | Select-Object id | ForEach-Object {
-            $_.id
-        } Where-Object {
-            $_.StartsWith("FiftyOne.IpIntelligence") 
-        }
+        $FrameworksNow = $PackagesNow.Projects | ForEach-Object { $_.Frameworks }
+        $TopLevelPackagesNow = $FrameworksNow | ForEach-Object { $_.TopLevelPackages }
+        $PackageIDsNow = $TopLevelPackagesNow | ForEach-Object { $_.id }
+        $ToRemove = $PackageIDsNow | Where-Object { $_.StartsWith("FiftyOne.IpIntelligence") }
         foreach ($NextToRemove in $ToRemove) {
             Write-Output "Removing $NextToRemove..."
             dotnet package remove $NextToRemove --project $NextProjectPath
