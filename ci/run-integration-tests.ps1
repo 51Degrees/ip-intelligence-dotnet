@@ -73,7 +73,7 @@ try {
         }
         foreach ($NextToRemove in $ToRemove) {
             Write-Output "Removing $NextToRemove..."
-            dotnet remove package $NextToRemove --project $NextProjectPath
+            dotnet remove $NextProjectPath package $NextToRemove
         }
 
         Write-Output "Adding the new packages..."
