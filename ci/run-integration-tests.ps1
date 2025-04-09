@@ -47,7 +47,19 @@ Push-Location $ExamplesRepo
 try {
     Write-Host "Restoring $ExamplesRepo..."
     foreach ($NextProject in (Get-ChildItem -Recurse -File -Filter '*.csproj')) {
-        $PackagesRaw = (dotnet list $NextProject.FullName package --format json)
+        $NextProjectPath = $NextProject.FullName
+        try {
+            $ErrorActionPreference = "Continue"
+            $PackagesRaw = (dotnet list $NextProjectPath package --format json)
+        } finally {
+            $ErrorActionPreference = "Stop"
+        }
+        if ($LASTEXITCODE -ne 0) {
+            Write-Warning "--- RAW OUTPUT START ---"
+            Write-Warning ($PackagesRaw -Join "`n")
+            Write-Warning "--- RAW OUTPUT END ---"
+            Write-Error "LASTEXITCODE = $LASTEXITCODE"
+        }
         $PackagesNow = ($PackagesRaw | ConvertFrom-Json)
         $ToRemove = $PackagesNow.Projects[0].Frameworks | ForEach-Object {
             $_.TopLevelPackages
@@ -58,7 +70,7 @@ try {
         }
         foreach ($NextToRemove in $ToRemove) {
             Write-Output "Removing $NextToRemove..."
-            dotnet package remove $NextToRemove --project $NextProject.FullName
+            dotnet package remove $NextToRemove --project $NextProjectPath
         }
 
         Write-Output "Adding the new packages..."
