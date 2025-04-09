@@ -46,8 +46,23 @@ try {
 Push-Location $ExamplesRepo
 try {
     Write-Host "Restoring $ExamplesRepo..."
-    Get-ChildItem -Recurse -File -Filter '*.csproj' | ForEach-Object {
-        dotnet add $_ package "FiftyOne.IpIntelligence" --version $Version
+    foreach ($NextProject in (Get-ChildItem -Recurse -File -Filter '*.csproj')) {
+        $PackagesRaw = (dotnet list .\Framework-Web.csproj package --format json)
+        $PackagesNow = ($PackagesRaw | ConvertFrom-Json)
+        $ToRemove = $PackagesNow.Projects[0].Frameworks | ForEach-Object {
+            $_.TopLevelPackages
+        } | Select-Object id | ForEach-Object {
+            $_.id
+        } Where-Object {
+            $_.StartsWith("FiftyOne.IpIntelligence") 
+        }
+        foreach ($NextToRemove in $ToRemove) {
+            Write-Output "Removing $NextToRemove..."
+            dotnet package remove $NextToRemove --project $NextProject
+        }
+
+        Write-Output "Adding the new packages..."
+        dotnet add $NextProject package "FiftyOne.IpIntelligence" --version $Version
     }
     dotnet restore
 } finally {
