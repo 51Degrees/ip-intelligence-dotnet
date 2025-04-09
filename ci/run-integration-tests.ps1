@@ -46,6 +46,7 @@ try {
 Push-Location $ExamplesRepo
 try {
     Write-Host "Restoring $ExamplesRepo..."
+    dotnet restore
     foreach ($NextProject in (Get-ChildItem -Recurse -File -Filter '*.csproj')) {
         $NextProjectPath = $NextProject.FullName
         try {
