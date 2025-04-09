@@ -58,7 +58,7 @@
         "Image": "macos-latest",
         "Name": "Mac_arm64_Release",
         "Configuration": "Release",
-        "Arch": "arm64",
+        "Arch": "ARM64",
         "PackageRequirement" : true,
         "BuildMethod": "dotnet"
     }
