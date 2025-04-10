@@ -116,7 +116,7 @@ $RunTestsArgs = $BuildTestsArgs + @{
 }
 try {
     $ErrorActionPreference = "Continue"
-    & ./$ExamplesRepo/ci/run-unit-tests.ps1 @RunTestsArgs
+    & ./$ExamplesRepo/ci/run-unit-tests.ps1 @RunTestsArgs -Debug
 } finally {
     $ErrorActionPreference = "Stop"
 }
