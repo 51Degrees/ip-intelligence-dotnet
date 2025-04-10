@@ -101,13 +101,17 @@ Write-Output "`n------- PACKAGE REPLACEMENT END -------`n"
 
 Write-Output "`n------- RUN INTEGRATION TESTS BEGIN -------`n"
 
-$RunTestsArgs = @{
+$BuildTestsArgs = @{
     RepoName = $ExamplesRepo
     ProjectDir = $ProjectDir
     Name = $Name
     Configuration = $Configuration
     Arch = $Arch
     BuildMethod = $BuildMethod
+}
+& ./$ExamplesRepo/ci/build-project.ps1 @BuildTestsArgs
+
+$RunTestsArgs = $BuildTestsArgs + @{
     OutputFolder = "integration"
 }
 & ./$ExamplesRepo/ci/run-unit-tests.ps1 @RunTestsArgs -Debug
