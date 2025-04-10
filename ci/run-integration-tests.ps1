@@ -114,7 +114,8 @@ $BuildTestsArgs = @{
 $RunTestsArgs = $BuildTestsArgs + @{
     OutputFolder = "integration"
 }
-& ./$ExamplesRepo/ci/run-unit-tests.ps1 @RunTestsArgs -Debug
+& ./$ExamplesRepo/ci/run-unit-tests.ps1 @RunTestsArgs -ErrorAction "Continue"
+
 Copy-Item $ExamplesRepo/test-results $RepoName -Recurse
 
 Write-Output "`n------- RUN INTEGRATION TESTS END -------`n"
