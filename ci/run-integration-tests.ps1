@@ -110,7 +110,7 @@ $RunTestsArgs = @{
     BuildMethod = $BuildMethod
     OutputFolder = "integration"
 }
-& ./$ExamplesRepo/ci/run-unit-tests.ps1 @RunTestsArgs
+& ./$ExamplesRepo/ci/run-unit-tests.ps1 @RunTestsArgs -Debug
 
 Write-Output "`n------- RUN INTEGRATION TESTS END -------`n"
 
