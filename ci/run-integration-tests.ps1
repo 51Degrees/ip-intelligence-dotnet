@@ -51,7 +51,7 @@ $SetupArgs = @{
     BuildMethod = $BuildMethod
     Keys = $Keys
 }
-& "./$ExamplesRepo/ci/setup-environment.ps1" @SetupArgs
+./$ExamplesRepo/ci/setup-environment.ps1 @SetupArgs
 
 Write-Output "`n------- SETUP ENVIRONMENT END -------`n"
 
@@ -111,7 +111,7 @@ $RunTestsArgs = @{
     BuildMethod = $BuildMethod
     OutputFolder = "integration"
 }
-& "./$ExamplesRepo/ci/setup-environment.ps1" @RunTestsArgs
+./$ExamplesRepo/ci/run-unit-tests.ps1 @RunTestsArgs
 
 Write-Output "`n------- RUN INTEGRATION TESTS END -------`n"
 
