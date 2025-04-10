@@ -114,10 +114,15 @@ $BuildTestsArgs = @{
 $RunTestsArgs = $BuildTestsArgs + @{
     OutputFolder = "integration"
 }
-& ./$ExamplesRepo/ci/run-unit-tests.ps1 @RunTestsArgs -ErrorAction "Continue"
-
-Copy-Item $ExamplesRepo/test-results $RepoName -Recurse
+try {
+    $ErrorActionPreference = "Continue"
+    & ./$ExamplesRepo/ci/run-unit-tests.ps1 @RunTestsArgs
+} finally {
+    $ErrorActionPreference = "Stop"
+}
 
 Write-Output "`n------- RUN INTEGRATION TESTS END -------`n"
+
+Copy-Item $ExamplesRepo/test-results $RepoName -Recurse
 
 exit $LASTEXITCODE
