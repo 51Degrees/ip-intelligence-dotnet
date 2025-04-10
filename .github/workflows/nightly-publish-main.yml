@@ -17,6 +17,7 @@ jobs:
     with:
       repo-name: ${{ github.event.repository.name }}
       org-name: ${{ github.event.repository.owner.login }}
+      common-ci-ref: cb22923624db2704c9c130ce994e4fa125fbd4dc
       dryrun: ${{ inputs.dryrun || false }}
       build-platform: windows-latest
     secrets: 
