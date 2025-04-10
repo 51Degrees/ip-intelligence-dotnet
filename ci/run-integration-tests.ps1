@@ -18,7 +18,6 @@ param(
 $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
 Set-StrictMode -Version 1.0
-Set-PSDebug -Trace 2
 
 # If Version is not provided, the script is running in a workflow that doesn't build packages and the integration tests wil lbe skipped
 if (!$Version) {
@@ -51,7 +50,7 @@ $SetupArgs = @{
     BuildMethod = $BuildMethod
     Keys = $Keys
 }
-./$ExamplesRepo/ci/setup-environment.ps1 @SetupArgs
+& ./$ExamplesRepo/ci/setup-environment.ps1 @SetupArgs
 
 Write-Output "`n------- SETUP ENVIRONMENT END -------`n"
 
@@ -111,7 +110,7 @@ $RunTestsArgs = @{
     BuildMethod = $BuildMethod
     OutputFolder = "integration"
 }
-./$ExamplesRepo/ci/run-unit-tests.ps1 @RunTestsArgs
+& ./$ExamplesRepo/ci/run-unit-tests.ps1 @RunTestsArgs
 
 Write-Output "`n------- RUN INTEGRATION TESTS END -------`n"
 
