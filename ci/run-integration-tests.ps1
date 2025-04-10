@@ -48,6 +48,7 @@ $SetupArgs = @{
     Name = $Name
     Arch = $Arch
     Configuration = $Configuration
+    BuildMethod = $BuildMethod
     Keys = $Keys
 }
 & "./$ExamplesRepo/ci/setup-environment.ps1" @SetupArgs
