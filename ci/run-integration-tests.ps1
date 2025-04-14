@@ -25,6 +25,8 @@ if (!$Version) {
     exit 0
 }
 
+Write-Debug "env:IPINTELLIGENCEDATAFILE = <$($env:IPINTELLIGENCEDATAFILE)>"
+
 Write-Host "Fetching examples..."
 ./steps/clone-repo.ps1 -RepoName $ExamplesRepo -OrgName $OrgName -Branch $ExamplesBranch
 & "./$ExamplesRepo/ci/fetch-assets.ps1" -RepoName $ExamplesRepo -DeviceDetection $DeviceDetection -DeviceDetectionUrl $DeviceDetectionUrl
@@ -53,6 +55,8 @@ $SetupArgs = @{
 & ./$ExamplesRepo/ci/setup-environment.ps1 @SetupArgs
 
 Write-Output "`n------- SETUP ENVIRONMENT END -------`n"
+
+Write-Debug "env:IPINTELLIGENCEDATAFILE = <$($env:IPINTELLIGENCEDATAFILE)>"
 
 Write-Output "`n------- PACKAGE REPLACEMENT BEGIN -------`n"
 
