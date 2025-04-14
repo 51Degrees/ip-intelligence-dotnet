@@ -45,7 +45,7 @@ Write-Output "`n------- SETUP ENVIRONMENT BEGIN -------`n"
 $SetupArgs = @{
     OrgName = $OrgName
     GitHubUser = $GitHubUser
-    RepoName = $RepoName
+    RepoName = $ExamplesRepo
     Name = $Name
     Arch = $Arch
     Configuration = $Configuration
