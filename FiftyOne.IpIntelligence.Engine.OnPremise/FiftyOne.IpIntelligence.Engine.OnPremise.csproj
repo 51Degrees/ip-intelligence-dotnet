@@ -51,15 +51,6 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DefineConstants>$(DefineConstants);FIFTYONE_DEGREES_LARGE_DATA_FILE_SUPPORT</DefineConstants>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-  </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.0.0">
       <PrivateAssets>all</PrivateAssets>
@@ -127,20 +118,10 @@
       <BuildAction>None</BuildAction>
       <PackagePath>runtimes\win-x64\native</PackagePath>
     </_PackageFiles>
-    <!-- Copy the Windows x86 native DLL -->
-    <_PackageFiles Include="..\windows\x86\FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll" Condition="$(BuiltOnCI)">
-      <BuildAction>None</BuildAction>
-      <PackagePath>runtimes\win-x86\native</PackagePath>
-    </_PackageFiles>
     <!-- Copy the Linux x64 native DLL -->
     <_PackageFiles Include="..\linux\x64\FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll" Condition="$(BuiltOnCI)">
       <BuildAction>None</BuildAction>
       <PackagePath>runtimes\linux-x64\native</PackagePath>
-    </_PackageFiles>
-    <!-- Copy the Linux x86 native DLL -->
-    <_PackageFiles Include="..\linux\x86\FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll" Condition="$(BuiltOnCI)">
-      <BuildAction>None</BuildAction>
-      <PackagePath>runtimes\linux-x86\native</PackagePath>
     </_PackageFiles>
     <!-- Copy the Mac x64 native DLL -->
     <_PackageFiles Include="..\macos\x64\FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll" Condition="$(BuiltOnCI)">
@@ -154,12 +135,12 @@
     </_PackageFiles>
 
     <!-- Direct pack -->
-    <!-- Copy the Windows x86/x64 native DLL -->
+    <!-- Copy the Windows x64 native DLL -->
     <_PackageFiles Include="$(OutputPath)\FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll" Condition="$([MSBuild]::IsOsPlatform('Windows')) AND !$(BuiltOnCI)">
       <BuildAction>None</BuildAction>
       <PackagePath>runtimes\win-x$(Platform)\native</PackagePath>
     </_PackageFiles>
-    <!-- Copy the Linux x86/x64 native DLL -->
+    <!-- Copy the Linux x64 native DLL -->
     <_PackageFiles Include="$(OutputPath)\FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll" Condition="$([MSBuild]::IsOsPlatform('Linux')) AND !$(BuiltOnCI)">
       <BuildAction>None</BuildAction>
       <PackagePath>runtimes\linux-$(Platform)\native</PackagePath>
