@@ -52,7 +52,7 @@ $SetupArgs = @{
     BuildMethod = $BuildMethod
     Keys = $Keys
 }
-& ./$ExamplesRepo/ci/setup-environment.ps1 @SetupArgs
+& ./$ExamplesRepo/ci/setup-environment.ps1 @SetupArgs -Debug
 
 Write-Output "`n------- SETUP ENVIRONMENT END -------`n"
 
