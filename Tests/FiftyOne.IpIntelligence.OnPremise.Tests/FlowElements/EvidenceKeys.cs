@@ -25,32 +25,30 @@ using FiftyOne.Pipeline.Engines;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace FiftyOne.IpIntelligence.OnPremise.Tests.Core.FlowElements
 {
-    [Ignore] // TODO: Remove once everything works
     [TestClass]
     [TestCategory("Core")]
     [TestCategory("EvidenceKeys")]
     public class EvidenceKeysOnPremiseCoreTests : TestsBase
     {
+        private static IEnumerable<object[]> ProfilesToTest
+            => TestHelpers.Constants.TestableProfiles
+            .Where(x => x != PerformanceProfiles.BalancedTemp)
+            .Select(x => new object[] { x });
 
         [DataTestMethod]
-        [DataRow(PerformanceProfiles.HighPerformance)]
-        [DataRow(PerformanceProfiles.MaxPerformance)]
-        [DataRow(PerformanceProfiles.LowMemory)]
-        [DataRow(PerformanceProfiles.Balanced)]
+        [DynamicData(nameof(ProfilesToTest))]
         public void EvidenceKeys_OnPremise_Core_ContainsIpAddress(PerformanceProfiles profile)
         {
             TestInitialize(profile);
             EvidenceKeyTests.ContainsIpAddress(Wrapper);
         }
         [DataTestMethod]
-        [DataRow(PerformanceProfiles.HighPerformance)]
-        [DataRow(PerformanceProfiles.MaxPerformance)]
-        [DataRow(PerformanceProfiles.LowMemory)]
-        [DataRow(PerformanceProfiles.Balanced)]
+        [DynamicData(nameof(ProfilesToTest))]
         public void EvidenceKeys_OnPremise_Core_CaseInsensitiveKeys(PerformanceProfiles profile)
         {
             TestInitialize(profile);

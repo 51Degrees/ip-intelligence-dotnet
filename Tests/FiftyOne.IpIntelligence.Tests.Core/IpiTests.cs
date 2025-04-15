@@ -20,6 +20,8 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
+using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
+using FiftyOne.Caching;
 using FiftyOne.IpIntelligence.TestHelpers;
 using FiftyOne.Pipeline.Core.Data;
 using FiftyOne.Pipeline.Engines;
@@ -31,6 +33,9 @@ using Moq;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -38,56 +43,37 @@ using Constants = FiftyOne.IpIntelligence.TestHelpers.Constants;
 
 namespace FiftyOne.IpIntelligence.Tests.Core
 {
-    [Ignore] // TODO: Remove once everything works
     [TestClass]
     public class IpiTests
     {
+        private static readonly IEnumerable<bool> AllBools = new bool[] { false, true };
+
+        private static IEnumerable<object[]> TestParams
+            => from profile in Constants.TestableProfiles
+               from useCache in AllBools
+               from useLazyLoading in AllBools
+               from multiThreaded in AllBools
+               select new object[] {
+                   profile, 
+                   useCache, 
+                   useLazyLoading, 
+                   multiThreaded,
+               };
+
+        public static string DisplayNameForTestCase(MethodInfo methodInfo, object[] data)
+        {
+            var profile = (PerformanceProfiles)data[0];
+            var useCache = (((bool)data[1]) ? "" : "No") + "Cache";
+            var useLazyLoading = (((bool)data[2]) ? "" : "No") + "LazyLoad";
+            var multiThreaded = (((bool)data[3]) ? "Multi" : "Single") + "Thread";
+            return $"Ipi-{profile}_{useCache}_{useLazyLoading}_{multiThreaded}";
+        }
+
         private static IpAddressGenerator IP_ADDRESSES = new IpAddressGenerator(
             TestHelpers.Utils.GetFilePath(Constants.IP_FILE_NAME));
 
         [DataTestMethod]
-        // ******** IP intelligence with a single thread *********
-        [DataRow(Constants.IPI_DATA_FILE_NAME, PerformanceProfiles.MaxPerformance, false, false, false, DisplayName = "Ipi-MaxPerformance-NoCache-NoLazyLoad-SingleThread")]
-        [DataRow(Constants.IPI_DATA_FILE_NAME, PerformanceProfiles.HighPerformance, false, false, false, DisplayName = "Ipi-HighPerformance-NoCache-NoLazyLoad-SingleThread")]
-        [DataRow(Constants.IPI_DATA_FILE_NAME, PerformanceProfiles.LowMemory, false, false, false, DisplayName = "Ipi-LowMemory-NoCache-NoLazyLoad-SingleThread")]
-        [DataRow(Constants.IPI_DATA_FILE_NAME, PerformanceProfiles.Balanced, false, false, false, DisplayName = "Ipi-Balanced-NoCache-NoLazyLoad-SingleThread")]
-        [DataRow(Constants.IPI_DATA_FILE_NAME, PerformanceProfiles.BalancedTemp, false, false, false, DisplayName = "Ipi-BalancedTemp-NoCache-NoLazyLoad-SingleThread")]
-        [DataRow(Constants.IPI_DATA_FILE_NAME, PerformanceProfiles.MaxPerformance, true, false, false, DisplayName = "Ipi-MaxPerformance-Cache-NoLazyLoad-SingleThread")]
-        [DataRow(Constants.IPI_DATA_FILE_NAME, PerformanceProfiles.HighPerformance, true, false, false, DisplayName = "Ipi-HighPerformance-Cache-NoLazyLoad-SingleThread")]
-        [DataRow(Constants.IPI_DATA_FILE_NAME, PerformanceProfiles.LowMemory, true, false, false, DisplayName = "Ipi-LowMemory-Cache-NoLazyLoad-SingleThread")]
-        [DataRow(Constants.IPI_DATA_FILE_NAME, PerformanceProfiles.Balanced, true, false, false, DisplayName = "Ipi-Balanced-Cache-NoLazyLoad-SingleThread")]
-        [DataRow(Constants.IPI_DATA_FILE_NAME, PerformanceProfiles.BalancedTemp, true, false, false, DisplayName = "Ipi-BalancedTemp-Cache-NoLazyLoad-SingleThread")]
-        [DataRow(Constants.IPI_DATA_FILE_NAME, PerformanceProfiles.MaxPerformance, false, true, false, DisplayName = "Ipi-MaxPerformance-NoCache-LazyLoad-SingleThread")]
-        [DataRow(Constants.IPI_DATA_FILE_NAME, PerformanceProfiles.HighPerformance, false, true, false, DisplayName = "Ipi-HighPerformance-NoCache-LazyLoad-SingleThread")]
-        [DataRow(Constants.IPI_DATA_FILE_NAME, PerformanceProfiles.LowMemory, false, true, false, DisplayName = "Ipi-LowMemory-NoCache-LazyLoad-SingleThread")]
-        [DataRow(Constants.IPI_DATA_FILE_NAME, PerformanceProfiles.Balanced, false, true, false, DisplayName = "Ipi-Balanced-NoCache-LazyLoad-SingleThread")]
-        [DataRow(Constants.IPI_DATA_FILE_NAME, PerformanceProfiles.BalancedTemp, false, true, false, DisplayName = "Ipi-BalancedTemp-NoCache-LazyLoad-SingleThread")]
-        [DataRow(Constants.IPI_DATA_FILE_NAME, PerformanceProfiles.MaxPerformance, true, true, false, DisplayName = "Ipi-MaxPerformance-Cache-LazyLoad-SingleThread")]
-        [DataRow(Constants.IPI_DATA_FILE_NAME, PerformanceProfiles.HighPerformance, true, true, false, DisplayName = "Ipi-HighPerformance-Cache-LazyLoad-SingleThread")]
-        [DataRow(Constants.IPI_DATA_FILE_NAME, PerformanceProfiles.LowMemory, true, true, false, DisplayName = "Ipi-LowMemory-Cache-LazyLoad-SingleThread")]
-        [DataRow(Constants.IPI_DATA_FILE_NAME, PerformanceProfiles.Balanced, true, true, false, DisplayName = "Ipi-Balanced-Cache-LazyLoad-SingleThread")]
-        [DataRow(Constants.IPI_DATA_FILE_NAME, PerformanceProfiles.BalancedTemp, true, true, false, DisplayName = "Ipi-BalancedTemp-Cache-LazyLoad-SingleThread")]
-        // ******** IP intelligence with multiple threads *********
-        [DataRow(Constants.IPI_DATA_FILE_NAME, PerformanceProfiles.MaxPerformance, false, false, true, DisplayName = "Ipi-MaxPerformance-NoCache-NoLazyLoad-MultiThread")]
-        [DataRow(Constants.IPI_DATA_FILE_NAME, PerformanceProfiles.HighPerformance, false, false, true, DisplayName = "Ipi-HighPerformance-NoCache-NoLazyLoad-MultiThread")]
-        [DataRow(Constants.IPI_DATA_FILE_NAME, PerformanceProfiles.LowMemory, false, false, true, DisplayName = "Ipi-LowMemory-NoCache-NoLazyLoad-MultiThread")]
-        [DataRow(Constants.IPI_DATA_FILE_NAME, PerformanceProfiles.Balanced, false, false, true, DisplayName = "Ipi-Balanced-NoCache-NoLazyLoad-MultiThread")]
-        [DataRow(Constants.IPI_DATA_FILE_NAME, PerformanceProfiles.BalancedTemp, false, false, true, DisplayName = "Ipi-BalancedTemp-NoCache-NoLazyLoad-MultiThread")]
-        [DataRow(Constants.IPI_DATA_FILE_NAME, PerformanceProfiles.MaxPerformance, true, false, true, DisplayName = "Ipi-MaxPerformance-Cache-NoLazyLoad-MultiThread")]
-        [DataRow(Constants.IPI_DATA_FILE_NAME, PerformanceProfiles.HighPerformance, true, false, true, DisplayName = "Ipi-HighPerformance-Cache-NoLazyLoad-MultiThread")]
-        [DataRow(Constants.IPI_DATA_FILE_NAME, PerformanceProfiles.LowMemory, true, false, true, DisplayName = "Ipi-LowMemory-Cache-NoLazyLoad-MultiThread")]
-        [DataRow(Constants.IPI_DATA_FILE_NAME, PerformanceProfiles.Balanced, true, false, true, DisplayName = "Ipi-Balanced-Cache-NoLazyLoad-MultiThread")]
-        [DataRow(Constants.IPI_DATA_FILE_NAME, PerformanceProfiles.BalancedTemp, true, false, true, DisplayName = "Ipi-BalancedTemp-Cache-NoLazyLoad-MultiThread")]
-        [DataRow(Constants.IPI_DATA_FILE_NAME, PerformanceProfiles.MaxPerformance, false, true, true, DisplayName = "Ipi-MaxPerformance-NoCache-LazyLoad-MultiThread")]
-        [DataRow(Constants.IPI_DATA_FILE_NAME, PerformanceProfiles.HighPerformance, false, true, true, DisplayName = "Ipi-HighPerformance-NoCache-LazyLoad-MultiThread")]
-        [DataRow(Constants.IPI_DATA_FILE_NAME, PerformanceProfiles.LowMemory, false, true, true, DisplayName = "Ipi-LowMemory-NoCache-LazyLoad-MultiThread")]
-        [DataRow(Constants.IPI_DATA_FILE_NAME, PerformanceProfiles.Balanced, false, true, true, DisplayName = "Ipi-Balanced-NoCache-LazyLoad-MultiThread")]
-        [DataRow(Constants.IPI_DATA_FILE_NAME, PerformanceProfiles.BalancedTemp, false, true, true, DisplayName = "Ipi-BalancedTemp-NoCache-LazyLoad-MultiThread")]
-        [DataRow(Constants.IPI_DATA_FILE_NAME, PerformanceProfiles.MaxPerformance, true, true, true, DisplayName = "Ipi-MaxPerformance-Cache-LazyLoad-MultiThread")]
-        [DataRow(Constants.IPI_DATA_FILE_NAME, PerformanceProfiles.HighPerformance, true, true, true, DisplayName = "Ipi-HighPerformance-Cache-LazyLoad-MultiThread")]
-        [DataRow(Constants.IPI_DATA_FILE_NAME, PerformanceProfiles.LowMemory, true, true, true, DisplayName = "Ipi-LowMemory-Cache-LazyLoad-MultiThread")]
-        [DataRow(Constants.IPI_DATA_FILE_NAME, PerformanceProfiles.Balanced, true, true, true, DisplayName = "Ipi-Balanced-Cache-LazyLoad-MultiThread")]
-        [DataRow(Constants.IPI_DATA_FILE_NAME, PerformanceProfiles.BalancedTemp, true, true, true, DisplayName = "Ipi-BalancedTemp-Cache-LazyLoad-MultiThread")]
+        [DynamicData(nameof(TestParams), DynamicDataDisplayName = nameof(DisplayNameForTestCase))]
         public void Ipi_AllConfigurations_100_IpAddresses(
             string datafileName,
             PerformanceProfiles performanceProfile,

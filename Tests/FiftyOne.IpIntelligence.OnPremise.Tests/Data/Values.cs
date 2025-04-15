@@ -23,21 +23,23 @@
 using FiftyOne.IpIntelligence.TestHelpers.Data;
 using FiftyOne.Pipeline.Engines;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace FiftyOne.IpIntelligence.OnPremise.Tests.Core.Data
 {
-    [Ignore] // TODO: Remove once everything works
     [TestClass]
     [TestCategory("Core")]
     [TestCategory("Values")]
     public class ValuesOnPremiseCoreTests : TestsBase
     {
+        private static IEnumerable<object[]> ProfilesToTest
+            => TestHelpers.Constants.TestableProfiles
+            .Where(x => x != PerformanceProfiles.BalancedTemp)
+            .Select(x => new object[] { x });
 
         [DataTestMethod]
-        [DataRow(PerformanceProfiles.HighPerformance)]
-        [DataRow(PerformanceProfiles.MaxPerformance)]
-        [DataRow(PerformanceProfiles.LowMemory)]
-        [DataRow(PerformanceProfiles.Balanced)]
+        [DynamicData(nameof(ProfilesToTest))]
         public void Values_OnPremise_Core_ValueTypes(PerformanceProfiles profile)
         {
             TestInitialize(profile);
@@ -45,10 +47,7 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Core.Data
         }
 
         [DataTestMethod]
-        [DataRow(PerformanceProfiles.HighPerformance)]
-        [DataRow(PerformanceProfiles.MaxPerformance)]
-        [DataRow(PerformanceProfiles.LowMemory)]
-        [DataRow(PerformanceProfiles.Balanced)]
+        [DynamicData(nameof(ProfilesToTest))]
         public void Values_OnPremise_Core_AvailableProperties(PerformanceProfiles profile)
         {
             TestInitialize(profile);
@@ -56,10 +55,7 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Core.Data
         }
 
         [DataTestMethod]
-        [DataRow(PerformanceProfiles.HighPerformance)]
-        [DataRow(PerformanceProfiles.MaxPerformance)]
-        [DataRow(PerformanceProfiles.LowMemory)]
-        [DataRow(PerformanceProfiles.Balanced)]
+        [DynamicData(nameof(ProfilesToTest))]
         public void Values_OnPremise_Core_TypedGetters(PerformanceProfiles profile)
         {
             TestInitialize(profile);

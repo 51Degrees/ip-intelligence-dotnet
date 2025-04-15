@@ -20,6 +20,7 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
+using FiftyOne.Pipeline.Engines;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -34,5 +35,18 @@ namespace FiftyOne.IpIntelligence.TestHelpers
 
         public static string Ipv4Address = "8.8.8.8";
         public static string Ipv6Address = "2001:4860:4860::8888";
+
+        public static IEnumerable<PerformanceProfiles> TestableProfiles
+        {
+            get
+            {
+                yield return PerformanceProfiles.MaxPerformance;
+                yield break;
+                // TODO: Swap to full enum once File operations are fixed
+                foreach(var x in Enum.GetValues(typeof(PerformanceProfiles)))
+                    if (x is PerformanceProfiles profile)
+                        yield return profile;
+            }
+        }
     }
 }

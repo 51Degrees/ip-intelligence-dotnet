@@ -24,11 +24,13 @@ using FiftyOne.IpIntelligence.OnPremise.Tests.Data;
 using FiftyOne.IpIntelligence.TestHelpers.Data;
 using FiftyOne.Pipeline.Engines;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace FiftyOne.IpIntelligence.OnPremise.Tests.Core.Data
 {
-    [Ignore] // TODO: Remove once everything works
     [TestClass]
     [TestCategory("Core")]
     [TestCategory("MetaData")]
@@ -36,75 +38,37 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Core.Data
     {
         private const int TEST_DELAY_MS = 3000;
 
+        private static IEnumerable<object[]> ProfilesToTest
+            => TestHelpers.Constants.TestableProfiles
+            .Where(x => x != PerformanceProfiles.BalancedTemp)
+            .Select(x => new object[] { x });
+
+        public static string DisplayNameForTestCase(MethodInfo methodInfo, object[] data)
+            => $"{methodInfo.Name}_{(PerformanceProfiles)data[0]}";
+
         // Note that the 'ReloadMemory' tests are split into separate methods
         // rather than using the 'DataTestMethod' approach because they 
         // often fail due to running out of memory.
         // This way, they do not run into the same problem for some reason.
 
         [TestMethod]
-        public void MetaData_OnPremise_Core_Reload_LowMemory()
+        [DynamicData(nameof(ProfilesToTest), DynamicDataDisplayName = nameof(DisplayNameForTestCase))]
+        public void MetaData_OnPremise_Core_Reload(PerformanceProfiles profile)
         {
             Task.Delay(TEST_DELAY_MS).Wait();
-            TestInitialize(PerformanceProfiles.LowMemory);
+            TestInitialize(profile);
             MetaDataTests test = new MetaDataTests();
-            test.Reload(Wrapper, new MetaDataHasher(), PerformanceProfiles.LowMemory);
-        }
-        [TestMethod]
-        public void MetaData_OnPremise_Core_Reload_Balanced()
-        {
-            Task.Delay(TEST_DELAY_MS).Wait();
-            TestInitialize(PerformanceProfiles.Balanced);
-            MetaDataTests test = new MetaDataTests();
-            test.Reload(Wrapper, new MetaDataHasher(), PerformanceProfiles.Balanced);
-        }
-        [TestMethod]
-        public void MetaData_OnPremise_Core_Reload_HighPerformance()
-        {
-            Task.Delay(TEST_DELAY_MS).Wait();
-            TestInitialize(PerformanceProfiles.HighPerformance);
-            MetaDataTests test = new MetaDataTests();
-            test.Reload(Wrapper, new MetaDataHasher(), PerformanceProfiles.HighPerformance);
-        }
-        [TestMethod]
-        public void MetaData_OnPremise_Core_Reload_MaxPerformance()
-        {
-            Task.Delay(TEST_DELAY_MS).Wait();
-            TestInitialize(PerformanceProfiles.MaxPerformance);
-            MetaDataTests test = new MetaDataTests();
-            test.Reload(Wrapper, new MetaDataHasher(), PerformanceProfiles.MaxPerformance);
+            test.Reload(Wrapper, new MetaDataHasher(), profile);
         }
 
         [TestMethod]
-        public void MetaData_OnPremise_Core_ReloadMemory_LowMemory()
+        [DynamicData(nameof(ProfilesToTest), DynamicDataDisplayName = nameof(DisplayNameForTestCase))]
+        public void MetaData_OnPremise_Core_ReloadMemory(PerformanceProfiles profile)
         {
             Task.Delay(TEST_DELAY_MS).Wait();
             TestInitialize(PerformanceProfiles.LowMemory);
             MetaDataTests test = new MetaDataTests();
             test.ReloadMemory(Wrapper, new MetaDataHasher(), PerformanceProfiles.LowMemory);
-        }
-        [TestMethod]
-        public void MetaData_OnPremise_Core_ReloadMemory_Balanced()
-        {
-            Task.Delay(TEST_DELAY_MS).Wait();
-            TestInitialize(PerformanceProfiles.Balanced);
-            MetaDataTests test = new MetaDataTests();
-            test.ReloadMemory(Wrapper, new MetaDataHasher(), PerformanceProfiles.Balanced);
-        }
-        [TestMethod]
-        public void MetaData_OnPremise_Core_ReloadMemory_HighPerformance()
-        {
-            Task.Delay(TEST_DELAY_MS).Wait();
-            TestInitialize(PerformanceProfiles.HighPerformance);
-            MetaDataTests test = new MetaDataTests();
-            test.ReloadMemory(Wrapper, new MetaDataHasher(), PerformanceProfiles.HighPerformance);
-        }
-        [TestMethod]
-        public void MetaData_OnPremise_Core_ReloadMemory_MaxPerformance()
-        {
-            Task.Delay(TEST_DELAY_MS).Wait();
-            TestInitialize(PerformanceProfiles.MaxPerformance);
-            MetaDataTests test = new MetaDataTests();
-            test.ReloadMemory(Wrapper, new MetaDataHasher(), PerformanceProfiles.MaxPerformance);
         }
     }
 }

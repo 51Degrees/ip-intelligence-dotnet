@@ -24,21 +24,23 @@ using FiftyOne.IpIntelligence.OnPremise.Tests.Data;
 using FiftyOne.IpIntelligence.TestHelpers.FlowElements;
 using FiftyOne.Pipeline.Engines;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace FiftyOne.IpIntelligence.OnPremise.Tests.Core.FlowElements
 {
-    [Ignore] // TODO: Remove once everything works
     [TestClass]
     [TestCategory("Core")]
     [TestCategory("Process")]
     public class ProcessOnPremiseCoreTests : TestsBase
     {
+        private static IEnumerable<object[]> ProfilesToTest
+            => TestHelpers.Constants.TestableProfiles
+            .Where(x => x != PerformanceProfiles.BalancedTemp)
+            .Select(x => new object[] { x });
 
         [DataTestMethod]
-        [DataRow(PerformanceProfiles.HighPerformance)]
-        [DataRow(PerformanceProfiles.MaxPerformance)]
-        [DataRow(PerformanceProfiles.LowMemory)]
-        [DataRow(PerformanceProfiles.Balanced)]
+        [DynamicData(nameof(ProfilesToTest))]
         public void Process_OnPremise_Core_NoEvidence(PerformanceProfiles profile)
         {
             TestInitialize(profile);
@@ -46,10 +48,7 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Core.FlowElements
         }
 
         [DataTestMethod]
-        [DataRow(PerformanceProfiles.HighPerformance)]
-        [DataRow(PerformanceProfiles.MaxPerformance)]
-        [DataRow(PerformanceProfiles.LowMemory)]
-        [DataRow(PerformanceProfiles.Balanced)]
+        [DynamicData(nameof(ProfilesToTest))]
         public void Process_OnPremise_Core_EmptyIpAddress(PerformanceProfiles profile)
         {
             TestInitialize(profile);
@@ -57,10 +56,7 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Core.FlowElements
         }
 
         [DataTestMethod]
-        [DataRow(PerformanceProfiles.HighPerformance)]
-        [DataRow(PerformanceProfiles.MaxPerformance)]
-        [DataRow(PerformanceProfiles.LowMemory)]
-        [DataRow(PerformanceProfiles.Balanced)]
+        [DynamicData(nameof(ProfilesToTest))]
         public void Process_OnPremise_Core_NoHeaders(PerformanceProfiles profile)
         {
             TestInitialize(profile);
@@ -68,10 +64,7 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Core.FlowElements
         }
 
         [DataTestMethod]
-        [DataRow(PerformanceProfiles.HighPerformance)]
-        [DataRow(PerformanceProfiles.MaxPerformance)]
-        [DataRow(PerformanceProfiles.LowMemory)]
-        [DataRow(PerformanceProfiles.Balanced)]
+        [DynamicData(nameof(ProfilesToTest))]
         public void Process_OnPremise_Core_NoUsefulHeaders(PerformanceProfiles profile)
         {
             TestInitialize(profile);
@@ -79,10 +72,7 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Core.FlowElements
         }
 
         [DataTestMethod]
-        [DataRow(PerformanceProfiles.HighPerformance)]
-        [DataRow(PerformanceProfiles.MaxPerformance)]
-        [DataRow(PerformanceProfiles.LowMemory)]
-        [DataRow(PerformanceProfiles.Balanced)]
+        [DynamicData(nameof(ProfilesToTest))]
         public void Process_OnPremise_Core_CaseInsensitiveKeys(PerformanceProfiles profile)
         {
             TestInitialize(profile);
@@ -90,10 +80,7 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Core.FlowElements
         }
 
         [DataTestMethod]
-        [DataRow(PerformanceProfiles.HighPerformance)]
-        [DataRow(PerformanceProfiles.MaxPerformance)]
-        [DataRow(PerformanceProfiles.LowMemory)]
-        [DataRow(PerformanceProfiles.Balanced)]
+        [DynamicData(nameof(ProfilesToTest))]
         public void Process_OnPremise_Core_MetaDataService_DefaultProfilesIds(PerformanceProfiles profile)
         {
             TestInitialize(profile);
@@ -106,10 +93,7 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Core.FlowElements
         // unmanaged layer.
         //
         // [DataTestMethod]
-        // [DataRow(PerformanceProfiles.HighPerformance)]
-        // [DataRow(PerformanceProfiles.MaxPerformance)]
-        // [DataRow(PerformanceProfiles.LowMemory)]
-        // [DataRow(PerformanceProfiles.Balanced)]
+        // [DynamicData(nameof(ProfilesToTest))]
         // public void Process_OnPremise_Core_MetaDataService_ComponentIdForProfile(PerformanceProfiles profile)
         // {
         //     TestInitialize(profile);
@@ -117,10 +101,7 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Core.FlowElements
         // }
 
         [DataTestMethod]
-        [DataRow(PerformanceProfiles.HighPerformance)]
-        [DataRow(PerformanceProfiles.MaxPerformance)]
-        [DataRow(PerformanceProfiles.LowMemory)]
-        [DataRow(PerformanceProfiles.Balanced)]
+        [DynamicData(nameof(ProfilesToTest))]
         public void Process_OnPremise_Core_MetaDataService_DefaultProfileIdForComponent(PerformanceProfiles profile)
         {
             TestInitialize(profile);
