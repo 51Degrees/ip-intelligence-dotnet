@@ -82,7 +82,19 @@ internal class ConfigIpiSwig : ConfigBaseSwig {
   }
 
   public CollectionConfigSwig getStrings() {
-    CollectionConfigSwig ret = new CollectionConfigSwig(IpIntelligenceEngineModulePINVOKE.ConfigIpiSwig_getStrings(swigCPtr), true);
+    CollectionConfigSwig ret = new CollectionConfigSwig(IpIntelligenceEngineModulePINVOKE.ConfigIpiSwig_getStrings(swigCPtr), false);
+    if (IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Pending) throw IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Retrieve();
+    return ret;
+  }
+
+  public CollectionConfigSwig getComponents() {
+    CollectionConfigSwig ret = new CollectionConfigSwig(IpIntelligenceEngineModulePINVOKE.ConfigIpiSwig_getComponents(swigCPtr), true);
+    if (IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Pending) throw IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Retrieve();
+    return ret;
+  }
+
+  public CollectionConfigSwig getMaps() {
+    CollectionConfigSwig ret = new CollectionConfigSwig(IpIntelligenceEngineModulePINVOKE.ConfigIpiSwig_getMaps(swigCPtr), false);
     if (IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Pending) throw IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
@@ -105,31 +117,37 @@ internal class ConfigIpiSwig : ConfigBaseSwig {
     return ret;
   }
 
-  public CollectionConfigSwig getIpv4Ranges() {
-    CollectionConfigSwig ret = new CollectionConfigSwig(IpIntelligenceEngineModulePINVOKE.ConfigIpiSwig_getIpv4Ranges(swigCPtr), true);
+  public CollectionConfigSwig getGraphs() {
+    CollectionConfigSwig ret = new CollectionConfigSwig(IpIntelligenceEngineModulePINVOKE.ConfigIpiSwig_getGraphs(swigCPtr), false);
     if (IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Pending) throw IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
 
-  public CollectionConfigSwig getIpv6Ranges() {
-    CollectionConfigSwig ret = new CollectionConfigSwig(IpIntelligenceEngineModulePINVOKE.ConfigIpiSwig_getIpv6Ranges(swigCPtr), true);
-    if (IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Pending) throw IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Retrieve();
-    return ret;
-  }
-
-  public CollectionConfigSwig getProfileCombinations() {
-    CollectionConfigSwig ret = new CollectionConfigSwig(IpIntelligenceEngineModulePINVOKE.ConfigIpiSwig_getProfileCombinations(swigCPtr), true);
+  public CollectionConfigSwig getProfileGroups() {
+    CollectionConfigSwig ret = new CollectionConfigSwig(IpIntelligenceEngineModulePINVOKE.ConfigIpiSwig_getProfileGroups(swigCPtr), false);
     if (IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Pending) throw IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
 
   public CollectionConfigSwig getProfileOffsets() {
-    CollectionConfigSwig ret = new CollectionConfigSwig(IpIntelligenceEngineModulePINVOKE.ConfigIpiSwig_getProfileOffsets(swigCPtr), true);
+    CollectionConfigSwig ret = new CollectionConfigSwig(IpIntelligenceEngineModulePINVOKE.ConfigIpiSwig_getProfileOffsets(swigCPtr), false);
     if (IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Pending) throw IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
 
-  public override ushort getConcurrency() {
+  public CollectionConfigSwig getPropertyTypes() {
+    CollectionConfigSwig ret = new CollectionConfigSwig(IpIntelligenceEngineModulePINVOKE.ConfigIpiSwig_getPropertyTypes(swigCPtr), false);
+    if (IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Pending) throw IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Retrieve();
+    return ret;
+  }
+
+  public CollectionConfigSwig getGraph() {
+    CollectionConfigSwig ret = new CollectionConfigSwig(IpIntelligenceEngineModulePINVOKE.ConfigIpiSwig_getGraph(swigCPtr), false);
+    if (IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Pending) throw IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Retrieve();
+    return ret;
+  }
+
+  public ushort getConcurrency() {
     ushort ret = IpIntelligenceEngineModulePINVOKE.ConfigIpiSwig_getConcurrency(swigCPtr);
     if (IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Pending) throw IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Retrieve();
     return ret;

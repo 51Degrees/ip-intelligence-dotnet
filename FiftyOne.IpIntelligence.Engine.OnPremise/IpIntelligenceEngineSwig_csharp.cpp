@@ -25088,12 +25088,12 @@ SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInte
 SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ConfigIpiSwig_getStrings___(void * jarg1) {
   void * jresult ;
   ConfigIpi *arg1 = (ConfigIpi *) 0 ;
-  CollectionConfig result;
+  CollectionConfig *result = 0 ;
   
   arg1 = (ConfigIpi *)jarg1; 
   {
     try {
-      result = (arg1)->getStrings();;
+      result = (CollectionConfig *) &((ConfigIpi const *)arg1)->getStrings();;
     }
     catch(FatalException& e) {
       {
@@ -25141,7 +25141,129 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
       };
     }
   }
-  jresult = new CollectionConfig(result); 
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ConfigIpiSwig_getComponents___(void * jarg1) {
+  void * jresult ;
+  ConfigIpi *arg1 = (ConfigIpi *) 0 ;
+  CollectionConfig *result = 0 ;
+  
+  arg1 = (ConfigIpi *)jarg1; 
+  {
+    try {
+      result = (CollectionConfig *) &((ConfigIpi const *)arg1)->getComponents();;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ConfigIpiSwig_getMaps___(void * jarg1) {
+  void * jresult ;
+  ConfigIpi *arg1 = (ConfigIpi *) 0 ;
+  CollectionConfig *result = 0 ;
+  
+  arg1 = (ConfigIpi *)jarg1; 
+  {
+    try {
+      result = (CollectionConfig *) &((ConfigIpi const *)arg1)->getMaps();;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = (void *)result; 
   return jresult;
 }
 
@@ -25149,12 +25271,12 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
 SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ConfigIpiSwig_getProperties___(void * jarg1) {
   void * jresult ;
   ConfigIpi *arg1 = (ConfigIpi *) 0 ;
-  CollectionConfig result;
+  CollectionConfig *result = 0 ;
   
   arg1 = (ConfigIpi *)jarg1; 
   {
     try {
-      result = (arg1)->getProperties();;
+      result = (CollectionConfig *) &((ConfigIpi const *)arg1)->getProperties();;
     }
     catch(FatalException& e) {
       {
@@ -25202,7 +25324,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
       };
     }
   }
-  jresult = new CollectionConfig(result); 
+  jresult = (void *)result; 
   return jresult;
 }
 
@@ -25210,12 +25332,12 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
 SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ConfigIpiSwig_getValues___(void * jarg1) {
   void * jresult ;
   ConfigIpi *arg1 = (ConfigIpi *) 0 ;
-  CollectionConfig result;
+  CollectionConfig *result = 0 ;
   
   arg1 = (ConfigIpi *)jarg1; 
   {
     try {
-      result = (arg1)->getValues();;
+      result = (CollectionConfig *) &((ConfigIpi const *)arg1)->getValues();;
     }
     catch(FatalException& e) {
       {
@@ -25263,7 +25385,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
       };
     }
   }
-  jresult = new CollectionConfig(result); 
+  jresult = (void *)result; 
   return jresult;
 }
 
@@ -25271,12 +25393,12 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
 SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ConfigIpiSwig_getProfiles___(void * jarg1) {
   void * jresult ;
   ConfigIpi *arg1 = (ConfigIpi *) 0 ;
-  CollectionConfig result;
+  CollectionConfig *result = 0 ;
   
   arg1 = (ConfigIpi *)jarg1; 
   {
     try {
-      result = (arg1)->getProfiles();;
+      result = (CollectionConfig *) &((ConfigIpi const *)arg1)->getProfiles();;
     }
     catch(FatalException& e) {
       {
@@ -25324,20 +25446,20 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
       };
     }
   }
-  jresult = new CollectionConfig(result); 
+  jresult = (void *)result; 
   return jresult;
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ConfigIpiSwig_getIpv4Ranges___(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ConfigIpiSwig_getGraphs___(void * jarg1) {
   void * jresult ;
   ConfigIpi *arg1 = (ConfigIpi *) 0 ;
-  CollectionConfig result;
+  CollectionConfig *result = 0 ;
   
   arg1 = (ConfigIpi *)jarg1; 
   {
     try {
-      result = (arg1)->getIpv4Ranges();;
+      result = (CollectionConfig *) &((ConfigIpi const *)arg1)->getGraphs();;
     }
     catch(FatalException& e) {
       {
@@ -25385,20 +25507,20 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
       };
     }
   }
-  jresult = new CollectionConfig(result); 
+  jresult = (void *)result; 
   return jresult;
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ConfigIpiSwig_getIpv6Ranges___(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ConfigIpiSwig_getProfileGroups___(void * jarg1) {
   void * jresult ;
   ConfigIpi *arg1 = (ConfigIpi *) 0 ;
-  CollectionConfig result;
+  CollectionConfig *result = 0 ;
   
   arg1 = (ConfigIpi *)jarg1; 
   {
     try {
-      result = (arg1)->getIpv6Ranges();;
+      result = (CollectionConfig *) &((ConfigIpi const *)arg1)->getProfileGroups();;
     }
     catch(FatalException& e) {
       {
@@ -25446,68 +25568,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
       };
     }
   }
-  jresult = new CollectionConfig(result); 
-  return jresult;
-}
-
-
-SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ConfigIpiSwig_getProfileCombinations___(void * jarg1) {
-  void * jresult ;
-  ConfigIpi *arg1 = (ConfigIpi *) 0 ;
-  CollectionConfig result;
-  
-  arg1 = (ConfigIpi *)jarg1; 
-  {
-    try {
-      result = (arg1)->getProfileCombinations();;
-    }
-    catch(FatalException& e) {
-      {
-        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
-      };
-    }
-    catch(NotImplementedException& e) {
-      {
-        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
-      };
-    }
-    catch(InvalidPropertyException& e) {
-      {
-        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
-      };
-    }
-    catch(EvidenceException& e) {
-      {
-        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
-      };
-    }
-    catch(TooManyValuesException& e) {
-      {
-        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
-      };
-    }
-    catch(NoValuesAvailableException& e) {
-      {
-        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
-      };
-    }	
-    catch(StatusCodeException& e) {
-      {
-        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
-      };
-    }
-    catch(runtime_error& e) {
-      {
-        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
-      };
-    }
-    catch(invalid_argument& e) {
-      {
-        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
-      };
-    }
-  }
-  jresult = new CollectionConfig(result); 
+  jresult = (void *)result; 
   return jresult;
 }
 
@@ -25515,12 +25576,12 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
 SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ConfigIpiSwig_getProfileOffsets___(void * jarg1) {
   void * jresult ;
   ConfigIpi *arg1 = (ConfigIpi *) 0 ;
-  CollectionConfig result;
+  CollectionConfig *result = 0 ;
   
   arg1 = (ConfigIpi *)jarg1; 
   {
     try {
-      result = (arg1)->getProfileOffsets();;
+      result = (CollectionConfig *) &((ConfigIpi const *)arg1)->getProfileOffsets();;
     }
     catch(FatalException& e) {
       {
@@ -25568,7 +25629,129 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
       };
     }
   }
-  jresult = new CollectionConfig(result); 
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ConfigIpiSwig_getPropertyTypes___(void * jarg1) {
+  void * jresult ;
+  ConfigIpi *arg1 = (ConfigIpi *) 0 ;
+  CollectionConfig *result = 0 ;
+  
+  arg1 = (ConfigIpi *)jarg1; 
+  {
+    try {
+      result = (CollectionConfig *) &((ConfigIpi const *)arg1)->getPropertyTypes();;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ConfigIpiSwig_getGraph___(void * jarg1) {
+  void * jresult ;
+  ConfigIpi *arg1 = (ConfigIpi *) 0 ;
+  CollectionConfig *result = 0 ;
+  
+  arg1 = (ConfigIpi *)jarg1; 
+  {
+    try {
+      result = (CollectionConfig *) &((ConfigIpi const *)arg1)->getGraph();;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = (void *)result; 
   return jresult;
 }
 
@@ -25581,7 +25764,7 @@ SWIGEXPORT unsigned short SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPr
   arg1 = (ConfigIpi *)jarg1; 
   {
     try {
-      result = (uint16_t)(arg1)->getConcurrency();;
+      result = (uint16_t)((ConfigIpi const *)arg1)->getConcurrency();;
     }
     catch(FatalException& e) {
       {

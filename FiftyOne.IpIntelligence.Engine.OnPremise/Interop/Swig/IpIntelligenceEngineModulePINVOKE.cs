@@ -1464,6 +1464,12 @@ class IpIntelligenceEngineModulePINVOKE {
   [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ConfigIpiSwig_getStrings___")]
   public static extern global::System.IntPtr ConfigIpiSwig_getStrings(global::System.Runtime.InteropServices.HandleRef jarg1);
 
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ConfigIpiSwig_getComponents___")]
+  public static extern global::System.IntPtr ConfigIpiSwig_getComponents(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ConfigIpiSwig_getMaps___")]
+  public static extern global::System.IntPtr ConfigIpiSwig_getMaps(global::System.Runtime.InteropServices.HandleRef jarg1);
+
   [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ConfigIpiSwig_getProperties___")]
   public static extern global::System.IntPtr ConfigIpiSwig_getProperties(global::System.Runtime.InteropServices.HandleRef jarg1);
 
@@ -1473,17 +1479,20 @@ class IpIntelligenceEngineModulePINVOKE {
   [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ConfigIpiSwig_getProfiles___")]
   public static extern global::System.IntPtr ConfigIpiSwig_getProfiles(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ConfigIpiSwig_getIpv4Ranges___")]
-  public static extern global::System.IntPtr ConfigIpiSwig_getIpv4Ranges(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ConfigIpiSwig_getGraphs___")]
+  public static extern global::System.IntPtr ConfigIpiSwig_getGraphs(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ConfigIpiSwig_getIpv6Ranges___")]
-  public static extern global::System.IntPtr ConfigIpiSwig_getIpv6Ranges(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ConfigIpiSwig_getProfileCombinations___")]
-  public static extern global::System.IntPtr ConfigIpiSwig_getProfileCombinations(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ConfigIpiSwig_getProfileGroups___")]
+  public static extern global::System.IntPtr ConfigIpiSwig_getProfileGroups(global::System.Runtime.InteropServices.HandleRef jarg1);
 
   [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ConfigIpiSwig_getProfileOffsets___")]
   public static extern global::System.IntPtr ConfigIpiSwig_getProfileOffsets(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ConfigIpiSwig_getPropertyTypes___")]
+  public static extern global::System.IntPtr ConfigIpiSwig_getPropertyTypes(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ConfigIpiSwig_getGraph___")]
+  public static extern global::System.IntPtr ConfigIpiSwig_getGraph(global::System.Runtime.InteropServices.HandleRef jarg1);
 
   [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ConfigIpiSwig_getConcurrency___")]
   public static extern ushort ConfigIpiSwig_getConcurrency(global::System.Runtime.InteropServices.HandleRef jarg1);
