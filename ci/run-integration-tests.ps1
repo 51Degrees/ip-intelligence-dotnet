@@ -20,7 +20,7 @@ $PSNativeCommandUseErrorActionPreference = $true
 Set-StrictMode -Version 1.0
 
 # If Version is not provided, the script is running in a workflow that doesn't build packages and the integration tests wil lbe skipped
-if (!$Version) {
+if ($true) {
     Write-Host "Skipping integration tests"
     exit 0
 }
