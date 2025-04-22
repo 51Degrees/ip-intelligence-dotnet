@@ -1,6 +1,6 @@
 /* *********************************************************************
  * This Original Work is copyright of 51 Degrees Mobile Experts Limited.
- * Copyright 2023 51 Degrees Mobile Experts Limited, Davidson House,
+ * Copyright 2025 51 Degrees Mobile Experts Limited, Davidson House,
  * Forbury Square, Reading, Berkshire, United Kingdom RG1 3EU.
  *
  * This Original Work is licensed under the European Union Public Licence
@@ -75,7 +75,7 @@ namespace FiftyOne.IpIntelligence.Examples.OnPremise.Performance
         private static readonly PerformanceConfiguration[] _configs = new PerformanceConfiguration[]
         {
             new PerformanceConfiguration(true, PerformanceProfiles.MaxPerformance, false, true, false),
-            new PerformanceConfiguration(true, PerformanceProfiles.MaxPerformance, true, true, false),
+            //new PerformanceConfiguration(true, PerformanceProfiles.MaxPerformance, true, true, false),
             //new PerformanceConfiguration(false, PerformanceProfiles.LowMemory, false, true, false),
             //new PerformanceConfiguration(false, PerformanceProfiles.LowMemory, true, true, false)
         };
@@ -186,11 +186,15 @@ namespace FiftyOne.IpIntelligence.Examples.OnPremise.Performance
                             var ipData = data.Get<IIpIntelligenceData>();
 
                             result.Count++;
+
                             // Access a property to ensure compiler optimizer doesn't optimize
                             // out the very method that the benchmark is testing.
-                            foreach (var nextName in ipData.RegisteredName.Value)
+                            if (ipData.RegisteredName.HasValue)
                             {
-                                result.HashSum += nextName.Value[0].GetHashCode();
+                                foreach (var nextName in ipData.RegisteredName.Value)
+                                {
+                                    result.HashSum += nextName.Value[0].GetHashCode();
+                                }
                             }
                         }
 
