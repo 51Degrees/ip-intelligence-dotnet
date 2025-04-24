@@ -45,7 +45,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GettingStarted-Web", "OnPre
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework-Web", "OnPremise\Framework-Web\Framework-Web.csproj", "{8A145E60-3FAC-421B-9EBB-732F86A07395}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiftyOne.DeviceDetection.Example.Tests.OnPremise", "..\Tests\FiftyOne.DeviceDetection.Example.Tests.OnPremise\FiftyOne.DeviceDetection.Example.Tests.OnPremise.csproj", "{69DCF217-4605-1565-FA02-69E0576AAAA4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiftyOne.IpIntelligence.Example.Tests.OnPremise", "..\Tests\FiftyOne.IpIntelligence.Example.Tests.OnPremise\FiftyOne.IpIntelligence.Example.Tests.OnPremise.csproj", "{69DCF217-4605-1565-FA02-69E0576AAAA4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
