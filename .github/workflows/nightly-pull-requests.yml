@@ -1,22 +1,15 @@
-name: Nightly PRs to Main
+name: Nightly Pull Requests
 
 on:
   workflow_dispatch:
     inputs:
       dryrun:
-        required: false
         type: boolean
         default: false
-  workflow_run:
-    workflows: 
-      - Nightly Submodule Update
-      - Nightly Package Update
-    types: [completed]
 
 jobs:
-  # Run the common workflow on each pull request
-  Nightly_PR_to_Main:
-    uses: 51Degrees/common-ci/.github/workflows/nightly-prs-to-main.yml@main
+  NightlyPullRequests:
+    uses: 51Degrees/common-ci/.github/workflows/nightly-pull-requests.yml@main
     with:
       repo-name: ${{ github.event.repository.name }}
       org-name: ${{ github.event.repository.owner.login }}
