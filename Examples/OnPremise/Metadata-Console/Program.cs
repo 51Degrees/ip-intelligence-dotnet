@@ -157,6 +157,7 @@ namespace FiftyOne.IpIntelligence.Examples.OnPremise.Metadata
 
             private void OutputProperties(IComponentMetaData component, TextWriter output)
             {
+                StringBuilder values = new StringBuilder();
                 foreach (var property in component.Properties)
                 {
                     // Output some details about the property.
@@ -174,22 +175,36 @@ namespace FiftyOne.IpIntelligence.Examples.OnPremise.Metadata
                     // values so exclude them.
                     if (property.Category != "Device Metrics")
                     {
-                        StringBuilder values = new StringBuilder("Possible values: ");
-                        foreach (var value in property.GetValues().Take(20))
+                        values.Clear();
+                        values.Append("Possible values (");
+                        long count = (property as PropertyMetaDataIpi)?.GetValuesCount() ?? (long)property.Values.Count();
+                        int limit = 20;
+                        values.Append(count);
+                        values.AppendLine("):");
+                        bool first = true;
+                        foreach (var value in property.GetValues().Take(limit))
                         {
+                            if (!first)
+                            {
+                                values.Append(',');
+                            }
+                            first = false;
                             // add value
+                            values.Append('\'');
                             values.Append(TruncateToNl(value.Name));
+                            values.Append('\'');
                             // add description if exists
                             if (string.IsNullOrEmpty(value.Description) == false)
                             {
                                 values.Append($"({value.Description})");
                             }
-                            values.Append(",");
                         }
-                        long count = (property as PropertyMetaDataIpi)?.GetValuesCount() ?? (long)property.Values.Count();
-                        if (count > 20)
+                        if (count > limit)
                         {
-                            values.Append($" + {count - 20} more ...");
+                            values.Append($" + {count - limit} more ...");
+                        } else if (count > 0)
+                        {
+                            values.Append('.');
                         }
                         output.WriteLine(values);
                     }
