@@ -197,7 +197,6 @@ namespace FiftyOne.IpIntelligence
         /// <exception cref="ArgumentNullException">
         /// Thrown if a required parameter is null
         /// </exception>
-        /// <seealso cref="UseOnPremise(Stream, string)"/>
         public IpiOnPremisePipelineBuilder UseOnPremise(
             string datafile, string key, bool createTempDataCopy = true)
         {
@@ -206,57 +205,6 @@ namespace FiftyOne.IpIntelligence
             var builder = new IpiOnPremisePipelineBuilder(
                 _loggerFactory, _dataUpdateService, _httpClient);
             builder.SetFilename(datafile, key, createTempDataCopy);
-            return builder;
-        }
-
-        /// <summary>
-        /// Use a 51Degrees on-premise IP intelligence engine to 
-        /// perform IP intelligence.
-        /// </summary>
-        /// <param name="dataStream">
-        /// The IP intelligence data file as a <see cref="Stream"/>.
-        /// </param>
-        /// <returns>
-        /// A builder that can be used to configure and build a pipeline
-        /// that will use the on-premise IP intelligence engine.
-        /// </returns>
-        [Obsolete("Call the overload that takes a license key instead. " +
-            "This method will be removed in a future version")]
-        public IpiOnPremisePipelineBuilder UseOnPremise(
-            Stream dataStream)
-        {
-            var builder = new IpiOnPremisePipelineBuilder(
-                _loggerFactory, _dataUpdateService, _httpClient);
-            builder.SetEngineData(dataStream);
-            return builder;
-        }
-
-        /// <summary>
-        /// Use a 51Degrees on-premise IP intelligence engine to 
-        /// perform IP intelligence.
-        /// </summary>
-        /// <param name="dataStream">
-        /// The IP intelligence data file as a <see cref="Stream"/>.
-        /// </param>
-        /// <param name="key">
-        /// The license key to use when checking for updates to the
-        /// data file.
-        /// A license key can be obtained from the 
-        /// [51Degrees website](https://www.51degrees.com/pricing).
-        /// If you have no license key then this parameter can be 
-        /// set to null, but doing so will disable automatic updates. 
-        /// </param>
-        /// <returns>
-        /// A builder that can be used to configure and build a pipeline
-        /// that will use the on-premise IP intelligence engine.
-        /// </returns>
-        /// <seealso cref="UseOnPremise(string, string, bool)"/>
-        public IpiOnPremisePipelineBuilder UseOnPremise(
-            Stream dataStream, string key)
-        {
-            var builder = new IpiOnPremisePipelineBuilder(
-                _loggerFactory, _dataUpdateService, _httpClient);
-            builder.SetEngineData(dataStream, key);
             return builder;
         }
     }

@@ -98,36 +98,6 @@
             Thrown if the filename has an unknown extension.
             </exception>
         </member>
-        <member name="M:FiftyOne.IpIntelligence.IpiOnPremisePipelineBuilder.SetEngineData(System.IO.Stream)">
-            <summary>
-            Set the byte array to use as a data source when 
-            creating the engine.
-            </summary>
-            <param name="dataStream">
-            The entire IP intelligence data file as a <see cref="T:System.IO.Stream"/>.
-            </param>
-            <returns>
-            This builder instance.
-            </returns>
-        </member>
-        <member name="M:FiftyOne.IpIntelligence.IpiOnPremisePipelineBuilder.SetEngineData(System.IO.Stream,System.String)">
-            <summary>
-            Set the byte array to use as a data source when 
-            creating the engine.
-            </summary>
-            <param name="dataStream">
-            The entire IP intelligence data file as a <see cref="T:System.IO.Stream"/>.
-            </param>
-            <param name="key">
-            The license key to use when checking for updates to the
-            data file.
-            This parameter can be set to null, but doing so will disable 
-            automatic updates. 
-            </param>
-            <returns>
-            This builder instance.
-            </returns>
-        </member>
         <member name="M:FiftyOne.IpIntelligence.IpiOnPremisePipelineBuilder.SetShareUsage(System.Boolean)">
             <summary>
             Set share usage enabled/disabled.
@@ -425,42 +395,6 @@
             <exception cref="T:System.ArgumentNullException">
             Thrown if a required parameter is null
             </exception>
-            <seealso cref="M:FiftyOne.IpIntelligence.IpiPipelineBuilder.UseOnPremise(System.IO.Stream,System.String)"/>
-        </member>
-        <member name="M:FiftyOne.IpIntelligence.IpiPipelineBuilder.UseOnPremise(System.IO.Stream)">
-            <summary>
-            Use a 51Degrees on-premise IP intelligence engine to 
-            perform IP intelligence.
-            </summary>
-            <param name="dataStream">
-            The IP intelligence data file as a <see cref="T:System.IO.Stream"/>.
-            </param>
-            <returns>
-            A builder that can be used to configure and build a pipeline
-            that will use the on-premise IP intelligence engine.
-            </returns>
-        </member>
-        <member name="M:FiftyOne.IpIntelligence.IpiPipelineBuilder.UseOnPremise(System.IO.Stream,System.String)">
-            <summary>
-            Use a 51Degrees on-premise IP intelligence engine to 
-            perform IP intelligence.
-            </summary>
-            <param name="dataStream">
-            The IP intelligence data file as a <see cref="T:System.IO.Stream"/>.
-            </param>
-            <param name="key">
-            The license key to use when checking for updates to the
-            data file.
-            A license key can be obtained from the 
-            [51Degrees website](https://www.51degrees.com/pricing).
-            If you have no license key then this parameter can be 
-            set to null, but doing so will disable automatic updates. 
-            </param>
-            <returns>
-            A builder that can be used to configure and build a pipeline
-            that will use the on-premise IP intelligence engine.
-            </returns>
-            <seealso cref="M:FiftyOne.IpIntelligence.IpiPipelineBuilder.UseOnPremise(System.String,System.String,System.Boolean)"/>
         </member>
         <member name="T:FiftyOne.IpIntelligence.Messages">
             <summary>

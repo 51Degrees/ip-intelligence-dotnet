@@ -47,7 +47,6 @@ namespace FiftyOne.IpIntelligence
     {
         private string _filename;
         private bool _createTempDataCopy;
-        private Stream _engineDataStream;
 
         private bool? _autoUpdateEnabled = null;
         private bool? _dataUpdateOnStartUpEnabled = null;
@@ -142,52 +141,6 @@ namespace FiftyOne.IpIntelligence
         {
             _filename = filename;
             _createTempDataCopy = createTempDataCopy;
-            _dataUpdateLicenseKey = key;
-            return this;
-        }
-
-
-        /// <summary>
-        /// Set the byte array to use as a data source when 
-        /// creating the engine.
-        /// </summary>
-        /// <param name="dataStream">
-        /// The entire IP intelligence data file as a <see cref="Stream"/>.
-        /// </param>
-        /// <returns>
-        /// This builder instance.
-        /// </returns>
-        [Obsolete("Call the overload that takes a license key instead. " +
-            "This method will be removed in a future version")]
-        internal IpiOnPremisePipelineBuilder SetEngineData(Stream dataStream)
-        {
-            _engineDataStream = dataStream;
-            return this;
-        }
-
-
-
-        /// <summary>
-        /// Set the byte array to use as a data source when 
-        /// creating the engine.
-        /// </summary>
-        /// <param name="dataStream">
-        /// The entire IP intelligence data file as a <see cref="Stream"/>.
-        /// </param>
-        /// <param name="key">
-        /// The license key to use when checking for updates to the
-        /// data file.
-        /// This parameter can be set to null, but doing so will disable 
-        /// automatic updates. 
-        /// </param>
-        /// <returns>
-        /// This builder instance.
-        /// </returns>
-        internal IpiOnPremisePipelineBuilder SetEngineData(
-            Stream dataStream,
-            string key)
-        {
-            _engineDataStream = dataStream;
             _dataUpdateLicenseKey = key;
             return this;
         }
@@ -503,11 +456,6 @@ namespace FiftyOne.IpIntelligence
             if (string.IsNullOrEmpty(_filename) == false)
             {
                 engine = builder.Build(_filename, _createTempDataCopy);
-            }
-            else if (_engineDataStream != null ||
-                _dataUpdateOnStartUpEnabled == true)
-            {
-                engine = builder.Build(_engineDataStream);
             }
             else
             {
