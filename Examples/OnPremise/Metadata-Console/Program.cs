@@ -177,7 +177,7 @@ namespace FiftyOne.IpIntelligence.Examples.OnPremise.Metadata
                     {
                         values.Clear();
                         values.Append("Possible values (");
-                        long count = (property as PropertyMetaDataIpi)?.GetValuesCount() ?? (long)property.Values.Count();
+                        long count = (property as PropertyMetaDataIpi)?.GetValuesCount() ?? (long)property.GetValues().Count();
                         int limit = 20;
                         values.Append(count);
                         values.AppendLine("):");

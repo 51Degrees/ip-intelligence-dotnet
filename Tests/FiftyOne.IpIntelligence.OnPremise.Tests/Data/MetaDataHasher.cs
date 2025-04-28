@@ -39,7 +39,7 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Data
             {
                 hash ^= property.GetHashCode();
 
-                foreach (var value in property.Values
+                foreach (var value in property.GetValues()
                     .Where((v, i) => { return i % 10 == 0; }))
                 {
                     hash ^= value.GetHashCode();
