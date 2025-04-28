@@ -35,17 +35,21 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Core.Data
     public class Utf8OnPremiseCoreTests : TestsBase
     {
         [TestMethod]
-        public void Utf8_OnPremise_Core_Validate_Property_Values()
+        [Ignore("SWIG does not ensure proper marshalling. "
+            + "See https://github.com/swig/swig/pull/2364")]
+        [DataRow(new byte[]{
+            0x50,0xc3,0xa4,0x69,0x6a,0xc3,0xa4,0x74,0x2d,0x48,0xc3,0xa4,0x6d,0x65,
+        }, DisplayName = "Utf8_OnPremise_Core_Validate_Property_Values(Päijät-Häme)")]
+        [DataRow(new byte[]{
+            0x42,0xe1,0xba,0xbf,0x6e,0x20,0x54,0x72,0x65,0x20,0x50,0x72,0x6f,0x76,0x69,0x6e,0x63,0x65,
+        }, DisplayName = "Utf8_OnPremise_Core_Validate_Property_Values(Bến Tre Province)")]
+        public void Utf8_OnPremise_Core_Validate_Property_Values(byte[] utf8Bytes)
         {
-            TestInitialize(PerformanceProfiles.Balanced);
-            
-            // Test Utf8 string: محافظة إب
-            byte[] utf8Bytes =
-                new byte[]{ 0xD9, 0x85, 0xD8, 0xAD, 0xD8, 0xA7, 0xD9, 0x81, 0xD8, 0xB8, 0xD8, 0xA9, 0x20, 0xD8, 0xA5, 0xD8, 0xA8 };
-            
+            TestInitialize(PerformanceProfiles.MaxPerformance);
+
             ValidateUtf8PropertyValues(
                 Wrapper, 
-                "StateName", 
+                "State", 
                 Encoding.UTF8.GetString(utf8Bytes));
         }
 
