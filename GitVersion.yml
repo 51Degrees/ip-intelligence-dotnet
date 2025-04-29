@@ -1,0 +1,6 @@
+# GitVersion config
+
+mode: ContinuousDelivery
+branches:
+  main:
+    label: alpha
