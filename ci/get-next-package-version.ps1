@@ -1,12 +1,7 @@
-
 param (
-    [Parameter(Mandatory=$true)]
-    [string]$VariableName,
-    [string]$RepoName
+    [Parameter(Mandatory)][string]$RepoName,
+    [string]$VariableName = "Version"
 )
 $ErrorActionPreference = "Stop"
-$PSNativeCommandUseErrorActionPreference = $true
 
-./dotnet/get-next-package-version.ps1 -RepoName $RepoName -VariableName $VariableName
-
-exit $LASTEXITCODE
+Set-Variable -Scope Global -Name $VariableName -Value (./steps/get-next-package-version.ps1 -RepoName $RepoName -Config $RepoName/GitVersion.yml)
