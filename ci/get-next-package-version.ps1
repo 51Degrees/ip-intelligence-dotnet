@@ -4,4 +4,4 @@ param (
 )
 $ErrorActionPreference = "Stop"
 
-Set-Variable -Scope Global -Name $VariableName -Value (./steps/get-next-package-version.ps1 -RepoName $RepoName -Config $RepoName/GitVersion.yml)
+Set-Variable -Scope Global -Name $VariableName -Value (./steps/get-next-package-version.ps1 -RepoName $RepoName -Config GitVersion.yml)
