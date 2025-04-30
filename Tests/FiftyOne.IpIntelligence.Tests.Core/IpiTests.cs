@@ -54,6 +54,7 @@ namespace FiftyOne.IpIntelligence.Tests.Core
                from useLazyLoading in AllBools
                from multiThreaded in AllBools
                select new object[] {
+                   Constants.IPI_DATA_FILE_NAME,
                    profile, 
                    useCache, 
                    useLazyLoading, 
@@ -62,10 +63,10 @@ namespace FiftyOne.IpIntelligence.Tests.Core
 
         public static string DisplayNameForTestCase(MethodInfo methodInfo, object[] data)
         {
-            var profile = (PerformanceProfiles)data[0];
-            var useCache = (((bool)data[1]) ? "" : "No") + "Cache";
-            var useLazyLoading = (((bool)data[2]) ? "" : "No") + "LazyLoad";
-            var multiThreaded = (((bool)data[3]) ? "Multi" : "Single") + "Thread";
+            var profile = (PerformanceProfiles)data[1];
+            var useCache = (((bool)data[2]) ? "" : "No") + "Cache";
+            var useLazyLoading = (((bool)data[3]) ? "" : "No") + "LazyLoad";
+            var multiThreaded = (((bool)data[4]) ? "Multi" : "Single") + "Thread";
             return $"Ipi-{profile}_{useCache}_{useLazyLoading}_{multiThreaded}";
         }
 
@@ -182,7 +183,7 @@ namespace FiftyOne.IpIntelligence.Tests.Core
                         // Countries property to ensure we can get 
                         // data out.
                         var ipData = flowData.Get<IIpIntelligenceData>();
-                        var result = ipData.CountryCode;
+                        var result = ipData.RegisteredCountry;
                     });
             }
         }

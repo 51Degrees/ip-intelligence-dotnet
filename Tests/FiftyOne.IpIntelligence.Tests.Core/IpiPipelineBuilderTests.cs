@@ -74,6 +74,7 @@ namespace FiftyOne.IpIntelligence.Tests.Core
                 .UseOnPremise(datafile.FullName, licenseKey, false)
                 .SetAutoUpdate(autoUpdate)
                 .SetShareUsage(shareUsage)
+                .SetPerformanceProfile(Pipeline.Engines.PerformanceProfiles.HighPerformance)
                 .Build();
 
             // Check that the flow elements in the pipeline are as expected.
