@@ -7,7 +7,7 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <DocumentationFile>FiftyOne.IpIntelligence.Cloud.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <Authors>51D_Steve;Ben51Degrees;Joseph51Degrees;TungPham51D</Authors>
+    <Authors>51Degrees Engineering</Authors>
     <Copyright>51Degrees Mobile Experts Limited</Copyright>
     <PackageLicenseExpression>EUPL-1.2</PackageLicenseExpression>
     <PackageProjectUrl>www.51degrees.com</PackageProjectUrl>

@@ -12,7 +12,7 @@
     <PackageId>FiftyOne.IpIntelligence.Engine.OnPremise</PackageId>
     <Title>On-premise IP intelligence service for the 51Degrees Pipeline API</Title>
     <Description>The 51Degrees Pipeline API provides a fast, modern architecture for consuming real-time digital data services. IP intelligence will provide detailed information about about the source IP address of the requests that were received by your website or service, such as location, Autonomous System Number and etc.</Description>
-    <Authors>51D_Steve;Ben51Degrees;Joseph51Degrees;TungPham51D</Authors>
+    <Authors>51Degrees Engineering</Authors>
     <PackageLicenseExpression>EUPL-1.2</PackageLicenseExpression>
     <PackageIconUrl>https://51degrees.com/portals/0/Logos/Square%20Logo.png?width=64</PackageIconUrl>
     <Copyright>51Degrees Mobile Experts Limited</Copyright>
