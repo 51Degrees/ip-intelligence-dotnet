@@ -66,9 +66,9 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Core.Data
         public void MetaData_OnPremise_Core_ReloadMemory(PerformanceProfiles profile)
         {
             Task.Delay(TEST_DELAY_MS).Wait();
-            TestInitialize(PerformanceProfiles.LowMemory);
+            TestInitialize(profile);
             MetaDataTests test = new MetaDataTests();
-            test.ReloadMemory(Wrapper, new MetaDataHasher(), PerformanceProfiles.LowMemory);
+            test.ReloadMemory(Wrapper, new MetaDataHasher(), profile);
         }
     }
 }
