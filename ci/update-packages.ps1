@@ -19,10 +19,7 @@ if ($LASTEXITCODE -eq 0) {
 }
 
 if ($LASTEXITCODE -ne 0) {
-    $ErrorActionPreference = "Stop"
-    $PSNativeCommandUseErrorActionPreference = $true
-
-    Write-Error "LASTEXITCODE = $LASTEXITCODE"
+    Write-Warning "LASTEXITCODE = $LASTEXITCODE"
 }
 
 exit $LASTEXITCODE
