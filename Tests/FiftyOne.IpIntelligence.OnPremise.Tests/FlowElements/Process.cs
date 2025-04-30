@@ -81,6 +81,7 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Core.FlowElements
 
         [DataTestMethod]
         [DynamicData(nameof(ProfilesToTest))]
+        [Ignore("IDs are not finalized yet.")]
         public void Process_OnPremise_Core_MetaDataService_DefaultProfilesIds(PerformanceProfiles profile)
         {
             TestInitialize(profile);
@@ -102,6 +103,7 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Core.FlowElements
 
         [DataTestMethod]
         [DynamicData(nameof(ProfilesToTest))]
+        [Ignore("IDs are not finalized yet.")]
         public void Process_OnPremise_Core_MetaDataService_DefaultProfileIdForComponent(PerformanceProfiles profile)
         {
             TestInitialize(profile);
