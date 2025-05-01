@@ -10,6 +10,9 @@ param(
 $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
 
+Write-Output "Looking for OnPremise.Native.dll"
+Get-ChildItem -Recurse -Include "*.OnPremise.Native.dll"
+
 ./dotnet/run-unit-tests.ps1 `
     -RepoName $RepoName `
     -ProjectDir $ProjectDir `
