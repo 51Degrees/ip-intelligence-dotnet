@@ -9,13 +9,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FiftyOne.Common.TestHelpers" Version="4.1.7" />
-    <PackageReference Include="FiftyOne.Pipeline.Engines.TestHelpers" Version="4.5.0-alpha.17" />
-    <PackageReference Include="FiftyOne.Pipeline.Web" Version="4.5.0-alpha.17" />
+    <PackageReference Include="coverlet.collector" Version="1.2.1">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="FiftyOne.Common.TestHelpers" Version="4.1.8" />
+    <PackageReference Include="FiftyOne.Pipeline.Engines.TestHelpers" Version="4.5.0-alpha.20" />
+    <PackageReference Include="FiftyOne.Pipeline.Web" Version="4.5.0-alpha.20" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
-    <PackageReference Include="MSTest.TestAdapter" Version="3.8.2" />
-    <PackageReference Include="MSTest.TestFramework" Version="3.8.2" />
-    <PackageReference Include="coverlet.collector" Version="1.2.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="3.8.3" />
+    <PackageReference Include="MSTest.TestFramework" Version="3.8.3" />
   </ItemGroup>
 
   <ItemGroup>
