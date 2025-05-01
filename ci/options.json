@@ -1,42 +1,10 @@
 [  
     {
-        "Image": "windows-latest",
-        "Name": "Windows_x64_Release",
+        "Image": "macos-latest",
+        "Name": "Mac_arm64_Release",
         "Configuration": "Release",
-        "Arch": "x64",
-        "BuildMethod": "msbuild",
+        "Arch": "ARM64",
         "PackageRequirement" : true,
-        "RunPerformance": true
-    },
-    {
-        "Image": "windows-latest",
-        "Name": "Windows_x64_Debug",
-        "Configuration": "Debug",
-        "Arch": "x64",
-        "BuildMethod": "msbuild"
-    },
-    {
-        "Image": "ubuntu-22.04",
-        "Name": "Ubuntu_x64_Release",
-        "Configuration": "Release",
-        "Arch": "x64",
-        "BuildMethod": "dotnet",
-        "PackageRequirement" : true,
-        "RunPerformance": true
-    },
-    {
-        "Image": "ubuntu-22.04",
-        "Name": "Ubuntu_x64_Debug",
-        "Configuration": "Debug",
-        "Arch": "x64",
-        "BuildMethod": "dotnet"
-    },
-    {
-        "Image": "macos-13",
-        "Name": "Mac_x64_Release",
-        "Configuration": "Release",
-        "Arch": "x64",
-        "PackageRequirement": true,
         "BuildMethod": "dotnet"
     }
 ]
