@@ -6,7 +6,7 @@ param (
     [string]$DeviceDetectionUrl
 )
 
-$CxxCiDir = Join-Path $RepoName "FiftyOne.IpIntelligence.Engine.OnPremise" "ip-intelligence-cxx"
+$CxxCiDir = Join-Path $RepoName "FiftyOne.IpIntelligence.Engine.OnPremise" "ip-intelligence-cxx" "ci"
 $CxxCiScript = Join-Path $pwd $CxxCiDir "fetch-assets.ps1"
 
 & $CxxCiScript `
