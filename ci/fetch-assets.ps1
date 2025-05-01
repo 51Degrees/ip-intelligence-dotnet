@@ -50,6 +50,7 @@ try {
     }
 
     ./evidence-gen.ps1 -v4 10000 -v6 10000
+    ./evidence-gen.ps1 -v4 10000 -v6 10000 -csv "evidence.csv"
 }
 finally {
     Pop-Location
