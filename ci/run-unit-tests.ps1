@@ -17,6 +17,6 @@ $PSNativeCommandUseErrorActionPreference = $true
     -Configuration $Configuration `
     -Arch $Arch `
     -BuildMethod $BuildMethod `
-    -Filter ".*Tests(|\.Core|\.Web)\.dll"
+    -Filter ".*Tests(|\.Core|\.Web)\.dll$"
 
 exit $LASTEXITCODE
