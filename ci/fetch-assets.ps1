@@ -8,9 +8,6 @@ param (
 $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
 
-# File download doesn't work yet
-exit 0
-
 # Fetch the TAC data file for testing with
 $DataFileName = "TAC-IpIntelligenceV41.ipi"
 
