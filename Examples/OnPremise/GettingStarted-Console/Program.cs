@@ -72,8 +72,8 @@ namespace FiftyOne.IpIntelligence.Examples.OnPremise.GettingStartedConsole
                     .SetAutoUpdate(false)
                     .SetDataUpdateOnStartUp(false)
                     .SetDataFileSystemWatcher(false)
-                    .SetProperty("IpRangeStart")
-                    .SetProperty("IpRangeEnd")
+                    .SetProperty("RegisteredCountry")
+                    .SetProperty("RegisteredOwner")
                     .SetProperty("RegisteredName")
                     .SetProperty("Region")
                     .SetProperty("Latitude")
@@ -131,31 +131,6 @@ namespace FiftyOne.IpIntelligence.Examples.OnPremise.GettingStartedConsole
                     // can get by asking for a result matching the `IDeviceData` interface.
                     var ipData = data.Get<IIpIntelligenceData>();
 
-                    // TODO: Read other properties
-                    {
-                        var ipRangeStart = ipData.IpRangeStart;
-                        if (!ipRangeStart.HasValue)
-                        {
-                            message.AppendLine($"\t{nameof(ipData.IpRangeStart)}: {ipRangeStart.NoValueMessage} - {ipRangeStart.NoValueMessage}");
-                        }
-                        else
-                        {
-                            var nameValues = string.Join(", ", ipRangeStart.Value.Select(x => $"('{x.Value}' @ {x.Weighting()})"));
-                            message.AppendLine($"\t{nameof(ipData.IpRangeStart)}  ({ipRangeStart.Value.Count}): {nameValues}");
-                        }
-                    }
-                    {
-                        var ipRangeEnd = ipData.IpRangeEnd;
-                        if (!ipRangeEnd.HasValue)
-                        {
-                            message.AppendLine($"\t{nameof(ipData.IpRangeEnd)}: {ipRangeEnd.NoValueMessage} - {ipRangeEnd.NoValueMessage}");
-                        }
-                        else
-                        {
-                            var nameValues = string.Join(", ", ipRangeEnd.Value.Select(x => $"('{x.Value}' @ {x.Weighting()})"));
-                            message.AppendLine($"\t{nameof(ipData.IpRangeEnd)}  ({ipRangeEnd.Value.Count}): {nameValues}");
-                        }
-                    }
                     {
                         var name = ipData.RegisteredName;
                         if (!name.HasValue)
@@ -166,6 +141,30 @@ namespace FiftyOne.IpIntelligence.Examples.OnPremise.GettingStartedConsole
                         {
                             var nameValues = string.Join(", ", name.Value.Select(x => $"('{x.Value}' @ {x.Weighting()})"));
                             message.AppendLine($"\t{nameof(ipData.RegisteredName)}  ({name.Value.Count}): {nameValues}");
+                        }
+                    }
+                    {
+                        var RegisteredOwner = ipData.RegisteredOwner;
+                        if (!RegisteredOwner.HasValue)
+                        {
+                            message.AppendLine($"\t{nameof(ipData.RegisteredOwner)}: {RegisteredOwner.NoValueMessage} - {RegisteredOwner.NoValueMessage}");
+                        }
+                        else
+                        {
+                            var nameValues = string.Join(", ", RegisteredOwner.Value.Select(x => $"('{x.Value}' @ {x.Weighting()})"));
+                            message.AppendLine($"\t{nameof(ipData.RegisteredOwner)}  ({RegisteredOwner.Value.Count}): {nameValues}");
+                        }
+                    }
+                    {
+                        var RegisteredCountry = ipData.RegisteredCountry;
+                        if (!RegisteredCountry.HasValue)
+                        {
+                            message.AppendLine($"\t{nameof(ipData.RegisteredCountry)}: {RegisteredCountry.NoValueMessage} - {RegisteredCountry.NoValueMessage}");
+                        }
+                        else
+                        {
+                            var nameValues = string.Join(", ", RegisteredCountry.Value.Select(x => $"('{x.Value}' @ {x.Weighting()})"));
+                            message.AppendLine($"\t{nameof(ipData.RegisteredCountry)}  ({RegisteredCountry.Value.Count}): {nameValues}");
                         }
                     }
                     output.WriteLine(message.ToString());

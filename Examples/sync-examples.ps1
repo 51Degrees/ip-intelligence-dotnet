@@ -12,7 +12,11 @@ if ($back) {
 }
 
 $Files = (
-    Get-ChildItem -Path $src -Recurse -Include "*.cs" `
+    Get-ChildItem `
+        -Path $src `
+        -Recurse `
+        -Include "*.cs" `
+        -Exclude "*.Assembly*.cs" `
     | Select-Object -ExpandProperty "FullName" `
     | ForEach-Object {
         $RelativePath = (Resolve-Path -Path $_ -Relative -RelativeBasePath $src)
