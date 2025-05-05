@@ -15,9 +15,6 @@ param(
     [string]$ExamplesRepo = "ip-intelligence-dotnet-examples",
     [hashtable]$Keys
 )
-
-exit 0
-
 $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
 Set-StrictMode -Version 1.0

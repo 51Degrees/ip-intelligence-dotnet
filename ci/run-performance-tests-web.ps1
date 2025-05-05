@@ -8,7 +8,6 @@ param(
     [string]$Arch = "x64"
 )
 
-exit 0
 
 $RepoPath = [IO.Path]::Combine($pwd, $RepoName)
 $PerfPath = [IO.Path]::Combine($RepoPath, "performance-tests")
