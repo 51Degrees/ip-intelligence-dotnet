@@ -20,7 +20,7 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
-using FiftyOne.DeviceDetection.Hash.Engine.OnPremise.FlowElements;
+using FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements;
 using FiftyOne.Pipeline.Core.Configuration;
 using System;
 using System.Linq;
@@ -41,7 +41,7 @@ namespace performance_tests
         /// <returns></returns>
         public static string GetHashDataFile(this PipelineOptions options)
         {
-            var hashConfig = options.GetElementConfig(nameof(DeviceDetectionHashEngine));
+            var hashConfig = options.GetElementConfig(nameof(IpiOnPremiseEngine));
             hashConfig.BuildParameters.TryGetValue(DATA_FILE_SETTING_NAME,
                 out var dataFileObj);
             return dataFileObj?.ToString();
@@ -55,7 +55,7 @@ namespace performance_tests
         /// <returns></returns>
         public static void SetHashDataFile(this PipelineOptions options, string dataFile)
         {
-            var hashConfig = options.GetElementConfig(nameof(DeviceDetectionHashEngine));
+            var hashConfig = options.GetElementConfig(nameof(IpiOnPremiseEngine));
             hashConfig.BuildParameters[DATA_FILE_SETTING_NAME] = dataFile;
         }
 

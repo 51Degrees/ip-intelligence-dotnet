@@ -20,9 +20,11 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using FiftyOne.Pipeline.Web.Services;
-using FiftyOne.DeviceDetection;
+using FiftyOne.IpIntelligence;
+using FiftyOne.Pipeline.Core.Data;
 
 namespace performance_tests.Controllers
 {
@@ -39,16 +41,17 @@ namespace performance_tests.Controllers
 
         [HttpGet]
         public string Get(){
-            var device = _flow.GetFlowData()?.Get<IDeviceData>();
-            if(device != null) {
-                if (device.IsMobile.HasValue) {
-                    return $"{device.IsMobile}";
+            var ipiData = _flow.GetFlowData()?.Get<IIpIntelligenceData>();
+            if(ipiData != null) {
+                if (ipiData.RegisteredName.HasValue) {
+                    var values = ipiData.RegisteredName.Value;
+                    var formattedValues = values.Select(x => $"'{x.Value}':{x.Weighting()}");
+                    var result = string.Join(", ", formattedValues);
+                    return result;
                 }
-                else {
-                    return $"{device.IsMobile.NoValueMessage}";
-                }
+                return $"{ipiData.RegisteredName.NoValueMessage}";
             }
-            return "Hash engine data was null";
+            return "IPI engine data was null";
         }
     }
 }

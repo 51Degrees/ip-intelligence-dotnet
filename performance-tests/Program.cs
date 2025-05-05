@@ -20,7 +20,7 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
-using FiftyOne.DeviceDetection.Hash.Engine.OnPremise.FlowElements;
+using FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements;
 using FiftyOne.Pipeline.Core.Configuration;
 using FiftyOne.Pipeline.Web.Shared;
 using Microsoft.AspNetCore.Hosting;
@@ -87,7 +87,7 @@ namespace performance_tests
 
             // Get the index of the device detection engine element in the config file so that
             // we can create an override key for it.
-            var hashEngineOptions = options.GetElementConfig(nameof(DeviceDetectionHashEngine));
+            var hashEngineOptions = options.GetElementConfig(nameof(IpiOnPremiseEngine));
             var hashEngineIndex = options.Elements.IndexOf(hashEngineOptions);
             var dataFileConfigKey = $"PipelineOptions:Elements:{hashEngineIndex}" +
                 $":BuildParameters:DataFile";
@@ -103,7 +103,7 @@ namespace performance_tests
             // ExampleUtils.FindFile function.
             else if (Path.IsPathRooted(dataFile) == false)
             {
-                var newPath = FiftyOne.DeviceDetection.TestHelpers.Utils.GetFilePath(dataFile);
+                var newPath = FiftyOne.IpIntelligence.TestHelpers.Utils.GetFilePath(dataFile);
                 if (newPath != null)
                 {
                     // Add an override for the absolute path to the data file.

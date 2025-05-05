@@ -4,19 +4,20 @@
     <TargetFramework>net8.0</TargetFramework>
     <RootNamespace>performance_tests</RootNamespace>
     <AssemblyName>performance_tests</AssemblyName>
-    <Platforms>AnyCPU;x64;x86;ARM64</Platforms>
+    <Platforms>x64;ARM64</Platforms>
     <Configurations>Debug;Release</Configurations>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FiftyOne.Pipeline.Web" Version="4.5.0-alpha.12" />
+    <PackageReference Include="FiftyOne.Pipeline.Web" Version="4.5.0-alpha.20" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.12" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FiftyOne.DeviceDetection.Hash.Engine.OnPremise\FiftyOne.DeviceDetection.Hash.Engine.OnPremise.csproj" />
-    <ProjectReference Include="..\Tests\FiftyOne.DeviceDetection.TestHelpers\FiftyOne.DeviceDetection.TestHelpers.csproj" />
+    <ProjectReference Include="..\FiftyOne.IpIntelligence.Shared\FiftyOne.IpIntelligence.Shared.csproj" />
+    <ProjectReference Include="..\FiftyOne.IpIntelligence.Engine.OnPremise\FiftyOne.IpIntelligence.Engine.OnPremise.csproj" />
+    <ProjectReference Include="..\Tests\FiftyOne.IpIntelligence.TestHelpers\FiftyOne.IpIntelligence.TestHelpers.csproj" />
   </ItemGroup>
 
 </Project>

@@ -25,7 +25,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using FiftyOne.DeviceDetection.Hash.Engine.OnPremise.FlowElements;
+using FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements;
 
 namespace performance_tests
 {
@@ -43,7 +43,7 @@ namespace performance_tests
         {
             services.AddControllers();
 
-            services.AddSingleton<DeviceDetectionHashEngineBuilder>();
+            services.AddSingleton<IpiOnPremiseEngineBuilder>();
 
             // Call AddFiftyOne to add all the things the Pipeline will need
             // to the services collection and create it based on the supplied
