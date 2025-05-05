@@ -23,7 +23,7 @@ if ($LASTEXITCODE -ne 0) {
 
 Write-Output "Running web performance tests..."
 & ./$RepoName/ci/run-performance-tests-web.ps1 `
-    -Debug
+    -Debug `
     -RepoName $RepoName `
     -ProjectDir $ProjectDir `
     -Name $Name `
