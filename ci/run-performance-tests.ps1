@@ -11,6 +11,7 @@ param(
 
 Write-Output "Running console performance tests..."
 & ./$RepoName/ci/run-performance-tests-console.ps1 `
+    -Debug `
     -RepoName $RepoName `
     -OrgName $OrgName `
     -Name $Name `

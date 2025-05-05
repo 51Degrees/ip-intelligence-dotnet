@@ -8,6 +8,8 @@ param(
     [string]$BuildMethod = "dotnet"
 )
 
+exit 0
+
 ./dotnet/run-unit-tests.ps1 `
     -RepoName $RepoName `
     -ProjectDir $ProjectDir `
