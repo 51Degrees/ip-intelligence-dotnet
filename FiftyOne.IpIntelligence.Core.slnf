@@ -9,7 +9,8 @@
       "Tests\\FiftyOne.IpIntelligence.CloudTests\\FiftyOne.IpIntelligence.CloudTests.csproj",
       "Tests\\FiftyOne.IpIntelligence.OnPremise.Tests\\FiftyOne.IpIntelligence.OnPremise.Tests.csproj",
       "Tests\\FiftyOne.IpIntelligence.TestHelpers\\FiftyOne.IpIntelligence.TestHelpers.csproj",
-      "Tests\\FiftyOne.IpIntelligence.Tests.Core\\FiftyOne.IpIntelligence.Tests.Core.csproj"
+      "Tests\\FiftyOne.IpIntelligence.Tests.Core\\FiftyOne.IpIntelligence.Tests.Core.csproj",
+      "performance-tests\\performance-tests.csproj"
     ]
   }
 }
