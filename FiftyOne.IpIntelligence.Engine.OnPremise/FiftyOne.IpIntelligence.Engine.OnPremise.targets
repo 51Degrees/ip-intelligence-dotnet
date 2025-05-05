@@ -10,11 +10,4 @@
     </Content>
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(Platform)' == 'x86' OR '$(Platform)' == 'AnyCPU' ">
-    <Content Include="$(MSBuildThisFileDirectory)..\runtimes\win-x86\native\FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <Link>FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll</Link>
-    </Content>
-  </ItemGroup>
-
 </Project>

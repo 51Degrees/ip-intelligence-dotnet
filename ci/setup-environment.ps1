@@ -27,7 +27,7 @@ if ($IsLinux) {
 
 }
 
-# $env:DEVICEDETECTIONDATAFILE = [IO.Path]::Combine($RepoPath, "FiftyOne.DeviceDetection.Hash.Engine.OnPremise", "device-detection-cxx", "device-detection-data", "TAC-HashV41.hash")
+$env:IPINTELLIGENCEDATAFILE = [IO.Path]::Combine($RepoPath, "FiftyOne.IpIntelligence.Engine.OnPremise", "ip-intelligence-cxx", "ip-intelligence-data", "TAC-IpIntelligenceV41.ipi")
 # $env:SUPER_RESOURCE_KEY = $Keys.TestResourceKey
 # $env:DEVICEDETECTIONLICENSEKEY_DOTNET = $Keys.DeviceDetection
 # $env:ACCEPTCH_BROWSER_KEY = $Keys.AcceptCHBrowserKey
