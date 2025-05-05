@@ -29,6 +29,7 @@ using Microsoft.Extensions.Hosting;
 using System.Collections.Generic;
 using System;
 using System.IO;
+using System.Linq;
 
 namespace performance_tests
 {
@@ -96,7 +97,10 @@ namespace performance_tests
             var foundDataFile = false;
             if (string.IsNullOrEmpty(dataFile))
             {
-                throw new Exception($"A data file must be specified in the appsettings.json file.");
+                var buildParams = hashEngineOptions?.BuildParameters;
+                string propDump = buildParams is null ? "(null)" :
+                    string.Join(", ", buildParams.Select(x => $"[{x.Key} = {x.Value}]"));
+                throw new Exception($"A data file must be specified in the appsettings.json file. Build params = {propDump}");
             }
             // The data file location provided in the configuration may be using an absolute or
             // relative path. If it is relative then search for a matching file using the 
