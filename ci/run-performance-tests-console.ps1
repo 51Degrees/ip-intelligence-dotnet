@@ -76,6 +76,7 @@ try {
         Write-Error "LASTEXITCODE = $LASTEXITCODE"
     }
 
+    Write-Debug "Entering output..."
     Push-Location "output"
     try {
         dotnet FiftyOne.IpIntelligence.Examples.OnPremise.Performance.dll -d $TacFile -a $EvidenceFile -j summary.json
