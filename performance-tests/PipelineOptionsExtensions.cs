@@ -64,8 +64,7 @@ namespace performance_tests
             string elementName)
         {
             var query = options.Elements
-                .Where(e => e.BuilderName.IndexOf(elementName,
-                    StringComparison.OrdinalIgnoreCase) >= 0);
+                .Where(e => e.BuilderName.Contains(elementName, StringComparison.OrdinalIgnoreCase));
             if (query.Count() == 1)
             {
                 return query.Single();
