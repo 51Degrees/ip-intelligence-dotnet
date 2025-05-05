@@ -42,8 +42,13 @@ $SettingsFile = [IO.Path]::Combine($RepoPath, "performance-tests", "appsettings.
 # Read the contents of the appsettings.json file
 $json = (Get-Content -Path $SettingsFile) -replace '^\s*//.*' | Out-String | ConvertFrom-Json
 
+$NewDataFilePath = $env:IPINTELLIGENCEDATAFILE
+if (($null -eq $NewDataFilePath) -or (($NewDataFilePath -eq ""))) {
+    Write-Error "NewDataFilePath is not set".
+}
+
 # Update the "DataFile" value
-$json.PipelineOptions.Elements[0].BuildParameters.DataFile = $env:IpIntelligenceDATAFILE
+$json.PipelineOptions.Elements[0].BuildParameters.DataFile = $NewDataFilePath
 
 # Convert the updated JSON object back to a string
 $jsonString = $json | ConvertTo-Json -Depth 10
