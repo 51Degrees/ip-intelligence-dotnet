@@ -1,3 +1,4 @@
+[CmdletBinding()]
 param(
     [Parameter(Mandatory=$true)]
     [string]$RepoName,
@@ -9,14 +10,25 @@ param(
 )
 
 Write-Output "Running console performance tests..."
-& ./$RepoName/ci/run-performance-tests-console.ps1 -RepoName $RepoName -OrgName $OrgName -Name $Name -Configuration $Configuration -Arch $Arch
+& ./$RepoName/ci/run-performance-tests-console.ps1 `
+    -RepoName $RepoName `
+    -OrgName $OrgName `
+    -Name $Name `
+    -Configuration $Configuration `
+    -Arch $Arch
 if ($LASTEXITCODE -ne 0) {
     Write-Warning "LASTEXITCODE = $LASTEXITCODE"
     exit $LASTEXITCODE
 }
 
 Write-Output "Running web performance tests..."
-& ./$RepoName/ci/run-performance-tests-web.ps1 -RepoName $RepoName -ProjectDir $ProjectDir -Name $Name -Configuration $Configuration -Arch $Arch
+& ./$RepoName/ci/run-performance-tests-web.ps1 `
+    -Debug
+    -RepoName $RepoName `
+    -ProjectDir $ProjectDir `
+    -Name $Name `
+    -Configuration $Configuration `
+    -Arch $Arch
 if ($LASTEXITCODE -ne 0) {
     Write-Warning "LASTEXITCODE = $LASTEXITCODE"
 }
