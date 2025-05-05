@@ -79,7 +79,6 @@ try {
     Write-Debug "Entering output..."
     Push-Location "output"
     try {
-        Get-ChildItem *.dll
         dotnet FiftyOne.IpIntelligence.Examples.OnPremise.Performance.dll -d $TacFile -a $EvidenceFile -j summary.json
     }
     finally {
