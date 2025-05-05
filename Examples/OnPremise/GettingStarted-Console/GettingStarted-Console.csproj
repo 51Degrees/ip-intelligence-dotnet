@@ -4,13 +4,13 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
     <Platforms>AnyCPU;x64;ARM64</Platforms>
-    <AssemblyName>FiftyOne.DeviceDetection.Examples.OnPremise.GettingStartedConsole</AssemblyName>
+    <AssemblyName>FiftyOne.IpIntelligence.Examples.OnPremise.GettingStartedConsole</AssemblyName>
     <Configurations>Debug;Release;CoreRelease;CoreDebug</Configurations>
   </PropertyGroup>
 
   <PropertyGroup>
     <DefineConstants>NETCORE</DefineConstants>
-    <RootNamespace>FiftyOne.DeviceDetection.Examples.OnPremise.GettingStartedConsole</RootNamespace>
+    <RootNamespace>FiftyOne.IpIntelligence.Examples.OnPremise.GettingStartedConsole</RootNamespace>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
 

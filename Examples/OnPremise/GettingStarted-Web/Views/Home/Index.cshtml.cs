@@ -23,7 +23,7 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 
-namespace FiftyOne.DeviceDetection.Examples.OnPremise.GettingStartedWeb.Pages
+namespace FiftyOne.IpIntelligence.Examples.OnPremise.GettingStartedWeb.Pages
 {
     public class IndexModel : PageModel
     {
