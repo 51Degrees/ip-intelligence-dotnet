@@ -92,19 +92,21 @@ try {
     # Write out the results for comparison
     Write-Output "Writing performance test results"
     $Results = Get-Content ./output/summary.json | ConvertFrom-Json
-    Write-Output "{
+    $PerfResults = "{
         'HigherIsBetter': {
             'DetectionsPerSecond': $($Results.MaxPerformance.DetectionsPerSecond)
         },
         'LowerIsBetter': {
             'MsPerDetection': $($Results.MaxPerformance.MsPerDetection)
         }
-    }" > $PerfResultsFile
-
+    }"
+    Write-Debug "--- RESULTS BEGIN ---"
+    Write-Debug $PerfResults
+    Write-Debug "--- RESULTS END ---"
+    Write-Debug "Saving to $PerfResultsFile..."
+    Set-Content -Value $PerfResults -Path $PerfResultsFile
 }
 finally {
     Write-Output "Leaving '$PerfProject'"
     Pop-Location
 }
-
-Copy-Item $ExamplesRepoName/test-results $RepoName -Recurse
