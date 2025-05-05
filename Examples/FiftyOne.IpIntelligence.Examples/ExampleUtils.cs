@@ -59,8 +59,8 @@ namespace FiftyOne.IpIntelligence.Examples
 
         private const string DATA_OPTION = "--data-file";
         private const string DATA_OPTION_SHORT = "-d";
-        private const string UA_OPTION = "--user-agent-file";
-        private const string UA_OPTION_SHORT = "-u";
+        private const string ADDRESSES_OPTION = "--ip-addresses-file";
+        private const string ADDRESSES_OPTION_SHORT = "-a";
         private const string JSON_OPTION = "--json-output";
         private const string JSON_OPTION_SHORT = "-j";
         private const string HELP_OPTION = "--51help";
@@ -78,8 +78,8 @@ namespace FiftyOne.IpIntelligence.Examples
         private static void PrintHelp()
         {
             Console.WriteLine("Available options are:");
-            Console.WriteLine(OptionMessage("Path to a 51Degrees Hash data file", DATA_OPTION, DATA_OPTION_SHORT));
-            Console.WriteLine(OptionMessage("Path to a User-Agents YAML file", UA_OPTION, UA_OPTION_SHORT));
+            Console.WriteLine(OptionMessage("Path to a 51Degrees IPI data file", DATA_OPTION, DATA_OPTION_SHORT));
+            Console.WriteLine(OptionMessage("Path to a IP Addresses YAML file", ADDRESSES_OPTION, ADDRESSES_OPTION_SHORT));
             Console.WriteLine(OptionMessage("Path to a file to output JSON format results to", JSON_OPTION, JSON_OPTION_SHORT));
             Console.WriteLine(OptionMessage("Print this help", HELP_OPTION, HELP_OPTION_SHORT));
         }
@@ -112,8 +112,8 @@ namespace FiftyOne.IpIntelligence.Examples
                             // Set data file path
                             options.DataFilePath = args[i + 1];
                             break;
-                        case UA_OPTION:
-                        case UA_OPTION_SHORT:
+                        case ADDRESSES_OPTION:
+                        case ADDRESSES_OPTION_SHORT:
                             // Set data file path
                             options.EvidenceFile = args[i + 1];
                             break;
