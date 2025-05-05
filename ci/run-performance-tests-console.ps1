@@ -46,7 +46,7 @@ Write-Output "Moving evidence file"
 $EvidenceFile = [IO.Path]::Combine($EvidenceFiles, "evidence.yml")
 Copy-Item $EvidenceFile "ip-intelligence-dotnet-examples/ip-intelligence-data/evidence.yml"
 
-$ExamplesProject = [IO.Path]::Combine($ExamplesRepoPath, "Examples", "ExampleBase")
+$ExamplesProject = [IO.Path]::Combine($ExamplesRepoPath, "Examples", "FiftyOne.IpIntelligence.Examples")
 
 # Update the dependency in the examples project to point to the newly bulit package
 Write-Output "Entering '$ExamplesProject'"
