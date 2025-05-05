@@ -45,9 +45,12 @@ Write-Debug "Reading $SettingsFile..."
 $json = (Get-Content -Path $SettingsFile) -replace '^\s*//.*' | Out-String | ConvertFrom-Json
 
 Write-Debug "Reading env var..."
-$NewDataFilePath = ($env:IPINTELLIGENCEDATAFILE)
+$NewDataFilePath = $env:IPINTELLIGENCEDATAFILE
 if (($null -eq $NewDataFilePath) -or (("" -eq "$NewDataFilePath"))) {
     Write-Error "NewDataFilePath is not set."
+}
+if (!(Test-Path -Path $NewDataFilePath -PathType Leaf)) {
+    Write-Error "File not found at '$NewDataFilePath'."
 }
 
 Write-Debug "Patching JSON..."
