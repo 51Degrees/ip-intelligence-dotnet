@@ -1,0 +1,5 @@
+var class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_wrappers_1_1_required_properties_config_swig_wrapper =
+[
+    [ "RequiredPropertiesConfigSwigWrapper", "class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_wrappers_1_1_required_properties_config_swig_wrapper.html#aa7df1388dbd3f85ef3d015e451e2b3d1", null ],
+    [ "Object", "class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_wrappers_1_1_required_properties_config_swig_wrapper.html#ab9e16d8628cf38b7e49219134829c6e2", null ]
+];

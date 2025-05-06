@@ -1,0 +1,4 @@
+<map id="FiftyOne.IpIntelligence.Cloud.FlowElements.IpiCloudEngine" name="FiftyOne.IpIntelligence.Cloud.FlowElements.IpiCloudEngine">
+<area shape="rect" id="node1" title="Engine that takes the JSON response from the CloudRequestEngine and uses it populate a IpDataCloud in..." alt="" coords="5,95,261,136"/>
+<area shape="rect" id="node2" title=" " alt="" coords="44,5,223,47"/>
+</map>

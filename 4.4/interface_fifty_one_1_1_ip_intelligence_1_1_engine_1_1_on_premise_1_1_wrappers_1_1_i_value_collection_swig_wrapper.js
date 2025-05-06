@@ -1,0 +1,5 @@
+var interface_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_wrappers_1_1_i_value_collection_swig_wrapper =
+[
+    [ "getByKey", "interface_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_wrappers_1_1_i_value_collection_swig_wrapper.html#aeb5900bc06bbb3da5c226f3d2f274d1c", null ],
+    [ "Count", "interface_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_wrappers_1_1_i_value_collection_swig_wrapper.html#adc5066fdea61a673daebfdc8ac122927", null ]
+];

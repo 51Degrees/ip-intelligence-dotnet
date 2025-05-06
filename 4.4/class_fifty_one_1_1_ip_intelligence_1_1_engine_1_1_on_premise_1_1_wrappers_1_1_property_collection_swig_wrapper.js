@@ -1,0 +1,6 @@
+var class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_wrappers_1_1_property_collection_swig_wrapper =
+[
+    [ "PropertyCollectionSwigWrapper", "class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_wrappers_1_1_property_collection_swig_wrapper.html#a4522d6f6f334e0f3130648d3f52432c0", null ],
+    [ "Dispose", "class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_wrappers_1_1_property_collection_swig_wrapper.html#a112b25fbff94ca21fd07bf2054a138fd", null ],
+    [ "GetEnumerator", "class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_wrappers_1_1_property_collection_swig_wrapper.html#a0e7e39c06c2027934279dc57ceff0088", null ]
+];
