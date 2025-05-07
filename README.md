@@ -45,24 +45,14 @@ on how to use this.
 #### On-Premise
 
 In order to perform IP intelligence on-premise, you will need to use a
-51Degrees data file. This repository includes a free, 'lite' file in the
+51Degrees data file.
+
+This repository includes a free, 'lite' file in the
 'ip-intelligence-data' sub-module that has a significantly reduced set of
 properties. To obtain a file with a more complete set of location properties see
-the [51Degrees website](https://51degrees.com/pricing). If you want to use the
-lite file, you will need to install [GitLFS](https://git-lfs.github.com/).
+the [51Degrees website](https://51degrees.com/pricing).
 
-On Linux:
-
-```sh
-sudo apt-get install git-lfs
-git lfs install
-```
-
-Then, navigate to 'FiftyOne.IpIntelligence.Engine.OnPremise/ip-intelligence-cxx/ip-intelligence-data' and execute:
-
-```sh
-git lfs pull
-```
+See `FiftyOne.IpIntelligence.Engine.OnPremise/ip-intelligence-cxx/ip-intelligence-data/README` ([local](./FiftyOne.IpIntelligence.Engine.OnPremise/ip-intelligence-cxx/ip-intelligence-data/README) / [GitHub](https://github.com/51Degrees/ip-intelligence-data/)) on how to pull the lite file.
 
 ## Solutions and projects
 
@@ -172,8 +162,6 @@ an 'inconclusive' result if these resources are not provided.
 - Tests using the cloud service require resource keys with specific properties
     to be provided using environment variables:
   - The `SUPER_RESOURCE_KEY` environment variable should be populated with a key that includes all properties. A [license](https://51degrees.com/pricing) is required in order to access some properties.
-
-## Project documentation
 
 ## Project documentation
 
