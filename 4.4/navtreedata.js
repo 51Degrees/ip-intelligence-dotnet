@@ -25,6 +25,7 @@ var NAVTREE =
 [
     [ "UTF 8 Marshaler", "md__home_runner_work_ip-intelligence-dotnet_ip-intelligence-dotnet_common_ip-intelligence-dotnete0b41793f235bcc692971b30f020016e.html", null ],
     [ "API Specific CI Approach", "md__home_runner_work_ip-intelligence-dotnet_ip-intelligence-dotnet_common_ip-intelligence-dotnetb56a822ce3b84f66e0f435933bbb9f3e.html", null ],
+    [ "<img src=\"https://51degrees.com/DesktopModules/FiftyOne/Distributor/Logo.ashx?utm_source=github&utm_medium=repository&utm_content=home&utm_campaign=c-open-source\" alt=\"51Degrees\" title=\"Data rewards the curious\"/> <strong>IP Intelligence Data Files</strong>", "md__home_runner_work_ip-intelligence-dotnet_ip-intelligence-dotnet_common_ip-intelligence-dotnetb450aa1d583c019b10abd451e46879e2.html", null ],
     [ "51Degrees Ip Intelligence API", "md__home_runner_work_ip-intelligence-dotnet_ip-intelligence-dotnet_common_ip-intelligence-dotnet8b402434632dbd4477654cd235f3faf7.html", null ],
     [ "API Specific CI Approach", "md__home_runner_work_ip-intelligence-dotnet_ip-intelligence-dotnet_common_ip-intelligence-dotnetc6541fcb3aa2f60ba4432056e9dcf2eb.html", null ],
     [ "51Degrees Common Code Library", "md__home_runner_work_ip-intelligence-dotnet_ip-intelligence-dotnet_common_ip-intelligence-dotnet5971c37cbb1510b1d58e092879a31bc4.html", null ],
