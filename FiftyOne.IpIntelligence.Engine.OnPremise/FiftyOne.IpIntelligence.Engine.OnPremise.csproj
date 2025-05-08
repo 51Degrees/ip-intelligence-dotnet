@@ -85,7 +85,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <AdditionalFiles Remove=".\.editorconfig" />
+    <AdditionalFiles Remove=".editorconfig" />
   </ItemGroup>
 
   <ItemGroup>
@@ -102,7 +102,7 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
-    <None Include=".\.editorconfig" />
+    <None Include=".editorconfig" />
   </ItemGroup>
 
   <ItemGroup>
