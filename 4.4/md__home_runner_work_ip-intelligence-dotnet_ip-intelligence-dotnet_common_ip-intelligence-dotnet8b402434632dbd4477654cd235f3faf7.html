@@ -73,11 +73,12 @@ $(document).ready(function(){initNavTree('md__home_runner_work_ip-intelligence-d
  <b>IP Intelligence in C</b></p>
 <p><a href="https://51degrees.com/ip-intelligence-cxx/4.1/modules.html">C Documentation</a> and the <a href="https://51degrees.com/ip-intelligence-cxx/4.1/namespaces.html">C++ Documentation</a>.</p>
 <p>The 51Degrees IP intelligence API is built on the 51Degrees <a href="https://github.com/51Degrees/common-cxx">common API</a>.</p>
-<h1 class="g-docs__section-heading">Pre-requisites</h1>
-<h2>Data File</h2>
-<p>In order to perform IP intelligence, you will need to use a 51Degrees data file. To obtain an IP intelligence data file see the <a href="https://51degrees.com/pricing">51Degrees website</a>. By default, the data file will need to be placed in the 'ip-intelligence-data' sub-folder for the tests and the on-premise examples to work. If you want to use a different location, you will need to manually update the data file paths for these files.</p>
-<p>For Linux: </p><div class="c-code__block c-code__block--outline"><div class="c-code__line">sudo apt-get install git-lfs</div><div class="c-code__line">git lfs install</div></div><p>Then, navigate to the ip-intelligence-data directory and execute:</p>
-<div class="c-code__block c-code__block--outline"><div class="c-code__line">git lfs pull</div></div><h2>Fetching sub-modules</h2>
+<h2>Pre-requisites</h2>
+<h3>Data file</h3>
+<p>In order to perform IP intelligence, you will need to use a 51Degrees data file. To obtain an IP intelligence data file see the <a href="https://51degrees.com/pricing">51Degrees website</a>.</p>
+<p>By default, the data file will need to be placed in the 'ip-intelligence-data' sub-folder for the tests and the on-premise examples to work.</p>
+<p>See <code>ip-intelligence-data/README</code> (<a href="./ip-intelligence-data/README">local</a> / <a href="https://github.com/51Degrees/ip-intelligence-data/">GitHub</a>) on how to pull and/or generate necessary files.</p>
+<h3>Fetching sub-modules</h3>
 <p>This repository has sub-modules that must be fetched. If cloning for the first time, use:</p>
 <div class="c-code__block c-code__block--outline"><div class="c-code__line">git clone --recurse-submodules https://github.com/51Degrees/ip-intelligence-cxx.git</div></div><p>If you have already cloned the repository and want to fetch the sub modules, use:</p>
 <div class="c-code__block c-code__block--outline"><div class="c-code__line">git submodule update --init --recursive</div></div><p>If you have downloaded this repository as a zip file then these sub modules need to be downloaded separately as GitHub does not include them in the archive. In particular, note that the zip download will contain links to LFS content, rather than the files themselves. As such, these need to be downloaded individually.</p>
@@ -86,43 +87,48 @@ $(document).ready(function(){initNavTree('md__home_runner_work_ip-intelligence-d
 <p>You will need either Visual Studio 2017/2019 or the <a href="https://visualstudio.microsoft.com/visual-cpp-build-tools/">C++ Build Tools</a> installed. If you have Visual Studio Code, you'll still need to install the build tools from the link above.</p>
 <h3>Linux</h3>
 <p>You will need <a href="https://cmake.org/">CMake 3.10</a> or greater installed to build the project. In addition, you will need a C++ compiler which supports C++11. The compiler will and other build tools will be selected by CMake automatically based on your environment.</p>
-<h1 class="g-docs__section-heading">Installing</h1>
-<h2>Using CMake</h2>
+<h2>Installing</h2>
+<h3>Using CMake</h3>
 <p>To build the make files required to build, open a <code>bash</code> or <code>Visual Studio Developer Command Prompt</code> terminal and run</p>
-<div class="c-code__block c-code__block--outline"><div class="c-code__line">mkdir build</div><div class="c-code__line">cd build</div><div class="c-code__line">cmake .. </div></div><p> Note: on an x64 Windows system, it is necessary to add <code>-A x64</code> as CMake will build a Win32 Solution by default.</p>
+<div class="c-code__block c-code__block--outline"><div class="c-code__line">mkdir build</div><div class="c-code__line">cd build</div><div class="c-code__line">cmake .. </div></div><p>Note: on an x64 Windows system, it is necessary to add <code>-A x64</code> as CMake will build a Win32 Solution by default.</p>
 <p>Then build the whole solution with</p>
 <div class="c-code__block c-code__block--outline"><div class="c-code__line">cmake --build . --config Release</div></div><p>Libraries are output to the <code>lib/</code> directory, and executables like examples and tests are output to the <code>bin/</code> directory.</p>
-<h2>Using Visual Studio</h2>
-<p>Calling <code>CMake</code> in an MSVC environment (as described in the <a href="#Using-CMake">Using CMake</a> section) will produce a Visual Studio solution with projects for all libraries, examples, and tests. However, it is preferable to use the dedicated Visual Studio solution in the <code>VisualStudio/</code> directory. If the dedicated Visual Studio solution is used, re-targeting the solution might be required for VS2019 IDE.</p>
-<h2>Build Options</h2>
+<h3>Using Visual Studio</h3>
+<p>Calling <code>CMake</code> in an MSVC environment (as described in the <a href="#using-cmake">Using CMake</a> section) will produce a Visual Studio solution with projects for all libraries, examples, and tests. However, it is preferable to use the dedicated Visual Studio solution in the <code>VisualStudio/</code> directory. If the dedicated Visual Studio solution is used, re-targeting the solution might be required for VS2019 IDE.</p>
+<h3>Build Options</h3>
 <p>For build options, see Common API</p>
-<h1 class="g-docs__section-heading">Tests</h1>
+<h2>Tests</h2>
 <p>All unit, integration, and performance tests are built using the <a href="https://github.com/google/googletest">Google test framework</a>.</p>
-<h2>CMake</h2>
+<h3>Testing with CMake</h3>
 <p>CMake automatically pulls in the latest Google Test from GitHub.</p>
 <p>Building the project builds multiple test executables to the <code>bin/</code> directory: <code>IpiTests</code> and any common testing included in the common-cxx library.</p>
-<p>These can be run by calling </p><div class="c-code__block c-code__block--outline"><div class="c-code__line">ctest</div></div><p>If CMake has been used in an MSVC environment, then the tests will be set up and discoverable in the Visual Studio solution <code>51DegreesIpIntelligence</code> created by CMake.</p>
-<h2>Visual Studio</h2>
+<p>These can be run by calling</p>
+<div class="c-code__block c-code__block--outline"><div class="c-code__line">ctest</div></div><p>If CMake has been used in an MSVC environment, then the tests will be set up and discoverable in the Visual Studio solution <code>51DegreesIpIntelligence</code> created by CMake.</p>
+<h3>Testing with Visual Studio</h3>
 <p>Tests in the Visual Studio solution automatically install the GTest dependency via a NuGet package. However, in order for the tests to show up in the Visual Studio test explorer, the <a href="https://marketplace.visualstudio.com/items?itemName=VisualCPPTeam.TestAdapterforGoogleTest">Test Adapter for Google Test</a> extension must be installed.</p>
 <p>The VisualStudio solution includes <code>FiftyOne.IpIntelligence.Tests</code>, which can be run through the standard Visual Studio test runner.</p>
-<h1 class="g-docs__section-heading">Referencing the API</h1>
-<h2>CMake</h2>
-<p>When building using CMake, static libraries are built in stages. These can be included in an executable just as they are in the examples. If these are included through a CMake file, the dependencies will be resolved automatically. However, if linking another way, all dependencies will need to be included from the <code>lib/</code> directory. For example, to use the IP Intelligence C API, the following static libraries would need to be included:</p><ul>
+<h2>Referencing the API</h2>
+<h3>Adding references with CMake</h3>
+<p>When building using CMake, static libraries are built in stages. These can be included in an executable just as they are in the examples. If these are included through a CMake file, the dependencies will be resolved automatically. However, if linking another way, all dependencies will need to be included from the <code>lib/</code> directory. For example, to use the IP Intelligence C API, the following static libraries would need to be included:</p>
+<ul>
 <li><code>fiftyone-common-c</code></li>
 <li><code>fiftyone-ip-intelligence-c</code></li>
 </ul>
-<p>and for the IP Intelligence C++ API, the following are needed in addition:</p><ul>
+<p>and for the IP Intelligence C++ API, the following are needed in addition:</p>
+<ul>
 <li><code>fiftyone-common-cxx</code></li>
 <li><code>fiftyone-ip-intelligence-cxx</code></li>
 </ul>
 <p>The CMake project also builds a single shared library containing everything. This is named <code>fiftyone-ip-intelligence-complete</code> and can be referenced by any C or C++ project.</p>
-<h2>Visual Studio</h2>
+<h3>Adding references with Visual Studio</h3>
 <p>The Visual Studio solution contains static libraries which have all the dependencies set up correctly, so referencing these in a Visual Studio solution should be fairly self explanatory.</p>
-<h1 class="g-docs__section-heading">Examples</h1>
+<h2>Examples</h2>
 <p>There are several examples available, the source files can be found in the <code>examples/</code> folder. The examples are written in C or CPP.</p>
-<h3>Visual Studio</h3>
+<h3>⚠️ Required files</h3>
+<p>See <code>ip-intelligence-data/README</code> (<a href="./ip-intelligence-data/README">local</a> / <a href="https://github.com/51Degrees/ip-intelligence-data/">GitHub</a>) on how to pull and/or generate necessary files.</p>
+<h3>Running examples in Visual Studio</h3>
 <p>All the examples are available to run in the <code>VisualStudio/IpIntelligence.sln</code> solution.</p>
-<h2>IP Intelligence Examples</h2>
+<h3>IP Intelligence Examples</h3>
 <div class="g-table g-table--overflow"><table class="c-table">
 <tr class="c-table__row--heading">
 <td class="c-table__cell">Example  </td><td class="c-table__cell">Description  </td><td class="c-table__cell">Language   </td></tr>
