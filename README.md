@@ -30,29 +30,23 @@ likely operate with other versions.
 
 ### Data
 
-The API can either use our cloud service to get its data or it can use a local
-(on-premise) copy of the data.
+The API does detections using a local (on-premise) data file or cloud service (coming soon). 
 
-#### Cloud
+#### On-Premise
 
-You will require a [resource
+In order to perform IP intelligence on-premise, you will need to use a
+data file.
+
+[ip-intelligence-data](https://github.com/51Degrees/ip-intelligence-data/) submodule repository instructs how to obtain a 'Lite' data file, otherwise [contact us](https://51degrees.com/contact-us) to obtain an 'Enterprise' data file.
+
+#### Cloud (coming soon)
+
+Requires a [resource
 key](https://51degrees.com/documentation/_info__resource_keys.html) to use the
 Cloud API. You can create resource keys using our
 [configurator](https://configure.51degrees.com/), see our
 [documentation](https://51degrees.com/documentation/_concepts__configurator.html)
 on how to use this.
-
-#### On-Premise
-
-In order to perform IP intelligence on-premise, you will need to use a
-51Degrees data file.
-
-This repository includes a free, 'lite' file in the
-'ip-intelligence-data' sub-module that has a significantly reduced set of
-properties. To obtain a file with a more complete set of location properties see
-the [51Degrees website](https://51degrees.com/pricing).
-
-See `FiftyOne.IpIntelligence.Engine.OnPremise/ip-intelligence-cxx/ip-intelligence-data/README` ([local](./FiftyOne.IpIntelligence.Engine.OnPremise/ip-intelligence-cxx/ip-intelligence-data/README) / [GitHub](https://github.com/51Degrees/ip-intelligence-data/)) on how to pull the lite file.
 
 ## Solutions and projects
 
