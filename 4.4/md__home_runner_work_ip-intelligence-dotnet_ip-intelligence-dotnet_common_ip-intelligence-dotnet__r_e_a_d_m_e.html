@@ -80,13 +80,12 @@ $(document).ready(function(){initNavTree('md__home_runner_work_ip-intelligence-d
 <p>The core IP intelligence projects are written in C and C++. The Pipeline engines are written in C# and target .NET Standard 2.0.3. Example and test projects mostly target .NET 6.0 though in some cases, projects are available targeting other frameworks.</p>
 <p>For runtime dependencies, see our <a href="https://51degrees.com/documentation/_info__dependencies.html">dependencies</a> page. The <code>ci/options.json</code> file lists the tested and packaged .NET versions and operating systems automatic tests are performed with. The solution will likely operate with other versions.</p>
 <h3>Data</h3>
-<p>The API can either use our cloud service to get its data or it can use a local (on-premise) copy of the data.</p>
-<h4>Cloud</h4>
-<p>You will require a <a href="https://51degrees.com/documentation/_info__resource_keys.html">resource key</a> to use the Cloud API. You can create resource keys using our <a href="https://configure.51degrees.com/">configurator</a>, see our <a href="https://51degrees.com/documentation/_concepts__configurator.html">documentation</a> on how to use this.</p>
+<p>The API does detections using a local (on-premise) data file or cloud service (coming soon).</p>
 <h4>On-Premise</h4>
-<p>In order to perform IP intelligence on-premise, you will need to use a 51Degrees data file.</p>
-<p>This repository includes a free, 'lite' file in the 'ip-intelligence-data' sub-module that has a significantly reduced set of properties. To obtain a file with a more complete set of location properties see the <a href="https://51degrees.com/pricing">51Degrees website</a>.</p>
-<p>See <code><a class="el" href="namespace_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise.html">FiftyOne.IpIntelligence.Engine.OnPremise</a>/ip-intelligence-cxx/ip-intelligence-data/README</code> (<a href="./FiftyOne.IpIntelligence.Engine.OnPremise/ip-intelligence-cxx/ip-intelligence-data/README">local</a> / <a href="https://github.com/51Degrees/ip-intelligence-data/">GitHub</a>) on how to pull the lite file.</p>
+<p>In order to perform IP intelligence on-premise, you will need to use a data file.</p>
+<p><a href="https://github.com/51Degrees/ip-intelligence-data/">ip-intelligence-data</a> submodule repository instructs how to obtain a 'Lite' data file, otherwise <a href="https://51degrees.com/contact-us">contact us</a> to obtain an 'Enterprise' data file.</p>
+<h4>Cloud (coming soon)</h4>
+<p>Requires a <a href="https://51degrees.com/documentation/_info__resource_keys.html">resource key</a> to use the Cloud API. You can create resource keys using our <a href="https://configure.51degrees.com/">configurator</a>, see our <a href="https://51degrees.com/documentation/_concepts__configurator.html">documentation</a> on how to use this.</p>
 <h2>Solutions and projects</h2>
 <ul>
 <li><b><a class="el" href="namespace_fifty_one_1_1_ip_intelligence.html">FiftyOne.IpIntelligence</a></b> - Ip intelligence engines and related projects.<ul>
