@@ -71,19 +71,16 @@ $(document).ready(function(){initNavTree('md__home_runner_work_ip-intelligence-d
 <div class="g-docs__inner">
 <div class="g-docs__primary" id="primary">
 <section class="g-docs__section"><h2>Introduction</h2>
-<p>This repository contains the freely available 'lite' version of the 51Degrees IP Intelligence data file.</p>
-<p>The properties available in this file are:</p>
-<ul>
-<li>RegisteredCountry</li>
-<li>RegisteredName</li>
-<li>RegisteredOwner</li>
-<li>More properties are available for free in our <a href="https://configure.51degrees.com/">cloud service</a>, or on a commercial basis on <a href="https://51degrees.com/pricing">our website</a>.</li>
+<p>This repo allows to obtain data needed to run IP Intelligence examples:</p><ul>
+<li>a URL and script to download 'Lite' IP Intelligence data file</li>
+<li>evidence files with lists of random IP addresses needed for some examples</li>
+<li>scripts to generate lists of random IP addresses like the above</li>
+<li>scripts to download 'Lite' IP Intelligence data file</li>
 </ul>
-<p>This 'lite' file is built from a subsection of all IPs and is updated less frequently than the paid-for data files.</p>
-<p>This repository uses <a href="https://git-lfs.github.com/">Git LFS</a> rather than storing these large binary files directly.</p>
-<h2>Pulling the files</h2>
+<h2>Download Lite data file</h2>
 <h3>From Azure</h3>
-<p>Select and run a script to download files from Azure.</p>
+<p>Either get it from the URL: <a href="https://51ddatafiles.blob.core.windows.net/enterpriseipi/51Degrees-LiteIpiV41.ipi.gz">https://51ddatafiles.blob.core.windows.net/enterpriseipi/51Degrees-LiteIpiV41.ipi.gz</a></p>
+<p>or run a script to download files from Azure.</p>
 <div class="g-table g-table--overflow"><table class="c-table">
 <tr class="c-table__row--heading">
 <td class="c-table__cell">Script  </td><td class="c-table__cell">Language  </td><td class="c-table__cell">OS   </td></tr>
@@ -92,12 +89,17 @@ $(document).ready(function(){initNavTree('md__home_runner_work_ip-intelligence-d
 <tr class="c-table__row">
 <td class="c-table__cell"><code>./get-lite-file-from-azure.sh</code>  </td><td class="c-table__cell">Shell  </td><td class="c-table__cell">Linux, macOS   </td></tr>
 </table>
-</div><h3>From LFS</h3>
-<p>On Linux:</p>
-<div class="c-code__block c-code__block--outline"><div class="c-code__line">sudo apt-get install git-lfs</div><div class="c-code__line">git lfs install</div></div><p>Then, execute:</p>
-<div class="c-code__block c-code__block--outline"><div class="c-code__line">git lfs pull</div></div><h2>Files</h2>
+</div><h2>Files</h2>
 <h3><code>51Degrees-LiteV41.ipi</code></h3>
 <p>The 'lite' on-premise IP Intelligence data file.</p>
+<p>The properties available in this file are:</p>
+<ul>
+<li>RegisteredCountry</li>
+<li>RegisteredName</li>
+<li>RegisteredOwner</li>
+</ul>
+<p>More properties are available as part of the Enterprise data file - <a href="https://51degrees.com/contact-us">contact us</a>.</p>
+<p>This 'lite' file is built from a subsection of all IPs and is updated less frequently than the Enterprise IPI data file.</p>
 <h3><code>get-lite-file-from-azure.ps1</code>/<code>.sh</code></h3>
 <p>Convenience scripts to download (and unpack) data file, stored on Azure Blob Storage.</p>
 <h3><code>evidence-gen.ps1</code></h3>

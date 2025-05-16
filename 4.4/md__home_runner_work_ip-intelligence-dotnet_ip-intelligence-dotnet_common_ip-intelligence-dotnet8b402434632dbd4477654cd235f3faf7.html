@@ -75,13 +75,12 @@ $(document).ready(function(){initNavTree('md__home_runner_work_ip-intelligence-d
 <p>The 51Degrees IP intelligence API is built on the 51Degrees <a href="https://github.com/51Degrees/common-cxx">common API</a>.</p>
 <h2>Pre-requisites</h2>
 <h3>Data file</h3>
-<p>In order to perform IP intelligence, you will need to use a 51Degrees data file. To obtain an IP intelligence data file see the <a href="https://51degrees.com/pricing">51Degrees website</a>.</p>
-<p>By default, the data file will need to be placed in the 'ip-intelligence-data' sub-folder for the tests and the on-premise examples to work.</p>
-<p>See <code>ip-intelligence-data/README</code> (<a href="./ip-intelligence-data/README">local</a> / <a href="https://github.com/51Degrees/ip-intelligence-data/">GitHub</a>) on how to pull and/or generate necessary files.</p>
+<p>In order to perform IP intelligence, you will need to obtain a 51Degrees data file. Lite data file can be obtained for free as specified in the <a href="https://github.com/51Degrees/ip-intelligence-data/"><code>ip-intelligence-data/README</code></a>. To obtain an Enterprise data file please <a href="https://51degrees.com/contact-us">contact us</a>.</p>
+<p>By default, the downloaded data file has to be placed in the 'ip-intelligence-data' sub-folder of this repo for the tests and examples to work.</p>
 <h3>Fetching sub-modules</h3>
 <p>This repository has sub-modules that must be fetched. If cloning for the first time, use:</p>
 <div class="c-code__block c-code__block--outline"><div class="c-code__line">git clone --recurse-submodules https://github.com/51Degrees/ip-intelligence-cxx.git</div></div><p>If you have already cloned the repository and want to fetch the sub modules, use:</p>
-<div class="c-code__block c-code__block--outline"><div class="c-code__line">git submodule update --init --recursive</div></div><p>If you have downloaded this repository as a zip file then these sub modules need to be downloaded separately as GitHub does not include them in the archive. In particular, note that the zip download will contain links to LFS content, rather than the files themselves. As such, these need to be downloaded individually.</p>
+<div class="c-code__block c-code__block--outline"><div class="c-code__line">git submodule update --init --recursive</div></div><p>If you have downloaded this repository as a zip file then these sub modules need to be downloaded separately as GitHub does not include them in the archive.</p>
 <h2>Build tools</h2>
 <h3>Windows</h3>
 <p>You will need either Visual Studio 2017/2019 or the <a href="https://visualstudio.microsoft.com/visual-cpp-build-tools/">C++ Build Tools</a> installed. If you have Visual Studio Code, you'll still need to install the build tools from the link above.</p>
