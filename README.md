@@ -9,7 +9,7 @@
 This repository contains the IP intelligence engines for the .NET implementation of the Pipeline API.
 
 The
-[specification](https://github.com/51Degrees/specifications/blob/feature/ip/ip-intelligence-specification/README.md)
+[specification](https://github.com/51Degrees/specifications/blob/main/ip-intelligence-specification/README.md)
 is also available on GitHub and is recommended reading if you wish to understand
 the concepts and design of this API.
 
