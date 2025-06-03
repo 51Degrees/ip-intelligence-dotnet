@@ -18,8 +18,8 @@ the concepts and design of this API.
 Visual Studio 2019 or later is recommended. Although Visual Studio Code can be used for working with most of the projects.
 
 The core IP intelligence projects are written in C and C++.
-The Pipeline engines are written in C# and target .NET Standard 2.0.3. Example and test
-projects mostly target .NET 6.0 though in some cases, projects are available
+The Pipeline engines are written in C# and target .NET Standard 2.0. Example and test
+projects mostly target .NET 8.0 though in some cases, projects are available
 targeting other frameworks.
 
 For runtime dependencies, see our
@@ -41,12 +41,10 @@ data file.
 
 #### Cloud (coming soon)
 
-Requires a [resource
-key](https://51degrees.com/documentation/_info__resource_keys.html) to use the
-Cloud API. You can create resource keys using our
-[configurator](https://configure.51degrees.com/), see our
-[documentation](https://51degrees.com/documentation/_concepts__configurator.html)
-on how to use this.
+You will require [resource keys](https://51degrees.com/documentation/_info__resource_keys.html)
+to use the Cloud API, as described on our website. Get resource keys from
+our [configurator](https://configure.51degrees.com/), see our [documentation](https://51degrees.com/documentation/_concepts__configurator.html) on
+how to use this.
 
 ## Solutions and projects
 
@@ -152,10 +150,7 @@ Some tests require additional resources to run. These will either fail or return
 an 'inconclusive' result if these resources are not provided.
 
 - Some tests require an 'Enterprise' data file. This can be obtained by [purchasing a license](https://51degrees.com/pricing).
-  - Once available, the full path to this data file must be specified in the `IPINTELLIGENCEDATAFILE` environment variable.
-- Tests using the cloud service require resource keys with specific properties
-    to be provided using environment variables:
-  - The `SUPER_RESOURCE_KEY` environment variable should be populated with a key that includes all properties. A [license](https://51degrees.com/pricing) is required in order to access some properties.
+- Tests using the cloud service require resource keys with specific properties. A [license](https://51degrees.com/pricing) is required in order to access some properties.
 
 ## Project documentation
 
