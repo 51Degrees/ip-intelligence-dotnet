@@ -77,7 +77,7 @@ $(document).ready(function(){initNavTree('md__home_runner_work_ip-intelligence-d
 <p>The specification is also available on GitHub and is recommended reading if you wish to understand the concepts and design of this API.</p>
 <h2>Dependencies</h2>
 <p>Visual Studio 2019 or later is recommended. Although Visual Studio Code can be used for working with most of the projects.</p>
-<p>The core IP intelligence projects are written in C and C++. The Pipeline engines are written in C# and target .NET Standard 2.0.3. Example and test projects mostly target .NET 6.0 though in some cases, projects are available targeting other frameworks.</p>
+<p>The core IP intelligence projects are written in C and C++. The Pipeline engines are written in C# and target .NET Standard 2.0. Example and test projects mostly target .NET 8.0 though in some cases, projects are available targeting other frameworks.</p>
 <p>For runtime dependencies, see our <a href="https://51degrees.com/documentation/_info__dependencies.html">dependencies</a> page. The <code>ci/options.json</code> file lists the tested and packaged .NET versions and operating systems automatic tests are performed with. The solution will likely operate with other versions.</p>
 <h3>Data</h3>
 <p>The API does detections using a local (on-premise) data file or cloud service (coming soon).</p>
@@ -85,7 +85,7 @@ $(document).ready(function(){initNavTree('md__home_runner_work_ip-intelligence-d
 <p>In order to perform IP intelligence on-premise, you will need to use a data file.</p>
 <p><a href="https://github.com/51Degrees/ip-intelligence-data/">ip-intelligence-data</a> submodule repository instructs how to obtain a 'Lite' data file, otherwise <a href="https://51degrees.com/contact-us">contact us</a> to obtain an 'Enterprise' data file.</p>
 <h4>Cloud (coming soon)</h4>
-<p>Requires a <a href="https://51degrees.com/documentation/_info__resource_keys.html">resource key</a> to use the Cloud API. You can create resource keys using our <a href="https://configure.51degrees.com/">configurator</a>, see our <a href="https://51degrees.com/documentation/_concepts__configurator.html">documentation</a> on how to use this.</p>
+<p>You will require <a href="https://51degrees.com/documentation/_info__resource_keys.html">resource keys</a> to use the Cloud API, as described on our website. Get resource keys from our <a href="https://configure.51degrees.com/">configurator</a>, see our <a href="https://51degrees.com/documentation/_concepts__configurator.html">documentation</a> on how to use this.</p>
 <h2>Solutions and projects</h2>
 <ul>
 <li><b><a class="el" href="namespace_fifty_one_1_1_ip_intelligence.html">FiftyOne.IpIntelligence</a></b> - Ip intelligence engines and related projects.<ul>
@@ -153,14 +153,8 @@ $(document).ready(function(){initNavTree('md__home_runner_work_ip-intelligence-d
 <p>Tests can be found in the <code>Tests/</code> folder. These can all be run from within Visual Studio or by using the <code>dotnet test</code> command line tool.</p>
 <p>Some tests require additional resources to run. These will either fail or return an 'inconclusive' result if these resources are not provided.</p>
 <ul>
-<li>Some tests require an 'Enterprise' data file. This can be obtained by <a href="https://51degrees.com/pricing">purchasing a license</a>.<ul>
-<li>Once available, the full path to this data file must be specified in the <code>IPINTELLIGENCEDATAFILE</code> environment variable.</li>
-</ul>
-</li>
-<li>Tests using the cloud service require resource keys with specific properties to be provided using environment variables:<ul>
-<li>The <code>SUPER_RESOURCE_KEY</code> environment variable should be populated with a key that includes all properties. A <a href="https://51degrees.com/pricing">license</a> is required in order to access some properties.</li>
-</ul>
-</li>
+<li>Some tests require an 'Enterprise' data file. This can be obtained by <a href="https://51degrees.com/pricing">purchasing a license</a>.</li>
+<li>Tests using the cloud service require resource keys with specific properties. A <a href="https://51degrees.com/pricing">license</a> is required in order to access some properties.</li>
 </ul>
 <h2>Project documentation</h2>
 <p>For complete documentation on the Pipeline API and associated engines, see the <a href="https://51degrees.com/documentation/index.html">51Degrees documentation site</a>. </p>
