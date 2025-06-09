@@ -38,9 +38,9 @@ if ($(Test-Path -Path $ExamplesRepoName) -eq $False) {
     ./steps/clone-repo.ps1 -RepoName $ExamplesRepoName -OrgName $OrgName
 }
 
-Write-Output "Moving TAC file"
-$TacFile = [IO.Path]::Combine($EvidenceFiles, "TAC-IpIntelligenceV41.ipi") 
-Copy-Item $TacFile "ip-intelligence-dotnet-examples/ip-intelligence-data/TAC-IpIntelligenceV41.ipi"
+Write-Output "Moving enterprise IPI file"
+$EnterpriseFile = [IO.Path]::Combine($EvidenceFiles, "51Degrees-EnterpriseIpiV41.ipi") 
+Copy-Item $EnterpriseFile "ip-intelligence-dotnet-examples/ip-intelligence-data/51Degrees-EnterpriseIpiV41.ipi"
 
 Write-Output "Moving evidence file"
 $EvidenceFile = [IO.Path]::Combine($EvidenceFiles, "evidence.yml")
@@ -79,7 +79,7 @@ try {
     Write-Debug "Entering output..."
     Push-Location "output"
     try {
-        dotnet FiftyOne.IpIntelligence.Examples.OnPremise.Performance.dll -d $TacFile -a $EvidenceFile -j summary.json
+        dotnet FiftyOne.IpIntelligence.Examples.OnPremise.Performance.dll -d $EnterpriseFile -a $EvidenceFile -j summary.json
     }
     finally {
         Pop-Location
