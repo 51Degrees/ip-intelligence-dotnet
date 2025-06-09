@@ -124,7 +124,7 @@ namespace performance_tests
             {
                 throw new Exception($"Failed to find an IP Intelligence data file matching " +
                     $"'{dataFile}'. If using the lite file, then make sure the " +
-                    $"device-detection-data submodule has been updated by running " +
+                    $"ip-intelligence-data submodule has been updated by running " +
                     "`git submodule update --recursive`. Otherwise, ensure that the filename " +
                     "is correct in appsettings.json.");
             }
