@@ -2,8 +2,8 @@ param(
     [Parameter(Mandatory)][string]$RepoName,
     [Parameter(Mandatory)][string]$OrgName,
     [string]$GitHubUser = "Automation51D",
-    [Parameter(Mandatory)][string]$DeviceDetection,
-    [Parameter(Mandatory)][string]$DeviceDetectionUrl,
+    [Parameter(Mandatory)][string]$IpIntelligence,
+    [Parameter(Mandatory)][string]$IpIntelligenceUrl,
     [string]$ProjectDir = ".",
     [string]$Name = "Release_x64",
     [string]$Configuration = "Release",
@@ -29,7 +29,7 @@ Write-Debug "env:IPINTELLIGENCEDATAFILE = <$($env:IPINTELLIGENCEDATAFILE)>"
 
 Write-Host "Fetching examples..."
 ./steps/clone-repo.ps1 -RepoName $ExamplesRepo -OrgName $OrgName -Branch $ExamplesBranch
-& "./$ExamplesRepo/ci/fetch-assets.ps1" -RepoName $ExamplesRepo -DeviceDetection $DeviceDetection -DeviceDetectionUrl $DeviceDetectionUrl
+& "./$ExamplesRepo/ci/fetch-assets.ps1" -RepoName $ExamplesRepo -IpIntelligence $IpIntelligence -IpIntelligenceUrl $IpIntelligenceUrl
 
 Push-Location package
 try {
