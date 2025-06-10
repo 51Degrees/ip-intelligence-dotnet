@@ -85,7 +85,7 @@ Find out about the more capable data files that are available on our
 </ul>
 <h2>Overview</h2>
 <p>The FiftyOne.Pipeline.Web package includes an IHttpModule implementation called 'PipelineModule'. This is inserted into the start of the ASP.NET processing pipeline so that it can intercept the request and perform IP Intelligence.</p>
-<p>The module replaces the default <code>HttpCapabilitiesBase.BrowserCapabilitiesProvider</code> with a 51Degrees version. This means that when values are requested (e.g. Request.Browser.IsMobileDevice), we can intercept that request and supply a result from our Device Detection and/or IP Intelligence.</p>
+<p>The module replaces the default <code>HttpCapabilitiesBase.BrowserCapabilitiesProvider</code> with a 51Degrees version. This means that when values are requested (e.g. Request.Browser.IsMobileDevice), we can intercept that request and supply a result from our IP Intelligence.</p>
 <p>If you require access to properties and features that are not available through <code>BrowserCapabilitiesProvider</code>, you will need to cast browser capabilities to our <code>PipelineCapabilities</code> class in order to access the <code>IFlowData</code> instance directly:</p>
 <div class="c-code__block c-code__block--outline"><div class="c-code__line">var flowData = ((PipelineCapabilities)Request.Browser).FlowData;</div><div class="c-code__line">var ipiData = flowData.Get&lt;IIpIntelligenceData&gt;();</div></div><p>The 'IPipeline' instance that is being used can also be accessed through the static <code>WebPipeline</code> class:</p>
 <div class="c-code__block c-code__block--outline"><div class="c-code__line">var ipiPipeline = WebPipeline.GetInstance();</div></div><h2>Configuration</h2>
