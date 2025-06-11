@@ -27,7 +27,7 @@ if ($IsLinux) {
 
 }
 
-$env:IPINTELLIGENCEDATAFILE = [IO.Path]::Combine($RepoPath, "FiftyOne.IpIntelligence.Engine.OnPremise", "ip-intelligence-cxx", "ip-intelligence-data", "TAC-IpIntelligenceV41.ipi")
+$env:IPINTELLIGENCEDATAFILE = [IO.Path]::Combine($RepoPath, "FiftyOne.IpIntelligence.Engine.OnPremise", "ip-intelligence-cxx", "ip-intelligence-data", "51Degrees-EnterpriseIpiV41.ipi")
 # $env:SUPER_RESOURCE_KEY = $Keys.TestResourceKey
 # $env:DEVICEDETECTIONLICENSEKEY_DOTNET = $Keys.DeviceDetection
 # $env:ACCEPTCH_BROWSER_KEY = $Keys.AcceptCHBrowserKey

@@ -14,17 +14,17 @@ stages:
     steps:
     
     - script: |
-        curl "https://distributor.51degrees.com/api/v2/download?LicenseKeys=$(IpiLicenseKey)&Type=IPIV41&Download=True&Product=V4Enterprise" --output Enterprise-ListV41.ipi.gz
+        curl "https://distributor.51degrees.com/api/v2/download?LicenseKeys=$(IpiLicenseKey)&Type=IPIV41&Download=True&Product=V4Enterprise" --output 51Degrees-EnterpriseIpiV41.ipi.gz
       displayName: 'Download Latest Data File'
 
     - task: ExtractFiles@1
       displayName: 'Extract Data File'
       inputs:
-        archiveFilePatterns: 'Enterprise-ListV41.ipi.gz'
+        archiveFilePatterns: '51Degrees-EnterpriseIpiV41.ipi.gz'
         cleanDestinationFolder: false
 
     - script: |
-          mv $(Build.SourcesDirectory)/Enterprise-ListV41.ipi  $(Build.ArtifactStagingDirectory)/Enterprise-ListV41.ipi
+          mv $(Build.SourcesDirectory)/51Degrees-EnterpriseIpiV41.ipi  $(Build.ArtifactStagingDirectory)/51Degrees-EnterpriseIpiV41.ipi
       displayName: 'Move Data File'
 
     - task: PublishBuildArtifacts@1
@@ -73,7 +73,7 @@ stages:
         downloadPath: '$(System.ArtifactsDirectory)'
 
     - script: |
-          mv $(System.ArtifactsDirectory)\enterpriseFile\Enterprise-ListV41.ipi  $(Build.SourcesDirectory)\FiftyOne.IpIntelligence\ip-intelligence-cxx\ip-intelligence-data\51Degrees-LiteV4.1.ipi
+          mv $(System.ArtifactsDirectory)\enterpriseFile\51Degrees-EnterpriseIpiV41.ipi  $(Build.SourcesDirectory)\FiftyOne.IpIntelligence\ip-intelligence-cxx\ip-intelligence-data\51Degrees-EnterpriseIpiV41.ipi
           ls $(Build.SourcesDirectory)\FiftyOne.IpIntelligence\ip-intelligence-cxx\ip-intelligence-data
       displayName: 'Move Data File'
     

@@ -60,7 +60,7 @@ namespace performance_tests
 
         /// <summary>
         /// Typically, something like this will not be necessary.
-        /// The device detection API will accept an absolute or relative path for the data file.
+        /// The IP Intelligence API will accept an absolute or relative path for the data file.
         /// However, if a relative path is specified, it will only look in the current working 
         /// directory.
         /// In our examples, we have many different projects and we don't want to have a copy of 
@@ -86,7 +86,7 @@ namespace performance_tests
             // misnamed configuration keys.
             section.Bind(options, (o) => { o.ErrorOnUnknownConfiguration = true; });
 
-            // Get the index of the device detection engine element in the config file so that
+            // Get the index of the IP Intelligence engine element in the config file so that
             // we can create an override key for it.
             var hashEngineOptions = options.GetElementConfig(nameof(IpiOnPremiseEngine));
             var hashEngineIndex = options.Elements.IndexOf(hashEngineOptions);
@@ -122,9 +122,9 @@ namespace performance_tests
 
             if (foundDataFile == false)
             {
-                throw new Exception($"Failed to find a device detection data file matching " +
+                throw new Exception($"Failed to find an IP Intelligence data file matching " +
                     $"'{dataFile}'. If using the lite file, then make sure the " +
-                    $"device-detection-data submodule has been updated by running " +
+                    $"ip-intelligence-data submodule has been updated by running " +
                     "`git submodule update --recursive`. Otherwise, ensure that the filename " +
                     "is correct in appsettings.json.");
             }
