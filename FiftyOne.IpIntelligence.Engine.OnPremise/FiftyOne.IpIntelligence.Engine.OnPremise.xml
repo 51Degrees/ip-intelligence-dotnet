@@ -735,13 +735,38 @@
             range that the IP address fall within
             </summary>
         </member>
+        <member name="P:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine.SwigFactory">
+            <summary>
+            Factory used to create a new <see cref="T:FiftyOne.IpIntelligence.Engine.OnPremise.Wrappers.IEngineSwigWrapper"/> when
+            <see cref="M:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine.RefreshData(System.String)"/> or 
+            <see cref="M:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine.RefreshData(System.String,System.IO.Stream)"/> is called.
+            </summary>
+            <remarks>
+            Must be set after construction and before usage.
+            </remarks>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine.Config">
+            <summary>
+            Wrapper to pass general configuration from managed code to unmanaged 
+            code.
+            </summary>
+            <remarks>
+            Must be set after construction and before usage.
+            </remarks>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine.PropertiesConfigSwig">
+            <summary>
+            Wrapper to pass property configuration from managed code to 
+            unmanaged code.
+            </summary>
+        </member>
         <member name="E:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine.RefreshCompleted">
             <summary>
             This event is fired whenever the data that this engine makes use
             of has been updated.
             </summary>
         </member>
-        <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine.#ctor(Microsoft.Extensions.Logging.ILoggerFactory,FiftyOne.Pipeline.Engines.Data.IAspectEngineDataFile,FiftyOne.IpIntelligence.Engine.OnPremise.Wrappers.IConfigSwigWrapper,FiftyOne.IpIntelligence.Engine.OnPremise.Wrappers.IRequiredPropertiesConfigSwigWrapper,System.Func{FiftyOne.Pipeline.Core.FlowElements.IPipeline,FiftyOne.Pipeline.Core.FlowElements.FlowElementBase{FiftyOne.IpIntelligence.Engine.OnPremise.Data.IIpDataOnPremise,FiftyOne.Pipeline.Engines.FiftyOne.Data.IFiftyOneAspectPropertyMetaData},FiftyOne.IpIntelligence.Engine.OnPremise.Data.IIpDataOnPremise},System.String,FiftyOne.IpIntelligence.Engine.OnPremise.Wrappers.ISwigFactory)">
+        <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine.#ctor(Microsoft.Extensions.Logging.ILoggerFactory,System.Func{FiftyOne.Pipeline.Core.FlowElements.IPipeline,FiftyOne.Pipeline.Core.FlowElements.FlowElementBase{FiftyOne.IpIntelligence.Engine.OnPremise.Data.IIpDataOnPremise,FiftyOne.Pipeline.Engines.FiftyOne.Data.IFiftyOneAspectPropertyMetaData},FiftyOne.IpIntelligence.Engine.OnPremise.Data.IIpDataOnPremise},System.String)">
             <summary>
             Construct a new instance of the IP intelligence engine.
             </summary>
@@ -895,7 +920,41 @@
             Data update service used to keep the engine's data up to date.
             </param>
         </member>
-        <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngineBuilder.SetReuseTempFile(System.Boolean)">
+        <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngineBuilder.CreateEngine(Microsoft.Extensions.Logging.ILoggerFactory,System.Func{FiftyOne.Pipeline.Core.FlowElements.IPipeline,FiftyOne.Pipeline.Core.FlowElements.FlowElementBase{FiftyOne.IpIntelligence.Engine.OnPremise.Data.IIpDataOnPremise,FiftyOne.Pipeline.Engines.FiftyOne.Data.IFiftyOneAspectPropertyMetaData},FiftyOne.IpIntelligence.Engine.OnPremise.Data.IIpDataOnPremise},System.String)">
+            <summary>
+            Creates a new instance of <see cref="!:DeviceDetectionHashEngine"/>.
+            </summary>
+            <param name="loggerFactory"></param>
+            <param name="deviceDataFactory"></param>
+            <param name="tempDataFilePath"></param>
+            <returns></returns>
+        </member>
+        <member name="T:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngineBuilderBase`1">
+            <summary>
+            Builder for the <see cref="T:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine"/>. All options
+            for the engine should be set here.
+            </summary>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngineBuilderBase`1.#ctor(Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            Construct a new instance of the builder.
+            </summary>
+            <param name="loggerFactory">
+            Factory used to create loggers for the engine
+            </param>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngineBuilderBase`1.#ctor(Microsoft.Extensions.Logging.ILoggerFactory,FiftyOne.Pipeline.Engines.Services.IDataUpdateService)">
+            <summary>
+            Construct a new instance of the builder.
+            </summary>
+            <param name="loggerFactory">
+            Factory used to create loggers for the engine
+            </param>
+            <param name="dataUpdateService">
+            Data update service used to keep the engine's data up to date.
+            </param>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngineBuilderBase`1.SetReuseTempFile(System.Boolean)">
             <summary>
             Set whether or not an existing temp file should be used if one is
             found in the temp directory.
@@ -903,21 +962,21 @@
             <param name="reuse">True if an existing file should be used</param>
             <returns>This builder</returns>
         </member>
-        <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngineBuilder.SetPerformanceProfile(System.String)">
+        <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngineBuilderBase`1.SetPerformanceProfile(System.String)">
             <summary>
             Set the performance profile to use when constructing the data set.
             </summary>
             <param name="profileName">Name of the profile to use</param>
             <returns>This builder</returns>
         </member>
-        <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngineBuilder.SetPerformanceProfile(FiftyOne.Pipeline.Engines.PerformanceProfiles)">
+        <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngineBuilderBase`1.SetPerformanceProfile(FiftyOne.Pipeline.Engines.PerformanceProfiles)">
             <summary>
             Set the performance profile to use when constructing the data set.
             </summary>
             <param name="profile">Profile to use</param>
             <returns>This builder</returns>
         </member>
-        <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngineBuilder.SetConcurrency(System.UInt16)">
+        <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngineBuilderBase`1.SetConcurrency(System.UInt16)">
             <summary>
             Set the expected number of concurrent operations using the engine.
             This sets the concurrency of the internal caches to avoid excessive
@@ -926,7 +985,7 @@
             <param name="concurrency">Expected concurrent accesses</param>
             <returns>This builder</returns>
         </member>
-        <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngineBuilder.NewEngine(System.Collections.Generic.List{System.String})">
+        <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngineBuilderBase`1.NewEngine(System.Collections.Generic.List{System.String})">
             <summary>
             Called by the 'BuildEngine' method to handle
             creation of the engine instance.
@@ -936,12 +995,22 @@
             An <see cref="T:FiftyOne.Pipeline.Engines.FlowElements.IAspectEngine"/>.
             </returns>
         </member>
-        <member name="P:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngineBuilder.DefaultDataDownloadType">
+        <member name="P:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngineBuilderBase`1.DefaultDataDownloadType">
             <summary>
             Get the default value for the 'Type' parameter that is passed
             to the 51Degrees Distributor service when checking for updated
             data files.
             </summary>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngineBuilderBase`1.CreateEngine(Microsoft.Extensions.Logging.ILoggerFactory,System.Func{FiftyOne.Pipeline.Core.FlowElements.IPipeline,FiftyOne.Pipeline.Core.FlowElements.FlowElementBase{FiftyOne.IpIntelligence.Engine.OnPremise.Data.IIpDataOnPremise,FiftyOne.Pipeline.Engines.FiftyOne.Data.IFiftyOneAspectPropertyMetaData},FiftyOne.IpIntelligence.Engine.OnPremise.Data.IIpDataOnPremise},System.String)">
+            <summary>
+            Overridden in the implementing class to create a new instance of
+            TEngine with the constructor parameters provided.
+            </summary>
+            <param name="loggerFactory"></param>
+            <param name="deviceDataFactory"></param>
+            <param name="tempDataFilePath"></param>
+            <returns></returns>
         </member>
         <member name="T:FiftyOne.IpIntelligence.Engine.OnPremise.Interop.UTF8Marshaler">
             <summary>
