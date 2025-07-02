@@ -219,7 +219,6 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
             DataFiles.Remove(dataFile);
 
             // Update the swig configuration object.
-            SwigConfig.setUseUpperPrefixHeaders(false);
             if (dataFile.Configuration.CreateTempCopy && String.IsNullOrEmpty(TempDir) == false)
             {
                 using (var tempDirs = new VectorStringSwig())
