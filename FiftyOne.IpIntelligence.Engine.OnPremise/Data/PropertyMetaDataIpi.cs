@@ -31,6 +31,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Text;
 
 namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
 {
@@ -262,10 +263,16 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
         public IValueMetaData GetValue(string valueName)
         {
             using (var values = _engine.MetaData.getValuesForProperty(_source, _engine))
-            using (var key = new ValueMetaDataKeySwig(Name, valueName))
             {
-                return new ValueMetaData(_engine,
-                    values.getByKey(key));
+                // Convert the valueName string to UTF8 byte array
+                byte[] valueNameBytes = Encoding.UTF8.GetBytes(valueName);
+                
+                // Use the byte array constructor overload
+                using (var key = new ValueMetaDataKeySwig(Name, valueNameBytes, valueNameBytes.Length))
+                {
+                    var value = values.getByKey(key);
+                    return (value is null) ? null : new ValueMetaData(_engine, value);
+                }
             }
         }
 

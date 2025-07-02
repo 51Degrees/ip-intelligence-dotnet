@@ -555,8 +555,11 @@ class IpIntelligenceEngineModulePINVOKE {
   [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_delete_ProfileMetaDataSwig___")]
   public static extern void delete_ProfileMetaDataSwig(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_new_ValueMetaDataKeySwig___")]
-  public static extern global::System.IntPtr new_ValueMetaDataKeySwig(string jarg1, string jarg2);
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_new_ValueMetaDataKeySwig__SWIG_0___")]
+  public static extern global::System.IntPtr new_ValueMetaDataKeySwig__SWIG_0(string jarg1, string jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_new_ValueMetaDataKeySwig__SWIG_1___")]
+  public static extern global::System.IntPtr new_ValueMetaDataKeySwig__SWIG_1(string jarg1, byte[] jarg2, int jarg3);
 
   [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ValueMetaDataKeySwig_getPropertyName___")]
   public static extern string ValueMetaDataKeySwig_getPropertyName(global::System.Runtime.InteropServices.HandleRef jarg1);

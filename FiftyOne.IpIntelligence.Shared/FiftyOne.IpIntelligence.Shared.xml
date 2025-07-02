@@ -647,6 +647,26 @@
             Thrown if the value was not of the expected type.
             </exception>
         </member>
+        <member name="T:FiftyOne.IpIntelligence.Shared.Data.RiskFactorEnum">
+            <summary>
+            Enum indicating the confidence associated with a network result.
+            </summary>
+        </member>
+        <member name="F:FiftyOne.IpIntelligence.Shared.Data.RiskFactorEnum.LowRisk">
+            <summary>
+            A standard wired or cellular IP with over 99% country accuracy and better than 60% combined accuracy within a 25 km radius globally.
+            </summary>
+        </member>
+        <member name="F:FiftyOne.IpIntelligence.Shared.Data.RiskFactorEnum.ModerateRisk">
+            <summary>
+            A hosting environment or ASN (like cloud servers, VPNs, proxies, TOR, etc.) but where we are confident the location represents over 60% accuracy at the country level.
+            </summary>
+        </member>
+        <member name="F:FiftyOne.IpIntelligence.Shared.Data.RiskFactorEnum.HighRisk">
+            <summary>
+            A hosting network where the location we have is likely valid for less than 50% of the traffic.
+            </summary>
+        </member>
         <member name="T:FiftyOne.IpIntelligence.Shared.Data.ValueMetaDataDefault">
             <summary>
             Data class that contains meta-data relating to a specific 
