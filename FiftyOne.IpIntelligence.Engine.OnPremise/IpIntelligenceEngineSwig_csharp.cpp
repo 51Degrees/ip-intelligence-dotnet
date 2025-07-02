@@ -6140,7 +6140,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInte
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_new_ValueMetaDataKeySwig___(const char * jarg1, const char * jarg2) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_new_ValueMetaDataKeySwig__SWIG_0___(const char * jarg1, const char * jarg2) {
   void * jresult ;
   std::string arg1 ;
   std::string arg2 ;
@@ -6159,6 +6159,75 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
   {
     try {
       result = (ValueMetaDataKey *)new ValueMetaDataKey(SWIG_STD_MOVE(arg1),SWIG_STD_MOVE(arg2));;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_CSharpException(SWIG_RuntimeError, e.what()); return 0; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_CSharpException(SWIG_ValueError, e.what()); return 0; 
+      };
+    }
+  }
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_new_ValueMetaDataKeySwig__SWIG_1___(const char * jarg1, unsigned char* jarg2, int jarg3) {
+  void * jresult ;
+  std::string arg1 ;
+  unsigned char *arg2 = (unsigned char *) (unsigned char *)0 ;
+  long arg3 ;
+  ValueMetaDataKey *result = 0 ;
+  
+  if (!jarg1) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "null string", 0);
+    return 0;
+  }
+  (&arg1)->assign(jarg1); 
+  arg2 = (unsigned char *)jarg2; 
+  arg3 = (long)jarg3; 
+  {
+    try {
+      result = (ValueMetaDataKey *)new ValueMetaDataKey(SWIG_STD_MOVE(arg1),arg2,arg3);;
     }
     catch(FatalException& e) {
       {
