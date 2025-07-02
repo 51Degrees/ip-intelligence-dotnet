@@ -110,7 +110,7 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
         /// Usually a <see cref="Wrappers.SwigFactory"/> instance.
         /// Unit tests can override this to mock behaviour as needed.
         /// </param>
-        internal IpiOnPremiseEngine(
+        internal protected IpiOnPremiseEngine(
             ILoggerFactory loggerFactory,
             Func<IPipeline, FlowElementBase<IIpDataOnPremise, IFiftyOneAspectPropertyMetaData>, IIpDataOnPremise> ipDataFactory,
             string tempDataFilePath)
