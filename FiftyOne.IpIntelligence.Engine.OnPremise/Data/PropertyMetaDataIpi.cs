@@ -264,8 +264,12 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
             using (var values = _engine.MetaData.getValuesForProperty(_source, _engine))
             using (var key = new ValueMetaDataKeySwig(Name, valueName))
             {
-                return new ValueMetaData(_engine,
-                    values.getByKey(key));
+                var value = values.getByKey(key);
+                if (value is null)
+                {
+                    return null;
+                }
+                return new ValueMetaData(_engine, value);
             }
         }
 
