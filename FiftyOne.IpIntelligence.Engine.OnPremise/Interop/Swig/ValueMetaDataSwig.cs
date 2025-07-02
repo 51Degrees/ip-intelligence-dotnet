@@ -75,6 +75,12 @@ internal class ValueMetaDataSwig : global::System.IDisposable {
     return ret;
   }
 
+  public UTF8StringSwig getUtf8ValueName() {
+    UTF8StringSwig ret = new UTF8StringSwig(IpIntelligenceEngineModulePINVOKE.ValueMetaDataSwig_getUtf8ValueName(swigCPtr), true);
+    if (IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Pending) throw IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Retrieve();
+    return ret;
+  }
+
 }
 
 }
