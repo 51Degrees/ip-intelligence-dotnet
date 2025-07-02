@@ -60,7 +60,14 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
         /// <summary>
         /// The value
         /// </summary>
-        public string Name => _source.getName();
+        public string Name
+        {
+            get
+            {
+                using (var valueNameSwig = _source.getUtf8ValueName())
+                    return valueNameSwig.ToUTF8String();
+            }
+        }
 
         /// <summary>
         /// A description of this value.
