@@ -43,30 +43,8 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
     /// for the engine should be set here.
     /// </summary>
     public class IpiOnPremiseEngineBuilder
-       : OnPremiseIpiEngineBuilderBase<IpiOnPremiseEngineBuilder, IpiOnPremiseEngine>
+       : IpiOnPremiseEngineBuilderBase<IpiOnPremiseEngine>
     {
-        #region Private Properties
-
-        private readonly ILoggerFactory _loggerFactory;
-
-        private IConfigSwigWrapper _config = null;
-
-        #endregion
-
-        internal ISwigFactory SwigFactory { get; set; } = new SwigFactory();
-
-        private IConfigSwigWrapper SwigConfig
-        {
-            get
-            {
-                if (_config == null)
-                {
-                    _config = SwigFactory.CreateConfig();
-                }
-                return _config;
-            }
-        }
-
         #region Constructor
 
         /// <summary>
@@ -77,7 +55,7 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
         /// </param>
         public IpiOnPremiseEngineBuilder(
             ILoggerFactory loggerFactory)
-            : this(loggerFactory, null)
+            : base(loggerFactory)
         {
         }
 
@@ -93,176 +71,36 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
         public IpiOnPremiseEngineBuilder(
             ILoggerFactory loggerFactory,
             IDataUpdateService dataUpdateService)
-            : base(dataUpdateService)
+            : base(loggerFactory, dataUpdateService)
         {
-            _loggerFactory = loggerFactory;
-        }
-
-        #endregion
-
-        #region Public Methods
-
-        /// <summary>
-        /// Set whether or not an existing temp file should be used if one is
-        /// found in the temp directory.
-        /// </summary>
-        /// <param name="reuse">True if an existing file should be used</param>
-        /// <returns>This builder</returns>
-        public IpiOnPremiseEngineBuilder SetReuseTempFile(bool reuse)
-        {
-            SwigConfig.setReuseTempFile(reuse);
-            return this;
-        }
-
-        /// <summary>
-        /// Set the performance profile to use when constructing the data set.
-        /// </summary>
-        /// <param name="profileName">Name of the profile to use</param>
-        /// <returns>This builder</returns>
-        public IpiOnPremiseEngineBuilder SetPerformanceProfile(
-            string profileName)
-        {
-            PerformanceProfiles profile;
-            if (Enum.TryParse<PerformanceProfiles>(
-                profileName,
-                out profile))
-            {
-                return SetPerformanceProfile(profile);
-            }
-            else
-            {
-                var available = Enum.GetNames(typeof(PerformanceProfiles))
-                    .Select(i => "'" + i + "'");
-                throw new ArgumentException(
-                    $"'{profileName}' is not a valid performance profile. " +
-                    $"Available profiles are {string.Join(", ", available)}.");
-            }
-        }
-
-        /// <summary>
-        /// Set the performance profile to use when constructing the data set.
-        /// </summary>
-        /// <param name="profile">Profile to use</param>
-        /// <returns>This builder</returns>
-        public override IpiOnPremiseEngineBuilder SetPerformanceProfile(
-            PerformanceProfiles profile)
-        {
-            switch (profile)
-            {
-                case PerformanceProfiles.LowMemory:
-                    SwigConfig.setLowMemory();
-                    break;
-                case PerformanceProfiles.Balanced:
-                    SwigConfig.setBalanced();
-                    break;
-                case PerformanceProfiles.BalancedTemp:
-                    SwigConfig.setBalancedTemp();
-                    break;
-                case PerformanceProfiles.HighPerformance:
-                    SwigConfig.setHighPerformance();
-                    break;
-                case PerformanceProfiles.MaxPerformance:
-                    SwigConfig.setMaxPerformance();
-                    break;
-                default:
-                    throw new ArgumentException(
-                        $"The performance profile '{profile}' is not valid " +
-                        $"for a IpiOnPremiseEngine.",
-                        nameof(profile));
-            }
-            return this;
-        }
-
-        /// <summary>
-        /// Set the expected number of concurrent operations using the engine.
-        /// This sets the concurrency of the internal caches to avoid excessive
-        /// locking.
-        /// </summary>
-        /// <param name="concurrency">Expected concurrent accesses</param>
-        /// <returns>This builder</returns>
-        public override IpiOnPremiseEngineBuilder SetConcurrency(
-            ushort concurrency)
-        {
-            SwigConfig.setConcurrency(concurrency);
-            return this;
         }
 
         #endregion
 
         #region Protected Overrides
+
         /// <summary>
-        /// Called by the 'BuildEngine' method to handle
-        /// creation of the engine instance.
+        /// Creates a new instance of <see cref="DeviceDetectionHashEngine"/>.
         /// </summary>
-        /// <param name="properties"></param>
-        /// <returns>
-        /// An <see cref="IAspectEngine"/>.
-        /// </returns>
-        protected override IpiOnPremiseEngine NewEngine(
-            List<string> properties)
+        /// <param name="loggerFactory"></param>
+        /// <param name="deviceDataFactory"></param>
+        /// <param name="tempDataFilePath"></param>
+        /// <returns></returns>
+        protected override IpiOnPremiseEngine CreateEngine(
+            ILoggerFactory loggerFactory,
+            Func<IPipeline, FlowElementBase<
+                IIpDataOnPremise,
+                IFiftyOneAspectPropertyMetaData>,
+                IIpDataOnPremise> deviceDataFactory,
+            string tempDataFilePath)
         {
-            if (DataFiles.Count != 1)
-            {
-                throw new PipelineConfigurationException(
-                    "This builder requires one and only one configured file " +
-                    $"but it has {DataFileConfigs.Count}");
-            }
-            var dataFile = DataFiles.First();
-            // We remove the data file configuration from the list.
-            // This is because the on-premise engine builder base class 
-            // adds all the data file configs after engine creation.  
-            // However, the IP intelligence data files are supplied 
-            // directly to the constructor.
-            // Consequently, we remove it here to stop it from being added 
-            // again by the base class.
-            DataFiles.Remove(dataFile);
-
-            // Update the swig configuration object.
-            SwigConfig.setUseUpperPrefixHeaders(false);
-            if (dataFile.Configuration.CreateTempCopy && String.IsNullOrEmpty(TempDir) == false)
-            {
-                using (var tempDirs = new VectorStringSwig())
-                {
-                    tempDirs.Add(TempDir);
-                    SwigConfig.setTempDirectories(tempDirs);
-                }
-                SwigConfig.setUseTempFile(true);
-            }
-
-            // Create swig property configuration object.
-            IRequiredPropertiesConfigSwigWrapper propertyConfig = null;
-            using (var vProperties = new VectorStringSwig(properties))
-            {
-                propertyConfig = SwigFactory.CreateRequiredProperties(vProperties);
-            }
 
             return new IpiOnPremiseEngine(
-                _loggerFactory,
-                dataFile,
-                SwigConfig,
-                propertyConfig,
-                CreateAspectData,
-                TempDir,
-                SwigFactory);
+                loggerFactory,
+                deviceDataFactory,
+                tempDataFilePath);
         }
 
-        /// <summary>
-        /// Get the default value for the 'Type' parameter that is passed
-        /// to the 51Degrees Distributor service when checking for updated
-        /// data files.
-        /// </summary>
-        protected override string DefaultDataDownloadType => "IPIV41";
         #endregion
-
-
-        private IIpDataOnPremise CreateAspectData(IPipeline pipeline,
-            FlowElementBase<IIpDataOnPremise, IFiftyOneAspectPropertyMetaData> engine)
-        {
-            return new IpDataOnPremise(
-                _loggerFactory.CreateLogger<IpDataOnPremise>(),
-                pipeline,
-                engine as IpiOnPremiseEngine,
-                MissingPropertyService.Instance);
-        }
     }
 }

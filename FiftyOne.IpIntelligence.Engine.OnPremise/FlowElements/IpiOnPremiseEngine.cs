@@ -48,7 +48,16 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
     /// </summary>
     public class IpiOnPremiseEngine : OnPremiseIpiEngineBase<IIpDataOnPremise>
     {
-        private ISwigFactory _swigFactory;
+        /// <summary>
+        /// Factory used to create a new <see cref="IEngineSwigWrapper"/> when
+        /// <see cref="RefreshData(string)"/> or 
+        /// <see cref="RefreshData(string, Stream)"/> is called.
+        /// </summary>
+        /// <remarks>
+        /// Must be set after construction and before usage.
+        /// </remarks>
+        internal ISwigFactory SwigFactory { get; set; }
+
         private IEngineSwigWrapper _engine;
 
         private IEvidenceKeyFilter _evidenceKeyFilter;
@@ -56,8 +65,20 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
         private IList<IFiftyOneAspectPropertyMetaData> _properties;
         private IList<IComponentMetaData> _components;
 
-        private IConfigSwigWrapper _config;
-        private IRequiredPropertiesConfigSwigWrapper _propertiesConfigSwig;
+        /// <summary>
+        /// Wrapper to pass general configuration from managed code to unmanaged 
+        /// code.
+        /// </summary>
+        /// <remarks>
+        /// Must be set after construction and before usage.
+        /// </remarks>
+        internal IConfigSwigWrapper Config { get; set; }
+
+        /// <summary>
+        /// Wrapper to pass property configuration from managed code to 
+        /// unmanaged code.
+        /// </summary>
+        internal IRequiredPropertiesConfigSwigWrapper PropertiesConfigSwig { get; set; }
 
         private static Random _rng = new Random();
 
@@ -86,27 +107,18 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
         /// </param>
         /// <param name="swigFactory">
         /// The factory object to use when creating swig wrapper instances.
-        /// Usually a <see cref="SwigFactory"/> instance.
+        /// Usually a <see cref="Wrappers.SwigFactory"/> instance.
         /// Unit tests can override this to mock behaviour as needed.
         /// </param>
         internal IpiOnPremiseEngine(
             ILoggerFactory loggerFactory,
-            IAspectEngineDataFile dataFile,
-            IConfigSwigWrapper config,
-            IRequiredPropertiesConfigSwigWrapper properties,
             Func<IPipeline, FlowElementBase<IIpDataOnPremise, IFiftyOneAspectPropertyMetaData>, IIpDataOnPremise> ipDataFactory,
-            string tempDataFilePath,
-            ISwigFactory swigFactory)
+            string tempDataFilePath)
             : base(
                   loggerFactory.CreateLogger<IpiOnPremiseEngine>(),
                   ipDataFactory,
                   tempDataFilePath)
         {
-            _config = config;
-            _propertiesConfigSwig = properties;
-            _swigFactory = swigFactory;
-
-            AddDataFile(dataFile);
         }
 
         /// <summary>
@@ -207,13 +219,13 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
             var dataFile = DataFiles.Single();
             if (_engine == null)
             {
-                _engine = _swigFactory.CreateEngine(dataFile.DataFilePath, _config, _propertiesConfigSwig);
+                _engine = SwigFactory.CreateEngine(dataFile.DataFilePath, Config, PropertiesConfigSwig);
             }
             else
             {
                 _engine.refreshData();
             }
-            GetEngineMetaData();
+            InitEngineMetaData();
             RefreshCompleted?.Invoke(this, null);
         }
 
@@ -237,13 +249,13 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
 
             if (_engine == null)
             {
-                _engine = _swigFactory.CreateEngine(data, data.Length, _config, _propertiesConfigSwig);
+                _engine = SwigFactory.CreateEngine(data, data.Length, Config, PropertiesConfigSwig);
             }
             else
             {
                 _engine.refreshData(data, data.Length);
             }
-            GetEngineMetaData();
+            InitEngineMetaData();
             RefreshCompleted?.Invoke(this, null);
         }
 
@@ -319,7 +331,7 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
             return result;
         }
 
-        private void GetEngineMetaData()
+        private void InitEngineMetaData()
         {
             _evidenceKeyFilter = new EvidenceKeyFilterWhitelist(
                 new List<string>(_engine.getKeys()),
