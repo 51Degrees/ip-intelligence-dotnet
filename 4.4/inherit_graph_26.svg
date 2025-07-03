@@ -8,30 +8,30 @@
  viewBox="0.00 0.00 392.00 50.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 46)">
 <title>Graphical Class Hierarchy</title>
-<!-- Node87 -->
+<!-- Node89 -->
 <g id="node1" class="node">
-<title>Node87</title>
+<title>Node89</title>
 <g id="a_node1"><a xlink:title=" ">
 <polygon fill="none" stroke="#bfbfbf" points="0,-6 0,-36 144,-36 144,-6 0,-6"/>
 <text text-anchor="start" x="8" y="-24" font-family="Helvetica,sans-Serif" font-size="10.00">IReadOnlyList&lt; IWeighted</text>
-<text text-anchor="middle" x="72" y="-13" font-family="Helvetica,sans-Serif" font-size="10.00">Value&lt; double &gt;&gt;</text>
+<text text-anchor="middle" x="72" y="-13" font-family="Helvetica,sans-Serif" font-size="10.00">Value&lt; bool &gt;&gt;</text>
 </a>
 </g>
 </g>
 <!-- Node0 -->
 <g id="node2" class="node">
 <title>Node0</title>
-<g id="a_node2"><a xlink:href="class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_wrappers_1_1_weighted_double_list_swig_wrapper.html" target="_top" xlink:title=" ">
+<g id="a_node2"><a xlink:href="class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_wrappers_1_1_weighted_bool_list_swig_wrapper.html" target="_top" xlink:title=" ">
 <polygon fill="none" stroke="black" points="180,-0.5 180,-41.5 384,-41.5 384,-0.5 180,-0.5"/>
 <text text-anchor="start" x="188" y="-29.5" font-family="Helvetica,sans-Serif" font-size="10.00">FiftyOne.IpIntelligence.</text>
 <text text-anchor="start" x="188" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">Engine.OnPremise.Wrappers.Weighted</text>
-<text text-anchor="middle" x="282" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">DoubleListSwigWrapper</text>
+<text text-anchor="middle" x="282" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">BoolListSwigWrapper</text>
 </a>
 </g>
 </g>
-<!-- Node87&#45;&gt;Node0 -->
+<!-- Node89&#45;&gt;Node0 -->
 <g id="edge1" class="edge">
-<title>Node87&#45;&gt;Node0</title>
+<title>Node89&#45;&gt;Node0</title>
 <path fill="none" stroke="midnightblue" d="M154.14,-21C162.55,-21 171.16,-21 179.76,-21"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="154,-17.5 144,-21 154,-24.5 154,-17.5"/>
 </g>
