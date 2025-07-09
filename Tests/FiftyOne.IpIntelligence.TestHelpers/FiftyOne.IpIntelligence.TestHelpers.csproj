@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="FiftyOne.Common.TestHelpers" Version="4.4.26" />
+    <PackageReference Include="FiftyOne.Common.TestHelpers" Version="4.4.27" />
     <PackageReference Include="MSTest.TestFramework" Version="3.8.3" />
   </ItemGroup>
 
