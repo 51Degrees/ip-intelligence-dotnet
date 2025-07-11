@@ -409,6 +409,11 @@ namespace FiftyOne.IpIntelligence.Shared.Data
                                 dict[property.Name.ToLowerInvariant()] =
                                     GetAs<AspectPropertyValue<IReadOnlyList<IWeightedValue<bool>>>>(property.Name);
                             }
+                            else if (property.Type == typeof(float))
+                            {
+                                dict[property.Name.ToLowerInvariant()] =
+                                    GetAs<AspectPropertyValue<IReadOnlyList<IWeightedValue<float>>>>(property.Name);
+                            }
                             else if (property.Type == typeof(IPAddress))
                             {
                                 dict[property.Name.ToLowerInvariant()] =
