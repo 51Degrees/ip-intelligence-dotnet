@@ -72,10 +72,6 @@ namespace FiftyOne.IpIntelligence
 		/// </summary>
 		IAspectPropertyValue<IReadOnlyList<IWeightedValue<float>>> Longitude { get; }
 		/// <summary>
-		/// The mobile country code of the network the device is connected to.
-		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> Mcc { get; }
-		/// <summary>
 		/// The name of the geographical region that the supplied location is in.
 		/// </summary>
 		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> Region { get; }
@@ -92,7 +88,7 @@ namespace FiftyOne.IpIntelligence
 		/// </summary>
 		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> RegisteredOwner { get; }
 		/// <summary>
-		/// The name of the state that the supplied location in in.
+		/// The name of the state that the supplied location is in.
 		/// </summary>
 		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> State { get; }
 		/// <summary>
