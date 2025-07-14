@@ -24,6 +24,7 @@ using FiftyOne.IpIntelligence.TestHelpers;
 using FiftyOne.Pipeline.Engines;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Constants = FiftyOne.IpIntelligence.TestHelpers.Constants;
@@ -39,13 +40,16 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests
         protected WrapperOnPremise Wrapper { get; private set; } = null;
         protected IpAddressGenerator IpAddresses { get; private set; }
 
+        private static readonly bool ShouldSaveMemory = 
+            (IntPtr.Size == 4) || RuntimeInformation.IsOSPlatform(OSPlatform.Linux);
+
         [TestInitialize]
         public void Init()
         {
             // If the test is running in x86 then we need to take some 
             // extra precautions to prevent occasionally running out
             // of memory.
-            if (IntPtr.Size == 4)
+            if (ShouldSaveMemory)
             {
                 // Ensure that only one integration test is running at once.
                 Monitor.Enter(_lock);
@@ -58,7 +62,7 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests
         public void Cleanup()
         {
             Wrapper?.Dispose();
-            if (IntPtr.Size == 4)
+            if (ShouldSaveMemory)
             {
                 Monitor.Exit(_lock);
             }
