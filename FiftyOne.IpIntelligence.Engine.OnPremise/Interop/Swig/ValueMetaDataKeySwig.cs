@@ -57,11 +57,7 @@ internal class ValueMetaDataKeySwig : global::System.IDisposable {
     }
   }
 
-  public ValueMetaDataKeySwig(string propertyName, string valueName) : this(IpIntelligenceEngineModulePINVOKE.new_ValueMetaDataKeySwig__SWIG_0(propertyName, valueName), true) {
-    if (IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Pending) throw IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Retrieve();
-  }
-
-  public ValueMetaDataKeySwig(string propertyName, byte[] data, int length) : this(IpIntelligenceEngineModulePINVOKE.new_ValueMetaDataKeySwig__SWIG_1(propertyName, data, length), true) {
+  public ValueMetaDataKeySwig(string propertyName, string valueName) : this(IpIntelligenceEngineModulePINVOKE.new_ValueMetaDataKeySwig(propertyName, valueName), true) {
     if (IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Pending) throw IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Retrieve();
   }
 
