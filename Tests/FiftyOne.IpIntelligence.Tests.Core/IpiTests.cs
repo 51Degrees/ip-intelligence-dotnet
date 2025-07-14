@@ -36,6 +36,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -47,6 +48,34 @@ namespace FiftyOne.IpIntelligence.Tests.Core
     public class IpiTests
     {
         private static readonly IEnumerable<bool> AllBools = new bool[] { false, true };
+
+        private static object _lock = new object();
+        private static readonly bool ShouldSaveMemory =
+            (IntPtr.Size == 4) || RuntimeInformation.IsOSPlatform(OSPlatform.Linux);
+
+        [TestInitialize]
+        public void Init()
+        {
+            // If the test is running in x86 then we need to take some 
+            // extra precautions to prevent occasionally running out
+            // of memory.
+            if (ShouldSaveMemory)
+            {
+                // Ensure that only one integration test is running at once.
+                Monitor.Enter(_lock);
+                // Force garbage collection
+                GC.Collect();
+            }
+        }
+
+        [TestCleanup]
+        public void Cleanup()
+        {
+            if (ShouldSaveMemory)
+            {
+                Monitor.Exit(_lock);
+            }
+        }
 
         private static IEnumerable<object[]> TestParams
             => from profile in Constants.TestableProfiles
