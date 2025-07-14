@@ -62,6 +62,7 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Core.Data
         }
 
         [TestMethod]
+        [Ignore("IPI files are too long for CLR to pass a buffer into C++.")]
         [DynamicData(nameof(ProfilesToTest), DynamicDataDisplayName = nameof(DisplayNameForTestCase))]
         public void MetaData_OnPremise_Core_ReloadMemory(PerformanceProfiles profile)
         {

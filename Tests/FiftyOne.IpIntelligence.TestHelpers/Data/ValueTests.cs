@@ -65,6 +65,10 @@ namespace FiftyOne.IpIntelligence.TestHelpers.Data
                 {
                     expectedType = typeof(IReadOnlyList<IWeightedValue<bool>>);
                 }
+                else if (property.Type == typeof(float))
+                {
+                    expectedType = typeof(IReadOnlyList<IWeightedValue<float>>);
+                }
 
                 var value = elementData[property.Name];
                 Assert.IsNotNull(value);
