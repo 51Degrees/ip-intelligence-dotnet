@@ -1021,7 +1021,7 @@
         </member>
         <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.State">
             <summary>
-            The name of the state that the supplied location in in.
+            The name of the state that the supplied location is in.
             </summary>
         </member>
         <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.TimeZoneOffset">
@@ -1032,11 +1032,6 @@
         <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.Town">
             <summary>
             The name of the town that the supplied location is in.
-            </summary>
-        </member>
-        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.Mcc">
-            <summary>
-            The mobile country code of the network the device is connected to.
             </summary>
         </member>
         <member name="T:FiftyOne.IpIntelligence.Shared.Messages">
@@ -1184,11 +1179,6 @@
             Average longitude of the IP. For privacy, this is randomized within around 1 mile of the result. Randomized result will change only once per day.
             </summary>
         </member>
-        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.Mcc">
-            <summary>
-            The mobile country code of the network the device is connected to.
-            </summary>
-        </member>
         <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.Region">
             <summary>
             The name of the geographical region that the supplied location is in.
@@ -1211,7 +1201,7 @@
         </member>
         <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.State">
             <summary>
-            The name of the state that the supplied location in in.
+            The name of the state that the supplied location is in.
             </summary>
         </member>
         <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.TimeZoneOffset">
