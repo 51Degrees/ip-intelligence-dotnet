@@ -27,6 +27,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
 namespace FiftyOne.IpIntelligence.OnPremise.Tests.Core.Data
@@ -55,6 +56,11 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Core.Data
         [DynamicData(nameof(ProfilesToTest), DynamicDataDisplayName = nameof(DisplayNameForTestCase))]
         public void MetaData_OnPremise_Core_Reload(PerformanceProfiles profile)
         {
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                Assert.Inconclusive("Skipped on Linux");
+                return;
+            }
             Task.Delay(TEST_DELAY_MS).Wait();
             TestInitialize(profile);
             MetaDataTests test = new MetaDataTests();
