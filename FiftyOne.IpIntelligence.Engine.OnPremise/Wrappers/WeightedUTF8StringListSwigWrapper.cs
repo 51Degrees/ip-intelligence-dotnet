@@ -20,6 +20,7 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
+using FiftyOne.IpIntelligence.Engine.OnPremise.Data;
 using FiftyOne.IpIntelligence.Engine.OnPremise.Interop;
 using FiftyOne.IpIntelligence.Shared.Data;
 using FiftyOne.Pipeline.Core.Data;
@@ -47,8 +48,7 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Wrappers
         private IWeightedValue<string> GetWeightedValue(int index) {
             using (var value = _object[index].getValue())
             {
-                byte[] utf8bytes = value.ToArray();
-                string s = Encoding.UTF8.GetString(utf8bytes);
+                string s = value.ToUTF8String();
                 return new WeightedValue<string>(this._object[index].getRawWeight(), s);
             }
         }

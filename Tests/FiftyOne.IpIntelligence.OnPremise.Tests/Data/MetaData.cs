@@ -61,6 +61,7 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Core.Data
             test.Reload(Wrapper, new MetaDataHasher(), profile);
         }
 
+        [Ignore("IPI data files are too large for C# to pass to C++ via buffer.")]
         [TestMethod]
         [Ignore("IPI files are too long for CLR to pass a buffer into C++.")]
         [DynamicData(nameof(ProfilesToTest), DynamicDataDisplayName = nameof(DisplayNameForTestCase))]

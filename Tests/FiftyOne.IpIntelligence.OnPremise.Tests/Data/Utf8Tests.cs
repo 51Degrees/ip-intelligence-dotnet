@@ -35,8 +35,6 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Core.Data
     public class Utf8OnPremiseCoreTests : TestsBase
     {
         [TestMethod]
-        [Ignore("SWIG does not ensure proper marshalling. "
-            + "See https://github.com/swig/swig/pull/2364")]
         [DataRow(new byte[]{
             0x50,0xc3,0xa4,0x69,0x6a,0xc3,0xa4,0x74,0x2d,0x48,0xc3,0xa4,0x6d,0x65,
         }, DisplayName = "Utf8_OnPremise_Core_Validate_Property_Values(Päijät-Häme)")]

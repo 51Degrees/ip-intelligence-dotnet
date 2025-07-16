@@ -404,6 +404,11 @@ namespace FiftyOne.IpIntelligence.Shared.Data
                                 dict[property.Name.ToLowerInvariant()] =
                                     GetAs<AspectPropertyValue<IReadOnlyList<IWeightedValue<int>>>>(property.Name);
                             }
+                            else if (property.Type == typeof(float))
+                            {
+                                dict[property.Name.ToLowerInvariant()] =
+                                    GetAs<AspectPropertyValue<IReadOnlyList<IWeightedValue<float>>>>(property.Name);
+                            }
                             else if (property.Type == typeof(bool))
                             {
                                 dict[property.Name.ToLowerInvariant()] =
