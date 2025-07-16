@@ -40,9 +40,12 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Core.Data
         private const int TEST_DELAY_MS = 3000;
 
         private static IEnumerable<object[]> ProfilesToTest
-            => TestHelpers.Constants.TestableProfiles
-            .Where(x => x != PerformanceProfiles.BalancedTemp)
-            .Select(x => new object[] { x });
+            =>  from x in TestHelpers.Constants.TestableProfiles
+                where x != PerformanceProfiles.BalancedTemp
+                select new object[] { 
+                    x, 
+                    x == PerformanceProfiles.Balanced,
+                };
 
         public static string DisplayNameForTestCase(MethodInfo methodInfo, object[] data)
             => $"{methodInfo.Name}_{(PerformanceProfiles)data[0]}";
@@ -54,11 +57,11 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Core.Data
 
         [TestMethod]
         [DynamicData(nameof(ProfilesToTest), DynamicDataDisplayName = nameof(DisplayNameForTestCase))]
-        public void MetaData_OnPremise_Core_Reload(PerformanceProfiles profile)
+        public void MetaData_OnPremise_Core_Reload(PerformanceProfiles profile, bool skipOnNonWindows)
         {
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            if (skipOnNonWindows && !RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                Assert.Inconclusive("Skipped on Linux");
+                Assert.Inconclusive("Skipped");
                 return;
             }
             Task.Delay(TEST_DELAY_MS).Wait();
@@ -70,7 +73,7 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Core.Data
         [TestMethod]
         [Ignore("IPI files are too long for CLR to pass a buffer into C++.")]
         [DynamicData(nameof(ProfilesToTest), DynamicDataDisplayName = nameof(DisplayNameForTestCase))]
-        public void MetaData_OnPremise_Core_ReloadMemory(PerformanceProfiles profile)
+        public void MetaData_OnPremise_Core_ReloadMemory(PerformanceProfiles profile, bool skipOnNonWindows)
         {
             Task.Delay(TEST_DELAY_MS).Wait();
             TestInitialize(profile);
