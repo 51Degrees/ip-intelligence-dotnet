@@ -44,7 +44,7 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Core.Data
                 where x != PerformanceProfiles.BalancedTemp
                 select new object[] { 
                     x, 
-                    x == PerformanceProfiles.Balanced,
+                    x == PerformanceProfiles.Balanced || x == PerformanceProfiles.LowMemory,
                 };
 
         public static string DisplayNameForTestCase(MethodInfo methodInfo, object[] data)
