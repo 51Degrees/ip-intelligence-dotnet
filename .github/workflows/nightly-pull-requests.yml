@@ -9,7 +9,7 @@ on:
 
 jobs:
   NightlyPullRequests:
-    uses: 51Degrees/common-ci/.github/workflows/nightly-pull-requests.yml@main
+    uses: 51Degrees/common-ci/.github/workflows/nightly-pull-requests.yml@feature/nightly-prs-4h
     with:
       repo-name: ${{ github.event.repository.name }}
       org-name: ${{ github.event.repository.owner.login }}
