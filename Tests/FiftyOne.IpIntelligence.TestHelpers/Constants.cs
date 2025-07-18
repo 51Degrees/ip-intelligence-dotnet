@@ -40,9 +40,6 @@ namespace FiftyOne.IpIntelligence.TestHelpers
         {
             get
             {
-                yield return PerformanceProfiles.MaxPerformance;
-                yield break;
-                // TODO: Swap to full enum once File operations are fixed
                 foreach(var x in Enum.GetValues(typeof(PerformanceProfiles)))
                     if (x is PerformanceProfiles profile)
                         yield return profile;

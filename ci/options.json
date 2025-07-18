@@ -16,7 +16,7 @@
         "BuildMethod": "msbuild"
     },
     {
-        "Image": "ubuntu-22.04",
+        "Image": "ubuntu-latest",
         "Name": "Ubuntu_x64_Release",
         "Configuration": "Release",
         "Arch": "x64",
@@ -25,7 +25,7 @@
         "RunPerformance": true
     },
     {
-        "Image": "ubuntu-22.04",
+        "Image": "ubuntu-latest",
         "Name": "Ubuntu_x64_Debug",
         "Configuration": "Debug",
         "Arch": "x64",
