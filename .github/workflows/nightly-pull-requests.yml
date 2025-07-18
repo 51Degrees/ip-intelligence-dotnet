@@ -18,7 +18,7 @@ jobs:
       repo-name: ${{ github.event.repository.name }}
       org-name: ${{ github.event.repository.owner.login }}
       dryrun: ${{ inputs.dryrun || false }}
-      skip-compare-performane: ${{ inputs.skip-compare-performance || false }}
+      skip-compare-performance: ${{ inputs.skip-compare-performance || false }}
     secrets:
       token: ${{ secrets.ACCESS_TOKEN }}
       DeviceDetection: ${{ secrets.DEVICE_DETECTION_KEY }}
