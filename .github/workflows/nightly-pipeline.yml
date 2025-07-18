@@ -6,6 +6,10 @@ on:
       dryrun:
         type: boolean
         default: false
+      skip-compare-performance:
+        description: '🦆 Performance'
+        type: boolean
+        default: false
   schedule:
     - cron: '0 0 * * *'
 
@@ -54,6 +58,7 @@ jobs:
       repo-name: ${{ github.event.repository.name }}
       org-name: ${{ github.event.repository.owner.login }}
       dryrun: ${{ inputs.dryrun || false }}
+      skip-compare-performane: ${{ inputs.skip-compare-performance || false }}
     secrets:
       token: ${{ secrets.ACCESS_TOKEN }}
       DeviceDetection: ${{ secrets.DEVICE_DETECTION_KEY }}
@@ -73,6 +78,7 @@ jobs:
       repo-name: ${{ github.event.repository.name }}
       org-name: ${{ github.event.repository.owner.login }}
       dryrun: ${{ inputs.dryrun || false }}
+      skip-compare-performane: ${{ inputs.skip-compare-performance || false }}
       build-platform: windows-latest
     secrets:
       token: ${{ secrets.ACCESS_TOKEN }}
