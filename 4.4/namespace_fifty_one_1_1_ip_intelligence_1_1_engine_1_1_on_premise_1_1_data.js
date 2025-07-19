@@ -8,5 +8,6 @@ var namespace_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_data =
     [ "IpDataOnPremise", "class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_data_1_1_ip_data_on_premise.html", "class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_data_1_1_ip_data_on_premise" ],
     [ "ProfileMetaData", "class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_data_1_1_profile_meta_data.html", "class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_data_1_1_profile_meta_data" ],
     [ "PropertyMetaDataIpi", "class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_data_1_1_property_meta_data_ipi.html", "class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_data_1_1_property_meta_data_ipi" ],
+    [ "UTF8StringSwigExtensions", "class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_data_1_1_u_t_f8_string_swig_extensions.html", "class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_data_1_1_u_t_f8_string_swig_extensions" ],
     [ "ValueMetaData", "class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_data_1_1_value_meta_data.html", "class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_data_1_1_value_meta_data" ]
 ];

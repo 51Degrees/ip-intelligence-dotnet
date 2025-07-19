@@ -98,7 +98,6 @@ var hierarchy =
       [ "FiftyOne.IpIntelligence.Engine.OnPremise.Wrappers.IProfileCollectionSwigWrapper", "interface_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_wrappers_1_1_i_profile_collection_swig_wrapper.html", null ]
     ] ],
     [ "IEnumerator", null, [
-      [ "FiftyOne.IpIntelligence.Engine.OnPremise.Interop.MapStringStringSwig.MapStringStringSwigEnumerator", "class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_map_string_string_afc829270b0fda0cf022c534f8fd28ee.html", null ],
       [ "FiftyOne.IpIntelligence.Engine.OnPremise.Interop.UTF8StringSwig.UTF8StringSwigEnumerator", "class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_u_t_f8_string_swig93f4cce6d61ca5f20ae6abf29399e8e6.html", null ],
       [ "FiftyOne.IpIntelligence.Engine.OnPremise.Interop.VectorStringSwig.VectorStringSwigEnumerator", "class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_vector_string_swig452eeae6ddefab7107be9b48b95f3874.html", null ],
       [ "FiftyOne.IpIntelligence.Engine.OnPremise.Interop.WeightedBoolListSwig.WeightedBoolListSwigEnumerator", "class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_weighted_bool_list687255ffcae427f162c49217e79891d5.html", null ],
@@ -108,6 +107,7 @@ var hierarchy =
       [ "FiftyOne.IpIntelligence.Engine.OnPremise.Interop.WeightedUTF8StringListSwig.WeightedUTF8StringListSwigEnumerator", "class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_weighted_u_t_f8_st865f5c639ab4fc06fc409320805505c2.html", null ]
     ] ],
     [ "IEnumerator", null, [
+      [ "FiftyOne.IpIntelligence.Engine.OnPremise.Interop.MapStringStringSwig.MapStringStringSwigEnumerator", "class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_map_string_string_afc829270b0fda0cf022c534f8fd28ee.html", null ],
       [ "FiftyOne.IpIntelligence.Engine.OnPremise.Interop.UTF8StringSwig.UTF8StringSwigEnumerator", "class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_u_t_f8_string_swig93f4cce6d61ca5f20ae6abf29399e8e6.html", null ],
       [ "FiftyOne.IpIntelligence.Engine.OnPremise.Interop.VectorStringSwig.VectorStringSwigEnumerator", "class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_vector_string_swig452eeae6ddefab7107be9b48b95f3874.html", null ],
       [ "FiftyOne.IpIntelligence.Engine.OnPremise.Interop.WeightedBoolListSwig.WeightedBoolListSwigEnumerator", "class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_weighted_bool_list687255ffcae427f162c49217e79891d5.html", null ],
@@ -190,8 +190,8 @@ var hierarchy =
     ] ],
     [ "FiftyOne.IpIntelligence.Examples.OnPremise.OfflineProcessing.Program", "class_fifty_one_1_1_ip_intelligence_1_1_examples_1_1_on_premise_1_1_offline_processing_1_1_program.html", null ],
     [ "FiftyOne.IpIntelligence.Examples.OnPremise.Performance.Program", "class_fifty_one_1_1_ip_intelligence_1_1_examples_1_1_on_premise_1_1_performance_1_1_program.html", null ],
-    [ "FiftyOne.IpIntelligence.Examples.OnPremise.GettingStartedConsole.Program", "class_fifty_one_1_1_ip_intelligence_1_1_examples_1_1_on_premise_1_1_getting_started_console_1_1_program.html", null ],
     [ "FiftyOne.IpIntelligence.Examples.OnPremise.UpdateDataFile.Program", "class_fifty_one_1_1_ip_intelligence_1_1_examples_1_1_on_premise_1_1_update_data_file_1_1_program.html", null ],
+    [ "FiftyOne.IpIntelligence.Examples.OnPremise.GettingStartedConsole.Program", "class_fifty_one_1_1_ip_intelligence_1_1_examples_1_1_on_premise_1_1_getting_started_console_1_1_program.html", null ],
     [ "FiftyOne.IpIntelligence.Examples.OnPremise.GettingStartedWeb.Program", "class_fifty_one_1_1_ip_intelligence_1_1_examples_1_1_on_premise_1_1_getting_started_web_1_1_program.html", null ],
     [ "FiftyOne.IpIntelligence.Examples.OnPremise.Metadata.Program", "class_fifty_one_1_1_ip_intelligence_1_1_examples_1_1_on_premise_1_1_metadata_1_1_program.html", null ],
     [ "FiftyOne.IpIntelligence.Examples.OnPremise.GettingStartedWeb.Startup", "class_fifty_one_1_1_ip_intelligence_1_1_examples_1_1_on_premise_1_1_getting_started_web_1_1_startup.html", null ],
@@ -251,5 +251,6 @@ var hierarchy =
       [ "FiftyOne.IpIntelligence.Engine.OnPremise.Interop.WeightedValueIntSwig", "class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_weighted_value_int_swig.html", null ],
       [ "FiftyOne.IpIntelligence.Engine.OnPremise.Interop.WeightedValueStringSwig", "class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_weighted_value_string_swig.html", null ],
       [ "FiftyOne.IpIntelligence.Engine.OnPremise.Interop.WeightedValueUTF8StringSwig", "class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_weighted_value_u_t_f8_string_swig.html", null ]
-    ] ]
+    ] ],
+    [ "FiftyOne.IpIntelligence.Engine.OnPremise.Data.UTF8StringSwigExtensions", "class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_data_1_1_u_t_f8_string_swig_extensions.html", null ]
 ];
