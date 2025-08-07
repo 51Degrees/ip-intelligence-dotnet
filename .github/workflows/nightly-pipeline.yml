@@ -14,20 +14,20 @@ on:
     - cron: '0 0 * * *'
 
 jobs:
-  DataFileChange:
-    name: Nightly Data File Change
-    uses: 51Degrees/common-ci/.github/workflows/nightly-data-file-change.yml@main
-    with:
-      repo-name: ${{ github.event.repository.name }}
-      org-name: ${{ github.event.repository.owner.login }}
-      dryrun: ${{ inputs.dryrun || false }}
-      data-type: "IpIntelligence"
-      data-product: "EnterpriseV4"
-      data-filename: "51Degrees-EnterpriseV4.ipi.gz"
-    secrets:
-      token: ${{ secrets.ACCESS_TOKEN }}
-      data-key: ${{ secrets.DEVICE_DETECTION_KEY }}
-      data-url: ${{ secrets.IPI_DATA_FILE_URL }}
+  # DataFileChange:
+  #   name: Nightly Data File Change
+  #   uses: 51Degrees/common-ci/.github/workflows/nightly-data-file-change.yml@main
+  #   with:
+  #     repo-name: ${{ github.event.repository.name }}
+  #     org-name: ${{ github.event.repository.owner.login }}
+  #     dryrun: ${{ inputs.dryrun || false }}
+  #     data-type: "IpIntelligence"
+  #     data-product: "EnterpriseV4"
+  #     data-filename: "51Degrees-EnterpriseV4.ipi.gz"
+  #   secrets:
+  #     token: ${{ secrets.ACCESS_TOKEN }}
+  #     data-key: ${{ secrets.DEVICE_DETECTION_KEY }}
+  #     data-url: ${{ secrets.IPI_DATA_FILE_URL }}
 
   PackageUpdate:
     name: Nightly Package Update
