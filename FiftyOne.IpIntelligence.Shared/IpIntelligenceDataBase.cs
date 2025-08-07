@@ -67,20 +67,29 @@ namespace FiftyOne.IpIntelligence.Shared
 		protected static readonly IReadOnlyDictionary<string, Type> PropertyTypes =
 			new Dictionary<string, Type>()
 			{
-				{ "AccuracyRadius", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<int>>>) },
+				{ "AccuracyRadiusMax", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<int>>>) },
+				{ "AccuracyRadiusMin", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<int>>>) },
 				{ "Areas", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
+				{ "ConnectionType", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
+				{ "ContinentCode2", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
+				{ "ContinentName", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
 				{ "Country", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
 				{ "CountryCode", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
 				{ "CountryCode3", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
+				{ "CurrencyCode", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
 				{ "IpRangeEnd", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<IPAddress>>>) },
 				{ "IpRangeStart", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<IPAddress>>>) },
+				{ "LanguageCode", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
 				{ "Latitude", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<float>>>) },
+				{ "LocationConfidence", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
 				{ "Longitude", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<float>>>) },
+				{ "Mcc", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
 				{ "Region", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
 				{ "RegisteredCountry", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
 				{ "RegisteredName", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
 				{ "RegisteredOwner", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
 				{ "State", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
+				{ "TimeZoneIana", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
 				{ "TimeZoneOffset", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<int>>>) },
 				{ "Town", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) }
 			};
@@ -106,13 +115,29 @@ namespace FiftyOne.IpIntelligence.Shared
 		/// </summary>
 		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> RegisteredOwner { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("RegisteredOwner"); } }
 		/// <summary>
-		/// Accuracy radius of the matched location in meters.
+		/// Radius in meters of the circle centred around the most probable location that encompasses the entire area(s). See Areas property. This will likely be a very large distance. It is recommend to use the AccuracyRadiusMin property.
 		/// </summary>
-		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<int>>> AccuracyRadius { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<int>>>>("AccuracyRadius"); } }
+		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<int>>> AccuracyRadiusMax { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<int>>>>("AccuracyRadiusMax"); } }
+		/// <summary>
+		/// Radius in meters of the largest circle centred around the most probable location that fits within the area. Where multiple areas are returned, only the area that the most probable location falls within is considered. See Areas property.
+		/// </summary>
+		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<int>>> AccuracyRadiusMin { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<int>>>>("AccuracyRadiusMin"); } }
 		/// <summary>
 		/// Any shapes associated with the location. Usually this is the area which the IP range covers.
 		/// </summary>
 		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> Areas { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("Areas"); } }
+		/// <summary>
+		/// Indicates the type of connection being used. Returns either Broadband, Cellular, or Hosting and Anonymous.
+		/// </summary>
+		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> ConnectionType { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("ConnectionType"); } }
+		/// <summary>
+		/// The 3-character ISO 3166-1 continent code for the supplied location.
+		/// </summary>
+		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> ContinentCode2 { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("ContinentCode2"); } }
+		/// <summary>
+		/// The name of the continent the supplied location is in.
+		/// </summary>
+		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> ContinentName { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("ContinentName"); } }
 		/// <summary>
 		/// The name of the country that the supplied location is in.
 		/// </summary>
@@ -126,11 +151,23 @@ namespace FiftyOne.IpIntelligence.Shared
 		/// </summary>
 		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> CountryCode3 { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("CountryCode3"); } }
 		/// <summary>
-		/// Average latitude of the IP. For privacy, this is randomized within around 1 mile of the result. Randomized result will change only once per day.
+		/// The Alpha-3 ISO 4217 code of the currency associated with the supplied location.
+		/// </summary>
+		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> CurrencyCode { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("CurrencyCode"); } }
+		/// <summary>
+		/// The Alpha-2 ISO 639 Language code associated with the supplied location.
+		/// </summary>
+		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> LanguageCode { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("LanguageCode"); } }
+		/// <summary>
+		/// Average latitude of the IP. For privacy, this is randomized within around 1 kilometer of the result. Randomized result will change only once per day.
 		/// </summary>
 		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<float>>> Latitude { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<float>>>>("Latitude"); } }
 		/// <summary>
-		/// Average longitude of the IP. For privacy, this is randomized within around 1 mile of the result. Randomized result will change only once per day.
+		/// The confidence in the town and country provided.
+		/// </summary>
+		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> LocationConfidence { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("LocationConfidence"); } }
+		/// <summary>
+		/// Average longitude of the IP. For privacy, this is randomized within around 1 kilometer of the result. Randomized result will change only once per day.
 		/// </summary>
 		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<float>>> Longitude { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<float>>>>("Longitude"); } }
 		/// <summary>
@@ -142,6 +179,10 @@ namespace FiftyOne.IpIntelligence.Shared
 		/// </summary>
 		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> State { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("State"); } }
 		/// <summary>
+		/// The time zone at the supplied location in the IANA Time Zone format.
+		/// </summary>
+		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> TimeZoneIana { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("TimeZoneIana"); } }
+		/// <summary>
 		/// The offset from UTC in minutes in the supplied location, at the time that the value is produced.
 		/// </summary>
 		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<int>>> TimeZoneOffset { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<int>>>>("TimeZoneOffset"); } }
@@ -149,5 +190,9 @@ namespace FiftyOne.IpIntelligence.Shared
 		/// The name of the town that the supplied location is in.
 		/// </summary>
 		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> Town { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("Town"); } }
+		/// <summary>
+		/// The mobile country code of the network the device is connected to.
+		/// </summary>
+		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> Mcc { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("Mcc"); } }
 	}
 }

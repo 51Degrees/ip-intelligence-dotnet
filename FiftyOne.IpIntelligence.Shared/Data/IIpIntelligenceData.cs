@@ -36,13 +36,29 @@ namespace FiftyOne.IpIntelligence
 	public interface IIpIntelligenceData : IAspectData
 	{
 		/// <summary>
-		/// Accuracy radius of the matched location in meters.
+		/// Radius in meters of the circle centred around the most probable location that encompasses the entire area(s). See Areas property. This will likely be a very large distance. It is recommend to use the AccuracyRadiusMin property.
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<int>>> AccuracyRadius { get; }
+		IAspectPropertyValue<IReadOnlyList<IWeightedValue<int>>> AccuracyRadiusMax { get; }
+		/// <summary>
+		/// Radius in meters of the largest circle centred around the most probable location that fits within the area. Where multiple areas are returned, only the area that the most probable location falls within is considered. See Areas property.
+		/// </summary>
+		IAspectPropertyValue<IReadOnlyList<IWeightedValue<int>>> AccuracyRadiusMin { get; }
 		/// <summary>
 		/// Any shapes associated with the location. Usually this is the area which the IP range covers.
 		/// </summary>
 		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> Areas { get; }
+		/// <summary>
+		/// Indicates the type of connection being used. Returns either Broadband, Cellular, or Hosting and Anonymous.
+		/// </summary>
+		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> ConnectionType { get; }
+		/// <summary>
+		/// The 3-character ISO 3166-1 continent code for the supplied location.
+		/// </summary>
+		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> ContinentCode2 { get; }
+		/// <summary>
+		/// The name of the continent the supplied location is in.
+		/// </summary>
+		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> ContinentName { get; }
 		/// <summary>
 		/// The name of the country that the supplied location is in.
 		/// </summary>
@@ -56,6 +72,10 @@ namespace FiftyOne.IpIntelligence
 		/// </summary>
 		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> CountryCode3 { get; }
 		/// <summary>
+		/// The Alpha-3 ISO 4217 code of the currency associated with the supplied location.
+		/// </summary>
+		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> CurrencyCode { get; }
+		/// <summary>
 		/// End of the IP range to which the evidence IP belongs.
 		/// </summary>
 		IAspectPropertyValue<IReadOnlyList<IWeightedValue<IPAddress>>> IpRangeEnd { get; }
@@ -64,13 +84,25 @@ namespace FiftyOne.IpIntelligence
 		/// </summary>
 		IAspectPropertyValue<IReadOnlyList<IWeightedValue<IPAddress>>> IpRangeStart { get; }
 		/// <summary>
-		/// Average latitude of the IP. For privacy, this is randomized within around 1 mile of the result. Randomized result will change only once per day.
+		/// The Alpha-2 ISO 639 Language code associated with the supplied location.
+		/// </summary>
+		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> LanguageCode { get; }
+		/// <summary>
+		/// Average latitude of the IP. For privacy, this is randomized within around 1 kilometer of the result. Randomized result will change only once per day.
 		/// </summary>
 		IAspectPropertyValue<IReadOnlyList<IWeightedValue<float>>> Latitude { get; }
 		/// <summary>
-		/// Average longitude of the IP. For privacy, this is randomized within around 1 mile of the result. Randomized result will change only once per day.
+		/// The confidence in the town and country provided.
+		/// </summary>
+		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> LocationConfidence { get; }
+		/// <summary>
+		/// Average longitude of the IP. For privacy, this is randomized within around 1 kilometer of the result. Randomized result will change only once per day.
 		/// </summary>
 		IAspectPropertyValue<IReadOnlyList<IWeightedValue<float>>> Longitude { get; }
+		/// <summary>
+		/// The mobile country code of the network the device is connected to.
+		/// </summary>
+		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> Mcc { get; }
 		/// <summary>
 		/// The name of the geographical region that the supplied location is in.
 		/// </summary>
@@ -91,6 +123,10 @@ namespace FiftyOne.IpIntelligence
 		/// The name of the state that the supplied location is in.
 		/// </summary>
 		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> State { get; }
+		/// <summary>
+		/// The time zone at the supplied location in the IANA Time Zone format.
+		/// </summary>
+		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> TimeZoneIana { get; }
 		/// <summary>
 		/// The offset from UTC in minutes in the supplied location, at the time that the value is produced.
 		/// </summary>
