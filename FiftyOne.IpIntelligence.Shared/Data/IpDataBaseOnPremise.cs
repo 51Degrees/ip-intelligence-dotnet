@@ -422,7 +422,7 @@ namespace FiftyOne.IpIntelligence.Shared.Data
                             else if (property.Type == typeof(IPAddress))
                             {
                                 dict[property.Name.ToLowerInvariant()] =
-                                    GetAs<AspectPropertyValue<IPAddress>>(property.Name);
+                                    GetAs<AspectPropertyValue<IReadOnlyList<IWeightedValue<IPAddress>>>>(property.Name);
                             }
                             else
                             {
