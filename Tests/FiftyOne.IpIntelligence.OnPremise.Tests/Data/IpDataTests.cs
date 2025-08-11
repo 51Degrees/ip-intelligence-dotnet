@@ -169,20 +169,6 @@ namespace FiftyOne.IpIntelligence.Tests.Core.Data
                 }
             }
 
-            protected override IAspectPropertyValue<IPAddress>
-                GetValueAsIpAddress(string propertyName)
-            {
-                if (propertyName == _testPropertyName)
-                {
-                    return new AspectPropertyValue<IPAddress>(
-                        (IPAddress)_value);
-                }
-                else
-                {
-                    throw new PropertyMissingException();
-                }
-            }
-
             public override IAspectPropertyValue<IReadOnlyList<string>> 
                 GetValues(string propertyName)
             {
@@ -350,9 +336,12 @@ namespace FiftyOne.IpIntelligence.Tests.Core.Data
         public void GetIpAddress()
         {
             SetupElementProperties(typeof(IPAddress));
-            IPAddress expected = IPAddress.Parse("::1");
-            TestResults<IPAddress> results =
-                new TestResults<IPAddress>(
+            IReadOnlyList<IWeightedValue<IPAddress>> expected = new List<WeightedValue<IPAddress>>()
+            {
+                new WeightedValue<IPAddress>(ushort.MaxValue, IPAddress.Parse("::1")),
+            };
+            TestResults<IReadOnlyList<IWeightedValue<IPAddress>>> results =
+                new TestResults<IReadOnlyList<IWeightedValue<IPAddress>>>(
                     _logger.Object,
                     _flowData.Object.Pipeline,
                     _engine.Object,
