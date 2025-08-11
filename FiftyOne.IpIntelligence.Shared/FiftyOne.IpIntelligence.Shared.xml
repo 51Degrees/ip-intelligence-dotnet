@@ -591,18 +591,6 @@
             <see cref="T:FiftyOne.Pipeline.Engines.Data.IAspectPropertyValue"/> instance.
             </returns>
         </member>
-        <member name="M:FiftyOne.IpIntelligence.Shared.Data.IpDataBaseOnPremise`1.GetValueAsIpAddress(System.String)">
-            <summary>
-            Get the IP address value this instance has for the specified proprety
-            </summary>
-            <param name="propertyName">
-            The name of the property to get value for.
-            </param>
-            <returns>
-            A <see cref="T:System.Net.IPAddress"/> wrapped in a
-            <see cref="T:FiftyOne.Pipeline.Engines.Data.IAspectPropertyValue"/> instance.
-            </returns>
-        </member>
         <member name="M:FiftyOne.IpIntelligence.Shared.Data.IpDataBaseOnPremise`1.AsDictionary">
             <summary>
             By default, the base dictionary will not be populated as 
