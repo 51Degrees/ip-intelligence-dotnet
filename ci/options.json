@@ -9,13 +9,6 @@
         "RunPerformance": true
     },
     {
-        "Image": "windows-latest",
-        "Name": "Windows_x64_Debug",
-        "Configuration": "Debug",
-        "Arch": "x64",
-        "BuildMethod": "msbuild"
-    },
-    {
         "Image": "ubuntu-latest",
         "Name": "Ubuntu_x64_Release",
         "Configuration": "Release",
