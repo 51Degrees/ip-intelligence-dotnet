@@ -267,7 +267,7 @@ namespace FiftyOne.IpIntelligence.Cloud.FlowElements
                         var genericType = genericArgs[0];
                         {
                             var listType = typeof(List<>).MakeGenericType(genericType);
-                            if (valueType.IsAssignableFrom(listType) 
+                            if (valueType.IsAssignableFrom(listType)
                                 && rawValue.GetType().GetInterfaces().Any(x => typeof(IEnumerable).IsAssignableFrom(x)))
                             {
                                 object list = Activator.CreateInstance(listType);
@@ -280,7 +280,7 @@ namespace FiftyOne.IpIntelligence.Cloud.FlowElements
                             }
                         }
                         {
-                            var weightedType = typeof(WeightedValue<>).MakeGenericType(valueType);
+                            var weightedType = typeof(WeightedValue<>).MakeGenericType(genericType);
                             if (valueType.IsAssignableFrom(weightedType)
                                 && rawValue is IDictionary<string, object> rawValueDic)
                             {
@@ -290,11 +290,12 @@ namespace FiftyOne.IpIntelligence.Cloud.FlowElements
                                 var value = rawValueDic.FirstOrDefault(
                                     p => p.Key.ToUpperInvariant() == nameof(WeightedValue<string>.Value).ToUpperInvariant())
                                     .Value;
-                                if (!(weighting is null) && typeof(ushort).IsAssignableFrom(weighting.GetType())
+                                if (!(weighting is null)
+                                    && weighting.GetType().IsPrimitive && weighting is IConvertible
                                     && !(value is null))
                                 {
                                     object weighted = Activator.CreateInstance(weightedType, new object[] {
-                                        (short)weighting,
+                                        Convert.ChangeType(weighting, typeof(ushort), CultureInfo.InvariantCulture),
                                         ToValueForAPV(value, genericType),
                                     });
                                     return weighted;

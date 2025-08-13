@@ -134,5 +134,20 @@ namespace FiftyOne.IpIntelligence.Cloud.Tests
                 Assert.AreEqual(rawValue[i], apvList[i].ToString());
             }
         }
+
+        [TestMethod]
+        public void TestToValueForAPV_WeightedString()
+        {
+            var rawValue = new Dictionary<string, object>
+            {
+                { "rawweighting", 2645 },
+                { "value", "someValue-137" },
+            };
+            var apvValue = IpiCloudEngine.ToValueForAPV(rawValue, typeof(IWeightedValue<string>));
+            var typedApvValue = apvValue as IWeightedValue<string>;
+            Assert.IsNotNull(typedApvValue);
+            Assert.AreEqual((ushort)(int)rawValue["rawweighting"], typedApvValue.RawWeighting);
+            Assert.AreEqual(rawValue["value"], typedApvValue.Value);
+        }
     }
 }
