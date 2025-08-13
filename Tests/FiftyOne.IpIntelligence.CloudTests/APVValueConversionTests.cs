@@ -278,5 +278,119 @@ namespace FiftyOne.IpIntelligence.Cloud.Tests
                 Assert.AreEqual(ipStringList[i], valueList[i].ToString());
             }
         }
+
+        [TestMethod]
+        public void TestToValueForAPV_ListOfWeightedStrings()
+        {
+            var weightedStringsList = new List<Dictionary<string, object>>
+            {
+                new Dictionary<string, object>
+                {
+                    { "rawweighting", 1111 },
+                    { "value", "alpha" },
+                },
+                new Dictionary<string, object>
+                {
+                    { "rawweighting", 2222 },
+                    { "value", "gamma" },
+                },
+                new Dictionary<string, object>
+                {
+                    { "rawweighting", 3333 },
+                    { "value", "omega" },
+                },
+            };
+            
+            var apvValue = IpiCloudEngine.ToValueForAPV(weightedStringsList, typeof(IReadOnlyList<IWeightedValue<string>>));
+            var apvList = (IReadOnlyList<IWeightedValue<string>>)apvValue;
+            
+            Assert.IsNotNull(apvList);
+            Assert.AreEqual(weightedStringsList.Count, apvList.Count);
+            
+            for (int i = 0; i < weightedStringsList.Count; i++)
+            {
+                var expectedWeighting = (ushort)(int)weightedStringsList[i]["rawweighting"];
+                var expectedValue = weightedStringsList[i]["value"].ToString();
+                
+                Assert.AreEqual(expectedWeighting, apvList[i].RawWeighting);
+                Assert.AreEqual(expectedValue, apvList[i].Value);
+            }
+        }
+
+        [TestMethod]
+        public void TestToValueForAPV_ListOfWeightedFloats()
+        {
+            var weightedFloatsList = new List<Dictionary<string, object>>
+            {
+                new Dictionary<string, object>
+                {
+                    { "rawweighting", 4444 },
+                    { "value", 1.0 },
+                },
+                new Dictionary<string, object>
+                {
+                    { "rawweighting", 5555 },
+                    { "value", -0.875 },
+                },
+                new Dictionary<string, object>
+                {
+                    { "rawweighting", 6666 },
+                    { "value", 128758.5075 },
+                },
+            };
+            
+            var apvValue = IpiCloudEngine.ToValueForAPV(weightedFloatsList, typeof(IReadOnlyList<IWeightedValue<float>>));
+            var apvList = (IReadOnlyList<IWeightedValue<float>>)apvValue;
+            
+            Assert.IsNotNull(apvList);
+            Assert.AreEqual(weightedFloatsList.Count, apvList.Count);
+            
+            for (int i = 0; i < weightedFloatsList.Count; i++)
+            {
+                var expectedWeighting = (ushort)(int)weightedFloatsList[i]["rawweighting"];
+                var expectedValue = (float)(double)weightedFloatsList[i]["value"];
+                
+                Assert.AreEqual(expectedWeighting, apvList[i].RawWeighting);
+                Assert.AreEqual(expectedValue, apvList[i].Value);
+            }
+        }
+
+        [TestMethod]
+        public void TestToValueForAPV_ListOfWeightedIPAddresses()
+        {
+            var weightedIPList = new List<Dictionary<string, object>>
+            {
+                new Dictionary<string, object>
+                {
+                    { "rawweighting", 7777 },
+                    { "value", "8.65.149.1" },
+                },
+                new Dictionary<string, object>
+                {
+                    { "rawweighting", 8888 },
+                    { "value", "3.2.96.7" },
+                },
+                new Dictionary<string, object>
+                {
+                    { "rawweighting", 9999 },
+                    { "value", "187.214.38.111" },
+                },
+            };
+            
+            var apvValue = IpiCloudEngine.ToValueForAPV(weightedIPList, typeof(IReadOnlyList<IWeightedValue<IPAddress>>));
+            var apvList = (IReadOnlyList<IWeightedValue<IPAddress>>)apvValue;
+            
+            Assert.IsNotNull(apvList);
+            Assert.AreEqual(weightedIPList.Count, apvList.Count);
+            
+            for (int i = 0; i < weightedIPList.Count; i++)
+            {
+                var expectedWeighting = (ushort)(int)weightedIPList[i]["rawweighting"];
+                var expectedValue = weightedIPList[i]["value"].ToString();
+                
+                Assert.AreEqual(expectedWeighting, apvList[i].RawWeighting);
+                Assert.AreEqual(expectedValue, apvList[i].Value.ToString());
+            }
+        }
     }
 }
