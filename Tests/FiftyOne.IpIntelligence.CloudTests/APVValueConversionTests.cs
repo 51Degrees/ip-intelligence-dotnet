@@ -35,6 +35,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 
 namespace FiftyOne.IpIntelligence.Cloud.Tests
 {
@@ -66,6 +67,15 @@ namespace FiftyOne.IpIntelligence.Cloud.Tests
             var apvValue = IpiCloudEngine.ToValueForAPV(rawValue, typeof(float));
             Assert.AreEqual(typeof(float), apvValue.GetType());
             Assert.AreEqual(rawValue, (float)apvValue);
+        }
+
+        [TestMethod]
+        public void TestToValueForAPV_IPAddress()
+        {
+            var rawValue = "8.49.13.251";
+            var apvValue = IpiCloudEngine.ToValueForAPV(rawValue, typeof(IPAddress));
+            Assert.AreEqual(typeof(IPAddress), apvValue.GetType());
+            Assert.AreEqual(rawValue, apvValue.ToString());
         }
 
         [TestMethod]
@@ -103,6 +113,25 @@ namespace FiftyOne.IpIntelligence.Cloud.Tests
             for(int i = 0; i < rawValue.Count; i++)
             {
                 Assert.AreEqual(rawValue[i], apvList[i]);
+            }
+        }
+
+        [TestMethod]
+        public void TestToValueForAPV_IPList()
+        {
+            var rawValue = new List<string>
+            {
+                "8.65.149.1",
+                "3.2.96.7",
+                "187.214.38.111",
+            };
+            var apvValue = IpiCloudEngine.ToValueForAPV(rawValue, typeof(IReadOnlyList<IPAddress>));
+            var apvList = (IReadOnlyList<IPAddress>)apvValue;
+            Assert.IsNotNull(apvList);
+            Assert.AreEqual(rawValue.Count, apvList.Count);
+            for (int i = 0; i < rawValue.Count; i++)
+            {
+                Assert.AreEqual(rawValue[i], apvList[i].ToString());
             }
         }
     }
