@@ -191,7 +191,10 @@ namespace FiftyOne.IpIntelligence.Cloud.FlowElements
             {
                 var outputValue = property.Value;
 
-                if (metaDataDictionary.TryGetValue(property.Key, out IElementPropertyMetaData metaData) == true)
+                if (metaDataDictionary
+                        .Where(x => x.Key.ToUpperInvariant() == property.Key.ToUpperInvariant())
+                        .Select(x => x.Value)
+                        .FirstOrDefault() is IElementPropertyMetaData metaData)
                 {
                     if (typeof(IAspectPropertyValue).IsAssignableFrom(metaData.Type))
                     {
@@ -323,6 +326,31 @@ namespace FiftyOne.IpIntelligence.Cloud.FlowElements
                 return ((Newtonsoft.Json.Linq.JObject)rawValue).ToObject<Dictionary<string, string>>();
             }
             return rawValue;
+        }
+
+        /// <summary>
+        /// Try to get the type of a property from the information
+        /// returned by the cloud service. This should be overridden
+        /// if anything other than simple types are required.
+        /// </summary>
+        /// <param name="propertyMetaData">
+        /// The <see cref="PropertyMetaData"/> instance to translate.
+        /// </param>
+        /// <param name="parentObjectType">
+        /// The type of the object on which this property exists.
+        /// </param>
+        /// <returns>
+        /// The type of the property determined from the Type field
+        /// of propertyMetaData.
+        /// </returns>
+        protected override Type GetPropertyType(
+            PropertyMetaData propertyMetaData,
+            Type parentObjectType)
+        {
+            return typeof(AspectPropertyValue<>).MakeGenericType(
+                typeof(IReadOnlyList<>).MakeGenericType(
+                    typeof(IWeightedValue<>).MakeGenericType(
+                        base.GetPropertyType(propertyMetaData, parentObjectType))));
         }
     }
 }
