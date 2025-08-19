@@ -5,224 +5,224 @@
  -->
 <!-- Title: Graphical Class Hierarchy Pages: 1 -->
 <svg width="463pt" height="516pt"
- viewBox="0.00 0.00 463.00 516.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 512)">
+ viewBox="0.00 0.00 463.00 515.50" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 511.5)">
 <title>Graphical Class Hierarchy</title>
-<!-- Node119 -->
+<!-- Node123 -->
 <g id="node1" class="node">
-<title>Node119</title>
+<title>Node123</title>
 <g id="a_node1"><a xlink:title=" ">
-<polygon fill="none" stroke="#bfbfbf" points="47.5,-275 47.5,-294 124.5,-294 124.5,-275 47.5,-275"/>
-<text text-anchor="middle" x="86" y="-282" font-family="Helvetica,sans-Serif" font-size="10.00">IEnumerator</text>
+<polygon fill="none" stroke="#bfbfbf" points="47.5,-252.5 47.5,-271.5 124.5,-271.5 124.5,-252.5 47.5,-252.5"/>
+<text text-anchor="middle" x="86" y="-259.5" font-family="Helvetica,sans-Serif" font-size="10.00">IEnumerator</text>
 </a>
 </g>
-</g>
-<!-- Node112 -->
-<g id="node2" class="node">
-<title>Node112</title>
-<g id="a_node2"><a xlink:href="class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_u_t_f8_string_swig93f4cce6d61ca5f20ae6abf29399e8e6.html" target="_top" xlink:title="Note that the IEnumerator documentation requires an InvalidOperationException to be thrown whenever t...">
-<polygon fill="none" stroke="black" points="228.5,-324 228.5,-365 434.5,-365 434.5,-324 228.5,-324"/>
-<text text-anchor="start" x="236.5" y="-353" font-family="Helvetica,sans-Serif" font-size="10.00">FiftyOne.IpIntelligence.</text>
-<text text-anchor="start" x="236.5" y="-342" font-family="Helvetica,sans-Serif" font-size="10.00">Engine.OnPremise.Interop.UTF8</text>
-<text text-anchor="middle" x="331.5" y="-331" font-family="Helvetica,sans-Serif" font-size="10.00">StringSwig.UTF8StringSwigEnumerator</text>
-</a>
-</g>
-</g>
-<!-- Node119&#45;&gt;Node112 -->
-<g id="edge1" class="edge">
-<title>Node119&#45;&gt;Node112</title>
-<path fill="none" stroke="midnightblue" d="M134.5,-296.31C156.8,-301.85 183.76,-308.53 208,-314.5 220.44,-317.56 233.59,-320.8 246.47,-323.96"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="135.15,-292.87 124.6,-293.85 133.46,-299.66 135.15,-292.87"/>
-</g>
-<!-- Node113 -->
-<g id="node3" class="node">
-<title>Node113</title>
-<g id="a_node3"><a xlink:href="class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_vector_string_swig452eeae6ddefab7107be9b48b95f3874.html" target="_top" xlink:title="Note that the IEnumerator documentation requires an InvalidOperationException to be thrown whenever t...">
-<polygon fill="none" stroke="black" points="226,-264 226,-305 437,-305 437,-264 226,-264"/>
-<text text-anchor="start" x="234" y="-293" font-family="Helvetica,sans-Serif" font-size="10.00">FiftyOne.IpIntelligence.</text>
-<text text-anchor="start" x="234" y="-282" font-family="Helvetica,sans-Serif" font-size="10.00">Engine.OnPremise.Interop.Vector</text>
-<text text-anchor="middle" x="331.5" y="-271" font-family="Helvetica,sans-Serif" font-size="10.00">StringSwig.VectorStringSwigEnumerator</text>
-</a>
-</g>
-</g>
-<!-- Node119&#45;&gt;Node113 -->
-<g id="edge2" class="edge">
-<title>Node119&#45;&gt;Node113</title>
-<path fill="none" stroke="midnightblue" d="M134.83,-284.5C160.86,-284.5 194.14,-284.5 225.84,-284.5"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="134.51,-281 124.51,-284.5 134.51,-288 134.51,-281"/>
-</g>
-<!-- Node114 -->
-<g id="node4" class="node">
-<title>Node114</title>
-<g id="a_node4"><a xlink:href="class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_weighted_bool_list687255ffcae427f162c49217e79891d5.html" target="_top" xlink:title="Note that the IEnumerator documentation requires an InvalidOperationException to be thrown whenever t...">
-<polygon fill="none" stroke="black" points="208,-204 208,-245 455,-245 455,-204 208,-204"/>
-<text text-anchor="start" x="216" y="-233" font-family="Helvetica,sans-Serif" font-size="10.00">FiftyOne.IpIntelligence.</text>
-<text text-anchor="start" x="216" y="-222" font-family="Helvetica,sans-Serif" font-size="10.00">Engine.OnPremise.Interop.Weighted</text>
-<text text-anchor="middle" x="331.5" y="-211" font-family="Helvetica,sans-Serif" font-size="10.00">BoolListSwig.WeightedBoolListSwigEnumerator</text>
-</a>
-</g>
-</g>
-<!-- Node119&#45;&gt;Node114 -->
-<g id="edge3" class="edge">
-<title>Node119&#45;&gt;Node114</title>
-<path fill="none" stroke="midnightblue" d="M134.5,-272.69C156.8,-267.15 183.76,-260.47 208,-254.5 220.44,-251.44 233.59,-248.2 246.47,-245.04"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="133.46,-269.34 124.6,-275.15 135.15,-276.13 133.46,-269.34"/>
-</g>
-<!-- Node115 -->
-<g id="node5" class="node">
-<title>Node115</title>
-<g id="a_node5"><a xlink:href="class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_weighted_double_li036fcb7432588bb1d64a85c15fd2bc88.html" target="_top" xlink:title="Note that the IEnumerator documentation requires an InvalidOperationException to be thrown whenever t...">
-<polygon fill="none" stroke="black" points="224,-132.5 224,-184.5 439,-184.5 439,-132.5 224,-132.5"/>
-<text text-anchor="start" x="232" y="-172.5" font-family="Helvetica,sans-Serif" font-size="10.00">FiftyOne.IpIntelligence.</text>
-<text text-anchor="start" x="232" y="-161.5" font-family="Helvetica,sans-Serif" font-size="10.00">Engine.OnPremise.Interop.Weighted</text>
-<text text-anchor="start" x="232" y="-150.5" font-family="Helvetica,sans-Serif" font-size="10.00">DoubleListSwig.WeightedDoubleListSwig</text>
-<text text-anchor="middle" x="331.5" y="-139.5" font-family="Helvetica,sans-Serif" font-size="10.00">Enumerator</text>
-</a>
-</g>
-</g>
-<!-- Node119&#45;&gt;Node115 -->
-<g id="edge4" class="edge">
-<title>Node119&#45;&gt;Node115</title>
-<path fill="none" stroke="midnightblue" d="M134.44,-274.14C147.58,-269.66 161.18,-263.33 172,-254.5 196.09,-234.83 183.4,-213.52 208,-194.5 212.91,-190.7 218.21,-187.31 223.76,-184.27"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="133.05,-270.91 124.54,-277.23 135.13,-277.59 133.05,-270.91"/>
-</g>
-<!-- Node116 -->
-<g id="node6" class="node">
-<title>Node116</title>
-<g id="a_node6"><a xlink:href="class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_weighted_int_list_9c276fa810f30b06c3cdc1b93ea2afab.html" target="_top" xlink:title="Note that the IEnumerator documentation requires an InvalidOperationException to be thrown whenever t...">
-<polygon fill="none" stroke="black" points="217,-72 217,-113 446,-113 446,-72 217,-72"/>
-<text text-anchor="start" x="225" y="-101" font-family="Helvetica,sans-Serif" font-size="10.00">FiftyOne.IpIntelligence.</text>
-<text text-anchor="start" x="225" y="-90" font-family="Helvetica,sans-Serif" font-size="10.00">Engine.OnPremise.Interop.Weighted</text>
-<text text-anchor="middle" x="331.5" y="-79" font-family="Helvetica,sans-Serif" font-size="10.00">IntListSwig.WeightedIntListSwigEnumerator</text>
-</a>
-</g>
-</g>
-<!-- Node119&#45;&gt;Node116 -->
-<g id="edge5" class="edge">
-<title>Node119&#45;&gt;Node116</title>
-<path fill="none" stroke="midnightblue" d="M134.64,-276.39C148.29,-271.95 162.13,-265.1 172,-254.5 213.15,-210.31 164.87,-165.76 208,-123.5 212,-119.58 216.41,-116.14 221.12,-113.12"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="133.44,-273.09 124.79,-279.21 135.37,-279.82 133.44,-273.09"/>
-</g>
-<!-- Node117 -->
-<g id="node7" class="node">
-<title>Node117</title>
-<g id="a_node7"><a xlink:href="class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_weighted_string_liad3b5e00a7cb58314813a24440d0c1f5.html" target="_top" xlink:title="Note that the IEnumerator documentation requires an InvalidOperationException to be thrown whenever t...">
-<polygon fill="none" stroke="black" points="230,-455.5 230,-507.5 433,-507.5 433,-455.5 230,-455.5"/>
-<text text-anchor="start" x="238" y="-495.5" font-family="Helvetica,sans-Serif" font-size="10.00">FiftyOne.IpIntelligence.</text>
-<text text-anchor="start" x="238" y="-484.5" font-family="Helvetica,sans-Serif" font-size="10.00">Engine.OnPremise.Interop.Weighted</text>
-<text text-anchor="start" x="238" y="-473.5" font-family="Helvetica,sans-Serif" font-size="10.00">StringListSwig.WeightedStringListSwig</text>
-<text text-anchor="middle" x="331.5" y="-462.5" font-family="Helvetica,sans-Serif" font-size="10.00">Enumerator</text>
-</a>
-</g>
-</g>
-<!-- Node119&#45;&gt;Node117 -->
-<g id="edge6" class="edge">
-<title>Node119&#45;&gt;Node117</title>
-<path fill="none" stroke="midnightblue" d="M95.95,-303.53C112.91,-337.5 153,-408.57 208,-446.5 214.74,-451.15 222.09,-455.18 229.73,-458.68"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="98.96,-301.72 91.44,-294.26 92.66,-304.78 98.96,-301.72"/>
-</g>
-<!-- Node118 -->
-<g id="node8" class="node">
-<title>Node118</title>
-<g id="a_node8"><a xlink:href="class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_weighted_u_t_f8_st865f5c639ab4fc06fc409320805505c2.html" target="_top" xlink:title="Note that the IEnumerator documentation requires an InvalidOperationException to be thrown whenever t...">
-<polygon fill="none" stroke="black" points="224.5,-384.5 224.5,-436.5 438.5,-436.5 438.5,-384.5 224.5,-384.5"/>
-<text text-anchor="start" x="232.5" y="-424.5" font-family="Helvetica,sans-Serif" font-size="10.00">FiftyOne.IpIntelligence.</text>
-<text text-anchor="start" x="232.5" y="-413.5" font-family="Helvetica,sans-Serif" font-size="10.00">Engine.OnPremise.Interop.Weighted</text>
-<text text-anchor="start" x="232.5" y="-402.5" font-family="Helvetica,sans-Serif" font-size="10.00">UTF8StringListSwig.WeightedUTF8String</text>
-<text text-anchor="middle" x="331.5" y="-391.5" font-family="Helvetica,sans-Serif" font-size="10.00">ListSwigEnumerator</text>
-</a>
-</g>
-</g>
-<!-- Node119&#45;&gt;Node118 -->
-<g id="edge7" class="edge">
-<title>Node119&#45;&gt;Node118</title>
-<path fill="none" stroke="midnightblue" d="M104.86,-301.02C127.34,-321.02 167.91,-354.5 208,-374.5 215.24,-378.11 222.91,-381.42 230.73,-384.45"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="106.93,-298.18 97.16,-294.07 102.24,-303.37 106.93,-298.18"/>
-</g>
-<!-- Node111 -->
-<g id="node9" class="node">
-<title>Node111</title>
-<g id="a_node9"><a xlink:title=" ">
-<polygon fill="none" stroke="#bfbfbf" points="47.5,-226 47.5,-245 124.5,-245 124.5,-226 47.5,-226"/>
-<text text-anchor="middle" x="86" y="-233" font-family="Helvetica,sans-Serif" font-size="10.00">IEnumerator</text>
-</a>
-</g>
-</g>
-<!-- Node111&#45;&gt;Node112 -->
-<g id="edge9" class="edge">
-<title>Node111&#45;&gt;Node112</title>
-<path fill="none" stroke="midnightblue" d="M134.64,-246.75C147.54,-251.23 160.98,-257.33 172,-265.5 193.7,-281.6 185.53,-299.5 208,-314.5 214.37,-318.76 221.29,-322.41 228.49,-325.54"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="135.51,-243.36 124.92,-243.64 133.37,-250.02 135.51,-243.36"/>
-</g>
-<!-- Node111&#45;&gt;Node113 -->
-<g id="edge10" class="edge">
-<title>Node111&#45;&gt;Node113</title>
-<path fill="none" stroke="midnightblue" d="M134.39,-245.04C161.21,-250.43 195.82,-257.4 228.49,-263.97"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="135.01,-241.59 124.51,-243.05 133.63,-248.45 135.01,-241.59"/>
-</g>
-<!-- Node111&#45;&gt;Node114 -->
-<g id="edge11" class="edge">
-<title>Node111&#45;&gt;Node114</title>
-<path fill="none" stroke="midnightblue" d="M134.51,-233.35C155.72,-232.4 181.79,-231.22 207.92,-230.04"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="134.35,-229.86 124.51,-233.81 134.66,-236.85 134.35,-229.86"/>
-</g>
-<!-- Node111&#45;&gt;Node115 -->
-<g id="edge12" class="edge">
-<title>Node111&#45;&gt;Node115</title>
-<path fill="none" stroke="midnightblue" d="M124.01,-222.52C147.9,-214.25 179.69,-203.45 208,-194.5 218.46,-191.19 229.46,-187.82 240.39,-184.52"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="122.59,-219.31 114.29,-225.9 124.88,-225.92 122.59,-219.31"/>
-</g>
-<!-- Node111&#45;&gt;Node116 -->
-<g id="edge13" class="edge">
-<title>Node111&#45;&gt;Node116</title>
-<path fill="none" stroke="midnightblue" d="M101.07,-217.79C121.8,-192.92 162.99,-147.93 208,-123.5 215.33,-119.52 223.18,-116.04 231.23,-113"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="98.23,-215.73 94.61,-225.69 103.65,-220.16 98.23,-215.73"/>
-</g>
-<!-- Node111&#45;&gt;Node117 -->
-<g id="edge14" class="edge">
-<title>Node111&#45;&gt;Node117</title>
-<path fill="none" stroke="midnightblue" d="M134.75,-243.07C148.54,-247.48 162.44,-254.46 172,-265.5 225.71,-327.49 152.43,-386.18 208,-446.5 214.22,-453.25 221.64,-458.73 229.71,-463.18"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="135.37,-239.61 124.79,-240.29 133.49,-246.35 135.37,-239.61"/>
-</g>
-<!-- Node111&#45;&gt;Node118 -->
-<g id="edge15" class="edge">
-<title>Node111&#45;&gt;Node118</title>
-<path fill="none" stroke="midnightblue" d="M134.67,-244.04C148.19,-248.49 161.95,-255.25 172,-265.5 207.71,-301.94 171.33,-339.03 208,-374.5 212.94,-379.28 218.48,-383.43 224.4,-387.03"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="135.5,-240.64 124.92,-241.19 133.54,-247.35 135.5,-240.64"/>
 </g>
 <!-- Node0 -->
-<g id="node10" class="node">
+<g id="node2" class="node">
 <title>Node0</title>
-<g id="a_node10"><a xlink:href="class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_map_string_string_afc829270b0fda0cf022c534f8fd28ee.html" target="_top" xlink:title="Note that the IEnumerator documentation requires an InvalidOperationException to be thrown whenever t...">
-<polygon fill="none" stroke="black" points="231,-0.5 231,-52.5 432,-52.5 432,-0.5 231,-0.5"/>
-<text text-anchor="start" x="239" y="-40.5" font-family="Helvetica,sans-Serif" font-size="10.00">FiftyOne.IpIntelligence.</text>
-<text text-anchor="start" x="239" y="-29.5" font-family="Helvetica,sans-Serif" font-size="10.00">Engine.OnPremise.Interop.Map</text>
-<text text-anchor="start" x="239" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">StringStringSwig.MapStringStringSwig</text>
-<text text-anchor="middle" x="331.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">Enumerator</text>
+<g id="a_node2"><a xlink:href="class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_map_string_string_afc829270b0fda0cf022c534f8fd28ee.html" target="_top" xlink:title="Note that the IEnumerator documentation requires an InvalidOperationException to be thrown whenever t...">
+<polygon fill="none" stroke="black" points="231,-455 231,-507 432,-507 432,-455 231,-455"/>
+<text text-anchor="start" x="239" y="-495" font-family="Helvetica,sans-Serif" font-size="10.00">FiftyOne.IpIntelligence.</text>
+<text text-anchor="start" x="239" y="-484" font-family="Helvetica,sans-Serif" font-size="10.00">Engine.OnPremise.Interop.Map</text>
+<text text-anchor="start" x="239" y="-473" font-family="Helvetica,sans-Serif" font-size="10.00">StringStringSwig.MapStringStringSwig</text>
+<text text-anchor="middle" x="331.5" y="-462" font-family="Helvetica,sans-Serif" font-size="10.00">Enumerator</text>
 </a>
 </g>
 </g>
-<!-- Node111&#45;&gt;Node0 -->
+<!-- Node123&#45;&gt;Node0 -->
+<g id="edge1" class="edge">
+<title>Node123&#45;&gt;Node0</title>
+<path fill="none" stroke="midnightblue" d="M94.37,-281.5C109.62,-319.18 148.27,-402.11 208,-446 215.04,-451.17 222.82,-455.58 230.96,-459.34"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="97.45,-279.78 90.54,-271.75 90.94,-282.34 97.45,-279.78"/>
+</g>
+<!-- Node116 -->
+<g id="node3" class="node">
+<title>Node116</title>
+<g id="a_node3"><a xlink:href="class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_u_t_f8_string_swig93f4cce6d61ca5f20ae6abf29399e8e6.html" target="_top" xlink:title="Note that the IEnumerator documentation requires an InvalidOperationException to be thrown whenever t...">
+<polygon fill="none" stroke="black" points="228.5,-252.5 228.5,-293.5 434.5,-293.5 434.5,-252.5 228.5,-252.5"/>
+<text text-anchor="start" x="236.5" y="-281.5" font-family="Helvetica,sans-Serif" font-size="10.00">FiftyOne.IpIntelligence.</text>
+<text text-anchor="start" x="236.5" y="-270.5" font-family="Helvetica,sans-Serif" font-size="10.00">Engine.OnPremise.Interop.UTF8</text>
+<text text-anchor="middle" x="331.5" y="-259.5" font-family="Helvetica,sans-Serif" font-size="10.00">StringSwig.UTF8StringSwigEnumerator</text>
+</a>
+</g>
+</g>
+<!-- Node123&#45;&gt;Node116 -->
+<g id="edge2" class="edge">
+<title>Node123&#45;&gt;Node116</title>
+<path fill="none" stroke="midnightblue" d="M134.74,-264.16C161.51,-265.37 195.97,-266.92 228.49,-268.39"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="134.66,-260.65 124.51,-263.69 134.35,-267.64 134.66,-260.65"/>
+</g>
+<!-- Node117 -->
+<g id="node4" class="node">
+<title>Node117</title>
+<g id="a_node4"><a xlink:href="class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_vector_string_swig452eeae6ddefab7107be9b48b95f3874.html" target="_top" xlink:title="Note that the IEnumerator documentation requires an InvalidOperationException to be thrown whenever t...">
+<polygon fill="none" stroke="black" points="226,-192.5 226,-233.5 437,-233.5 437,-192.5 226,-192.5"/>
+<text text-anchor="start" x="234" y="-221.5" font-family="Helvetica,sans-Serif" font-size="10.00">FiftyOne.IpIntelligence.</text>
+<text text-anchor="start" x="234" y="-210.5" font-family="Helvetica,sans-Serif" font-size="10.00">Engine.OnPremise.Interop.Vector</text>
+<text text-anchor="middle" x="331.5" y="-199.5" font-family="Helvetica,sans-Serif" font-size="10.00">StringSwig.VectorStringSwigEnumerator</text>
+</a>
+</g>
+</g>
+<!-- Node123&#45;&gt;Node117 -->
+<g id="edge3" class="edge">
+<title>Node123&#45;&gt;Node117</title>
+<path fill="none" stroke="midnightblue" d="M134.39,-252.46C161.21,-247.07 195.82,-240.1 228.49,-233.53"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="133.63,-249.05 124.51,-254.45 135.01,-255.91 133.63,-249.05"/>
+</g>
+<!-- Node118 -->
+<g id="node5" class="node">
+<title>Node118</title>
+<g id="a_node5"><a xlink:href="class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_weighted_bool_list687255ffcae427f162c49217e79891d5.html" target="_top" xlink:title="Note that the IEnumerator documentation requires an InvalidOperationException to be thrown whenever t...">
+<polygon fill="none" stroke="black" points="208,-132.5 208,-173.5 455,-173.5 455,-132.5 208,-132.5"/>
+<text text-anchor="start" x="216" y="-161.5" font-family="Helvetica,sans-Serif" font-size="10.00">FiftyOne.IpIntelligence.</text>
+<text text-anchor="start" x="216" y="-150.5" font-family="Helvetica,sans-Serif" font-size="10.00">Engine.OnPremise.Interop.Weighted</text>
+<text text-anchor="middle" x="331.5" y="-139.5" font-family="Helvetica,sans-Serif" font-size="10.00">BoolListSwig.WeightedBoolListSwigEnumerator</text>
+</a>
+</g>
+</g>
+<!-- Node123&#45;&gt;Node118 -->
+<g id="edge4" class="edge">
+<title>Node123&#45;&gt;Node118</title>
+<path fill="none" stroke="midnightblue" d="M134.64,-250.75C147.54,-246.27 160.98,-240.17 172,-232 193.7,-215.9 185.53,-198 208,-183 213.28,-179.47 218.94,-176.36 224.82,-173.62"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="133.37,-247.48 124.92,-253.86 135.51,-254.14 133.37,-247.48"/>
+</g>
+<!-- Node119 -->
+<g id="node6" class="node">
+<title>Node119</title>
+<g id="a_node6"><a xlink:href="class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_weighted_double_li036fcb7432588bb1d64a85c15fd2bc88.html" target="_top" xlink:title="Note that the IEnumerator documentation requires an InvalidOperationException to be thrown whenever t...">
+<polygon fill="none" stroke="black" points="224,-61 224,-113 439,-113 439,-61 224,-61"/>
+<text text-anchor="start" x="232" y="-101" font-family="Helvetica,sans-Serif" font-size="10.00">FiftyOne.IpIntelligence.</text>
+<text text-anchor="start" x="232" y="-90" font-family="Helvetica,sans-Serif" font-size="10.00">Engine.OnPremise.Interop.Weighted</text>
+<text text-anchor="start" x="232" y="-79" font-family="Helvetica,sans-Serif" font-size="10.00">DoubleListSwig.WeightedDoubleListSwig</text>
+<text text-anchor="middle" x="331.5" y="-68" font-family="Helvetica,sans-Serif" font-size="10.00">Enumerator</text>
+</a>
+</g>
+</g>
+<!-- Node123&#45;&gt;Node119 -->
+<g id="edge5" class="edge">
+<title>Node123&#45;&gt;Node119</title>
+<path fill="none" stroke="midnightblue" d="M134.67,-253.46C148.19,-249.01 161.95,-242.25 172,-232 207.71,-195.56 171.33,-158.47 208,-123 212.78,-118.38 218.12,-114.34 223.83,-110.82"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="133.54,-250.15 124.92,-256.31 135.5,-256.86 133.54,-250.15"/>
+</g>
+<!-- Node120 -->
+<g id="node7" class="node">
+<title>Node120</title>
+<g id="a_node7"><a xlink:href="class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_weighted_int_list_9c276fa810f30b06c3cdc1b93ea2afab.html" target="_top" xlink:title="Note that the IEnumerator documentation requires an InvalidOperationException to be thrown whenever t...">
+<polygon fill="none" stroke="black" points="217,-0.5 217,-41.5 446,-41.5 446,-0.5 217,-0.5"/>
+<text text-anchor="start" x="225" y="-29.5" font-family="Helvetica,sans-Serif" font-size="10.00">FiftyOne.IpIntelligence.</text>
+<text text-anchor="start" x="225" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">Engine.OnPremise.Interop.Weighted</text>
+<text text-anchor="middle" x="331.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">IntListSwig.WeightedIntListSwigEnumerator</text>
+</a>
+</g>
+</g>
+<!-- Node123&#45;&gt;Node120 -->
+<g id="edge6" class="edge">
+<title>Node123&#45;&gt;Node120</title>
+<path fill="none" stroke="midnightblue" d="M134.75,-254.43C148.54,-250.02 162.44,-243.04 172,-232 225.71,-170.01 151.29,-110.25 208,-51 211.33,-47.52 214.99,-44.42 218.91,-41.65"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="133.49,-251.15 124.79,-257.21 135.37,-257.89 133.49,-251.15"/>
+</g>
+<!-- Node121 -->
+<g id="node8" class="node">
+<title>Node121</title>
+<g id="a_node8"><a xlink:href="class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_weighted_string_liad3b5e00a7cb58314813a24440d0c1f5.html" target="_top" xlink:title="Note that the IEnumerator documentation requires an InvalidOperationException to be thrown whenever t...">
+<polygon fill="none" stroke="black" points="230,-384 230,-436 433,-436 433,-384 230,-384"/>
+<text text-anchor="start" x="238" y="-424" font-family="Helvetica,sans-Serif" font-size="10.00">FiftyOne.IpIntelligence.</text>
+<text text-anchor="start" x="238" y="-413" font-family="Helvetica,sans-Serif" font-size="10.00">Engine.OnPremise.Interop.Weighted</text>
+<text text-anchor="start" x="238" y="-402" font-family="Helvetica,sans-Serif" font-size="10.00">StringListSwig.WeightedStringListSwig</text>
+<text text-anchor="middle" x="331.5" y="-391" font-family="Helvetica,sans-Serif" font-size="10.00">Enumerator</text>
+</a>
+</g>
+</g>
+<!-- Node123&#45;&gt;Node121 -->
+<g id="edge7" class="edge">
+<title>Node123&#45;&gt;Node121</title>
+<path fill="none" stroke="midnightblue" d="M101.13,-279.68C121.95,-304.56 163.24,-349.68 208,-375 214.93,-378.92 222.33,-382.43 229.94,-385.57"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="103.71,-277.3 94.65,-271.79 98.3,-281.74 103.71,-277.3"/>
+</g>
+<!-- Node122 -->
+<g id="node9" class="node">
+<title>Node122</title>
+<g id="a_node9"><a xlink:href="class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_weighted_u_t_f8_st865f5c639ab4fc06fc409320805505c2.html" target="_top" xlink:title="Note that the IEnumerator documentation requires an InvalidOperationException to be thrown whenever t...">
+<polygon fill="none" stroke="black" points="224.5,-313 224.5,-365 438.5,-365 438.5,-313 224.5,-313"/>
+<text text-anchor="start" x="232.5" y="-353" font-family="Helvetica,sans-Serif" font-size="10.00">FiftyOne.IpIntelligence.</text>
+<text text-anchor="start" x="232.5" y="-342" font-family="Helvetica,sans-Serif" font-size="10.00">Engine.OnPremise.Interop.Weighted</text>
+<text text-anchor="start" x="232.5" y="-331" font-family="Helvetica,sans-Serif" font-size="10.00">UTF8StringListSwig.WeightedUTF8String</text>
+<text text-anchor="middle" x="331.5" y="-320" font-family="Helvetica,sans-Serif" font-size="10.00">ListSwigEnumerator</text>
+</a>
+</g>
+</g>
+<!-- Node123&#45;&gt;Node122 -->
 <g id="edge8" class="edge">
-<title>Node111&#45;&gt;Node0</title>
-<path fill="none" stroke="midnightblue" d="M94.95,-216.7C110.97,-181.11 150.57,-103.77 208,-62.5 215.02,-57.45 222.74,-53.11 230.8,-49.37"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="91.71,-215.38 90.9,-225.94 98.12,-218.19 91.71,-215.38"/>
+<title>Node123&#45;&gt;Node122</title>
+<path fill="none" stroke="midnightblue" d="M124.01,-274.98C147.9,-283.25 179.69,-294.05 208,-303 218.46,-306.31 229.46,-309.68 240.39,-312.98"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="124.88,-271.58 114.29,-271.6 122.59,-278.19 124.88,-271.58"/>
+</g>
+<!-- Node115 -->
+<g id="node10" class="node">
+<title>Node115</title>
+<g id="a_node10"><a xlink:title=" ">
+<polygon fill="none" stroke="#bfbfbf" points="47.5,-203.5 47.5,-222.5 124.5,-222.5 124.5,-203.5 47.5,-203.5"/>
+<text text-anchor="middle" x="86" y="-210.5" font-family="Helvetica,sans-Serif" font-size="10.00">IEnumerator</text>
+</a>
+</g>
+</g>
+<!-- Node115&#45;&gt;Node116 -->
+<g id="edge9" class="edge">
+<title>Node115&#45;&gt;Node116</title>
+<path fill="none" stroke="midnightblue" d="M134.5,-224.81C156.8,-230.35 183.76,-237.03 208,-243 220.44,-246.06 233.59,-249.3 246.47,-252.46"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="135.15,-221.37 124.6,-222.35 133.46,-228.16 135.15,-221.37"/>
+</g>
+<!-- Node115&#45;&gt;Node117 -->
+<g id="edge10" class="edge">
+<title>Node115&#45;&gt;Node117</title>
+<path fill="none" stroke="midnightblue" d="M134.83,-213C160.86,-213 194.14,-213 225.84,-213"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="134.51,-209.5 124.51,-213 134.51,-216.5 134.51,-209.5"/>
+</g>
+<!-- Node115&#45;&gt;Node118 -->
+<g id="edge11" class="edge">
+<title>Node115&#45;&gt;Node118</title>
+<path fill="none" stroke="midnightblue" d="M134.5,-201.19C156.8,-195.65 183.76,-188.97 208,-183 220.44,-179.94 233.59,-176.7 246.47,-173.54"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="133.46,-197.84 124.6,-203.65 135.15,-204.63 133.46,-197.84"/>
+</g>
+<!-- Node115&#45;&gt;Node119 -->
+<g id="edge12" class="edge">
+<title>Node115&#45;&gt;Node119</title>
+<path fill="none" stroke="midnightblue" d="M104.86,-196.48C127.34,-176.48 167.91,-143 208,-123 215.24,-119.39 222.91,-116.08 230.73,-113.05"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="102.24,-194.13 97.16,-203.43 106.93,-199.32 102.24,-194.13"/>
+</g>
+<!-- Node115&#45;&gt;Node120 -->
+<g id="edge13" class="edge">
+<title>Node115&#45;&gt;Node120</title>
+<path fill="none" stroke="midnightblue" d="M95.81,-193.76C112.54,-159.45 152.29,-87.88 208,-51 213.39,-47.43 219.16,-44.29 225.15,-41.52"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="92.49,-192.59 91.36,-203.13 98.81,-195.6 92.49,-192.59"/>
+</g>
+<!-- Node115&#45;&gt;Node121 -->
+<g id="edge14" class="edge">
+<title>Node115&#45;&gt;Node121</title>
+<path fill="none" stroke="midnightblue" d="M134.65,-221.1C148.3,-225.53 162.14,-232.39 172,-243 213.4,-287.54 165.26,-331.74 208,-375 214.37,-381.45 221.85,-386.73 229.91,-391.06"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="135.38,-217.67 124.8,-218.28 133.45,-224.4 135.38,-217.67"/>
+</g>
+<!-- Node115&#45;&gt;Node122 -->
+<g id="edge15" class="edge">
+<title>Node115&#45;&gt;Node122</title>
+<path fill="none" stroke="midnightblue" d="M134.44,-223.36C147.58,-227.84 161.18,-234.17 172,-243 196.09,-262.67 183.4,-283.98 208,-303 213.09,-306.93 218.59,-310.43 224.36,-313.56"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="135.13,-219.91 124.54,-220.27 133.05,-226.59 135.13,-219.91"/>
 </g>
 <!-- Node49 -->
 <g id="node11" class="node">
 <title>Node49</title>
 <g id="a_node11"><a xlink:title=" ">
-<polygon fill="none" stroke="#bfbfbf" points="0,-11.5 0,-41.5 172,-41.5 172,-11.5 0,-11.5"/>
-<text text-anchor="start" x="8" y="-29.5" font-family="Helvetica,sans-Serif" font-size="10.00">System.Collections.Generic.</text>
-<text text-anchor="middle" x="86" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">KeyValuePair&lt; string, string &gt;&gt;</text>
+<polygon fill="none" stroke="#bfbfbf" points="0,-466 0,-496 172,-496 172,-466 0,-466"/>
+<text text-anchor="start" x="8" y="-484" font-family="Helvetica,sans-Serif" font-size="10.00">System.Collections.Generic.</text>
+<text text-anchor="middle" x="86" y="-473" font-family="Helvetica,sans-Serif" font-size="10.00">KeyValuePair&lt; string, string &gt;&gt;</text>
 </a>
 </g>
 </g>
 <!-- Node49&#45;&gt;Node0 -->
 <g id="edge16" class="edge">
 <title>Node49&#45;&gt;Node0</title>
-<path fill="none" stroke="midnightblue" d="M182.48,-26.5C198.33,-26.5 214.81,-26.5 230.77,-26.5"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="182.16,-23 172.16,-26.5 182.16,-30 182.16,-23"/>
+<path fill="none" stroke="midnightblue" d="M182.48,-481C198.33,-481 214.81,-481 230.77,-481"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="182.16,-477.5 172.16,-481 182.16,-484.5 182.16,-477.5"/>
 </g>
 </g>
 </svg>

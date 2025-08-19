@@ -8,9 +8,9 @@
  viewBox="0.00 0.00 392.00 110.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 106)">
 <title>Graphical Class Hierarchy</title>
-<!-- Node83 -->
+<!-- Node86 -->
 <g id="node1" class="node">
-<title>Node83</title>
+<title>Node86</title>
 <g id="a_node1"><a xlink:title=" ">
 <polygon fill="none" stroke="#bfbfbf" points="0,-36 0,-66 144,-66 144,-36 0,-36"/>
 <text text-anchor="start" x="8" y="-54" font-family="Helvetica,sans-Serif" font-size="10.00">IReadOnlyList&lt; IWeighted</text>
@@ -29,15 +29,15 @@
 </a>
 </g>
 </g>
-<!-- Node83&#45;&gt;Node0 -->
+<!-- Node86&#45;&gt;Node0 -->
 <g id="edge1" class="edge">
-<title>Node83&#45;&gt;Node0</title>
+<title>Node86&#45;&gt;Node0</title>
 <path fill="none" stroke="midnightblue" d="M154.14,-62.7C162.55,-63.92 171.16,-65.16 179.76,-66.4"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="154.4,-59.2 144,-61.24 153.4,-66.13 154.4,-59.2"/>
 </g>
-<!-- Node85 -->
+<!-- Node88 -->
 <g id="node3" class="node">
-<title>Node85</title>
+<title>Node88</title>
 <g id="a_node3"><a xlink:href="class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_wrappers_1_1_weighted_u_t_f8_string_list_swig_wrapper.html" target="_top" xlink:title=" ">
 <polygon fill="none" stroke="black" points="180,-0.5 180,-41.5 384,-41.5 384,-0.5 180,-0.5"/>
 <text text-anchor="start" x="188" y="-29.5" font-family="Helvetica,sans-Serif" font-size="10.00">FiftyOne.IpIntelligence.</text>
@@ -46,9 +46,9 @@
 </a>
 </g>
 </g>
-<!-- Node83&#45;&gt;Node85 -->
+<!-- Node86&#45;&gt;Node88 -->
 <g id="edge2" class="edge">
-<title>Node83&#45;&gt;Node85</title>
+<title>Node86&#45;&gt;Node88</title>
 <path fill="none" stroke="midnightblue" d="M154.14,-39.3C162.55,-38.08 171.16,-36.84 179.76,-35.6"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="153.4,-35.87 144,-40.76 154.4,-42.8 153.4,-35.87"/>
 </g>

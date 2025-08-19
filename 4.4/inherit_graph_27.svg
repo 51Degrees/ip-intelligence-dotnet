@@ -8,9 +8,9 @@
  viewBox="0.00 0.00 392.00 50.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 46)">
 <title>Graphical Class Hierarchy</title>
-<!-- Node90 -->
+<!-- Node93 -->
 <g id="node1" class="node">
-<title>Node90</title>
+<title>Node93</title>
 <g id="a_node1"><a xlink:title=" ">
 <polygon fill="none" stroke="#bfbfbf" points="0,-6 0,-36 144,-36 144,-6 0,-6"/>
 <text text-anchor="start" x="8" y="-24" font-family="Helvetica,sans-Serif" font-size="10.00">IReadOnlyList&lt; IWeighted</text>
@@ -29,9 +29,9 @@
 </a>
 </g>
 </g>
-<!-- Node90&#45;&gt;Node0 -->
+<!-- Node93&#45;&gt;Node0 -->
 <g id="edge1" class="edge">
-<title>Node90&#45;&gt;Node0</title>
+<title>Node93&#45;&gt;Node0</title>
 <path fill="none" stroke="midnightblue" d="M154.14,-21C162.55,-21 171.16,-21 179.76,-21"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="154,-17.5 144,-21 154,-24.5 154,-17.5"/>
 </g>

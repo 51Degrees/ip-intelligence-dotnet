@@ -1,5 +1,6 @@
 var namespace_fifty_one_1_1_ip_intelligence_1_1_examples =
 [
+    [ "Mixed", "namespace_fifty_one_1_1_ip_intelligence_1_1_examples_1_1_mixed.html", "namespace_fifty_one_1_1_ip_intelligence_1_1_examples_1_1_mixed" ],
     [ "OnPremise", "namespace_fifty_one_1_1_ip_intelligence_1_1_examples_1_1_on_premise.html", "namespace_fifty_one_1_1_ip_intelligence_1_1_examples_1_1_on_premise" ],
     [ "Constants", "class_fifty_one_1_1_ip_intelligence_1_1_examples_1_1_constants.html", "class_fifty_one_1_1_ip_intelligence_1_1_examples_1_1_constants" ],
     [ "DataExtensions", "class_fifty_one_1_1_ip_intelligence_1_1_examples_1_1_data_extensions.html", "class_fifty_one_1_1_ip_intelligence_1_1_examples_1_1_data_extensions" ],

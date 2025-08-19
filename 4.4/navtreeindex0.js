@@ -1,12 +1,13 @@
 var NAVTREEINDEX0 =
 {
-"_on_premise_2_framework-_web_2_default_8aspx_8cs-example.html":[8,0],
-"_on_premise_2_getting_started-_console_2_program_8cs-example.html":[8,1],
-"_on_premise_2_getting_started-_web_2_startup_8cs-example.html":[8,2],
-"_on_premise_2_metadata-_console_2_program_8cs-example.html":[8,3],
-"_on_premise_2_offline_processing-_console_2_program_8cs-example.html":[8,4],
-"_on_premise_2_update_data_file-_console_2_program_8cs-example.html":[8,5],
-"_performance-_console_2_program_8cs-example.html":[8,6],
+"_mixed_2_on_premise_2_getting_started-_console_2_program_8cs-example.html":[8,0],
+"_on_premise_2_framework-_web_2_default_8aspx_8cs-example.html":[8,1],
+"_on_premise_2_getting_started-_console_2_program_8cs-example.html":[8,2],
+"_on_premise_2_getting_started-_web_2_startup_8cs-example.html":[8,3],
+"_on_premise_2_metadata-_console_2_program_8cs-example.html":[8,4],
+"_on_premise_2_offline_processing-_console_2_program_8cs-example.html":[8,5],
+"_on_premise_2_update_data_file-_console_2_program_8cs-example.html":[8,6],
+"_performance-_console_2_program_8cs-example.html":[8,7],
 "annotated.html":[7,0],
 "class_fifty_one_1_1_ip_intelligence_1_1_cloud_1_1_data_1_1_ip_data_cloud.html":[7,0,0,0,0,0,0],
 "class_fifty_one_1_1_ip_intelligence_1_1_cloud_1_1_data_1_1_ip_data_cloud.html#adc834e3ec6b1404e4edf39d13701cb63":[7,0,0,0,0,0,0,0],
@@ -248,6 +249,5 @@ var NAVTREEINDEX0 =
 "class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_engine_base_swig.html#ae885d519221a8a13431e15c182cbe46d":[7,0,0,0,1,0,2,8,7],
 "class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_engine_base_swig.html#aed436a91724b8a00558f0c1fd59d3f6a":[7,0,0,0,1,0,2,8,16],
 "class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_engine_base_swig.html#af6e0c779a228f0c64e8df61675232ce6":[7,0,0,0,1,0,2,8,13],
-"class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_engine_base_swig.html#af7825c63bb5c2e3e1c8d0a5b4281a565":[7,0,0,0,1,0,2,8,12],
-"class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_engine_base_swig.html#af831498b22df85e681512450a35bc713":[7,0,0,0,1,0,2,8,17]
+"class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_engine_base_swig.html#af7825c63bb5c2e3e1c8d0a5b4281a565":[7,0,0,0,1,0,2,8,12]
 };
