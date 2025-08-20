@@ -26,6 +26,7 @@ using FiftyOne.Pipeline.Core.Exceptions;
 using FiftyOne.Pipeline.Core.FlowElements;
 using FiftyOne.Pipeline.Engines;
 using FiftyOne.Pipeline.Engines.Configuration;
+using FiftyOne.Pipeline.Engines.Data;
 using FiftyOne.Pipeline.Engines.FiftyOne.FlowElements;
 using FiftyOne.Pipeline.Engines.FlowElements;
 using FiftyOne.Pipeline.Engines.Services;
@@ -59,6 +60,16 @@ namespace FiftyOne.IpIntelligence
             PerformanceProfiles.Balanced;
         private bool _shareUsageEnabled = true;
         private List<string> _requestedProperties = new List<string>();
+
+        private string _dataUpdateUrlString = null;
+        private Uri _dataUpdateUrlUri = null;
+
+        /// <summary>
+        /// A Nullable box for a single nullable formatter reference.
+        /// </summary>
+        private IList<IDataUpdateUrlFormatter> _dataUpdateUrlFormatter = null;
+
+        private bool? _dataUpdateVerifyMd5 = null;
 
         private IDataUpdateService _dataUpdateService;
         private HttpClient _httpClient;
@@ -332,6 +343,85 @@ namespace FiftyOne.IpIntelligence
         }
 
         /// <summary>
+        /// Configure the engine to use the specified URL when looking for
+        /// an updated data file.
+        /// </summary>
+        /// <param name="url">
+        /// The URL to check for a new data file.
+        /// </param>
+        /// <returns>
+        /// This builder instance.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown if url parameter is null or and empty string
+        /// </exception>
+        public IpiOnPremisePipelineBuilder SetDataUpdateUrl(string url)
+        {
+            if (string.IsNullOrEmpty(url)) throw new ArgumentNullException(nameof(url));
+            _dataUpdateUrlString = url;
+            _dataUpdateUrlUri = null;
+            return this;
+        }
+
+        /// <summary>
+        /// Configure the engine to use the specified URL when looking for
+        /// an updated data file.
+        /// </summary>
+        /// <param name="url">
+        /// The URL to check for a new data file.
+        /// </param>
+        /// <returns>
+        /// This builder instance.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown if url parameter is null
+        /// </exception>
+        public IpiOnPremisePipelineBuilder SetDataUpdateUrl(Uri url)
+        {
+            if (url == null) throw new ArgumentNullException(nameof(url));
+            _dataUpdateUrlString = null;
+            _dataUpdateUrlUri = url;
+            return this;
+        }
+
+        /// <summary>
+        /// Specify a <see cref="IDataUpdateUrlFormatter"/> to be 
+        /// used by the <see cref="DataUpdateService"/> when building the 
+        /// complete URL to query for updated data.
+        /// </summary>
+        /// <param name="formatter">
+        /// The formatter to use.
+        /// </param>
+        /// <returns>
+        /// This builder instance.
+        /// </returns>
+        public IpiOnPremisePipelineBuilder SetDataUpdateUrlFormatter(
+            IDataUpdateUrlFormatter formatter)
+        {
+            _dataUpdateUrlFormatter = new IDataUpdateUrlFormatter[] { formatter };
+            return this;
+        }
+
+        /// <summary>
+        /// Set a value indicating if the <see cref="DataUpdateService"/>
+        /// should expect the response from the data update URL to contain a
+        /// 'content-md5' HTTP header that can be used to verify the integrity
+        /// of the content.
+        /// </summary>
+        /// <param name="verify">
+        /// True if the content should be verified with the Md5 hash.
+        /// False otherwise.
+        /// </param>
+        /// <returns>
+        /// This builder instance.
+        /// </returns>
+        public IpiOnPremisePipelineBuilder SetDataUpdateVerifyMd5(bool verify)
+        {
+            _dataUpdateVerifyMd5 = verify;
+            return this;
+        }
+
+        /// <summary>
         /// The <see cref="DataUpdateService"/> has the ability to watch a 
         /// file on disk and refresh the engine as soon as that file is 
         /// updated.
@@ -439,6 +529,25 @@ namespace FiftyOne.IpIntelligence
             foreach (var property in _requestedProperties)
             {
                 builder.SetProperty(property);
+            }
+
+            if (_dataUpdateUrlString != null)
+            {
+#               pragma warning disable CA2234 // Pass system uri objects instead of strings
+                builder.SetDataUpdateUrl(_dataUpdateUrlString);
+#               pragma warning restore CA2234 // Pass system uri objects instead of strings
+            }
+            else if (_dataUpdateUrlUri != null)
+            {
+                builder.SetDataUpdateUrl(_dataUpdateUrlUri);
+            }
+            if (_dataUpdateUrlFormatter != null && _dataUpdateUrlFormatter.Count > 0)
+            {
+                builder.SetDataUpdateUrlFormatter(_dataUpdateUrlFormatter[0]);
+            }
+            if (_dataUpdateVerifyMd5.HasValue)
+            {
+                builder.SetDataUpdateVerifyMd5(_dataUpdateVerifyMd5.Value);
             }
 
             builder.SetDataUpdateLicenseKey(_dataUpdateLicenseKey);

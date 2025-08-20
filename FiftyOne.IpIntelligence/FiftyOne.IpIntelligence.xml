@@ -37,6 +37,11 @@
             IP intelligence engine.
             </summary>
         </member>
+        <member name="F:FiftyOne.IpIntelligence.IpiOnPremisePipelineBuilder._dataUpdateUrlFormatter">
+            <summary>
+            A Nullable box for a single nullable formatter reference.
+            </summary>
+        </member>
         <member name="M:FiftyOne.IpIntelligence.IpiOnPremisePipelineBuilder.#ctor(Microsoft.Extensions.Logging.ILoggerFactory,FiftyOne.Pipeline.Engines.Services.IDataUpdateService,System.Net.Http.HttpClient)">
             <summary>
             Internal constructor
@@ -238,6 +243,64 @@
             </summary>
             <param name="concurrency">Expected concurrent accesses</param>
             <returns>This builder</returns>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.IpiOnPremisePipelineBuilder.SetDataUpdateUrl(System.String)">
+            <summary>
+            Configure the engine to use the specified URL when looking for
+            an updated data file.
+            </summary>
+            <param name="url">
+            The URL to check for a new data file.
+            </param>
+            <returns>
+            This builder instance.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown if url parameter is null or and empty string
+            </exception>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.IpiOnPremisePipelineBuilder.SetDataUpdateUrl(System.Uri)">
+            <summary>
+            Configure the engine to use the specified URL when looking for
+            an updated data file.
+            </summary>
+            <param name="url">
+            The URL to check for a new data file.
+            </param>
+            <returns>
+            This builder instance.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown if url parameter is null
+            </exception>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.IpiOnPremisePipelineBuilder.SetDataUpdateUrlFormatter(FiftyOne.Pipeline.Engines.Data.IDataUpdateUrlFormatter)">
+            <summary>
+            Specify a <see cref="T:FiftyOne.Pipeline.Engines.Data.IDataUpdateUrlFormatter"/> to be 
+            used by the <see cref="T:FiftyOne.Pipeline.Engines.Services.DataUpdateService"/> when building the 
+            complete URL to query for updated data.
+            </summary>
+            <param name="formatter">
+            The formatter to use.
+            </param>
+            <returns>
+            This builder instance.
+            </returns>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.IpiOnPremisePipelineBuilder.SetDataUpdateVerifyMd5(System.Boolean)">
+            <summary>
+            Set a value indicating if the <see cref="T:FiftyOne.Pipeline.Engines.Services.DataUpdateService"/>
+            should expect the response from the data update URL to contain a
+            'content-md5' HTTP header that can be used to verify the integrity
+            of the content.
+            </summary>
+            <param name="verify">
+            True if the content should be verified with the Md5 hash.
+            False otherwise.
+            </param>
+            <returns>
+            This builder instance.
+            </returns>
         </member>
         <member name="M:FiftyOne.IpIntelligence.IpiOnPremisePipelineBuilder.SetDataFileSystemWatcher(System.Boolean)">
             <summary>
