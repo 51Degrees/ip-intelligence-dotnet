@@ -13,7 +13,6 @@ $PerfResultsFile = [IO.Path]::Combine($RepoPath, "test-results", "performance-su
 $EvidenceFiles = [IO.Path]::Combine($pwd, $RepoName,"FiftyOne.IpIntelligence.Engine.OnPremise", "ip-intelligence-cxx", "ip-intelligence-data")
 $ExamplesRepoName = "ip-intelligence-dotnet-examples"
 $ExamplesRepoPath = [IO.Path]::Combine($pwd, $ExamplesRepoName)
-$IpIntelligenceProject = [IO.Path]::Combine($RepoPath, "FiftyOne.IpIntelligence", "FiftyOne.IpIntelligence.csproj")
 $PerfProject = [IO.Path]::Combine($ExamplesRepoPath, "Examples", "OnPremise", "Performance-Console")
 
 Write-Output "Entering '$RepoPath'"
@@ -46,21 +45,36 @@ Write-Output "Moving evidence file"
 $EvidenceFile = [IO.Path]::Combine($EvidenceFiles, "evidence.yml")
 Copy-Item $EvidenceFile "ip-intelligence-dotnet-examples/ip-intelligence-data/evidence.yml"
 
-$ExamplesProject = [IO.Path]::Combine($ExamplesRepoPath, "Examples", "FiftyOne.IpIntelligence.Examples")
 
-# Update the dependency in the examples project to point to the newly bulit package
-Write-Output "Entering '$ExamplesProject'"
-Push-Location $ExamplesProject
-try{
-    # Change the dependency version to the locally build Nuget package
-    Write-Output "Replacing the IpIntelligence package with a local reference."
-    dotnet remove package "FiftyOne.IpIntelligence"
-    dotnet add reference $IpIntelligenceProject
+function Edit-ExamplesCsprojRef {
+    param(
+        [string]$ExampleInfix = "",
+        [string]$PackageInfix = "",
+        [string]$ProjectInfix = ""
+    )
+    
+    $ExampleProject = [IO.Path]::Combine($ExamplesRepoPath, "Examples", "FiftyOne.IpIntelligence.Examples$ExampleInfix")
+    $IpIntelligenceProject = [IO.Path]::Combine($RepoPath, "FiftyOne.IpIntelligence$ProjectInfix", "FiftyOne.IpIntelligence$ProjectInfix.csproj")
+
+    Write-Output "Entering '$ExampleProject'"
+    Push-Location $ExampleProject
+    try{
+        # Change the dependency version to the locally build Nuget package
+        Write-Output "Replacing the IpIntelligence package with a local reference."
+        dotnet remove package "FiftyOne.IpIntelligence$PackageInfix"
+        dotnet add reference $IpIntelligenceProject
+    }
+    finally{
+        Write-Output "Leaving '$ExampleProject'"
+        Pop-Location
+    }
 }
-finally{
-    Write-Output "Leaving '$ExamplesProject'"
-    Pop-Location
-}
+
+Edit-ExamplesCsprojRef
+Edit-ExamplesCsprojRef -ExampleInfix ".OnPremise" PackageInfix ".Engine.OnPremise" ProjectInfix ".Engine.OnPremise"
+Edit-ExamplesCsprojRef -ExampleInfix ".Cloud" PackageInfix ".Cloud" ProjectInfix ".Cloud"
+
+
 
 Write-Output "Running performance example with config $Configuration|$Arch"
 Write-Output "Entering '$PerfProject' folder"
