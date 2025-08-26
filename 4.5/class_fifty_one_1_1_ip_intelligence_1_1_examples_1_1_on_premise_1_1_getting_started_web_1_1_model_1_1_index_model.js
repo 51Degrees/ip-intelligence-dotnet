@@ -1,0 +1,26 @@
+var class_fifty_one_1_1_ip_intelligence_1_1_examples_1_1_on_premise_1_1_getting_started_web_1_1_model_1_1_index_model =
+[
+    [ "IndexModel", null, null ],
+    [ "AccuracyRadius", null, null ],
+    [ "Areas", null, null ],
+    [ "Country", null, null ],
+    [ "CountryCode", null, null ],
+    [ "CountryCode3", null, null ],
+    [ "DataFile", null, null ],
+    [ "Engine", null, null ],
+    [ "Evidence", null, null ],
+    [ "FlowData", null, null ],
+    [ "InputIpAddress", null, null ],
+    [ "IpRangeEnd", null, null ],
+    [ "IpRangeStart", null, null ],
+    [ "Latitude", null, null ],
+    [ "Longitude", null, null ],
+    [ "Name", null, null ],
+    [ "Region", null, null ],
+    [ "RegisteredCountry", null, null ],
+    [ "RegisteredOwner", null, null ],
+    [ "ResponseHeaders", null, null ],
+    [ "State", null, null ],
+    [ "TimeZoneOffset", null, null ],
+    [ "Town", null, null ]
+];

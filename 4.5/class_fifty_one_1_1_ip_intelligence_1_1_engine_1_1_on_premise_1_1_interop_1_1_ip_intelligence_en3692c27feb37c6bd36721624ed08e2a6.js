@@ -1,0 +1,5 @@
+var class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_ip_intelligence_en3692c27feb37c6bd36721624ed08e2a6 =
+[
+    [ "SWIG_c_to_csharp_string", "class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_ip_intelligence_en3692c27feb37c6bd36721624ed08e2a6.html#a0012247d31ba7f78c9fa06f428c203e0", null ],
+    [ "SWIG_csharp_string_to_c", "class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_ip_intelligence_en3692c27feb37c6bd36721624ed08e2a6.html#a13730be74a891067c2c543067a2c9479", null ]
+];

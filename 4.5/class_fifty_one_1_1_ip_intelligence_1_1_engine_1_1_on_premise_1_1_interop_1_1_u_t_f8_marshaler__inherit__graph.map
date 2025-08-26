@@ -1,0 +1,4 @@
+<map id="FiftyOne.IpIntelligence.Engine.OnPremise.Interop.UTF8Marshaler" name="FiftyOne.IpIntelligence.Engine.OnPremise.Interop.UTF8Marshaler">
+<area shape="rect" id="node1" title="A UTF&#45;8 encoding Marshaler to marshal the string being passed between C# and C/C++ layer as UTF&#45;8 enc..." alt="" coords="5,80,235,136"/>
+<area shape="rect" id="node2" title=" " alt="" coords="49,5,191,32"/>
+</map>
