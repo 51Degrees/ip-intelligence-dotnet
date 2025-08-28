@@ -101,12 +101,12 @@ namespace FiftyOne.IpIntelligence
         /// Use the 51Degrees Cloud service to perform IP intelligence.
         /// </summary>
         /// <param name="resourceKey">
-        /// The resource key to use when querying the cloud service. 
+        /// The resource key to use when querying the Cloud service. 
         /// Obtain one from https://configure.51degrees.com
         /// </param>
         /// <returns>
         /// A builder that can be used to configure and build a pipeline
-        /// that will use the cloud IP intelligence engine.
+        /// that will use the Cloud IP intelligence engine.
         /// </returns>
         public IpiCloudPipelineBuilder UseCloud(string resourceKey)
         {
@@ -119,7 +119,7 @@ namespace FiftyOne.IpIntelligence
         /// Use the 51Degrees Cloud service to perform IP intelligence.
         /// </summary>
         /// <param name="resourceKey">
-        /// The resource key to use when querying the cloud service. 
+        /// The resource key to use when querying the Cloud service. 
         /// Obtain one from https://configure.51degrees.com
         /// </param>
         /// <param name="endpoint">
@@ -127,7 +127,7 @@ namespace FiftyOne.IpIntelligence
         /// </param>
         /// <returns>
         /// A builder that can be used to configure and build a pipeline
-        /// that will use the cloud IP intelligence engine.
+        /// that will use the Cloud IP intelligence engine.
         /// </returns>
         public IpiCloudPipelineBuilder UseCloud(string resourceKey, string endpoint)
         {

@@ -56,7 +56,7 @@ namespace FiftyOne.IpIntelligence
         /// <returns>
         /// A new <see cref="IPipeline"/> instance that contains a 
         /// <see cref="CloudRequestEngine"/> for making requests
-        /// to the 51Degrees cloud service and a 
+        /// to the 51Degrees Cloud service and a 
         /// <see cref="IpiCloudEngine"/> to interpret the
         /// IP intelligence results.
         /// </returns>

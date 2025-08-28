@@ -52,7 +52,7 @@ how to use this.
   - **FiftyOne.IpIntelligence.Engine.OnPremise** - .NET implementation of the IP intelligence on-premise engine.
   - **FiftyOne.IpIntelligence.Shared** - Shared classes used by the IP intelligence engines.
   - **FiftyOne.IpIntelligence** - Contains IP intelligence engine builders.
-  - **FiftyOne.IpIntelligence.Cloud** - A .NET engine which retrieves IP intelligence results by consuming the 51Degrees cloud service. This can be swapped out with either the on-premise engine seamlessly.
+  - **FiftyOne.IpIntelligence.Cloud** - A .NET engine which retrieves IP intelligence results by consuming the 51Degrees Cloud service. This can be swapped out with either the on-premise engine seamlessly.
   
 ## Installation
 
@@ -150,7 +150,7 @@ Some tests require additional resources to run. These will either fail or return
 an 'inconclusive' result if these resources are not provided.
 
 - Some tests require an 'Enterprise' data file. This can be obtained by [purchasing a license](https://51degrees.com/pricing).
-- Tests using the cloud service require resource keys with specific properties. A [license](https://51degrees.com/pricing) is required in order to access some properties.
+- Tests using the Cloud service require resource keys with specific properties. A [license](https://51degrees.com/pricing) is required in order to access some properties.
 
 ## Project documentation
 
