@@ -27,7 +27,7 @@
 <!--div id="top"--><!-- do not remove this div, it is closed by doxygen! -->
 <div id="titlearea" class="g-header g-header--docs">
   <h1 class="c-brand">
-  <a id="projectlogo" href="../../documentation/4.4/index.html" class="c-brand__link"><img class="c-brand__image" alt="Logo" src="logo-51Degrees-Docs.png" style="width:172px;"/></a>
+  <a id="projectlogo" href="/documentation/4.5/index.html" class="c-brand__link"><img class="c-brand__image" alt="Logo" src="logo-51Degrees-Docs.png" style="width:172px;"/></a>
   <span class="c-tagline">51Degrees IP Intelligence .NET
    &#160;<span id="projectnumber">4.5</span>
   </span>
@@ -65,20 +65,14 @@ $(document).ready(function(){initNavTree('_on_premise_2_getting_started-_web_2_s
 <h2 class="g-docs__page-title">OnPremise/GettingStarted-Web/Startup.cs</h2></div><!--header-->
 <div class="g-docs__inner">
 <div class="g-docs__primary" id="primary">
+<p>This example shows how to use 51Degrees On-premise IP Intelligence in a web application to determine location and network details from IP addresses.You will learn:</p>
+<ol type="1">
+<li>How to configure a Pipeline in a web application that uses 51Degrees On-premise IP Intelligence</li>
+<li>How evidence from the web request is automatically passed to the Pipeline</li>
+<li>How to retrieve the results in your web application</li>
+</ol>
 <p>The source code for this example is available in full on <a href="https://github.com/51Degrees/ip-intelligence-dotnet-examples/tree/master/Examples/OnPremise/GettingStarted-Web">GitHub</a>.</p>
-<p>
-<p>
-This example requires a local data file. The free 'Lite' data file can be acquired by
-pulling the git submodules under this repository (run `git submodule update --recursive`) 
-or from the <a href="https://github.com/51Degrees/device-detection-data">device-detection-data</a>
-GitHub repository.
-</p>
-<p>
-The Lite data file is only used for illustration, and has limited accuracy and capabilities.
-Find out about the more capable data files that are available on our 
-<a href="https://51degrees.com/pricing">pricing page</a>
-</p>
-</p>
+<p>This example requires an enterprise IP Intelligence data file (.ipi). To obtain an enterprise data file for testing, please <a href="https://51degrees.com/contact-us">contact us</a>.</p>
 <p>Required NuGet Dependencies:</p><ul>
 <li><a href="https://www.nuget.org/packages/Microsoft.AspNetCore.App/">Microsoft.AspNetCore.App</a></li>
 <li><a href="https://www.nuget.org/packages/FiftyOne.IpIntelligence/">FiftyOne.IpIntelligence</a></li>

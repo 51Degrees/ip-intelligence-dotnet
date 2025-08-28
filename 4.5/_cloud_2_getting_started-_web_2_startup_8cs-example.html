@@ -27,7 +27,7 @@
 <!--div id="top"--><!-- do not remove this div, it is closed by doxygen! -->
 <div id="titlearea" class="g-header g-header--docs">
   <h1 class="c-brand">
-  <a id="projectlogo" href="../../documentation/4.4/index.html" class="c-brand__link"><img class="c-brand__image" alt="Logo" src="logo-51Degrees-Docs.png" style="width:172px;"/></a>
+  <a id="projectlogo" href="/documentation/4.5/index.html" class="c-brand__link"><img class="c-brand__image" alt="Logo" src="logo-51Degrees-Docs.png" style="width:172px;"/></a>
   <span class="c-tagline">51Degrees IP Intelligence .NET
    &#160;<span id="projectnumber">4.5</span>
   </span>
@@ -65,19 +65,14 @@ $(document).ready(function(){initNavTree('_cloud_2_getting_started-_web_2_startu
 <h2 class="g-docs__page-title">Cloud/GettingStarted-Web/Startup.cs</h2></div><!--header-->
 <div class="g-docs__inner">
 <div class="g-docs__primary" id="primary">
-<p>The source code for this example is available in full on <a href="https://github.com/51Degrees/device-detection-dotnet-examples/tree/main/Examples/Cloud/GettingStarted-Web">GitHub</a>.</p>
-<p>
-<p>
-To run this example, you will need to create a <strong>resource key</strong>. 
-The resource key is used as shorthand to store the particular set of 
-properties you are interested in as well as any associated license keys 
-that entitle you to increased request limits and/or paid-for properties.
-</p>
-<p>
-You can create a resource key using the 51Degrees 
-<a href="https://configure.51degrees.com">Configurator</a>.
-</p>
-</p>
+<p>This example shows how to configure and use 51Degrees Cloud IP Intelligence in a web application.You will learn:</p>
+<ol type="1">
+<li>How to configure a Pipeline that uses 51Degrees Cloud IP Intelligence in a web application</li>
+<li>How the PipelineFilter automatically processes requests and makes results available</li>
+<li>How to retrieve IP Intelligence results in your web application</li>
+</ol>
+<p>The source code for this example is available in full on <a href="https://github.com/51Degrees/ip-intelligence-dotnet-examples/tree/main/Examples/Cloud/GettingStarted-Web">GitHub</a>.</p>
+<p>To run this example, you will eventually need to create a Resource Key, but for now you should use the GettingStarted-API example - just run it and point this example to its custom endpoint to simulate a custom hosted Cloud service. Resource Key is used as shorthand to store the particular set of properties you are interested in as well as any associated License Keys that entitle you to increased request limits and/or paid-for properties, but it is not yet available for IP Intelligence.</p>
 <p>Required NuGet Dependencies:</p><ul>
 <li><a href="https://www.nuget.org/packages/Microsoft.AspNetCore.App/">Microsoft.AspNetCore.App</a></li>
 <li><a href="https://www.nuget.org/packages/FiftyOne.IpIntelligence/">FiftyOne.IpIntelligence</a></li>

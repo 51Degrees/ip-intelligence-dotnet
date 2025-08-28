@@ -1,0 +1,4 @@
+var namespace_fifty_one_1_1_ip_intelligence_1_1_examples_1_1_mixed_1_1_cloud_1_1_getting_started_web_1_1_controllers =
+[
+    [ "HomeController", "class_fifty_one_1_1_ip_intelligence_1_1_examples_1_1_mixed_1_1_cloud_1_1_getting_started_web_1_1c37a66a2903772610d83596387461ea0.html", "class_fifty_one_1_1_ip_intelligence_1_1_examples_1_1_mixed_1_1_cloud_1_1_getting_started_web_1_1c37a66a2903772610d83596387461ea0" ]
+];
