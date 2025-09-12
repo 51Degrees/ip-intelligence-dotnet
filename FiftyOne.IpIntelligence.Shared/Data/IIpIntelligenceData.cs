@@ -36,30 +36,30 @@ namespace FiftyOne.IpIntelligence
 	public interface IIpIntelligenceData : IAspectData
 	{
 		/// <summary>
-		/// Radius in meters of the circle centred around the most probable location that encompasses the entire area(s). See Areas property. This will likely be a very large distance. It is recommend to use the AccuracyRadiusMin property.
+		/// Radius in kilometers of the circle centred around the most probable location that encompasses the entire area(s). See Areas property. This will likely be a very large distance. It is recommend to use the AccuracyRadiusMin property.
 		/// <para>More information: <see href="Network"/></para>
 		/// </summary>
 		IAspectPropertyValue<IReadOnlyList<IWeightedValue<int>>> AccuracyRadiusMax { get; }
 		/// <summary>
-		/// Radius in meters of the largest circle centred around the most probable location that fits within the area. Where multiple areas are returned, only the area that the most probable location falls within is considered. See Areas property.
+		/// Radius in kilometers of the largest circle centred around the most probable location that fits within the area. Where multiple areas are returned, only the area that the most probable location falls within is considered. See Areas property.
 		/// <para>More information: <see href="Network"/></para>
 		/// </summary>
 		IAspectPropertyValue<IReadOnlyList<IWeightedValue<int>>> AccuracyRadiusMin { get; }
 		/// <summary>
-		/// Any shapes associated with the location. Usually this is the area which the IP range covers.
-		/// <para>More information: <see href="Network"/></para>
+		/// Any shapes associated with the location. Usually this is the area which the IP range covers. This is returned as a WKT String stored as a reduced format of WKB.
+		/// <para>More information: <see href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry"/></para>
 		/// </summary>
 		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> Areas { get; }
 		/// <summary>
-		/// 
-		/// <para>More information: <see href="Network"/></para>
+		/// Autonomous System Number associated with the IP address.
+		/// <para>More information: <see href="https://en.wikipedia.org/wiki/Autonomous_system_(Internet)"/></para>
+		/// </summary>
+		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> Asn { get; }
+		/// <summary>
+		/// The name registered to the Asn associated with the IP address.
+		/// <para>More information: <see href="https://en.wikipedia.org/wiki/Autonomous_system_(Internet)"/></para>
 		/// </summary>
 		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> AsnName { get; }
-		/// <summary>
-		/// 
-		/// <para>More information: <see href="Network"/></para>
-		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> AsnNumber { get; }
 		/// <summary>
 		/// Indicates the type of connection being used. Returns either Broadband, Cellular, or Hosting and Anonymous.
 		/// <para>More information: <see href="Network"/></para>
@@ -104,9 +104,9 @@ namespace FiftyOne.IpIntelligence
 		/// ITU international?telephone numbering plan code for the country.
 		/// <para>More information: <see href="Network"/></para>
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<int>>> DialCode { get; }
+		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> DialCode { get; }
 		/// <summary>
-		/// The confidence that the IP address is a human user versus associated with hosting. A 1-10 value where; 1-3: Low confidence the user is human, 4-6: Medium confidence the user is human, 7-10: High confidence the user is human.
+		/// The confidence that the IP address is a human user versus associated with hosting. A 1-10 value where; 1-3: Low confidence the user is human, 4-6: Medium confidence, 7-10: High confidence.
 		/// <para>More information: <see href="Network"/></para>
 		/// </summary>
 		IAspectPropertyValue<IReadOnlyList<IWeightedValue<int>>> HumanProbability { get; }

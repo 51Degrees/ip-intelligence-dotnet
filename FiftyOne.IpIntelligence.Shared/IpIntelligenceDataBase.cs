@@ -70,8 +70,8 @@ namespace FiftyOne.IpIntelligence.Shared
 				{ "AccuracyRadiusMax", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<int>>>) },
 				{ "AccuracyRadiusMin", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<int>>>) },
 				{ "Areas", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
+				{ "Asn", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
 				{ "AsnName", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
-				{ "AsnNumber", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
 				{ "ConnectionType", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
 				{ "ContinentCode2", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
 				{ "ContinentName", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
@@ -80,7 +80,7 @@ namespace FiftyOne.IpIntelligence.Shared
 				{ "CountryCode3", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
 				{ "County", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
 				{ "CurrencyCode", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
-				{ "DialCode", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<int>>>) },
+				{ "DialCode", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
 				{ "HumanProbability", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<int>>>) },
 				{ "IpRangeEnd", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<IPAddress>>>) },
 				{ "IpRangeStart", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<IPAddress>>>) },
@@ -135,18 +135,18 @@ namespace FiftyOne.IpIntelligence.Shared
 		/// </summary>
 		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> RegisteredOwner { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("RegisteredOwner"); } }
 		/// <summary>
-		/// Radius in meters of the circle centred around the most probable location that encompasses the entire area(s). See Areas property. This will likely be a very large distance. It is recommend to use the AccuracyRadiusMin property.
+		/// Radius in kilometers of the circle centred around the most probable location that encompasses the entire area(s). See Areas property. This will likely be a very large distance. It is recommend to use the AccuracyRadiusMin property.
 		/// <para>More information: <see href="Network"/></para>
 		/// </summary>
 		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<int>>> AccuracyRadiusMax { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<int>>>>("AccuracyRadiusMax"); } }
 		/// <summary>
-		/// Radius in meters of the largest circle centred around the most probable location that fits within the area. Where multiple areas are returned, only the area that the most probable location falls within is considered. See Areas property.
+		/// Radius in kilometers of the largest circle centred around the most probable location that fits within the area. Where multiple areas are returned, only the area that the most probable location falls within is considered. See Areas property.
 		/// <para>More information: <see href="Network"/></para>
 		/// </summary>
 		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<int>>> AccuracyRadiusMin { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<int>>>>("AccuracyRadiusMin"); } }
 		/// <summary>
-		/// Any shapes associated with the location. Usually this is the area which the IP range covers.
-		/// <para>More information: <see href="Network"/></para>
+		/// Any shapes associated with the location. Usually this is the area which the IP range covers. This is returned as a WKT String stored as a reduced format of WKB.
+		/// <para>More information: <see href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry"/></para>
 		/// </summary>
 		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> Areas { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("Areas"); } }
 		/// <summary>
@@ -193,9 +193,9 @@ namespace FiftyOne.IpIntelligence.Shared
 		/// ITU international?telephone numbering plan code for the country.
 		/// <para>More information: <see href="Network"/></para>
 		/// </summary>
-		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<int>>> DialCode { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<int>>>>("DialCode"); } }
+		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> DialCode { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("DialCode"); } }
 		/// <summary>
-		/// The confidence that the IP address is a human user versus associated with hosting. A 1-10 value where; 1-3: Low confidence the user is human, 4-6: Medium confidence the user is human, 7-10: High confidence the user is human.
+		/// The confidence that the IP address is a human user versus associated with hosting. A 1-10 value where; 1-3: Low confidence the user is human, 4-6: Medium confidence, 7-10: High confidence.
 		/// <para>More information: <see href="Network"/></para>
 		/// </summary>
 		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<int>>> HumanProbability { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<int>>>>("HumanProbability"); } }
@@ -300,14 +300,14 @@ namespace FiftyOne.IpIntelligence.Shared
 		/// </summary>
 		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> Mcc { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("Mcc"); } }
 		/// <summary>
-		/// 
-		/// <para>More information: <see href="Network"/></para>
+		/// Autonomous System Number associated with the IP address.
+		/// <para>More information: <see href="https://en.wikipedia.org/wiki/Autonomous_system_(Internet)"/></para>
+		/// </summary>
+		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> Asn { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("Asn"); } }
+		/// <summary>
+		/// The name registered to the Asn associated with the IP address.
+		/// <para>More information: <see href="https://en.wikipedia.org/wiki/Autonomous_system_(Internet)"/></para>
 		/// </summary>
 		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> AsnName { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("AsnName"); } }
-		/// <summary>
-		/// 
-		/// <para>More information: <see href="Network"/></para>
-		/// </summary>
-		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> AsnNumber { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("AsnNumber"); } }
 	}
 }
