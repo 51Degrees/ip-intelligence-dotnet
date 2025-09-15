@@ -38,12 +38,15 @@ if ($(Test-Path -Path $ExamplesRepoName) -eq $False) {
 }
 
 Write-Output "Moving enterprise IPI file"
-$EnterpriseFile = [IO.Path]::Combine($EvidenceFiles, "51Degrees-EnterpriseIpiV41.ipi") 
-Copy-Item $EnterpriseFile "ip-intelligence-dotnet-examples/ip-intelligence-data/51Degrees-EnterpriseIpiV41.ipi"
+$EnterpriseFile = [IO.Path]::Combine($EvidenceFiles, "51Degrees-EnterpriseIpiV41.ipi")
+$EnterpriseFileDst = "ip-intelligence-dotnet-examples/ip-intelligence-data/51Degrees-EnterpriseIpiV41.ipi" 
+Move-Item -Force $EnterpriseFile $EnterpriseFileDst
+
+$env:IPINTELLIGENCEDATAFILE = (Get-ChildItem $EnterpriseFileDst).FullName
 
 Write-Output "Moving evidence file"
 $EvidenceFile = [IO.Path]::Combine($EvidenceFiles, "evidence.yml")
-Copy-Item $EvidenceFile "ip-intelligence-dotnet-examples/ip-intelligence-data/evidence.yml"
+Copy-Item -Force $EvidenceFile "ip-intelligence-dotnet-examples/ip-intelligence-data/evidence.yml"
 
 
 function Edit-ExamplesCsprojRef {

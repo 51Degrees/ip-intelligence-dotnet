@@ -30,7 +30,7 @@ namespace FiftyOne.IpIntelligence.TestHelpers
     public static class Constants
     {
         public const int IPS_TO_TEST = 10;
-        public const string IPI_DATA_FILE_NAME = "51Degrees-LiteV41.ipi";
+        public const string IPI_DATA_FILE_NAME = "51Degrees-EnterpriseIpiV41.ipi";
         public const string IP_FILE_NAME = "evidence.yml";
 
         public static string Ipv4Address = "8.8.8.8";
