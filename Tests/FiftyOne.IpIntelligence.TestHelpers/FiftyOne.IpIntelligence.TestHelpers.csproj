@@ -13,7 +13,7 @@
     <!-- <None Include="..\..\ip-intelligence-cxx\ip-intelligence-data\20000 IP Addresses.csv" Link="20000 IP Addresses.csv">
     	<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None> -->
-    <None Include="..\..\FiftyOne.IpIntelligence.Engine.OnPremise\ip-intelligence-cxx\ip-intelligence-data\51Degrees-LiteV41.ipi" Link="51Degrees-LiteV41.ipi">
+    <None Include="..\..\FiftyOne.IpIntelligence.Engine.OnPremise\ip-intelligence-cxx\ip-intelligence-data\51Degrees-EnterpriseIpiV41.ipi" Link="51Degrees-EnterpriseIpiV41.ipi">
     	<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
