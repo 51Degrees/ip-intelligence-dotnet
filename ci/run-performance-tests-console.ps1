@@ -15,6 +15,7 @@ $ExamplesRepoName = "ip-intelligence-dotnet-examples"
 $ExamplesRepoPath = [IO.Path]::Combine($pwd, $ExamplesRepoName)
 $PerfProject = [IO.Path]::Combine($ExamplesRepoPath, "Examples", "OnPremise", "Performance-Console")
 
+$NativeDll = $null
 Write-Output "Entering '$RepoPath'"
 Push-Location $RepoPath
 
@@ -26,6 +27,7 @@ try {
     if ($(Test-Path -Path "test-results/performance-summary") -eq  $False) {
         mkdir test-results/performance-summary
     }
+    $NativeDll = (Get-ChildItem -Recurse -File -Include "FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll" | Select-Object -ExpandProperty FullName -First 1)
 }
 finally {
     Write-Output "Leaving '$RepoPath'"
@@ -74,9 +76,8 @@ function Edit-ExamplesCsprojRef {
 }
 
 Edit-ExamplesCsprojRef
-Edit-ExamplesCsprojRef -ExampleInfix ".OnPremise" PackageInfix ".Engine.OnPremise" ProjectInfix ".Engine.OnPremise"
-Edit-ExamplesCsprojRef -ExampleInfix ".Cloud" PackageInfix ".Cloud" ProjectInfix ".Cloud"
-
+Edit-ExamplesCsprojRef -ExampleInfix ".OnPremise" -PackageInfix ".Engine.OnPremise" -ProjectInfix ".Engine.OnPremise"
+Edit-ExamplesCsprojRef -ExampleInfix ".Cloud" -PackageInfix ".Cloud" -ProjectInfix ".Cloud"
 
 
 Write-Output "Running performance example with config $Configuration|$Arch"
@@ -96,6 +97,13 @@ try {
     Write-Debug "Entering output..."
     Push-Location "output"
     try {
+        if ($null -ne $NativeDll) {
+            Write-Output "Copying '$NativeDll'..."
+            Copy-Item $NativeDll ./
+        }
+        if ($IsLinux) {
+            free -h
+        }
         dotnet FiftyOne.IpIntelligence.Examples.OnPremise.Performance.dll -d $EnterpriseFile -a $EvidenceFile -j summary.json
     }
     finally {
