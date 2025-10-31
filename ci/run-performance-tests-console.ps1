@@ -101,6 +101,9 @@ try {
             Write-Output "Copying '$NativeDll'..."
             Copy-Item $NativeDll ./
         }
+        if ($IsLinux) {
+            free -h
+        }
         dotnet FiftyOne.IpIntelligence.Examples.OnPremise.Performance.dll -d $EnterpriseFile -a $EvidenceFile -j summary.json
     }
     finally {
