@@ -74,8 +74,8 @@ function Edit-ExamplesCsprojRef {
 }
 
 Edit-ExamplesCsprojRef
-Edit-ExamplesCsprojRef -ExampleInfix ".OnPremise" PackageInfix ".Engine.OnPremise" ProjectInfix ".Engine.OnPremise"
-Edit-ExamplesCsprojRef -ExampleInfix ".Cloud" PackageInfix ".Cloud" ProjectInfix ".Cloud"
+Edit-ExamplesCsprojRef -ExampleInfix ".OnPremise" -PackageInfix ".Engine.OnPremise" -ProjectInfix ".Engine.OnPremise"
+Edit-ExamplesCsprojRef -ExampleInfix ".Cloud" -PackageInfix ".Cloud" -ProjectInfix ".Cloud"
 
 
 
