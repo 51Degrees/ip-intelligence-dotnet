@@ -79,6 +79,12 @@ Edit-ExamplesCsprojRef
 Edit-ExamplesCsprojRef -ExampleInfix ".OnPremise" -PackageInfix ".Engine.OnPremise" -ProjectInfix ".Engine.OnPremise"
 Edit-ExamplesCsprojRef -ExampleInfix ".Cloud" -PackageInfix ".Cloud" -ProjectInfix ".Cloud"
 
+& "$RepoPath/ci/add-projects-to-sln.ps1" `
+    -Solution "$ExamplesRepoPath/FiftyOne.IpIntelligence.Examples.sln" `
+    -Name "_IPI" `
+    -Path $RepoPath `
+    -ProjectTypes @("*.csproj")
+
 
 Write-Output "Running performance example with config $Configuration|$Arch"
 Write-Output "Entering '$PerfProject' folder"
