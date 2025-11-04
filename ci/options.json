@@ -15,7 +15,7 @@
         "Arch": "x64",
         "BuildMethod": "dotnet",
         "PackageRequirement" : true,
-        "RunPerformance": false
+        "RunPerformance": true
     },
     {
         "Image": "ubuntu-latest",
