@@ -1,3 +1,4 @@
+[CmdletBinding()]
 param ($c, $d, $p)
 
 if ($c -eq $null) {
@@ -33,4 +34,5 @@ $CAL="calibrate"
 $PRO="process"
 $PERF="$scriptRoot/ApacheBench-prefix/src/ApacheBench-build/bin/runPerf.ps1"
 
+Write-Debug "[EXEC] >>> $PERF -n $PASSES -s '$d $pwd/../bin/$p/$c/net8.0/performance_tests.dll' -c $CAL -p $PRO -h $SERVICEHOST"
 Invoke-Expression "$PERF -n $PASSES -s '$d $pwd/../bin/$p/$c/net8.0/performance_tests.dll' -c $CAL -p $PRO -h $SERVICEHOST"
