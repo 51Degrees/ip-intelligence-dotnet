@@ -45,6 +45,7 @@ $EnterpriseFileDst = "ip-intelligence-dotnet-examples/ip-intelligence-data/51Deg
 Move-Item -Force $EnterpriseFile $EnterpriseFileDst
 
 $env:IPINTELLIGENCEDATAFILE = (Get-ChildItem $EnterpriseFileDst).FullName
+Write-Debug "IPINTELLIGENCEDATAFILE = $env:IPINTELLIGENCEDATAFILE"
 
 Write-Output "Moving evidence file"
 $EvidenceFile = [IO.Path]::Combine($EvidenceFiles, "evidence.yml")
@@ -95,6 +96,7 @@ try {
         $RunConfig = "Release"
     }
 
+    Write-Debug "[EXEC] >>> dotnet build -c $RunConfig /p:Platform=$Arch /p:OutDir=output /p:BuiltOnCI=true"
     dotnet build -c $RunConfig /p:Platform=$Arch /p:OutDir=output /p:BuiltOnCI=true
     if ($LASTEXITCODE -ne 0) {
         Write-Error "LASTEXITCODE = $LASTEXITCODE"
