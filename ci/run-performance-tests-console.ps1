@@ -112,6 +112,12 @@ try {
         if ($IsLinux) {
             free -h
         }
+        Write-Debug "Prepare to run performance tests -- check file locations."
+        Write-Debug "Check for '$EnterpriseFile'"
+        Write-Debug (Get-ChildItem $EnterpriseFile | Out-String)
+        Write-Debug "Check for '$EvidenceFile'"
+        Write-Debug (Get-ChildItem $EvidenceFile | Out-String)
+        Write-Debug "[EXEC] >>> dotnet FiftyOne.IpIntelligence.Examples.OnPremise.Performance.dll -d $EnterpriseFile -a $EvidenceFile -j summary.json"
         dotnet FiftyOne.IpIntelligence.Examples.OnPremise.Performance.dll -d $EnterpriseFile -a $EvidenceFile -j summary.json
     }
     finally {
