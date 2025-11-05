@@ -9,8 +9,6 @@ param(
     [string]$Arch = "x64"
 )
 
-exit 0
-
 Write-Output "Running console performance tests..."
 & ./$RepoName/ci/run-performance-tests-console.ps1 `
     -Debug `
