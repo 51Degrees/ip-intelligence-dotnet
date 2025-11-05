@@ -39,17 +39,18 @@ if ($(Test-Path -Path $ExamplesRepoName) -eq $False) {
     ./steps/clone-repo.ps1 -RepoName $ExamplesRepoName -OrgName $OrgName
 }
 
-Write-Output "Moving enterprise IPI file"
+# Write-Output "Moving enterprise IPI file"
 $EnterpriseFile = [IO.Path]::Combine($EvidenceFiles, "51Degrees-EnterpriseIpiV41.ipi")
-$EnterpriseFileDst = "ip-intelligence-dotnet-examples/ip-intelligence-data/51Degrees-EnterpriseIpiV41.ipi" 
-Move-Item -Force $EnterpriseFile $EnterpriseFileDst
+# $EnterpriseFileDst = "ip-intelligence-dotnet-examples/ip-intelligence-data/51Degrees-EnterpriseIpiV41.ipi" 
+# Move-Item -Force $EnterpriseFile $EnterpriseFileDst
 
-$env:IPINTELLIGENCEDATAFILE = (Get-ChildItem $EnterpriseFileDst).FullName
+$env:IPINTELLIGENCEDATAFILE = (Get-ChildItem $EnterpriseFile).FullName
+# $env:IPINTELLIGENCEDATAFILE = (Get-ChildItem $EnterpriseFileDst).FullName
 Write-Debug "IPINTELLIGENCEDATAFILE = $env:IPINTELLIGENCEDATAFILE"
 
-Write-Output "Moving evidence file"
+# Write-Output "Moving evidence file"
 $EvidenceFile = [IO.Path]::Combine($EvidenceFiles, "evidence.yml")
-Copy-Item -Force $EvidenceFile "ip-intelligence-dotnet-examples/ip-intelligence-data/evidence.yml"
+# Copy-Item -Force $EvidenceFile "ip-intelligence-dotnet-examples/ip-intelligence-data/evidence.yml"
 
 
 function Edit-ExamplesCsprojRef {
