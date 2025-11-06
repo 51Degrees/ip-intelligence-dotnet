@@ -15,6 +15,7 @@ param(
     -Configuration $Configuration `
     -Arch $Arch `
     -BuildMethod $BuildMethod `
+    -BlameHangTimeout "20m" `
     -Filter ".*Tests(|\.Core|\.Web)\.dll$"
 
 exit $LASTEXITCODE
