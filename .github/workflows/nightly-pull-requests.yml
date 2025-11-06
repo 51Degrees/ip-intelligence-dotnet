@@ -20,6 +20,7 @@ jobs:
       dryrun: ${{ inputs.dryrun || false }}
       skip-compare-performance: ${{ inputs.skip-compare-performance || false }}
       build-test-timeout-minutes: 300
+      common-ci-ref: 0f06c151c060188d10d29fc2c01bd6500f49ef98
     secrets:
       token: ${{ secrets.ACCESS_TOKEN }}
       DeviceDetection: ${{ secrets.DEVICE_DETECTION_KEY }}
