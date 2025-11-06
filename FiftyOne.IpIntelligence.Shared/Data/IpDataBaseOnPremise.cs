@@ -243,6 +243,48 @@ namespace FiftyOne.IpIntelligence.Shared.Data
         public abstract IAspectPropertyValue<IReadOnlyList<string>> GetValues(string propertyName);
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
+        protected abstract IAspectPropertyValue<string> GetValueAsString(string propertyName);
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
+        protected abstract IAspectPropertyValue<int> GetValueAsInteger(string propertyName);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
+        protected abstract IAspectPropertyValue<float> GetValueAsFloat(string propertyName);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
+        protected abstract IAspectPropertyValue<double> GetValueAsDouble(string propertyName);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
+        protected abstract IAspectPropertyValue<bool> GetValueAsBool(string propertyName);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
+        protected abstract IAspectPropertyValue<IPAddress> GetValueAsIp(string propertyName);
+
+        /// <summary>
         /// Get weighted bool values this instance has for the specified property
         /// </summary>
         /// <param name="propertyName">
@@ -508,33 +550,51 @@ namespace FiftyOne.IpIntelligence.Shared.Data
                     }
                     lock (_getLock)
                     {
-                        if (innerType == typeof(string) ||
-                            innerType == typeof(IReadOnlyList<IWeightedValue<string>>))
+                        if (innerType == typeof(string))
+                        {
+                            obj = GetValueAsString(key);
+                        }
+                        else if (innerType == typeof(IReadOnlyList<IWeightedValue<string>>))
                         {
                             obj = GetValuesAsWeightedStringList(key);
                         }
-                        else if (innerType == typeof(double) ||
-                            innerType == typeof(IReadOnlyList<IWeightedValue<double>>))
+                        else if (innerType == typeof(double))
+                        {
+                            obj = GetValueAsDouble(key);
+                        }
+                        else if (innerType == typeof(IReadOnlyList<IWeightedValue<double>>))
                         {
                             obj = GetValuesAsWeightedDoubleList(key);
                         }
-                        else if (innerType == typeof(float) ||
-                            innerType == typeof(IReadOnlyList<IWeightedValue<float>>))
+                        else if (innerType == typeof(float))
+                        {
+                            obj = GetValueAsFloat(key);
+                        }
+                        else if (innerType == typeof(IReadOnlyList<IWeightedValue<float>>))
                         {
                             obj = GetValuesAsWeightedFloatList(key);
                         }
-                        else if (innerType == typeof(int) ||
-                            innerType == typeof(IReadOnlyList<IWeightedValue<int>>))
+                        else if (innerType == typeof(int))
+                        {
+                            obj = GetValueAsInteger(key);
+                        }
+                        else if (innerType == typeof(IReadOnlyList<IWeightedValue<int>>))
                         {
                             obj = GetValuesAsWeightedIntegerList(key);
                         }
-                        else if (innerType == typeof(bool) ||
-                            innerType == typeof(IReadOnlyList<IWeightedValue<bool>>))
+                        else if (innerType == typeof(bool))
+                        {
+                            obj = GetValueAsBool(key);
+                        }
+                        else if (innerType == typeof(IReadOnlyList<IWeightedValue<bool>>))
                         {
                             obj = GetValuesAsWeightedBoolList(key);
                         }
-                        else if (innerType == typeof(IPAddress) || 
-                            innerType == typeof(IReadOnlyList<IWeightedValue<IPAddress>>))
+                        else if (innerType == typeof(IPAddress))
+                        {
+                            obj = GetValueAsIp(key);
+                        }
+                        else if (innerType == typeof(IReadOnlyList<IWeightedValue<IPAddress>>))
                         {
                             obj = GetValuesAsWeightedIPList(key);
                         }

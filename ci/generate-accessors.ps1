@@ -1,6 +1,5 @@
 param (
-    [Parameter(Mandatory)][string]$RepoName,
-    [string]$DataFile = "$PWD/$RepoName/51Degrees-EnterpriseV4.ipi"
+    [Parameter(Mandatory)][string]$RepoName
 )
 $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
