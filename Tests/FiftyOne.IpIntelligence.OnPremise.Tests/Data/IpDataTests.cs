@@ -186,6 +186,84 @@ namespace FiftyOne.IpIntelligence.Tests.Core.Data
             {
                 return propertyName == _testPropertyName;
             }
+
+            protected override IAspectPropertyValue<string> GetValueAsString(string propertyName)
+            {
+                if (propertyName == _testPropertyName)
+                {
+                    return new AspectPropertyValue<string>(
+                        (string)_value);
+                }
+                else
+                {
+                    throw new PropertyMissingException();
+                }
+            }
+
+            protected override IAspectPropertyValue<int> GetValueAsInteger(string propertyName)
+            {
+                if (propertyName == _testPropertyName)
+                {
+                    return new AspectPropertyValue<int>(
+                        (int)_value);
+                }
+                else
+                {
+                    throw new PropertyMissingException();
+                }
+            }
+
+            protected override IAspectPropertyValue<float> GetValueAsFloat(string propertyName)
+            {
+                if (propertyName == _testPropertyName)
+                {
+                    return new AspectPropertyValue<float>(
+                        (float)_value);
+                }
+                else
+                {
+                    throw new PropertyMissingException();
+                }
+            }
+
+            protected override IAspectPropertyValue<double> GetValueAsDouble(string propertyName)
+            {
+                if (propertyName == _testPropertyName)
+                {
+                    return new AspectPropertyValue<double>(
+                        (double)_value);
+                }
+                else
+                {
+                    throw new PropertyMissingException();
+                }
+            }
+
+            protected override IAspectPropertyValue<bool> GetValueAsBool(string propertyName)
+            {
+                if (propertyName == _testPropertyName)
+                {
+                    return new AspectPropertyValue<bool>(
+                        (bool)_value);
+                }
+                else
+                {
+                    throw new PropertyMissingException();
+                }
+            }
+
+            protected override IAspectPropertyValue<IPAddress> GetValueAsIp(string propertyName)
+            {
+                if (propertyName == _testPropertyName)
+                {
+                    return new AspectPropertyValue<IPAddress>(
+                        (IPAddress)_value);
+                }
+                else
+                {
+                    throw new PropertyMissingException();
+                }
+            }
         }
 
         private void SetupElementProperties(Type type)

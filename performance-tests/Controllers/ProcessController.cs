@@ -44,10 +44,7 @@ namespace performance_tests.Controllers
             var ipiData = _flow.GetFlowData()?.Get<IIpIntelligenceData>();
             if(ipiData != null) {
                 if (ipiData.RegisteredName.HasValue) {
-                    var values = ipiData.RegisteredName.Value;
-                    var formattedValues = values.Select(x => $"'{x.Value}':{x.Weighting()}");
-                    var result = string.Join(", ", formattedValues);
-                    return result;
+                    return ipiData.RegisteredName.Value;
                 }
                 return $"{ipiData.RegisteredName.NoValueMessage}";
             }
