@@ -93,7 +93,7 @@ try {
         # then unset once we're done
         Write-Output "Running performance test"
 
-        ./runPerf.ps1 -c $Configuration -p $Arch 
+        ./runPerf.ps1 -c $Configuration -p $Arch -Debug
 		
         Get-ChildItem -Path $PerfPath -Filter "summary.json" -File -Recurse | ForEach-Object {
             $destinationPath = Join-Path -Path $PerfPath/build -ChildPath $_.Name
