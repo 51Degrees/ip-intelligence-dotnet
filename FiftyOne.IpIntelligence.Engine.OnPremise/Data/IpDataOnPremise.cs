@@ -239,6 +239,29 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
             }
             return result;
         }
+
+        protected override IAspectPropertyValue<WktString> GetValueAsWktString(string propertyName)
+        {
+            var result = new AspectPropertyValue<WktString>();
+            var results = GetResultsContainingProperty(propertyName);
+
+            if (results != null)
+            {
+                using (var value = results.getValueAsString(propertyName))
+                {
+                    if (value.hasValue())
+                    {
+                        result.Value = new WktString(value.getValue());
+                    }
+                    else
+                    {
+                        result.NoValueMessage = value.getNoValueMessage();
+                    }
+                }
+            }
+            return result;
+        }
+
         protected override IAspectPropertyValue<int> GetValueAsInteger(string propertyName)
         {
             var result = new AspectPropertyValue<int>();

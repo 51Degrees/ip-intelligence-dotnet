@@ -200,6 +200,19 @@ namespace FiftyOne.IpIntelligence.Tests.Core.Data
                 }
             }
 
+            protected override IAspectPropertyValue<WktString> GetValueAsWktString(string propertyName)
+            {
+                if (propertyName == _testPropertyName)
+                {
+                    return new AspectPropertyValue<WktString>(
+                        (WktString)_value);
+                }
+                else
+                {
+                    throw new PropertyMissingException();
+                }
+            }
+
             protected override IAspectPropertyValue<int> GetValueAsInteger(string propertyName)
             {
                 if (propertyName == _testPropertyName)

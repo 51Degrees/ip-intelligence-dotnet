@@ -248,7 +248,14 @@ namespace FiftyOne.IpIntelligence.Shared.Data
         /// <param name="propertyName"></param>
         /// <returns></returns>
         protected abstract IAspectPropertyValue<string> GetValueAsString(string propertyName);
-        
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
+        protected abstract IAspectPropertyValue<WktString> GetValueAsWktString(string propertyName);
+
         /// <summary>
         /// 
         /// </summary>
@@ -411,20 +418,25 @@ namespace FiftyOne.IpIntelligence.Shared.Data
                         {
                             if (property.Type == typeof(string))
                             {
-                                if (property.Name.Equals("NetworkId", StringComparison.InvariantCultureIgnoreCase))
-                                {
-                                    // NetworkId is a special case for IP intelligence where
-                                    // the string value does not have the associated weight
-                                    dict[property.Name.ToLowerInvariant()] =
-                                        GetAs<AspectPropertyValue<string>>(property.Name);
-                                }
-                                else
-                                {
-                                    dict[property.Name.ToLowerInvariant()] =
-                                        GetAs<AspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>(property.Name);
-                                }
+                                dict[property.Name.ToLowerInvariant()] =
+                                    GetAs<AspectPropertyValue<string>>(property.Name);
+                            }
+                            if (property.Type == typeof(WktString))
+                            {
+                                dict[property.Name.ToLowerInvariant()] =
+                                    GetAs<AspectPropertyValue<WktString>>(property.Name);
+                            }
+                            if (property.Type == typeof(IReadOnlyList<IWeightedValue<string>>))
+                            {
+                                dict[property.Name.ToLowerInvariant()] =
+                                    GetAs<AspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>(property.Name);
                             }
                             else if (property.Type == typeof(double))
+                            {
+                                dict[property.Name.ToLowerInvariant()] =
+                                    GetAs<AspectPropertyValue<double>>(property.Name);
+                            }
+                            else if (property.Type == typeof(IReadOnlyList<IWeightedValue<double>>))
                             {
                                 dict[property.Name.ToLowerInvariant()] =
                                     GetAs<AspectPropertyValue<IReadOnlyList<IWeightedValue<double>>>>(property.Name);
@@ -432,14 +444,24 @@ namespace FiftyOne.IpIntelligence.Shared.Data
                             else if (property.Type == typeof(int))
                             {
                                 dict[property.Name.ToLowerInvariant()] =
+                                    GetAs<AspectPropertyValue<int>>(property.Name);
+                            }
+                            else if (property.Type == typeof(IReadOnlyList<IWeightedValue<int>>))
+                            {
+                                dict[property.Name.ToLowerInvariant()] =
                                     GetAs<AspectPropertyValue<IReadOnlyList<IWeightedValue<int>>>>(property.Name);
                             }
                             else if (property.Type == typeof(float))
                             {
                                 dict[property.Name.ToLowerInvariant()] =
-                                    GetAs<AspectPropertyValue<IReadOnlyList<IWeightedValue<float>>>>(property.Name);
+                                    GetAs<AspectPropertyValue<float>>(property.Name);
                             }
                             else if (property.Type == typeof(bool))
+                            {
+                                dict[property.Name.ToLowerInvariant()] =
+                                    GetAs<AspectPropertyValue<bool>>(property.Name);
+                            }
+                            else if (property.Type == typeof(IReadOnlyList<IWeightedValue<bool>>))
                             {
                                 dict[property.Name.ToLowerInvariant()] =
                                     GetAs<AspectPropertyValue<IReadOnlyList<IWeightedValue<bool>>>>(property.Name);
@@ -447,9 +469,19 @@ namespace FiftyOne.IpIntelligence.Shared.Data
                             else if (property.Type == typeof(float))
                             {
                                 dict[property.Name.ToLowerInvariant()] =
+                                    GetAs<AspectPropertyValue<float>>(property.Name);
+                            }
+                            else if (property.Type == typeof(IReadOnlyList<IWeightedValue<float>>))
+                            {
+                                dict[property.Name.ToLowerInvariant()] =
                                     GetAs<AspectPropertyValue<IReadOnlyList<IWeightedValue<float>>>>(property.Name);
                             }
                             else if (property.Type == typeof(IPAddress))
+                            {
+                                dict[property.Name.ToLowerInvariant()] =
+                                    GetAs<AspectPropertyValue<IPAddress>>(property.Name);
+                            }
+                            else if (property.Type == typeof(IReadOnlyList<IWeightedValue<IPAddress>>))
                             {
                                 dict[property.Name.ToLowerInvariant()] =
                                     GetAs<AspectPropertyValue<IReadOnlyList<IWeightedValue<IPAddress>>>>(property.Name);
@@ -492,6 +524,11 @@ namespace FiftyOne.IpIntelligence.Shared.Data
                 if (property != null)
                 {
                     type = property.Type;
+                    var values = GetValues(propertyName);
+                    if (values.HasValue && values.Value.Count > 1)
+                    {
+                        type = typeof(IReadOnlyList<>).MakeGenericType(typeof(IWeightedValue<>)).MakeGenericType(type);
+                    }
                 }
             }
             return type;
@@ -555,6 +592,14 @@ namespace FiftyOne.IpIntelligence.Shared.Data
                             obj = GetValueAsString(key);
                         }
                         else if (innerType == typeof(IReadOnlyList<IWeightedValue<string>>))
+                        {
+                            obj = GetValuesAsWeightedStringList(key);
+                        }
+                        else if (innerType == typeof(WktString))
+                        {
+                            obj = GetValueAsWktString(key);
+                        }
+                        else if (innerType == typeof(IReadOnlyList<IWeightedValue<WktString>>))
                         {
                             obj = GetValuesAsWeightedStringList(key);
                         }
