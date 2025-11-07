@@ -243,45 +243,75 @@ namespace FiftyOne.IpIntelligence.Shared.Data
         public abstract IAspectPropertyValue<IReadOnlyList<string>> GetValues(string propertyName);
 
         /// <summary>
-        /// 
+        /// Get string value this instance has for the specified property
         /// </summary>
-        /// <param name="propertyName"></param>
-        /// <returns></returns>
+        /// <param name="propertyName">
+        /// The name of the property to get value for.
+        /// </param>
+        /// <returns>
+        /// A <see cref="string"/> wrapped in a 
+        /// <see cref="IAspectPropertyValue"/> instance.
+        /// </returns>
         protected abstract IAspectPropertyValue<string> GetValueAsString(string propertyName);
 
         /// <summary>
-        /// 
+        /// Get WKT string value this instance has for the specified property
         /// </summary>
-        /// <param name="propertyName"></param>
-        /// <returns></returns>
+        /// <param name="propertyName">
+        /// The name of the property to get value for.
+        /// </param>
+        /// <returns>
+        /// A <see cref="WktString"/> wrapped in a 
+        /// <see cref="IAspectPropertyValue"/> instance.
+        /// </returns>
         protected abstract IAspectPropertyValue<WktString> GetValueAsWktString(string propertyName);
 
         /// <summary>
-        /// 
+        /// Get int value this instance has for the specified property
         /// </summary>
-        /// <param name="propertyName"></param>
-        /// <returns></returns>
+        /// <param name="propertyName">
+        /// The name of the property to get value for.
+        /// </param>
+        /// <returns>
+        /// A <see cref="int"/> wrapped in a 
+        /// <see cref="IAspectPropertyValue"/> instance.
+        /// </returns>
         protected abstract IAspectPropertyValue<int> GetValueAsInteger(string propertyName);
 
         /// <summary>
-        /// 
+        /// Get float value this instance has for the specified property
         /// </summary>
-        /// <param name="propertyName"></param>
-        /// <returns></returns>
+        /// <param name="propertyName">
+        /// The name of the property to get value for.
+        /// </param>
+        /// <returns>
+        /// A <see cref="float"/> wrapped in a 
+        /// <see cref="IAspectPropertyValue"/> instance.
+        /// </returns>
         protected abstract IAspectPropertyValue<float> GetValueAsFloat(string propertyName);
 
         /// <summary>
-        /// 
+        /// Get double value this instance has for the specified property
         /// </summary>
-        /// <param name="propertyName"></param>
-        /// <returns></returns>
+        /// <param name="propertyName">
+        /// The name of the property to get value for.
+        /// </param>
+        /// <returns>
+        /// A <see cref="double"/> wrapped in a 
+        /// <see cref="IAspectPropertyValue"/> instance.
+        /// </returns>
         protected abstract IAspectPropertyValue<double> GetValueAsDouble(string propertyName);
 
         /// <summary>
-        /// 
+        /// Get bool value this instance has for the specified property
         /// </summary>
-        /// <param name="propertyName"></param>
-        /// <returns></returns>
+        /// <param name="propertyName">
+        /// The name of the property to get value for.
+        /// </param>
+        /// <returns>
+        /// A <see cref="bool"/> wrapped in a 
+        /// <see cref="IAspectPropertyValue"/> instance.
+        /// </returns>
         protected abstract IAspectPropertyValue<bool> GetValueAsBool(string propertyName);
 
         /// <summary>
