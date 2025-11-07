@@ -46,7 +46,7 @@ namespace FiftyOne.IpIntelligence
 		/// <summary>
 		/// Any shapes associated with the location. Usually this is the area which the IP range covers. This is returned as a WKT String stored as a reduced format of WKB.
 		/// </summary>
-		IAspectPropertyValue<string> Areas { get; }
+		IAspectPropertyValue<WktString> Areas { get; }
 		/// <summary>
 		/// Autonomous System Number associated with the IP address.
 		/// </summary>

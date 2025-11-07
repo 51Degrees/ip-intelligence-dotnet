@@ -421,12 +421,12 @@ namespace FiftyOne.IpIntelligence.Shared.Data
                                 dict[property.Name.ToLowerInvariant()] =
                                     GetAs<AspectPropertyValue<string>>(property.Name);
                             }
-                            if (property.Type == typeof(WktString))
+                            else if (property.Type == typeof(WktString))
                             {
                                 dict[property.Name.ToLowerInvariant()] =
                                     GetAs<AspectPropertyValue<WktString>>(property.Name);
                             }
-                            if (property.Type == typeof(IReadOnlyList<IWeightedValue<string>>))
+                            else if (property.Type == typeof(IReadOnlyList<IWeightedValue<string>>))
                             {
                                 dict[property.Name.ToLowerInvariant()] =
                                     GetAs<AspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>(property.Name);
@@ -524,11 +524,6 @@ namespace FiftyOne.IpIntelligence.Shared.Data
                 if (property != null)
                 {
                     type = property.Type;
-                    var values = GetValues(propertyName);
-                    if (values.HasValue && values.Value.Count > 1)
-                    {
-                        type = typeof(IReadOnlyList<>).MakeGenericType(typeof(IWeightedValue<>)).MakeGenericType(type);
-                    }
                 }
             }
             return type;

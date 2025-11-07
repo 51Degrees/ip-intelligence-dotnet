@@ -69,7 +69,7 @@ namespace FiftyOne.IpIntelligence.Shared
 			{
 				{ "AccuracyRadiusMax", typeof(IAspectPropertyValue<int>) },
 				{ "AccuracyRadiusMin", typeof(IAspectPropertyValue<int>) },
-				{ "Areas", typeof(IAspectPropertyValue<string>) },
+				{ "Areas", typeof(IAspectPropertyValue<WktString>) },
 				{ "Asn", typeof(IAspectPropertyValue<string>) },
 				{ "AsnName", typeof(IAspectPropertyValue<string>) },
 				{ "ConnectionType", typeof(IAspectPropertyValue<string>) },
@@ -148,7 +148,7 @@ namespace FiftyOne.IpIntelligence.Shared
 		/// <summary>
 		/// Any shapes associated with the location. Usually this is the area which the IP range covers. This is returned as a WKT String stored as a reduced format of WKB.
 		/// </summary>
-		public IAspectPropertyValue<string> Areas { get { return GetAs<IAspectPropertyValue<string>>("Areas"); } }
+		public IAspectPropertyValue<WktString> Areas { get { return GetAs<IAspectPropertyValue<WktString>>("Areas"); } }
 		/// <summary>
 		/// The name of the country that the supplied location is in.
 		/// </summary>
