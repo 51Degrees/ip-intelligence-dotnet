@@ -28,7 +28,7 @@ if (!$Version) {
 Write-Debug "env:IPINTELLIGENCEDATAFILE = <$($env:IPINTELLIGENCEDATAFILE)>"
 
 Write-Host "Fetching examples..."
-./steps/clone-repo.ps1 -RepoName $ExamplesRepo -OrgName $OrgName -Branch $ExamplesBranch
+./steps/clone-repo.ps1 -RepoName $ExamplesRepo -OrgName $OrgName -Branch "feature/non-weighted-values"
 & "./$ExamplesRepo/ci/fetch-assets.ps1" -RepoName $ExamplesRepo -DeviceDetection $DeviceDetection -DeviceDetectionUrl $DeviceDetectionUrl
 
 Push-Location package
