@@ -15,6 +15,7 @@ $ExamplesRepoName = "ip-intelligence-dotnet-examples"
 $ExamplesRepoPath = [IO.Path]::Combine($pwd, $ExamplesRepoName)
 $PerfProject = [IO.Path]::Combine($ExamplesRepoPath, "Examples", "OnPremise", "Performance-Console")
 
+$NativeDll = $null
 Write-Output "Entering '$RepoPath'"
 Push-Location $RepoPath
 
@@ -26,6 +27,7 @@ try {
     if ($(Test-Path -Path "test-results/performance-summary") -eq  $False) {
         mkdir test-results/performance-summary
     }
+    $NativeDll = (Get-ChildItem -Recurse -File -Include "FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll" | Select-Object -ExpandProperty FullName -First 1)
 }
 finally {
     Write-Output "Leaving '$RepoPath'"
@@ -37,16 +39,18 @@ if ($(Test-Path -Path $ExamplesRepoName) -eq $False) {
     ./steps/clone-repo.ps1 -RepoName $ExamplesRepoName -OrgName $OrgName
 }
 
-Write-Output "Moving enterprise IPI file"
+# Write-Output "Moving enterprise IPI file"
 $EnterpriseFile = [IO.Path]::Combine($EvidenceFiles, "51Degrees-EnterpriseIpiV41.ipi")
-$EnterpriseFileDst = "ip-intelligence-dotnet-examples/ip-intelligence-data/51Degrees-EnterpriseIpiV41.ipi" 
-Move-Item -Force $EnterpriseFile $EnterpriseFileDst
+# $EnterpriseFileDst = "ip-intelligence-dotnet-examples/ip-intelligence-data/51Degrees-EnterpriseIpiV41.ipi" 
+# Move-Item -Force $EnterpriseFile $EnterpriseFileDst
 
-$env:IPINTELLIGENCEDATAFILE = (Get-ChildItem $EnterpriseFileDst).FullName
+$env:IPINTELLIGENCEDATAFILE = (Get-ChildItem $EnterpriseFile).FullName
+# $env:IPINTELLIGENCEDATAFILE = (Get-ChildItem $EnterpriseFileDst).FullName
+Write-Debug "IPINTELLIGENCEDATAFILE = $env:IPINTELLIGENCEDATAFILE"
 
-Write-Output "Moving evidence file"
+# Write-Output "Moving evidence file"
 $EvidenceFile = [IO.Path]::Combine($EvidenceFiles, "evidence.yml")
-Copy-Item -Force $EvidenceFile "ip-intelligence-dotnet-examples/ip-intelligence-data/evidence.yml"
+# Copy-Item -Force $EvidenceFile "ip-intelligence-dotnet-examples/ip-intelligence-data/evidence.yml"
 
 
 function Edit-ExamplesCsprojRef {
@@ -74,9 +78,14 @@ function Edit-ExamplesCsprojRef {
 }
 
 Edit-ExamplesCsprojRef
-Edit-ExamplesCsprojRef -ExampleInfix ".OnPremise" PackageInfix ".Engine.OnPremise" ProjectInfix ".Engine.OnPremise"
-Edit-ExamplesCsprojRef -ExampleInfix ".Cloud" PackageInfix ".Cloud" ProjectInfix ".Cloud"
+Edit-ExamplesCsprojRef -ExampleInfix ".OnPremise" -PackageInfix ".Engine.OnPremise" -ProjectInfix ".Engine.OnPremise"
+Edit-ExamplesCsprojRef -ExampleInfix ".Cloud" -PackageInfix ".Cloud" -ProjectInfix ".Cloud"
 
+& "$RepoPath/ci/add-projects-to-sln.ps1" `
+    -Solution "$ExamplesRepoPath/FiftyOne.IpIntelligence.Examples.sln" `
+    -Name "_IPI" `
+    -Path $RepoPath `
+    -ProjectTypes @("*.csproj")
 
 
 Write-Output "Running performance example with config $Configuration|$Arch"
@@ -88,6 +97,7 @@ try {
         $RunConfig = "Release"
     }
 
+    Write-Debug "[EXEC] >>> dotnet build -c $RunConfig /p:Platform=$Arch /p:OutDir=output /p:BuiltOnCI=true"
     dotnet build -c $RunConfig /p:Platform=$Arch /p:OutDir=output /p:BuiltOnCI=true
     if ($LASTEXITCODE -ne 0) {
         Write-Error "LASTEXITCODE = $LASTEXITCODE"
@@ -96,6 +106,19 @@ try {
     Write-Debug "Entering output..."
     Push-Location "output"
     try {
+        if ($null -ne $NativeDll) {
+            Write-Output "Copying '$NativeDll'..."
+            Copy-Item $NativeDll ./
+        }
+        if ($IsLinux) {
+            free -h
+        }
+        Write-Debug "Prepare to run performance tests -- check file locations."
+        Write-Debug "Check for '$EnterpriseFile'"
+        Write-Debug (Get-ChildItem $EnterpriseFile | Out-String)
+        Write-Debug "Check for '$EvidenceFile'"
+        Write-Debug (Get-ChildItem $EvidenceFile | Out-String)
+        Write-Debug "[EXEC] >>> dotnet FiftyOne.IpIntelligence.Examples.OnPremise.Performance.dll -d $EnterpriseFile -a $EvidenceFile -j summary.json"
         dotnet FiftyOne.IpIntelligence.Examples.OnPremise.Performance.dll -d $EnterpriseFile -a $EvidenceFile -j summary.json
     }
     finally {
