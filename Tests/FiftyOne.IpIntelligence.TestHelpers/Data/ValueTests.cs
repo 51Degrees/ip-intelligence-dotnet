@@ -50,30 +50,6 @@ namespace FiftyOne.IpIntelligence.TestHelpers.Data
                 .Where(p => p.Available))
             {
                 Type expectedType = property.Type;
-                if (property.Type == typeof(string) && !property.Name.Equals("NetworkId"))
-                {
-                    expectedType = typeof(IReadOnlyList<IWeightedValue<string>>);
-                }
-                else if (property.Type == typeof(int))
-                {
-                    expectedType = typeof(IReadOnlyList<IWeightedValue<int>>);
-                }
-                else if (property.Type == typeof(double))
-                {
-                    expectedType = typeof(IReadOnlyList<IWeightedValue<double>>);
-                }
-                else if (property.Type == typeof(float))
-                {
-                    expectedType = typeof(IReadOnlyList<IWeightedValue<float>>);
-                }
-                else if (property.Type == typeof(bool))
-                {
-                    expectedType = typeof(IReadOnlyList<IWeightedValue<bool>>);
-                }
-                else if (property.Type == typeof(IPAddress))
-                {
-                    expectedType = typeof(IReadOnlyList<IWeightedValue<IPAddress>>);
-                }
 
                 var value = elementData[property.Name];
                 Assert.IsNotNull(value);
