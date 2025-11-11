@@ -38,119 +38,119 @@ namespace FiftyOne.IpIntelligence
 		/// <summary>
 		/// Radius in kilometers of the circle centred around the most probable location that encompasses the entire area(s). See Areas property. This will likely be a very large distance. It is recommend to use the AccuracyRadiusMin property.
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<int>>> AccuracyRadiusMax { get; }
+		IAspectPropertyValue<int> AccuracyRadiusMax { get; }
 		/// <summary>
 		/// Radius in kilometers of the largest circle centred around the most probable location that fits within the area. Where multiple areas are returned, only the area that the most probable location falls within is considered. See Areas property.
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<int>>> AccuracyRadiusMin { get; }
+		IAspectPropertyValue<int> AccuracyRadiusMin { get; }
 		/// <summary>
 		/// Any shapes associated with the location. Usually this is the area which the IP range covers. This is returned as a WKT String stored as a reduced format of WKB.
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> Areas { get; }
+		IAspectPropertyValue<WktString> Areas { get; }
 		/// <summary>
 		/// Autonomous System Number associated with the IP address.
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> Asn { get; }
+		IAspectPropertyValue<string> Asn { get; }
 		/// <summary>
 		/// The name registered to the Asn associated with the IP address.
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> AsnName { get; }
+		IAspectPropertyValue<string> AsnName { get; }
 		/// <summary>
 		/// Indicates the type of connection being used. Returns either Broadband, Cellular, or Hosting and Anonymous.
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> ConnectionType { get; }
+		IAspectPropertyValue<string> ConnectionType { get; }
 		/// <summary>
 		/// The 3-character ISO 3166-1 continent code for the supplied location.
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> ContinentCode2 { get; }
+		IAspectPropertyValue<string> ContinentCode2 { get; }
 		/// <summary>
 		/// The name of the continent the supplied location is in.
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> ContinentName { get; }
+		IAspectPropertyValue<string> ContinentName { get; }
 		/// <summary>
 		/// The name of the country that the supplied location is in.
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> Country { get; }
+		IAspectPropertyValue<string> Country { get; }
 		/// <summary>
 		/// The 2-character ISO 3166-1 code of the country that the supplied location is in.
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> CountryCode { get; }
+		IAspectPropertyValue<string> CountryCode { get; }
 		/// <summary>
 		/// The 3-character ISO 3166-1 alpha-3 code of the country that the supplied location is in.
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> CountryCode3 { get; }
+		IAspectPropertyValue<string> CountryCode3 { get; }
 		/// <summary>
 		/// The name of the county that the supplied location is in. In this case, a county is defined as an administrative sub-section of a country or state.
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> County { get; }
+		IAspectPropertyValue<string> County { get; }
 		/// <summary>
 		/// The Alpha-3 ISO 4217 code of the currency associated with the supplied location.
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> CurrencyCode { get; }
+		IAspectPropertyValue<string> CurrencyCode { get; }
 		/// <summary>
-		/// ITU international?telephone numbering plan code for the country.
+		/// ITU international telephone numbering plan code for the country.
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> DialCode { get; }
+		IAspectPropertyValue<string> DialCode { get; }
 		/// <summary>
 		/// The confidence that the IP address is a human user versus associated with hosting. A 1-10 value where; 1-3: Low confidence the user is human, 4-6: Medium confidence, 7-10: High confidence.
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<int>>> HumanProbability { get; }
+		IAspectPropertyValue<int> HumanProbability { get; }
 		/// <summary>
 		/// End of the IP range to which the evidence IP belongs.
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<IPAddress>>> IpRangeEnd { get; }
+		IAspectPropertyValue<IPAddress> IpRangeEnd { get; }
 		/// <summary>
 		/// Start of the IP range to which the evidence IP belongs.
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<IPAddress>>> IpRangeStart { get; }
+		IAspectPropertyValue<IPAddress> IpRangeStart { get; }
 		/// <summary>
 		/// Indicates whether the IP address is associated with a broadband connection. Includes DSL, Cable, Fibre, and Satellite connections.
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<bool>>> IsBroadband { get; }
+		IAspectPropertyValue<bool> IsBroadband { get; }
 		/// <summary>
 		/// Indicates whether the IP address is associated with a cellular network.
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<bool>>> IsCellular { get; }
+		IAspectPropertyValue<bool> IsCellular { get; }
 		/// <summary>
 		/// Indicates whether the country of the supplied location is within the European Union.
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<bool>>> IsEu { get; }
+		IAspectPropertyValue<bool> IsEu { get; }
 		/// <summary>
 		/// Indicates whether the IP address is associated with hosting. Includes both hosting and anonymised connections such as hosting networks, hosting ASNs, VPNs, proxies, TOR networks, and unreachable IP addresses.
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<bool>>> IsHosted { get; }
+		IAspectPropertyValue<bool> IsHosted { get; }
 		/// <summary>
 		/// Indicates whether the IP address is associated with a Proxy server.
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<bool>>> IsProxy { get; }
+		IAspectPropertyValue<bool> IsProxy { get; }
 		/// <summary>
 		/// Indicates whether the IP address is associated with a public router.
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<bool>>> IsPublicRouter { get; }
+		IAspectPropertyValue<bool> IsPublicRouter { get; }
 		/// <summary>
 		/// Indicates whether the IP address is associated with a TOR server.
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<bool>>> IsTor { get; }
+		IAspectPropertyValue<bool> IsTor { get; }
 		/// <summary>
 		/// Indicates whether the IP address is associated with a VPN server.
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<bool>>> IsVPN { get; }
+		IAspectPropertyValue<bool> IsVPN { get; }
 		/// <summary>
 		/// The Alpha-2 ISO 639 Language code associated with the supplied location.
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> LanguageCode { get; }
+		IAspectPropertyValue<string> LanguageCode { get; }
 		/// <summary>
 		/// Average latitude of the IP. For privacy, this is randomized within around 1 kilometer of the result. Randomized result will change only once per day.
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<float>>> Latitude { get; }
+		IAspectPropertyValue<float> Latitude { get; }
 		/// <summary>
 		/// The confidence in the town and country provided.
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> LocationConfidence { get; }
+		IAspectPropertyValue<string> LocationConfidence { get; }
 		/// <summary>
 		/// Average longitude of the IP. For privacy, this is randomized within around 1 kilometer of the result. Randomized result will change only once per day.
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<float>>> Longitude { get; }
+		IAspectPropertyValue<float> Longitude { get; }
 		/// <summary>
 		/// The mobile country code of the network the device is connected to.
 		/// </summary>
@@ -158,42 +158,42 @@ namespace FiftyOne.IpIntelligence
 		/// <summary>
 		/// The name of the geographical region that the supplied location is in.
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> Region { get; }
+		IAspectPropertyValue<string> Region { get; }
 		/// <summary>
 		/// Country code of the registered range.
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> RegisteredCountry { get; }
+		IAspectPropertyValue<string> RegisteredCountry { get; }
 		/// <summary>
 		/// Name of the IP range. This is usually the owner.
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> RegisteredName { get; }
+		IAspectPropertyValue<string> RegisteredName { get; }
 		/// <summary>
 		/// Registered owner of the range.
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> RegisteredOwner { get; }
+		IAspectPropertyValue<string> RegisteredOwner { get; }
 		/// <summary>
 		/// The name of the state that the supplied location is in.
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> State { get; }
+		IAspectPropertyValue<string> State { get; }
 		/// <summary>
 		/// The name of the suburb that the supplied location is in.
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> Suburb { get; }
+		IAspectPropertyValue<string> Suburb { get; }
 		/// <summary>
 		/// The time zone at the supplied location in the IANA Time Zone format.
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> TimeZoneIana { get; }
+		IAspectPropertyValue<string> TimeZoneIana { get; }
 		/// <summary>
 		/// The offset from UTC in minutes in the supplied location, at the time that the value is produced.
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<int>>> TimeZoneOffset { get; }
+		IAspectPropertyValue<int> TimeZoneOffset { get; }
 		/// <summary>
 		/// The name of the town that the supplied location is in.
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> Town { get; }
+		IAspectPropertyValue<string> Town { get; }
 		/// <summary>
 		/// The zip or postal code that the supplied location falls under.
 		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> ZipCode { get; }
+		IAspectPropertyValue<string> ZipCode { get; }
 	}
 }

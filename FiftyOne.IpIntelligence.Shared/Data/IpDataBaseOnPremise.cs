@@ -243,6 +243,85 @@ namespace FiftyOne.IpIntelligence.Shared.Data
         public abstract IAspectPropertyValue<IReadOnlyList<string>> GetValues(string propertyName);
 
         /// <summary>
+        /// Get string value this instance has for the specified property
+        /// </summary>
+        /// <param name="propertyName">
+        /// The name of the property to get value for.
+        /// </param>
+        /// <returns>
+        /// A <see cref="string"/> wrapped in a 
+        /// <see cref="IAspectPropertyValue"/> instance.
+        /// </returns>
+        protected abstract IAspectPropertyValue<string> GetValueAsString(string propertyName);
+
+        /// <summary>
+        /// Get WKT string value this instance has for the specified property
+        /// </summary>
+        /// <param name="propertyName">
+        /// The name of the property to get value for.
+        /// </param>
+        /// <returns>
+        /// A <see cref="WktString"/> wrapped in a 
+        /// <see cref="IAspectPropertyValue"/> instance.
+        /// </returns>
+        protected abstract IAspectPropertyValue<WktString> GetValueAsWktString(string propertyName);
+
+        /// <summary>
+        /// Get int value this instance has for the specified property
+        /// </summary>
+        /// <param name="propertyName">
+        /// The name of the property to get value for.
+        /// </param>
+        /// <returns>
+        /// A <see cref="int"/> wrapped in a 
+        /// <see cref="IAspectPropertyValue"/> instance.
+        /// </returns>
+        protected abstract IAspectPropertyValue<int> GetValueAsInteger(string propertyName);
+
+        /// <summary>
+        /// Get float value this instance has for the specified property
+        /// </summary>
+        /// <param name="propertyName">
+        /// The name of the property to get value for.
+        /// </param>
+        /// <returns>
+        /// A <see cref="float"/> wrapped in a 
+        /// <see cref="IAspectPropertyValue"/> instance.
+        /// </returns>
+        protected abstract IAspectPropertyValue<float> GetValueAsFloat(string propertyName);
+
+        /// <summary>
+        /// Get double value this instance has for the specified property
+        /// </summary>
+        /// <param name="propertyName">
+        /// The name of the property to get value for.
+        /// </param>
+        /// <returns>
+        /// A <see cref="double"/> wrapped in a 
+        /// <see cref="IAspectPropertyValue"/> instance.
+        /// </returns>
+        protected abstract IAspectPropertyValue<double> GetValueAsDouble(string propertyName);
+
+        /// <summary>
+        /// Get bool value this instance has for the specified property
+        /// </summary>
+        /// <param name="propertyName">
+        /// The name of the property to get value for.
+        /// </param>
+        /// <returns>
+        /// A <see cref="bool"/> wrapped in a 
+        /// <see cref="IAspectPropertyValue"/> instance.
+        /// </returns>
+        protected abstract IAspectPropertyValue<bool> GetValueAsBool(string propertyName);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
+        protected abstract IAspectPropertyValue<IPAddress> GetValueAsIp(string propertyName);
+
+        /// <summary>
         /// Get weighted bool values this instance has for the specified property
         /// </summary>
         /// <param name="propertyName">
@@ -369,20 +448,25 @@ namespace FiftyOne.IpIntelligence.Shared.Data
                         {
                             if (property.Type == typeof(string))
                             {
-                                if (property.Name.Equals("NetworkId", StringComparison.InvariantCultureIgnoreCase))
-                                {
-                                    // NetworkId is a special case for IP intelligence where
-                                    // the string value does not have the associated weight
-                                    dict[property.Name.ToLowerInvariant()] =
-                                        GetAs<AspectPropertyValue<string>>(property.Name);
-                                }
-                                else
-                                {
-                                    dict[property.Name.ToLowerInvariant()] =
-                                        GetAs<AspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>(property.Name);
-                                }
+                                dict[property.Name.ToLowerInvariant()] =
+                                    GetAs<AspectPropertyValue<string>>(property.Name);
+                            }
+                            else if (property.Type == typeof(WktString))
+                            {
+                                dict[property.Name.ToLowerInvariant()] =
+                                    GetAs<AspectPropertyValue<WktString>>(property.Name);
+                            }
+                            else if (property.Type == typeof(IReadOnlyList<IWeightedValue<string>>))
+                            {
+                                dict[property.Name.ToLowerInvariant()] =
+                                    GetAs<AspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>(property.Name);
                             }
                             else if (property.Type == typeof(double))
+                            {
+                                dict[property.Name.ToLowerInvariant()] =
+                                    GetAs<AspectPropertyValue<double>>(property.Name);
+                            }
+                            else if (property.Type == typeof(IReadOnlyList<IWeightedValue<double>>))
                             {
                                 dict[property.Name.ToLowerInvariant()] =
                                     GetAs<AspectPropertyValue<IReadOnlyList<IWeightedValue<double>>>>(property.Name);
@@ -390,14 +474,24 @@ namespace FiftyOne.IpIntelligence.Shared.Data
                             else if (property.Type == typeof(int))
                             {
                                 dict[property.Name.ToLowerInvariant()] =
+                                    GetAs<AspectPropertyValue<int>>(property.Name);
+                            }
+                            else if (property.Type == typeof(IReadOnlyList<IWeightedValue<int>>))
+                            {
+                                dict[property.Name.ToLowerInvariant()] =
                                     GetAs<AspectPropertyValue<IReadOnlyList<IWeightedValue<int>>>>(property.Name);
                             }
                             else if (property.Type == typeof(float))
                             {
                                 dict[property.Name.ToLowerInvariant()] =
-                                    GetAs<AspectPropertyValue<IReadOnlyList<IWeightedValue<float>>>>(property.Name);
+                                    GetAs<AspectPropertyValue<float>>(property.Name);
                             }
                             else if (property.Type == typeof(bool))
+                            {
+                                dict[property.Name.ToLowerInvariant()] =
+                                    GetAs<AspectPropertyValue<bool>>(property.Name);
+                            }
+                            else if (property.Type == typeof(IReadOnlyList<IWeightedValue<bool>>))
                             {
                                 dict[property.Name.ToLowerInvariant()] =
                                     GetAs<AspectPropertyValue<IReadOnlyList<IWeightedValue<bool>>>>(property.Name);
@@ -405,9 +499,19 @@ namespace FiftyOne.IpIntelligence.Shared.Data
                             else if (property.Type == typeof(float))
                             {
                                 dict[property.Name.ToLowerInvariant()] =
+                                    GetAs<AspectPropertyValue<float>>(property.Name);
+                            }
+                            else if (property.Type == typeof(IReadOnlyList<IWeightedValue<float>>))
+                            {
+                                dict[property.Name.ToLowerInvariant()] =
                                     GetAs<AspectPropertyValue<IReadOnlyList<IWeightedValue<float>>>>(property.Name);
                             }
                             else if (property.Type == typeof(IPAddress))
+                            {
+                                dict[property.Name.ToLowerInvariant()] =
+                                    GetAs<AspectPropertyValue<IPAddress>>(property.Name);
+                            }
+                            else if (property.Type == typeof(IReadOnlyList<IWeightedValue<IPAddress>>))
                             {
                                 dict[property.Name.ToLowerInvariant()] =
                                     GetAs<AspectPropertyValue<IReadOnlyList<IWeightedValue<IPAddress>>>>(property.Name);
@@ -508,33 +612,59 @@ namespace FiftyOne.IpIntelligence.Shared.Data
                     }
                     lock (_getLock)
                     {
-                        if (innerType == typeof(string) ||
-                            innerType == typeof(IReadOnlyList<IWeightedValue<string>>))
+                        if (innerType == typeof(string))
+                        {
+                            obj = GetValueAsString(key);
+                        }
+                        else if (innerType == typeof(IReadOnlyList<IWeightedValue<string>>))
                         {
                             obj = GetValuesAsWeightedStringList(key);
                         }
-                        else if (innerType == typeof(double) ||
-                            innerType == typeof(IReadOnlyList<IWeightedValue<double>>))
+                        else if (innerType == typeof(WktString))
+                        {
+                            obj = GetValueAsWktString(key);
+                        }
+                        else if (innerType == typeof(IReadOnlyList<IWeightedValue<WktString>>))
+                        {
+                            obj = GetValuesAsWeightedStringList(key);
+                        }
+                        else if (innerType == typeof(double))
+                        {
+                            obj = GetValueAsDouble(key);
+                        }
+                        else if (innerType == typeof(IReadOnlyList<IWeightedValue<double>>))
                         {
                             obj = GetValuesAsWeightedDoubleList(key);
                         }
-                        else if (innerType == typeof(float) ||
-                            innerType == typeof(IReadOnlyList<IWeightedValue<float>>))
+                        else if (innerType == typeof(float))
+                        {
+                            obj = GetValueAsFloat(key);
+                        }
+                        else if (innerType == typeof(IReadOnlyList<IWeightedValue<float>>))
                         {
                             obj = GetValuesAsWeightedFloatList(key);
                         }
-                        else if (innerType == typeof(int) ||
-                            innerType == typeof(IReadOnlyList<IWeightedValue<int>>))
+                        else if (innerType == typeof(int))
+                        {
+                            obj = GetValueAsInteger(key);
+                        }
+                        else if (innerType == typeof(IReadOnlyList<IWeightedValue<int>>))
                         {
                             obj = GetValuesAsWeightedIntegerList(key);
                         }
-                        else if (innerType == typeof(bool) ||
-                            innerType == typeof(IReadOnlyList<IWeightedValue<bool>>))
+                        else if (innerType == typeof(bool))
+                        {
+                            obj = GetValueAsBool(key);
+                        }
+                        else if (innerType == typeof(IReadOnlyList<IWeightedValue<bool>>))
                         {
                             obj = GetValuesAsWeightedBoolList(key);
                         }
-                        else if (innerType == typeof(IPAddress) || 
-                            innerType == typeof(IReadOnlyList<IWeightedValue<IPAddress>>))
+                        else if (innerType == typeof(IPAddress))
+                        {
+                            obj = GetValueAsIp(key);
+                        }
+                        else if (innerType == typeof(IReadOnlyList<IWeightedValue<IPAddress>>))
                         {
                             obj = GetValuesAsWeightedIPList(key);
                         }

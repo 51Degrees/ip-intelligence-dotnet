@@ -186,6 +186,97 @@ namespace FiftyOne.IpIntelligence.Tests.Core.Data
             {
                 return propertyName == _testPropertyName;
             }
+
+            protected override IAspectPropertyValue<string> GetValueAsString(string propertyName)
+            {
+                if (propertyName == _testPropertyName)
+                {
+                    return new AspectPropertyValue<string>(
+                        (string)_value);
+                }
+                else
+                {
+                    throw new PropertyMissingException();
+                }
+            }
+
+            protected override IAspectPropertyValue<WktString> GetValueAsWktString(string propertyName)
+            {
+                if (propertyName == _testPropertyName)
+                {
+                    return new AspectPropertyValue<WktString>(
+                        (WktString)_value);
+                }
+                else
+                {
+                    throw new PropertyMissingException();
+                }
+            }
+
+            protected override IAspectPropertyValue<int> GetValueAsInteger(string propertyName)
+            {
+                if (propertyName == _testPropertyName)
+                {
+                    return new AspectPropertyValue<int>(
+                        (int)_value);
+                }
+                else
+                {
+                    throw new PropertyMissingException();
+                }
+            }
+
+            protected override IAspectPropertyValue<float> GetValueAsFloat(string propertyName)
+            {
+                if (propertyName == _testPropertyName)
+                {
+                    return new AspectPropertyValue<float>(
+                        (float)_value);
+                }
+                else
+                {
+                    throw new PropertyMissingException();
+                }
+            }
+
+            protected override IAspectPropertyValue<double> GetValueAsDouble(string propertyName)
+            {
+                if (propertyName == _testPropertyName)
+                {
+                    return new AspectPropertyValue<double>(
+                        (double)_value);
+                }
+                else
+                {
+                    throw new PropertyMissingException();
+                }
+            }
+
+            protected override IAspectPropertyValue<bool> GetValueAsBool(string propertyName)
+            {
+                if (propertyName == _testPropertyName)
+                {
+                    return new AspectPropertyValue<bool>(
+                        (bool)_value);
+                }
+                else
+                {
+                    throw new PropertyMissingException();
+                }
+            }
+
+            protected override IAspectPropertyValue<IPAddress> GetValueAsIp(string propertyName)
+            {
+                if (propertyName == _testPropertyName)
+                {
+                    return new AspectPropertyValue<IPAddress>(
+                        (IPAddress)_value);
+                }
+                else
+                {
+                    throw new PropertyMissingException();
+                }
+            }
         }
 
         private void SetupElementProperties(Type type)
@@ -227,10 +318,64 @@ namespace FiftyOne.IpIntelligence.Tests.Core.Data
         [TestMethod]
         public void GetWeightedStringList()
         {
-            SetupElementProperties(typeof(string));
+            SetupElementProperties(typeof(IReadOnlyList<IWeightedValue<string>>));
             IReadOnlyList<IWeightedValue<string>> expected = new List<WeightedValue<string>>();
             TestResults<IReadOnlyList<IWeightedValue<string>>> results =
                 new TestResults<IReadOnlyList<IWeightedValue<string>>>(
+                    _logger.Object,
+                    _flowData.Object.Pipeline,
+                    _engine.Object,
+                    _missingPropertyService.Object,
+                    expected);
+
+            var value = results[_testPropertyName];
+            Assert.IsTrue(typeof(IAspectPropertyValue).IsAssignableFrom(value.GetType()));
+            Assert.AreEqual(expected, ((IAspectPropertyValue)value).Value);
+            var dict = results.AsDictionary();
+            Assert.IsTrue(dict.ContainsKey(_testPropertyName));
+            var dictValue = dict[_testPropertyName];
+            Assert.IsTrue(typeof(IAspectPropertyValue).IsAssignableFrom(dictValue.GetType()));
+            Assert.AreEqual(expected, ((IAspectPropertyValue)dictValue).Value);
+        }
+
+        /// <summary>
+        /// Check that a string is returned from the internal results instance
+        /// using the correct get method.
+        /// </summary>
+        [TestMethod]
+        public void GetString()
+        {
+            SetupElementProperties(typeof(string));
+            string expected = "string";
+            TestResults<string> results =
+                new TestResults<string>(
+                    _logger.Object,
+                    _flowData.Object.Pipeline,
+                    _engine.Object,
+                    _missingPropertyService.Object,
+                    expected);
+
+            var value = results[_testPropertyName];
+            Assert.IsTrue(typeof(IAspectPropertyValue).IsAssignableFrom(value.GetType()));
+            Assert.AreEqual(expected, ((IAspectPropertyValue)value).Value);
+            var dict = results.AsDictionary();
+            Assert.IsTrue(dict.ContainsKey(_testPropertyName));
+            var dictValue = dict[_testPropertyName];
+            Assert.IsTrue(typeof(IAspectPropertyValue).IsAssignableFrom(dictValue.GetType()));
+            Assert.AreEqual(expected, ((IAspectPropertyValue)dictValue).Value);
+        }
+
+        /// <summary>
+        /// Check that a WKT string is returned from the internal results instance
+        /// using the correct get method.
+        /// </summary>
+        [TestMethod]
+        public void GetWktString()
+        {
+            SetupElementProperties(typeof(WktString));
+            WktString expected = new WktString("string");
+            TestResults<WktString> results =
+                new TestResults<WktString>(
                     _logger.Object,
                     _flowData.Object.Pipeline,
                     _engine.Object,
@@ -254,10 +399,37 @@ namespace FiftyOne.IpIntelligence.Tests.Core.Data
         [TestMethod]
         public void GetWeightedBoolList()
         {
-            SetupElementProperties(typeof(bool));
+            SetupElementProperties(typeof(IReadOnlyList<IWeightedValue<bool>>));
             IReadOnlyList<IWeightedValue<bool>> expected = new List<WeightedValue<bool>>();
             TestResults<IReadOnlyList<IWeightedValue<bool>>> results =
                 new TestResults<IReadOnlyList<IWeightedValue<bool>>>(
+                    _logger.Object,
+                    _flowData.Object.Pipeline,
+                    _engine.Object,
+                    _missingPropertyService.Object,
+                    expected);
+
+            var value = results[_testPropertyName];
+            Assert.IsTrue(typeof(IAspectPropertyValue).IsAssignableFrom(value.GetType()));
+            Assert.AreEqual(expected, ((IAspectPropertyValue)value).Value);
+            var dict = results.AsDictionary();
+            Assert.IsTrue(dict.ContainsKey(_testPropertyName));
+            var dictValue = dict[_testPropertyName];
+            Assert.IsTrue(typeof(IAspectPropertyValue).IsAssignableFrom(dictValue.GetType()));
+            Assert.AreEqual(expected, ((IAspectPropertyValue)dictValue).Value);
+        }
+
+        /// <summary>
+        /// Check that a bool is returned from the internal results instance
+        /// using the correct get method.
+        /// </summary>
+        [TestMethod]
+        public void GetBool()
+        {
+            SetupElementProperties(typeof(bool));
+            bool expected = true;
+            TestResults<bool> results =
+                new TestResults<bool>(
                     _logger.Object,
                     _flowData.Object.Pipeline,
                     _engine.Object,
@@ -281,10 +453,40 @@ namespace FiftyOne.IpIntelligence.Tests.Core.Data
         [TestMethod]
         public void GetWeightedIntList()
         {
-            SetupElementProperties(typeof(int));
-            IReadOnlyList<IWeightedValue<int>> expected = new List<WeightedValue<int>>();
+            SetupElementProperties(typeof(IReadOnlyList<IWeightedValue<int>>));
+            IReadOnlyList<IWeightedValue<int>> expected = new List<WeightedValue<int>>() {
+                new WeightedValue<int>(1, 1),
+                new WeightedValue<int>(1, 1)
+            };
             TestResults<IReadOnlyList<IWeightedValue<int>>> results =
                 new TestResults<IReadOnlyList<IWeightedValue<int>>>(
+                    _logger.Object,
+                    _flowData.Object.Pipeline,
+                    _engine.Object,
+                    _missingPropertyService.Object,
+                    expected);
+
+            var value = results[_testPropertyName];
+            Assert.IsTrue(value is IAspectPropertyValue);
+            Assert.IsTrue(typeof(IAspectPropertyValue).IsAssignableFrom(value.GetType()));
+            var dict = results.AsDictionary();
+            Assert.IsTrue(dict.ContainsKey(_testPropertyName));
+            var dictValue = dict[_testPropertyName];
+            Assert.IsTrue(typeof(IAspectPropertyValue).IsAssignableFrom(dictValue.GetType()));
+            Assert.AreEqual(expected, ((IAspectPropertyValue)dictValue).Value);
+        }
+
+        /// <summary>
+        /// Check that a int is returned from the internal results instance
+        /// using the correct get method.
+        /// </summary>
+        [TestMethod]
+        public void GetInt()
+        {
+            SetupElementProperties(typeof(int));
+            int expected = 51;
+            TestResults<int> results =
+                new TestResults<int>(
                     _logger.Object,
                     _flowData.Object.Pipeline,
                     _engine.Object,
@@ -308,10 +510,37 @@ namespace FiftyOne.IpIntelligence.Tests.Core.Data
         [TestMethod]
         public void GetWeightedDoubleList()
         {
-            SetupElementProperties(typeof(double));
+            SetupElementProperties(typeof(IReadOnlyList<IWeightedValue<double>>));
             IReadOnlyList<IWeightedValue<double>> expected = new List<WeightedValue<double>>();
             TestResults<IReadOnlyList<IWeightedValue<double>>> results =
                 new TestResults<IReadOnlyList<IWeightedValue<double>>>(
+                    _logger.Object,
+                    _flowData.Object.Pipeline,
+                    _engine.Object,
+                    _missingPropertyService.Object,
+                    expected);
+
+            var value = results[_testPropertyName];
+            Assert.IsTrue(value is IAspectPropertyValue);
+            Assert.IsTrue(typeof(IAspectPropertyValue).IsAssignableFrom(value.GetType()));
+            var dict = results.AsDictionary();
+            Assert.IsTrue(dict.ContainsKey(_testPropertyName));
+            var dictValue = dict[_testPropertyName];
+            Assert.IsTrue(typeof(IAspectPropertyValue).IsAssignableFrom(dictValue.GetType()));
+            Assert.AreEqual(expected, ((IAspectPropertyValue)dictValue).Value);
+        }
+
+        /// <summary>
+        /// Check that a double is returned from the internal results instance
+        /// using the correct get method.
+        /// </summary>
+        [TestMethod]
+        public void GetDouble()
+        {
+            SetupElementProperties(typeof(double));
+            double expected = 51.0;
+            TestResults<double> results =
+                new TestResults<double>(
                     _logger.Object,
                     _flowData.Object.Pipeline,
                     _engine.Object,
@@ -336,12 +565,9 @@ namespace FiftyOne.IpIntelligence.Tests.Core.Data
         public void GetIpAddress()
         {
             SetupElementProperties(typeof(IPAddress));
-            IReadOnlyList<IWeightedValue<IPAddress>> expected = new List<WeightedValue<IPAddress>>()
-            {
-                new WeightedValue<IPAddress>(ushort.MaxValue, IPAddress.Parse("::1")),
-            };
-            TestResults<IReadOnlyList<IWeightedValue<IPAddress>>> results =
-                new TestResults<IReadOnlyList<IWeightedValue<IPAddress>>>(
+            IPAddress expected = IPAddress.Parse("::1");
+            TestResults<IPAddress> results =
+                new TestResults<IPAddress>(
                     _logger.Object,
                     _flowData.Object.Pipeline,
                     _engine.Object,

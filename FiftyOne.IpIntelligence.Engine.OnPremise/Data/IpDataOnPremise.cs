@@ -218,6 +218,160 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
             return result;
         }
 
+        protected override IAspectPropertyValue<string> GetValueAsString(string propertyName)
+        {
+            var result = new AspectPropertyValue<string>();
+            var results = GetResultsContainingProperty(propertyName);
+
+            if (results != null)
+            {
+                using (var value = results.getValueAsString(propertyName))
+                {
+                    if (value.hasValue())
+                    {
+                        result.Value = value.getValue();
+                    }
+                    else
+                    {
+                        result.NoValueMessage = value.getNoValueMessage();
+                    }
+                }
+            }
+            return result;
+        }
+
+        protected override IAspectPropertyValue<WktString> GetValueAsWktString(string propertyName)
+        {
+            var result = new AspectPropertyValue<WktString>();
+            var results = GetResultsContainingProperty(propertyName);
+
+            if (results != null)
+            {
+                using (var value = results.getValueAsString(propertyName))
+                {
+                    if (value.hasValue())
+                    {
+                        result.Value = new WktString(value.getValue());
+                    }
+                    else
+                    {
+                        result.NoValueMessage = value.getNoValueMessage();
+                    }
+                }
+            }
+            return result;
+        }
+
+        protected override IAspectPropertyValue<int> GetValueAsInteger(string propertyName)
+        {
+            var result = new AspectPropertyValue<int>();
+            var results = GetResultsContainingProperty(propertyName);
+
+            if (results != null)
+            {
+                using (var value = results.getValueAsInteger(propertyName))
+                {
+                    if (value.hasValue())
+                    {
+                        result.Value = value.getValue();
+                    }
+                    else
+                    {
+                        result.NoValueMessage = value.getNoValueMessage();
+                    }
+                }
+            }
+            return result;
+        }
+
+        protected override IAspectPropertyValue<bool> GetValueAsBool(string propertyName)
+        { 
+            var result = new AspectPropertyValue<bool>();
+            var results = GetResultsContainingProperty(propertyName);
+
+            if (results != null)
+            {
+                using (var value =  results.getValueAsBool(propertyName))
+                {
+                    if (value.hasValue())
+                    {
+                        result.Value = value.getValue();
+                    }
+                    else
+                    {
+                        result.NoValueMessage = value.getNoValueMessage();
+                    }
+                }
+            }
+            return result;
+        }
+
+        protected override IAspectPropertyValue<double> GetValueAsDouble(string propertyName)
+        {
+            var result = new AspectPropertyValue<double>();
+            var results = GetResultsContainingProperty(propertyName);
+
+            if (results != null)
+            {
+                using (var value = results.getValueAsDouble(propertyName))
+                {
+                    if (value.hasValue())
+                    {
+                        result.Value = value.getValue();
+                    }
+                    else
+                    {
+                        result.NoValueMessage = value.getNoValueMessage();
+                    }
+                }
+            }
+            return result;
+        }
+
+        protected override IAspectPropertyValue<float> GetValueAsFloat(string propertyName)
+        {
+            var result = new AspectPropertyValue<float>();
+            var results = GetResultsContainingProperty(propertyName);
+
+            if (results != null)
+            {
+                using (var value = results.getValueAsDouble(propertyName))
+                {
+                    if (value.hasValue())
+                    {
+                        result.Value = (float)value.getValue();
+                    }
+                    else
+                    {
+                        result.NoValueMessage = value.getNoValueMessage();
+                    }
+                }
+            }
+            return result;
+        }
+
+        protected override IAspectPropertyValue<IPAddress> GetValueAsIp(string propertyName)
+        {
+            var result = new AspectPropertyValue<IPAddress>();
+            var results = GetResultsContainingProperty(propertyName);
+
+            if (results != null)
+            {
+                using (var value = results.getValueAsString(propertyName))
+                {
+                    if (value.hasValue())
+                    {
+                        result.Value = IPAddress.Parse(value.getValue());
+                    }
+                    else
+                    {
+                        result.NoValueMessage = value.getNoValueMessage();
+                    }
+                }
+            }
+            return result;
+        }
+
         protected override IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> GetValuesAsWeightedStringList(string propertyName)
         {
             var result = new AspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>();

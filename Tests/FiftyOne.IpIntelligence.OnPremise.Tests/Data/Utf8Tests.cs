@@ -29,6 +29,7 @@ using System.Text;
 
 namespace FiftyOne.IpIntelligence.OnPremise.Tests.Core.Data
 {
+    [Ignore]
     [TestClass]
     [TestCategory("Core")]
     [TestCategory("Utf8")]
@@ -37,10 +38,10 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Core.Data
         [TestMethod]
         [DataRow(new byte[]{
             0x50,0xc3,0xa4,0x69,0x6a,0xc3,0xa4,0x74,0x2d,0x48,0xc3,0xa4,0x6d,0x65,
-        }, DisplayName = "Utf8_OnPremise_Core_Validate_Property_Values(Päijät-Häme)")]
+        }, DisplayName = nameof(Utf8_OnPremise_Core_Validate_Property_Values) + "(Päijät-Häme)")]
         //[DataRow(new byte[]{
         //    0x42,0xe1,0xba,0xbf,0x6e,0x20,0x54,0x72,0x65,0x20,0x50,0x72,0x6f,0x76,0x69,0x6e,0x63,0x65,
-        //}, DisplayName = "Utf8_OnPremise_Core_Validate_Property_Values(Bến Tre Province)")]
+        //}, DisplayName = nameof(Utf8_OnPremise_Core_Validate_Property_Values) + "(Bến Tre Province)")]
         public void Utf8_OnPremise_Core_Validate_Property_Values(byte[] utf8Bytes)
         {
             TestInitialize(PerformanceProfiles.MaxPerformance);

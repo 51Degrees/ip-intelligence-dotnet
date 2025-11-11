@@ -195,7 +195,15 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
                     case "ipaddress": return typeof(IPAddress);
                     case "javascript": return typeof(JavaScript);
                     case "wkb": return typeof(WktString);
+                    case "wkbr": return typeof(WktString);
                     case "string[]": return typeof(IReadOnlyList<string>);
+                    case "weightedstring": return typeof(IReadOnlyList<IWeightedValue<string>>);
+                    case "weightedint": return typeof(IReadOnlyList<IWeightedValue<int>>);
+                    case "weightedbool": return typeof(IReadOnlyList<IWeightedValue<bool>>);
+                    case "weightedsingle": return typeof(IReadOnlyList<IWeightedValue<float>>);
+                    case "weighteddouble": return typeof(IReadOnlyList<IWeightedValue<double>>);
+                    case "weightedipaddress": return typeof(IReadOnlyList<IWeightedValue<IPAddress>>);
+                    case "weightedwkbr": return typeof(IReadOnlyList<IWeightedValue<WktString>>);
                     default: return typeof(string);
                 };
             }

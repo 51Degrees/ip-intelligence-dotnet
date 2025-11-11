@@ -23,7 +23,7 @@ jobs:
     secrets:
       token: ${{ secrets.ACCESS_TOKEN }}
       DeviceDetection: ${{ secrets.DEVICE_DETECTION_KEY }}
-      DeviceDetectionUrl: ${{ secrets.IPI_DATA_FILE_URL }}
+      DeviceDetectionUrl: ${{ secrets.IPI_DATA_FILE_SAMPLE_URL }}
       TestResourceKey: ${{ secrets.SUPER_RESOURCE_KEY}}
       AcceptCHBrowserKey: ${{ secrets.ACCEPTCH_BROWSER_KEY}}
       AcceptCHHardwareKey: ${{ secrets.ACCEPTCH_HARDWARE_KEY}}
