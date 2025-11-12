@@ -1,3 +1,4 @@
 [submodule "FiftyOne.IpIntelligence/ip-intelligence-cxx"]
 	path = FiftyOne.IpIntelligence.Engine.OnPremise/ip-intelligence-cxx
 	url = ../ip-intelligence-cxx
+	branch = feature/weighted-values
