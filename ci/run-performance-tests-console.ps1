@@ -36,10 +36,7 @@ finally {
 
 if ($(Test-Path -Path $ExamplesRepoName) -eq $False) {
     Write-Output "Cloning '$ExamplesRepoName'"
-    ./steps/clone-repo.ps1 `
-        -Branch "feature/non-weighted-values" `
-        -RepoName $ExamplesRepoName `
-        -OrgName $OrgName
+    ./steps/clone-repo.ps1 -RepoName $ExamplesRepoName -OrgName $OrgName
 }
 
 # Write-Output "Moving enterprise IPI file"
