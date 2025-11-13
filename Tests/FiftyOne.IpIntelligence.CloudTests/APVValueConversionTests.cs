@@ -151,6 +151,19 @@ namespace FiftyOne.IpIntelligence.Cloud.Tests
         }
 
         [TestMethod]
+        public void TestToValueForAPV_WktString()
+        {
+            var rawValue = new Dictionary<string, object>
+            {
+                { "value", "someValue-137" }
+            };
+            var apvValue = IpiCloudEngine.ToValueForAPV(rawValue, typeof(WktString));
+            var typedApvValue = apvValue as WktString?;
+            Assert.IsNotNull(typedApvValue);
+            Assert.AreEqual(rawValue["value"], typedApvValue.Value.Value);
+        }
+
+        [TestMethod]
         public void TestToValueForAPV_WeightedInt()
         {
             var rawValue = new Dictionary<string, object>

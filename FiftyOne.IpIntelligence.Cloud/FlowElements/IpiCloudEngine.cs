@@ -312,6 +312,17 @@ namespace FiftyOne.IpIntelligence.Cloud.FlowElements
             {
                 return IPAddress.Parse((string)rawValue);
             }
+            if (valueType == typeof(WktString)
+                && rawValue is IDictionary<string, object> rawWktValueDic)
+            {
+                var value = rawWktValueDic.FirstOrDefault(
+                    p => p.Key.ToUpperInvariant() == nameof(WktString.Value).ToUpperInvariant())
+                    .Value;
+                if (value is string wktValue)
+                {
+                    return new WktString(wktValue);
+                }
+            }
             return ToValueForAPV_Base(rawValue, valueType);
         }
 
