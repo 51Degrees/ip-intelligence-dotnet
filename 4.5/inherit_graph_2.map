@@ -1,4 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" title=" " alt="" coords="5,20,193,47"/>
-<area shape="rect" id="node2" href="$class_fifty_one_1_1_ip_intelligence_1_1_cloud_1_1_flow_elements_1_1_ipi_cloud_engine_builder.html" title="Fluent builder used to create a cloud&#45;based IP intelligence engine." alt="" coords="241,5,497,61"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,13,147,39"/>
+<area shape="rect" id="node2" href="$class_fifty_one_1_1_ip_intelligence_1_1_cloud_1_1_data_1_1_ip_data_cloud.html" title="A data class that makes working with IP data from cloud services easier for the user." alt="" coords="195,5,373,47"/>
 </map>

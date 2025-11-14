@@ -35,7 +35,7 @@ var NAVTREE =
       [ "Class Index", "classes.html", null ],
       [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
       [ "Class Members", "functions.html", [
-        [ "All", "functions.html", null ],
+        [ "All", "functions.html", "functions_dup" ],
         [ "Functions", "functions_func.html", null ],
         [ "Variables", "functions_vars.html", null ],
         [ "Properties", "functions_prop.html", null ],
@@ -52,13 +52,13 @@ var NAVTREEHIDESYNC = true;
 var NAVTREEINDEX =
 [
 "_cloud_2_framework-_web_2_default_8aspx_8cs-example.html",
-"class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_engine_base_swig.html#a0ad5e0cc64f7977cd342afb041992674",
-"class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_ip_intelligence_engine_module_p_i_n_v_o_k_e.html#a5b8d54e8cbb8bc04888cd9e45d5caff8",
-"class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_ip_intelligence_engine_module_p_i_n_v_o_k_e.html#aee9d3955917951fce1adc9ba177b6284",
-"class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_vector_string_swig.html#a2a7367544da7686bb78461e7432841d8",
-"class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_weighted_u_t_f8_string_list_swig.html#a355c1e58dda3f274980767511333d95d",
-"class_fifty_one_1_1_ip_intelligence_1_1_examples_1_1_constants.html#afc6b48a909f08faf4ef3d8ca618f46cf",
-"interface_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_wrappers_1_1_i_engine_swig_wrapper.html"
+"class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_date.html#ae4afc6463c08dbcaffb0f3673fa35664",
+"class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_ip_intelligence_engine_module_p_i_n_v_o_k_e.html#a5503df534bcb03e799d6703750e9e135",
+"class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_ip_intelligence_engine_module_p_i_n_v_o_k_e.html#ae833a90e340d2f75ce0b707fcfaa14b6",
+"class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_value_meta_data_swig.html#af8398fe286a51ef9279853c83b0881d5",
+"class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_weighted_u_t_f8_st865f5c639ab4fc06fc409320805505c2.html#a787cc8f1f5a68726f57230bbf80147ea",
+"class_fifty_one_1_1_ip_intelligence_1_1_examples_1_1_cloud_1_1_pipeline_options_extensions.html",
+"class_program_1_1_consumer.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
