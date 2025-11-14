@@ -30,6 +30,7 @@ using FiftyOne.Pipeline.Core.FlowElements;
 using FiftyOne.Pipeline.Engines.Data;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -312,15 +313,20 @@ namespace FiftyOne.IpIntelligence.Cloud.FlowElements
             {
                 return IPAddress.Parse((string)rawValue);
             }
-            if (valueType == typeof(WktString)
-                && rawValue is IDictionary<string, object> rawWktValueDic)
+            if (valueType == typeof(WktString))
             {
-                var value = rawWktValueDic.FirstOrDefault(
-                    p => p.Key.ToUpperInvariant() == nameof(WktString.Value).ToUpperInvariant())
-                    .Value;
-                if (value is string wktValue)
+                object rawValue2 = (rawValue is JObject rawValueObject)
+                    ? rawValueObject.ToObject<IDictionary<string, object>>()
+                    : rawValue;
+                if (rawValue2 is IDictionary<string, object> rawWktValueDic)
                 {
-                    return new WktString(wktValue);
+                    var value = rawWktValueDic.FirstOrDefault(
+                        p => p.Key.ToUpperInvariant() == nameof(WktString.Value).ToUpperInvariant())
+                        .Value;
+                    if (value is string wktValue)
+                    {
+                        return new WktString(wktValue);
+                    }
                 }
             }
             return ToValueForAPV_Base(rawValue, valueType);
@@ -358,10 +364,31 @@ namespace FiftyOne.IpIntelligence.Cloud.FlowElements
             PropertyMetaData propertyMetaData,
             Type parentObjectType)
         {
+            if (propertyMetaData?.Type.Equals("WktString", StringComparison.InvariantCultureIgnoreCase) == true)
+            {
+                return typeof(AspectPropertyValue<WktString>);
+            }
+            const string weightedPrefix = "Weighted";
+            if (propertyMetaData?.Type is string propTypeRaw
+                && propTypeRaw.StartsWith(weightedPrefix, StringComparison.InvariantCultureIgnoreCase) == true)
+            {
+                var realType = propTypeRaw.Substring(weightedPrefix.Length);
+                var propClone = new PropertyMetaData
+                {
+                    Name = propertyMetaData.Name,
+                    Type = realType,
+                    Category = propertyMetaData.Category,
+                    ItemProperties = propertyMetaData.ItemProperties,
+                    DelayExecution = propertyMetaData.DelayExecution,
+                    EvidenceProperties = propertyMetaData.EvidenceProperties,
+                };
+                return typeof(AspectPropertyValue<>).MakeGenericType(
+                    typeof(IReadOnlyList<>).MakeGenericType(
+                        typeof(IWeightedValue<>).MakeGenericType(
+                            base.GetPropertyType(propClone, parentObjectType))));
+            }
             return typeof(AspectPropertyValue<>).MakeGenericType(
-                typeof(IReadOnlyList<>).MakeGenericType(
-                    typeof(IWeightedValue<>).MakeGenericType(
-                        base.GetPropertyType(propertyMetaData, parentObjectType))));
+                base.GetPropertyType(propertyMetaData, parentObjectType));
         }
     }
 }
