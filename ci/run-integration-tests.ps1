@@ -67,7 +67,7 @@ function Update-CsprojRefs {
         [string]$CsprojPath
     )
     
-    $PackagesRaw = (dotnet list $NextProjectPath package --format json)
+    $PackagesRaw = (dotnet list $CsprojPath package --format json)
     $script:updateExitCode = $LASTEXITCODE
     if ($LASTEXITCODE -ne 0) {
         Write-Warning "--- RAW OUTPUT START ---"
@@ -92,7 +92,7 @@ function Update-CsprojRefs {
     }
     foreach ($NextToRemove in $ToRemove) {
         Write-Output "Removing $NextToRemove..."
-        dotnet remove $NextProjectPath package $NextToRemove
+        dotnet remove $CsprojPath package $NextToRemove
         $script:updateExitCode = $LASTEXITCODE
         if ($LASTEXITCODE -ne 0) {
             Write-Error "LASTEXITCODE (dotnet remove) = $LASTEXITCODE"
@@ -100,7 +100,7 @@ function Update-CsprojRefs {
     }
 
     Write-Output "Adding the new packages..."
-    dotnet add $NextProject package "FiftyOne.IpIntelligence" --version $Version
+    dotnet add $CsprojPath package "FiftyOne.IpIntelligence" --version $Version
     $script:updateExitCode = $LASTEXITCODE
     if ($LASTEXITCODE -ne 0) {
         Write-Error "LASTEXITCODE (dotnet add) = $LASTEXITCODE"
