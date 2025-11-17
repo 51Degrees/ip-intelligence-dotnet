@@ -187,7 +187,7 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
             {
                 switch (_source.getType())
                 {
-                    case "string": return typeof(string);
+                    case "string": return Name.ToUpperInvariant() == "MCC" ? typeof(IReadOnlyList<IWeightedValue<string>>) : typeof(string);
                     case "int": return typeof(int);
                     case "bool": return typeof(bool);
                     case "single": return typeof(float);
