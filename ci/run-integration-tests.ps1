@@ -119,7 +119,7 @@ try {
         $currentRound = $nextRound
         $nextRound = @()
 
-        foreach ($item in $currentRound) {
+        foreach ($NextProjectPath in $currentRound) {
             $updateExitCode = $null
             try {
                 $ErrorActionPreference = "Continue"
@@ -130,19 +130,19 @@ try {
             }
 
             if ($updateExitCode -eq 0) {
-                Write-Warning "Success: $item"
+                Write-Warning "Success: $NextProjectPath"
                 $topLevelSuccess = $true
             } else {
-                Write-Warning "Retrying: $item"
-                $nextRound += $item
+                Write-Warning "Retrying: $NextProjectPath"
+                $nextRound += $NextProjectPath
             }
         }
 
         if (-not $topLevelSuccess) {
             Write-Warning "No progress made. Breaking."
             Write-Warning "Remaining items:"
-            foreach ($item in $nextRound) {
-                Write-Output $item
+            foreach ($NextProjectPath in $nextRound) {
+                Write-Output $NextProjectPath
             }
             Write-Error "Update failed. Remaining items: $($nextRound.Count)"
             break
