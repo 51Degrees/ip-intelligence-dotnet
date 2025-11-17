@@ -76,7 +76,16 @@ try {
             Write-Warning "--- RAW OUTPUT START ---"
             Write-Warning ($PackagesRaw -Join "`n")
             Write-Warning "--- RAW OUTPUT END ---"
-            Write-Error "LASTEXITCODE = $LASTEXITCODE"
+            Write-Warning "^ LASTEXITCODE (dotnet list) = $LASTEXITCODE"
+            $LASTEXITCODE_DOTNET_LIST = $LASTEXITCODE
+            try {
+                $ErrorActionPreference = "Continue"
+                dotnet restore
+                Write-Warning "LASTEXITCODE (dotnet restore) = $LASTEXITCODE"
+            } finally {
+                $ErrorActionPreference = "Stop"
+            }
+            Write-Error "LASTEXITCODE (dotnet list) = $LASTEXITCODE_DOTNET_LIST"
         }
         $PackagesNow = ($PackagesRaw | ConvertFrom-Json)
         $ToRemove = $PackagesNow.Projects | ForEach-Object {
