@@ -60,51 +60,95 @@ Write-Debug "env:IPINTELLIGENCEDATAFILE = <$($env:IPINTELLIGENCEDATAFILE)>"
 
 Write-Output "`n------- PACKAGE REPLACEMENT BEGIN -------`n"
 
+$updateExitCode = $null
+function Update-CsprojRefs {
+    param (
+        [Parameter(Mandatory)]
+        [string]$CsprojPath
+    )
+    
+    $PackagesRaw = (dotnet list $NextProjectPath package --format json)
+    $script:updateExitCode = $LASTEXITCODE
+    if ($LASTEXITCODE -ne 0) {
+        Write-Warning "--- RAW OUTPUT START ---"
+        Write-Warning ($PackagesRaw -Join "`n")
+        Write-Warning "--- RAW OUTPUT END ---"
+        Write-Warning "^ LASTEXITCODE (dotnet list) = $LASTEXITCODE"
+        $LASTEXITCODE_DOTNET_LIST = $LASTEXITCODE
+        dotnet restore
+        Write-Warning "LASTEXITCODE (dotnet restore) = $LASTEXITCODE"
+        Write-Warning "LASTEXITCODE (dotnet list) = $LASTEXITCODE_DOTNET_LIST"
+        return
+    }
+    $PackagesNow = ($PackagesRaw | ConvertFrom-Json)
+    $ToRemove = $PackagesNow.Projects | ForEach-Object {
+        $_.Frameworks
+    } | ForEach-Object {
+        $_.TopLevelPackages
+    } | ForEach-Object {
+        $_.id
+    } | Where-Object {
+        $_.StartsWith("FiftyOne.IpIntelligence") 
+    }
+    foreach ($NextToRemove in $ToRemove) {
+        Write-Output "Removing $NextToRemove..."
+        dotnet remove $NextProjectPath package $NextToRemove
+        $script:updateExitCode = $LASTEXITCODE
+        if ($LASTEXITCODE -ne 0) {
+            Write-Error "LASTEXITCODE (dotnet remove) = $LASTEXITCODE"
+        }
+    }
+
+    Write-Output "Adding the new packages..."
+    dotnet add $NextProject package "FiftyOne.IpIntelligence" --version $Version
+    $script:updateExitCode = $LASTEXITCODE
+    if ($LASTEXITCODE -ne 0) {
+        Write-Error "LASTEXITCODE (dotnet add) = $LASTEXITCODE"
+    }
+}
+
 Push-Location $ExamplesRepo
 try {
     Write-Host "Restoring $ExamplesRepo..."
     dotnet restore
-    foreach ($NextProject in (Get-ChildItem -Recurse -File -Filter '*.csproj')) {
-        $NextProjectPath = $NextProject.FullName
-        try {
-            $ErrorActionPreference = "Continue"
-            $PackagesRaw = (dotnet list $NextProjectPath package --format json)
-        } finally {
-            $ErrorActionPreference = "Stop"
-        }
-        if ($LASTEXITCODE -ne 0) {
-            Write-Warning "--- RAW OUTPUT START ---"
-            Write-Warning ($PackagesRaw -Join "`n")
-            Write-Warning "--- RAW OUTPUT END ---"
-            Write-Warning "^ LASTEXITCODE (dotnet list) = $LASTEXITCODE"
-            $LASTEXITCODE_DOTNET_LIST = $LASTEXITCODE
+    $CsprojPaths = (Get-ChildItem -Recurse -File -Filter '*.csproj' | Select-Object -ExpandProperty FullName)
+    $nextRound = $CsprojPaths
+
+    while ($nextRound.Count -gt 0) {
+        $topLevelSuccess = $false
+        $currentRound = $nextRound
+        $nextRound = @()
+
+        foreach ($item in $currentRound) {
+            $updateExitCode = $null
             try {
                 $ErrorActionPreference = "Continue"
-                dotnet restore
-                Write-Warning "LASTEXITCODE (dotnet restore) = $LASTEXITCODE"
+                Update-CsprojRefs -CsprojPath $NextProjectPath
+                Write-Warning "updateExitCode ($NextProjectPath) = $updateExitCode"
             } finally {
                 $ErrorActionPreference = "Stop"
             }
-            Write-Error "LASTEXITCODE (dotnet list) = $LASTEXITCODE_DOTNET_LIST"
-        }
-        $PackagesNow = ($PackagesRaw | ConvertFrom-Json)
-        $ToRemove = $PackagesNow.Projects | ForEach-Object {
-            $_.Frameworks
-        } | ForEach-Object {
-            $_.TopLevelPackages
-        } | ForEach-Object {
-            $_.id
-        } | Where-Object {
-            $_.StartsWith("FiftyOne.IpIntelligence") 
-        }
-        foreach ($NextToRemove in $ToRemove) {
-            Write-Output "Removing $NextToRemove..."
-            dotnet remove $NextProjectPath package $NextToRemove
+
+            if ($updateExitCode -eq 0) {
+                Write-Warning "Success: $item"
+                $topLevelSuccess = $true
+            } else {
+                Write-Warning "Retrying: $item"
+                $nextRound += $item
+            }
         }
 
-        Write-Output "Adding the new packages..."
-        dotnet add $NextProject package "FiftyOne.IpIntelligence" --version $Version
+        if (-not $topLevelSuccess) {
+            Write-Warning "No progress made. Breaking."
+            Write-Warning "Remaining items:"
+            foreach ($item in $nextRound) {
+                Write-Output $item
+            }
+            Write-Error "Update failed. Remaining items: $($nextRound.Count)"
+            break
+        }
     }
+
     dotnet restore
 } finally {
     Pop-Location
