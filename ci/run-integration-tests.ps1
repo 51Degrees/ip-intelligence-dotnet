@@ -111,7 +111,15 @@ Push-Location $ExamplesRepo
 try {
     Write-Host "Restoring $ExamplesRepo..."
     dotnet restore
-    $CsprojPaths = (Get-ChildItem -Recurse -File -Filter '*.csproj' | Select-Object -ExpandProperty FullName)
+    $CsprojPaths = @(
+        "Examples/OnPremise/UpdateDataFile-Console/UpdateDataFile-Console.csproj",
+        "Examples/OnPremise/Mixed/GettingStarted-Web/GettingStarted-Web.csproj",
+        "Examples/OnPremise/GettingStarted-Console/GettingStarted-Console.csproj",
+        "Examples/OnPremise/OfflineProcessing-Console/OfflineProcessing-Console.csproj",
+        "Examples/OnPremise/GettingStarted-Web/GettingStarted-Web.csproj",
+        "Tests/FiftyOne.IpIntelligence.Example.Tests.Cloud/FiftyOne.IpIntelligence.Example.Tests.Cloud.csproj",
+        "Tests/FiftyOne.IpIntelligence.Example.Tests.OnPremise/FiftyOne.IpIntelligence.Example.Tests.OnPremise.csproj"
+    ) + (Get-ChildItem -Recurse -File -Filter '*.csproj' | Select-Object -ExpandProperty FullName)
     $nextRound = $CsprojPaths
 
     while ($nextRound.Count -gt 0) {
