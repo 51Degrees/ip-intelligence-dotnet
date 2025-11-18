@@ -100,11 +100,7 @@ try {
 
         Write-Debug -Debug "Now in $(Get-Location)"
         
-        # Copy runPerf.ps1 if it doesn't exist (CMake might not have copied it)
-        if (!(Test-Path ./runPerf.ps1)) {
-            Copy-Item ../runPerf.ps1 ./runPerf.ps1
-        }
-        ./runPerf.ps1 -c $Configuration -p $Arch -Debug
+        ../runPerf.ps1 -c $Configuration -p $Arch -Debug
 		
         Write-Debug -Debug "Now in $(Get-Location)"
 

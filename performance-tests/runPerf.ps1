@@ -34,5 +34,13 @@ $CAL="calibrate"
 $PRO="process"
 $PERF="$scriptRoot/ApacheBench-prefix/src/ApacheBench-build/bin/runPerf.ps1"
 
-Write-Debug "[EXEC] >>> $PERF -n $PASSES -s '$d $pwd/../bin/$p/$c/net8.0/performance_tests.dll' -c $CAL -p $PRO -h $SERVICEHOST"
-Invoke-Expression "$PERF -n $PASSES -s '$d $pwd/../bin/$p/$c/net8.0/performance_tests.dll' -c $CAL -p $PRO -h $SERVICEHOST"
+Write-Debug "Checking executable"
+Get-ChildItem $PERF
+Write-Debug "Looking for all performance_tests.dll"
+Get-ChildItem -Recurse -File -Filter "performance_tests.dll"
+Write-Debug "Looking for specific performance_tests.dll"
+$TargetDLL = "$pwd/../bin/$p/$c/net8.0/performance_tests.dll"
+Get-ChildItem $TargetDLL
+
+Write-Debug "[EXEC] >>> $PERF -n $PASSES -s '$d $TargetDLL' -c $CAL -p $PRO -h $SERVICEHOST"
+Invoke-Expression "$PERF -n $PASSES -s '$d $TargetDLL' -c $CAL -p $PRO -h $SERVICEHOST"
