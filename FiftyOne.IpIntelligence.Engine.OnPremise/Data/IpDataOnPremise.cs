@@ -225,11 +225,14 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
 
             if (results != null)
             {
-                using (var value = results.getValueAsString(propertyName))
+                using (var value = results.getValueAsUTF8String(propertyName))
                 {
                     if (value.hasValue())
                     {
-                        result.Value = value.getValue();
+                        using (var utf8value = value.getValue())
+                        {
+                            result.Value = utf8value.ToUTF8String();
+                        }
                     }
                     else
                     {
