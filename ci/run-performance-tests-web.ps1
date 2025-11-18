@@ -80,21 +80,30 @@ try {
     mkdir build
     Push-Location build
     try {
+        Write-Debug -Debug "Now in $(Get-Location)"
 
         # Build the performance tests
         Write-Output "Building performance test"
         cmake ..
         cmake --build .
 
+        Write-Debug -Debug "Now in $(Get-Location)"
+
         Write-Output "Building service"
         dotnet build "$PerfPath" -c $Configuration /p:Platform=$Arch
+
+        Write-Debug -Debug "Now in $(Get-Location)"
 
         # When running the performance tests, set the data file name manually,
         # then unset once we're done
         Write-Output "Running performance test"
 
-        ./runPerf.ps1 -c $Configuration -p $Arch -Debug
+        Write-Debug -Debug "Now in $(Get-Location)"
+        
+        ../runPerf.ps1 -c $Configuration -p $Arch -Debug -NoScriptRoot
 		
+        Write-Debug -Debug "Now in $(Get-Location)"
+
         Get-ChildItem -Path $PerfPath -Filter "summary.json" -File -Recurse | ForEach-Object {
             $destinationPath = Join-Path -Path $PerfPath/build -ChildPath $_.Name
             Copy-Item -Path $_.FullName -Destination $destinationPath -Force -ErrorAction SilentlyContinue
