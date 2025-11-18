@@ -100,7 +100,7 @@ try {
 
         Write-Debug -Debug "Now in $(Get-Location)"
         
-        ../runPerf.ps1 -c $Configuration -p $Arch -Debug
+        ../runPerf.ps1 -c $Configuration -p $Arch -Debug -NoScriptRoot
 		
         Write-Debug -Debug "Now in $(Get-Location)"
 

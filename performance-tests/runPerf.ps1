@@ -1,5 +1,10 @@
 [CmdletBinding()]
-param ($c, $d, $p)
+param (
+	$c,
+	$d,
+	$p,
+	[switch]$NoScriptRoot
+)
 
 if ($c -eq $null) {
     Write-Host "Config was not provided, defaulting to Debug."
@@ -25,7 +30,7 @@ Write-Host "Configuration         = $c"
 Write-Host "Platform              = $p"
 Write-Host "DotNet                = $d"
 
-$scriptRoot = Split-Path -Parent -Path $MyInvocation.MyCommand.Definition
+$scriptRoot = $NoScriptRoot ? (Get-Location) : (Split-Path -Parent -Path $MyInvocation.MyCommand.Definition)
 
 # Constants
 $PASSES=20000
