@@ -34,6 +34,8 @@ $CAL="calibrate"
 $PRO="process"
 $PERF="$scriptRoot/ApacheBench-prefix/src/ApacheBench-build/bin/runPerf.ps1"
 
+Write-Debug "Looking for all runPerf.ps1"
+Get-ChildItem -Recurse -File -Filter "runPerf.ps1"
 Write-Debug "Checking executable"
 Get-ChildItem $PERF
 Write-Debug "Looking for all performance_tests.dll"
