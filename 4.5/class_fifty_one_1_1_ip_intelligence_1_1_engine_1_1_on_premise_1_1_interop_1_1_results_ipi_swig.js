@@ -3,6 +3,8 @@ var class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_
     [ "Dispose", "class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_results_ipi_swig.html#abc4fa8fda5efb6021045f532e4c94c36", null ],
     [ "getValueAsIpAddress", "class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_results_ipi_swig.html#a37c44826ea7b72c3278163480bbab1c7", null ],
     [ "getValueAsIpAddress", "class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_results_ipi_swig.html#a669e30470ceeb6c3ae9255035890d707", null ],
+    [ "getValueAsUTF8String", "class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_results_ipi_swig.html#aa69692fb1a947ecf08ce7fa79a24297b", null ],
+    [ "getValueAsUTF8String", "class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_results_ipi_swig.html#a5bf6b799933693caea950bd2c78e3719", null ],
     [ "getValuesAsWeightedBoolList", "class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_results_ipi_swig.html#a3b1e6423eaa7abe6db29cf4fedba71c3", null ],
     [ "getValuesAsWeightedBoolList", "class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_results_ipi_swig.html#a2c1237f08eb083b807f5ffb6c17d3f68", null ],
     [ "getValuesAsWeightedDoubleList", "class_fifty_one_1_1_ip_intelligence_1_1_engine_1_1_on_premise_1_1_interop_1_1_results_ipi_swig.html#a05edd4ce572545a1bbbd73f478aafa1c", null ],
