@@ -1,4 +1,4 @@
-name: Nightly Pull Requests
+name: Pull Requests
 
 on:
   workflow_dispatch:
@@ -12,7 +12,8 @@ on:
         default: false
 
 jobs:
-  NightlyPullRequests:
+  PullRequests:
+    name: Pull Requests
     uses: 51Degrees/common-ci/.github/workflows/nightly-pull-requests.yml@main
     with:
       repo-name: ${{ github.event.repository.name }}

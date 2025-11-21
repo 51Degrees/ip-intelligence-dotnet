@@ -1,4 +1,4 @@
-name: Nightly Publish
+name: Publish
 
 on:
   workflow_dispatch:
@@ -13,7 +13,7 @@ on:
 
 jobs:
   Publish:
-    name: Nightly Publish
+    name: Publish
     uses: 51Degrees/common-ci/.github/workflows/nightly-publish.yml@main
     with:
       repo-name: ${{ github.event.repository.name }}
