@@ -130,13 +130,13 @@ namespace FiftyOne.IpIntelligence.Shared
 		/// </summary>
 		public IAspectPropertyValue<string> RegisteredCountry { get { return GetAs<IAspectPropertyValue<string>>("RegisteredCountry"); } }
 		/// <summary>
-		/// The confidence in the town and country provided.
-		/// </summary>
-		public IAspectPropertyValue<string> LocationConfidence { get { return GetAs<IAspectPropertyValue<string>>("LocationConfidence"); } }
-		/// <summary>
-		/// Radius in kilometers of the circle centred around the most probable location that encompasses the entire area(s). See Areas property. This will likely be a very large distance. It is recommend to use the AccuracyRadiusMin property.
+		/// Radius in kilometers of the circle centred around the most probable location that encompasses the entire area. Where multiple areas are returned, this will only cover the area the most probable location is in. See Areas property. This will likely be a very large distance. It is recommend to use the AccuracyRadiusMin property.
 		/// </summary>
 		public IAspectPropertyValue<int> AccuracyRadiusMax { get { return GetAs<IAspectPropertyValue<int>>("AccuracyRadiusMax"); } }
+		/// <summary>
+		/// Radius in kilometers of the largest circle centred around the most probable location that fits within the area. Where multiple areas are returned, only the area that the most probable location falls within is considered. See Areas property.
+		/// </summary>
+		public IAspectPropertyValue<int> AccuracyRadiusMin { get { return GetAs<IAspectPropertyValue<int>>("AccuracyRadiusMin"); } }
 		/// <summary>
 		/// Average latitude of the IP. For privacy, this is randomized within around 1 kilometer of the result. Randomized result will change only once per day.
 		/// </summary>
@@ -149,38 +149,6 @@ namespace FiftyOne.IpIntelligence.Shared
 		/// Any shapes associated with the location. Usually this is the area which the IP range covers. This is returned as a WKT String stored as a reduced format of WKB.
 		/// </summary>
 		public IAspectPropertyValue<WktString> Areas { get { return GetAs<IAspectPropertyValue<WktString>>("Areas"); } }
-		/// <summary>
-		/// The name of the country that the supplied location is in.
-		/// </summary>
-		public IAspectPropertyValue<string> Country { get { return GetAs<IAspectPropertyValue<string>>("Country"); } }
-		/// <summary>
-		/// The 2-character ISO 3166-1 code of the country that the supplied location is in.
-		/// </summary>
-		public IAspectPropertyValue<string> CountryCode { get { return GetAs<IAspectPropertyValue<string>>("CountryCode"); } }
-		/// <summary>
-		/// The 3-character ISO 3166-1 alpha-3 code of the country that the supplied location is in.
-		/// </summary>
-		public IAspectPropertyValue<string> CountryCode3 { get { return GetAs<IAspectPropertyValue<string>>("CountryCode3"); } }
-		/// <summary>
-		/// The name of the geographical region that the supplied location is in.
-		/// </summary>
-		public IAspectPropertyValue<string> Region { get { return GetAs<IAspectPropertyValue<string>>("Region"); } }
-		/// <summary>
-		/// The offset from UTC in minutes in the supplied location, at the time that the value is produced.
-		/// </summary>
-		public IAspectPropertyValue<int> TimeZoneOffset { get { return GetAs<IAspectPropertyValue<int>>("TimeZoneOffset"); } }
-		/// <summary>
-		/// The name of the town that the supplied location is in.
-		/// </summary>
-		public IAspectPropertyValue<string> Town { get { return GetAs<IAspectPropertyValue<string>>("Town"); } }
-		/// <summary>
-		/// The name of the state that the supplied location is in.
-		/// </summary>
-		public IAspectPropertyValue<string> State { get { return GetAs<IAspectPropertyValue<string>>("State"); } }
-		/// <summary>
-		/// Radius in kilometers of the largest circle centred around the most probable location that fits within the area. Where multiple areas are returned, only the area that the most probable location falls within is considered. See Areas property.
-		/// </summary>
-		public IAspectPropertyValue<int> AccuracyRadiusMin { get { return GetAs<IAspectPropertyValue<int>>("AccuracyRadiusMin"); } }
 		/// <summary>
 		/// Indicates the type of connection being used. Returns either Broadband, Cellular, or Hosting and Anonymous.
 		/// </summary>
@@ -226,6 +194,18 @@ namespace FiftyOne.IpIntelligence.Shared
 		/// </summary>
 		public IAspectPropertyValue<string> County { get { return GetAs<IAspectPropertyValue<string>>("County"); } }
 		/// <summary>
+		/// The name of the country that the supplied location is in.
+		/// </summary>
+		public IAspectPropertyValue<string> Country { get { return GetAs<IAspectPropertyValue<string>>("Country"); } }
+		/// <summary>
+		/// The 2-character ISO 3166-1 code of the country that the supplied location is in.
+		/// </summary>
+		public IAspectPropertyValue<string> CountryCode { get { return GetAs<IAspectPropertyValue<string>>("CountryCode"); } }
+		/// <summary>
+		/// The 3-character ISO 3166-1 alpha-3 code of the country that the supplied location is in.
+		/// </summary>
+		public IAspectPropertyValue<string> CountryCode3 { get { return GetAs<IAspectPropertyValue<string>>("CountryCode3"); } }
+		/// <summary>
 		/// The Alpha-3 ISO 4217 code of the currency associated with the supplied location.
 		/// </summary>
 		public IAspectPropertyValue<string> CurrencyCode { get { return GetAs<IAspectPropertyValue<string>>("CurrencyCode"); } }
@@ -246,9 +226,29 @@ namespace FiftyOne.IpIntelligence.Shared
 		/// </summary>
 		public IAspectPropertyValue<string> LanguageCode { get { return GetAs<IAspectPropertyValue<string>>("LanguageCode"); } }
 		/// <summary>
+		/// The confidence in the town and country provided.
+		/// </summary>
+		public IAspectPropertyValue<string> LocationConfidence { get { return GetAs<IAspectPropertyValue<string>>("LocationConfidence"); } }
+		/// <summary>
+		/// The name of the geographical region that the supplied location is in.
+		/// </summary>
+		public IAspectPropertyValue<string> Region { get { return GetAs<IAspectPropertyValue<string>>("Region"); } }
+		/// <summary>
 		/// The time zone at the supplied location in the IANA Time Zone format.
 		/// </summary>
 		public IAspectPropertyValue<string> TimeZoneIana { get { return GetAs<IAspectPropertyValue<string>>("TimeZoneIana"); } }
+		/// <summary>
+		/// The offset from UTC in minutes in the supplied location, at the time that the value is produced.
+		/// </summary>
+		public IAspectPropertyValue<int> TimeZoneOffset { get { return GetAs<IAspectPropertyValue<int>>("TimeZoneOffset"); } }
+		/// <summary>
+		/// The name of the town that the supplied location is in.
+		/// </summary>
+		public IAspectPropertyValue<string> Town { get { return GetAs<IAspectPropertyValue<string>>("Town"); } }
+		/// <summary>
+		/// The name of the state that the supplied location is in.
+		/// </summary>
+		public IAspectPropertyValue<string> State { get { return GetAs<IAspectPropertyValue<string>>("State"); } }
 		/// <summary>
 		/// The name of the suburb that the supplied location is in.
 		/// </summary>
