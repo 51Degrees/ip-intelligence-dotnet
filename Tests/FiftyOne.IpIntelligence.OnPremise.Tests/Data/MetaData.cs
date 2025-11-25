@@ -51,11 +51,15 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Core.Data
             => $"{methodInfo.Name}_{(PerformanceProfiles)data[0]}";
 
         // Note that the 'ReloadMemory' tests are split into separate methods
-        // rather than using the 'DataTestMethod' approach because they 
+        // rather than using the 'DataTestMethod' approach because they
         // often fail due to running out of memory.
         // This way, they do not run into the same problem for some reason.
 
+        // Disabled due to crash caused by unsorted profileOffsets collection in native library
+        // after parallel export. Binary search fails and causes null pointer dereference.
+        // See: https://github.com/51Degrees/Pearl/issues/690
         [TestMethod]
+        [Ignore("Disabled due to native library bug - profileOffsets not sorted after parallel export (Pearl#690)")]
         [DynamicData(nameof(ProfilesToTest), DynamicDataDisplayName = nameof(DisplayNameForTestCase))]
         public void MetaData_OnPremise_Core_Reload(PerformanceProfiles profile, bool skipOnNonWindows)
         {
