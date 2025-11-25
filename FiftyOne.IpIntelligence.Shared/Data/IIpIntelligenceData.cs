@@ -36,7 +36,7 @@ namespace FiftyOne.IpIntelligence
 	public interface IIpIntelligenceData : IAspectData
 	{
 		/// <summary>
-		/// Radius in kilometers of the circle centred around the most probable location that encompasses the entire area(s). See Areas property. This will likely be a very large distance. It is recommend to use the AccuracyRadiusMin property.
+		/// Radius in kilometers of the circle centred around the most probable location that encompasses the entire area. Where multiple areas are returned, this will only cover the area the most probable location is in. See Areas property. This will likely be a very large distance. It is recommend to use the AccuracyRadiusMin property.
 		/// </summary>
 		IAspectPropertyValue<int> AccuracyRadiusMax { get; }
 		/// <summary>
