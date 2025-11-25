@@ -27,7 +27,7 @@ jobs:
     secrets:
       token: ${{ secrets.ACCESS_TOKEN }}
       data-key: ${{ secrets.DEVICE_DETECTION_KEY }}
-      data-url: ${{ secrets.IPI_DATA_FILE_SAMPLE_URL }}
+      data-url: ${{ secrets.IPI_DATA_FILE_URL }}
 
   PackageUpdate:
     name: Nightly Package Update
@@ -63,7 +63,7 @@ jobs:
     secrets:
       token: ${{ secrets.ACCESS_TOKEN }}
       DeviceDetection: ${{ secrets.DEVICE_DETECTION_KEY }}
-      DeviceDetectionUrl: ${{ secrets.IPI_DATA_FILE_SAMPLE_URL }}
+      DeviceDetectionUrl: ${{ secrets.IPI_DATA_FILE_URL }}
       TestResourceKey: ${{ secrets.SUPER_RESOURCE_KEY}}
       AcceptCHBrowserKey: ${{ secrets.ACCEPTCH_BROWSER_KEY}}
       AcceptCHHardwareKey: ${{ secrets.ACCEPTCH_HARDWARE_KEY}}
@@ -90,7 +90,7 @@ jobs:
       CodeSigningKeyVaultClientSecret: ${{ secrets.CODE_SIGNING_KEY_VAULT_CLIENT_SECRET }}
       CodeSigningKeyVaultCertificateName: ${{ secrets.CODE_SIGNING_KEY_VAULT_CERTIFICATE_NAME }}
       DeviceDetection: ${{ secrets.DEVICE_DETECTION_KEY }}
-      DeviceDetectionUrl: ${{ secrets.IPI_DATA_FILE_SAMPLE_URL }}
+      DeviceDetectionUrl: ${{ secrets.IPI_DATA_FILE_URL }}
       TestResourceKey: ${{ secrets.SUPER_RESOURCE_KEY}}
       AcceptCHBrowserKey: ${{ secrets.ACCEPTCH_BROWSER_KEY}}
       AcceptCHHardwareKey: ${{ secrets.ACCEPTCH_HARDWARE_KEY}}
