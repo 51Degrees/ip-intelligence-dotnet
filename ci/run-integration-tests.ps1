@@ -52,7 +52,7 @@ $SetupArgs = @{
     BuildMethod = $BuildMethod
     Keys = $Keys
 }
-& ./$ExamplesRepo/ci/setup-environment.ps1 @SetupArgs -Debug
+& ./$ExamplesRepo/ci/setup-environment.ps1 @SetupArgs
 
 Write-Output "`n------- SETUP ENVIRONMENT END -------`n"
 
@@ -181,7 +181,7 @@ $RunTestsArgs = $BuildTestsArgs + @{
 }
 try {
     $ErrorActionPreference = "Continue"
-    & ./$ExamplesRepo/ci/run-unit-tests.ps1 @RunTestsArgs -Debug
+    & ./$ExamplesRepo/ci/run-unit-tests.ps1 @RunTestsArgs
 } finally {
     $ErrorActionPreference = "Stop"
 }
