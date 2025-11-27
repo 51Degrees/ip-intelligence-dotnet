@@ -85,10 +85,10 @@ function Update-CsprojRefs {
         $_.Frameworks
     } | ForEach-Object {
         $_.TopLevelPackages
-    } | ForEach-Object {
+    } | Where-Object { $_ } | ForEach-Object {
         $_.id
     } | Where-Object {
-        $_.StartsWith("FiftyOne.IpIntelligence") 
+        $_ -and $_.StartsWith("FiftyOne.IpIntelligence")
     }
     foreach ($NextToRemove in $ToRemove) {
         Write-Output "Removing $NextToRemove..."
