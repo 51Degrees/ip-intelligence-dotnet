@@ -218,7 +218,7 @@ namespace FiftyOne.IpIntelligence.Shared
 		/// </summary>
 		public IAspectPropertyValue<string> DialCode { get { return GetAs<IAspectPropertyValue<string>>("DialCode"); } }
 		/// <summary>
-		/// The confidence that the IP address is a human user versus associated with hosting. A 1-10 value where; 1-3: Low confidence the user is human, 4-6: Medium confidence, 7-10: High confidence.
+		/// The confidence that the IP address is a human user versus associated with hosting. A 0-10 value where; 0-3: Low confidence the user is human, 4-6: Medium confidence, 7-10: High confidence. A -1 value indicates that the probability is unknown.
 		/// </summary>
 		public IAspectPropertyValue<int> HumanProbability { get { return GetAs<IAspectPropertyValue<int>>("HumanProbability"); } }
 		/// <summary>
