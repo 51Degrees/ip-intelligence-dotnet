@@ -16,7 +16,7 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>51degrees;pipeline;data-service;ip-intelligence;ip-address;cloud</PackageTags>
 	<Title>51Degrees IP Intelligence Cloud Service for the Pipeline API</Title>
-    <Description>The 51Degrees Pipeline API provides a fast, modern architecture for consuming real-time digital data services. IP intelligence will provide detailed information about about the source IP address of the requests that were received by your website or service, such as location, Autonomous System Number and etc.</Description>
+    <Description>This package provides the Cloud implementation of 51Degrees IP Intelligence for the Pipeline API. It uses a hosted 51Degrees service to enrich incoming requests with IP address information, including geographic location and Autonomous System Number (ASN). Use this package when you want IP Intelligence without running a local on-premise engine, as an alternative to legacy IP Intelligence services such as MaxMind or IPinfo.</Description>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='Debug'">
