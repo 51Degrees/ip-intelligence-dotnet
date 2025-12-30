@@ -16,7 +16,7 @@
     <PackageLicenseExpression>EUPL-1.2</PackageLicenseExpression>
     <PackageIconUrl>https://51degrees.com/portals/0/Logos/Square%20Logo.png?width=64</PackageIconUrl>
     <Copyright>51Degrees Mobile Experts Limited</Copyright>
-    <PackageTags>51degrees;pipeline;data-service;ip-intelligence;ip-address</PackageTags>
+    <PackageTags>51degrees;pipeline;pipeline-api;ip-intelligence;ip;ip-address;ip-geolocation;geolocation;geoip;engine;on-premise;onprem;local;offline</PackageTags>
     <RepositoryUrl>https://github.com/51Degrees/ip-intelligence-dotnet</RepositoryUrl>
     <PackageProjectUrl>www.51degrees.com</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
