@@ -14,7 +14,7 @@
     <PackageIcon>51d-logo.png</PackageIcon>
     <RepositoryUrl>https://github.com/51Degrees/ip-intelligence-dotnet</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>51degrees,pipeline,data service,ip intelligence,ip address,cloud</PackageTags>
+    <PackageTags>51degrees;pipeline;data-service;ip-intelligence;ip-address;cloud</PackageTags>
     <Description>The 51Degrees Pipeline API provides a fast, modern architecture for consuming real-time digital data services. IP intelligence will provide detailed information about about the source IP address of the requests that were received by your website or service, such as location, Autonomous System Number and etc.</Description>
   </PropertyGroup>
 
