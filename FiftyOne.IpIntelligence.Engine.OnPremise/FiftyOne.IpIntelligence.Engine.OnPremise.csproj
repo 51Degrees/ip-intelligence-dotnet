@@ -10,7 +10,7 @@
     
     <!-- NuGet package properties -->
     <PackageId>FiftyOne.IpIntelligence.Engine.OnPremise</PackageId>
-    <Title>On-premise IP intelligence service for the 51Degrees Pipeline API</Title>
+    <Title>51Degrees IP Intelligence On-Premise Engine for the Pipeline API</Title>
     <Description>This package provides the On-premise IP Intelligence engine for the 51Degrees Pipeline API. It enriches incoming requests with IP address information, including geographic location and Autonomous System Number (ASN). Use this package when you want a local On-premise IP Intelligence engine, as an alternative to legacy IP intelligence services such as MaxMind or IPinfo.</Description>
     <Authors>51Degrees Engineering</Authors>
     <PackageLicenseExpression>EUPL-1.2</PackageLicenseExpression>
