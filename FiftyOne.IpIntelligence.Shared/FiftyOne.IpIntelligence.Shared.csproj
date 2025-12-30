@@ -11,7 +11,7 @@
     
     <!-- NuGet package properties -->
     <PackageId>FiftyOne.IpIntelligence.Shared</PackageId>
-    <Title>Shared code library for IP intelligence services for the 51Degrees Pipeline API</Title>
+    <Title>51Degrees IP Intelligence Shared Components for the Pipeline API</Title>
     <Description>Shared classes used by the 51Degrees IP Intelligence engine for the Pipeline API.</Description>
     <Authors>51Degrees Engineering</Authors>
     <PackageLicenseExpression>EUPL-1.2</PackageLicenseExpression>
