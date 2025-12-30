@@ -11,7 +11,7 @@
 
 	<!-- NuGet package properties -->
 	<PackageId>FiftyOne.IpIntelligence</PackageId>
-	<Title>Shared code library for IP intelligence services for the 51Degrees Pipeline API</Title>
+	<Title>51Degrees IP Intelligence Pipeline Configuration for the Pipeline API</Title>
 	<Description>Pipeline builder components for integrating 51Degrees IP Intelligence with the Pipeline API. This package provides builders for configuring IP Intelligence pipelines using either the Cloud or On-premise implementations, based on IP address data.</Description>
 	<Authors>51Degrees Engineering</Authors>
 	<PackageLicenseExpression>EUPL-1.2</PackageLicenseExpression>
