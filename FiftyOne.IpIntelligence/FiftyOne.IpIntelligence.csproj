@@ -12,7 +12,7 @@
 	<!-- NuGet package properties -->
 	<PackageId>FiftyOne.IpIntelligence</PackageId>
 	<Title>Shared code library for IP intelligence services for the 51Degrees Pipeline API</Title>
-	<Description>This package provides the Cloud implementation of 51Degrees IP Intelligence for the Pipeline API. It uses a hosted 51Degrees service to enrich incoming requests with IP address information, including geographic location and Autonomous System Number (ASN). Use this package when you want IP Intelligence without running a local on-premise engine, as an alternative to legacy IP Intelligence services such as MaxMind or IPinfo.</Description>
+	<Description>Pipeline builder components for integrating 51Degrees IP Intelligence with the Pipeline API. This package provides builders for configuring IP Intelligence pipelines using either the Cloud or On-premise implementations, based on IP address data.</Description>
 	<Authors>51Degrees Engineering</Authors>
 	<PackageLicenseExpression>EUPL-1.2</PackageLicenseExpression>
 	<PackageIconUrl>https://51degrees.com/portals/0/Logos/Square%20Logo.png?width=64</PackageIconUrl>
