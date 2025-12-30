@@ -14,7 +14,7 @@
     <PackageIcon>51d-logo.png</PackageIcon>
     <RepositoryUrl>https://github.com/51Degrees/ip-intelligence-dotnet</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>51degrees;pipeline;data-service;ip-intelligence;ip-address;cloud</PackageTags>
+    <PackageTags>51degrees;pipeline;pipeline-api;ip-intelligence;ip;ip-address;ip-geolocation;geolocation;geoip;cloud;hosted;saas;api</PackageTags>
 	<Title>51Degrees IP Intelligence Cloud Service for the Pipeline API</Title>
     <Description>This package provides the Cloud implementation of 51Degrees IP Intelligence for the Pipeline API. It uses a hosted 51Degrees service to enrich incoming requests with IP address information, including geographic location and Autonomous System Number (ASN). Use this package when you want IP Intelligence without running a local on-premise engine, as an alternative to legacy IP Intelligence services such as MaxMind or IPinfo.</Description>
   </PropertyGroup>
