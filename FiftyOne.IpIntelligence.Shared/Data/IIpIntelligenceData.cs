@@ -120,6 +120,22 @@ namespace FiftyOne.IpIntelligence
 		/// </summary>
 		IAspectPropertyValue<bool> IsHosted { get; }
 		/// <summary>
+		/// The ISO 3166-2 code for the supplied location. This is using the 'ISO3166-2-lvl4' property from OpenStreetMap.
+		/// </summary>
+		IAspectPropertyValue<string> Iso31662Lvl4 { get; }
+		/// <summary>
+		/// The alphanumeric code representing the subdivision from the ISO 3166-2 code of the supplied location. This is using the 'ISO3166-2-lvl4' property from OpenStreetMap.
+		/// </summary>
+		IAspectPropertyValue<string> Iso31662Lvl4SubdivisionOnly { get; }
+		/// <summary>
+		/// The ISO 3166-2 code for the supplied location. This is using the 'ISO3166-2-lvl8' property from OpenStreetMap.
+		/// </summary>
+		IAspectPropertyValue<string> Iso31662Lvl8 { get; }
+		/// <summary>
+		/// The alphanumeric code representing the subdivision from the ISO 3166-2 code of the supplied location. This is using the 'ISO3166-2-lvl8' property from OpenStreetMap.
+		/// </summary>
+		IAspectPropertyValue<string> Iso31662Lvl8SubdivisionOnly { get; }
+		/// <summary>
 		/// Indicates whether the IP address is associated with a Proxy server.
 		/// </summary>
 		IAspectPropertyValue<bool> IsProxy { get; }
