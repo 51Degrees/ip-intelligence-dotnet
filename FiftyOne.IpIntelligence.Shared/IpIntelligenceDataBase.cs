@@ -88,6 +88,10 @@ namespace FiftyOne.IpIntelligence.Shared
 				{ "IsCellular", typeof(IAspectPropertyValue<bool>) },
 				{ "IsEu", typeof(IAspectPropertyValue<bool>) },
 				{ "IsHosted", typeof(IAspectPropertyValue<bool>) },
+				{ "Iso31662Lvl4", typeof(IAspectPropertyValue<string>) },
+				{ "Iso31662Lvl4SubdivisionOnly", typeof(IAspectPropertyValue<string>) },
+				{ "Iso31662Lvl8", typeof(IAspectPropertyValue<string>) },
+				{ "Iso31662Lvl8SubdivisionOnly", typeof(IAspectPropertyValue<string>) },
 				{ "IsProxy", typeof(IAspectPropertyValue<bool>) },
 				{ "IsPublicRouter", typeof(IAspectPropertyValue<bool>) },
 				{ "IsTor", typeof(IAspectPropertyValue<bool>) },
@@ -181,6 +185,22 @@ namespace FiftyOne.IpIntelligence.Shared
 		/// Indicates whether the IP address is associated with a TOR server.
 		/// </summary>
 		public IAspectPropertyValue<bool> IsTor { get { return GetAs<IAspectPropertyValue<bool>>("IsTor"); } }
+		/// <summary>
+		/// The ISO 3166-2 code for the supplied location. This is using the 'ISO3166-2-lvl4' property from OpenStreetMap.
+		/// </summary>
+		public IAspectPropertyValue<string> Iso31662Lvl4 { get { return GetAs<IAspectPropertyValue<string>>("Iso31662Lvl4"); } }
+		/// <summary>
+		/// The alphanumeric code representing the subdivision from the ISO 3166-2 code of the supplied location. This is using the 'ISO3166-2-lvl4' property from OpenStreetMap.
+		/// </summary>
+		public IAspectPropertyValue<string> Iso31662Lvl4SubdivisionOnly { get { return GetAs<IAspectPropertyValue<string>>("Iso31662Lvl4SubdivisionOnly"); } }
+		/// <summary>
+		/// The ISO 3166-2 code for the supplied location. This is using the 'ISO3166-2-lvl8' property from OpenStreetMap.
+		/// </summary>
+		public IAspectPropertyValue<string> Iso31662Lvl8 { get { return GetAs<IAspectPropertyValue<string>>("Iso31662Lvl8"); } }
+		/// <summary>
+		/// The alphanumeric code representing the subdivision from the ISO 3166-2 code of the supplied location. This is using the 'ISO3166-2-lvl8' property from OpenStreetMap.
+		/// </summary>
+		public IAspectPropertyValue<string> Iso31662Lvl8SubdivisionOnly { get { return GetAs<IAspectPropertyValue<string>>("Iso31662Lvl8SubdivisionOnly"); } }
 		/// <summary>
 		/// The 3-character ISO 3166-1 continent code for the supplied location.
 		/// </summary>
