@@ -922,7 +922,7 @@
         </member>
         <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngineBuilder.CreateEngine(Microsoft.Extensions.Logging.ILoggerFactory,System.Func{FiftyOne.Pipeline.Core.FlowElements.IPipeline,FiftyOne.Pipeline.Core.FlowElements.FlowElementBase{FiftyOne.IpIntelligence.Engine.OnPremise.Data.IIpDataOnPremise,FiftyOne.Pipeline.Engines.FiftyOne.Data.IFiftyOneAspectPropertyMetaData},FiftyOne.IpIntelligence.Engine.OnPremise.Data.IIpDataOnPremise},System.String)">
             <summary>
-            Creates a new instance of <see cref="!:DeviceDetectionHashEngine"/>.
+            Creates a new instance of <see cref="T:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine"/>.
             </summary>
             <param name="loggerFactory"></param>
             <param name="deviceDataFactory"></param>

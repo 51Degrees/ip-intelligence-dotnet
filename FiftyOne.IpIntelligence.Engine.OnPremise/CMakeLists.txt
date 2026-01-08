@@ -4,7 +4,7 @@ set (CMAKE_C_STANDARD 11)
 set (CMAKE_CXX_STANDARD 11)
 
 # Include the C API
-project(IpIntelligenceHashEngine VERSION 4.3.0 LANGUAGES CXX C)
+project(IpIntelligenceEngine VERSION 4.3.0 LANGUAGES CXX C)
 
 if (NOT MSVC)
     add_compile_options(-fPIC)
@@ -70,11 +70,11 @@ if (RebuildSwig)
     endif()
 endif()
 
-add_library(fiftyone-ipi-hash-dotnet SHARED
+add_library(fiftyone-ipi-dotnet SHARED
     ${CMAKE_CURRENT_LIST_DIR}/IpIntelligenceEngineSwig_csharp.cpp)
 
 if(UNIX)
-    set_target_properties(fiftyone-ipi-hash-dotnet
+    set_target_properties(fiftyone-ipi-dotnet
         PROPERTIES
         RUNTIME_OUTPUT_DIRECTORY "."
         LIBRARY_OUTPUT_DIRECTORY "./${CMAKE_BUILD_TYPE}"
@@ -83,7 +83,7 @@ if(UNIX)
         SUFFIX ".dll"
     )
 else()
-    set_target_properties(fiftyone-ipi-hash-dotnet
+    set_target_properties(fiftyone-ipi-dotnet
         PROPERTIES
         RUNTIME_OUTPUT_DIRECTORY "."
         LIBRARY_OUTPUT_DIRECTORY "."
@@ -92,12 +92,12 @@ else()
     )
 endif()
 
-target_link_libraries(fiftyone-ipi-hash-dotnet fiftyone-ip-intelligence-cxx)
+target_link_libraries(fiftyone-ipi-dotnet fiftyone-ip-intelligence-cxx)
 if (MSVC)
     # /wd4100 needed to disable "unreferenced formal parameter" which comes from the SWIG file
-    target_compile_options(fiftyone-ipi-hash-dotnet PRIVATE "/D_CRT_SECURE_NO_WARNINGS" "/W4" "/WX" "/wd4100")
+    target_compile_options(fiftyone-ipi-dotnet PRIVATE "/D_CRT_SECURE_NO_WARNINGS" "/W4" "/WX" "/wd4100")
 else()
     add_compile_options(-fPIC)
-    target_compile_options(fiftyone-ipi-hash-dotnet INTERFACE "-static-libgcc -static-libstdc++")
-    target_link_options(fiftyone-ipi-hash-dotnet INTERFACE "-static-libgcc -static-libstdc++")
+    target_compile_options(fiftyone-ipi-dotnet INTERFACE "-static-libgcc -static-libstdc++")
+    target_link_options(fiftyone-ipi-dotnet INTERFACE "-static-libgcc -static-libstdc++")
 endif()

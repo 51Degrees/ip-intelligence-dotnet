@@ -129,6 +129,23 @@
             <param name="valueType">Target type.</param>
             <returns>Converted value.</returns>
         </member>
+        <member name="M:FiftyOne.IpIntelligence.Cloud.FlowElements.IpiCloudEngine.GetPropertyType(FiftyOne.Pipeline.Core.Data.PropertyMetaData,System.Type)">
+            <summary>
+            Try to get the type of a property from the information
+            returned by the cloud service. This should be overridden
+            if anything other than simple types are required.
+            </summary>
+            <param name="propertyMetaData">
+            The <see cref="T:FiftyOne.Pipeline.Core.Data.PropertyMetaData"/> instance to translate.
+            </param>
+            <param name="parentObjectType">
+            The type of the object on which this property exists.
+            </param>
+            <returns>
+            The type of the property determined from the Type field
+            of propertyMetaData.
+            </returns>
+        </member>
         <member name="T:FiftyOne.IpIntelligence.Cloud.FlowElements.IpiCloudEngineBuilder">
             <summary>
             Fluent builder used to create a cloud-based IP intelligence
