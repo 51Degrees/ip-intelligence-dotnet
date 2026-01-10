@@ -497,6 +497,85 @@
             <see cref="T:FiftyOne.Pipeline.Engines.Data.IAspectPropertyValue"/> instance.
             </returns>
         </member>
+        <member name="M:FiftyOne.IpIntelligence.Shared.Data.IpDataBaseOnPremise`1.GetValueAsString(System.String)">
+            <summary>
+            Get string value this instance has for the specified property
+            </summary>
+            <param name="propertyName">
+            The name of the property to get value for.
+            </param>
+            <returns>
+            A <see cref="T:System.String"/> wrapped in a 
+            <see cref="T:FiftyOne.Pipeline.Engines.Data.IAspectPropertyValue"/> instance.
+            </returns>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Shared.Data.IpDataBaseOnPremise`1.GetValueAsWktString(System.String)">
+            <summary>
+            Get WKT string value this instance has for the specified property
+            </summary>
+            <param name="propertyName">
+            The name of the property to get value for.
+            </param>
+            <returns>
+            A <see cref="T:FiftyOne.Pipeline.Core.Data.WktString"/> wrapped in a 
+            <see cref="T:FiftyOne.Pipeline.Engines.Data.IAspectPropertyValue"/> instance.
+            </returns>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Shared.Data.IpDataBaseOnPremise`1.GetValueAsInteger(System.String)">
+            <summary>
+            Get int value this instance has for the specified property
+            </summary>
+            <param name="propertyName">
+            The name of the property to get value for.
+            </param>
+            <returns>
+            A <see cref="T:System.Int32"/> wrapped in a 
+            <see cref="T:FiftyOne.Pipeline.Engines.Data.IAspectPropertyValue"/> instance.
+            </returns>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Shared.Data.IpDataBaseOnPremise`1.GetValueAsFloat(System.String)">
+            <summary>
+            Get float value this instance has for the specified property
+            </summary>
+            <param name="propertyName">
+            The name of the property to get value for.
+            </param>
+            <returns>
+            A <see cref="T:System.Single"/> wrapped in a 
+            <see cref="T:FiftyOne.Pipeline.Engines.Data.IAspectPropertyValue"/> instance.
+            </returns>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Shared.Data.IpDataBaseOnPremise`1.GetValueAsDouble(System.String)">
+            <summary>
+            Get double value this instance has for the specified property
+            </summary>
+            <param name="propertyName">
+            The name of the property to get value for.
+            </param>
+            <returns>
+            A <see cref="T:System.Double"/> wrapped in a 
+            <see cref="T:FiftyOne.Pipeline.Engines.Data.IAspectPropertyValue"/> instance.
+            </returns>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Shared.Data.IpDataBaseOnPremise`1.GetValueAsBool(System.String)">
+            <summary>
+            Get bool value this instance has for the specified property
+            </summary>
+            <param name="propertyName">
+            The name of the property to get value for.
+            </param>
+            <returns>
+            A <see cref="T:System.Boolean"/> wrapped in a 
+            <see cref="T:FiftyOne.Pipeline.Engines.Data.IAspectPropertyValue"/> instance.
+            </returns>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Shared.Data.IpDataBaseOnPremise`1.GetValueAsIp(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="propertyName"></param>
+            <returns></returns>
+        </member>
         <member name="M:FiftyOne.IpIntelligence.Shared.Data.IpDataBaseOnPremise`1.GetValuesAsWeightedBoolList(System.String)">
             <summary>
             Get weighted bool values this instance has for the specified property
@@ -942,19 +1021,14 @@
             name of the type.
             </summary>
         </member>
-        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.IpRangeEnd">
-            <summary>
-            End of the IP range to which the evidence IP belongs.
-            </summary>
-        </member>
         <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.IpRangeStart">
             <summary>
             Start of the IP range to which the evidence IP belongs.
             </summary>
         </member>
-        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.RegisteredCountry">
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.IpRangeEnd">
             <summary>
-            Country code of the registered range.
+            End of the IP range to which the evidence IP belongs.
             </summary>
         </member>
         <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.RegisteredName">
@@ -967,14 +1041,109 @@
             Registered owner of the range.
             </summary>
         </member>
-        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.AccuracyRadius">
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.RegisteredCountry">
             <summary>
-            Accuracy radius of the matched location in meters.
+            Country code of the registered range.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.AccuracyRadiusMax">
+            <summary>
+            Radius in kilometers of the circle centred around the most probable location that encompasses the entire area. Where multiple areas are returned, this will only cover the area the most probable location is in. See Areas property. This will likely be a very large distance. It is recommend to use the AccuracyRadiusMin property.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.AccuracyRadiusMin">
+            <summary>
+            Radius in kilometers of the largest circle centred around the most probable location that fits within the area. Where multiple areas are returned, only the area that the most probable location falls within is considered. See Areas property.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.Latitude">
+            <summary>
+            Average latitude of the IP. For privacy, this is randomized within around 1 kilometer of the result. Randomized result will change only once per day.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.Longitude">
+            <summary>
+            Average longitude of the IP. For privacy, this is randomized within around 1 kilometer of the result. Randomized result will change only once per day.
             </summary>
         </member>
         <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.Areas">
             <summary>
-            Any shapes associated with the location. Usually this is the area which the IP range covers.
+            Any shapes associated with the location. Usually this is the area which the IP range covers. This is returned as a WKT String stored as a reduced format of WKB.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.ConnectionType">
+            <summary>
+            Indicates the type of connection being used. Returns either Broadband, Cellular, or Hosting and Anonymous.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.IsBroadband">
+            <summary>
+            Indicates whether the IP address is associated with a broadband connection. Includes DSL, Cable, Fibre, and Satellite connections.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.IsCellular">
+            <summary>
+            Indicates whether the IP address is associated with a cellular network.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.IsHosted">
+            <summary>
+            Indicates whether the IP address is associated with hosting. Includes both hosting and anonymised connections such as hosting networks, hosting ASNs, VPNs, proxies, TOR networks, and unreachable IP addresses.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.IsVPN">
+            <summary>
+            Indicates whether the IP address is associated with a VPN server.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.IsProxy">
+            <summary>
+            Indicates whether the IP address is associated with a Proxy server.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.IsPublicRouter">
+            <summary>
+            Indicates whether the IP address is associated with a public router.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.IsTor">
+            <summary>
+            Indicates whether the IP address is associated with a TOR server.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.Iso31662Lvl4">
+            <summary>
+            The ISO 3166-2 code for the supplied location. This is using the 'ISO3166-2-lvl4' property from OpenStreetMap.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.Iso31662Lvl4SubdivisionOnly">
+            <summary>
+            The alphanumeric code representing the subdivision from the ISO 3166-2 code of the supplied location. This is using the 'ISO3166-2-lvl4' property from OpenStreetMap.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.Iso31662Lvl8">
+            <summary>
+            The ISO 3166-2 code for the supplied location. This is using the 'ISO3166-2-lvl8' property from OpenStreetMap.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.Iso31662Lvl8SubdivisionOnly">
+            <summary>
+            The alphanumeric code representing the subdivision from the ISO 3166-2 code of the supplied location. This is using the 'ISO3166-2-lvl8' property from OpenStreetMap.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.ContinentCode2">
+            <summary>
+            The 3-character ISO 3166-1 continent code for the supplied location.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.ContinentName">
+            <summary>
+            The name of the continent the supplied location is in.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.County">
+            <summary>
+            The name of the county that the supplied location is in. In this case, a county is defined as an administrative sub-section of a country or state.
             </summary>
         </member>
         <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.Country">
@@ -992,14 +1161,34 @@
             The 3-character ISO 3166-1 alpha-3 code of the country that the supplied location is in.
             </summary>
         </member>
-        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.Latitude">
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.CurrencyCode">
             <summary>
-            Average latitude of the IP. For privacy, this is randomized within around 1 mile of the result. Randomized result will change only once per day.
+            The Alpha-3 ISO 4217 code of the currency associated with the supplied location.
             </summary>
         </member>
-        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.Longitude">
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.IsEu">
             <summary>
-            Average longitude of the IP. For privacy, this is randomized within around 1 mile of the result. Randomized result will change only once per day.
+            Indicates whether the country of the supplied location is within the European Union.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.DialCode">
+            <summary>
+            ITU international telephone numbering plan code for the country.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.HumanProbability">
+            <summary>
+            The confidence that the IP address is a human user versus associated with hosting. A 0-10 value where; 0-3: Low confidence the user is human, 4-6: Medium confidence, 7-10: High confidence. A -1 value indicates that the probability is unknown.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.LanguageCode">
+            <summary>
+            The Alpha-2 ISO 639 Language code associated with the supplied location.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.LocationConfidence">
+            <summary>
+            The confidence in the town and country provided.
             </summary>
         </member>
         <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.Region">
@@ -1007,9 +1196,9 @@
             The name of the geographical region that the supplied location is in.
             </summary>
         </member>
-        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.State">
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.TimeZoneIana">
             <summary>
-            The name of the state that the supplied location is in.
+            The time zone at the supplied location in the IANA Time Zone format.
             </summary>
         </member>
         <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.TimeZoneOffset">
@@ -1020,6 +1209,36 @@
         <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.Town">
             <summary>
             The name of the town that the supplied location is in.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.State">
+            <summary>
+            The name of the state that the supplied location is in.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.Suburb">
+            <summary>
+            The name of the suburb that the supplied location is in.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.ZipCode">
+            <summary>
+            The zip or postal code that the supplied location falls under.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.Mcc">
+            <summary>
+            The mobile country code of the network the device is connected to.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.AsnName">
+            <summary>
+            The name registered to the Asn associated with the IP address.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.Asn">
+            <summary>
+            Autonomous System Number associated with the IP address.
             </summary>
         </member>
         <member name="T:FiftyOne.IpIntelligence.Shared.Messages">
@@ -1122,14 +1341,44 @@
             This includes the network, and location.
             </summary>
         </member>
-        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.AccuracyRadius">
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.AccuracyRadiusMax">
             <summary>
-            Accuracy radius of the matched location in meters.
+            Radius in kilometers of the circle centred around the most probable location that encompasses the entire area. Where multiple areas are returned, this will only cover the area the most probable location is in. See Areas property. This will likely be a very large distance. It is recommend to use the AccuracyRadiusMin property.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.AccuracyRadiusMin">
+            <summary>
+            Radius in kilometers of the largest circle centred around the most probable location that fits within the area. Where multiple areas are returned, only the area that the most probable location falls within is considered. See Areas property.
             </summary>
         </member>
         <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.Areas">
             <summary>
-            Any shapes associated with the location. Usually this is the area which the IP range covers.
+            Any shapes associated with the location. Usually this is the area which the IP range covers. This is returned as a WKT String stored as a reduced format of WKB.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.Asn">
+            <summary>
+            Autonomous System Number associated with the IP address.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.AsnName">
+            <summary>
+            The name registered to the Asn associated with the IP address.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.ConnectionType">
+            <summary>
+            Indicates the type of connection being used. Returns either Broadband, Cellular, or Hosting and Anonymous.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.ContinentCode2">
+            <summary>
+            The 3-character ISO 3166-1 continent code for the supplied location.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.ContinentName">
+            <summary>
+            The name of the continent the supplied location is in.
             </summary>
         </member>
         <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.Country">
@@ -1147,6 +1396,26 @@
             The 3-character ISO 3166-1 alpha-3 code of the country that the supplied location is in.
             </summary>
         </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.County">
+            <summary>
+            The name of the county that the supplied location is in. In this case, a county is defined as an administrative sub-section of a country or state.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.CurrencyCode">
+            <summary>
+            The Alpha-3 ISO 4217 code of the currency associated with the supplied location.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.DialCode">
+            <summary>
+            ITU international telephone numbering plan code for the country.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.HumanProbability">
+            <summary>
+            The confidence that the IP address is a human user versus associated with hosting. A 0-10 value where; 0-3: Low confidence the user is human, 4-6: Medium confidence, 7-10: High confidence. A -1 value indicates that the probability is unknown.
+            </summary>
+        </member>
         <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.IpRangeEnd">
             <summary>
             End of the IP range to which the evidence IP belongs.
@@ -1157,14 +1426,89 @@
             Start of the IP range to which the evidence IP belongs.
             </summary>
         </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.IsBroadband">
+            <summary>
+            Indicates whether the IP address is associated with a broadband connection. Includes DSL, Cable, Fibre, and Satellite connections.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.IsCellular">
+            <summary>
+            Indicates whether the IP address is associated with a cellular network.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.IsEu">
+            <summary>
+            Indicates whether the country of the supplied location is within the European Union.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.IsHosted">
+            <summary>
+            Indicates whether the IP address is associated with hosting. Includes both hosting and anonymised connections such as hosting networks, hosting ASNs, VPNs, proxies, TOR networks, and unreachable IP addresses.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.Iso31662Lvl4">
+            <summary>
+            The ISO 3166-2 code for the supplied location. This is using the 'ISO3166-2-lvl4' property from OpenStreetMap.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.Iso31662Lvl4SubdivisionOnly">
+            <summary>
+            The alphanumeric code representing the subdivision from the ISO 3166-2 code of the supplied location. This is using the 'ISO3166-2-lvl4' property from OpenStreetMap.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.Iso31662Lvl8">
+            <summary>
+            The ISO 3166-2 code for the supplied location. This is using the 'ISO3166-2-lvl8' property from OpenStreetMap.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.Iso31662Lvl8SubdivisionOnly">
+            <summary>
+            The alphanumeric code representing the subdivision from the ISO 3166-2 code of the supplied location. This is using the 'ISO3166-2-lvl8' property from OpenStreetMap.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.IsProxy">
+            <summary>
+            Indicates whether the IP address is associated with a Proxy server.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.IsPublicRouter">
+            <summary>
+            Indicates whether the IP address is associated with a public router.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.IsTor">
+            <summary>
+            Indicates whether the IP address is associated with a TOR server.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.IsVPN">
+            <summary>
+            Indicates whether the IP address is associated with a VPN server.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.LanguageCode">
+            <summary>
+            The Alpha-2 ISO 639 Language code associated with the supplied location.
+            </summary>
+        </member>
         <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.Latitude">
             <summary>
-            Average latitude of the IP. For privacy, this is randomized within around 1 mile of the result. Randomized result will change only once per day.
+            Average latitude of the IP. For privacy, this is randomized within around 1 kilometer of the result. Randomized result will change only once per day.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.LocationConfidence">
+            <summary>
+            The confidence in the town and country provided.
             </summary>
         </member>
         <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.Longitude">
             <summary>
-            Average longitude of the IP. For privacy, this is randomized within around 1 mile of the result. Randomized result will change only once per day.
+            Average longitude of the IP. For privacy, this is randomized within around 1 kilometer of the result. Randomized result will change only once per day.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.Mcc">
+            <summary>
+            The mobile country code of the network the device is connected to.
             </summary>
         </member>
         <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.Region">
@@ -1192,6 +1536,16 @@
             The name of the state that the supplied location is in.
             </summary>
         </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.Suburb">
+            <summary>
+            The name of the suburb that the supplied location is in.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.TimeZoneIana">
+            <summary>
+            The time zone at the supplied location in the IANA Time Zone format.
+            </summary>
+        </member>
         <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.TimeZoneOffset">
             <summary>
             The offset from UTC in minutes in the supplied location, at the time that the value is produced.
@@ -1200,6 +1554,11 @@
         <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.Town">
             <summary>
             The name of the town that the supplied location is in.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.ZipCode">
+            <summary>
+            The zip or postal code that the supplied location falls under.
             </summary>
         </member>
     </members>

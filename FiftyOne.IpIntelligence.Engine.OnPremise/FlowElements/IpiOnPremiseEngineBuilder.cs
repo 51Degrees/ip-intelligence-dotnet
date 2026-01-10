@@ -80,7 +80,7 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
         #region Protected Overrides
 
         /// <summary>
-        /// Creates a new instance of <see cref="DeviceDetectionHashEngine"/>.
+        /// Creates a new instance of <see cref="IpiOnPremiseEngine"/>.
         /// </summary>
         /// <param name="loggerFactory"></param>
         /// <param name="deviceDataFactory"></param>

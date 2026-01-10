@@ -43,16 +43,16 @@ try {
 
 		# CMake handles the multi configuration environment including the 
 		# optimisation parameters for Release. The output can be checked in 
-		# the fiftyone-ipi-hash-dotnet.vxproj file to ensure it includes /O2 and
+		# the fiftyone-ipi-dotnet.vxproj file to ensure it includes /O2 and
 		# other optimisations in Release configuration.
 
 		cmake ../../.. -A $Arch -DRebuildSwig=Off -DBUILD_TESTING=Off -DLargeDataFileSupport:BOOL=ON
-		cmake --build . -t fiftyone-ipi-hash-dotnet --config $BuildType $Jargs
+		cmake --build . -t fiftyone-ipi-dotnet --config $BuildType $Jargs
 		
 	}
 	else {
 
-		# CMake creates the CMakeFiles\fiftyone-ipi-hash-dotnet.dir folder for the
+		# CMake creates the CMakeFiles\fiftyone-ipi-dotnet.dir folder for the
 		# target. These files should be checked to ensure they include -O3 and
 		# other optimisations in Release configuration.
 
@@ -61,7 +61,7 @@ try {
 			$Is32 = "on"
 		}
 		cmake ../../.. "-D32bit=$Is32" "-DCMAKE_BUILD_TYPE=$BuildType" -DRebuildSwig=Off -DBUILD_TESTING=Off
-		cmake --build . -t fiftyone-ipi-hash-dotnet $Jargs
+		cmake --build . -t fiftyone-ipi-dotnet $Jargs
 
 	}
 
