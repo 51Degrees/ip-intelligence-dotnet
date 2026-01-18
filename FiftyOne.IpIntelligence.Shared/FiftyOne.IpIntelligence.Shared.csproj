@@ -15,7 +15,7 @@
     <Description>Shared classes used by the 51Degrees IP Intelligence engine for the Pipeline API.</Description>
     <Authors>51Degrees Engineering</Authors>
     <PackageLicenseExpression>EUPL-1.2</PackageLicenseExpression>
-    <PackageIconUrl>https://51degrees.com/Nuget-FiftyOne.IpIntelligence.Shared/Square%20Logo.png</PackageIconUrl>
+    <PackageIconUrl>https://51degrees.com/portals/0/Logos/Square%20Logo.png?width=64</PackageIconUrl>
     <Copyright>51Degrees Mobile Experts Limited</Copyright>
     <PackageTags>51degrees;pipeline;pipeline-api;ip-intelligence;ip;ip-address;shared;common;models;utilities</PackageTags>
     <RepositoryUrl>https://github.com/51Degrees/ip-intelligence-dotnet</RepositoryUrl>
