@@ -20,6 +20,8 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
+using FiftyOne.Common;
+using FiftyOne.Common.TestHelpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Concurrent;
@@ -31,10 +33,6 @@ namespace FiftyOne.IpIntelligence.TestHelpers
 {
     public static class Utils
     {
-        /// <summary>
-        /// Timeout used when searching for files.
-        /// </summary>
-        private const int FindFileTimeoutMs = 10000;
 
         /// <summary>
         /// The folder that contains the C++ and therefore device data folder.
@@ -50,19 +48,12 @@ namespace FiftyOne.IpIntelligence.TestHelpers
 
         public static FileInfo GetFilePath(string filename)
         {
-            var fullPath = Cache.GetOrAdd(
+            return Cache.GetOrAdd(
                 filename,
                 (f) =>
                 {
-                    var p = FindFile(filename, GetOnPremiseDirectory());
-                    return p == null ? null : new FileInfo(p);
+                    return TestUtils.GetFilePath(filename, GetOnPremiseDirectory());
                 });
-            if (fullPath == null || fullPath.Exists == false)
-            {
-                Assert.Inconclusive($"Expected data file " +
-                    $"'{filename}' was missing. Test not run.");
-            }
-            return fullPath;
         }
 
         /// <summary>
@@ -87,55 +78,9 @@ namespace FiftyOne.IpIntelligence.TestHelpers
             throw new DirectoryNotFoundException(OnPremiseDirectory);
         }
 
-        /// <summary>
-        /// Uses a background task to search for the specified filename within the working 
-        /// directory.
-        /// If the file cannot be found, the algorithm will move to the parent directory and 
-        /// repeat the process.
-        /// This continues until the file is found or a timeout is triggered.
-        /// </summary>
-        /// <param name="filename"></param>
-        /// <param name="dir">
-        /// The directory to start looking from.
-        /// </param>
-        /// <returns></returns>
-        private static string FindFile(string filename, DirectoryInfo dir)
+        public static string FindFile(string filename, DirectoryInfo dir)
         {
-            var cancel = new CancellationTokenSource();
-            // Start the file system search as a separate task.
-            var searchTask = Task.Run(() => FindFile(filename, dir, cancel.Token));
-            // Wait for either the search or a timeout task to complete.
-            Task.WaitAny(searchTask, Task.Delay(FindFileTimeoutMs));
-            cancel.Cancel();
-            // If search has not got a result then return null.
-            return searchTask.IsCompleted ? searchTask.Result : null;
-        }
-
-        private static string FindFile(
-            string filename,
-            DirectoryInfo dir,
-            CancellationToken cancel)
-        {
-            string result = null;
-            try
-            {
-                var files = dir.GetFiles(filename, SearchOption.AllDirectories);
-                if (files.Length == 0 &&
-                    dir.Parent != null &&
-                    cancel.IsCancellationRequested == false)
-                {
-                    result = FindFile(filename, dir.Parent, cancel);
-                }
-                else if (files.Length > 0)
-                {
-                    result = files[0].FullName;
-                }
-            }
-            // No matter what goes wrong here, we just want to indicate that we
-            // couldn't find the file by returning null.
-            catch { result = null; }
-
-            return result;
+            return FileUtils.FindFile(filename, dir);
         }
     }
 }
