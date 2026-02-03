@@ -15,7 +15,7 @@
 	<Description>Pipeline builder components for integrating 51Degrees IP Intelligence with the Pipeline API. This package provides builders for configuring IP Intelligence pipelines using either the Cloud or On-premise implementations, based on IP address data.</Description>
 	<Authors>51Degrees Engineering</Authors>
 	<PackageLicenseExpression>EUPL-1.2</PackageLicenseExpression>
-	<PackageIconUrl>https://51degrees.com/portals/0/Logos/Square%20Logo.png?width=64</PackageIconUrl>
+	<PackageIconUrl>https://51degrees.com/Nuget-FiftyOne.IpIntelligence/Square%20Logo.png</PackageIconUrl>
 	<Copyright>51Degrees Mobile Experts Limited</Copyright>
 	<PackageTags>51degrees;pipeline;pipeline-api;pipeline-builder;builder;configuration;ip-intelligence;ip;ip-address;ip-geolocation;geolocation;geoip;asn;autonomous-system;isp;organization;network</PackageTags>
 	<RepositoryUrl>https://github.com/51Degrees/ip-intelligence-dotnet</RepositoryUrl>
