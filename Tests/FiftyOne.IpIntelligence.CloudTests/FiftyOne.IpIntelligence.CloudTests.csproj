@@ -14,8 +14,8 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="FiftyOne.Common.TestHelpers" Version="4.1.8" />
-    <PackageReference Include="FiftyOne.Pipeline.Engines.TestHelpers" Version="4.5.19" />
-    <PackageReference Include="FiftyOne.Pipeline.Web" Version="4.5.19" />
+    <PackageReference Include="FiftyOne.Pipeline.Engines.TestHelpers" Version="4.5.20" />
+    <PackageReference Include="FiftyOne.Pipeline.Web" Version="4.5.20" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="3.9.3" />
     <PackageReference Include="MSTest.TestFramework" Version="3.9.3" />
