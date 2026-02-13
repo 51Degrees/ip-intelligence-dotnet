@@ -113,14 +113,6 @@ namespace FiftyOne.IpIntelligence.Shared
 			};
 
 		/// <summary>
-		/// Start of the IP range to which the evidence IP belongs.
-		/// </summary>
-		public IAspectPropertyValue<IPAddress> IpRangeStart { get { return GetAs<IAspectPropertyValue<IPAddress>>("IpRangeStart"); } }
-		/// <summary>
-		/// End of the IP range to which the evidence IP belongs.
-		/// </summary>
-		public IAspectPropertyValue<IPAddress> IpRangeEnd { get { return GetAs<IAspectPropertyValue<IPAddress>>("IpRangeEnd"); } }
-		/// <summary>
 		/// Name of the IP range. This is usually the owner.
 		/// </summary>
 		public IAspectPropertyValue<string> RegisteredName { get { return GetAs<IAspectPropertyValue<string>>("RegisteredName"); } }
@@ -132,6 +124,14 @@ namespace FiftyOne.IpIntelligence.Shared
 		/// Country code of the registered range.
 		/// </summary>
 		public IAspectPropertyValue<string> RegisteredCountry { get { return GetAs<IAspectPropertyValue<string>>("RegisteredCountry"); } }
+		/// <summary>
+		/// Start of the IP range to which the evidence IP belongs.
+		/// </summary>
+		public IAspectPropertyValue<IPAddress> IpRangeStart { get { return GetAs<IAspectPropertyValue<IPAddress>>("IpRangeStart"); } }
+		/// <summary>
+		/// End of the IP range to which the evidence IP belongs.
+		/// </summary>
+		public IAspectPropertyValue<IPAddress> IpRangeEnd { get { return GetAs<IAspectPropertyValue<IPAddress>>("IpRangeEnd"); } }
 		/// <summary>
 		/// Radius in kilometers of the circle centred around the most probable location that encompasses the entire area. Where multiple areas are returned, this will only cover the area the most probable location is in. See Areas property. This will likely be a very large distance. It is recommend to use the AccuracyRadiusMin property.
 		/// </summary>
