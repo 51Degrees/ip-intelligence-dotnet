@@ -74,6 +74,10 @@ namespace FiftyOne.IpIntelligence.Shared
 				{ "ConnectionType", typeof(IAspectPropertyValue<string>) },
 				{ "ContinentCode2", typeof(IAspectPropertyValue<string>) },
 				{ "ContinentName", typeof(IAspectPropertyValue<string>) },
+				{ "CountriesGeographical", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
+				{ "CountriesGeographicalAll", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
+				{ "CountriesPopulation", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
+				{ "CountriesPopulationAll", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
 				{ "Country", typeof(IAspectPropertyValue<string>) },
 				{ "CountryCode", typeof(IAspectPropertyValue<string>) },
 				{ "CountryCode3", typeof(IAspectPropertyValue<string>) },
@@ -113,6 +117,14 @@ namespace FiftyOne.IpIntelligence.Shared
 			};
 
 		/// <summary>
+		/// Start of the IP range to which the evidence IP belongs.
+		/// </summary>
+		public IAspectPropertyValue<IPAddress> IpRangeStart { get { return GetAs<IAspectPropertyValue<IPAddress>>("IpRangeStart"); } }
+		/// <summary>
+		/// End of the IP range to which the evidence IP belongs.
+		/// </summary>
+		public IAspectPropertyValue<IPAddress> IpRangeEnd { get { return GetAs<IAspectPropertyValue<IPAddress>>("IpRangeEnd"); } }
+		/// <summary>
 		/// Name of the IP range. This is usually the owner.
 		/// </summary>
 		public IAspectPropertyValue<string> RegisteredName { get { return GetAs<IAspectPropertyValue<string>>("RegisteredName"); } }
@@ -124,14 +136,6 @@ namespace FiftyOne.IpIntelligence.Shared
 		/// Country code of the registered range.
 		/// </summary>
 		public IAspectPropertyValue<string> RegisteredCountry { get { return GetAs<IAspectPropertyValue<string>>("RegisteredCountry"); } }
-		/// <summary>
-		/// Start of the IP range to which the evidence IP belongs.
-		/// </summary>
-		public IAspectPropertyValue<IPAddress> IpRangeStart { get { return GetAs<IAspectPropertyValue<IPAddress>>("IpRangeStart"); } }
-		/// <summary>
-		/// End of the IP range to which the evidence IP belongs.
-		/// </summary>
-		public IAspectPropertyValue<IPAddress> IpRangeEnd { get { return GetAs<IAspectPropertyValue<IPAddress>>("IpRangeEnd"); } }
 		/// <summary>
 		/// Radius in kilometers of the circle centred around the most probable location that encompasses the entire area. Where multiple areas are returned, this will only cover the area the most probable location is in. See Areas property. This will likely be a very large distance. It is recommend to use the AccuracyRadiusMin property.
 		/// </summary>
@@ -224,6 +228,22 @@ namespace FiftyOne.IpIntelligence.Shared
 		/// The 3-character ISO 3166-1 alpha-3 code of the country that the supplied location is in.
 		/// </summary>
 		public IAspectPropertyValue<string> CountryCode3 { get { return GetAs<IAspectPropertyValue<string>>("CountryCode3"); } }
+		/// <summary>
+		/// A list of countries in ISO 3166-1 alpha-2 country code format that overlap with the area likely associated with the provided evidence. These are weighted and ordered by each country's proportion of the area.
+		/// </summary>
+		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> CountriesGeographical { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("CountriesGeographical"); } }
+		/// <summary>
+		/// A full list of countries in ISO 3166-1 alpha-2 country code format. Countries that overlap with the area likely associated with the provided evidence are listed first, weighted and ordered by each country's proportion of the area. This is then followed by the remaining countries, ordered according to ISO 3166-1 alpha 2 standard.
+		/// </summary>
+		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> CountriesGeographicalAll { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("CountriesGeographicalAll"); } }
+		/// <summary>
+		/// A list of countries in ISO 3166-1 alpha-2 country code format that overlap with the area likely associated with the provided evidence. These are weighted and ordered by each country's proportion of the total population within the area.
+		/// </summary>
+		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> CountriesPopulation { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("CountriesPopulation"); } }
+		/// <summary>
+		/// A full list of countries in ISO 3166-1 alpha-2 country code format. Countries that overlap with the area likely associated with the provided evidence are listed first, weighted and ordered by each country's proportion of the total population within the area. This is then followed by the remaining countries, ordered according to ISO 3166-1 alpha 2 standard.
+		/// </summary>
+		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> CountriesPopulationAll { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("CountriesPopulationAll"); } }
 		/// <summary>
 		/// The Alpha-3 ISO 4217 code of the currency associated with the supplied location.
 		/// </summary>
