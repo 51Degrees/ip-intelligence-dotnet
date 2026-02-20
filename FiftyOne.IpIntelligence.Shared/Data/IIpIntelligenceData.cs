@@ -67,6 +67,22 @@ namespace FiftyOne.IpIntelligence
 		/// </summary>
 		IAspectPropertyValue<string> ContinentName { get; }
 		/// <summary>
+		/// A list of countries in ISO 3166-1 alpha-2 country code format that overlap with the area likely associated with the provided evidence. These are weighted and ordered by each country's proportion of the area.
+		/// </summary>
+		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> CountriesGeographical { get; }
+		/// <summary>
+		/// A full list of countries in ISO 3166-1 alpha-2 country code format. Countries that overlap with the area likely associated with the provided evidence are listed first, weighted and ordered by each country's proportion of the area. This is then followed by the remaining countries, ordered according to ISO 3166-1 alpha 2 standard.
+		/// </summary>
+		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> CountriesGeographicalAll { get; }
+		/// <summary>
+		/// A list of countries in ISO 3166-1 alpha-2 country code format that overlap with the area likely associated with the provided evidence. These are weighted and ordered by each country's proportion of the total population within the area.
+		/// </summary>
+		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> CountriesPopulation { get; }
+		/// <summary>
+		/// A full list of countries in ISO 3166-1 alpha-2 country code format. Countries that overlap with the area likely associated with the provided evidence are listed first, weighted and ordered by each country's proportion of the total population within the area. This is then followed by the remaining countries, ordered according to ISO 3166-1 alpha 2 standard.
+		/// </summary>
+		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> CountriesPopulationAll { get; }
+		/// <summary>
 		/// The name of the country that the supplied location is in.
 		/// </summary>
 		IAspectPropertyValue<string> Country { get; }
