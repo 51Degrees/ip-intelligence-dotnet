@@ -71,19 +71,17 @@ namespace FiftyOne.IpIntelligence.Shared
 				{ "Areas", typeof(IAspectPropertyValue<WktString>) },
 				{ "Asn", typeof(IAspectPropertyValue<string>) },
 				{ "AsnName", typeof(IAspectPropertyValue<string>) },
+				{ "BrowserDiversity", typeof(IAspectPropertyValue<int>) },
 				{ "ConnectionType", typeof(IAspectPropertyValue<string>) },
 				{ "ContinentCode2", typeof(IAspectPropertyValue<string>) },
 				{ "ContinentName", typeof(IAspectPropertyValue<string>) },
-				{ "CountriesGeographical", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
-				{ "CountriesGeographicalAll", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
-				{ "CountriesPopulation", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
-				{ "CountriesPopulationAll", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
 				{ "Country", typeof(IAspectPropertyValue<string>) },
 				{ "CountryCode", typeof(IAspectPropertyValue<string>) },
 				{ "CountryCode3", typeof(IAspectPropertyValue<string>) },
 				{ "County", typeof(IAspectPropertyValue<string>) },
 				{ "CurrencyCode", typeof(IAspectPropertyValue<string>) },
 				{ "DialCode", typeof(IAspectPropertyValue<string>) },
+				{ "HardwareDiversity", typeof(IAspectPropertyValue<int>) },
 				{ "HumanProbability", typeof(IAspectPropertyValue<int>) },
 				{ "IpRangeEnd", typeof(IAspectPropertyValue<IPAddress>) },
 				{ "IpRangeStart", typeof(IAspectPropertyValue<IPAddress>) },
@@ -104,6 +102,7 @@ namespace FiftyOne.IpIntelligence.Shared
 				{ "LocationConfidence", typeof(IAspectPropertyValue<string>) },
 				{ "Longitude", typeof(IAspectPropertyValue<float>) },
 				{ "Mcc", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
+				{ "PlatformDiversity", typeof(IAspectPropertyValue<int>) },
 				{ "Region", typeof(IAspectPropertyValue<string>) },
 				{ "RegisteredCountry", typeof(IAspectPropertyValue<string>) },
 				{ "RegisteredName", typeof(IAspectPropertyValue<string>) },
@@ -229,22 +228,6 @@ namespace FiftyOne.IpIntelligence.Shared
 		/// </summary>
 		public IAspectPropertyValue<string> CountryCode3 { get { return GetAs<IAspectPropertyValue<string>>("CountryCode3"); } }
 		/// <summary>
-		/// A list of countries in ISO 3166-1 alpha-2 country code format that overlap with the area likely associated with the provided evidence. These are weighted and ordered by each country's proportion of the area.
-		/// </summary>
-		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> CountriesGeographical { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("CountriesGeographical"); } }
-		/// <summary>
-		/// A full list of countries in ISO 3166-1 alpha-2 country code format. Countries that overlap with the area likely associated with the provided evidence are listed first, weighted and ordered by each country's proportion of the area. This is then followed by the remaining countries, ordered according to ISO 3166-1 alpha 2 standard.
-		/// </summary>
-		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> CountriesGeographicalAll { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("CountriesGeographicalAll"); } }
-		/// <summary>
-		/// A list of countries in ISO 3166-1 alpha-2 country code format that overlap with the area likely associated with the provided evidence. These are weighted and ordered by each country's proportion of the total population within the area.
-		/// </summary>
-		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> CountriesPopulation { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("CountriesPopulation"); } }
-		/// <summary>
-		/// A full list of countries in ISO 3166-1 alpha-2 country code format. Countries that overlap with the area likely associated with the provided evidence are listed first, weighted and ordered by each country's proportion of the total population within the area. This is then followed by the remaining countries, ordered according to ISO 3166-1 alpha 2 standard.
-		/// </summary>
-		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> CountriesPopulationAll { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("CountriesPopulationAll"); } }
-		/// <summary>
 		/// The Alpha-3 ISO 4217 code of the currency associated with the supplied location.
 		/// </summary>
 		public IAspectPropertyValue<string> CurrencyCode { get { return GetAs<IAspectPropertyValue<string>>("CurrencyCode"); } }
@@ -308,5 +291,17 @@ namespace FiftyOne.IpIntelligence.Shared
 		/// Autonomous System Number associated with the IP address.
 		/// </summary>
 		public IAspectPropertyValue<string> Asn { get { return GetAs<IAspectPropertyValue<string>>("Asn"); } }
+		/// <summary>
+		/// Refers to the diversity of hardware devices observed from the IP range. An integer between 1-10, a lower value indicates a low number of devices seen per IP address, while a higher value indicates a high number of devices seen per IP address. A 0 value indicates that the probability is unknown.
+		/// </summary>
+		public IAspectPropertyValue<int> HardwareDiversity { get { return GetAs<IAspectPropertyValue<int>>("HardwareDiversity"); } }
+		/// <summary>
+		/// Refers to the diversity of software observed from the IP range. An integer between 1-10, a lower value indicates a low number of software seen per IP address, while a higher value indicates a high number of software seen per IP address. A 0 value indicates that the probability is unknown.
+		/// </summary>
+		public IAspectPropertyValue<int> PlatformDiversity { get { return GetAs<IAspectPropertyValue<int>>("PlatformDiversity"); } }
+		/// <summary>
+		/// Refers to the diversity of browsers observed from the IP range. An integer between 1-10, a lower value indicates a low number of browsers seen per IP address, while a higher value indicates a high number of browsers seen per IP address. A 0 value indicates that the probability is unknown.
+		/// </summary>
+		public IAspectPropertyValue<int> BrowserDiversity { get { return GetAs<IAspectPropertyValue<int>>("BrowserDiversity"); } }
 	}
 }
