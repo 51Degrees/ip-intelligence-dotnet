@@ -49,7 +49,7 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Wrappers
             using (var value = _object[index].getValue())
             {
                 string s = value.ToUTF8String();
-                return new WeightedValue<string>(this._object[index].getRawWeight(), s);
+                return new WeightedValue<string>(this._object[index].getShortRawWeight(), s);
             }
         }
 
