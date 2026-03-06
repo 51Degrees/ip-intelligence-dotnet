@@ -45,7 +45,7 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Wrappers
         }
 
         private IWeightedValue<string> GetWeightedValue(int index) {
-            return new WeightedValue<string>(this._object[index].getRawWeight(), this._object[index].getValue());
+            return new WeightedValue<string>(this._object[index].getShortRawWeight(), this._object[index].getValue());
         }
 
         public IEnumerator<IWeightedValue<string>> GetEnumerator()

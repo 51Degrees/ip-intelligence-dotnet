@@ -816,11 +816,11 @@ class IpIntelligenceEngineModulePINVOKE {
   [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueStringSwig_getWeight___")]
   public static extern float WeightedValueStringSwig_getWeight(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueStringSwig_getRawWeight___")]
-  public static extern ushort WeightedValueStringSwig_getRawWeight(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueStringSwig_getShortRawWeight___")]
+  public static extern ushort WeightedValueStringSwig_getShortRawWeight(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueStringSwig_setRawWeight___")]
-  public static extern void WeightedValueStringSwig_setRawWeight(global::System.Runtime.InteropServices.HandleRef jarg1, ushort jarg2);
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueStringSwig_setShortRawWeight___")]
+  public static extern void WeightedValueStringSwig_setShortRawWeight(global::System.Runtime.InteropServices.HandleRef jarg1, ushort jarg2);
 
   [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_delete_WeightedValueStringSwig___")]
   public static extern void delete_WeightedValueStringSwig(global::System.Runtime.InteropServices.HandleRef jarg1);
@@ -834,11 +834,11 @@ class IpIntelligenceEngineModulePINVOKE {
   [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueUTF8StringSwig_getWeight___")]
   public static extern float WeightedValueUTF8StringSwig_getWeight(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueUTF8StringSwig_getRawWeight___")]
-  public static extern ushort WeightedValueUTF8StringSwig_getRawWeight(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueUTF8StringSwig_getShortRawWeight___")]
+  public static extern ushort WeightedValueUTF8StringSwig_getShortRawWeight(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueUTF8StringSwig_setRawWeight___")]
-  public static extern void WeightedValueUTF8StringSwig_setRawWeight(global::System.Runtime.InteropServices.HandleRef jarg1, ushort jarg2);
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueUTF8StringSwig_setShortRawWeight___")]
+  public static extern void WeightedValueUTF8StringSwig_setShortRawWeight(global::System.Runtime.InteropServices.HandleRef jarg1, ushort jarg2);
 
   [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_delete_WeightedValueUTF8StringSwig___")]
   public static extern void delete_WeightedValueUTF8StringSwig(global::System.Runtime.InteropServices.HandleRef jarg1);
@@ -852,11 +852,11 @@ class IpIntelligenceEngineModulePINVOKE {
   [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueBoolSwig_getWeight___")]
   public static extern float WeightedValueBoolSwig_getWeight(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueBoolSwig_getRawWeight___")]
-  public static extern ushort WeightedValueBoolSwig_getRawWeight(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueBoolSwig_getShortRawWeight___")]
+  public static extern ushort WeightedValueBoolSwig_getShortRawWeight(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueBoolSwig_setRawWeight___")]
-  public static extern void WeightedValueBoolSwig_setRawWeight(global::System.Runtime.InteropServices.HandleRef jarg1, ushort jarg2);
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueBoolSwig_setShortRawWeight___")]
+  public static extern void WeightedValueBoolSwig_setShortRawWeight(global::System.Runtime.InteropServices.HandleRef jarg1, ushort jarg2);
 
   [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_delete_WeightedValueBoolSwig___")]
   public static extern void delete_WeightedValueBoolSwig(global::System.Runtime.InteropServices.HandleRef jarg1);
@@ -870,11 +870,11 @@ class IpIntelligenceEngineModulePINVOKE {
   [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueIntSwig_getWeight___")]
   public static extern float WeightedValueIntSwig_getWeight(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueIntSwig_getRawWeight___")]
-  public static extern ushort WeightedValueIntSwig_getRawWeight(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueIntSwig_getShortRawWeight___")]
+  public static extern ushort WeightedValueIntSwig_getShortRawWeight(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueIntSwig_setRawWeight___")]
-  public static extern void WeightedValueIntSwig_setRawWeight(global::System.Runtime.InteropServices.HandleRef jarg1, ushort jarg2);
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueIntSwig_setShortRawWeight___")]
+  public static extern void WeightedValueIntSwig_setShortRawWeight(global::System.Runtime.InteropServices.HandleRef jarg1, ushort jarg2);
 
   [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_delete_WeightedValueIntSwig___")]
   public static extern void delete_WeightedValueIntSwig(global::System.Runtime.InteropServices.HandleRef jarg1);
@@ -888,11 +888,11 @@ class IpIntelligenceEngineModulePINVOKE {
   [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueDoubleSwig_getWeight___")]
   public static extern float WeightedValueDoubleSwig_getWeight(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueDoubleSwig_getRawWeight___")]
-  public static extern ushort WeightedValueDoubleSwig_getRawWeight(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueDoubleSwig_getShortRawWeight___")]
+  public static extern ushort WeightedValueDoubleSwig_getShortRawWeight(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueDoubleSwig_setRawWeight___")]
-  public static extern void WeightedValueDoubleSwig_setRawWeight(global::System.Runtime.InteropServices.HandleRef jarg1, ushort jarg2);
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueDoubleSwig_setShortRawWeight___")]
+  public static extern void WeightedValueDoubleSwig_setShortRawWeight(global::System.Runtime.InteropServices.HandleRef jarg1, ushort jarg2);
 
   [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_delete_WeightedValueDoubleSwig___")]
   public static extern void delete_WeightedValueDoubleSwig(global::System.Runtime.InteropServices.HandleRef jarg1);

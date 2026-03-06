@@ -74,14 +74,14 @@ internal class WeightedValueBoolSwig : global::System.IDisposable {
     return ret;
   }
 
-  public ushort getRawWeight() {
-    ushort ret = IpIntelligenceEngineModulePINVOKE.WeightedValueBoolSwig_getRawWeight(swigCPtr);
+  public ushort getShortRawWeight() {
+    ushort ret = IpIntelligenceEngineModulePINVOKE.WeightedValueBoolSwig_getShortRawWeight(swigCPtr);
     if (IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Pending) throw IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
 
-  public void setRawWeight(ushort w) {
-    IpIntelligenceEngineModulePINVOKE.WeightedValueBoolSwig_setRawWeight(swigCPtr, w);
+  public void setShortRawWeight(ushort w) {
+    IpIntelligenceEngineModulePINVOKE.WeightedValueBoolSwig_setShortRawWeight(swigCPtr, w);
     if (IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Pending) throw IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Retrieve();
   }
 

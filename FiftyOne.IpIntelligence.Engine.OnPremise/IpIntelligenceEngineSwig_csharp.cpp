@@ -717,6 +717,36 @@ SWIGINTERN bool std_vector_Sl_uint8_t_Sg__Remove(std::vector< uint8_t > *self,un
 
 #include <utility>
 
+SWIGINTERN uint16_t WeightedValue_Sl_std_string_Sg__getShortRawWeight(WeightedValue< std::string > *self){ 
+        return (uint16_t)(self->getRawWeight() / 65535u); 
+    }
+SWIGINTERN void WeightedValue_Sl_std_string_Sg__setShortRawWeight(WeightedValue< std::string > *self,uint16_t w){ 
+        self->setRawWeight(((uint32_t)w) * (uint32_t)65535u); 
+    }
+SWIGINTERN uint16_t WeightedValue_Sl_std_vector_Sl_uint8_t_Sg__Sg__getShortRawWeight(WeightedValue< std::vector< uint8_t > > *self){ 
+        return (uint16_t)(self->getRawWeight() / 65535u); 
+    }
+SWIGINTERN void WeightedValue_Sl_std_vector_Sl_uint8_t_Sg__Sg__setShortRawWeight(WeightedValue< std::vector< uint8_t > > *self,uint16_t w){ 
+        self->setRawWeight(((uint32_t)w) * (uint32_t)65535u); 
+    }
+SWIGINTERN uint16_t WeightedValue_Sl_bool_Sg__getShortRawWeight(WeightedValue< bool > *self){ 
+        return (uint16_t)(self->getRawWeight() / 65535u); 
+    }
+SWIGINTERN void WeightedValue_Sl_bool_Sg__setShortRawWeight(WeightedValue< bool > *self,uint16_t w){ 
+        self->setRawWeight(((uint32_t)w) * (uint32_t)65535u); 
+    }
+SWIGINTERN uint16_t WeightedValue_Sl_int_Sg__getShortRawWeight(WeightedValue< int > *self){ 
+        return (uint16_t)(self->getRawWeight() / 65535u); 
+    }
+SWIGINTERN void WeightedValue_Sl_int_Sg__setShortRawWeight(WeightedValue< int > *self,uint16_t w){ 
+        self->setRawWeight(((uint32_t)w) * (uint32_t)65535u); 
+    }
+SWIGINTERN uint16_t WeightedValue_Sl_double_Sg__getShortRawWeight(WeightedValue< double > *self){ 
+        return (uint16_t)(self->getRawWeight() / 65535u); 
+    }
+SWIGINTERN void WeightedValue_Sl_double_Sg__setShortRawWeight(WeightedValue< double > *self,uint16_t w){ 
+        self->setRawWeight(((uint32_t)w) * (uint32_t)65535u); 
+    }
 SWIGINTERN std::vector< WeightedValue< std::string > > *new_std_vector_Sl_WeightedValue_Sl_std_string_Sg__Sg___SWIG_2(int capacity){
         std::vector< WeightedValue< std::string > >* pv = 0;
         if (capacity >= 0) {
@@ -11582,7 +11612,7 @@ SWIGEXPORT float SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInt
 }
 
 
-SWIGEXPORT unsigned short SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueStringSwig_getRawWeight___(void * jarg1) {
+SWIGEXPORT unsigned short SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueStringSwig_getShortRawWeight___(void * jarg1) {
   unsigned short jresult ;
   WeightedValue< std::string > *arg1 = (WeightedValue< std::string > *) 0 ;
   uint16_t result;
@@ -11590,7 +11620,7 @@ SWIGEXPORT unsigned short SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPr
   arg1 = (WeightedValue< std::string > *)jarg1; 
   {
     try {
-      result = (uint16_t)(arg1)->getRawWeight();;
+      result = (uint16_t)WeightedValue_Sl_std_string_Sg__getShortRawWeight(arg1);;
     }
     catch(FatalException& e) {
       {
@@ -11643,7 +11673,7 @@ SWIGEXPORT unsigned short SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPr
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueStringSwig_setRawWeight___(void * jarg1, unsigned short jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueStringSwig_setShortRawWeight___(void * jarg1, unsigned short jarg2) {
   WeightedValue< std::string > *arg1 = (WeightedValue< std::string > *) 0 ;
   uint16_t arg2 ;
   
@@ -11651,7 +11681,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInte
   arg2 = (uint16_t)jarg2; 
   {
     try {
-      (arg1)->setRawWeight(arg2);;
+      WeightedValue_Sl_std_string_Sg__setShortRawWeight(arg1,arg2);;
     }
     catch(FatalException& e) {
       {
@@ -11946,7 +11976,7 @@ SWIGEXPORT float SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInt
 }
 
 
-SWIGEXPORT unsigned short SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueUTF8StringSwig_getRawWeight___(void * jarg1) {
+SWIGEXPORT unsigned short SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueUTF8StringSwig_getShortRawWeight___(void * jarg1) {
   unsigned short jresult ;
   WeightedValue< std::vector< uint8_t > > *arg1 = (WeightedValue< std::vector< uint8_t > > *) 0 ;
   uint16_t result;
@@ -11954,7 +11984,7 @@ SWIGEXPORT unsigned short SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPr
   arg1 = (WeightedValue< std::vector< uint8_t > > *)jarg1; 
   {
     try {
-      result = (uint16_t)(arg1)->getRawWeight();;
+      result = (uint16_t)WeightedValue_Sl_std_vector_Sl_uint8_t_Sg__Sg__getShortRawWeight(arg1);;
     }
     catch(FatalException& e) {
       {
@@ -12007,7 +12037,7 @@ SWIGEXPORT unsigned short SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPr
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueUTF8StringSwig_setRawWeight___(void * jarg1, unsigned short jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueUTF8StringSwig_setShortRawWeight___(void * jarg1, unsigned short jarg2) {
   WeightedValue< std::vector< uint8_t > > *arg1 = (WeightedValue< std::vector< uint8_t > > *) 0 ;
   uint16_t arg2 ;
   
@@ -12015,7 +12045,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInte
   arg2 = (uint16_t)jarg2; 
   {
     try {
-      (arg1)->setRawWeight(arg2);;
+      WeightedValue_Sl_std_vector_Sl_uint8_t_Sg__Sg__setShortRawWeight(arg1,arg2);;
     }
     catch(FatalException& e) {
       {
@@ -12304,7 +12334,7 @@ SWIGEXPORT float SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInt
 }
 
 
-SWIGEXPORT unsigned short SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueBoolSwig_getRawWeight___(void * jarg1) {
+SWIGEXPORT unsigned short SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueBoolSwig_getShortRawWeight___(void * jarg1) {
   unsigned short jresult ;
   WeightedValue< bool > *arg1 = (WeightedValue< bool > *) 0 ;
   uint16_t result;
@@ -12312,7 +12342,7 @@ SWIGEXPORT unsigned short SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPr
   arg1 = (WeightedValue< bool > *)jarg1; 
   {
     try {
-      result = (uint16_t)(arg1)->getRawWeight();;
+      result = (uint16_t)WeightedValue_Sl_bool_Sg__getShortRawWeight(arg1);;
     }
     catch(FatalException& e) {
       {
@@ -12365,7 +12395,7 @@ SWIGEXPORT unsigned short SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPr
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueBoolSwig_setRawWeight___(void * jarg1, unsigned short jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueBoolSwig_setShortRawWeight___(void * jarg1, unsigned short jarg2) {
   WeightedValue< bool > *arg1 = (WeightedValue< bool > *) 0 ;
   uint16_t arg2 ;
   
@@ -12373,7 +12403,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInte
   arg2 = (uint16_t)jarg2; 
   {
     try {
-      (arg1)->setRawWeight(arg2);;
+      WeightedValue_Sl_bool_Sg__setShortRawWeight(arg1,arg2);;
     }
     catch(FatalException& e) {
       {
@@ -12662,7 +12692,7 @@ SWIGEXPORT float SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInt
 }
 
 
-SWIGEXPORT unsigned short SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueIntSwig_getRawWeight___(void * jarg1) {
+SWIGEXPORT unsigned short SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueIntSwig_getShortRawWeight___(void * jarg1) {
   unsigned short jresult ;
   WeightedValue< int > *arg1 = (WeightedValue< int > *) 0 ;
   uint16_t result;
@@ -12670,7 +12700,7 @@ SWIGEXPORT unsigned short SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPr
   arg1 = (WeightedValue< int > *)jarg1; 
   {
     try {
-      result = (uint16_t)(arg1)->getRawWeight();;
+      result = (uint16_t)WeightedValue_Sl_int_Sg__getShortRawWeight(arg1);;
     }
     catch(FatalException& e) {
       {
@@ -12723,7 +12753,7 @@ SWIGEXPORT unsigned short SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPr
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueIntSwig_setRawWeight___(void * jarg1, unsigned short jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueIntSwig_setShortRawWeight___(void * jarg1, unsigned short jarg2) {
   WeightedValue< int > *arg1 = (WeightedValue< int > *) 0 ;
   uint16_t arg2 ;
   
@@ -12731,7 +12761,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInte
   arg2 = (uint16_t)jarg2; 
   {
     try {
-      (arg1)->setRawWeight(arg2);;
+      WeightedValue_Sl_int_Sg__setShortRawWeight(arg1,arg2);;
     }
     catch(FatalException& e) {
       {
@@ -13020,7 +13050,7 @@ SWIGEXPORT float SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInt
 }
 
 
-SWIGEXPORT unsigned short SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueDoubleSwig_getRawWeight___(void * jarg1) {
+SWIGEXPORT unsigned short SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueDoubleSwig_getShortRawWeight___(void * jarg1) {
   unsigned short jresult ;
   WeightedValue< double > *arg1 = (WeightedValue< double > *) 0 ;
   uint16_t result;
@@ -13028,7 +13058,7 @@ SWIGEXPORT unsigned short SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPr
   arg1 = (WeightedValue< double > *)jarg1; 
   {
     try {
-      result = (uint16_t)(arg1)->getRawWeight();;
+      result = (uint16_t)WeightedValue_Sl_double_Sg__getShortRawWeight(arg1);;
     }
     catch(FatalException& e) {
       {
@@ -13081,7 +13111,7 @@ SWIGEXPORT unsigned short SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPr
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueDoubleSwig_setRawWeight___(void * jarg1, unsigned short jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_WeightedValueDoubleSwig_setShortRawWeight___(void * jarg1, unsigned short jarg2) {
   WeightedValue< double > *arg1 = (WeightedValue< double > *) 0 ;
   uint16_t arg2 ;
   
@@ -13089,7 +13119,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInte
   arg2 = (uint16_t)jarg2; 
   {
     try {
-      (arg1)->setRawWeight(arg2);;
+      WeightedValue_Sl_double_Sg__setShortRawWeight(arg1,arg2);;
     }
     catch(FatalException& e) {
       {
