@@ -1001,16 +1001,6 @@
             name of the type.
             </summary>
         </member>
-        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.IpRangeStart">
-            <summary>
-            Start of the IP range to which the evidence IP belongs.
-            </summary>
-        </member>
-        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.IpRangeEnd">
-            <summary>
-            End of the IP range to which the evidence IP belongs.
-            </summary>
-        </member>
         <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.RegisteredName">
             <summary>
             Name of the IP range. This is usually the owner.
@@ -1024,6 +1014,16 @@
         <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.RegisteredCountry">
             <summary>
             Country code of the registered range.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.IpRangeStart">
+            <summary>
+            Start of the IP range to which the evidence IP belongs.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.IpRangeEnd">
+            <summary>
+            End of the IP range to which the evidence IP belongs.
             </summary>
         </member>
         <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.AccuracyRadiusMax">
@@ -1221,6 +1221,45 @@
             Autonomous System Number associated with the IP address.
             </summary>
         </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.HardwareDiversity">
+            <summary>
+            Refers to the diversity of hardware devices observed from the IP range. An integer between 1-10, a lower value indicates a low number of devices seen per IP address, while a higher value indicates a high number of devices seen per IP address. A 0 value indicates that the probability is unknown.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.PlatformDiversity">
+            <summary>
+            Refers to the diversity of software observed from the IP range. An integer between 1-10, a lower value indicates a low number of software seen per IP address, while a higher value indicates a high number of software seen per IP address. A 0 value indicates that the probability is unknown.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.BrowserDiversity">
+            <summary>
+            Refers to the diversity of browsers observed from the IP range. An integer between 1-10, a lower value indicates a low number of browsers seen per IP address, while a higher value indicates a high number of browsers seen per IP address. A 0 value indicates that the probability is unknown.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.CountryCodesGeographical">
+            <summary>
+            Weighted list of country codes by geographical area coverage.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.CountryCodesPopulation">
+            <summary>
+            Weighted list of country codes by population distribution.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.CountryCodesGeographicalAll">
+            <summary>
+            All country codes ordered by geographical weighting descending,
+            followed by remaining codes alphabetically.
+            Populated by the IpCountriesAllEngine.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.CountryCodesPopulationAll">
+            <summary>
+            All country codes ordered by population weighting descending,
+            followed by remaining codes alphabetically.
+            Populated by the IpCountriesAllEngine.
+            </summary>
+        </member>
         <member name="T:FiftyOne.IpIntelligence.Shared.Messages">
             <summary>
               A strongly-typed resource class, for looking up localized strings, etc.
@@ -1346,6 +1385,11 @@
             The name registered to the Asn associated with the IP address.
             </summary>
         </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.BrowserDiversity">
+            <summary>
+            Refers to the diversity of browsers observed from the IP range. An integer between 1-10, a lower value indicates a low number of browsers seen per IP address, while a higher value indicates a high number of browsers seen per IP address. A 0 value indicates that the probability is unknown.
+            </summary>
+        </member>
         <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.ConnectionType">
             <summary>
             Indicates the type of connection being used. Returns either Broadband, Cellular, or Hosting and Anonymous.
@@ -1389,6 +1433,11 @@
         <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.DialCode">
             <summary>
             ITU international telephone numbering plan code for the country.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.HardwareDiversity">
+            <summary>
+            Refers to the diversity of hardware devices observed from the IP range. An integer between 1-10, a lower value indicates a low number of devices seen per IP address, while a higher value indicates a high number of devices seen per IP address. A 0 value indicates that the probability is unknown.
             </summary>
         </member>
         <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.HumanProbability">
@@ -1491,6 +1540,11 @@
             The mobile country code of the network the device is connected to.
             </summary>
         </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.PlatformDiversity">
+            <summary>
+            Refers to the diversity of software observed from the IP range. An integer between 1-10, a lower value indicates a low number of software seen per IP address, while a higher value indicates a high number of software seen per IP address. A 0 value indicates that the probability is unknown.
+            </summary>
+        </member>
         <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.Region">
             <summary>
             The name of the geographical region that the supplied location is in.
@@ -1539,6 +1593,30 @@
         <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.ZipCode">
             <summary>
             The zip or postal code that the supplied location falls under.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.CountryCodesGeographical">
+            <summary>
+            Weighted list of country codes by geographical area coverage.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.CountryCodesPopulation">
+            <summary>
+            Weighted list of country codes by population distribution.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.CountryCodesGeographicalAll">
+            <summary>
+            All country codes ordered by geographical weighting descending,
+            followed by remaining codes alphabetically.
+            Populated by the IpCountriesAllEngine.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.CountryCodesPopulationAll">
+            <summary>
+            All country codes ordered by population weighting descending,
+            followed by remaining codes alphabetically.
+            Populated by the IpCountriesAllEngine.
             </summary>
         </member>
     </members>

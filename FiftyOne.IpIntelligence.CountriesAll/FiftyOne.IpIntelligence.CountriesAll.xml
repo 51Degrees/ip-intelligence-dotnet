@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FiftyOne.IpIntelligence.CountriesAll</name>
+    </assembly>
+    <members>
+        <member name="T:FiftyOne.IpIntelligence.CountriesAll.Data.IIpCountriesAllData">
+            <summary>
+            Data interface for the IpCountriesAll engine output.
+            Contains flat (non-weighted) lists of all country codes,
+            ordered by weight descending for matched codes followed by
+            remaining codes alphabetically.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.CountriesAll.Data.IIpCountriesAllData.CountryCodesGeographicalAll">
+            <summary>
+            All country codes ordered by geographical weighting descending,
+            followed by remaining codes alphabetically.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.CountriesAll.Data.IIpCountriesAllData.CountryCodesPopulationAll">
+            <summary>
+            All country codes ordered by population weighting descending,
+            followed by remaining codes alphabetically.
+            </summary>
+        </member>
+        <member name="T:FiftyOne.IpIntelligence.CountriesAll.Data.IpCountriesAllData">
+            <summary>
+            Data implementation for the IpCountriesAll engine output.
+            </summary>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.CountriesAll.Data.IpCountriesAllData.#ctor(Microsoft.Extensions.Logging.ILogger{FiftyOne.Pipeline.Engines.Data.AspectDataBase},FiftyOne.Pipeline.Core.FlowElements.IPipeline,FiftyOne.Pipeline.Engines.FlowElements.IAspectEngine,FiftyOne.Pipeline.Engines.Services.IMissingPropertyService)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="logger">Logger instance.</param>
+            <param name="pipeline">The pipeline this data was created by.</param>
+            <param name="engine">The engine this data was created by.</param>
+            <param name="missingPropertyService">
+            Service to handle missing property requests.
+            </param>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.CountriesAll.Data.IpCountriesAllData.#ctor(Microsoft.Extensions.Logging.ILogger{FiftyOne.Pipeline.Engines.Data.AspectDataBase},FiftyOne.Pipeline.Core.FlowElements.IPipeline,FiftyOne.Pipeline.Engines.FlowElements.IAspectEngine)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="logger">Logger instance.</param>
+            <param name="pipeline">The pipeline this data was created by.</param>
+            <param name="engine">The engine this data was created by.</param>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.CountriesAll.Data.IpCountriesAllData.CountryCodesGeographicalAll">
+            <inheritdoc/>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.CountriesAll.Data.IpCountriesAllData.CountryCodesPopulationAll">
+            <inheritdoc/>
+        </member>
+        <member name="T:FiftyOne.IpIntelligence.CountriesAll.FlowElements.IpCountriesAllEngine">
+             <summary>
+             A post-processing engine that produces flat (non-weighted) country
+             code lists by combining weighted results from the IPI engine with the
+             full set of possible country codes from metadata.
+            
+             Must be added to the pipeline after <see cref="T:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine"/>.
+             </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.CountriesAll.FlowElements.IpCountriesAllEngine.ElementDataKey">
+            <inheritdoc/>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.CountriesAll.FlowElements.IpCountriesAllEngine.EvidenceKeyFilter">
+            <inheritdoc/>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.CountriesAll.FlowElements.IpCountriesAllEngine.DataSourceTier">
+            <inheritdoc/>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.CountriesAll.FlowElements.IpCountriesAllEngine.Properties">
+            <inheritdoc/>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.CountriesAll.FlowElements.IpCountriesAllEngine.#ctor(Microsoft.Extensions.Logging.ILogger{FiftyOne.IpIntelligence.CountriesAll.FlowElements.IpCountriesAllEngine},System.Func{FiftyOne.Pipeline.Core.FlowElements.IPipeline,FiftyOne.Pipeline.Core.FlowElements.FlowElementBase{FiftyOne.IpIntelligence.CountriesAll.Data.IpCountriesAllData,FiftyOne.Pipeline.Engines.Data.IAspectPropertyMetaData},FiftyOne.IpIntelligence.CountriesAll.Data.IpCountriesAllData})">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="logger">Logger instance.</param>
+            <param name="aspectDataFactory">Factory to create data instances.</param>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.CountriesAll.FlowElements.IpCountriesAllEngine.AddPipeline(FiftyOne.Pipeline.Core.FlowElements.IPipeline)">
+            <inheritdoc/>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.CountriesAll.FlowElements.IpCountriesAllEngine.ProcessEngine(FiftyOne.Pipeline.Core.Data.IFlowData,FiftyOne.IpIntelligence.CountriesAll.Data.IpCountriesAllData)">
+            <inheritdoc/>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.CountriesAll.FlowElements.IpCountriesAllEngine.ManagedResourcesCleanup">
+            <inheritdoc/>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.CountriesAll.FlowElements.IpCountriesAllEngine.UnmanagedResourcesCleanup">
+            <inheritdoc/>
+        </member>
+        <member name="T:FiftyOne.IpIntelligence.CountriesAll.FlowElements.IpCountriesAllEngineBuilder">
+            <summary>
+            Builder for <see cref="T:FiftyOne.IpIntelligence.CountriesAll.FlowElements.IpCountriesAllEngine"/>.
+            </summary>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.CountriesAll.FlowElements.IpCountriesAllEngineBuilder.#ctor(Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="loggerFactory">Logger factory to use.</param>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.CountriesAll.FlowElements.IpCountriesAllEngineBuilder.Build">
+            <summary>
+            Build a new <see cref="T:FiftyOne.IpIntelligence.CountriesAll.FlowElements.IpCountriesAllEngine"/> instance.
+            </summary>
+            <returns>A new engine instance.</returns>
+        </member>
+    </members>
+</doc>

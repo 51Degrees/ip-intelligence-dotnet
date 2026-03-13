@@ -26,7 +26,7 @@
             <returns>
             A new <see cref="T:FiftyOne.Pipeline.Core.FlowElements.IPipeline"/> instance that contains a 
             <see cref="T:FiftyOne.Pipeline.CloudRequestEngine.FlowElements.CloudRequestEngine"/> for making requests
-            to the 51Degrees cloud service and a 
+            to the 51Degrees Cloud service and a 
             <see cref="T:FiftyOne.IpIntelligence.Cloud.FlowElements.IpiCloudEngine"/> to interpret the
             IP intelligence results.
             </returns>
@@ -385,12 +385,12 @@
             Use the 51Degrees Cloud service to perform IP intelligence.
             </summary>
             <param name="resourceKey">
-            The resource key to use when querying the cloud service. 
+            The resource key to use when querying the Cloud service. 
             Obtain one from https://configure.51degrees.com
             </param>
             <returns>
             A builder that can be used to configure and build a pipeline
-            that will use the cloud IP intelligence engine.
+            that will use the Cloud IP intelligence engine.
             </returns>
         </member>
         <member name="M:FiftyOne.IpIntelligence.IpiPipelineBuilder.UseCloud(System.String,System.String)">
@@ -398,7 +398,7 @@
             Use the 51Degrees Cloud service to perform IP intelligence.
             </summary>
             <param name="resourceKey">
-            The resource key to use when querying the cloud service. 
+            The resource key to use when querying the Cloud service. 
             Obtain one from https://configure.51degrees.com
             </param>
             <param name="endpoint">
@@ -406,7 +406,7 @@
             </param>
             <returns>
             A builder that can be used to configure and build a pipeline
-            that will use the cloud IP intelligence engine.
+            that will use the Cloud IP intelligence engine.
             </returns>
         </member>
         <member name="M:FiftyOne.IpIntelligence.IpiPipelineBuilder.UseOnPremise(System.String,System.Boolean)">

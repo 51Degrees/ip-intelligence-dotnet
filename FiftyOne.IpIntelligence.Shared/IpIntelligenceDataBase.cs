@@ -112,7 +112,9 @@ namespace FiftyOne.IpIntelligence.Shared
 				{ "TimeZoneIana", typeof(IAspectPropertyValue<string>) },
 				{ "TimeZoneOffset", typeof(IAspectPropertyValue<int>) },
 				{ "Town", typeof(IAspectPropertyValue<string>) },
-				{ "ZipCode", typeof(IAspectPropertyValue<string>) }
+				{ "ZipCode", typeof(IAspectPropertyValue<string>) },
+				{ "CountryCodesGeographical", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
+				{ "CountryCodesPopulation", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) }
 			};
 
 		/// <summary>
@@ -303,5 +305,25 @@ namespace FiftyOne.IpIntelligence.Shared
 		/// Refers to the diversity of browsers observed from the IP range. An integer between 1-10, a lower value indicates a low number of browsers seen per IP address, while a higher value indicates a high number of browsers seen per IP address. A 0 value indicates that the probability is unknown.
 		/// </summary>
 		public IAspectPropertyValue<int> BrowserDiversity { get { return GetAs<IAspectPropertyValue<int>>("BrowserDiversity"); } }
+		/// <summary>
+		/// Weighted list of country codes by geographical area coverage.
+		/// </summary>
+		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> CountryCodesGeographical { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("CountryCodesGeographical"); } }
+		/// <summary>
+		/// Weighted list of country codes by population distribution.
+		/// </summary>
+		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> CountryCodesPopulation { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("CountryCodesPopulation"); } }
+		/// <summary>
+		/// All country codes ordered by geographical weighting descending,
+		/// followed by remaining codes alphabetically.
+		/// Populated by the IpCountriesAllEngine.
+		/// </summary>
+		public IAspectPropertyValue<IReadOnlyList<string>> CountryCodesGeographicalAll { get { return GetAs<IAspectPropertyValue<IReadOnlyList<string>>>("CountryCodesGeographicalAll"); } }
+		/// <summary>
+		/// All country codes ordered by population weighting descending,
+		/// followed by remaining codes alphabetically.
+		/// Populated by the IpCountriesAllEngine.
+		/// </summary>
+		public IAspectPropertyValue<IReadOnlyList<string>> CountryCodesPopulationAll { get { return GetAs<IAspectPropertyValue<IReadOnlyList<string>>>("CountryCodesPopulationAll"); } }
 	}
 }

@@ -27,6 +27,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FiftyOne.IpIntelligence.Clo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "performance-tests", "performance-tests\performance-tests.csproj", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiftyOne.IpIntelligence.CountriesAll", "FiftyOne.IpIntelligence.CountriesAll\FiftyOne.IpIntelligence.CountriesAll.csproj", "{04D86161-EB1C-4F81-A823-BA20F310F02E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM64 = Debug|ARM64
@@ -259,6 +261,30 @@ Global
 		{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}.Release-Single|ARM64.Build.0 = Release|ARM64
 		{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}.Release-Single|x64.ActiveCfg = Release|x64
 		{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}.Release-Single|x64.Build.0 = Release|x64
+		{04D86161-EB1C-4F81-A823-BA20F310F02E}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{04D86161-EB1C-4F81-A823-BA20F310F02E}.Debug|ARM64.Build.0 = Debug|ARM64
+		{04D86161-EB1C-4F81-A823-BA20F310F02E}.Debug|x64.ActiveCfg = Debug|x64
+		{04D86161-EB1C-4F81-A823-BA20F310F02E}.Debug|x64.Build.0 = Debug|x64
+		{04D86161-EB1C-4F81-A823-BA20F310F02E}.Debug-MemoryOnly|ARM64.ActiveCfg = Debug|ARM64
+		{04D86161-EB1C-4F81-A823-BA20F310F02E}.Debug-MemoryOnly|ARM64.Build.0 = Debug|ARM64
+		{04D86161-EB1C-4F81-A823-BA20F310F02E}.Debug-MemoryOnly|x64.ActiveCfg = Debug|x64
+		{04D86161-EB1C-4F81-A823-BA20F310F02E}.Debug-MemoryOnly|x64.Build.0 = Debug|x64
+		{04D86161-EB1C-4F81-A823-BA20F310F02E}.Debug-Single|ARM64.ActiveCfg = Debug|ARM64
+		{04D86161-EB1C-4F81-A823-BA20F310F02E}.Debug-Single|ARM64.Build.0 = Debug|ARM64
+		{04D86161-EB1C-4F81-A823-BA20F310F02E}.Debug-Single|x64.ActiveCfg = Debug|x64
+		{04D86161-EB1C-4F81-A823-BA20F310F02E}.Debug-Single|x64.Build.0 = Debug|x64
+		{04D86161-EB1C-4F81-A823-BA20F310F02E}.Release|ARM64.ActiveCfg = Release|ARM64
+		{04D86161-EB1C-4F81-A823-BA20F310F02E}.Release|ARM64.Build.0 = Release|ARM64
+		{04D86161-EB1C-4F81-A823-BA20F310F02E}.Release|x64.ActiveCfg = Release|x64
+		{04D86161-EB1C-4F81-A823-BA20F310F02E}.Release|x64.Build.0 = Release|x64
+		{04D86161-EB1C-4F81-A823-BA20F310F02E}.Release-MemoryOnly|ARM64.ActiveCfg = Debug|ARM64
+		{04D86161-EB1C-4F81-A823-BA20F310F02E}.Release-MemoryOnly|ARM64.Build.0 = Debug|ARM64
+		{04D86161-EB1C-4F81-A823-BA20F310F02E}.Release-MemoryOnly|x64.ActiveCfg = Debug|x64
+		{04D86161-EB1C-4F81-A823-BA20F310F02E}.Release-MemoryOnly|x64.Build.0 = Debug|x64
+		{04D86161-EB1C-4F81-A823-BA20F310F02E}.Release-Single|ARM64.ActiveCfg = Debug|ARM64
+		{04D86161-EB1C-4F81-A823-BA20F310F02E}.Release-Single|ARM64.Build.0 = Debug|ARM64
+		{04D86161-EB1C-4F81-A823-BA20F310F02E}.Release-Single|x64.ActiveCfg = Debug|x64
+		{04D86161-EB1C-4F81-A823-BA20F310F02E}.Release-Single|x64.Build.0 = Debug|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

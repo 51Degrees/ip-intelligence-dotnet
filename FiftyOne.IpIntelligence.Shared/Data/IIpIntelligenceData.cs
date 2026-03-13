@@ -222,5 +222,25 @@ namespace FiftyOne.IpIntelligence
 		/// The zip or postal code that the supplied location falls under.
 		/// </summary>
 		IAspectPropertyValue<string> ZipCode { get; }
+		/// <summary>
+		/// Weighted list of country codes by geographical area coverage.
+		/// </summary>
+		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> CountryCodesGeographical { get; }
+		/// <summary>
+		/// Weighted list of country codes by population distribution.
+		/// </summary>
+		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> CountryCodesPopulation { get; }
+		/// <summary>
+		/// All country codes ordered by geographical weighting descending,
+		/// followed by remaining codes alphabetically.
+		/// Populated by the IpCountriesAllEngine.
+		/// </summary>
+		IAspectPropertyValue<IReadOnlyList<string>> CountryCodesGeographicalAll { get; }
+		/// <summary>
+		/// All country codes ordered by population weighting descending,
+		/// followed by remaining codes alphabetically.
+		/// Populated by the IpCountriesAllEngine.
+		/// </summary>
+		IAspectPropertyValue<IReadOnlyList<string>> CountryCodesPopulationAll { get; }
 	}
 }
