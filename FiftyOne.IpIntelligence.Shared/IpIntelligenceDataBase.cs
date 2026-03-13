@@ -316,13 +316,13 @@ namespace FiftyOne.IpIntelligence.Shared
 		/// <summary>
 		/// All country codes ordered by geographical weighting descending,
 		/// followed by remaining codes alphabetically.
-		/// Populated by the IpCountriesAllEngine.
+		/// Populated by the IpCountriesElement.
 		/// </summary>
 		public IAspectPropertyValue<IReadOnlyList<string>> CountryCodesGeographicalAll { get { return GetAs<IAspectPropertyValue<IReadOnlyList<string>>>("CountryCodesGeographicalAll"); } }
 		/// <summary>
 		/// All country codes ordered by population weighting descending,
 		/// followed by remaining codes alphabetically.
-		/// Populated by the IpCountriesAllEngine.
+		/// Populated by the IpCountriesElement.
 		/// </summary>
 		public IAspectPropertyValue<IReadOnlyList<string>> CountryCodesPopulationAll { get { return GetAs<IAspectPropertyValue<IReadOnlyList<string>>>("CountryCodesPopulationAll"); } }
 	}

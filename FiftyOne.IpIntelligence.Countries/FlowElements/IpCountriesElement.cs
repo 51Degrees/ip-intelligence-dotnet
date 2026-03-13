@@ -20,40 +20,37 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
-using FiftyOne.IpIntelligence.CountriesAll.Data;
 using FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements;
 using FiftyOne.Pipeline.Core.Data;
 using FiftyOne.Pipeline.Core.FlowElements;
 using FiftyOne.Pipeline.Engines;
 using FiftyOne.Pipeline.Engines.Data;
-using FiftyOne.Pipeline.Engines.FlowElements;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
-namespace FiftyOne.IpIntelligence.CountriesAll.FlowElements
+namespace FiftyOne.IpIntelligence.Countries.FlowElements
 {
     /// <summary>
-    /// A post-processing engine that produces flat (non-weighted) country
+    /// A post-processing flow element that produces flat (non-weighted) country
     /// code lists by combining weighted results from the IPI engine with the
     /// full set of possible country codes from metadata.
     ///
+    /// The results are written directly to the <see cref="IIpIntelligenceData"/>
+    /// object's <c>CountryCodesGeographicalAll</c> and
+    /// <c>CountryCodesPopulationAll</c> properties.
+    ///
     /// Must be added to the pipeline after <see cref="IpiOnPremiseEngine"/>.
     /// </summary>
-    public class IpCountriesAllEngine : AspectEngineBase<IpCountriesAllData, IAspectPropertyMetaData>
+    public class IpCountriesElement : FlowElementBase<IElementData, IElementPropertyMetaData>
     {
         private IpiOnPremiseEngine _ipiEngine;
         private List<string> _allCountryCodes;
         private bool _initialized;
         private readonly object _initLock = new object();
-        private readonly ILogger<IpCountriesAllEngine> _logger;
-
-        private const string NoIpiEngineMessage =
-            "IPI engine or CountryCode metadata not available.";
-        private const string NoIpDataMessage =
-            "IP Intelligence data not available in flow data.";
+        private readonly ILogger<IpCountriesElement> _logger;
 
         /// <inheritdoc/>
         public override string ElementDataKey => "ipcountriesall";
@@ -63,42 +60,30 @@ namespace FiftyOne.IpIntelligence.CountriesAll.FlowElements
             new EvidenceKeyFilterWhitelist(new List<string>());
 
         /// <inheritdoc/>
-        public override string DataSourceTier => "n/a";
-
-        /// <inheritdoc/>
-        public override IList<IAspectPropertyMetaData> Properties { get; } =
-            new List<IAspectPropertyMetaData>
+        public override IList<IElementPropertyMetaData> Properties { get; } =
+            new List<IElementPropertyMetaData>
             {
-                new AspectPropertyMetaData(
+                new ElementPropertyMetaData(
                     null,
                     "CountryCodesGeographicalAll",
                     typeof(IReadOnlyList<string>),
-                    "Countries",
-                    new List<string> { "n/a" },
                     true,
-                    "All country codes ordered by geographical weighting " +
-                    "descending, followed by remaining codes alphabetically."),
-                new AspectPropertyMetaData(
+                    "Countries"),
+                new ElementPropertyMetaData(
                     null,
                     "CountryCodesPopulationAll",
                     typeof(IReadOnlyList<string>),
-                    "Countries",
-                    new List<string> { "n/a" },
                     true,
-                    "All country codes ordered by population weighting " +
-                    "descending, followed by remaining codes alphabetically.")
+                    "Countries")
             };
 
         /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="logger">Logger instance.</param>
-        /// <param name="aspectDataFactory">Factory to create data instances.</param>
-        internal IpCountriesAllEngine(
-            ILogger<IpCountriesAllEngine> logger,
-            Func<IPipeline, FlowElementBase<IpCountriesAllData, IAspectPropertyMetaData>,
-                IpCountriesAllData> aspectDataFactory)
-            : base(logger, aspectDataFactory)
+        internal IpCountriesElement(
+            ILogger<IpCountriesElement> logger)
+            : base(logger)
         {
             _logger = logger;
         }
@@ -136,7 +121,7 @@ namespace FiftyOne.IpIntelligence.CountriesAll.FlowElements
                         CultureInfo.InvariantCulture,
                         "{0} not found in the pipeline. {1} will not have values.",
                         nameof(IpiOnPremiseEngine),
-                        nameof(IpCountriesAllEngine)));
+                        nameof(IpCountriesElement)));
                 }
                 else
                 {
@@ -175,20 +160,15 @@ namespace FiftyOne.IpIntelligence.CountriesAll.FlowElements
         }
 
         /// <inheritdoc/>
-        protected override void ProcessEngine(IFlowData data, IpCountriesAllData aspectData)
+        protected override void ProcessInternal(IFlowData data)
         {
             if (data == null)
             {
                 throw new ArgumentNullException(nameof(data));
             }
-            if (aspectData == null)
-            {
-                throw new ArgumentNullException(nameof(aspectData));
-            }
 
             if (_ipiEngine == null || _allCountryCodes == null || _allCountryCodes.Count == 0)
             {
-                SetNoValue(aspectData, NoIpiEngineMessage);
                 return;
             }
 
@@ -199,85 +179,54 @@ namespace FiftyOne.IpIntelligence.CountriesAll.FlowElements
             }
             catch (KeyNotFoundException)
             {
-                SetNoValue(aspectData, NoIpDataMessage);
                 return;
             }
             catch (InvalidOperationException)
             {
-                SetNoValue(aspectData, NoIpDataMessage);
                 return;
             }
 
-            aspectData.CountryCodesGeographicalAll = BuildAllList(
-                ipData, "CountryCodesGeographical");
-            aspectData.CountryCodesPopulationAll = BuildAllList(
-                ipData, "CountryCodesPopulation");
-        }
+            // Build the flat lists and write them directly to the IPI data object
+            var geoAll = BuildAllList(ipData, "CountryCodesGeographical");
+            var popAll = BuildAllList(ipData, "CountryCodesPopulation");
 
-        private static void SetNoValue(IpCountriesAllData aspectData, string message)
-        {
-            aspectData.CountryCodesGeographicalAll =
-                new AspectPropertyValue<IReadOnlyList<string>>()
-                {
-                    NoValueMessage = message
-                };
-            aspectData.CountryCodesPopulationAll =
-                new AspectPropertyValue<IReadOnlyList<string>>()
-                {
-                    NoValueMessage = message
-                };
+            ((IData)ipData)["CountryCodesGeographicalAll"] = geoAll;
+            ((IData)ipData)["CountryCodesPopulationAll"] = popAll;
         }
 
         private IAspectPropertyValue<IReadOnlyList<string>> BuildAllList(
             IIpIntelligenceData ipData, string propertyName)
         {
-            object rawValue;
+            // Try to get the weighted property from the IPI data.
+            // If not available, we still return all codes alphabetically.
+            List<string> weightedCodes = null;
+            object rawValue = null;
             try
             {
                 rawValue = ((IElementData)ipData)[propertyName];
             }
             catch (PropertyMissingException)
             {
-                return new AspectPropertyValue<IReadOnlyList<string>>()
-                {
-                    NoValueMessage = string.Format(
-                        CultureInfo.InvariantCulture,
-                        "Property '{0}' not available.",
-                        propertyName)
-                };
             }
             catch (KeyNotFoundException)
             {
-                return new AspectPropertyValue<IReadOnlyList<string>>()
-                {
-                    NoValueMessage = string.Format(
-                        CultureInfo.InvariantCulture,
-                        "Property '{0}' not available.",
-                        propertyName)
-                };
             }
 
-            var weightedProperty =
-                rawValue as IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>;
-
-            if (weightedProperty == null || !weightedProperty.HasValue)
+            if (rawValue is IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> weightedProperty
+                && weightedProperty.HasValue)
             {
-                var noValueMsg = weightedProperty?.NoValueMessage
-                    ?? string.Format(
-                        CultureInfo.InvariantCulture,
-                        "Property '{0}' has no value.",
-                        propertyName);
-                return new AspectPropertyValue<IReadOnlyList<string>>()
-                {
-                    NoValueMessage = noValueMsg
-                };
+                weightedCodes = weightedProperty.Value
+                    .OrderByDescending(w => w.RawWeighting)
+                    .Select(w => w.Value)
+                    .ToList();
             }
 
-            // Sort weighted codes by weight descending, strip weights
-            var weightedCodes = weightedProperty.Value
-                .OrderByDescending(w => w.RawWeighting)
-                .Select(w => w.Value)
-                .ToList();
+            if (weightedCodes == null || weightedCodes.Count == 0)
+            {
+                // No weighted data — return all codes alphabetically
+                return new AspectPropertyValue<IReadOnlyList<string>>(
+                    new List<string>(_allCountryCodes));
+            }
 
             // Build set for fast lookup of already-included codes
             var includedCodes = new HashSet<string>(

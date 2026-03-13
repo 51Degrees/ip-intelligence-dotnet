@@ -20,17 +20,14 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
-using FiftyOne.IpIntelligence.CountriesAll.Data;
-using FiftyOne.Pipeline.Engines.Data;
-using FiftyOne.Pipeline.Engines.Services;
 using Microsoft.Extensions.Logging;
 
-namespace FiftyOne.IpIntelligence.CountriesAll.FlowElements
+namespace FiftyOne.IpIntelligence.Countries.FlowElements
 {
     /// <summary>
-    /// Builder for <see cref="IpCountriesAllEngine"/>.
+    /// Builder for <see cref="IpCountriesElement"/>.
     /// </summary>
-    public class IpCountriesAllEngineBuilder
+    public class IpCountriesElementBuilder
     {
         private readonly ILoggerFactory _loggerFactory;
 
@@ -38,25 +35,19 @@ namespace FiftyOne.IpIntelligence.CountriesAll.FlowElements
         /// Constructor.
         /// </summary>
         /// <param name="loggerFactory">Logger factory to use.</param>
-        public IpCountriesAllEngineBuilder(ILoggerFactory loggerFactory)
+        public IpCountriesElementBuilder(ILoggerFactory loggerFactory)
         {
             _loggerFactory = loggerFactory;
         }
 
         /// <summary>
-        /// Build a new <see cref="IpCountriesAllEngine"/> instance.
+        /// Build a new <see cref="IpCountriesElement"/> instance.
         /// </summary>
         /// <returns>A new engine instance.</returns>
-        public IpCountriesAllEngine Build()
+        public IpCountriesElement Build()
         {
-            return new IpCountriesAllEngine(
-                _loggerFactory.CreateLogger<IpCountriesAllEngine>(),
-                (pipeline, engine) =>
-                    new IpCountriesAllData(
-                        _loggerFactory.CreateLogger<AspectDataBase>(),
-                        pipeline,
-                        (IpCountriesAllEngine)engine,
-                        MissingPropertyService.Instance));
+            return new IpCountriesElement(
+                _loggerFactory.CreateLogger<IpCountriesElement>());
         }
     }
 }

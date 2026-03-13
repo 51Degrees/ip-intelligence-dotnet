@@ -33,7 +33,7 @@
   <ItemGroup>
     <ProjectReference Include="..\FiftyOne.IpIntelligence.Cloud\FiftyOne.IpIntelligence.Cloud.csproj" />
     <ProjectReference Include="..\FiftyOne.IpIntelligence.Engine.OnPremise\FiftyOne.IpIntelligence.Engine.OnPremise.csproj" />
-    <ProjectReference Include="..\FiftyOne.IpIntelligence.CountriesAll\FiftyOne.IpIntelligence.CountriesAll.csproj" />
+    <ProjectReference Include="..\FiftyOne.IpIntelligence.Countries\FiftyOne.IpIntelligence.Countries.csproj" />
   </ItemGroup>
 
   <ItemGroup>

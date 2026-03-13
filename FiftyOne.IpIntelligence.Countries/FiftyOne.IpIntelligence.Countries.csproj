@@ -5,14 +5,14 @@
     <Platforms>AnyCPU;x64;ARM64</Platforms>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
-    <DocumentationFile>FiftyOne.IpIntelligence.CountriesAll.xml</DocumentationFile>
+    <DocumentationFile>FiftyOne.IpIntelligence.Countries.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
 
     <!-- NuGet package properties -->
-    <PackageId>FiftyOne.IpIntelligence.CountriesAll</PackageId>
-    <Title>51Degrees IP Intelligence Countries All Engine</Title>
-    <Description>A post-processing engine that combines weighted country code results with all possible country codes from metadata, producing flat ordered lists.</Description>
+    <PackageId>FiftyOne.IpIntelligence.Countries</PackageId>
+    <Title>51Degrees IP Intelligence Countries Element</Title>
+    <Description>A post-processing flow element that combines weighted country code results with all possible country codes from metadata, producing flat ordered lists.</Description>
     <Authors>51Degrees Engineering</Authors>
     <PackageLicenseExpression>EUPL-1.2</PackageLicenseExpression>
     <Copyright>51Degrees Mobile Experts Limited</Copyright>

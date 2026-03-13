@@ -29,4 +29,4 @@
     "CA1303:Do not pass literals as localized parameters",
     Justification = "Log messages do not need localization.",
     Scope = "namespaceanddescendants",
-    Target = "FiftyOne.IpIntelligence.CountriesAll")]
+    Target = "FiftyOne.IpIntelligence.Countries")]

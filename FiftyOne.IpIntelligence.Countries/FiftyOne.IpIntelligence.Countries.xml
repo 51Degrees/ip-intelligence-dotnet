@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FiftyOne.IpIntelligence.Countries</name>
+    </assembly>
+    <members>
+        <member name="T:FiftyOne.IpIntelligence.Countries.FlowElements.IpCountriesElement">
+             <summary>
+             A post-processing flow element that produces flat (non-weighted) country
+             code lists by combining weighted results from the IPI engine with the
+             full set of possible country codes from metadata.
+            
+             The results are written directly to the <see cref="T:FiftyOne.IpIntelligence.IIpIntelligenceData"/>
+             object's <c>CountryCodesGeographicalAll</c> and
+             <c>CountryCodesPopulationAll</c> properties.
+            
+             Must be added to the pipeline after <see cref="T:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine"/>.
+             </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Countries.FlowElements.IpCountriesElement.ElementDataKey">
+            <inheritdoc/>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Countries.FlowElements.IpCountriesElement.EvidenceKeyFilter">
+            <inheritdoc/>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Countries.FlowElements.IpCountriesElement.Properties">
+            <inheritdoc/>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Countries.FlowElements.IpCountriesElement.#ctor(Microsoft.Extensions.Logging.ILogger{FiftyOne.IpIntelligence.Countries.FlowElements.IpCountriesElement})">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="logger">Logger instance.</param>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Countries.FlowElements.IpCountriesElement.AddPipeline(FiftyOne.Pipeline.Core.FlowElements.IPipeline)">
+            <inheritdoc/>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Countries.FlowElements.IpCountriesElement.ProcessInternal(FiftyOne.Pipeline.Core.Data.IFlowData)">
+            <inheritdoc/>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Countries.FlowElements.IpCountriesElement.ManagedResourcesCleanup">
+            <inheritdoc/>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Countries.FlowElements.IpCountriesElement.UnmanagedResourcesCleanup">
+            <inheritdoc/>
+        </member>
+        <member name="T:FiftyOne.IpIntelligence.Countries.FlowElements.IpCountriesElementBuilder">
+            <summary>
+            Builder for <see cref="T:FiftyOne.IpIntelligence.Countries.FlowElements.IpCountriesElement"/>.
+            </summary>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Countries.FlowElements.IpCountriesElementBuilder.#ctor(Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="loggerFactory">Logger factory to use.</param>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Countries.FlowElements.IpCountriesElementBuilder.Build">
+            <summary>
+            Build a new <see cref="T:FiftyOne.IpIntelligence.Countries.FlowElements.IpCountriesElement"/> instance.
+            </summary>
+            <returns>A new engine instance.</returns>
+        </member>
+    </members>
+</doc>

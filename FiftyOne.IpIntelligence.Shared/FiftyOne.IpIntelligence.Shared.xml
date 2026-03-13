@@ -1250,14 +1250,14 @@
             <summary>
             All country codes ordered by geographical weighting descending,
             followed by remaining codes alphabetically.
-            Populated by the IpCountriesAllEngine.
+            Populated by the IpCountriesElement.
             </summary>
         </member>
         <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.CountryCodesPopulationAll">
             <summary>
             All country codes ordered by population weighting descending,
             followed by remaining codes alphabetically.
-            Populated by the IpCountriesAllEngine.
+            Populated by the IpCountriesElement.
             </summary>
         </member>
         <member name="T:FiftyOne.IpIntelligence.Shared.Messages">
@@ -1609,14 +1609,14 @@
             <summary>
             All country codes ordered by geographical weighting descending,
             followed by remaining codes alphabetically.
-            Populated by the IpCountriesAllEngine.
+            Populated by the IpCountriesElement.
             </summary>
         </member>
         <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.CountryCodesPopulationAll">
             <summary>
             All country codes ordered by population weighting descending,
             followed by remaining codes alphabetically.
-            Populated by the IpCountriesAllEngine.
+            Populated by the IpCountriesElement.
             </summary>
         </member>
     </members>
