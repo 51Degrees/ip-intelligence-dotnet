@@ -20,7 +20,6 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
-using FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements;
 using FiftyOne.Pipeline.Core.Data;
 using FiftyOne.Pipeline.Core.FlowElements;
 using FiftyOne.Pipeline.Engines;
@@ -28,7 +27,6 @@ using FiftyOne.Pipeline.Engines.Data;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 
 namespace FiftyOne.IpIntelligence.Countries.FlowElements
@@ -36,24 +34,21 @@ namespace FiftyOne.IpIntelligence.Countries.FlowElements
     /// <summary>
     /// A post-processing flow element that produces flat (non-weighted) country
     /// code lists by combining weighted results from the IPI engine with the
-    /// full set of possible country codes from metadata.
+    /// full set of possible country codes loaded from a JSON file.
     ///
     /// The results are written directly to the <see cref="IIpIntelligenceData"/>
     /// object's <c>CountryCodesGeographicalAll</c> and
     /// <c>CountryCodesPopulationAll</c> properties.
     ///
-    /// Must be added to the pipeline after <see cref="IpiOnPremiseEngine"/>.
+    /// Must be added to the pipeline after the IPI engine.
     /// </summary>
     public class IpCountriesElement : FlowElementBase<IElementData, IElementPropertyMetaData>
     {
-        private IpiOnPremiseEngine _ipiEngine;
-        private List<string> _allCountryCodes;
-        private bool _initialized;
-        private readonly object _initLock = new object();
+        private readonly List<string> _allCountryCodes;
         private readonly ILogger<IpCountriesElement> _logger;
 
         /// <inheritdoc/>
-        public override string ElementDataKey => "ipcountriesall";
+        public override string ElementDataKey => "ipcountries";
 
         /// <inheritdoc/>
         public override IEvidenceKeyFilter EvidenceKeyFilter { get; } =
@@ -81,82 +76,16 @@ namespace FiftyOne.IpIntelligence.Countries.FlowElements
         /// Constructor.
         /// </summary>
         /// <param name="logger">Logger instance.</param>
+        /// <param name="allCountryCodes">
+        /// The complete list of country codes, already sorted alphabetically.
+        /// </param>
         internal IpCountriesElement(
-            ILogger<IpCountriesElement> logger)
+            ILogger<IpCountriesElement> logger,
+            List<string> allCountryCodes)
             : base(logger)
         {
             _logger = logger;
-        }
-
-        /// <inheritdoc/>
-        public override void AddPipeline(IPipeline pipeline)
-        {
-            if (pipeline == null)
-            {
-                throw new ArgumentNullException(nameof(pipeline));
-            }
-            base.AddPipeline(pipeline);
-            EnsureInitialized(pipeline);
-        }
-
-        private void EnsureInitialized(IPipeline pipeline)
-        {
-            if (_initialized)
-            {
-                return;
-            }
-
-            lock (_initLock)
-            {
-                if (_initialized)
-                {
-                    return;
-                }
-
-                _ipiEngine = pipeline.GetElement<IpiOnPremiseEngine>();
-
-                if (_ipiEngine == null)
-                {
-                    _logger.LogWarning(string.Format(
-                        CultureInfo.InvariantCulture,
-                        "{0} not found in the pipeline. {1} will not have values.",
-                        nameof(IpiOnPremiseEngine),
-                        nameof(IpCountriesElement)));
-                }
-                else
-                {
-                    LoadAllCountryCodes();
-                }
-
-                _initialized = true;
-            }
-        }
-
-        private void LoadAllCountryCodes()
-        {
-            var countryCodeProperty = _ipiEngine.Properties
-                .FirstOrDefault(p => string.Equals(
-                    p.Name, "CountryCode", StringComparison.OrdinalIgnoreCase));
-
-            if (countryCodeProperty == null)
-            {
-                _logger.LogWarning(string.Format(
-                    CultureInfo.InvariantCulture,
-                    "CountryCode property not found in {0} metadata.",
-                    nameof(IpiOnPremiseEngine)));
-                _allCountryCodes = new List<string>();
-                return;
-            }
-
-            _allCountryCodes = countryCodeProperty.GetValues()
-                .Select(v => v.Name)
-                .OrderBy(v => v, StringComparer.OrdinalIgnoreCase)
-                .ToList();
-
-            _logger.LogInformation(string.Format(
-                CultureInfo.InvariantCulture,
-                "Loaded {0} country codes from IPI engine metadata.",
-                _allCountryCodes.Count));
+            _allCountryCodes = allCountryCodes;
         }
 
         /// <inheritdoc/>
@@ -167,7 +96,7 @@ namespace FiftyOne.IpIntelligence.Countries.FlowElements
                 throw new ArgumentNullException(nameof(data));
             }
 
-            if (_ipiEngine == null || _allCountryCodes == null || _allCountryCodes.Count == 0)
+            if (_allCountryCodes == null || _allCountryCodes.Count == 0)
             {
                 return;
             }

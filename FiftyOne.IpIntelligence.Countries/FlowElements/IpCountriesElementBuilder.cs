@@ -21,6 +21,11 @@
  * ********************************************************************* */
 
 using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
+using System.Text.Json;
 
 namespace FiftyOne.IpIntelligence.Countries.FlowElements
 {
@@ -30,6 +35,7 @@ namespace FiftyOne.IpIntelligence.Countries.FlowElements
     public class IpCountriesElementBuilder
     {
         private readonly ILoggerFactory _loggerFactory;
+        private string _countryCodesFile;
 
         /// <summary>
         /// Constructor.
@@ -41,13 +47,81 @@ namespace FiftyOne.IpIntelligence.Countries.FlowElements
         }
 
         /// <summary>
+        /// Optionally set the path to a custom CountryCodes.json file.
+        /// If not set, the embedded resource shipped with this package
+        /// will be used.
+        /// </summary>
+        /// <param name="filePath">
+        /// Path to a JSON file containing an array of country code strings.
+        /// </param>
+        /// <returns>This builder.</returns>
+        public IpCountriesElementBuilder SetCountryCodesFile(string filePath)
+        {
+            _countryCodesFile = filePath;
+            return this;
+        }
+
+        /// <summary>
         /// Build a new <see cref="IpCountriesElement"/> instance.
         /// </summary>
-        /// <returns>A new engine instance.</returns>
+        /// <returns>A new element instance.</returns>
         public IpCountriesElement Build()
         {
-            return new IpCountriesElement(
-                _loggerFactory.CreateLogger<IpCountriesElement>());
+            var logger = _loggerFactory.CreateLogger<IpCountriesElement>();
+            List<string> codes;
+
+            if (!string.IsNullOrEmpty(_countryCodesFile))
+            {
+                var json = File.ReadAllText(_countryCodesFile);
+                codes = JsonSerializer.Deserialize<List<string>>(json);
+                codes.Sort(StringComparer.OrdinalIgnoreCase);
+                logger.LogInformation(
+                    "Loaded {0} country codes from '{1}'.",
+                    codes.Count,
+                    _countryCodesFile);
+            }
+            else
+            {
+                codes = LoadFromEmbeddedResource();
+                logger.LogInformation(
+                    "Loaded {0} country codes from embedded resource.",
+                    codes.Count);
+            }
+
+            return new IpCountriesElement(logger, codes);
+        }
+
+        private static List<string> LoadFromEmbeddedResource()
+        {
+            var assembly = typeof(IpCountriesElementBuilder).Assembly;
+            var resourceName = "CountryCodes.json";
+
+            // Find the resource by suffix match
+            foreach (var name in assembly.GetManifestResourceNames())
+            {
+                if (name.EndsWith(resourceName, StringComparison.OrdinalIgnoreCase))
+                {
+                    resourceName = name;
+                    break;
+                }
+            }
+
+            using (var stream = assembly.GetManifestResourceStream(resourceName))
+            {
+                if (stream == null)
+                {
+                    throw new InvalidOperationException(
+                        "Embedded resource 'CountryCodes.json' not found.");
+                }
+
+                using (var reader = new StreamReader(stream))
+                {
+                    var json = reader.ReadToEnd();
+                    var codes = JsonSerializer.Deserialize<List<string>>(json);
+                    codes.Sort(StringComparer.OrdinalIgnoreCase);
+                    return codes;
+                }
+            }
         }
     }
 }
