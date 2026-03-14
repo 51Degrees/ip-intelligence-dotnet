@@ -29,6 +29,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "performance-tests", "perfor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiftyOne.IpIntelligence.Countries", "FiftyOne.IpIntelligence.Countries\FiftyOne.IpIntelligence.Countries.csproj", "{04D86161-EB1C-4F81-A823-BA20F310F02E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiftyOne.IpIntelligence.Countries.Tests", "Tests\FiftyOne.IpIntelligence.Countries.Tests\FiftyOne.IpIntelligence.Countries.Tests.csproj", "{B3A7C2E1-5F9D-4A8B-9C6E-1D2F3E4A5B6C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM64 = Debug|ARM64
@@ -285,6 +287,30 @@ Global
 		{04D86161-EB1C-4F81-A823-BA20F310F02E}.Release-Single|ARM64.Build.0 = Debug|ARM64
 		{04D86161-EB1C-4F81-A823-BA20F310F02E}.Release-Single|x64.ActiveCfg = Debug|x64
 		{04D86161-EB1C-4F81-A823-BA20F310F02E}.Release-Single|x64.Build.0 = Debug|x64
+		{B3A7C2E1-5F9D-4A8B-9C6E-1D2F3E4A5B6C}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{B3A7C2E1-5F9D-4A8B-9C6E-1D2F3E4A5B6C}.Debug|ARM64.Build.0 = Debug|ARM64
+		{B3A7C2E1-5F9D-4A8B-9C6E-1D2F3E4A5B6C}.Debug|x64.ActiveCfg = Debug|x64
+		{B3A7C2E1-5F9D-4A8B-9C6E-1D2F3E4A5B6C}.Debug|x64.Build.0 = Debug|x64
+		{B3A7C2E1-5F9D-4A8B-9C6E-1D2F3E4A5B6C}.Debug-MemoryOnly|ARM64.ActiveCfg = Debug|ARM64
+		{B3A7C2E1-5F9D-4A8B-9C6E-1D2F3E4A5B6C}.Debug-MemoryOnly|ARM64.Build.0 = Debug|ARM64
+		{B3A7C2E1-5F9D-4A8B-9C6E-1D2F3E4A5B6C}.Debug-MemoryOnly|x64.ActiveCfg = Debug|x64
+		{B3A7C2E1-5F9D-4A8B-9C6E-1D2F3E4A5B6C}.Debug-MemoryOnly|x64.Build.0 = Debug|x64
+		{B3A7C2E1-5F9D-4A8B-9C6E-1D2F3E4A5B6C}.Debug-Single|ARM64.ActiveCfg = Debug|ARM64
+		{B3A7C2E1-5F9D-4A8B-9C6E-1D2F3E4A5B6C}.Debug-Single|ARM64.Build.0 = Debug|ARM64
+		{B3A7C2E1-5F9D-4A8B-9C6E-1D2F3E4A5B6C}.Debug-Single|x64.ActiveCfg = Debug|x64
+		{B3A7C2E1-5F9D-4A8B-9C6E-1D2F3E4A5B6C}.Debug-Single|x64.Build.0 = Debug|x64
+		{B3A7C2E1-5F9D-4A8B-9C6E-1D2F3E4A5B6C}.Release|ARM64.ActiveCfg = Release|ARM64
+		{B3A7C2E1-5F9D-4A8B-9C6E-1D2F3E4A5B6C}.Release|ARM64.Build.0 = Release|ARM64
+		{B3A7C2E1-5F9D-4A8B-9C6E-1D2F3E4A5B6C}.Release|x64.ActiveCfg = Release|x64
+		{B3A7C2E1-5F9D-4A8B-9C6E-1D2F3E4A5B6C}.Release|x64.Build.0 = Release|x64
+		{B3A7C2E1-5F9D-4A8B-9C6E-1D2F3E4A5B6C}.Release-MemoryOnly|ARM64.ActiveCfg = Release|ARM64
+		{B3A7C2E1-5F9D-4A8B-9C6E-1D2F3E4A5B6C}.Release-MemoryOnly|ARM64.Build.0 = Release|ARM64
+		{B3A7C2E1-5F9D-4A8B-9C6E-1D2F3E4A5B6C}.Release-MemoryOnly|x64.ActiveCfg = Release|x64
+		{B3A7C2E1-5F9D-4A8B-9C6E-1D2F3E4A5B6C}.Release-MemoryOnly|x64.Build.0 = Release|x64
+		{B3A7C2E1-5F9D-4A8B-9C6E-1D2F3E4A5B6C}.Release-Single|ARM64.ActiveCfg = Release|ARM64
+		{B3A7C2E1-5F9D-4A8B-9C6E-1D2F3E4A5B6C}.Release-Single|ARM64.Build.0 = Release|ARM64
+		{B3A7C2E1-5F9D-4A8B-9C6E-1D2F3E4A5B6C}.Release-Single|x64.ActiveCfg = Release|x64
+		{B3A7C2E1-5F9D-4A8B-9C6E-1D2F3E4A5B6C}.Release-Single|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -296,6 +322,7 @@ Global
 		{92AED47A-87F2-4DD3-95F0-4B5F8767A0AB} = {ECDB9D3A-5695-41C2-99D5-AB3562DA22B1}
 		{CFC9BCB7-1908-4413-8DEC-A2F83596192C} = {ECDB9D3A-5695-41C2-99D5-AB3562DA22B1}
 		{4AC08D2B-48DD-4A36-B7F8-5FD768EDD5C6} = {ECDB9D3A-5695-41C2-99D5-AB3562DA22B1}
+		{B3A7C2E1-5F9D-4A8B-9C6E-1D2F3E4A5B6C} = {ECDB9D3A-5695-41C2-99D5-AB3562DA22B1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7346AAA8-ADE3-458F-8EDB-925B1505A7A8}
