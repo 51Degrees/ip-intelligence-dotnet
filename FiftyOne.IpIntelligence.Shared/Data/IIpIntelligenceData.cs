@@ -230,17 +230,5 @@ namespace FiftyOne.IpIntelligence
 		/// Weighted list of country codes by population distribution.
 		/// </summary>
 		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> CountryCodesPopulation { get; }
-		/// <summary>
-		/// All country codes ordered by geographical weighting descending,
-		/// followed by remaining codes alphabetically.
-		/// Populated by the IpCountriesElement.
-		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<string>> CountryCodesGeographicalAll { get; }
-		/// <summary>
-		/// All country codes ordered by population weighting descending,
-		/// followed by remaining codes alphabetically.
-		/// Populated by the IpCountriesElement.
-		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<string>> CountryCodesPopulationAll { get; }
 	}
 }

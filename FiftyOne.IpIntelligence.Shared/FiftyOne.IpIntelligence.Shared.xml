@@ -1246,20 +1246,6 @@
             Weighted list of country codes by population distribution.
             </summary>
         </member>
-        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.CountryCodesGeographicalAll">
-            <summary>
-            All country codes ordered by geographical weighting descending,
-            followed by remaining codes alphabetically.
-            Populated by the IpCountriesElement.
-            </summary>
-        </member>
-        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.CountryCodesPopulationAll">
-            <summary>
-            All country codes ordered by population weighting descending,
-            followed by remaining codes alphabetically.
-            Populated by the IpCountriesElement.
-            </summary>
-        </member>
         <member name="T:FiftyOne.IpIntelligence.Shared.Messages">
             <summary>
               A strongly-typed resource class, for looking up localized strings, etc.
@@ -1603,20 +1589,6 @@
         <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.CountryCodesPopulation">
             <summary>
             Weighted list of country codes by population distribution.
-            </summary>
-        </member>
-        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.CountryCodesGeographicalAll">
-            <summary>
-            All country codes ordered by geographical weighting descending,
-            followed by remaining codes alphabetically.
-            Populated by the IpCountriesElement.
-            </summary>
-        </member>
-        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.CountryCodesPopulationAll">
-            <summary>
-            All country codes ordered by population weighting descending,
-            followed by remaining codes alphabetically.
-            Populated by the IpCountriesElement.
             </summary>
         </member>
     </members>

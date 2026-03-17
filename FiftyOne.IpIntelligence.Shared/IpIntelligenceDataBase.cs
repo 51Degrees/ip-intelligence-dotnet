@@ -313,17 +313,5 @@ namespace FiftyOne.IpIntelligence.Shared
 		/// Weighted list of country codes by population distribution.
 		/// </summary>
 		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> CountryCodesPopulation { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("CountryCodesPopulation"); } }
-		/// <summary>
-		/// All country codes ordered by geographical weighting descending,
-		/// followed by remaining codes alphabetically.
-		/// Populated by the IpCountriesElement.
-		/// </summary>
-		public IAspectPropertyValue<IReadOnlyList<string>> CountryCodesGeographicalAll { get { return GetAs<IAspectPropertyValue<IReadOnlyList<string>>>("CountryCodesGeographicalAll"); } }
-		/// <summary>
-		/// All country codes ordered by population weighting descending,
-		/// followed by remaining codes alphabetically.
-		/// Populated by the IpCountriesElement.
-		/// </summary>
-		public IAspectPropertyValue<IReadOnlyList<string>> CountryCodesPopulationAll { get { return GetAs<IAspectPropertyValue<IReadOnlyList<string>>>("CountryCodesPopulationAll"); } }
 	}
 }

@@ -20,6 +20,7 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
+using FiftyOne.IpIntelligence.Countries.Data;
 using FiftyOne.Pipeline.Core.Data;
 using FiftyOne.Pipeline.Core.FlowElements;
 using FiftyOne.Pipeline.Engines;
@@ -36,13 +37,12 @@ namespace FiftyOne.IpIntelligence.Countries.FlowElements
     /// code lists by combining weighted results from the IPI engine with the
     /// full set of possible country codes loaded from a JSON file.
     ///
-    /// The results are written directly to the <see cref="IIpIntelligenceData"/>
-    /// object's <c>CountryCodesGeographicalAll</c> and
-    /// <c>CountryCodesPopulationAll</c> properties.
+    /// The results are stored in the element's own <see cref="IIpCountriesData"/>
+    /// object, accessible via <c>flowData.Get&lt;IIpCountriesData&gt;()</c>.
     ///
     /// Must be added to the pipeline after the IPI engine.
     /// </summary>
-    public class IpCountriesElement : FlowElementBase<IElementData, IElementPropertyMetaData>
+    public class IpCountriesElement : FlowElementBase<IIpCountriesData, IElementPropertyMetaData>
     {
         private readonly List<string> _allCountryCodes;
         private readonly ILogger<IpCountriesElement> _logger;
@@ -79,10 +79,16 @@ namespace FiftyOne.IpIntelligence.Countries.FlowElements
         /// <param name="allCountryCodes">
         /// The complete list of country codes, already sorted alphabetically.
         /// </param>
+        /// <param name="elementDataFactory">
+        /// Factory method to create <see cref="IIpCountriesData"/> instances.
+        /// </param>
         internal IpCountriesElement(
             ILogger<IpCountriesElement> logger,
-            List<string> allCountryCodes)
-            : base(logger)
+            List<string> allCountryCodes,
+            Func<IPipeline,
+                FlowElementBase<IIpCountriesData, IElementPropertyMetaData>,
+                IIpCountriesData> elementDataFactory)
+            : base(logger, elementDataFactory)
         {
             _logger = logger;
             _allCountryCodes = allCountryCodes;
@@ -115,12 +121,16 @@ namespace FiftyOne.IpIntelligence.Countries.FlowElements
                 return;
             }
 
-            // Build the flat lists and write them directly to the IPI data object
+            // Build the flat lists
             var geoAll = BuildAllList(ipData, "CountryCodesGeographical");
             var popAll = BuildAllList(ipData, "CountryCodesPopulation");
 
-            ((IData)ipData)["CountryCodesGeographicalAll"] = geoAll;
-            ((IData)ipData)["CountryCodesPopulationAll"] = popAll;
+            // Write to this element's own data object
+            var elementData = (IpCountriesData)data.GetOrAdd(
+                ElementDataKeyTyped,
+                CreateElementData);
+            elementData.SetCountryCodesGeographicalAll(geoAll);
+            elementData.SetCountryCodesPopulationAll(popAll);
         }
 
         private IAspectPropertyValue<IReadOnlyList<string>> BuildAllList(

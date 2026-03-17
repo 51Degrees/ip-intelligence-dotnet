@@ -4,15 +4,51 @@
         <name>FiftyOne.IpIntelligence.Countries</name>
     </assembly>
     <members>
+        <member name="T:FiftyOne.IpIntelligence.Countries.Data.IIpCountriesData">
+            <summary>
+            Data interface for the <see cref="T:FiftyOne.IpIntelligence.Countries.FlowElements.IpCountriesElement"/>.
+            Contains flat (non-weighted) country code lists.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Countries.Data.IIpCountriesData.CountryCodesGeographicalAll">
+            <summary>
+            All country codes ordered by geographical weighting descending,
+            followed by remaining codes alphabetically.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Countries.Data.IIpCountriesData.CountryCodesPopulationAll">
+            <summary>
+            All country codes ordered by population weighting descending,
+            followed by remaining codes alphabetically.
+            </summary>
+        </member>
+        <member name="T:FiftyOne.IpIntelligence.Countries.Data.IpCountriesData">
+            <summary>
+            Element data for the <see cref="T:FiftyOne.IpIntelligence.Countries.FlowElements.IpCountriesElement"/>.
+            Contains flat (non-weighted) country code lists.
+            </summary>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Countries.Data.IpCountriesData.#ctor(Microsoft.Extensions.Logging.ILogger{FiftyOne.IpIntelligence.Countries.Data.IpCountriesData},FiftyOne.Pipeline.Core.FlowElements.IPipeline)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="logger">Logger instance.</param>
+            <param name="pipeline">The pipeline this data belongs to.</param>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Countries.Data.IpCountriesData.CountryCodesGeographicalAll">
+            <inheritdoc/>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Countries.Data.IpCountriesData.CountryCodesPopulationAll">
+            <inheritdoc/>
+        </member>
         <member name="T:FiftyOne.IpIntelligence.Countries.FlowElements.IpCountriesElement">
              <summary>
              A post-processing flow element that produces flat (non-weighted) country
              code lists by combining weighted results from the IPI engine with the
              full set of possible country codes loaded from a JSON file.
             
-             The results are written directly to the <see cref="T:FiftyOne.IpIntelligence.IIpIntelligenceData"/>
-             object's <c>CountryCodesGeographicalAll</c> and
-             <c>CountryCodesPopulationAll</c> properties.
+             The results are stored in the element's own <see cref="T:FiftyOne.IpIntelligence.Countries.Data.IIpCountriesData"/>
+             object, accessible via <c>flowData.Get&lt;IIpCountriesData&gt;()</c>.
             
              Must be added to the pipeline after the IPI engine.
              </summary>
@@ -26,13 +62,16 @@
         <member name="P:FiftyOne.IpIntelligence.Countries.FlowElements.IpCountriesElement.Properties">
             <inheritdoc/>
         </member>
-        <member name="M:FiftyOne.IpIntelligence.Countries.FlowElements.IpCountriesElement.#ctor(Microsoft.Extensions.Logging.ILogger{FiftyOne.IpIntelligence.Countries.FlowElements.IpCountriesElement},System.Collections.Generic.List{System.String})">
+        <member name="M:FiftyOne.IpIntelligence.Countries.FlowElements.IpCountriesElement.#ctor(Microsoft.Extensions.Logging.ILogger{FiftyOne.IpIntelligence.Countries.FlowElements.IpCountriesElement},System.Collections.Generic.List{System.String},System.Func{FiftyOne.Pipeline.Core.FlowElements.IPipeline,FiftyOne.Pipeline.Core.FlowElements.FlowElementBase{FiftyOne.IpIntelligence.Countries.Data.IIpCountriesData,FiftyOne.Pipeline.Core.Data.IElementPropertyMetaData},FiftyOne.IpIntelligence.Countries.Data.IIpCountriesData})">
             <summary>
             Constructor.
             </summary>
             <param name="logger">Logger instance.</param>
             <param name="allCountryCodes">
             The complete list of country codes, already sorted alphabetically.
+            </param>
+            <param name="elementDataFactory">
+            Factory method to create <see cref="T:FiftyOne.IpIntelligence.Countries.Data.IIpCountriesData"/> instances.
             </param>
         </member>
         <member name="M:FiftyOne.IpIntelligence.Countries.FlowElements.IpCountriesElement.ProcessInternal(FiftyOne.Pipeline.Core.Data.IFlowData)">

@@ -20,6 +20,9 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
+using FiftyOne.IpIntelligence.Countries.Data;
+using FiftyOne.Pipeline.Core.Data;
+using FiftyOne.Pipeline.Core.FlowElements;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -88,7 +91,11 @@ namespace FiftyOne.IpIntelligence.Countries.FlowElements
                     codes.Count);
             }
 
-            return new IpCountriesElement(logger, codes);
+            return new IpCountriesElement(logger, codes,
+                (pipeline, element) =>
+                    new IpCountriesData(
+                        _loggerFactory.CreateLogger<IpCountriesData>(),
+                        pipeline));
         }
 
         private static List<string> LoadFromEmbeddedResource()
