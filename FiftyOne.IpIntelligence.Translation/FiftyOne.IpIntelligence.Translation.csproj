@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FiftyOne.IpIntelligence.Shared\FiftyOne.IpIntelligence.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="..\ip-intelligence-data\Translations\OSM\countries.*.yml" LinkBase="Resources\" />
+    <EmbeddedResource Include="..\ip-intelligence-data\Translations\countrycodes.*.yml" LinkBase="Resources\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FiftyOne.Pipeline.Translation" Version="4.5.26" />
+  </ItemGroup>
+
+</Project>
