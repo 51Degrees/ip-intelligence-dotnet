@@ -22,8 +22,8 @@
 
 using FiftyOne.IpIntelligence.Countries.Data;
 using FiftyOne.Pipeline.Core.Data;
+using FiftyOne.Pipeline.Core.Exceptions;
 using FiftyOne.Pipeline.Core.FlowElements;
-using FiftyOne.Pipeline.Engines;
 using FiftyOne.Pipeline.Engines.Data;
 using Microsoft.Extensions.Logging;
 using System;
@@ -84,7 +84,7 @@ namespace FiftyOne.IpIntelligence.Countries.FlowElements
         /// </param>
         internal IpCountriesElement(
             ILogger<IpCountriesElement> logger,
-            List<string> allCountryCodes,
+            IReadOnlyList<string> allCountryCodes,
             Func<IPipeline,
                 FlowElementBase<IIpCountriesData, IElementPropertyMetaData>,
                 IIpCountriesData> elementDataFactory)
@@ -113,23 +113,17 @@ namespace FiftyOne.IpIntelligence.Countries.FlowElements
                 throw new ArgumentNullException(nameof(data));
             }
 
-            IIpIntelligenceData ipData;
+            IIpIntelligenceData ipData = null;
             try
             {
                 ipData = data.Get<IIpIntelligenceData>();
             }
-            catch (KeyNotFoundException)
-            {
-                return;
-            }
-            catch (InvalidOperationException)
-            {
-                return;
-            }
+            catch (PipelineException) { }
+            catch (KeyNotFoundException) { }
 
             // Build the flat lists
-            var geoAll = BuildAllList(ipData, "CountryCodesGeographical");
-            var popAll = BuildAllList(ipData, "CountryCodesPopulation");
+            var geoAll = BuildAllList(ipData?.CountryCodesGeographical);
+            var popAll = BuildAllList(ipData?.CountryCodesPopulation);
 
             // Write to this element's own data object
             var elementData = (IpCountriesData)data.GetOrAdd(
@@ -140,54 +134,28 @@ namespace FiftyOne.IpIntelligence.Countries.FlowElements
         }
 
         private IAspectPropertyValue<IReadOnlyList<string>> BuildAllList(
-            IIpIntelligenceData ipData, string propertyName)
+            IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> weightedProperty)
         {
-            // Try to get the weighted property from the IPI data.
-            // If not available, we still return all codes alphabetically.
-            List<string> weightedCodes = null;
-            object rawValue = null;
-            try
-            {
-                rawValue = ((IElementData)ipData)[propertyName];
-            }
-            catch (PropertyMissingException)
-            {
-            }
-            catch (KeyNotFoundException)
-            {
-            }
+            var weightedCodes = (weightedProperty?.HasValue == true)
+                ? weightedProperty.Value
+                .OrderByDescending(x => x.RawWeighting)
+                .ThenBy(x => x.Value)
+                .Select(w => w.Value)
+                .ToList()
+                : (IReadOnlyList<string>)Array.Empty<string>();
 
-            if (rawValue is IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> weightedProperty
-                && weightedProperty.HasValue)
-            {
-                weightedCodes = weightedProperty.Value
-                    .OrderByDescending(w => w.RawWeighting)
-                    .Select(w => w.Value)
-                    .ToList();
-            }
-
-            if (weightedCodes == null || weightedCodes.Count == 0)
+            if (weightedCodes.Count == 0)
             {
                 // No weighted data — return all codes alphabetically
                 return new AspectPropertyValue<IReadOnlyList<string>>(
                     _allCountryCodes);
             }
 
-            // Build set for fast lookup of already-included codes
-            var includedCodes = new HashSet<string>(
-                weightedCodes, StringComparer.OrdinalIgnoreCase);
-
-            // Remaining codes from the master list, excluding already-included ones
-            // Master list is already sorted alphabetically
             var remainingCodes = _allCountryCodes
-                .Where(code => !includedCodes.Contains(code));
+                .Where(code => !weightedCodes.Contains(code));
 
-            // Concatenate: weighted (desc) + remaining (alpha)
-            var result = new List<string>(weightedCodes.Count + _allCountryCodes.Count);
-            result.AddRange(weightedCodes);
-            result.AddRange(remainingCodes);
-
-            return new AspectPropertyValue<IReadOnlyList<string>>(result);
+            return new AspectPropertyValue<IReadOnlyList<string>>(
+                weightedCodes.Concat(remainingCodes).ToList());
         }
 
         /// <inheritdoc/>

@@ -62,7 +62,7 @@
         <member name="P:FiftyOne.IpIntelligence.Countries.FlowElements.IpCountriesElement.Properties">
             <inheritdoc/>
         </member>
-        <member name="M:FiftyOne.IpIntelligence.Countries.FlowElements.IpCountriesElement.#ctor(Microsoft.Extensions.Logging.ILogger{FiftyOne.IpIntelligence.Countries.FlowElements.IpCountriesElement},System.Collections.Generic.List{System.String},System.Func{FiftyOne.Pipeline.Core.FlowElements.IPipeline,FiftyOne.Pipeline.Core.FlowElements.FlowElementBase{FiftyOne.IpIntelligence.Countries.Data.IIpCountriesData,FiftyOne.Pipeline.Core.Data.IElementPropertyMetaData},FiftyOne.IpIntelligence.Countries.Data.IIpCountriesData})">
+        <member name="M:FiftyOne.IpIntelligence.Countries.FlowElements.IpCountriesElement.#ctor(Microsoft.Extensions.Logging.ILogger{FiftyOne.IpIntelligence.Countries.FlowElements.IpCountriesElement},System.Collections.Generic.IReadOnlyList{System.String},System.Func{FiftyOne.Pipeline.Core.FlowElements.IPipeline,FiftyOne.Pipeline.Core.FlowElements.FlowElementBase{FiftyOne.IpIntelligence.Countries.Data.IIpCountriesData,FiftyOne.Pipeline.Core.Data.IElementPropertyMetaData},FiftyOne.IpIntelligence.Countries.Data.IIpCountriesData})">
             <summary>
             Constructor.
             </summary>
