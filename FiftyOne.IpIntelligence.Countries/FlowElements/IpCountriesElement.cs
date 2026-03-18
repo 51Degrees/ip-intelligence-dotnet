@@ -44,7 +44,7 @@ namespace FiftyOne.IpIntelligence.Countries.FlowElements
     /// </summary>
     public class IpCountriesElement : FlowElementBase<IIpCountriesData, IElementPropertyMetaData>
     {
-        private readonly List<string> _allCountryCodes;
+        private readonly IReadOnlyList<string> _allCountryCodes;
         private readonly ILogger<IpCountriesElement> _logger;
 
         /// <inheritdoc/>
@@ -90,6 +90,17 @@ namespace FiftyOne.IpIntelligence.Countries.FlowElements
                 IIpCountriesData> elementDataFactory)
             : base(logger, elementDataFactory)
         {
+            if (allCountryCodes is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(allCountryCodes));
+            }
+            if (allCountryCodes.Count <= 0)
+            {
+                throw new ArgumentException(
+                    message: $"Countries list should not be empty!",
+                    paramName: nameof(allCountryCodes));
+            }
+
             _logger = logger;
             _allCountryCodes = allCountryCodes;
         }
@@ -97,14 +108,9 @@ namespace FiftyOne.IpIntelligence.Countries.FlowElements
         /// <inheritdoc/>
         protected override void ProcessInternal(IFlowData data)
         {
-            if (data == null)
+            if (data is null)
             {
                 throw new ArgumentNullException(nameof(data));
-            }
-
-            if (_allCountryCodes == null || _allCountryCodes.Count == 0)
-            {
-                return;
             }
 
             IIpIntelligenceData ipData;
@@ -164,7 +170,7 @@ namespace FiftyOne.IpIntelligence.Countries.FlowElements
             {
                 // No weighted data — return all codes alphabetically
                 return new AspectPropertyValue<IReadOnlyList<string>>(
-                    new List<string>(_allCountryCodes));
+                    _allCountryCodes);
             }
 
             // Build set for fast lookup of already-included codes
