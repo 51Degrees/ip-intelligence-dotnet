@@ -184,7 +184,7 @@ namespace FiftyOne.IpIntelligence.Translation.Tests
         /// to end.
         /// </summary>
         [TestMethod]
-        public void Translate4dCountryAll()
+        public void TranslatedCountryAll()
         {
             // Use a mock IP element to provide the country codes as evidence.
             // This allow the engine to be tested in isolation.
