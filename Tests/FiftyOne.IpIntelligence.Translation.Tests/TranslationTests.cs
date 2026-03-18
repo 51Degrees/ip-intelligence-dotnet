@@ -5,11 +5,6 @@ using FiftyOne.Pipeline.Core.FlowElements;
 using FiftyOne.Pipeline.Engines.Data;
 using Microsoft.Extensions.Logging;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FiftyOne.IpIntelligence.Translation.Tests
 {
@@ -55,18 +50,25 @@ namespace FiftyOne.IpIntelligence.Translation.Tests
             // Assert
             var result = flowData.Get<ICountryCodeTranslationData>();
             Assert.IsNotNull(result);
-            Assert.IsNotNull(result.CountryNamesGeographic);
+            Assert.IsNotNull(result.CountryNamesGeographical);
             Assert.IsNotNull(result.CountryNamesPopulation);
-            Assert.IsTrue(result.CountryNamesGeographic.HasValue);
+            Assert.IsTrue(result.CountryNamesGeographical.HasValue);
             Assert.IsTrue(result.CountryNamesPopulation.HasValue);
-            Assert.AreEqual(2, result.CountryNamesGeographic.Value.Count);
+            Assert.AreEqual(2, result.CountryNamesGeographical.Value.Count);
             Assert.AreEqual(2, result.CountryNamesPopulation.Value.Count);
-            Assert.AreEqual("United Kingdom", result.CountryNamesGeographic.Value[0].Value);
-            Assert.AreEqual("France", result.CountryNamesGeographic.Value[1].Value);
-            Assert.AreEqual("United Kingdom", result.CountryNamesPopulation.Value[0].Value);
-            Assert.AreEqual("France", result.CountryNamesPopulation.Value[1].Value);
+            Assert.AreEqual(
+                "United Kingdom",
+                result.CountryNamesGeographical.Value[0].Value);
+            Assert.AreEqual(
+                "France",
+                result.CountryNamesGeographical.Value[1].Value);
+            Assert.AreEqual(
+                "United Kingdom",
+                result.CountryNamesPopulation.Value[0].Value);
+            Assert.AreEqual(
+                "France",
+                result.CountryNamesPopulation.Value[1].Value);
         }
-
 
         /// <summary>
         /// Test that a list of countries can be translated to a target
@@ -103,16 +105,24 @@ namespace FiftyOne.IpIntelligence.Translation.Tests
             // Assert
             var result = flowData.Get<ICountriesTranslationData>();
             Assert.IsNotNull(result);
-            Assert.IsNotNull(result.CountryNamesGeographicTranslated);
+            Assert.IsNotNull(result.CountryNamesGeographicalTranslated);
             Assert.IsNotNull(result.CountryNamesPopulationTranslated);
-            Assert.IsTrue(result.CountryNamesGeographicTranslated.HasValue);
+            Assert.IsTrue(result.CountryNamesGeographicalTranslated.HasValue);
             Assert.IsTrue(result.CountryNamesPopulationTranslated.HasValue);
-            Assert.AreEqual(2, result.CountryNamesGeographicTranslated.Value.Count);
+            Assert.AreEqual(2, result.CountryNamesGeographicalTranslated.Value.Count);
             Assert.AreEqual(2, result.CountryNamesPopulationTranslated.Value.Count);
-            Assert.AreEqual("Royaume-Uni", result.CountryNamesGeographicTranslated.Value[0].Value);
-            Assert.AreEqual("France", result.CountryNamesGeographicTranslated.Value[1].Value);
-            Assert.AreEqual("Royaume-Uni", result.CountryNamesPopulationTranslated.Value[0].Value);
-            Assert.AreEqual("France", result.CountryNamesPopulationTranslated.Value[1].Value);
+            Assert.AreEqual(
+                "Royaume-Uni",
+                result.CountryNamesGeographicalTranslated.Value[0].Value);
+            Assert.AreEqual(
+                "France",
+                result.CountryNamesGeographicalTranslated.Value[1].Value);
+            Assert.AreEqual(
+                "Royaume-Uni",
+                result.CountryNamesPopulationTranslated.Value[0].Value);
+            Assert.AreEqual(
+                "France",
+                result.CountryNamesPopulationTranslated.Value[1].Value);
         }
 
         /// <summary>
@@ -150,7 +160,6 @@ namespace FiftyOne.IpIntelligence.Translation.Tests
                     countriesPopulation.Select(i =>
                         new WeightedValue<string>(0, i))
                     .ToList()));
-
         }
 
         /// <summary>
@@ -167,8 +176,8 @@ namespace FiftyOne.IpIntelligence.Translation.Tests
         {
             var ipData = new TestIpData(null, null);
 
-            ipData["CountriesGeographic"] = countriesGeographic;
-            ipData["CountriesPopulation"] = countriesPopulation;
+            ipData["CountryCodesGeographical"] = countriesGeographic;
+            ipData["CountryCodesPopulation"] = countriesPopulation;
 
             var element = new Mock<IFlowElement>();
             element.SetupGet(i => i.Properties)

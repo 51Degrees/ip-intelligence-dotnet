@@ -20,20 +20,24 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
-using FiftyOne.Pipeline.Core.Data;
-using FiftyOne.Pipeline.Engines.Data;
-using FiftyOne.Pipeline.Translation.Data;
-using System.Collections.Generic;
 
-namespace FiftyOne.IpIntelligence.Translation.Data
+namespace FiftyOne.IpIntelligence.Translation
 {
-    public interface ICountryCodeTranslationData : ITranslationData
+    /// <summary>
+    /// Constants used by the translation flow elements.
+    /// </summary>
+    internal class Constants
     {
-        IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>
-            CountryNamesGeographical
-        { get; }
-        IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>
-            CountryNamesPopulation
-        { get; }
+        /// <summary>
+        /// Element key used by the
+        /// <see cref="FlowElements.CountriesTranslationEngine"/>.
+        /// </summary>
+        public const string CountryNamesKey = "countrynames";
+
+        /// <summary>
+        /// Element key used by the
+        /// <see cref="FlowElements.CountriesTranslationEngine"/>.
+        /// </summary>
+        public const string CountryNamesTranslatedKey = "countrynamestranslated";
     }
 }
