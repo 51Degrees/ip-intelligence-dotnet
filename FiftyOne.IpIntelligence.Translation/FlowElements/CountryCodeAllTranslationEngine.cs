@@ -20,6 +20,7 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
+using FiftyOne.IpIntelligence.Countries.Data;
 using FiftyOne.IpIntelligence.Translation.Data;
 using FiftyOne.Pipeline.Core.Data;
 using FiftyOne.Pipeline.Core.FlowElements;
@@ -53,10 +54,10 @@ namespace FiftyOne.IpIntelligence.Translation.FlowElements
             _translations = new List<TranslationProperty>
             {
                 new TranslationProperty(
-                    "CountryCodesGeographicalAll",
+                    nameof(IIpCountriesData.CountryCodesGeographicalAll),
                     nameof(ICountryCodeTranslationData.CountryNamesGeographicalAll)),
                 new TranslationProperty(
-                    "CountryCodesPopulationAll",
+                    nameof(IIpCountriesData.CountryCodesPopulationAll),
                     nameof(ICountryCodeTranslationData.CountryNamesPopulationAll))
             };
 
