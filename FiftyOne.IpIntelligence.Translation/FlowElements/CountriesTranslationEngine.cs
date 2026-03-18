@@ -57,14 +57,27 @@ namespace FiftyOne.IpIntelligence.Translation.FlowElements
                     nameof(ICountriesTranslationData.CountryNamesPopulationTranslated))
             };
 
+        /// <inheritdoc/>
         public override string ElementDataKey =>
             Constants.CountryNamesTranslatedKey;
 
-        public CountriesTranslationEngine(
-            ILogger<FlowElementBase<ICountriesTranslationData, IElementPropertyMetaData>> logger,
-            Func<IPipeline, FlowElementBase<ICountriesTranslationData, IElementPropertyMetaData>, ICountriesTranslationData> elementDataFactory)
+        /// <summary>
+        /// Countructor which is only accessible by the builder.
+        /// </summary>
+        /// <param name="logger"></param>
+        /// <param name="elementDataFactory"></param>
+        internal CountriesTranslationEngine(
+            ILogger<FlowElementBase<
+                ICountriesTranslationData,
+                IElementPropertyMetaData>> logger,
+            Func<
+                IPipeline,
+                FlowElementBase<
+                    ICountriesTranslationData,
+                    IElementPropertyMetaData>,
+                ICountriesTranslationData> elementDataFactory)
             : base(
-                  "countrynames",
+                  Constants.CountryNamesKey,
                   _translations,
                   Resources.Resources.GetCountryResources(),
                   null,

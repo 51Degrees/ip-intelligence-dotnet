@@ -27,13 +27,24 @@ using System.Collections.Generic;
 
 namespace FiftyOne.IpIntelligence.Translation.Data
 {
+    /// <summary>
+    /// Contains English country names translated from country codes for both
+    /// the geographical and population weighted lists from IP Intelligence.
+    /// </summary>
     public interface ICountryCodeTranslationData : ITranslationData
     {
+        /// <summary>
+        /// List of country names based on the geographical weighted
+        /// list of country codes from IP Intelligence. 
+        /// </summary>
         IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>
-            CountryNamesGeographical
-        { get; }
+            CountryNamesGeographical { get; }
+
+        /// <summary>
+        /// List of country names based on the population weighted
+        /// list of country codes from IP Intelligence. 
+        /// </summary>
         IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>
-            CountryNamesPopulation
-        { get; }
+            CountryNamesPopulation { get; }
     }
 }

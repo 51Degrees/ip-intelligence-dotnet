@@ -2,8 +2,40 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Platforms>AnyCPU;x64;ARM64</Platforms>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <DocumentationFile>FiftyOne.IpIntelligence.Translation.xml</DocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+    <!-- NuGet package properties -->
+    <PackageId>FiftyOne.IpIntelligence.Translation</PackageId>
+    <Title>51Degrees IP Intelligence Country Translation Engines</Title>
+    <Description>Translation engines which take country code lists provided by FiftyOne.IpIntelligence and translate into country names in the requested language.</Description>
+    <Authors>51Degrees Engineering</Authors>
+    <PackageLicenseExpression>EUPL-1.2</PackageLicenseExpression>
+    <PackageIconUrl>https://51degrees.com/Nuget-FiftyOne.IpIntelligence/Square%20Logo.png</PackageIconUrl>
+    <Copyright>51Degrees Mobile Experts Limited</Copyright>
+    <PackageTags>51degrees;pipeline;pipeline-api;ip-intelligence;language;translation</PackageTags>
+    <RepositoryUrl>https://github.com/51Degrees/ip-intelligence-dotnet</RepositoryUrl>
+    <PackageProjectUrl>www.51degrees.com</PackageProjectUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageIcon>51d-logo.png</PackageIcon>
+    <NeutralLanguage>en</NeutralLanguage>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\Images\51d-logo.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+  
   <ItemGroup>
     <ProjectReference Include="..\FiftyOne.IpIntelligence.Shared\FiftyOne.IpIntelligence.Shared.csproj" />
   </ItemGroup>

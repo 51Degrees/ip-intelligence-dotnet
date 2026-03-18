@@ -29,7 +29,7 @@ namespace FiftyOne.IpIntelligence.Translation.Data
 {
     /// <summary>
     /// Contains trawnslated country names for both the geographical and
-    /// population weighted lists from IP Intelligence.
+    /// population weighted lists from <see cref="ICountryCodeTranslationData"/>.
     /// </summary>
     public interface ICountriesTranslationData : ITranslationData
     {

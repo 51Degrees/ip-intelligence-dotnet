@@ -1,0 +1,225 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FiftyOne.IpIntelligence.Translation</name>
+    </assembly>
+    <members>
+        <member name="T:FiftyOne.IpIntelligence.Translation.Constants">
+            <summary>
+            Constants used by the translation flow elements.
+            </summary>
+        </member>
+        <member name="F:FiftyOne.IpIntelligence.Translation.Constants.CountryNamesKey">
+            <summary>
+            Element key used by the
+            <see cref="T:FiftyOne.IpIntelligence.Translation.FlowElements.CountriesTranslationEngine"/>.
+            </summary>
+        </member>
+        <member name="F:FiftyOne.IpIntelligence.Translation.Constants.CountryNamesTranslatedKey">
+            <summary>
+            Element key used by the
+            <see cref="T:FiftyOne.IpIntelligence.Translation.FlowElements.CountriesTranslationEngine"/>.
+            </summary>
+        </member>
+        <member name="T:FiftyOne.IpIntelligence.Translation.Data.CountriesTranslationData">
+            <summary>
+            Concrete implementation of <see cref="T:FiftyOne.IpIntelligence.Translation.Data.ICountriesTranslationData"/>. 
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Translation.Data.CountriesTranslationData.CountryNamesGeographicalTranslated">
+            <inheritdoc/>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Translation.Data.CountriesTranslationData.CountryNamesPopulationTranslated">
+            <inheritdoc/>
+        </member>
+        <member name="T:FiftyOne.IpIntelligence.Translation.Data.CountryCodeTranslationData">
+            <summary>
+            Concrete implementation of <see cref="T:FiftyOne.IpIntelligence.Translation.Data.ICountryCodeTranslationData"/>.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Translation.Data.CountryCodeTranslationData.CountryNamesGeographical">
+            <inheritdoc/>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Translation.Data.CountryCodeTranslationData.CountryNamesPopulation">
+            <inheritdoc/>
+        </member>
+        <member name="T:FiftyOne.IpIntelligence.Translation.Data.ICountriesTranslationData">
+            <summary>
+            Contains trawnslated country names for both the geographical and
+            population weighted lists from <see cref="T:FiftyOne.IpIntelligence.Translation.Data.ICountryCodeTranslationData"/>.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Translation.Data.ICountriesTranslationData.CountryNamesGeographicalTranslated">
+            <summary>
+            Translated list of country names based on the geographical weighted
+            list from IP Intelligence. This is translated to the browser
+            language determined from the evidence.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Translation.Data.ICountriesTranslationData.CountryNamesPopulationTranslated">
+            <summary>
+            Translated list of country names based on the population weighted
+            list from IP Intelligence. This is translated to the browser
+            language determined from the evidence.
+            </summary>
+        </member>
+        <member name="T:FiftyOne.IpIntelligence.Translation.Data.ICountryCodeTranslationData">
+            <summary>
+            Contains English country names translated from country codes for both
+            the geographical and population weighted lists from IP Intelligence.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Translation.Data.ICountryCodeTranslationData.CountryNamesGeographical">
+            <summary>
+            List of country names based on the geographical weighted
+            list of country codes from IP Intelligence. 
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Translation.Data.ICountryCodeTranslationData.CountryNamesPopulation">
+            <summary>
+            List of country names based on the population weighted
+            list of country codes from IP Intelligence. 
+            </summary>
+        </member>
+        <member name="T:FiftyOne.IpIntelligence.Translation.FlowElements.CountriesTranslationEngine">
+            <summary>
+            Engine which takes the country name properties from
+            <see cref="T:FiftyOne.IpIntelligence.Translation.FlowElements.CountryCodeTranslationEngine"/> and translates them into the
+            browser language determined from the evidence. Results are stored using
+            the <see cref="F:FiftyOne.IpIntelligence.Translation.Constants.CountryNamesTranslatedKey"/> key.
+            
+            All translation files are stored as embedded resources, so no
+            configuration is required.
+            </summary>
+        </member>
+        <member name="F:FiftyOne.IpIntelligence.Translation.FlowElements.CountriesTranslationEngine._translations">
+            <summary>
+            Static translations passed to the base constructor.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Translation.FlowElements.CountriesTranslationEngine.ElementDataKey">
+            <inheritdoc/>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Translation.FlowElements.CountriesTranslationEngine.#ctor(Microsoft.Extensions.Logging.ILogger{FiftyOne.Pipeline.Core.FlowElements.FlowElementBase{FiftyOne.IpIntelligence.Translation.Data.ICountriesTranslationData,FiftyOne.Pipeline.Core.Data.IElementPropertyMetaData}},System.Func{FiftyOne.Pipeline.Core.FlowElements.IPipeline,FiftyOne.Pipeline.Core.FlowElements.FlowElementBase{FiftyOne.IpIntelligence.Translation.Data.ICountriesTranslationData,FiftyOne.Pipeline.Core.Data.IElementPropertyMetaData},FiftyOne.IpIntelligence.Translation.Data.ICountriesTranslationData})">
+            <summary>
+            Countructor which is only accessible by the builder.
+            </summary>
+            <param name="logger"></param>
+            <param name="elementDataFactory"></param>
+        </member>
+        <member name="T:FiftyOne.IpIntelligence.Translation.FlowElements.CountriesTranslationEngineBuilder">
+            <summary>
+            Builder for the <see cref="T:FiftyOne.IpIntelligence.Translation.FlowElements.CountriesTranslationEngine"/> element.
+            This requires no configuration, as all the configuration for the base
+            translation engine is taken care of.
+            </summary>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Translation.FlowElements.CountriesTranslationEngineBuilder.#ctor(Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="loggerFactory">
+            Logger factory used by the engine and any element data created.
+            </param>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Translation.FlowElements.CountriesTranslationEngineBuilder.Build">
+            <summary>
+            Build a new instance of <see cref="T:FiftyOne.IpIntelligence.Translation.FlowElements.CountryCodeTranslationEngine"/>.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Translation.FlowElements.CountriesTranslationEngineBuilder.CreateData(FiftyOne.Pipeline.Core.FlowElements.IPipeline,FiftyOne.Pipeline.Core.FlowElements.FlowElementBase{FiftyOne.IpIntelligence.Translation.Data.ICountriesTranslationData,FiftyOne.Pipeline.Core.Data.IElementPropertyMetaData})">
+            <summary>
+            Creates an instance of <see cref="T:FiftyOne.IpIntelligence.Translation.Data.CountriesTranslationData"/>.
+            </summary>
+            <param name="pipeline"></param>
+            <param name="flowElement"></param>
+            <returns></returns>
+        </member>
+        <member name="T:FiftyOne.IpIntelligence.Translation.FlowElements.CountryCodeTranslationEngine">
+            <summary>
+            Engine which takes the country code properties from IP Intelligence
+            and translates them to country names. The country names are always in
+            English. Results are stored using the
+            <see cref="F:FiftyOne.IpIntelligence.Translation.Constants.CountryNamesKey"/> key.
+            
+            All translation files are stored as embedded resources, so no
+            configuration is required.
+            </summary>
+        </member>
+        <member name="F:FiftyOne.IpIntelligence.Translation.FlowElements.CountryCodeTranslationEngine._translations">
+            <summary>
+            Static translations passed to the base constructor.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Translation.FlowElements.CountryCodeTranslationEngine.ElementDataKey">
+            <inheritdoc/>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Translation.FlowElements.CountryCodeTranslationEngine.#ctor(Microsoft.Extensions.Logging.ILogger{FiftyOne.Pipeline.Core.FlowElements.FlowElementBase{FiftyOne.IpIntelligence.Translation.Data.ICountryCodeTranslationData,FiftyOne.Pipeline.Core.Data.IElementPropertyMetaData}},System.Func{FiftyOne.Pipeline.Core.FlowElements.IPipeline,FiftyOne.Pipeline.Core.FlowElements.FlowElementBase{FiftyOne.IpIntelligence.Translation.Data.ICountryCodeTranslationData,FiftyOne.Pipeline.Core.Data.IElementPropertyMetaData},FiftyOne.IpIntelligence.Translation.Data.ICountryCodeTranslationData})">
+            <summary>
+            Countructor which is only accessible by the builder.
+            </summary>
+            <param name="logger"></param>
+            <param name="elementDataFactory"></param>
+        </member>
+        <member name="T:FiftyOne.IpIntelligence.Translation.FlowElements.CountryCodeTranslationEngineBuilder">
+            <summary>
+            Builder for the <see cref="T:FiftyOne.IpIntelligence.Translation.FlowElements.CountryCodeTranslationEngine"/> element.
+            This requires no configuration, as all the configuration for the base
+            translation engine is taken care of.
+            </summary>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Translation.FlowElements.CountryCodeTranslationEngineBuilder.#ctor(Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="loggerFactory">
+            Logger factory used by the engine and any element data created.
+            </param>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Translation.FlowElements.CountryCodeTranslationEngineBuilder.Build">
+            <summary>
+            Build a new instance of <see cref="T:FiftyOne.IpIntelligence.Translation.FlowElements.CountryCodeTranslationEngine"/>.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Translation.FlowElements.CountryCodeTranslationEngineBuilder.CreateData(FiftyOne.Pipeline.Core.FlowElements.IPipeline,FiftyOne.Pipeline.Core.FlowElements.FlowElementBase{FiftyOne.IpIntelligence.Translation.Data.ICountryCodeTranslationData,FiftyOne.Pipeline.Core.Data.IElementPropertyMetaData})">
+            <summary>
+            Creates an instance of CountryCodeTranslationData
+            </summary>
+            <param name="pipeline"></param>
+            <param name="flowElement"></param>
+            <returns></returns>
+        </member>
+        <member name="T:FiftyOne.IpIntelligence.Translation.Resources.Resources">
+            <summary>
+            Internal resources class used to retrieve the translation files stored
+            as embedded resources.
+            </summary>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Translation.Resources.Resources.GetCountryResources">
+            <summary>
+            Get the country name translation YAML files.
+            </summary>
+            <returns>
+            Dictionary of file contents keyed on file name.
+            </returns>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Translation.Resources.Resources.GetCountryCodeResources">
+            <summary>
+            Get the country code translation YAML files.
+            </summary>
+            <returns>
+            Dictionary of file contents keyed on file name.
+            </returns>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Translation.Resources.Resources.GetResources">
+            <summary>
+            Get all the translation YAML files stored as embedded resources.
+            </summary>
+            <returns>
+            Dictionary of file contents keyed on file name.
+            </returns>
+        </member>
+    </members>
+</doc>
