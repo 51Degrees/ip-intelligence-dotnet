@@ -6,6 +6,10 @@ on:
       dryrun:
         type: boolean
         default: false
+      metadata-branch:
+        description: 'Branch of common-metadata to use for accessor generation'
+        type: string
+        default: 'main'
       skip-compare-performance:
         description: '🦆 Performance'
         type: boolean
@@ -21,6 +25,7 @@ jobs:
       repo-name: ${{ github.event.repository.name }}
       org-name: ${{ github.event.repository.owner.login }}
       dryrun: ${{ inputs.dryrun || false }}
+      metadata-branch: ${{ inputs.metadata-branch || 'main' }}
       data-type: "IpIntelligence"
       data-product: "EnterpriseV4"
       data-filename: "51Degrees-EnterpriseV4.ipi.gz"
