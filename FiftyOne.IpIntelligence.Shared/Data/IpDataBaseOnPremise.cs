@@ -585,12 +585,18 @@ namespace FiftyOne.IpIntelligence.Shared.Data
             value = default(T);
             if (_dictionaryPopulated == true)
             {
-                // If the complete set of values has been populated 
-                // then we can use the base implementation to get 
+                // If the complete set of values has been populated
+                // then we can use the base implementation to get
                 // the value from the dictionary.
                 return base.TryGetValue(key, out value);
             }
-            else if (Results.HasResults())
+            // Check if the value has been set directly in the dictionary
+            // (e.g. by a post-processing flow element).
+            if (base.TryGetValue(key, out value))
+            {
+                return true;
+            }
+            if (Results.HasResults())
             {
                 // Object to hold the value
                 object obj = null;
