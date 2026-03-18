@@ -10,19 +10,19 @@ param(
 $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
 
+$BuildArgs = @{
+    RepoName = $RepoName
+    ProjectDir = $ProjectDir
+    Name = $Name
+    Configuration = $Configuration
+    Arch = $Arch
+}
+
 if ($BuildMethod -eq "dotnet"){
-
-    if ($IsWindows) {
-        ./dotnet/build-project-core.ps1 -RepoName $RepoName -ProjectDir $ProjectDir -Name $Name -Configuration $Configuration -Arch $Arch
-    }
-    else {
-        # On non-Windows, use the solution filter to remove the Framework projects.
-        ./dotnet/build-project-core.ps1 -RepoName $RepoName -ProjectDir "./FiftyOne.IpIntelligence.Core.slnf" -Name $Name -Configuration $Configuration -Arch $Arch
-    }
-
+    ./dotnet/build-project-core.ps1 @BuildArgs
 }
 else{
-    ./dotnet/build-project-framework.ps1 -RepoName $RepoName -ProjectDir $ProjectDir -Name $Name -Configuration $Configuration -Arch $Arch
+    ./dotnet/build-project-framework.ps1 @BuildArgs
 }
 
 exit $LASTEXITCODE
