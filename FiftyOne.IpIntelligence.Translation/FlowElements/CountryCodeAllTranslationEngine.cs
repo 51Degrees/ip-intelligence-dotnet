@@ -32,16 +32,19 @@ using System.Collections.Generic;
 namespace FiftyOne.IpIntelligence.Translation.FlowElements
 {
     /// <summary>
-    /// Engine which takes the country name properties from
-    /// <see cref="CountryCodeTranslationEngine"/> and translates them into the
-    /// browser language determined from the evidence. Results are stored using
-    /// the <see cref="Constants.CountryNamesTranslatedKey"/> key.
+    /// Engine which takes the country code properties from IpCountries element
+    /// and translates them to country names. The country names are always in
+    /// English. Results are stored using the
+    /// <see cref="Constants.CountryNamesKey"/> key.
+    /// 
+    /// The element data used by this engine is shared with the
+    /// <see cref="CountryCodeTranslationEngine" />.
     /// 
     /// All translation files are stored as embedded resources, so no
     /// configuration is required.
     /// </summary>
-    public class CountriesTranslationEngine
-        : TranslationEngineBase<ICountriesTranslationData>
+    public class CountryCodeAllTranslationEngine
+        : TranslationEngineBase<ICountryCodeTranslationData>
     {
         /// <summary>
         /// Static translations passed to the base constructor.
@@ -50,43 +53,36 @@ namespace FiftyOne.IpIntelligence.Translation.FlowElements
             _translations = new List<TranslationProperty>
             {
                 new TranslationProperty(
-                    nameof(ICountryCodeTranslationData.CountryNamesGeographical),
-                    nameof(ICountriesTranslationData.CountryNamesGeographicalTranslated)),
+                    "CountryCodesGeographicalAll",
+                    nameof(ICountryCodeTranslationData.CountryNamesGeographicalAll)),
                 new TranslationProperty(
-                    nameof(ICountryCodeTranslationData.CountryNamesPopulation),
-                    nameof(ICountriesTranslationData.CountryNamesPopulationTranslated)),
-                new TranslationProperty(
-                    nameof(ICountryCodeTranslationData.CountryNamesGeographicalAll),
-                    nameof(ICountriesTranslationData.CountryNamesGeographicalAllTranslated)),
-                new TranslationProperty(
-                    nameof(ICountryCodeTranslationData.CountryNamesPopulationAll),
-                    nameof(ICountriesTranslationData.CountryNamesPopulationAllTranslated))
+                    "CountryCodesPopulationAll",
+                    nameof(ICountryCodeTranslationData.CountryNamesPopulationAll))
             };
 
         /// <inheritdoc/>
-        public override string ElementDataKey =>
-            Constants.CountryNamesTranslatedKey;
+        public override string ElementDataKey => Constants.CountryNamesKey;
 
         /// <summary>
         /// Countructor which is only accessible by the builder.
         /// </summary>
         /// <param name="logger"></param>
         /// <param name="elementDataFactory"></param>
-        internal CountriesTranslationEngine(
+        internal CountryCodeAllTranslationEngine(
             ILogger<FlowElementBase<
-                ICountriesTranslationData,
+                ICountryCodeTranslationData,
                 IElementPropertyMetaData>> logger,
             Func<
                 IPipeline,
                 FlowElementBase<
-                    ICountriesTranslationData,
+                    ICountryCodeTranslationData,
                     IElementPropertyMetaData>,
-                ICountriesTranslationData> elementDataFactory)
+                ICountryCodeTranslationData> elementDataFactory)
             : base(
-                  Constants.CountryNamesKey,
+                  "ipcountries",
                   _translations,
-                  Resources.Resources.GetCountryResources(),
-                  null,
+                  Resources.Resources.GetCountryCodeResources(),
+                  "en_GB",
                   MissingTranslationBehavior.Original,
                   logger,
                   elementDataFactory)

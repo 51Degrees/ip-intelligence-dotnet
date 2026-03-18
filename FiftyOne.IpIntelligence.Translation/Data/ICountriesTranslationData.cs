@@ -48,5 +48,21 @@ namespace FiftyOne.IpIntelligence.Translation.Data
         /// </summary>
         IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>
             CountryNamesPopulationTranslated { get; }
+
+        /// <summary>
+        /// Translated list of country names based on the geographical list of
+        /// all countries from the IpCountriesElement. This is translated to
+        /// the browser language determined from the evidence.
+        /// </summary>
+        IAspectPropertyValue<IReadOnlyList<string>>
+            CountryNamesGeographicalAllTranslated { get; }
+
+        /// <summary>
+        /// Translated list of country names based on the population list of
+        /// all countries from the IpCountriesElement. This is translated to
+        /// the browser language determined from the evidence.
+        /// </summary>
+        IAspectPropertyValue<IReadOnlyList<string>>
+            CountryNamesPopulationAllTranslated { get; }
     }
 }
