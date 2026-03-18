@@ -48,15 +48,11 @@ namespace FiftyOne.IpIntelligence.Countries.Data
 
         /// <inheritdoc/>
         public IAspectPropertyValue<IReadOnlyList<string>> CountryCodesGeographicalAll
-        {
-            get { return (IAspectPropertyValue<IReadOnlyList<string>>)this["CountryCodesGeographicalAll"]; }
-        }
+            => GetAs<IAspectPropertyValue<IReadOnlyList<string>>>("CountryCodesGeographicalAll");
 
         /// <inheritdoc/>
         public IAspectPropertyValue<IReadOnlyList<string>> CountryCodesPopulationAll
-        {
-            get { return (IAspectPropertyValue<IReadOnlyList<string>>)this["CountryCodesPopulationAll"]; }
-        }
+            => GetAs<IAspectPropertyValue<IReadOnlyList<string>>>("CountryCodesPopulationAll");
 
         internal void SetCountryCodesGeographicalAll(
             IAspectPropertyValue<IReadOnlyList<string>> value)
