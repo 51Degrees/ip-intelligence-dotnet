@@ -49,7 +49,7 @@ namespace FiftyOne.IpIntelligence.Countries.Tests
             _logger = new Mock<ILogger<IpCountriesElement>>();
         }
 
-        private IpCountriesElement CreateElement(List<string> countryCodes)
+        private IpCountriesElement CreateElement(IReadOnlyList<string> countryCodes)
         {
             return new IpCountriesElement(
                 _logger.Object,
@@ -68,9 +68,24 @@ namespace FiftyOne.IpIntelligence.Countries.Tests
         }
 
         private Mock<IFlowData> CreateMockFlowData(
-            Dictionary<string, object> ipiStore,
-            IpCountriesData countriesData)
+            Dictionary<string, object> ipiStore)
         {
+            var flowData = new Mock<IFlowData>();
+            var ipCountriesDataStore = new IIpCountriesData[] { null };
+            flowData.Setup(d => d.GetOrAdd(
+                    It.IsAny<ITypedKey<IIpCountriesData>>(),
+                    It.IsAny<Func<IPipeline, IIpCountriesData>>()))
+                .Callback<ITypedKey<IIpCountriesData>, Func<IPipeline, IIpCountriesData>>((k, factory) => {
+                    ipCountriesDataStore[0] ??= factory(null);
+                })
+                .Returns(() => ipCountriesDataStore[0]);
+            flowData.Setup(d => d.Get<IIpCountriesData>())
+                .Returns(() => ipCountriesDataStore[0]);
+            if (ipiStore is null)
+            {
+                return flowData;
+            }
+
             var ipDataMock = new Mock<IIpIntelligenceData>();
             ipDataMock.As<IElementData>()
                 .Setup(d => d[It.IsAny<string>()])
@@ -80,14 +95,33 @@ namespace FiftyOne.IpIntelligence.Countries.Tests
                         return val;
                     throw new KeyNotFoundException(key);
                 });
+            {
+                AspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> geoCountriesValue = new();
+                if (ipiStore.TryGetValue(
+                    nameof(IIpIntelligenceData.CountryCodesGeographical),
+                    out var ccGeo)
+                    && ccGeo is AspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> countryCodesGeographical)
+                {
+                    geoCountriesValue = countryCodesGeographical;
+                }
+                ipDataMock.Setup(d => d.CountryCodesGeographical)
+                    .Returns(() => geoCountriesValue);
+            }
+            {
+                AspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> popCountriesValue = new();
+                if (ipiStore.TryGetValue(
+                    nameof(IIpIntelligenceData.CountryCodesPopulation),
+                    out var ccPop)
+                    && ccPop is AspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> countryCodesPopulation)
+                {
+                    popCountriesValue = countryCodesPopulation;
+                }
+                ipDataMock.Setup(d => d.CountryCodesPopulation)
+                    .Returns(() => popCountriesValue);
+            }
 
-            var flowData = new Mock<IFlowData>();
             flowData.Setup(d => d.Get<IIpIntelligenceData>())
                 .Returns(ipDataMock.Object);
-            flowData.Setup(d => d.GetOrAdd(
-                    It.IsAny<ITypedKey<IIpCountriesData>>(),
-                    It.IsAny<Func<IPipeline, IIpCountriesData>>()))
-                .Returns(countriesData);
             return flowData;
         }
 
@@ -106,11 +140,11 @@ namespace FiftyOne.IpIntelligence.Countries.Tests
                 { "CountryCodesGeographical", new AspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>(
                     new List<IWeightedValue<string>> { Weighted("DE", 30000), Weighted("AT", 60000) }) }
             };
-            var countriesData = CreateCountriesData();
-            var flowData = CreateMockFlowData(store, countriesData);
+            var flowData = CreateMockFlowData(store);
 
-            CreateElement(new List<string>(TestCountryCodes)).Process(flowData.Object);
+            CreateElement(TestCountryCodes).Process(flowData.Object);
 
+            var countriesData = flowData.Object.Get<IIpCountriesData>();
             var codes = countriesData.CountryCodesGeographicalAll.Value;
             Assert.AreEqual("AT", codes[0]);
             Assert.AreEqual("DE", codes[1]);
@@ -128,11 +162,12 @@ namespace FiftyOne.IpIntelligence.Countries.Tests
                 { "CountryCodesPopulation", new AspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>(
                     new List<IWeightedValue<string>> { Weighted("US", 50000), Weighted("GB", 20000) }) }
             };
-            var countriesData = CreateCountriesData();
-            var flowData = CreateMockFlowData(store, countriesData);
 
-            CreateElement(new List<string>(TestCountryCodes)).Process(flowData.Object);
+            var flowData = CreateMockFlowData(store);
 
+            CreateElement(TestCountryCodes).Process(flowData.Object);
+
+            var countriesData = flowData.Object.Get<IIpCountriesData>();
             var codes = countriesData.CountryCodesPopulationAll.Value;
             Assert.AreEqual("US", codes[0]);
             Assert.AreEqual("GB", codes[1]);
@@ -149,11 +184,12 @@ namespace FiftyOne.IpIntelligence.Countries.Tests
                 { "CountryCodesPopulation", new AspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>(
                     new List<IWeightedValue<string>> { Weighted("US", 50000) }) }
             };
-            var countriesData = CreateCountriesData();
-            var flowData = CreateMockFlowData(store, countriesData);
 
-            CreateElement(new List<string>(TestCountryCodes)).Process(flowData.Object);
+            var flowData = CreateMockFlowData(store);
 
+            CreateElement(TestCountryCodes).Process(flowData.Object);
+
+            var countriesData = flowData.Object.Get<IIpCountriesData>();
             Assert.AreEqual("FR", countriesData.CountryCodesGeographicalAll.Value[0]);
             Assert.AreEqual("IT", countriesData.CountryCodesGeographicalAll.Value[1]);
             Assert.AreEqual("US", countriesData.CountryCodesPopulationAll.Value[0]);
@@ -167,11 +203,12 @@ namespace FiftyOne.IpIntelligence.Countries.Tests
                 { "CountryCodesGeographical", new AspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>(
                     new List<IWeightedValue<string>> { Weighted("US", 65535) }) }
             };
-            var countriesData = CreateCountriesData();
-            var flowData = CreateMockFlowData(store, countriesData);
 
-            CreateElement(new List<string>(TestCountryCodes)).Process(flowData.Object);
+            var flowData = CreateMockFlowData(store);
 
+            CreateElement(TestCountryCodes).Process(flowData.Object);
+
+            var countriesData = flowData.Object.Get<IIpCountriesData>();
             var codes = countriesData.CountryCodesGeographicalAll.Value;
             Assert.AreEqual("US", codes[0]);
             CollectionAssert.AreEqual(
@@ -186,11 +223,12 @@ namespace FiftyOne.IpIntelligence.Countries.Tests
         [TestMethod]
         public void Process_NoWeightedProperties_ReturnsAllCodesAlphabetically()
         {
-            var countriesData = CreateCountriesData();
-            var flowData = CreateMockFlowData(new Dictionary<string, object>(), countriesData);
 
-            CreateElement(new List<string>(TestCountryCodes)).Process(flowData.Object);
+            var flowData = CreateMockFlowData(new Dictionary<string, object>());
 
+            CreateElement(TestCountryCodes).Process(flowData.Object);
+
+            var countriesData = flowData.Object.Get<IIpCountriesData>();
             CollectionAssert.AreEqual(TestCountryCodes,
                 countriesData.CountryCodesGeographicalAll.Value.ToList());
             CollectionAssert.AreEqual(TestCountryCodes,
@@ -206,11 +244,12 @@ namespace FiftyOne.IpIntelligence.Countries.Tests
                 { "CountryCodesGeographical", noValue },
                 { "CountryCodesPopulation", noValue }
             };
-            var countriesData = CreateCountriesData();
-            var flowData = CreateMockFlowData(store, countriesData);
 
-            CreateElement(new List<string>(TestCountryCodes)).Process(flowData.Object);
+            var flowData = CreateMockFlowData(store);
 
+            CreateElement(TestCountryCodes).Process(flowData.Object);
+
+            var countriesData = flowData.Object.Get<IIpCountriesData>();
             CollectionAssert.AreEqual(TestCountryCodes,
                 countriesData.CountryCodesGeographicalAll.Value.ToList());
         }
@@ -223,11 +262,12 @@ namespace FiftyOne.IpIntelligence.Countries.Tests
                 { "CountryCodesGeographical", new AspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>(
                     new List<IWeightedValue<string>>()) }
             };
-            var countriesData = CreateCountriesData();
-            var flowData = CreateMockFlowData(store, countriesData);
 
-            CreateElement(new List<string>(TestCountryCodes)).Process(flowData.Object);
+            var flowData = CreateMockFlowData(store);
 
+            CreateElement(TestCountryCodes).Process(flowData.Object);
+
+            var countriesData = flowData.Object.Get<IIpCountriesData>();
             CollectionAssert.AreEqual(TestCountryCodes,
                 countriesData.CountryCodesGeographicalAll.Value.ToList());
         }
@@ -239,48 +279,37 @@ namespace FiftyOne.IpIntelligence.Countries.Tests
         [TestMethod]
         public void Process_NoIpiDataInPipeline_DoesNotThrow()
         {
-            var flowData = new Mock<IFlowData>();
+            var flowData = CreateMockFlowData(null);
             flowData.Setup(d => d.Get<IIpIntelligenceData>())
                 .Throws(new KeyNotFoundException("No IPI data"));
 
-            CreateElement(new List<string>(TestCountryCodes)).Process(flowData.Object);
+            CreateElement(TestCountryCodes).Process(flowData.Object);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void Process_NullFlowData_ThrowsArgumentNullException()
         {
-            CreateElement(new List<string>(TestCountryCodes)).Process(null);
+            CreateElement(TestCountryCodes).Process(null);
         }
 
         [TestMethod]
-        public void Process_EmptyCountryCodesList_DoesNotPopulateOutputs()
+        [ExpectedException(typeof(ArgumentException))]
+        public void Process_EmptyCountryCodesList_ThrowsArgumentNullException()
         {
-            var countriesData = CreateCountriesData();
-            var flowData = CreateMockFlowData(new Dictionary<string, object>(), countriesData);
+            var flowData = CreateMockFlowData(new Dictionary<string, object>());
 
-            CreateElement(new List<string>()).Process(flowData.Object);
-
-            flowData.Verify(d => d.GetOrAdd(
-                It.IsAny<ITypedKey<IIpCountriesData>>(),
-                It.IsAny<Func<IPipeline, IIpCountriesData>>()), Times.Never);
+            CreateElement(Array.Empty<string>());
         }
 
         [TestMethod]
-        public void Process_NullCountryCodesList_DoesNotPopulateOutputs()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Process_NullCountryCodesList_ThrowsArgumentException()
         {
-            var countriesData = CreateCountriesData();
-            var flowData = CreateMockFlowData(new Dictionary<string, object>(), countriesData);
-
             new IpCountriesElement(
                 _logger.Object, null,
                 (p, e) => new IpCountriesData(
-                    new Mock<ILogger<IpCountriesData>>().Object, p))
-                .Process(flowData.Object);
-
-            flowData.Verify(d => d.GetOrAdd(
-                It.IsAny<ITypedKey<IIpCountriesData>>(),
-                It.IsAny<Func<IPipeline, IIpCountriesData>>()), Times.Never);
+                    new Mock<ILogger<IpCountriesData>>().Object, p));
         }
 
         #endregion
@@ -296,11 +325,12 @@ namespace FiftyOne.IpIntelligence.Countries.Tests
                     new List<IWeightedValue<string>> {
                         Weighted("FR", 10000), Weighted("AT", 50000), Weighted("DE", 30000) }) }
             };
-            var countriesData = CreateCountriesData();
-            var flowData = CreateMockFlowData(store, countriesData);
 
-            CreateElement(new List<string>(TestCountryCodes)).Process(flowData.Object);
+            var flowData = CreateMockFlowData(store);
 
+            CreateElement(TestCountryCodes).Process(flowData.Object);
+
+            var countriesData = flowData.Object.Get<IIpCountriesData>();
             var codes = countriesData.CountryCodesGeographicalAll.Value;
             Assert.AreEqual("AT", codes[0]);
             Assert.AreEqual("DE", codes[1]);
@@ -318,11 +348,12 @@ namespace FiftyOne.IpIntelligence.Countries.Tests
                 { "CountryCodesGeographical", new AspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>(
                     new List<IWeightedValue<string>> { Weighted("ZZ", 50000) }) }
             };
-            var countriesData = CreateCountriesData();
-            var flowData = CreateMockFlowData(store, countriesData);
 
-            CreateElement(new List<string>(TestCountryCodes)).Process(flowData.Object);
+            var flowData = CreateMockFlowData(store);
 
+            CreateElement(TestCountryCodes).Process(flowData.Object);
+
+            var countriesData = flowData.Object.Get<IIpCountriesData>();
             var codes = countriesData.CountryCodesGeographicalAll.Value;
             Assert.AreEqual("ZZ", codes[0]);
             Assert.AreEqual(TestCountryCodes.Count + 1, codes.Count);
@@ -336,11 +367,12 @@ namespace FiftyOne.IpIntelligence.Countries.Tests
                 { "CountryCodesGeographical", new AspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>(
                     new List<IWeightedValue<string>> { Weighted("DE", 50000), Weighted("FR", 30000) }) }
             };
-            var countriesData = CreateCountriesData();
-            var flowData = CreateMockFlowData(store, countriesData);
 
-            CreateElement(new List<string>(TestCountryCodes)).Process(flowData.Object);
+            var flowData = CreateMockFlowData(store);
 
+            CreateElement(TestCountryCodes).Process(flowData.Object);
+
+            var countriesData = flowData.Object.Get<IIpCountriesData>();
             var codes = countriesData.CountryCodesGeographicalAll.Value;
             Assert.AreEqual(codes.Count, codes.Distinct().Count());
         }
@@ -357,11 +389,12 @@ namespace FiftyOne.IpIntelligence.Countries.Tests
                 { "CountryCodesGeographical", new AspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>(
                     new List<IWeightedValue<string>> { Weighted("HU", 40000), Weighted("SK", 25000) }) }
             };
-            var countriesData = CreateCountriesData();
-            var flowData = CreateMockFlowData(store, countriesData);
 
-            CreateElement(new List<string>(TestCountryCodes)).Process(flowData.Object);
+            var flowData = CreateMockFlowData(store);
 
+            CreateElement(TestCountryCodes).Process(flowData.Object);
+
+            var countriesData = flowData.Object.Get<IIpCountriesData>();
             Assert.AreEqual("HU", countriesData.CountryCodesGeographicalAll.Value[0]);
             Assert.AreEqual("SK", countriesData.CountryCodesGeographicalAll.Value[1]);
             CollectionAssert.AreEqual(TestCountryCodes,
@@ -376,13 +409,13 @@ namespace FiftyOne.IpIntelligence.Countries.Tests
         public void ElementDataKey_ReturnsExpectedValue()
         {
             Assert.AreEqual("ipcountries",
-                CreateElement(new List<string>(TestCountryCodes)).ElementDataKey);
+                CreateElement(TestCountryCodes).ElementDataKey);
         }
 
         [TestMethod]
         public void Properties_ContainsBothOutputProperties()
         {
-            var props = CreateElement(new List<string>(TestCountryCodes)).Properties;
+            var props = CreateElement(TestCountryCodes).Properties;
             Assert.AreEqual(2, props.Count);
             Assert.IsTrue(props.Any(p => p.Name == "CountryCodesGeographicalAll"));
             Assert.IsTrue(props.Any(p => p.Name == "CountryCodesPopulationAll"));
@@ -392,7 +425,7 @@ namespace FiftyOne.IpIntelligence.Countries.Tests
         public void EvidenceKeyFilter_IsEmpty()
         {
             Assert.IsNotNull(
-                CreateElement(new List<string>(TestCountryCodes)).EvidenceKeyFilter);
+                CreateElement(TestCountryCodes).EvidenceKeyFilter);
         }
 
         #endregion
