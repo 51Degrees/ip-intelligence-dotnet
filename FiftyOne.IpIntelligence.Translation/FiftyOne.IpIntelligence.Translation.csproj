@@ -42,8 +42,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="..\ip-intelligence-data\Translations\OSM\countries.*.yml" LinkBase="Resources\" />
-    <EmbeddedResource Include="..\ip-intelligence-data\Translations\countrycodes.*.yml" LinkBase="Resources\" />
+    <EmbeddedResource Include="..\ip-intelligence-data\Translations\OSM\countries.*.yml" LinkBase="Resources\" WithCulture="false" />
+    <EmbeddedResource Include="..\ip-intelligence-data\Translations\countrycodes.*.yml" LinkBase="Resources\" WithCulture="false" />
   </ItemGroup>
 
   <ItemGroup>
