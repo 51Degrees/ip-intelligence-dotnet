@@ -64,5 +64,17 @@ namespace FiftyOne.IpIntelligence.Translation.Data
             CountryNamesPopulationAllTranslated =>
             GetAs<IAspectPropertyValue<IReadOnlyList<string>>>(
                 nameof(CountryNamesPopulationAllTranslated));
+
+        /// <inheritdoc/>
+        public IAspectPropertyValue<IReadOnlyList<string>>
+            CountryCodesGeographicalAll =>
+            GetAs<IAspectPropertyValue<IReadOnlyList<string>>>(
+                nameof(CountryCodesGeographicalAll));
+
+        /// <inheritdoc/>
+        public IAspectPropertyValue<IReadOnlyList<string>>
+            CountryCodesPopulationAll =>
+            GetAs<IAspectPropertyValue<IReadOnlyList<string>>>(
+                nameof(CountryCodesPopulationAll));
     }
 }

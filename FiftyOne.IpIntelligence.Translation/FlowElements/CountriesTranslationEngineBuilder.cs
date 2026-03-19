@@ -23,14 +23,19 @@
 using FiftyOne.IpIntelligence.Translation.Data;
 using FiftyOne.Pipeline.Core.Data;
 using FiftyOne.Pipeline.Core.FlowElements;
+using FiftyOne.Pipeline.Translation.Data;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace FiftyOne.IpIntelligence.Translation.FlowElements
 {
     /// <summary>
     /// Builder for the <see cref="CountriesTranslationEngine"/> element.
-    /// This requires no configuration, as all the configuration for the base
-    /// translation engine is taken care of.
+    /// Loads the country code resource (countrycodes.en_GB.yml) which lists
+    /// all known country codes and their English names. The country name
+    /// translation resources (countries.*.yml) are handled by the base
+    /// <see cref="Pipeline.Translation.FlowElements.TranslationEngineBase{T}"/>.
     /// </summary>
     public class CountriesTranslationEngineBuilder
     {
@@ -48,22 +53,26 @@ namespace FiftyOne.IpIntelligence.Translation.FlowElements
         }
 
         /// <summary>
-        /// Build a new instance of <see cref="CountryCodeTranslationEngine"/>.
+        /// Build a new instance of <see cref="CountriesTranslationEngine"/>.
         /// </summary>
         /// <returns></returns>
         public CountriesTranslationEngine Build()
         {
+            var countryCodeResources =
+                Resources.Resources.GetCountryCodeResources();
+            var content = countryCodeResources.Values.FirstOrDefault();
+            var dict = content != null
+                ? Languages.DeserializeYaml(content)
+                : null;
+            var allCountries = dict?.ToList()
+                ?? new List<KeyValuePair<string, string>>();
+
             return new CountriesTranslationEngine(
                 _loggerFactory.CreateLogger<CountriesTranslationEngine>(),
+                allCountries,
                 CreateData);
         }
 
-        /// <summary>
-        /// Creates an instance of <see cref="CountriesTranslationData"/>.
-        /// </summary>
-        /// <param name="pipeline"></param>
-        /// <param name="flowElement"></param>
-        /// <returns></returns>
         private ICountriesTranslationData CreateData(
             IPipeline pipeline,
             FlowElementBase<
