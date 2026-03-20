@@ -64,5 +64,27 @@ namespace FiftyOne.IpIntelligence.Translation.Data
             CountryNamesPopulationAllTranslated =>
             GetAs<IAspectPropertyValue<IReadOnlyList<string>>>(
                 nameof(CountryNamesPopulationAllTranslated));
+
+        /// <inheritdoc/>
+        public IAspectPropertyValue<IReadOnlyList<string>>
+            CountryCodesGeographicalAll =>
+            GetAs<IAspectPropertyValue<IReadOnlyList<string>>>(
+                nameof(CountryCodesGeographicalAll));
+
+        /// <inheritdoc/>
+        public IAspectPropertyValue<IReadOnlyList<string>>
+            CountryCodesPopulationAll =>
+            GetAs<IAspectPropertyValue<IReadOnlyList<string>>>(
+                nameof(CountryCodesPopulationAll));
+
+        /// <summary>
+        /// Stores the culture used by engine to sort the data.
+        /// Exposed for test purposes.
+        /// Not intended to be used by customers.
+        /// May be an empty string in case of
+        /// <see cref="System.Globalization.CultureInfo.InvariantCulture"/>.
+        /// </summary>
+        public string SortingCultureUsed =>
+            GetAs<string>(nameof(SortingCultureUsed));
     }
 }

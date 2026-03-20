@@ -37,7 +37,6 @@
   </ItemGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\FiftyOne.IpIntelligence.Countries\FiftyOne.IpIntelligence.Countries.csproj" />
     <ProjectReference Include="..\FiftyOne.IpIntelligence.Shared\FiftyOne.IpIntelligence.Shared.csproj" />
   </ItemGroup>
 
