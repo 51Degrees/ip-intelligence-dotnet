@@ -672,7 +672,7 @@ namespace FiftyOne.IpIntelligence.Translation.Tests
             ipData.Setup(i => i.CountryCodesGeographical)
                 .Returns(countriesGeographic);
             ipData.Setup(i => i.CountryCodesPopulation)
-                .Returns(countriesGeographic);
+                .Returns(countriesPopulation);
 
             var element = new Mock<IFlowElement>();
             element.SetupGet(i => i.Properties)
