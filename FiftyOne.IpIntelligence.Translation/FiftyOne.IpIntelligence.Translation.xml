@@ -45,7 +45,13 @@
             <inheritdoc/>
         </member>
         <member name="P:FiftyOne.IpIntelligence.Translation.Data.CountriesTranslationData.SortingCultureUsed">
-            <inheritdoc/>
+            <summary>
+            Stores the culture used by engine to sort the data.
+            Exposed for test purposes.
+            Not intended to be used by customers.
+            May be an empty string in case of
+            <see cref="P:System.Globalization.CultureInfo.InvariantCulture"/>.
+            </summary>
         </member>
         <member name="T:FiftyOne.IpIntelligence.Translation.Data.CountryCodeTranslationData">
             <summary>
