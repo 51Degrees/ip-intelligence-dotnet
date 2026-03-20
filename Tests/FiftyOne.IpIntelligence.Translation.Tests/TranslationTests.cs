@@ -5,6 +5,7 @@ using FiftyOne.Pipeline.Core.FlowElements;
 using FiftyOne.Pipeline.Engines.Data;
 using Microsoft.Extensions.Logging;
 using Moq;
+using System.Globalization;
 
 namespace FiftyOne.IpIntelligence.Translation.Tests
 {
@@ -126,6 +127,76 @@ namespace FiftyOne.IpIntelligence.Translation.Tests
         /// by translated name.
         /// </summary>
         [TestMethod]
+        public void AllListsProducedCorrectlySorted()
+        {
+            var ipElement = MockIpElementWeighted(
+                [new(30000, "FR"), new(35535, "GB")],
+                [new(30000, "FR"), new(35535, "GB")]);
+            var codeTranslationElement =
+                new CountryCodeTranslationEngineBuilder(_loggerFactory)
+                .Build();
+            var nameTranslationElement =
+                new CountriesTranslationEngineBuilder(_loggerFactory)
+                .Build();
+            using var pipeline = new PipelineBuilder(_loggerFactory)
+                .AddFlowElement(ipElement)
+                .AddFlowElement(codeTranslationElement)
+                .AddFlowElement(nameTranslationElement)
+                .Build();
+
+            using var flowData = pipeline.CreateFlowData();
+            flowData.AddEvidence("header.Accept-Language", "fr_FR");
+            flowData.Process();
+
+            var result = flowData.Get<ICountriesTranslationData>();
+
+            // Check "All" lists exist and have values.
+            Assert.IsTrue(
+                result.CountryNamesGeographicalAllTranslated.HasValue);
+            Assert.IsTrue(
+                result.CountryNamesPopulationAllTranslated.HasValue);
+            Assert.IsTrue(result.CountryCodesGeographicalAll.HasValue);
+            Assert.IsTrue(result.CountryCodesPopulationAll.HasValue);
+
+            var namesAll =
+                result.CountryNamesGeographicalAllTranslated.Value;
+            var codesAll = result.CountryCodesGeographicalAll.Value;
+
+            // Same number of names and codes.
+            Assert.AreEqual(namesAll.Count, codesAll.Count);
+
+            // The weighted countries should be first (GB and FR).
+            Assert.AreEqual("Royaume-Uni", namesAll[0]);
+            Assert.AreEqual("GB", codesAll[0]);
+            Assert.AreEqual("France", namesAll[1]);
+            Assert.AreEqual("FR", codesAll[1]);
+
+            // All known countries should be present.
+            Assert.IsTrue(namesAll.Count > 200);
+
+            // GB and FR should not appear again after the first 2 positions.
+            Assert.IsFalse(codesAll.Skip(2).Contains("GB"));
+            Assert.IsFalse(codesAll.Skip(2).Contains("FR"));
+
+            // Remaining countries should be sorted alphabetically by
+            // translated name.
+            var remaining = namesAll.Skip(2).ToList();
+            var comparer = GetComparer(flowData, out var cultureUsed);
+            for (int i = 1; i < remaining.Count; i++)
+            {
+                Assert.IsTrue(
+                    comparer.Compare(remaining[i - 1], remaining[i]) <= 0,
+                    $"Expected '{remaining[i - 1]}' (at {i - 1}) <= '{remaining[i]}' (at {i}) -- using '{cultureUsed}'");
+            }
+        }
+
+
+        /// <summary>
+        /// Test that the "All" lists are produced correctly, with weighted
+        /// countries first and remaining countries sorted alphabetically
+        /// by translated name.
+        /// </summary>
+        [TestMethod]
         public void AllListsProducedCorrectly()
         {
             var ipElement = MockIpElement(
@@ -180,13 +251,22 @@ namespace FiftyOne.IpIntelligence.Translation.Tests
             // Remaining countries should be sorted alphabetically by
             // translated name.
             var remaining = namesAll.Skip(2).ToList();
+            var comparer = GetComparer(flowData, out var cultureUsed);
             for (int i = 1; i < remaining.Count; i++)
             {
                 Assert.IsTrue(
-                    string.Compare(remaining[i - 1], remaining[i],
-                        StringComparison.CurrentCulture) <= 0,
-                    $"Expected '{remaining[i - 1]}' <= '{remaining[i]}'");
+                    comparer.Compare(remaining[i - 1], remaining[i]) <= 0,
+                    $"Expected '{remaining[i - 1]}' (at {i - 1}) <= '{remaining[i]}' (at {i}) -- using '{cultureUsed}'");
             }
+        }
+
+        private static StringComparer GetComparer(IFlowData data, out string cultureUsed)
+        {
+            cultureUsed = ((CountriesTranslationData)data.Get<ICountriesTranslationData>()).SortingCultureUsed;
+            var culture = string.IsNullOrWhiteSpace(cultureUsed)
+                ? CultureInfo.InvariantCulture
+                : CultureInfo.GetCultureInfo(cultureUsed);
+            return StringComparer.Create(culture, ignoreCase: false);
         }
 
         /// <summary>
@@ -516,17 +596,19 @@ namespace FiftyOne.IpIntelligence.Translation.Tests
         }
 
         /// <summary>
-        /// Basic implementation of the abstract ElementData class to be used
-        /// by the mock element.
+        /// Create a mocked IP element that adds the country code properties
+        /// provided to a new ElementData. The Element key, and properties are
+        /// initialized just to make the Pipeline work.
         /// </summary>
-        private class TestIpData : ElementDataBase
+        private IFlowElement MockIpElementWeighted(
+            IReadOnlyList<WeightedValue<string>> geographicCodes,
+            IReadOnlyList<WeightedValue<string>> populationCodes)
         {
-            public TestIpData(
-                ILogger<ElementDataBase> logger,
-                IPipeline pipeline)
-                : base(logger, pipeline)
-            {
-            }
+            return MockIpElement(
+                new AspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>(
+                    geographicCodes),
+                new AspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>(
+                    populationCodes));
         }
 
         /// <summary>
@@ -535,18 +617,39 @@ namespace FiftyOne.IpIntelligence.Translation.Tests
         /// initialized just to make the Pipeline work.
         /// </summary>
         private IFlowElement MockIpElement(
-            string[] geographicCodes,
-            string[] populationCodes)
+            IReadOnlyList<string> geographicCodes,
+            IReadOnlyList<string> populationCodes)
         {
             return MockIpElement(
                 new AspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>(
-                    geographicCodes.Select(i =>
-                        new WeightedValue<string>(0, i))
-                    .ToList()),
+                    Weightify(geographicCodes)),
                 new AspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>(
-                    populationCodes.Select(i =>
-                        new WeightedValue<string>(0, i))
-                    .ToList()));
+                    Weightify(populationCodes)));
+        }
+
+        private static IReadOnlyList<WeightedValue<string>> Weightify(
+            IReadOnlyList<string> countryCodes)
+        {
+            if (countryCodes.Count == 0)
+            {
+                return [];
+            }
+            ushort weightLeft = ushort.MaxValue;
+            ushort[] buckets = new ushort[countryCodes.Count];
+            for (ushort i = 0; i < countryCodes.Count; i++) {
+                buckets[i] = (ushort)(((ushort)countryCodes.Count) - i);
+                weightLeft -= buckets[i];
+            }
+            ushort additional = (ushort)(weightLeft / countryCodes.Count);
+            weightLeft -= (ushort)(additional * countryCodes.Count);
+            for (ushort i = 0; i < countryCodes.Count; i++)
+            {
+                buckets[i] += additional;
+            }
+            buckets[0] += weightLeft;
+            return countryCodes
+                .Select((c, i) => new WeightedValue<string>(buckets[i], c))
+                .ToList();
         }
 
         /// <summary>
@@ -561,10 +664,15 @@ namespace FiftyOne.IpIntelligence.Translation.Tests
             IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> countriesGeographic,
             IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> countriesPopulation)
         {
-            var ipData = new TestIpData(null, null);
-
-            ipData["CountryCodesGeographical"] = countriesGeographic;
-            ipData["CountryCodesPopulation"] = countriesPopulation;
+            var ipData = new Mock<IIpIntelligenceData>();
+            ipData.Setup(i => i["CountryCodesGeographical"])
+                .Returns(countriesGeographic);
+            ipData.Setup(i => i["CountryCodesPopulation"])
+                .Returns(countriesPopulation);
+            ipData.Setup(i => i.CountryCodesGeographical)
+                .Returns(countriesGeographic);
+            ipData.Setup(i => i.CountryCodesPopulation)
+                .Returns(countriesGeographic);
 
             var element = new Mock<IFlowElement>();
             element.SetupGet(i => i.Properties)
@@ -573,7 +681,7 @@ namespace FiftyOne.IpIntelligence.Translation.Tests
             element.Setup(i => i.Process(It.IsAny<IFlowData>()))
                 .Callback<IFlowData>(data =>
                 {
-                    data.GetOrAdd(element.Object.ElementDataKey, p => ipData);
+                    data.GetOrAdd(element.Object.ElementDataKey, p => ipData.Object);
                 });
             return element.Object;
         }

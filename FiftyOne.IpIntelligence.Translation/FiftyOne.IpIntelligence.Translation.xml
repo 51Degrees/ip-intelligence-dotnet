@@ -44,6 +44,9 @@
         <member name="P:FiftyOne.IpIntelligence.Translation.Data.CountriesTranslationData.CountryCodesPopulationAll">
             <inheritdoc/>
         </member>
+        <member name="P:FiftyOne.IpIntelligence.Translation.Data.CountriesTranslationData.SortingCultureUsed">
+            <inheritdoc/>
+        </member>
         <member name="T:FiftyOne.IpIntelligence.Translation.Data.CountryCodeTranslationData">
             <summary>
             Concrete implementation of <see cref="T:FiftyOne.IpIntelligence.Translation.Data.ICountryCodeTranslationData"/>.
@@ -161,13 +164,13 @@
         <member name="M:FiftyOne.IpIntelligence.Translation.FlowElements.CountriesTranslationEngine.ProcessInternal(FiftyOne.Pipeline.Core.Data.IFlowData)">
             <inheritdoc/>
         </member>
-        <member name="M:FiftyOne.IpIntelligence.Translation.FlowElements.CountriesTranslationEngine.BuildAndStoreAllLists(FiftyOne.IpIntelligence.Translation.Data.ICountriesTranslationData,FiftyOne.Pipeline.Engines.Data.IAspectPropertyValue{System.Collections.Generic.IReadOnlyList{FiftyOne.Pipeline.Core.Data.IWeightedValue{System.String}}},FiftyOne.Pipeline.Engines.Data.IAspectPropertyValue{System.Collections.Generic.IReadOnlyList{FiftyOne.Pipeline.Core.Data.IWeightedValue{System.String}}},FiftyOne.Pipeline.Translation.Data.Translator,System.StringComparer,System.String,System.String)">
+        <member name="M:FiftyOne.IpIntelligence.Translation.FlowElements.CountriesTranslationEngine.BuildAndStoreAllLists(FiftyOne.IpIntelligence.Translation.Data.ICountriesTranslationData,System.Collections.Generic.IReadOnlyList{FiftyOne.Pipeline.Core.Data.IWeightedValue{System.String}},System.Collections.Generic.IReadOnlyList{FiftyOne.Pipeline.Core.Data.IWeightedValue{System.String}},FiftyOne.Pipeline.Translation.Data.Translator,System.StringComparer,System.String,System.String)">
             <summary>
             Builds the complete "All" lists for one dimension (geographical
             or population) and stores them in the element data.
             </summary>
         </member>
-        <member name="M:FiftyOne.IpIntelligence.Translation.FlowElements.CountriesTranslationEngine.ResolveTranslator(FiftyOne.Pipeline.Core.Data.IFlowData)">
+        <member name="M:FiftyOne.IpIntelligence.Translation.FlowElements.CountriesTranslationEngine.TryResolveTranslator(FiftyOne.Pipeline.Core.Data.IFlowData,FiftyOne.Pipeline.Translation.Data.Translator@,System.String@)">
             <summary>
             Resolves the target language from evidence using the base class's
             <see cref="F:FiftyOne.Pipeline.Translation.FlowElements.TranslationEngineBase`1.Languages"/> collection.

@@ -76,5 +76,9 @@ namespace FiftyOne.IpIntelligence.Translation.Data
             CountryCodesPopulationAll =>
             GetAs<IAspectPropertyValue<IReadOnlyList<string>>>(
                 nameof(CountryCodesPopulationAll));
+
+        /// <inheritdoc/>
+        public string SortingCultureUsed =>
+            GetAs<string>(nameof(SortingCultureUsed));
     }
 }

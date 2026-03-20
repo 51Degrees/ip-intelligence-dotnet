@@ -21,12 +21,14 @@
  * ********************************************************************* */
 
 using FiftyOne.IpIntelligence.Translation.Data;
+using FiftyOne.IpIntelligence.Translation.Resources;
 using FiftyOne.Pipeline.Core.Data;
 using FiftyOne.Pipeline.Core.FlowElements;
 using FiftyOne.Pipeline.Translation.Data;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
+using YamlDotNet.Serialization;
 
 namespace FiftyOne.IpIntelligence.Translation.FlowElements
 {
@@ -62,7 +64,7 @@ namespace FiftyOne.IpIntelligence.Translation.FlowElements
                 Resources.Resources.GetCountryCodeResources();
             var content = countryCodeResources.Values.FirstOrDefault();
             var dict = content != null
-                ? Languages.DeserializeYaml(content)
+                ? DeserializeYaml(content)
                 : null;
             var allCountries = dict?.ToList()
                 ?? new List<KeyValuePair<string, string>>();
@@ -72,6 +74,12 @@ namespace FiftyOne.IpIntelligence.Translation.FlowElements
                 allCountries,
                 CreateData);
         }
+
+        private static IDictionary<string, string> DeserializeYaml(string inputYaml) 
+            => new DeserializerBuilder()
+            .IgnoreUnmatchedProperties()
+            .Build()
+            .Deserialize<Dictionary<string, string>>(inputYaml);
 
         private ICountriesTranslationData CreateData(
             IPipeline pipeline,

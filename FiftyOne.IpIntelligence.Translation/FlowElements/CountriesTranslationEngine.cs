@@ -126,10 +126,13 @@ namespace FiftyOne.IpIntelligence.Translation.FlowElements
             // Data is already created by base class.
             var elementData = data.Get(ElementDataKeyTyped);
 
+            string cultureUsed = string.Empty;
             // Resolve the translator and locale for the "All" lists.
             var comparer = TryResolveTranslator(data, out var translator, out var locale)
-                ? CreateComparer(locale)
+                ? CreateComparer(locale, out cultureUsed)
                 : StringComparer.InvariantCultureIgnoreCase;
+
+            elementData[nameof(CountriesTranslationData.SortingCultureUsed)] = cultureUsed;
 
             // Get weighted codes from IP engine.
             IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> geoCodesWeighted = null;
@@ -199,18 +202,21 @@ namespace FiftyOne.IpIntelligence.Translation.FlowElements
             var remainingPairs = _allCountries
                 .Where(nextPair =>
                     weightedTuples.Any(weightedPair => 
-                        comparer.Compare(weightedPair.Key, nextPair.Key) == 0)
+                        weightedPair.Key == nextPair.Key)
                     == false);
             if (translator is null == false)
             {
                 remainingPairs = remainingPairs
                     .Select(nextPair => new CountryCodeNamePair(
                         nextPair.Key,
-                        translator.Translate(nextPair, errors) as string
+                        translator.Translate(nextPair.Value, errors) as string
                         ?? nextPair.Value));
             }
-                
-            var allTuples = weightedTuples.Concat(remainingPairs).ToList();
+            var remainingPairsSorted = remainingPairs.OrderBy(
+                x => x.Value,
+                comparer);
+
+            var allTuples = weightedTuples.Concat(remainingPairsSorted).ToList();
 
             elementData[codesPropertyName] =
                 new AspectPropertyValue<IReadOnlyList<string>>(
@@ -273,13 +279,14 @@ namespace FiftyOne.IpIntelligence.Translation.FlowElements
             return false;
         }
 
-        private static StringComparer CreateComparer(string locale)
+        private static StringComparer CreateComparer(string locale, out string cultureUsed)
         {
+            cultureUsed = string.Empty;
             if (locale == null) return StringComparer.CurrentCulture;
             try
             {
-                var culture = CultureInfo.GetCultureInfo(
-                    locale.Replace('_', '-'));
+                cultureUsed = locale.Replace('_', '-');
+                var culture = CultureInfo.GetCultureInfo(cultureUsed);
                 return StringComparer.Create(culture, ignoreCase: false);
             }
             catch (CultureNotFoundException)
