@@ -1267,6 +1267,52 @@
               Looks up a localized string similar to The results collection for this data object has already been accessed and must not be updated..
             </summary>
         </member>
+        <member name="T:FiftyOne.IpIntelligence.Shared.Services.CloudDataHelper">
+            <summary>
+            Static helper for converting cloud data values to AspectPropertyValue 
+            types and creating APV dictionaries.
+            </summary>
+        </member>
+        <member name="F:FiftyOne.IpIntelligence.Shared.Services.CloudDataHelper.IpTypeConverter">
+            <summary>
+            Default type converter that handles IPAddress and WktString types.
+            Used by IpiCloudEngine for IP intelligence data.
+            </summary>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Shared.Services.CloudDataHelper.ToValueForAPV(System.Object,System.Type,System.Func{System.Object,System.Type,System.Object})">
+            <summary>
+            Convert value returned by cloud in json (weakly typed)
+            to a value expected by AspectPropertyValue (strongly typed).
+            </summary>
+            <param name="rawValue">The raw value from JSON</param>
+            <param name="valueType">The target type</param>
+            <param name="typeConverter">
+            Optional type-specific converter for handling special types like 
+            IPAddress. Called first to give type-specific converters priority 
+            over generic handling.
+            </param>
+            <returns>The converted value</returns>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Shared.Services.CloudDataHelper.ToValueForAPVSimple(System.Object,System.Type)">
+            <summary>
+            Base conversion for simple types like JavaScript and Dictionary.
+            </summary>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Shared.Services.CloudDataHelper.CreateAPVDictionary(System.Collections.Generic.Dictionary{System.String,System.Object},System.Collections.Generic.IReadOnlyList{FiftyOne.Pipeline.Core.Data.IElementPropertyMetaData},System.Func{System.Object,System.Type,System.Object},Microsoft.Extensions.Logging.ILogger,System.String)">
+            <summary>
+            Use the supplied cloud data to create a dictionary of 
+            <see cref="T:FiftyOne.Pipeline.Engines.Data.IAspectPropertyValue"/> instances.
+            </summary>
+            <param name="cloudData">The cloud data to be processed</param>
+            <param name="propertyMetaData">The meta-data for the properties</param>
+            <param name="typeConverter">
+            Optional type-specific converter for handling special types.
+            </param>
+            <param name="logger">Optional logger for warnings</param>
+            <param name="engineTypeName">Engine type name for logging</param>
+            <returns>A dictionary with values converted to AspectPropertyValue 
+            where needed</returns>
+        </member>
         <member name="T:FiftyOne.IpIntelligence.Shared.Services.IMetaDataService">
             <summary>
             Helper service for working with IP intelligence meta-data.

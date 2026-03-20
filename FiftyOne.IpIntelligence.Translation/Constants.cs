@@ -26,7 +26,7 @@ namespace FiftyOne.IpIntelligence.Translation
     /// <summary>
     /// Constants used by the translation flow elements.
     /// </summary>
-    internal class Constants
+    public class Constants
     {
         /// <summary>
         /// Element key used by the

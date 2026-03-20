@@ -4,6 +4,38 @@
         <name>FiftyOne.IpIntelligence.Cloud</name>
     </assembly>
     <members>
+        <member name="T:FiftyOne.IpIntelligence.Cloud.Data.CloudCountryCodeTranslationData">
+            <summary>
+            A cloud-specific data class that implements IAspectData for use
+            with <see cref="T:FiftyOne.IpIntelligence.Cloud.FlowElements.IpiCloudTranslationEngine"/>.
+            </summary>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Cloud.Data.CloudCountryCodeTranslationData.#ctor(Microsoft.Extensions.Logging.ILogger{FiftyOne.Pipeline.Engines.Data.AspectDataBase},FiftyOne.Pipeline.Core.FlowElements.IPipeline,FiftyOne.Pipeline.Engines.FlowElements.IAspectEngine)">
+            <summary>
+            Construct a new instance.
+            </summary>
+            <param name="logger">
+            The logger instance to use.
+            </param>
+            <param name="pipeline">
+            The Pipeline that created this data instance.
+            </param>
+            <param name="engine">
+            The engine that created this instance.
+            </param>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Cloud.Data.CloudCountryCodeTranslationData.CountryNamesGeographical">
+            <inheritdoc/>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Cloud.Data.CloudCountryCodeTranslationData.CountryNamesPopulation">
+            <inheritdoc/>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Cloud.Data.CloudCountryCodeTranslationData.CountryNamesGeographicalAll">
+            <inheritdoc/>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Cloud.Data.CloudCountryCodeTranslationData.CountryNamesPopulationAll">
+            <inheritdoc/>
+        </member>
         <member name="T:FiftyOne.IpIntelligence.Cloud.Data.IpDataCloud">
             <summary>
             A data class that makes working with IP data from cloud 
@@ -81,49 +113,11 @@
             Thrown if a required parameter is null
             </exception>
         </member>
-        <member name="M:FiftyOne.IpIntelligence.Cloud.FlowElements.IpiCloudEngine.CreateAPVDictionary2(System.Collections.Generic.Dictionary{System.String,System.Object},System.Collections.Generic.IReadOnlyList{FiftyOne.Pipeline.Core.Data.IElementPropertyMetaData})">
-            <summary>
-            Use the supplied cloud data to create a dictionary of 
-            <see cref="T:FiftyOne.Pipeline.Engines.Data.AspectPropertyValue`1"/> instances.
-            </summary>
-            <remarks>
-            This method uses the meta-data exposed by the 
-            <see cref="P:FiftyOne.Pipeline.CloudRequestEngine.FlowElements.CloudAspectEngineBase`1.Properties"/> collection to determine
-            if a given entry in the supplied cloudData should
-            be converted to an <see cref="T:FiftyOne.Pipeline.Engines.Data.AspectPropertyValue`1"/>
-            or not.
-            If not it will be output unchanged. If it is then a new
-            <see cref="T:FiftyOne.Pipeline.Engines.Data.AspectPropertyValue`1"/> instance will be created 
-            and the value from the cloud data assigned to it.
-            If the value is null then the code will look for a property
-            in the cloud data with the same name suffixed with 'nullreason'.
-            If it exists, then it's value will be used to set the 
-            noValueMessage on the new <see cref="T:FiftyOne.Pipeline.Engines.Data.AspectPropertyValue`1"/>.
-            </remarks>
-            <param name="cloudData">
-            The cloud data to be processed.
-            Keys are flat property names (i.e. no '.' separators).
-            Values are the property values.
-            </param>
-            <param name="propertyMetaData">
-            The meta-data for the properties in the data.
-            This will usually be the list from <see cref="P:FiftyOne.Pipeline.CloudRequestEngine.FlowElements.CloudAspectEngineBase`1.Properties"/>
-            but will be different if dealing with sub-properties.
-            </param>
-            <returns>
-            A dictionary containing the original values converted to 
-            <see cref="T:FiftyOne.Pipeline.Engines.Data.AspectPropertyValue`1"/> instances where needed.
-            Any entries in the source dictionary where the key ends 
-            with 'nullreason' will not appear in the output.
-            </returns>
-            <exception cref="T:System.ArgumentNullException">
-            Thrown if a required parameter is null.
-            </exception>
-        </member>
         <member name="M:FiftyOne.IpIntelligence.Cloud.FlowElements.IpiCloudEngine.ToValueForAPV(System.Object,System.Type)">
             <summary>
-            Convert value return by cloud in json (weakly typed)
-            to a value expected by AspectPropertyValue (strongly typed)
+            Convert value returned by cloud in json (weakly typed)
+            to a value expected by AspectPropertyValue (strongly typed).
+            Uses the IP-specific type converter for IPAddress and WktString.
             </summary>
             <param name="rawValue">Original value.</param>
             <param name="valueType">Target type.</param>
@@ -182,6 +176,123 @@
             <returns>
             A new <see cref="T:FiftyOne.IpIntelligence.Cloud.FlowElements.IpiCloudEngine"/> instance.
             </returns>
+        </member>
+        <member name="T:FiftyOne.IpIntelligence.Cloud.FlowElements.IpiCloudTranslationEngine">
+            <summary>
+            Cloud engine that reads translation data from the JSON response
+            and populates <see cref="T:FiftyOne.IpIntelligence.Translation.Data.ICountryCodeTranslationData"/>.
+            This engine extracts country name translations from the cloud service
+            response and makes them available for further translation to other languages.
+            </summary>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Cloud.FlowElements.IpiCloudTranslationEngine.#ctor(Microsoft.Extensions.Logging.ILogger{FiftyOne.IpIntelligence.Cloud.FlowElements.IpiCloudTranslationEngine},System.Func{FiftyOne.Pipeline.Core.FlowElements.IPipeline,FiftyOne.Pipeline.Core.FlowElements.FlowElementBase{FiftyOne.IpIntelligence.Cloud.Data.CloudCountryCodeTranslationData,FiftyOne.Pipeline.Engines.Data.IAspectPropertyMetaData},FiftyOne.IpIntelligence.Cloud.Data.CloudCountryCodeTranslationData})">
+            <summary>
+            Constructor
+            </summary>
+            <param name="logger">
+            The logger for this instance to use
+            </param>
+            <param name="translationDataFactory">
+            Factory function to use when creating aspect data instances.
+            </param>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Cloud.FlowElements.IpiCloudTranslationEngine.ElementDataKey">
+            <summary>
+            The key to use for storing this engine's data in a 
+            <see cref="T:FiftyOne.Pipeline.Core.Data.IFlowData"/> instance.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Cloud.FlowElements.IpiCloudTranslationEngine.EvidenceKeyFilter">
+            <summary>
+            The filter that defines the evidence that is used by 
+            this engine.
+            </summary>
+        </member>
+        <member name="F:FiftyOne.IpIntelligence.Cloud.FlowElements.IpiCloudTranslationEngine._properties">
+            <summary>
+            Static list of properties that this engine always supports.
+            These are defined locally rather than fetched from cloud metadata
+            since the translation properties are always the same.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Cloud.FlowElements.IpiCloudTranslationEngine.Properties">
+            <summary>
+            Get the property meta-data for properties populated by this engine.
+            Returns the static list since these properties are always locally defined.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Cloud.FlowElements.IpiCloudTranslationEngine.HasLoadedProperties">
+            <summary>
+            Indicates that properties have been loaded.
+            Always returns true since this engine uses locally defined properties
+            rather than cloud metadata.
+            </summary>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Cloud.FlowElements.IpiCloudTranslationEngine.ProcessEngine(FiftyOne.Pipeline.Core.Data.IFlowData,FiftyOne.IpIntelligence.Cloud.Data.CloudCountryCodeTranslationData)">
+            <summary>
+            Perform the processing for this engine:
+            1. Get the JSON data from the <see cref="T:FiftyOne.Pipeline.CloudRequestEngine.FlowElements.CloudRequestEngine"/> response.
+            2. Extract properties relevant to this engine.
+            3. Deserialize JSON data to populate a 
+            <see cref="T:FiftyOne.IpIntelligence.Cloud.Data.CloudCountryCodeTranslationData"/> instance.
+            </summary>
+            <param name="data">
+            The <see cref="T:FiftyOne.Pipeline.Core.Data.IFlowData"/> instance containing data for the 
+            current request.
+            </param>
+            <param name="aspectData">
+            The <see cref="T:FiftyOne.IpIntelligence.Cloud.Data.CloudCountryCodeTranslationData"/> instance to populate.
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown if a required parameter is null
+            </exception>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Cloud.FlowElements.IpiCloudTranslationEngine.GetPropertyType(FiftyOne.Pipeline.Core.Data.PropertyMetaData,System.Type)">
+            <summary>
+            Get the type of a property from the meta-data.
+            </summary>
+        </member>
+        <member name="T:FiftyOne.IpIntelligence.Cloud.FlowElements.IpiCloudTranslationEngineBuilder">
+            <summary>
+            Fluent builder used to create a cloud-based translation engine
+            for IP intelligence country name translations.
+            </summary>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Cloud.FlowElements.IpiCloudTranslationEngineBuilder.#ctor(Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="loggerFactory">
+            The factory to use when creating a logger.
+            </param>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Cloud.FlowElements.IpiCloudTranslationEngineBuilder.Build">
+            <summary>
+            Build a new engine using the configured values.
+            </summary>
+            <returns>
+            A new <see cref="T:FiftyOne.IpIntelligence.Cloud.FlowElements.IpiCloudTranslationEngine"/>
+            </returns>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Cloud.FlowElements.IpiCloudTranslationEngineBuilder.NewEngine(System.Collections.Generic.List{System.String})">
+            <summary>
+            This method is called by the base class to create a new
+            <see cref="T:FiftyOne.IpIntelligence.Cloud.FlowElements.IpiCloudTranslationEngine"/> instance.
+            </summary>
+            <param name="properties">
+            A string list of the properties that the engine should populate.
+            </param>
+            <returns>
+            A new <see cref="T:FiftyOne.IpIntelligence.Cloud.FlowElements.IpiCloudTranslationEngine"/> instance.
+            </returns>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Cloud.FlowElements.IpiCloudTranslationEngineBuilder.CreateData(FiftyOne.Pipeline.Core.FlowElements.IPipeline,FiftyOne.Pipeline.Core.FlowElements.FlowElementBase{FiftyOne.IpIntelligence.Cloud.Data.CloudCountryCodeTranslationData,FiftyOne.Pipeline.Engines.Data.IAspectPropertyMetaData})">
+            <summary>
+            Create a default instance of this element's data. 
+            </summary>
+            <param name="pipeline"></param>
+            <param name="engine"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>
