@@ -30,72 +30,71 @@ using FiftyOne.Pipeline.Engines.FlowElements;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace FiftyOne.IpIntelligence.Cloud.Tests
+namespace FiftyOne.IpIntelligence.CloudTests;
+
+[TestClass]
+public class CloudTranslationEngineTests
 {
-    [TestClass]
-    public class CloudTranslationEngineTests
+    private IPipeline _pipeline;
+    private const string _resource_key_env_variable = "51D_RESOURCE_KEY";
+
+    /// <summary>
+    /// Perform a simple gross error check by calling the cloud service
+    /// with a single IP address and validating the translation data is correct.
+    /// This is an integration test that uses the live cloud service
+    /// so any problems with that service could affect the result
+    /// of this test.
+    /// </summary>
+    [TestMethod]
+    public void CloudIntegrationTest()
     {
-        private IPipeline _pipeline;
-        private const string _resource_key_env_variable = "51D_RESOURCE_KEY";
+        var resourceKey = System.Environment.GetEnvironmentVariable(
+            _resource_key_env_variable);
 
-        /// <summary>
-        /// Perform a simple gross error check by calling the cloud service
-        /// with a single IP address and validating the translation data is correct.
-        /// This is an integration test that uses the live cloud service
-        /// so any problems with that service could affect the result
-        /// of this test.
-        /// </summary>
-        [TestMethod]
-        public void CloudIntegrationTest()
+        if (resourceKey != null)
         {
-            var resourceKey = System.Environment.GetEnvironmentVariable(
-                _resource_key_env_variable);
+            _pipeline = new IpiPipelineBuilder(
+                new LoggerFactory(), new System.Net.Http.HttpClient())
+                .UseCloud(resourceKey)
+                .Build();
+            var data = _pipeline.CreateFlowData();
+            data.AddEvidence("query.client-ip-51d",
+                "185.28.167.78");
+            data.Process();
 
-            if (resourceKey != null)
-            {
-                _pipeline = new IpiPipelineBuilder(
-                    new LoggerFactory(), new System.Net.Http.HttpClient())
-                    .UseCloud(resourceKey)
-                    .Build();
-                var data = _pipeline.CreateFlowData();
-                data.AddEvidence("query.client-ip-51d",
-                    "185.28.167.78");
-                data.Process();
-
-                var translationData = data.Get<ICountryCodeTranslationData>();
-                Assert.IsNotNull(translationData);
-                Assert.IsTrue(translationData.CountryNamesGeographical.HasValue);
-            }
-            else
-            {
-                Assert.Inconclusive($"No resource key supplied in " +
-                    $"environment variable '{_resource_key_env_variable}'");
-            }
+            var translationData = data.Get<ICountryCodeTranslationData>();
+            Assert.IsNotNull(translationData);
+            Assert.IsTrue(translationData.CountryNamesGeographical.HasValue);
         }
-
-        /// <summary>
-        /// Verify that the IpiCloudTranslationEngine HasLoadedProperties 
-        /// returns true since it uses locally defined properties.
-        /// </summary>
-        [TestMethod]
-        public void HasLoadedProperties()
+        else
         {
-            var loggerFactory = new TestLoggerFactory();
-            var engine = new IpiCloudTranslationEngine(
-                loggerFactory.CreateLogger<IpiCloudTranslationEngine>(),
-                CreateTranslationData);
-
-            Assert.IsTrue(engine.HasLoadedProperties);
+            Assert.Inconclusive($"No resource key supplied in " +
+                $"environment variable '{_resource_key_env_variable}'");
         }
+    }
 
-        private CloudCountryCodeTranslationData CreateTranslationData(
-            IPipeline pipeline,
-            FlowElementBase<CloudCountryCodeTranslationData, IAspectPropertyMetaData> engine)
-        {
-            return new CloudCountryCodeTranslationData(
-                new TestLoggerFactory().CreateLogger<CloudCountryCodeTranslationData>(),
-                pipeline,
-                (IAspectEngine)engine);
-        }
+    /// <summary>
+    /// Verify that the IpiCloudTranslationEngine HasLoadedProperties 
+    /// returns true since it uses locally defined properties.
+    /// </summary>
+    [TestMethod]
+    public void HasLoadedProperties()
+    {
+        var loggerFactory = new TestLoggerFactory();
+        var engine = new IpiCloudTranslationEngine(
+            loggerFactory.CreateLogger<IpiCloudTranslationEngine>(),
+            CreateTranslationData);
+
+        Assert.IsTrue(engine.HasLoadedProperties);
+    }
+
+    private CloudCountryCodeTranslationData CreateTranslationData(
+        IPipeline pipeline,
+        FlowElementBase<CloudCountryCodeTranslationData, IAspectPropertyMetaData> engine)
+    {
+        return new CloudCountryCodeTranslationData(
+            new TestLoggerFactory().CreateLogger<CloudCountryCodeTranslationData>(),
+            pipeline,
+            (IAspectEngine)engine);
     }
 }
