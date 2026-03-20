@@ -1267,49 +1267,51 @@
               Looks up a localized string similar to The results collection for this data object has already been accessed and must not be updated..
             </summary>
         </member>
-        <member name="T:FiftyOne.IpIntelligence.Shared.Services.ICloudDataHelper">
+        <member name="T:FiftyOne.IpIntelligence.Shared.Services.CloudDataHelper">
             <summary>
-            Helper service for creating AspectPropertyValue dictionaries from cloud data.
+            Static helper for converting cloud data values to AspectPropertyValue 
+            types and creating APV dictionaries.
             </summary>
         </member>
-        <member name="M:FiftyOne.IpIntelligence.Shared.Services.ICloudDataHelper.CreateAPVDictionary(System.Collections.Generic.Dictionary{System.String,System.Object},System.Collections.Generic.IReadOnlyList{FiftyOne.Pipeline.Core.Data.IElementPropertyMetaData},Microsoft.Extensions.Logging.ILogger,System.String)">
+        <member name="F:FiftyOne.IpIntelligence.Shared.Services.CloudDataHelper.IpTypeConverter">
             <summary>
-            Use the supplied cloud data to create a dictionary of 
-            <see cref="T:FiftyOne.Pipeline.Engines.Data.IAspectPropertyValue"/> instances.
+            Default type converter that handles IPAddress and WktString types.
+            Used by IpiCloudEngine for IP intelligence data.
             </summary>
         </member>
-        <member name="M:FiftyOne.IpIntelligence.Shared.Services.ICloudDataHelper.ToValueForAPV(System.Object,System.Type)">
+        <member name="M:FiftyOne.IpIntelligence.Shared.Services.CloudDataHelper.ToValueForAPV(System.Object,System.Type,System.Func{System.Object,System.Type,System.Object})">
             <summary>
             Convert value returned by cloud in json (weakly typed)
             to a value expected by AspectPropertyValue (strongly typed).
             </summary>
+            <param name="rawValue">The raw value from JSON</param>
+            <param name="valueType">The target type</param>
+            <param name="typeConverter">
+            Optional type-specific converter for handling special types like 
+            IPAddress. Called first to give type-specific converters priority 
+            over generic handling.
+            </param>
+            <returns>The converted value</returns>
         </member>
-        <member name="T:FiftyOne.IpIntelligence.Shared.Services.CloudDataHelper">
-            <summary>
-            Implementation of <see cref="T:FiftyOne.IpIntelligence.Shared.Services.ICloudDataHelper"/>.
-            </summary>
-        </member>
-        <member name="M:FiftyOne.IpIntelligence.Shared.Services.CloudDataHelper.ToValueForAPV(System.Object,System.Type)">
-            <inheritdoc/>
-        </member>
-        <member name="M:FiftyOne.IpIntelligence.Shared.Services.CloudDataHelper.CreateAPVDictionary(System.Collections.Generic.Dictionary{System.String,System.Object},System.Collections.Generic.IReadOnlyList{FiftyOne.Pipeline.Core.Data.IElementPropertyMetaData},Microsoft.Extensions.Logging.ILogger,System.String)">
-            <inheritdoc/>
-        </member>
-        <member name="T:FiftyOne.IpIntelligence.Shared.Services.CloudDataHelperInternal">
-            <summary>
-            Internal helper for converting cloud data values to AspectPropertyValue types.
-            </summary>
-        </member>
-        <member name="M:FiftyOne.IpIntelligence.Shared.Services.CloudDataHelperInternal.ToValueForAPV(System.Object,System.Type)">
-            <summary>
-            Convert value returned by cloud in json (weakly typed)
-            to a value expected by AspectPropertyValue (strongly typed)
-            </summary>
-        </member>
-        <member name="M:FiftyOne.IpIntelligence.Shared.Services.CloudDataHelperInternal.ToValueForAPVSimple(System.Object,System.Type)">
+        <member name="M:FiftyOne.IpIntelligence.Shared.Services.CloudDataHelper.ToValueForAPVSimple(System.Object,System.Type)">
             <summary>
             Base conversion for simple types like JavaScript and Dictionary.
             </summary>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Shared.Services.CloudDataHelper.CreateAPVDictionary(System.Collections.Generic.Dictionary{System.String,System.Object},System.Collections.Generic.IReadOnlyList{FiftyOne.Pipeline.Core.Data.IElementPropertyMetaData},System.Func{System.Object,System.Type,System.Object},Microsoft.Extensions.Logging.ILogger,System.String)">
+            <summary>
+            Use the supplied cloud data to create a dictionary of 
+            <see cref="T:FiftyOne.Pipeline.Engines.Data.IAspectPropertyValue"/> instances.
+            </summary>
+            <param name="cloudData">The cloud data to be processed</param>
+            <param name="propertyMetaData">The meta-data for the properties</param>
+            <param name="typeConverter">
+            Optional type-specific converter for handling special types.
+            </param>
+            <param name="logger">Optional logger for warnings</param>
+            <param name="engineTypeName">Engine type name for logging</param>
+            <returns>A dictionary with values converted to AspectPropertyValue 
+            where needed</returns>
         </member>
         <member name="T:FiftyOne.IpIntelligence.Shared.Services.IMetaDataService">
             <summary>
@@ -1334,14 +1336,6 @@
             <returns>
             A dictionary with key of component Id and value of profile Id.
             </returns>
-        </member>
-        <member name="T:FiftyOne.IpIntelligence.Shared.Services.IpCloudDataHelper">
-            <summary>
-            IP-specific cloud data helper that handles IPAddress and WktString types.
-            </summary>
-        </member>
-        <member name="M:FiftyOne.IpIntelligence.Shared.Services.IpCloudDataHelper.ToValueForAPV(System.Object,System.Type)">
-            <inheritdoc/>
         </member>
         <member name="T:FiftyOne.IpIntelligence.Shared.Services.MetaDataService">
             <summary>

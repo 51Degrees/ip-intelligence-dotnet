@@ -36,7 +36,10 @@ namespace FiftyOne.IpIntelligence.Cloud.FlowElements
     /// Fluent builder used to create a cloud-based translation engine
     /// for IP intelligence country name translations.
     /// </summary>
-    public class IpiCloudTranslationEngineBuilder : AspectEngineBuilderBase<IpiCloudTranslationEngineBuilder, IpiCloudTranslationEngine>
+    public class IpiCloudTranslationEngineBuilder 
+        : AspectEngineBuilderBase<
+            IpiCloudTranslationEngineBuilder, 
+            IpiCloudTranslationEngine>
     {
         private readonly ILoggerFactory _loggerFactory;
 
@@ -72,16 +75,25 @@ namespace FiftyOne.IpIntelligence.Cloud.FlowElements
         /// <returns>
         /// A new <see cref="IpiCloudTranslationEngine"/> instance.
         /// </returns>
-        protected override IpiCloudTranslationEngine NewEngine(List<string> properties)
+        protected override IpiCloudTranslationEngine NewEngine(
+            List<string> properties)
         {
             return new IpiCloudTranslationEngine(
                 _loggerFactory.CreateLogger<IpiCloudTranslationEngine>(),
                 CreateData);
         }
 
+        /// <summary>
+        /// Create a default instance of this element's data. 
+        /// </summary>
+        /// <param name="pipeline"></param>
+        /// <param name="engine"></param>
+        /// <returns></returns>
         private CloudCountryCodeTranslationData CreateData(
             IPipeline pipeline,
-            FlowElementBase<CloudCountryCodeTranslationData, IAspectPropertyMetaData> engine)
+            FlowElementBase<
+                CloudCountryCodeTranslationData, 
+                IAspectPropertyMetaData> engine)
         {
             return new CloudCountryCodeTranslationData(
                 _loggerFactory.CreateLogger<CloudCountryCodeTranslationData>(),

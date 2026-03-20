@@ -52,8 +52,6 @@ namespace FiftyOne.IpIntelligence.Cloud.FlowElements
             new CloudJsonConverter()
         };
 
-        private static readonly ICloudDataHelper _cloudDataHelper = new CloudDataHelper();
-
         /// <summary>
         /// Constructor
         /// </summary>
@@ -137,6 +135,50 @@ namespace FiftyOne.IpIntelligence.Cloud.FlowElements
                     "",
                     null,
                     false,
+                    null),
+                new AspectPropertyMetaData(
+                    null,
+                    "CountryNamesGeographicalTranslated",
+                    typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>),
+                    "Country Names",
+                    new List<string>(),
+                    true,
+                    "",
+                    null,
+                    false,
+                    null),
+                new AspectPropertyMetaData(
+                    null,
+                    "CountryNamesPopulationTranslated",
+                    typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>),
+                    "Country Names",
+                    new List<string>(),
+                    true,
+                    "",
+                    null,
+                    false,
+                    null),
+                new AspectPropertyMetaData(
+                    null,
+                    "CountryNamesGeographicalAllTranslated",
+                    typeof(IAspectPropertyValue<IReadOnlyList<string>>),
+                    "Country Names",
+                    new List<string>(),
+                    true,
+                    "",
+                    null,
+                    false,
+                    null),
+                new AspectPropertyMetaData(
+                    null,
+                    "CountryNamesPopulationAllTranslated",
+                    typeof(IAspectPropertyValue<IReadOnlyList<string>>),
+                    "Country Names",
+                    new List<string>(),
+                    true,
+                    "",
+                    null,
+                    false,
                     null)
             };
 
@@ -196,7 +238,7 @@ namespace FiftyOne.IpIntelligence.Cloud.FlowElements
                     Converters = JSON_CONVERTERS,
                 });
 
-            var translated = _cloudDataHelper.CreateAPVDictionary(propertyValues, Properties.ToList(), Logger, GetType().Name);
+            var translated = CloudDataHelper.CreateAPVDictionary(propertyValues, Properties.ToList(), null, Logger, GetType().Name);
             aspectData.PopulateFrom(translated);
         }
 
