@@ -31,9 +31,12 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using FiftyOne.Pipeline.Core.Exceptions;
 
 namespace FiftyOne.IpIntelligence.Translation.FlowElements
 {
+    using CountryCodeNamePair = KeyValuePair<string, string>;
+    
     /// <summary>
     /// Engine which takes country name properties from
     /// <see cref="CountryCodeTranslationEngine"/> and country code properties
@@ -77,7 +80,7 @@ namespace FiftyOne.IpIntelligence.Translation.FlowElements
         /// All known country codes and their English names, ordered as they
         /// appear in countrycodes.en_GB.yml.
         /// </summary>
-        private readonly IReadOnlyList<KeyValuePair<string, string>>
+        private readonly IReadOnlyList<CountryCodeNamePair>
             _allCountries;
 
         /// <inheritdoc/>
@@ -91,7 +94,7 @@ namespace FiftyOne.IpIntelligence.Translation.FlowElements
             ILogger<FlowElementBase<
                 ICountriesTranslationData,
                 IElementPropertyMetaData>> logger,
-            IReadOnlyList<KeyValuePair<string, string>> allCountries,
+            IReadOnlyList<CountryCodeNamePair> allCountries,
             Func<
                 IPipeline,
                 FlowElementBase<
@@ -120,43 +123,39 @@ namespace FiftyOne.IpIntelligence.Translation.FlowElements
             // empty translator (pass-through) when appropriate.
             base.ProcessInternal(data);
 
-            var elementData = data.GetOrAdd(
-                ElementDataKeyTyped,
-                CreateElementData);
+            // Data is already created by base class.
+            var elementData = data.Get(ElementDataKeyTyped);
 
             // Resolve the translator and locale for the "All" lists.
-            var (translator, locale) = ResolveTranslator(data);
-            var comparer = CreateComparer(locale);
+            var comparer = TryResolveTranslator(data, out var translator, out var locale)
+                ? CreateComparer(locale)
+                : StringComparer.InvariantCultureIgnoreCase;
 
             // Get weighted codes from IP engine.
-            IElementData ipData = null;
+            IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> geoCodesWeighted = null;
+            IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> popCodesWeighted = null;
+            IIpIntelligenceData ipData = null;
             try
             {
-                ipData = data.Get("ip");
+                ipData = data.Get<IIpIntelligenceData>();
+                geoCodesWeighted = ipData?.CountryCodesGeographical;
+                popCodesWeighted = ipData?.CountryCodesPopulation;
             }
             catch (KeyNotFoundException) { }
-
-            var geoCodesWeighted = GetPropertyValue
-                <IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>(
-                    ipData, "CountryCodesGeographical");
-            var popCodesWeighted = GetPropertyValue
-                <IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>(
-                    ipData, "CountryCodesPopulation");
+            catch (PipelineException) { }
 
             // Get the weighted names (translated or pass-through English).
-            var geoTranslated = GetPropertyValue
-                <IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>(
-                    elementData,
-                    nameof(ICountriesTranslationData
-                        .CountryNamesGeographicalTranslated));
-            var popTranslated = GetPropertyValue
-                <IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>(
-                    elementData,
-                    nameof(ICountriesTranslationData
-                        .CountryNamesPopulationTranslated));
+            var geoTranslated = elementData.CountryNamesGeographicalTranslated;
+            var popTranslated = elementData.CountryNamesPopulationTranslated;
 
             BuildAndStoreAllLists(
-                elementData, geoTranslated, geoCodesWeighted,
+                elementData,
+                geoTranslated.HasValue 
+                    ? geoTranslated.Value
+                    : Array.Empty<IWeightedValue<string>>(),
+                geoCodesWeighted.HasValue 
+                    ? geoCodesWeighted.Value
+                    : Array.Empty<IWeightedValue<string>>(),
                 translator, comparer,
                 nameof(ICountriesTranslationData
                     .CountryNamesGeographicalAllTranslated),
@@ -164,7 +163,13 @@ namespace FiftyOne.IpIntelligence.Translation.FlowElements
                     .CountryCodesGeographicalAll));
 
             BuildAndStoreAllLists(
-                elementData, popTranslated, popCodesWeighted,
+                elementData,
+                popTranslated.HasValue 
+                    ? popTranslated.Value
+                    : Array.Empty<IWeightedValue<string>>(),
+                popCodesWeighted.HasValue 
+                    ? popCodesWeighted.Value
+                    : Array.Empty<IWeightedValue<string>>(),
                 translator, comparer,
                 nameof(ICountriesTranslationData
                     .CountryNamesPopulationAllTranslated),
@@ -178,81 +183,61 @@ namespace FiftyOne.IpIntelligence.Translation.FlowElements
         /// </summary>
         private void BuildAndStoreAllLists(
             ICountriesTranslationData elementData,
-            IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>
-                translatedWeightedNames,
-            IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>
-                weightedCodes,
+            IReadOnlyList<IWeightedValue<string>> translatedWeightedNames,
+            IReadOnlyList<IWeightedValue<string>> weightedCodes,
             Translator translator,
             StringComparer comparer,
             string namesPropertyName,
             string codesPropertyName)
         {
             var weightedTuples = BuildWeightedTuples(
-                translatedWeightedNames, weightedCodes);
+                translatedWeightedNames,
+                weightedCodes,
+                comparer).ToList();
 
             var errors = new List<Exception>();
-            var allTuples = _allCountries
-                .Select(kv => (
-                    Name: translator != null
-                        ? (string)translator.Translate(kv.Value, errors)
-                        : kv.Value,
-                    Code: kv.Key))
-                .ToList();
+            var remainingPairs = _allCountries
+                .Where(nextPair =>
+                    weightedTuples.Any(weightedPair => 
+                        comparer.Compare(weightedPair.Key, nextPair.Key) == 0)
+                    == false);
+            if (translator is null == false)
+            {
+                remainingPairs = remainingPairs
+                    .Select(nextPair => new CountryCodeNamePair(
+                        nextPair.Key,
+                        translator.Translate(nextPair, errors) as string
+                        ?? nextPair.Value));
+            }
+                
+            var allTuples = weightedTuples.Concat(remainingPairs).ToList();
 
-            var weightedCodeSet = new HashSet<string>(
-                weightedTuples.Select(t => t.Code));
-            var remainingTuples = allTuples
-                .Where(t => !weightedCodeSet.Contains(t.Code))
-                .ToList();
-
-            remainingTuples.Sort((a, b) => comparer.Compare(a.Name, b.Name));
-
-            var combined = weightedTuples.Concat(remainingTuples).ToList();
-
-            elementData[namesPropertyName] =
-                new AspectPropertyValue<IReadOnlyList<string>>(
-                    combined.Select(t => t.Name).ToList());
             elementData[codesPropertyName] =
                 new AspectPropertyValue<IReadOnlyList<string>>(
-                    combined.Select(t => t.Code).ToList());
+                    allTuples.Select(t => t.Key).ToList());
+            elementData[namesPropertyName] =
+                new AspectPropertyValue<IReadOnlyList<string>>(
+                    allTuples.Select(t => t.Value).ToList());
         }
 
-        private static List<(string Name, string Code)> BuildWeightedTuples(
-            IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>
-                translatedNames,
-            IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>
-                codes)
+        private static IEnumerable<CountryCodeNamePair> BuildWeightedTuples(
+            IReadOnlyList<IWeightedValue<string>> translatedNames,
+            IReadOnlyList<IWeightedValue<string>> codes,
+            StringComparer comparer)
         {
-            if (translatedNames?.HasValue != true ||
-                codes?.HasValue != true)
+            if (translatedNames is null || codes is null)
             {
-                return new List<(string, string)>();
+                return Enumerable.Empty<CountryCodeNamePair>();
             }
-
-            var orderedNames = translatedNames.Value
-                .OrderByDescending(w => w.RawWeighting).ToList();
-            var orderedCodes = codes.Value
-                .OrderByDescending(w => w.RawWeighting).ToList();
-
-            var count = Math.Min(orderedNames.Count, orderedCodes.Count);
-            var result = new List<(string Name, string Code)>(count);
-            for (int i = 0; i < count; i++)
-            {
-                result.Add((orderedNames[i].Value, orderedCodes[i].Value));
-            }
-            return result;
-        }
-
-        private static T GetPropertyValue<T>(
-            IElementData elementData, string propertyName)
-        {
-            if (elementData == null) return default;
-            try
-            {
-                if (elementData[propertyName] is T typed) return typed;
-            }
-            catch (KeyNotFoundException) { }
-            return default;
+            var itemsToTake = Math.Min(translatedNames.Count, codes.Count);
+            return translatedNames
+                .Take(itemsToTake)
+                .Select((weightedName, i) => (weightedName, weightedCode: codes[i]))
+                .OrderByDescending(x => x.weightedName.RawWeighting)
+                .ThenBy(p => p.weightedName.Value, comparer)
+                .Select(p => new CountryCodeNamePair(
+                    p.weightedCode.Value,
+                    p.weightedName.Value));
         }
 
         /// <summary>
@@ -260,10 +245,14 @@ namespace FiftyOne.IpIntelligence.Translation.FlowElements
         /// <see cref="TranslationEngineBase{T}.Languages"/> collection.
         /// English is treated as the base language (no translation needed).
         /// </summary>
-        private (Translator Translator, string Locale) ResolveTranslator(
-            IFlowData data)
+        private bool TryResolveTranslator(
+            IFlowData data,
+            out Translator translator,
+            out string locale)
         {
             var evidence = data.GetEvidence().AsDictionary();
+            translator = null;
+            locale = "en_GB";
 
             foreach (var key in EvidenceKeys)
             {
@@ -273,20 +262,15 @@ namespace FiftyOne.IpIntelligence.Translation.FlowElements
                 {
                     if (Languages.TryGetTranslator(
                         headerValue,
-                        out var translator,
-                        out var locale))
+                        out translator,
+                        out locale))
                     {
-                        return (translator, locale);
+                        return true;
                     }
-
-                    // If TryGetTranslator returned false, it means
-                    // either English was preferred (base language) or
-                    // nothing matched. Either way, no translation.
-                    return (null, "en_GB");
                 }
             }
 
-            return (null, "en_GB");
+            return false;
         }
 
         private static StringComparer CreateComparer(string locale)
