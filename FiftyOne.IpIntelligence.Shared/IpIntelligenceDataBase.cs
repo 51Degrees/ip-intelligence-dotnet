@@ -78,6 +78,8 @@ namespace FiftyOne.IpIntelligence.Shared
 				{ "Country", typeof(IAspectPropertyValue<string>) },
 				{ "CountryCode", typeof(IAspectPropertyValue<string>) },
 				{ "CountryCode3", typeof(IAspectPropertyValue<string>) },
+				{ "CountryCodesGeographical", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<IReadOnlyList<string>>>>) },
+				{ "CountryCodesPopulation", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<IReadOnlyList<string>>>>) },
 				{ "County", typeof(IAspectPropertyValue<string>) },
 				{ "CurrencyCode", typeof(IAspectPropertyValue<string>) },
 				{ "DialCode", typeof(IAspectPropertyValue<string>) },
@@ -112,9 +114,7 @@ namespace FiftyOne.IpIntelligence.Shared
 				{ "TimeZoneIana", typeof(IAspectPropertyValue<string>) },
 				{ "TimeZoneOffset", typeof(IAspectPropertyValue<int>) },
 				{ "Town", typeof(IAspectPropertyValue<string>) },
-				{ "ZipCode", typeof(IAspectPropertyValue<string>) },
-				{ "CountryCodesGeographical", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
-				{ "CountryCodesPopulation", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) }
+				{ "ZipCode", typeof(IAspectPropertyValue<string>) }
 			};
 
 		/// <summary>
@@ -282,6 +282,14 @@ namespace FiftyOne.IpIntelligence.Shared
 		/// </summary>
 		public IAspectPropertyValue<string> ZipCode { get { return GetAs<IAspectPropertyValue<string>>("ZipCode"); } }
 		/// <summary>
+		/// A list of countries in ISO 3166-1 alpha-2 country code format that overlap with the area likely associated with the provided evidence, weighted and ordered by each country's proportion of the area. Administrative areas that cannot be cleanly resolved to the country level will not contribute to the resulting data.
+		/// </summary>
+		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<IReadOnlyList<string>>>> CountryCodesGeographical { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<IReadOnlyList<string>>>>>("CountryCodesGeographical"); } }
+		/// <summary>
+		/// A list of countries in ISO 3166-1 alpha-2 country code format that overlap with the area likely associated with the provided evidence, weighted and ordered by each country's proportion of the total population within the area. Administrative areas that cannot be cleanly resolved to the country level will not contribute to the resulting data.
+		/// </summary>
+		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<IReadOnlyList<string>>>> CountryCodesPopulation { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<IReadOnlyList<string>>>>>("CountryCodesPopulation"); } }
+		/// <summary>
 		/// The mobile country code of the network the device is connected to.
 		/// </summary>
 		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> Mcc { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("Mcc"); } }
@@ -305,13 +313,5 @@ namespace FiftyOne.IpIntelligence.Shared
 		/// Refers to the diversity of browsers observed from the IP range. An integer between 1-10, a lower value indicates a low number of browsers seen per IP address, while a higher value indicates a high number of browsers seen per IP address. A 0 value indicates that the probability is unknown.
 		/// </summary>
 		public IAspectPropertyValue<int> BrowserDiversity { get { return GetAs<IAspectPropertyValue<int>>("BrowserDiversity"); } }
-		/// <summary>
-		/// Weighted list of country codes by geographical area coverage.
-		/// </summary>
-		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> CountryCodesGeographical { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("CountryCodesGeographical"); } }
-		/// <summary>
-		/// Weighted list of country codes by population distribution.
-		/// </summary>
-		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> CountryCodesPopulation { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("CountryCodesPopulation"); } }
 	}
 }
