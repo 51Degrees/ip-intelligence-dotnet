@@ -14,6 +14,10 @@ on:
         description: 'Branch of tools to use for accessor generation'
         type: string
         default: 'main'
+      common-ci-ref:
+        description: 'Branch of common-ci to use for accessor generation'
+        type: string
+        default: 'main'
 
 jobs:
   DataFileChange:
@@ -25,6 +29,7 @@ jobs:
       dryrun: ${{ inputs.dryrun || false }}
       metadata-branch: ${{ inputs.metadata-branch || 'main' }}
       tools-branch: ${{ inputs.tools-branch || 'main' }}
+      common-ci-ref: ${{ inputs.common-ci-ref || 'main' }}
       data-type: "IpIntelligence"
       data-product: "EnterpriseV4"
       data-filename: "51Degrees-EnterpriseV4.ipi.gz"
