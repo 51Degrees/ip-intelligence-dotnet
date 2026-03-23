@@ -78,8 +78,8 @@ namespace FiftyOne.IpIntelligence.Shared
 				{ "Country", typeof(IAspectPropertyValue<string>) },
 				{ "CountryCode", typeof(IAspectPropertyValue<string>) },
 				{ "CountryCode3", typeof(IAspectPropertyValue<string>) },
-				{ "CountryCodesGeographical", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<IReadOnlyList<string>>>>) },
-				{ "CountryCodesPopulation", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<IReadOnlyList<string>>>>) },
+				{ "CountryCodesGeographical", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
+				{ "CountryCodesPopulation", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
 				{ "County", typeof(IAspectPropertyValue<string>) },
 				{ "CurrencyCode", typeof(IAspectPropertyValue<string>) },
 				{ "DialCode", typeof(IAspectPropertyValue<string>) },
@@ -284,11 +284,11 @@ namespace FiftyOne.IpIntelligence.Shared
 		/// <summary>
 		/// A list of countries in ISO 3166-1 alpha-2 country code format that overlap with the area likely associated with the provided evidence, weighted and ordered by each country's proportion of the area. Administrative areas that cannot be cleanly resolved to the country level will not contribute to the resulting data.
 		/// </summary>
-		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<IReadOnlyList<string>>>> CountryCodesGeographical { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<IReadOnlyList<string>>>>>("CountryCodesGeographical"); } }
+		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> CountryCodesGeographical { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("CountryCodesGeographical"); } }
 		/// <summary>
 		/// A list of countries in ISO 3166-1 alpha-2 country code format that overlap with the area likely associated with the provided evidence, weighted and ordered by each country's proportion of the total population within the area. Administrative areas that cannot be cleanly resolved to the country level will not contribute to the resulting data.
 		/// </summary>
-		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<IReadOnlyList<string>>>> CountryCodesPopulation { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<IReadOnlyList<string>>>>>("CountryCodesPopulation"); } }
+		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> CountryCodesPopulation { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("CountryCodesPopulation"); } }
 		/// <summary>
 		/// The mobile country code of the network the device is connected to.
 		/// </summary>
