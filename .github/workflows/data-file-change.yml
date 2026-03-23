@@ -1,0 +1,29 @@
+name: Data File Change
+
+on:
+  workflow_dispatch:
+    inputs:
+      dryrun:
+        type: boolean
+        default: false
+      metadata-branch:
+        description: 'Branch of common-metadata to use for accessor generation'
+        type: string
+        default: 'main'
+
+jobs:
+  DataFileChange:
+    name: Data File Change
+    uses: 51Degrees/common-ci/.github/workflows/nightly-data-file-change.yml@main
+    with:
+      repo-name: ${{ github.event.repository.name }}
+      org-name: ${{ github.event.repository.owner.login }}
+      dryrun: ${{ inputs.dryrun || false }}
+      metadata-branch: ${{ inputs.metadata-branch || 'main' }}
+      data-type: "IpIntelligence"
+      data-product: "EnterpriseV4"
+      data-filename: "51Degrees-EnterpriseV4.ipi.gz"
+    secrets:
+      token: ${{ secrets.ACCESS_TOKEN }}
+      data-key: ${{ secrets.DEVICE_DETECTION_KEY }}
+      data-url: ${{ secrets.DEVICE_DETECTION_URL }}
