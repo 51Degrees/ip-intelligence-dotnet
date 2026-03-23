@@ -22,7 +22,7 @@ on:
 jobs:
   DataFileChange:
     name: Data File Change
-    uses: 51Degrees/common-ci/.github/workflows/nightly-data-file-change.yml@main
+    uses: 51Degrees/common-ci/.github/workflows/nightly-data-file-change.yml@feature/tools-branch-for-data-file-update
     with:
       repo-name: ${{ github.event.repository.name }}
       org-name: ${{ github.event.repository.owner.login }}
