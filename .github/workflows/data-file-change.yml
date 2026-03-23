@@ -10,6 +10,10 @@ on:
         description: 'Branch of common-metadata to use for accessor generation'
         type: string
         default: 'main'
+      tools-branch:
+        description: 'Branch of tools to use for accessor generation'
+        type: string
+        default: 'main'
 
 jobs:
   DataFileChange:
@@ -20,6 +24,7 @@ jobs:
       org-name: ${{ github.event.repository.owner.login }}
       dryrun: ${{ inputs.dryrun || false }}
       metadata-branch: ${{ inputs.metadata-branch || 'main' }}
+      tools-branch: ${{ inputs.tools-branch || 'main' }}
       data-type: "IpIntelligence"
       data-product: "EnterpriseV4"
       data-filename: "51Degrees-EnterpriseV4.ipi.gz"
