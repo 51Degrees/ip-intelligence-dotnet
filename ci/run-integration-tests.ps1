@@ -60,6 +60,10 @@ Write-Debug "env:IPINTELLIGENCEDATAFILE = <$($env:IPINTELLIGENCEDATAFILE)>"
 
 Write-Output "`n------- PACKAGE REPLACEMENT BEGIN -------`n"
 
+$PackagesToAdd = @(
+    "FiftyOne.IpIntelligence",
+    "FiftyOne.IpIntelligence.Translation"
+)
 $updateExitCode = $null
 function Update-CsprojRefs {
     param (
@@ -100,10 +104,15 @@ function Update-CsprojRefs {
     }
 
     Write-Output "Adding the new packages..."
-    dotnet add $CsprojPath package "FiftyOne.IpIntelligence" --version $Version
-    $script:updateExitCode = $LASTEXITCODE
-    if ($LASTEXITCODE -ne 0) {
-        Write-Error "LASTEXITCODE (dotnet add) = $LASTEXITCODE"
+    foreach ($NextToAdd in $PackagesToAdd) {
+        Write-Output "Adding the new package ($NextToAdd)..."
+        dotnet add $CsprojPath package $NextToAdd --version $Version
+        $script:updateExitCode = $LASTEXITCODE
+        if ($LASTEXITCODE -ne 0) {
+            Write-Error "LASTEXITCODE (dotnet add) = $LASTEXITCODE"
+        } else {
+            Write-Output "Package added ($NextToAdd)."
+        }
     }
 }
 
