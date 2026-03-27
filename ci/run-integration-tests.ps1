@@ -2,8 +2,8 @@ param(
     [Parameter(Mandatory)][string]$RepoName,
     [Parameter(Mandatory)][string]$OrgName,
     [string]$GitHubUser = "Automation51D",
-    [Parameter(Mandatory)][string]$DeviceDetection,
-    [Parameter(Mandatory)][string]$DeviceDetectionUrl,
+    [string]$DeviceDetection,
+    [string]$DeviceDetectionUrl,
     [string]$ProjectDir = ".",
     [string]$Name = "Release_x64",
     [string]$Configuration = "Release",
@@ -70,7 +70,7 @@ function Update-CsprojRefs {
         [Parameter(Mandatory)]
         [string]$CsprojPath
     )
-    
+
     $PackagesRaw = (dotnet list $CsprojPath package --format json)
     $script:updateExitCode = $LASTEXITCODE
     if ($LASTEXITCODE -ne 0) {
