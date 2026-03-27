@@ -63,6 +63,7 @@ jobs:
       repo-name: ${{ github.event.repository.name }}
       org-name: ${{ github.event.repository.owner.login }}
       dryrun: ${{ inputs.dryrun || false }}
+      cache-assets: true
       skip-compare-performance: ${{ inputs.skip-compare-performance || false }}
       build-test-timeout-minutes: 300
     secrets:
@@ -83,6 +84,7 @@ jobs:
       repo-name: ${{ github.event.repository.name }}
       org-name: ${{ github.event.repository.owner.login }}
       dryrun: ${{ inputs.dryrun || false }}
+      cache-assets: true
       skip-compare-performance: ${{ inputs.skip-compare-performance || false }}
       build-platform: windows-latest
     secrets:
