@@ -1,13 +1,12 @@
 param (
-    [string]$DeviceDetection,
-    [string]$DeviceDetectionUrl
+    [string]$IpIntelligenceUrl
 )
 $ErrorActionPreference = "Stop"
 
 $ipIntelligenceData = "$PSScriptRoot/../FiftyOne.IpIntelligence.Engine.OnPremise/ip-intelligence-cxx/ip-intelligence-data"
 
 # TODO: fix DeviceDetectionUrl containing IpIntelligenceUrl
-./steps/fetch-assets.ps1 -DeviceDetection $DeviceDetection -IpIntelligenceUrl $DeviceDetectionUrl -Assets '51Degrees-EnterpriseIpiV41.ipi', '20000 User Agents.csv'
+./steps/fetch-assets.ps1 -IpIntelligenceUrl:$IpIntelligenceUrl -Assets '51Degrees-EnterpriseIpiV41.ipi', '20000 User Agents.csv'
 New-Item -ItemType SymbolicLink -Force -Target "$PWD/assets/51Degrees-EnterpriseIpiV41.ipi" -Path "$ipIntelligenceData/51Degrees-EnterpriseIpiV41.ipi"
 
 Get-PSDrive -PSProvider FileSystem

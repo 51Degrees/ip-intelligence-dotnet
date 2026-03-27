@@ -29,8 +29,7 @@ jobs:
       CodeSigningKeyVaultTenantId: ${{ secrets.CODE_SIGNING_KEY_VAULT_TENANT_ID }}
       CodeSigningKeyVaultClientSecret: ${{ secrets.CODE_SIGNING_KEY_VAULT_CLIENT_SECRET }}
       CodeSigningKeyVaultCertificateName: ${{ secrets.CODE_SIGNING_KEY_VAULT_CERTIFICATE_NAME }}
-      DeviceDetection: ${{ secrets.DEVICE_DETECTION_KEY }}
-      DeviceDetectionUrl: ${{ secrets.IPI_DATA_FILE_URL }}
+      IpIntelligenceUrl: ${{ secrets.IPI_DATA_FILE_URL }}
       TestResourceKey: ${{ secrets.SUPER_RESOURCE_KEY}}
       AcceptCHBrowserKey: ${{ secrets.ACCEPTCH_BROWSER_KEY}}
       AcceptCHHardwareKey: ${{ secrets.ACCEPTCH_HARDWARE_KEY}}
