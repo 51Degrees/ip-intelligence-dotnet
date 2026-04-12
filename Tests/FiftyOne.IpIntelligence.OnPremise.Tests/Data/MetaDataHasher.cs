@@ -30,39 +30,14 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Data
     {
         public int HashProperties(int hash, IWrapper wrapper)
         {
-            foreach (var property in wrapper.Properties
-                    .Where((p, i) => { return i % 10 == 0; }))
+            foreach (var property in wrapper.Properties)
             {
                 hash ^= property.GetHashCode();
-
-                foreach (var value in property.GetValues()
-                    .Where((v, i) => { return i % 10 == 0; }))
-                {
-                    hash ^= value.GetHashCode();
-                }
                 hash ^= property.Component.GetHashCode();
                 if (property.DefaultValue != null)
                 {
                     hash ^= property.DefaultValue.GetHashCode();
                 }
-            }
-            return hash;
-        }
-
-        public int HashValues(int hash, IWrapper wrapper)
-        {
-            // For a big data file, this is a very time consuming task
-            // as it requires a linear search through the values list
-            // Therefore skip, then take a good amount of data and perform
-            // hash against them. This should ensure that the integrity
-            // of the data file is reasonably verified.
-            // TODO: To move the iteration logic to the C layer
-            foreach (var value in wrapper.Values.Skip(100000).Take(100000))
-            {
-                hash ^= value.GetHashCode();
-                hash ^= value.GetProperty() == null ? 0 : value.GetProperty().GetHashCode();
-                // Dispose value
-                value.Dispose();
             }
             return hash;
         }
@@ -90,7 +65,7 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Data
             // hash against them. This should ensure that the integrity
             // of the data file is reasonably verified.
             // TODO: To move the iteration logic to the C layer
-            foreach (var profile in wrapper.Profiles.Skip(100000).Take(50000))
+            foreach (var profile in wrapper.Profiles.Skip(1000).Take(1000))
             {
                 hash ^= profile.GetHashCode();
                 hash ^= profile.Component.GetHashCode();

@@ -51,9 +51,9 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Data
                 if (validEvidence)
                 {
                     if (!value.HasValue) {
-                        Assert.IsTrue(
-                            value.NoValueMessage.Contains(
-                                "The results contained a null profile"));
+                        Assert.Contains(
+                            "The results contained a null profile", 
+                            value.NoValueMessage);
                     }
                 }
                 else

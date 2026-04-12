@@ -23,6 +23,7 @@
 using FiftyOne.IpIntelligence.Shared.FlowElements;
 using FiftyOne.IpIntelligence.Shared.Services;
 using FiftyOne.IpIntelligence.TestHelpers.Data;
+using FiftyOne.Pipeline.Core.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
@@ -33,41 +34,99 @@ namespace FiftyOne.IpIntelligence.TestHelpers.FlowElements
     {
         public static void NoEvidence(IWrapper wrapper, IDataValidator validator)
         {
-            var data = wrapper.Pipeline.CreateFlowData();
-            data.Process();
-            validator.ValidateData(data, false);
+            using (var data = wrapper.Pipeline.CreateFlowData())
+            {
+                data.Process();
+                validator.ValidateData(data, false);
+            }
         }
 
         public static void EmptyIpAddress(IWrapper wrapper, IDataValidator validator)
         {
-            var data = wrapper.Pipeline.CreateFlowData();
-            data.AddEvidence("query.client-ip-51d", "")
-                .Process();
-            validator.ValidateData(data, false);
+            using (var data = wrapper.Pipeline.CreateFlowData())
+            {
+                data.AddEvidence("query.client-ip-51d", "")
+                    .Process();
+                validator.ValidateData(data, false);
+            }
         }
 
         public static void NoHeaders(IWrapper wrapper, IDataValidator validator)
         {
-            var data = wrapper.Pipeline.CreateFlowData();
-            data.AddEvidence("irrelevant.evidence", "some evidence")
-                .Process();
-            validator.ValidateData(data, false);
+            using (var data = wrapper.Pipeline.CreateFlowData())
+            {
+                data.AddEvidence("irrelevant.evidence", "some evidence")
+                    .Process();
+                validator.ValidateData(data, false);
+            }
         }
 
         public static void NoUsefulHeaders(IWrapper wrapper, IDataValidator validator)
         {
-            var data = wrapper.Pipeline.CreateFlowData();
-            data.AddEvidence("query.irrelevant-header", "some evidence")
-                .Process();
-            validator.ValidateData(data, false);
+            using (var data = wrapper.Pipeline.CreateFlowData())
+            {
+                data.AddEvidence("query.irrelevant-header", "some evidence")
+                    .Process();
+                validator.ValidateData(data, false);
+            }
         }
 
-        public static void CaseInsensitiveEvidenceKeys(IWrapper wrapper, IDataValidator validator)
+        /// <summary>
+        /// Uses all the evidence keys where the last segment is converted to
+        /// upper case before being used as an evidence key.
+        /// </summary>
+        /// <param name="wrapper"></param>
+        /// <param name="validator"></param>
+        public static void CaseInsensitiveEvidenceKeys(
+            IWrapper wrapper, 
+            IDataValidator validator)
         {
-            var data = wrapper.Pipeline.CreateFlowData();
-            data.AddEvidence("query.CLIENT-IP-51D", Constants.Ipv4Address)
-                .Process();
-            validator.ValidateData(data);
+            var filter = wrapper.GetEngine().EvidenceKeyFilter 
+                as EvidenceKeyFilterWhitelist;
+            foreach (var key in filter.Whitelist)
+            {
+                var segments = key.Key.Split('.').ToArray();
+                var evidenceKey = String.Join(".", segments.Select((v, i) =>
+                    i < segments.Length - 1 ? v : v.ToUpperInvariant()));
+                using (var data = wrapper.Pipeline.CreateFlowData())
+                {
+                    data.AddEvidence(evidenceKey, Constants.Ipv4Address)
+                        .Process();
+                    validator.ValidateData(data);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Uses all the available evidence keys and repeats the process for a
+        /// number of iterations.
+        /// </summary>
+        /// <param name="wrapper"></param>
+        /// <param name="validator"></param>
+        /// <param name="iterations"></param>
+        /// <returns>Number of times that the process was completed</returns>
+        public static int EvidenceKeys(
+            IWrapper wrapper,
+            IDataValidator validator,
+            int iterations)
+        {
+            var filter = wrapper.GetEngine().EvidenceKeyFilter
+                as EvidenceKeyFilterWhitelist;
+            var count = 0;
+            for (var i = 0; i < iterations; i++)
+            {
+                foreach (var key in filter.Whitelist)
+                {
+                    using (var data = wrapper.Pipeline.CreateFlowData())
+                    {
+                        data.AddEvidence(key.Key, Constants.Ipv4Address)
+                            .Process();
+                        validator.ValidateData(data);
+                        count++;
+                    }
+                }
+            }
+            return count;
         }
 
         public static void MetaDataService_DefaultProfilesIds(IWrapper wrapper)
@@ -78,7 +137,7 @@ namespace FiftyOne.IpIntelligence.TestHelpers.FlowElements
                     .Cast<IOnPremiseIpiEngine>()
                     .ToArray());
             var defaultProfiles = service.DefaultProfilesIds();
-            Assert.AreEqual(14, defaultProfiles.Count);
+            Assert.HasCount(14, defaultProfiles);
             Assert.IsTrue(defaultProfiles.ContainsKey(1));
             Assert.IsTrue(defaultProfiles.ContainsKey(2));
             Assert.IsTrue(defaultProfiles.ContainsKey(3));

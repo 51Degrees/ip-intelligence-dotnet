@@ -42,14 +42,14 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Core.FlowElements
         [DynamicData(nameof(ProfilesToTest))]
         public void EvidenceKeys_OnPremise_Core_ContainsIpAddress(PerformanceProfiles profile)
         {
-            TestInitialize(profile, 0);
+            TestInitialize(profile);
             EvidenceKeyTests.ContainsIpAddress(Wrapper);
         }
         [TestMethod]
         [DynamicData(nameof(ProfilesToTest))]
         public void EvidenceKeys_OnPremise_Core_CaseInsensitiveKeys(PerformanceProfiles profile)
         {
-            TestInitialize(profile, 0);
+            TestInitialize(profile);
             EvidenceKeyTests.CaseInsensitiveKeys(Wrapper);
         }
     }

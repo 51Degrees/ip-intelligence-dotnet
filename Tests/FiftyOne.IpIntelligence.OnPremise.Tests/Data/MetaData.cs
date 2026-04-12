@@ -54,12 +54,7 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Core.Data
         // rather than using the 'DataTestMethod' approach because they
         // often fail due to running out of memory.
         // This way, they do not run into the same problem for some reason.
-
-        // Disabled due to crash caused by unsorted profileOffsets collection in native library
-        // after parallel export. Binary search fails and causes null pointer dereference.
-        // See: https://github.com/51Degrees/Pearl/issues/690
         [TestMethod]
-        [Ignore("Disabled due to native library bug - profileOffsets not sorted after parallel export (Pearl#690)")]
         [DynamicData(nameof(ProfilesToTest), DynamicDataDisplayName = nameof(DisplayNameForTestCase))]
         public void MetaData_OnPremise_Core_Reload(PerformanceProfiles profile, bool skipOnNonWindows)
         {
@@ -68,21 +63,23 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Core.Data
                 Assert.Inconclusive("Skipped");
                 return;
             }
-            Task.Delay(TEST_DELAY_MS).Wait();
+            Task.Delay(TEST_DELAY_MS, TestContext.CancellationToken).Wait();
             TestInitialize(profile);
-            MetaDataTests test = new MetaDataTests();
+            var test = new MetaDataTests();
             test.Reload(Wrapper, new MetaDataHasher(), profile);
         }
 
         [TestMethod]
         [Ignore("IPI files are too long for CLR to pass a buffer into C++.")]
         [DynamicData(nameof(ProfilesToTest), DynamicDataDisplayName = nameof(DisplayNameForTestCase))]
-        public void MetaData_OnPremise_Core_ReloadMemory(PerformanceProfiles profile, bool skipOnNonWindows)
+        public void MetaData_OnPremise_Core_ReloadMemory(PerformanceProfiles profile, bool _)
         {
-            Task.Delay(TEST_DELAY_MS).Wait();
+            Task.Delay(TEST_DELAY_MS, TestContext.CancellationToken).Wait();
             TestInitialize(profile);
-            MetaDataTests test = new MetaDataTests();
+            var test = new MetaDataTests();
             test.ReloadMemory(Wrapper, new MetaDataHasher(), profile);
         }
+
+        public TestContext TestContext { get; set; }
     }
 }

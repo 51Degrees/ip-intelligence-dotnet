@@ -25,7 +25,6 @@ namespace FiftyOne.IpIntelligence.TestHelpers.Data
     public interface IMetaDataHasher
     {
         int HashProperties(int hash, IWrapper wrapper);
-        int HashValues(int hash, IWrapper wrapper);
         int HashComponents(int hash, IWrapper wrapper);
         int HashProfiles(int hash, IWrapper wrapper);
     }

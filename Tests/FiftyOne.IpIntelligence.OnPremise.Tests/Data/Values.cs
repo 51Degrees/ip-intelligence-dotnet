@@ -38,7 +38,7 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Core.Data
             .Where(x => x != PerformanceProfiles.BalancedTemp)
             .Select(x => new object[] { x });
 
-        [DataTestMethod]
+        [TestMethod]
         [DynamicData(nameof(ProfilesToTest))]
         public void Values_OnPremise_Core_ValueTypes(PerformanceProfiles profile)
         {
@@ -46,7 +46,7 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Core.Data
             ValueTests.ValueTypes(Wrapper);
         }
 
-        [DataTestMethod]
+        [TestMethod]
         [DynamicData(nameof(ProfilesToTest))]
         public void Values_OnPremise_Core_AvailableProperties(PerformanceProfiles profile)
         {
@@ -54,7 +54,7 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Core.Data
             ValueTests.AvailableProperties(Wrapper);
         }
 
-        [DataTestMethod]
+        [TestMethod]
         [DynamicData(nameof(ProfilesToTest))]
         public void Values_OnPremise_Core_TypedGetters(PerformanceProfiles profile)
         {
