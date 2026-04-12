@@ -169,13 +169,16 @@ namespace FiftyOne.IpIntelligence.Tests.Core
                 var options = new ParallelOptions()
                 {
                     CancellationToken = cancellationSource.Token,
-                    // The max parallelism is limited to 8 when the
-                    // multiThreaded flag is enabled.
+                    // The max parallelism is limited to
+                    // Environment.ProcessorCount when the multiThreaded flag
+                    // is enabled.
                     // This is because, if it is not limited, the lazy 
                     // loading tests will start all requests almost
                     // immediately and then some will take so long to
                     // complete that they exceed the configured timeout.
-                    MaxDegreeOfParallelism = (multiThreaded ? 8 : 1)
+                    MaxDegreeOfParallelism = multiThreaded ? 
+                        Environment.ProcessorCount : 
+                        1
                 };
 
 
