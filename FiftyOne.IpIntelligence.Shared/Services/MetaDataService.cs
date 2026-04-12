@@ -21,13 +21,10 @@
  * ********************************************************************* */
 
 using FiftyOne.IpIntelligence.Shared.FlowElements;
-using FiftyOne.Pipeline.Engines.FiftyOne.Data;
-using FiftyOne.Pipeline.Engines.FiftyOne.FlowElements;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace FiftyOne.IpIntelligence.Shared.Services
 {

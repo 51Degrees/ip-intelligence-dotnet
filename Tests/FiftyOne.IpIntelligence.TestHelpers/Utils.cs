@@ -22,12 +22,9 @@
 
 using FiftyOne.Common;
 using FiftyOne.Common.TestHelpers;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Concurrent;
 using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace FiftyOne.IpIntelligence.TestHelpers
 {

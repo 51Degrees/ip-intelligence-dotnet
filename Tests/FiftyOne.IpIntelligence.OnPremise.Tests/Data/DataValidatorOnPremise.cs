@@ -20,17 +20,12 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
-using FiftyOne.IpIntelligence.Engine.OnPremise.Data;
 using FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements;
 using FiftyOne.IpIntelligence.TestHelpers.Data;
 using FiftyOne.Pipeline.Core.Data;
 using FiftyOne.Pipeline.Engines.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
 
 namespace FiftyOne.IpIntelligence.OnPremise.Tests.Data
 {

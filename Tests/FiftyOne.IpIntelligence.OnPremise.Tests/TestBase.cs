@@ -26,7 +26,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Runtime.InteropServices;
 using System.Threading;
-using System.Threading.Tasks;
 using Constants = FiftyOne.IpIntelligence.TestHelpers.Constants;
 
 namespace FiftyOne.IpIntelligence.OnPremise.Tests
