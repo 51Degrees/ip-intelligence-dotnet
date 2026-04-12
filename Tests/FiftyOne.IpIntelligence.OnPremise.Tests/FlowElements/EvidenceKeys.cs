@@ -38,18 +38,18 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Core.FlowElements
             .Where(x => x != PerformanceProfiles.BalancedTemp)
             .Select(x => new object[] { x });
 
-        [DataTestMethod]
+        [TestMethod]
         [DynamicData(nameof(ProfilesToTest))]
         public void EvidenceKeys_OnPremise_Core_ContainsIpAddress(PerformanceProfiles profile)
         {
-            TestInitialize(profile);
+            TestInitialize(profile, 0);
             EvidenceKeyTests.ContainsIpAddress(Wrapper);
         }
-        [DataTestMethod]
+        [TestMethod]
         [DynamicData(nameof(ProfilesToTest))]
         public void EvidenceKeys_OnPremise_Core_CaseInsensitiveKeys(PerformanceProfiles profile)
         {
-            TestInitialize(profile);
+            TestInitialize(profile, 0);
             EvidenceKeyTests.CaseInsensitiveKeys(Wrapper);
         }
     }

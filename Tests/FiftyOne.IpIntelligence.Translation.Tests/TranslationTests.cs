@@ -27,7 +27,10 @@ using FiftyOne.Pipeline.Core.FlowElements;
 using FiftyOne.Pipeline.Engines.Data;
 using Microsoft.Extensions.Logging;
 using Moq;
+using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 
 namespace FiftyOne.IpIntelligence.Translation.Tests
 {
@@ -77,8 +80,8 @@ namespace FiftyOne.IpIntelligence.Translation.Tests
             Assert.IsNotNull(result.CountryNamesPopulation);
             Assert.IsTrue(result.CountryNamesGeographical.HasValue);
             Assert.IsTrue(result.CountryNamesPopulation.HasValue);
-            Assert.AreEqual(2, result.CountryNamesGeographical.Value.Count);
-            Assert.AreEqual(2, result.CountryNamesPopulation.Value.Count);
+            Assert.HasCount(2, result.CountryNamesGeographical.Value);
+            Assert.HasCount(2, result.CountryNamesPopulation.Value);
             Assert.AreEqual(
                 "United Kingdom",
                 result.CountryNamesGeographical.Value[0].Value);
@@ -130,10 +133,10 @@ namespace FiftyOne.IpIntelligence.Translation.Tests
             Assert.IsNotNull(result);
             Assert.IsTrue(result.CountryNamesGeographicalTranslated.HasValue);
             Assert.IsTrue(result.CountryNamesPopulationTranslated.HasValue);
-            Assert.AreEqual(2,
-                result.CountryNamesGeographicalTranslated.Value.Count);
-            Assert.AreEqual(2,
-                result.CountryNamesPopulationTranslated.Value.Count);
+            Assert.HasCount(2,
+                result.CountryNamesGeographicalTranslated.Value);
+            Assert.HasCount(2,
+                result.CountryNamesPopulationTranslated.Value);
             Assert.AreEqual(
                 "Royaume-Uni",
                 result.CountryNamesGeographicalTranslated.Value[0].Value);
@@ -185,7 +188,7 @@ namespace FiftyOne.IpIntelligence.Translation.Tests
             var codesAll = result.CountryCodesGeographicalAll.Value;
 
             // Same number of names and codes.
-            Assert.AreEqual(namesAll.Count, codesAll.Count);
+            Assert.HasCount(namesAll.Count, codesAll);
 
             // The weighted countries should be first (GB and FR).
             Assert.AreEqual("Royaume-Uni", namesAll[0]);
@@ -194,7 +197,7 @@ namespace FiftyOne.IpIntelligence.Translation.Tests
             Assert.AreEqual("FR", codesAll[1]);
 
             // All known countries should be present.
-            Assert.IsTrue(namesAll.Count > 200);
+            Assert.IsGreaterThan(200, namesAll.Count);
 
             // GB and FR should not appear again after the first 2 positions.
             Assert.IsFalse(codesAll.Skip(2).Contains("GB"));
@@ -206,9 +209,9 @@ namespace FiftyOne.IpIntelligence.Translation.Tests
             var comparer = GetComparer(flowData, out var cultureUsed);
             for (int i = 1; i < remaining.Count; i++)
             {
-                Assert.IsTrue(
-                    comparer.Compare(remaining[i - 1], remaining[i]) <= 0,
-                    $"Expected '{remaining[i - 1]}' (at {i - 1}) <= '{remaining[i]}' (at {i}) -- using '{cultureUsed}'");
+                Assert.IsLessThanOrEqualTo(
+0,
+                    comparer.Compare(remaining[i - 1], remaining[i]), $"Expected '{remaining[i - 1]}' (at {i - 1}) <= '{remaining[i]}' (at {i}) -- using '{cultureUsed}'");
             }
         }
 
@@ -255,7 +258,7 @@ namespace FiftyOne.IpIntelligence.Translation.Tests
             var codesAll = result.CountryCodesGeographicalAll.Value;
 
             // Same number of names and codes.
-            Assert.AreEqual(namesAll.Count, codesAll.Count);
+            Assert.HasCount(namesAll.Count, codesAll);
 
             // The weighted countries should be first (GB and FR).
             Assert.AreEqual("Royaume-Uni", namesAll[0]);
@@ -264,7 +267,7 @@ namespace FiftyOne.IpIntelligence.Translation.Tests
             Assert.AreEqual("FR", codesAll[1]);
 
             // All known countries should be present.
-            Assert.IsTrue(namesAll.Count > 200);
+            Assert.IsGreaterThan(200, namesAll.Count);
 
             // GB and FR should not appear again after the first 2 positions.
             Assert.IsFalse(codesAll.Skip(2).Contains("GB"));
@@ -276,9 +279,9 @@ namespace FiftyOne.IpIntelligence.Translation.Tests
             var comparer = GetComparer(flowData, out var cultureUsed);
             for (int i = 1; i < remaining.Count; i++)
             {
-                Assert.IsTrue(
-                    comparer.Compare(remaining[i - 1], remaining[i]) <= 0,
-                    $"Expected '{remaining[i - 1]}' (at {i - 1}) <= '{remaining[i]}' (at {i}) -- using '{cultureUsed}'");
+                Assert.IsLessThanOrEqualTo(
+0,
+                    comparer.Compare(remaining[i - 1], remaining[i]), $"Expected '{remaining[i - 1]}' (at {i - 1}) <= '{remaining[i]}' (at {i}) -- using '{cultureUsed}'");
             }
         }
 
@@ -331,16 +334,15 @@ namespace FiftyOne.IpIntelligence.Translation.Tests
             Assert.AreEqual("GB", codesAll[0]);
 
             // All known countries should be present.
-            Assert.IsTrue(namesAll.Count > 200);
+            Assert.IsGreaterThan(200, namesAll.Count);
 
             // Remaining should be sorted alphabetically by English name.
             var remaining = namesAll.Skip(1).ToList();
             for (int i = 1; i < remaining.Count; i++)
             {
-                Assert.IsTrue(
+                Assert.IsLessThanOrEqualTo(0,
                     string.Compare(remaining[i - 1], remaining[i],
-                        StringComparison.CurrentCulture) <= 0,
-                    $"Expected '{remaining[i - 1]}' <= '{remaining[i]}'");
+                        StringComparison.CurrentCulture), $"Expected '{remaining[i - 1]}' <= '{remaining[i]}'");
             }
         }
 
@@ -383,13 +385,13 @@ namespace FiftyOne.IpIntelligence.Translation.Tests
 
             // All known countries should be present, all sorted
             // alphabetically.
-            Assert.IsTrue(namesAll.Count > 200);
+            Assert.IsGreaterThan(200, namesAll.Count);
             for (int i = 1; i < namesAll.Count; i++)
             {
-                Assert.IsTrue(
+                Assert.IsLessThanOrEqualTo(
+0,
                     string.Compare(namesAll[i - 1], namesAll[i],
-                        StringComparison.CurrentCulture) <= 0,
-                    $"Expected '{namesAll[i - 1]}' <= '{namesAll[i]}'");
+                        StringComparison.CurrentCulture), $"Expected '{namesAll[i - 1]}' <= '{namesAll[i]}'");
             }
         }
 

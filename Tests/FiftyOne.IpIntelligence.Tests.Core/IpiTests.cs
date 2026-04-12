@@ -97,7 +97,7 @@ namespace FiftyOne.IpIntelligence.Tests.Core
         private static IpAddressGenerator IP_ADDRESSES = new IpAddressGenerator(
             TestHelpers.Utils.GetFilePath(Constants.IP_FILE_NAME));
 
-        [DataTestMethod]
+        [TestMethod]
         [DynamicData(nameof(TestParams), DynamicDataDisplayName = nameof(DisplayNameForTestCase))]
         public void Ipi_AllConfigurations_100_IpAddresses(
             string datafileName,
@@ -197,7 +197,7 @@ namespace FiftyOne.IpIntelligence.Tests.Core
                         // cancel the parallel process.
                         if (flowData.Errors != null)
                         {
-                            Assert.AreEqual(0, flowData.Errors.Count,
+                            Assert.IsEmpty(flowData.Errors,
                                 $"Expected no errors but got {flowData.Errors.Count}" +
                                 $":{Environment.NewLine}{ReportErrors(flowData.Errors)}");
                             cancellationSource.Cancel();
