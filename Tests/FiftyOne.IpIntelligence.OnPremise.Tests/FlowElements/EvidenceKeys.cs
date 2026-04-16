@@ -23,10 +23,8 @@
 using FiftyOne.IpIntelligence.TestHelpers.FlowElements;
 using FiftyOne.Pipeline.Engines;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace FiftyOne.IpIntelligence.OnPremise.Tests.Core.FlowElements
 {
@@ -40,14 +38,14 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Core.FlowElements
             .Where(x => x != PerformanceProfiles.BalancedTemp)
             .Select(x => new object[] { x });
 
-        [DataTestMethod]
+        [TestMethod]
         [DynamicData(nameof(ProfilesToTest))]
         public void EvidenceKeys_OnPremise_Core_ContainsIpAddress(PerformanceProfiles profile)
         {
             TestInitialize(profile);
             EvidenceKeyTests.ContainsIpAddress(Wrapper);
         }
-        [DataTestMethod]
+        [TestMethod]
         [DynamicData(nameof(ProfilesToTest))]
         public void EvidenceKeys_OnPremise_Core_CaseInsensitiveKeys(PerformanceProfiles profile)
         {

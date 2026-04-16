@@ -48,7 +48,6 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Core.Data
         public void Utf8_OnPremise_Core_Validate_Property_Values(byte[] utf8Bytes, string propertyName)
         {
             TestInitialize(PerformanceProfiles.MaxPerformance);
-
             ValidateUtf8PropertyValues(
                 Wrapper,
                 propertyName,

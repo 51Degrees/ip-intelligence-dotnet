@@ -26,7 +26,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Runtime.InteropServices;
 using System.Threading;
-using System.Threading.Tasks;
 using Constants = FiftyOne.IpIntelligence.TestHelpers.Constants;
 
 namespace FiftyOne.IpIntelligence.OnPremise.Tests
@@ -35,8 +34,7 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests
     [TestCategory("OnPremise")]
     public class TestsBase
     {
-        private static object _lock = new object();
-
+        private static readonly object _lock = new object();
         protected WrapperOnPremise Wrapper { get; private set; } = null;
         protected IpAddressGenerator IpAddresses { get; private set; }
 

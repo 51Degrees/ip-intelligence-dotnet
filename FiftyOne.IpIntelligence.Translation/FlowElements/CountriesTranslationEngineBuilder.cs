@@ -21,10 +21,8 @@
  * ********************************************************************* */
 
 using FiftyOne.IpIntelligence.Translation.Data;
-using FiftyOne.IpIntelligence.Translation.Resources;
 using FiftyOne.Pipeline.Core.Data;
 using FiftyOne.Pipeline.Core.FlowElements;
-using FiftyOne.Pipeline.Translation.Data;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;

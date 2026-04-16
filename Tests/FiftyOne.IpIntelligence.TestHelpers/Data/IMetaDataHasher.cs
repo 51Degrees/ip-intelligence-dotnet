@@ -20,16 +20,11 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 namespace FiftyOne.IpIntelligence.TestHelpers.Data
 {
     public interface IMetaDataHasher
     {
         int HashProperties(int hash, IWrapper wrapper);
-        int HashValues(int hash, IWrapper wrapper);
         int HashComponents(int hash, IWrapper wrapper);
         int HashProfiles(int hash, IWrapper wrapper);
     }

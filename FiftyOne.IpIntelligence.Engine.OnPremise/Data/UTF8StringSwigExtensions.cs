@@ -21,8 +21,6 @@
  * ********************************************************************* */
 
 using FiftyOne.IpIntelligence.Engine.OnPremise.Interop;
-using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data

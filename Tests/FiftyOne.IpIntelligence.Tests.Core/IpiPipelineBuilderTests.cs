@@ -27,14 +27,12 @@ using FiftyOne.Pipeline.Engines.Configuration;
 using FiftyOne.Pipeline.Engines.Data;
 using FiftyOne.Pipeline.Engines.FiftyOne.FlowElements;
 using FiftyOne.Pipeline.Engines.Services;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace FiftyOne.IpIntelligence.Tests.Core
 {
@@ -51,8 +49,7 @@ namespace FiftyOne.IpIntelligence.Tests.Core
             IPipeline Pipeline,
             IpiOnPremiseEngine Engine,
             IAspectEngineDataFile DataFile,
-            IDataFileConfiguration DataFileConfig
-            );
+            IDataFileConfiguration DataFileConfig);
 
         public record ValidationAction(
             string Description,
@@ -106,7 +103,7 @@ namespace FiftyOne.IpIntelligence.Tests.Core
             null,
             (licenseKey is not null)
             ? pd => Assert.AreEqual(licenseKey, pd.DataFileConfig.DataUpdateLicenseKeys[0])
-            : pd => Assert.AreEqual(0, pd.DataFileConfig.DataUpdateLicenseKeys.Count));
+            : pd => Assert.IsEmpty(pd.DataFileConfig.DataUpdateLicenseKeys));
 
         #endregion
 
@@ -123,11 +120,11 @@ namespace FiftyOne.IpIntelligence.Tests.Core
             shareUsage
             ? (pd =>
             {
-                Assert.AreEqual(2, pd.Pipeline.FlowElements.Count);
+                Assert.HasCount(2, pd.Pipeline.FlowElements);
                 Assert.IsTrue(pd.Pipeline.FlowElements.Any(
                     e => e.GetType() == typeof(ShareUsageElement)));
             })
-            : (pd => Assert.AreEqual(1, pd.Pipeline.FlowElements.Count)));
+            : (pd => Assert.HasCount(1, pd.Pipeline.FlowElements)));
 
         #endregion
 
@@ -326,7 +323,7 @@ namespace FiftyOne.IpIntelligence.Tests.Core
         /// <param name="licenseKey">
         /// The license key to use when performing automatic update.
         /// </param>
-        [DataTestMethod]
+        [TestMethod]
         [DynamicData(nameof(AllTestParams))]
         public void IpiPipelineBuilder_CheckConfiguration(TestParamsComplete testParams)
         {
@@ -353,7 +350,6 @@ namespace FiftyOne.IpIntelligence.Tests.Core
 
             // Build the pipeline
             using var pipeline = pipelineBuilder.Build();
-
 
             Console.WriteLine("Building finished!");
 
