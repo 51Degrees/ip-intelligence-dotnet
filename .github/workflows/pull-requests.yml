@@ -25,6 +25,7 @@ jobs:
     secrets:
       token: ${{ secrets.ACCESS_TOKEN }}
       DeviceDetection: ${{ secrets.DEVICE_DETECTION_KEY }} # for examples
+      DeviceDetectionUrl: ${{ secrets.DEVICE_DETECTION_URL }}
       IpIntelligenceUrl: ${{ secrets.IPI_DATA_FILE_URL }}
       TestResourceKey: ${{ secrets.SUPER_RESOURCE_KEY}}
       AcceptCHBrowserKey: ${{ secrets.ACCEPTCH_BROWSER_KEY}}
