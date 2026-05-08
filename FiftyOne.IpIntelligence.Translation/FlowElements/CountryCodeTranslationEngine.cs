@@ -61,11 +61,12 @@ namespace FiftyOne.IpIntelligence.Translation.FlowElements
         public override string ElementDataKey => Constants.CountryNamesKey;
 
         /// <summary>
-        /// Countructor which is only accessible by the builder.
+        /// Constructor. Accessible to the package builder and to subclasses
+        /// (e.g. cloud-side gating wrappers).
         /// </summary>
         /// <param name="logger"></param>
         /// <param name="elementDataFactory"></param>
-        internal CountryCodeTranslationEngine(
+        protected internal CountryCodeTranslationEngine(
             ILogger<FlowElementBase<
                 ICountryCodeTranslationData,
                 IElementPropertyMetaData>> logger,

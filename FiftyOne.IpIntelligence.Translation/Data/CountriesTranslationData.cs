@@ -34,7 +34,12 @@ namespace FiftyOne.IpIntelligence.Translation.Data
     /// </summary>
     public class CountriesTranslationData : TranslationData, ICountriesTranslationData
     {
-        internal CountriesTranslationData(
+        /// <summary>
+        /// Constructor. Public so cloud-side gating subclasses of
+        /// <see cref="FlowElements.CountriesTranslationEngine"/> can supply
+        /// their own element-data factories.
+        /// </summary>
+        public CountriesTranslationData(
             ILogger<TranslationData> logger,
             IPipeline pipeline)
             : base(logger, pipeline)
