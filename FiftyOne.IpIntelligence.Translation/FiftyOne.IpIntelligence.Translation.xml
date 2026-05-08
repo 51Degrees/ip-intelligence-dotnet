@@ -11,19 +11,26 @@
         </member>
         <member name="F:FiftyOne.IpIntelligence.Translation.Constants.CountryNamesKey">
             <summary>
-            Element key used by the
-            <see cref="T:FiftyOne.IpIntelligence.Translation.FlowElements.CountriesTranslationEngine"/>.
+            Element-data key used by
+            <see cref="T:FiftyOne.IpIntelligence.Translation.FlowElements.CountryCodeTranslationEngine"/>.
             </summary>
         </member>
         <member name="F:FiftyOne.IpIntelligence.Translation.Constants.CountryNamesTranslatedKey">
             <summary>
-            Element key used by the
+            Element-data key used by
             <see cref="T:FiftyOne.IpIntelligence.Translation.FlowElements.CountriesTranslationEngine"/>.
             </summary>
         </member>
         <member name="T:FiftyOne.IpIntelligence.Translation.Data.CountriesTranslationData">
             <summary>
             Concrete implementation of <see cref="T:FiftyOne.IpIntelligence.Translation.Data.ICountriesTranslationData"/>. 
+            </summary>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Translation.Data.CountriesTranslationData.#ctor(Microsoft.Extensions.Logging.ILogger{FiftyOne.Pipeline.Translation.Data.TranslationData},FiftyOne.Pipeline.Core.FlowElements.IPipeline)">
+            <summary>
+            Constructor. Public so cloud-side gating subclasses of
+            <see cref="T:FiftyOne.IpIntelligence.Translation.FlowElements.CountriesTranslationEngine"/> can supply
+            their own element-data factories.
             </summary>
         </member>
         <member name="P:FiftyOne.IpIntelligence.Translation.Data.CountriesTranslationData.CountryNamesGeographicalTranslated">
@@ -56,6 +63,13 @@
         <member name="T:FiftyOne.IpIntelligence.Translation.Data.CountryCodeTranslationData">
             <summary>
             Concrete implementation of <see cref="T:FiftyOne.IpIntelligence.Translation.Data.ICountryCodeTranslationData"/>.
+            </summary>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Translation.Data.CountryCodeTranslationData.#ctor(Microsoft.Extensions.Logging.ILogger{FiftyOne.Pipeline.Translation.Data.TranslationData},FiftyOne.Pipeline.Core.FlowElements.IPipeline)">
+            <summary>
+            Constructor. Public so cloud-side gating subclasses of
+            <see cref="T:FiftyOne.IpIntelligence.Translation.FlowElements.CountryCodeTranslationEngine"/> can supply
+            their own element-data factories.
             </summary>
         </member>
         <member name="P:FiftyOne.IpIntelligence.Translation.Data.CountryCodeTranslationData.CountryNamesGeographical">
@@ -164,7 +178,8 @@
         </member>
         <member name="M:FiftyOne.IpIntelligence.Translation.FlowElements.CountriesTranslationEngine.#ctor(Microsoft.Extensions.Logging.ILogger{FiftyOne.Pipeline.Core.FlowElements.FlowElementBase{FiftyOne.IpIntelligence.Translation.Data.ICountriesTranslationData,FiftyOne.Pipeline.Core.Data.IElementPropertyMetaData}},System.Collections.Generic.IReadOnlyList{System.Collections.Generic.KeyValuePair{System.String,System.String}},System.Func{FiftyOne.Pipeline.Core.FlowElements.IPipeline,FiftyOne.Pipeline.Core.FlowElements.FlowElementBase{FiftyOne.IpIntelligence.Translation.Data.ICountriesTranslationData,FiftyOne.Pipeline.Core.Data.IElementPropertyMetaData},FiftyOne.IpIntelligence.Translation.Data.ICountriesTranslationData})">
             <summary>
-            Constructor which is only accessible by the builder.
+            Constructor. Accessible to the package builder and to subclasses
+            (e.g. cloud-side gating wrappers).
             </summary>
         </member>
         <member name="M:FiftyOne.IpIntelligence.Translation.FlowElements.CountriesTranslationEngine.ProcessInternal(FiftyOne.Pipeline.Core.Data.IFlowData)">
@@ -227,7 +242,8 @@
         </member>
         <member name="M:FiftyOne.IpIntelligence.Translation.FlowElements.CountryCodeTranslationEngine.#ctor(Microsoft.Extensions.Logging.ILogger{FiftyOne.Pipeline.Core.FlowElements.FlowElementBase{FiftyOne.IpIntelligence.Translation.Data.ICountryCodeTranslationData,FiftyOne.Pipeline.Core.Data.IElementPropertyMetaData}},System.Func{FiftyOne.Pipeline.Core.FlowElements.IPipeline,FiftyOne.Pipeline.Core.FlowElements.FlowElementBase{FiftyOne.IpIntelligence.Translation.Data.ICountryCodeTranslationData,FiftyOne.Pipeline.Core.Data.IElementPropertyMetaData},FiftyOne.IpIntelligence.Translation.Data.ICountryCodeTranslationData})">
             <summary>
-            Countructor which is only accessible by the builder.
+            Constructor. Accessible to the package builder and to subclasses
+            (e.g. cloud-side gating wrappers).
             </summary>
             <param name="logger"></param>
             <param name="elementDataFactory"></param>
@@ -263,8 +279,10 @@
         </member>
         <member name="T:FiftyOne.IpIntelligence.Translation.Resources.Resources">
             <summary>
-            Internal resources class used to retrieve the translation files stored
-            as embedded resources.
+            Resources class used to retrieve the translation files stored
+            as embedded resources. Public so that subclasses living in other
+            assemblies (e.g. cloud-side gating wrappers) can read the same
+            YAML files used by the package's built-in builders.
             </summary>
         </member>
         <member name="M:FiftyOne.IpIntelligence.Translation.Resources.Resources.GetCountryResources">

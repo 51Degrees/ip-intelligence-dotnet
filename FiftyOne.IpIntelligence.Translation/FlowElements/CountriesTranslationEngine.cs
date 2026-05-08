@@ -88,9 +88,10 @@ namespace FiftyOne.IpIntelligence.Translation.FlowElements
             Constants.CountryNamesTranslatedKey;
 
         /// <summary>
-        /// Constructor which is only accessible by the builder.
+        /// Constructor. Accessible to the package builder and to subclasses
+        /// (e.g. cloud-side gating wrappers).
         /// </summary>
-        internal CountriesTranslationEngine(
+        protected internal CountriesTranslationEngine(
             ILogger<FlowElementBase<
                 ICountriesTranslationData,
                 IElementPropertyMetaData>> logger,

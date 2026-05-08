@@ -27,10 +27,12 @@ using System.Linq;
 namespace FiftyOne.IpIntelligence.Translation.Resources
 {
     /// <summary>
-    /// Internal resources class used to retrieve the translation files stored
-    /// as embedded resources.
+    /// Resources class used to retrieve the translation files stored
+    /// as embedded resources. Public so that subclasses living in other
+    /// assemblies (e.g. cloud-side gating wrappers) can read the same
+    /// YAML files used by the package's built-in builders.
     /// </summary>
-    internal class Resources
+    public class Resources
     {
         /// <summary>
         /// Get the country name translation YAML files.
@@ -38,7 +40,7 @@ namespace FiftyOne.IpIntelligence.Translation.Resources
         /// <returns>
         /// Dictionary of file contents keyed on file name.
         /// </returns>
-        internal static IReadOnlyDictionary<string, string>
+        public static IReadOnlyDictionary<string, string>
             GetCountryResources()
         {
             return GetResources()
@@ -52,7 +54,7 @@ namespace FiftyOne.IpIntelligence.Translation.Resources
         /// <returns>
         /// Dictionary of file contents keyed on file name.
         /// </returns>
-        internal static IReadOnlyDictionary<string, string>
+        public static IReadOnlyDictionary<string, string>
             GetCountryCodeResources()
         {
             return GetResources()
