@@ -221,6 +221,13 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:FiftyOne.IpIntelligence.Translation.FlowElements.CountriesTranslationEngineBuilder.CreateEngine(Microsoft.Extensions.Logging.ILogger{FiftyOne.Pipeline.Core.FlowElements.FlowElementBase{FiftyOne.IpIntelligence.Translation.Data.ICountriesTranslationData,FiftyOne.Pipeline.Core.Data.IElementPropertyMetaData}},System.Collections.Generic.IReadOnlyList{System.Collections.Generic.KeyValuePair{System.String,System.String}},System.Func{FiftyOne.Pipeline.Core.FlowElements.IPipeline,FiftyOne.Pipeline.Core.FlowElements.FlowElementBase{FiftyOne.IpIntelligence.Translation.Data.ICountriesTranslationData,FiftyOne.Pipeline.Core.Data.IElementPropertyMetaData},FiftyOne.IpIntelligence.Translation.Data.ICountriesTranslationData})">
+            <summary>
+            Construct the engine instance. Subclasses can override this to
+            return a derived engine type while reusing the rest of
+            <see cref="M:FiftyOne.IpIntelligence.Translation.FlowElements.CountriesTranslationEngineBuilder.Build"/>.
+            </summary>
+        </member>
         <member name="T:FiftyOne.IpIntelligence.Translation.FlowElements.CountryCodeTranslationEngine">
             <summary>
             Engine which takes the country code properties from IP Intelligence
@@ -268,6 +275,13 @@
             Build a new instance of <see cref="T:FiftyOne.IpIntelligence.Translation.FlowElements.CountryCodeTranslationEngine"/>.
             </summary>
             <returns></returns>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Translation.FlowElements.CountryCodeTranslationEngineBuilder.CreateEngine(Microsoft.Extensions.Logging.ILogger{FiftyOne.Pipeline.Core.FlowElements.FlowElementBase{FiftyOne.IpIntelligence.Translation.Data.ICountryCodeTranslationData,FiftyOne.Pipeline.Core.Data.IElementPropertyMetaData}},System.Func{FiftyOne.Pipeline.Core.FlowElements.IPipeline,FiftyOne.Pipeline.Core.FlowElements.FlowElementBase{FiftyOne.IpIntelligence.Translation.Data.ICountryCodeTranslationData,FiftyOne.Pipeline.Core.Data.IElementPropertyMetaData},FiftyOne.IpIntelligence.Translation.Data.ICountryCodeTranslationData})">
+            <summary>
+            Construct the engine instance. Subclasses can override this to
+            return a derived engine type while reusing the rest of
+            <see cref="M:FiftyOne.IpIntelligence.Translation.FlowElements.CountryCodeTranslationEngineBuilder.Build"/>.
+            </summary>
         </member>
         <member name="M:FiftyOne.IpIntelligence.Translation.FlowElements.CountryCodeTranslationEngineBuilder.CreateData(FiftyOne.Pipeline.Core.FlowElements.IPipeline,FiftyOne.Pipeline.Core.FlowElements.FlowElementBase{FiftyOne.IpIntelligence.Translation.Data.ICountryCodeTranslationData,FiftyOne.Pipeline.Core.Data.IElementPropertyMetaData})">
             <summary>
