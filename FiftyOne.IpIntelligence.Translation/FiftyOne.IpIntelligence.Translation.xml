@@ -176,6 +176,15 @@
         <member name="P:FiftyOne.IpIntelligence.Translation.FlowElements.CountriesTranslationEngine.ElementDataKey">
             <inheritdoc/>
         </member>
+        <member name="P:FiftyOne.IpIntelligence.Translation.FlowElements.CountriesTranslationEngine.Properties">
+            <summary>
+            Reflects over <see cref="T:FiftyOne.IpIntelligence.Translation.Data.ICountriesTranslationData"/> so each
+            property is advertised with the unwrapped <see cref="T:FiftyOne.Pipeline.Engines.Data.IAspectPropertyValue`1"/>
+            type instead of the <see cref="T:FiftyOne.Pipeline.Translation.FlowElements.TranslationEngineBase`1"/> default of
+            <c>typeof(object)</c>. Covers both the weighted translations the base
+            class produces and the "All" / Codes-All lists computed here.
+            </summary>
+        </member>
         <member name="M:FiftyOne.IpIntelligence.Translation.FlowElements.CountriesTranslationEngine.#ctor(Microsoft.Extensions.Logging.ILogger{FiftyOne.Pipeline.Core.FlowElements.FlowElementBase{FiftyOne.IpIntelligence.Translation.Data.ICountriesTranslationData,FiftyOne.Pipeline.Core.Data.IElementPropertyMetaData}},System.Collections.Generic.IReadOnlyList{System.Collections.Generic.KeyValuePair{System.String,System.String}},System.Func{FiftyOne.Pipeline.Core.FlowElements.IPipeline,FiftyOne.Pipeline.Core.FlowElements.FlowElementBase{FiftyOne.IpIntelligence.Translation.Data.ICountriesTranslationData,FiftyOne.Pipeline.Core.Data.IElementPropertyMetaData},FiftyOne.IpIntelligence.Translation.Data.ICountriesTranslationData})">
             <summary>
             Constructor. Accessible to the package builder and to subclasses
@@ -220,6 +229,13 @@
             Build a new instance of <see cref="T:FiftyOne.IpIntelligence.Translation.FlowElements.CountriesTranslationEngine"/>.
             </summary>
             <returns></returns>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Translation.FlowElements.CountriesTranslationEngineBuilder.CreateEngine(Microsoft.Extensions.Logging.ILogger{FiftyOne.Pipeline.Core.FlowElements.FlowElementBase{FiftyOne.IpIntelligence.Translation.Data.ICountriesTranslationData,FiftyOne.Pipeline.Core.Data.IElementPropertyMetaData}},System.Collections.Generic.IReadOnlyList{System.Collections.Generic.KeyValuePair{System.String,System.String}},System.Func{FiftyOne.Pipeline.Core.FlowElements.IPipeline,FiftyOne.Pipeline.Core.FlowElements.FlowElementBase{FiftyOne.IpIntelligence.Translation.Data.ICountriesTranslationData,FiftyOne.Pipeline.Core.Data.IElementPropertyMetaData},FiftyOne.IpIntelligence.Translation.Data.ICountriesTranslationData})">
+            <summary>
+            Construct the engine instance. Subclasses can override this to
+            return a derived engine type while reusing the rest of
+            <see cref="M:FiftyOne.IpIntelligence.Translation.FlowElements.CountriesTranslationEngineBuilder.Build"/>.
+            </summary>
         </member>
         <member name="T:FiftyOne.IpIntelligence.Translation.FlowElements.CountryCodeTranslationEngine">
             <summary>
@@ -268,6 +284,13 @@
             Build a new instance of <see cref="T:FiftyOne.IpIntelligence.Translation.FlowElements.CountryCodeTranslationEngine"/>.
             </summary>
             <returns></returns>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Translation.FlowElements.CountryCodeTranslationEngineBuilder.CreateEngine(Microsoft.Extensions.Logging.ILogger{FiftyOne.Pipeline.Core.FlowElements.FlowElementBase{FiftyOne.IpIntelligence.Translation.Data.ICountryCodeTranslationData,FiftyOne.Pipeline.Core.Data.IElementPropertyMetaData}},System.Func{FiftyOne.Pipeline.Core.FlowElements.IPipeline,FiftyOne.Pipeline.Core.FlowElements.FlowElementBase{FiftyOne.IpIntelligence.Translation.Data.ICountryCodeTranslationData,FiftyOne.Pipeline.Core.Data.IElementPropertyMetaData},FiftyOne.IpIntelligence.Translation.Data.ICountryCodeTranslationData})">
+            <summary>
+            Construct the engine instance. Subclasses can override this to
+            return a derived engine type while reusing the rest of
+            <see cref="M:FiftyOne.IpIntelligence.Translation.FlowElements.CountryCodeTranslationEngineBuilder.Build"/>.
+            </summary>
         </member>
         <member name="M:FiftyOne.IpIntelligence.Translation.FlowElements.CountryCodeTranslationEngineBuilder.CreateData(FiftyOne.Pipeline.Core.FlowElements.IPipeline,FiftyOne.Pipeline.Core.FlowElements.FlowElementBase{FiftyOne.IpIntelligence.Translation.Data.ICountryCodeTranslationData,FiftyOne.Pipeline.Core.Data.IElementPropertyMetaData})">
             <summary>

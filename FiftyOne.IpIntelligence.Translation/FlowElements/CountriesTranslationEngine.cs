@@ -83,9 +83,41 @@ namespace FiftyOne.IpIntelligence.Translation.FlowElements
         private readonly IReadOnlyList<CountryCodeNamePair>
             _allCountries;
 
+        private IList<IElementPropertyMetaData> _properties;
+
         /// <inheritdoc/>
         public override string ElementDataKey =>
             Constants.CountryNamesTranslatedKey;
+
+        /// <summary>
+        /// Reflects over <see cref="ICountriesTranslationData"/> so each
+        /// property is advertised with the unwrapped <see cref="IAspectPropertyValue{T}"/>
+        /// type instead of the <see cref="TranslationEngineBase{T}"/> default of
+        /// <c>typeof(object)</c>. Covers both the weighted translations the base
+        /// class produces and the "All" / Codes-All lists computed here.
+        /// </summary>
+        public override IList<IElementPropertyMetaData> Properties
+        {
+            get
+            {
+                if (_properties == null)
+                {
+                    _properties = typeof(ICountriesTranslationData)
+                        .GetProperties()
+                        .Where(p => p.PropertyType.IsGenericType
+                            && p.PropertyType.GetGenericTypeDefinition()
+                                == typeof(IAspectPropertyValue<>))
+                        .Select(p =>
+                            (IElementPropertyMetaData)new ElementPropertyMetaData(
+                                this,
+                                p.Name,
+                                p.PropertyType.GetGenericArguments()[0],
+                                available: true))
+                        .ToList();
+                }
+                return _properties;
+            }
+        }
 
         /// <summary>
         /// Constructor. Accessible to the package builder and to subclasses

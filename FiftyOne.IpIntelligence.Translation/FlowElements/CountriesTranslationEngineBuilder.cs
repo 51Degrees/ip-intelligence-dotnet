@@ -26,6 +26,7 @@ using FiftyOne.Pipeline.Core.Data;
 using FiftyOne.Pipeline.Core.FlowElements;
 using FiftyOne.Pipeline.Translation.Data;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using YamlDotNet.Serialization;
@@ -49,7 +50,7 @@ namespace FiftyOne.IpIntelligence.Translation.FlowElements
         /// <param name="loggerFactory">
         /// Logger factory used by the engine and any element data created.
         /// </param>
-        public CountriesTranslationEngineBuilder(ILoggerFactory loggerFactory) 
+        public CountriesTranslationEngineBuilder(ILoggerFactory loggerFactory)
         {
             _loggerFactory = loggerFactory;
         }
@@ -69,13 +70,36 @@ namespace FiftyOne.IpIntelligence.Translation.FlowElements
             var allCountries = dict?.ToList()
                 ?? new List<KeyValuePair<string, string>>();
 
-            return new CountriesTranslationEngine(
+            return CreateEngine(
                 _loggerFactory.CreateLogger<CountriesTranslationEngine>(),
                 allCountries,
                 CreateData);
         }
 
-        private static IDictionary<string, string> DeserializeYaml(string inputYaml) 
+        /// <summary>
+        /// Construct the engine instance. Subclasses can override this to
+        /// return a derived engine type while reusing the rest of
+        /// <see cref="Build"/>.
+        /// </summary>
+        protected virtual CountriesTranslationEngine CreateEngine(
+            ILogger<FlowElementBase<
+                ICountriesTranslationData,
+                IElementPropertyMetaData>> logger,
+            IReadOnlyList<KeyValuePair<string, string>> allCountries,
+            Func<
+                IPipeline,
+                FlowElementBase<
+                    ICountriesTranslationData,
+                    IElementPropertyMetaData>,
+                ICountriesTranslationData> elementDataFactory)
+        {
+            return new CountriesTranslationEngine(
+                logger,
+                allCountries,
+                elementDataFactory);
+        }
+
+        private static IDictionary<string, string> DeserializeYaml(string inputYaml)
             => new DeserializerBuilder()
             .IgnoreUnmatchedProperties()
             .Build()

@@ -24,6 +24,7 @@ using FiftyOne.IpIntelligence.Translation.Data;
 using FiftyOne.Pipeline.Core.Data;
 using FiftyOne.Pipeline.Core.FlowElements;
 using Microsoft.Extensions.Logging;
+using System;
 
 namespace FiftyOne.IpIntelligence.Translation.FlowElements
 {
@@ -53,9 +54,30 @@ namespace FiftyOne.IpIntelligence.Translation.FlowElements
         /// <returns></returns>
         public CountryCodeTranslationEngine Build()
         {
-            return new CountryCodeTranslationEngine(
+            return CreateEngine(
                 _loggerFactory.CreateLogger<CountryCodeTranslationEngine>(),
                 CreateData);
+        }
+
+        /// <summary>
+        /// Construct the engine instance. Subclasses can override this to
+        /// return a derived engine type while reusing the rest of
+        /// <see cref="Build"/>.
+        /// </summary>
+        protected virtual CountryCodeTranslationEngine CreateEngine(
+            ILogger<FlowElementBase<
+                ICountryCodeTranslationData,
+                IElementPropertyMetaData>> logger,
+            Func<
+                IPipeline,
+                FlowElementBase<
+                    ICountryCodeTranslationData,
+                    IElementPropertyMetaData>,
+                ICountryCodeTranslationData> elementDataFactory)
+        {
+            return new CountryCodeTranslationEngine(
+                logger,
+                elementDataFactory);
         }
 
         /// <summary>
