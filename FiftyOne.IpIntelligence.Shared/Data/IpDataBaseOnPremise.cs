@@ -506,10 +506,15 @@ namespace FiftyOne.IpIntelligence.Shared.Data
                                 dict[property.Name.ToLowerInvariant()] =
                                     GetAs<AspectPropertyValue<IReadOnlyList<IWeightedValue<float>>>>(property.Name);
                             }
+                            // Use GetValueAsIp directly here (unlike the other type branches above)
+                            // so synthetic Ip / IpV6 echo properties — whose values live in
+                            // IpDataOnPremise._echoIp / _echoIpV6, never in the cache — reach the JSON
+                            // output. Real IPAddress properties (IpRangeStart/End) fall through to the
+                            // native lookup inside the override, so behaviour is unchanged for them.
                             else if (property.Type == typeof(IPAddress))
                             {
                                 dict[property.Name.ToLowerInvariant()] =
-                                    GetAs<AspectPropertyValue<IPAddress>>(property.Name);
+                                    GetValueAsIp(property.Name);
                             }
                             else if (property.Type == typeof(IReadOnlyList<IWeightedValue<IPAddress>>))
                             {

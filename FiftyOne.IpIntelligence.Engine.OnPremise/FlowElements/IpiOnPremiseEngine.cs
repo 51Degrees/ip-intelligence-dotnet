@@ -291,6 +291,63 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
                 }
                 (ipData as IpDataOnPremise).SetResults(_engine.process(relevantEvidence));
             }
+
+            // Capture the IP used for the lookup so we can echo it back as
+            // synthetic Ip / IpV6 properties. Priority mirrors the cloud's
+            // existing NetworkElement (query.client-ip > server.client-ip
+            // > anything else parseable from filtered evidence).
+            System.Net.IPAddress echoV4 = null;
+            System.Net.IPAddress echoV6 = null;
+            string echoNoValue = null;
+
+            string chosenIp = null;
+            if (data.TryGetEvidence("query.client-ip", out string queryIp))
+            {
+                chosenIp = queryIp;
+            }
+            else if (data.TryGetEvidence("server.client-ip", out string serverIp))
+            {
+                chosenIp = serverIp;
+            }
+            else
+            {
+                foreach (var evidenceItem in data.GetEvidence().AsDictionary())
+                {
+                    if (EvidenceKeyFilter.Include(evidenceItem.Key) &&
+                        evidenceItem.Value is string candidate &&
+                        System.Net.IPAddress.TryParse(candidate, out _))
+                    {
+                        chosenIp = candidate;
+                        break;
+                    }
+                }
+            }
+
+            if (chosenIp == null)
+            {
+                echoNoValue = "No IP evidence supplied.";
+            }
+            else if (System.Net.IPAddress.TryParse(chosenIp, out var parsed))
+            {
+                if (parsed.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                {
+                    echoV4 = parsed;
+                }
+                else if (parsed.AddressFamily == System.Net.Sockets.AddressFamily.InterNetworkV6)
+                {
+                    echoV6 = parsed;
+                }
+                else
+                {
+                    echoNoValue = "Unsupported IP address family.";
+                }
+            }
+            else
+            {
+                echoNoValue = "IP evidence could not be parsed.";
+            }
+
+            (ipData as IpDataOnPremise).SetEchoIp(echoV4, echoV6, echoNoValue);
         }
 
         /// <summary>
@@ -328,6 +385,36 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
                     result.Add(property);
                 }
             }
+
+            // Synthetic echo properties — populated from request evidence
+            // during ProcessEngine. Component must be "Network" so they
+            // align with common-metadata's Network component (VendorIds:
+            // ["ip"]) and resolve against the CloudV5* product entries.
+            var networkComponent = new Data.ComponentMetaDataIpi("Network");
+            var noDataTiers = new System.Collections.Generic.List<string>();
+            var noDefault = new Shared.Data.ValueMetaDataDefault("N/A");
+
+            result.Add(new Data.FiftyOneAspectPropertyMetaDataIpi(
+                this,
+                "Ip",
+                typeof(System.Net.IPAddress),
+                "Network",
+                noDataTiers,
+                true,
+                networkComponent,
+                noDefault,
+                "The IPv4 address of the request as a string."));
+            result.Add(new Data.FiftyOneAspectPropertyMetaDataIpi(
+                this,
+                "IpV6",
+                typeof(System.Net.IPAddress),
+                "Network",
+                noDataTiers,
+                true,
+                networkComponent,
+                noDefault,
+                "The IPv6 address of the request as a string."));
+
             return result;
         }
 
