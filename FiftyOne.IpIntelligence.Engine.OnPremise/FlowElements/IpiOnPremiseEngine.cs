@@ -298,7 +298,6 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
             // > anything else parseable from filtered evidence).
             System.Net.IPAddress echoV4 = null;
             System.Net.IPAddress echoV6 = null;
-            string echoNoValue = null;
 
             string chosenIp = null;
             if (data.TryGetEvidence("query.client-ip", out string queryIp))
@@ -323,11 +322,7 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
                 }
             }
 
-            if (chosenIp == null)
-            {
-                echoNoValue = "No IP evidence supplied.";
-            }
-            else if (System.Net.IPAddress.TryParse(chosenIp, out var parsed))
+            if (chosenIp != null && System.Net.IPAddress.TryParse(chosenIp, out var parsed))
             {
                 if (parsed.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
                 {
@@ -337,17 +332,9 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
                 {
                     echoV6 = parsed;
                 }
-                else
-                {
-                    echoNoValue = "Unsupported IP address family.";
-                }
-            }
-            else
-            {
-                echoNoValue = "IP evidence could not be parsed.";
             }
 
-            (ipData as IpDataOnPremise).SetEchoIp(echoV4, echoV6, echoNoValue);
+            (ipData as IpDataOnPremise).SetEchoIp(echoV4, echoV6);
         }
 
         /// <summary>

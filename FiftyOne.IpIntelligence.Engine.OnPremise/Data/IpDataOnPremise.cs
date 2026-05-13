@@ -86,11 +86,7 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
         /// </summary>
         /// <param name="ipv4">Parsed IPv4 address, or null if none.</param>
         /// <param name="ipv6">Parsed IPv6 address, or null if none.</param>
-        /// <param name="noValueMessage">
-        /// Message to apply to whichever family is null. If both are null
-        /// (no evidence at all), applied to both.
-        /// </param>
-        internal void SetEchoIp(System.Net.IPAddress ipv4, System.Net.IPAddress ipv6, string noValueMessage)
+        internal void SetEchoIp(System.Net.IPAddress ipv4, System.Net.IPAddress ipv6)
         {
             _echoIp = new FiftyOne.Pipeline.Engines.Data.AspectPropertyValue<System.Net.IPAddress>();
             _echoIpV6 = new FiftyOne.Pipeline.Engines.Data.AspectPropertyValue<System.Net.IPAddress>();
@@ -101,7 +97,7 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
             }
             else
             {
-                _echoIp.NoValueMessage = noValueMessage;
+                _echoIp.NoValueMessage = "IPv4 was not supplied as evidence.";
             }
 
             if (ipv6 != null)
@@ -110,7 +106,7 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
             }
             else
             {
-                _echoIpV6.NoValueMessage = noValueMessage;
+                _echoIpV6.NoValueMessage = "IPv6 was not supplied as evidence.";
             }
         }
 
