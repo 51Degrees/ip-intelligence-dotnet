@@ -85,8 +85,10 @@ namespace FiftyOne.IpIntelligence.Shared
 				{ "DialCode", typeof(IAspectPropertyValue<string>) },
 				{ "HardwareDiversity", typeof(IAspectPropertyValue<int>) },
 				{ "HumanProbability", typeof(IAspectPropertyValue<int>) },
+				{ "Ip", typeof(IAspectPropertyValue<IPAddress>) },
 				{ "IpRangeEnd", typeof(IAspectPropertyValue<IPAddress>) },
 				{ "IpRangeStart", typeof(IAspectPropertyValue<IPAddress>) },
+				{ "IpV6", typeof(IAspectPropertyValue<IPAddress>) },
 				{ "IsBroadband", typeof(IAspectPropertyValue<bool>) },
 				{ "IsCellular", typeof(IAspectPropertyValue<bool>) },
 				{ "IsEu", typeof(IAspectPropertyValue<bool>) },
@@ -194,6 +196,10 @@ namespace FiftyOne.IpIntelligence.Shared
 		/// </summary>
 		public IAspectPropertyValue<int> HumanProbability { get { return GetAs<IAspectPropertyValue<int>>("HumanProbability"); } }
 		/// <summary>
+		/// The IPv4 address of the request.
+		/// </summary>
+		public IAspectPropertyValue<IPAddress> Ip { get { return GetAs<IAspectPropertyValue<IPAddress>>("Ip"); } }
+		/// <summary>
 		/// End of the IP range to which the evidence IP belongs.
 		/// </summary>
 		public IAspectPropertyValue<IPAddress> IpRangeEnd { get { return GetAs<IAspectPropertyValue<IPAddress>>("IpRangeEnd"); } }
@@ -201,6 +207,10 @@ namespace FiftyOne.IpIntelligence.Shared
 		/// Start of the IP range to which the evidence IP belongs.
 		/// </summary>
 		public IAspectPropertyValue<IPAddress> IpRangeStart { get { return GetAs<IAspectPropertyValue<IPAddress>>("IpRangeStart"); } }
+		/// <summary>
+		/// The IPv6 address of the request.
+		/// </summary>
+		public IAspectPropertyValue<IPAddress> IpV6 { get { return GetAs<IAspectPropertyValue<IPAddress>>("IpV6"); } }
 		/// <summary>
 		/// Indicates whether the IP address is associated with a broadband connection. Includes DSL, Cable, Fibre, and Satellite connections.
 		/// </summary>
