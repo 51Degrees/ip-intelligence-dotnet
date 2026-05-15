@@ -74,6 +74,42 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
         #endregion
 
         #region Internal Methods
+
+        private FiftyOne.Pipeline.Engines.Data.AspectPropertyValue<System.Net.IPAddress> _echoIp =
+            new FiftyOne.Pipeline.Engines.Data.AspectPropertyValue<System.Net.IPAddress>();
+        private FiftyOne.Pipeline.Engines.Data.AspectPropertyValue<System.Net.IPAddress> _echoIpV6 =
+            new FiftyOne.Pipeline.Engines.Data.AspectPropertyValue<System.Net.IPAddress>();
+
+        /// <summary>
+        /// Set the echo IP values captured from request evidence.
+        /// Called by IpiOnPremiseEngine.ProcessEngine.
+        /// </summary>
+        /// <param name="ipv4">Parsed IPv4 address, or null if none.</param>
+        /// <param name="ipv6">Parsed IPv6 address, or null if none.</param>
+        internal void SetEchoIp(System.Net.IPAddress ipv4, System.Net.IPAddress ipv6)
+        {
+            _echoIp = new FiftyOne.Pipeline.Engines.Data.AspectPropertyValue<System.Net.IPAddress>();
+            _echoIpV6 = new FiftyOne.Pipeline.Engines.Data.AspectPropertyValue<System.Net.IPAddress>();
+
+            if (ipv4 != null)
+            {
+                _echoIp.Value = ipv4;
+            }
+            else
+            {
+                _echoIp.NoValueMessage = "IPv4 was not supplied as evidence.";
+            }
+
+            if (ipv6 != null)
+            {
+                _echoIpV6.Value = ipv6;
+            }
+            else
+            {
+                _echoIpV6.NoValueMessage = "IPv6 was not supplied as evidence.";
+            }
+        }
+
         internal void SetResults(ResultsIpiSwig results)
         {
             Results.AddResult(results);
@@ -100,6 +136,11 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
 
         protected override bool PropertyIsAvailable(string propertyName)
         {
+            if (string.Equals(propertyName, "Ip", System.StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(propertyName, "IpV6", System.StringComparison.OrdinalIgnoreCase))
+            {
+                return true;
+            }
             return Results.ResultsList
                 .Any(r => r.containsProperty(propertyName));
         }
@@ -355,6 +396,15 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
 
         protected override IAspectPropertyValue<IPAddress> GetValueAsIp(string propertyName)
         {
+            if (string.Equals(propertyName, "Ip", System.StringComparison.OrdinalIgnoreCase))
+            {
+                return _echoIp;
+            }
+            if (string.Equals(propertyName, "IpV6", System.StringComparison.OrdinalIgnoreCase))
+            {
+                return _echoIpV6;
+            }
+
             var result = new AspectPropertyValue<IPAddress>();
             var results = GetResultsContainingProperty(propertyName);
 

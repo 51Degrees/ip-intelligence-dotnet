@@ -24,7 +24,7 @@ using FiftyOne.Pipeline.Core.Data;
 using FiftyOne.Pipeline.Engines.Data;
 using System.Collections.Generic;
 
-// This interface sits at the top of the name space in order to make 
+// This interface sits at the top of the name space in order to make
 // life easier for consumers.
 namespace FiftyOne.IpIntelligence
 {
