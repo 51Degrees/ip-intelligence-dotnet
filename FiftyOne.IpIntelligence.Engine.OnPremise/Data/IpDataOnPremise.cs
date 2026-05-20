@@ -114,6 +114,32 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
         {
             Results.AddResult(results);
         }
+
+        /// <summary>
+        /// Drops the Ip and IpV6 entries when the matching address is not in
+        /// evidence. Direct .NET accessors are unchanged.
+        /// </summary>
+        public override IReadOnlyDictionary<string, object> AsDictionary()
+        {
+            var dict = base.AsDictionary();
+            if (_echoIp.HasValue && _echoIpV6.HasValue)
+            {
+                return dict;
+            }
+
+            var filtered = dict.ToDictionary(
+                kv => kv.Key, kv => kv.Value,
+                StringComparer.InvariantCultureIgnoreCase);
+            if (_echoIp.HasValue == false)
+            {
+                filtered.Remove("ip");
+            }
+            if (_echoIpV6.HasValue == false)
+            {
+                filtered.Remove("ipv6");
+            }
+            return filtered;
+        }
         #endregion
 
         #region Private Methods
