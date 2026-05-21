@@ -244,6 +244,12 @@
             <param name="ipv4">Parsed IPv4 address, or null if none.</param>
             <param name="ipv6">Parsed IPv6 address, or null if none.</param>
         </member>
+        <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.Data.IpDataOnPremise.AsDictionary">
+            <summary>
+            Drops the Ip and IpV6 entries when the matching address is not in
+            evidence. Direct .NET accessors are unchanged.
+            </summary>
+        </member>
         <member name="T:FiftyOne.IpIntelligence.Engine.OnPremise.Data.ProfileMetaData">
             <summary>
             Data class that contains meta-data relating to a specific 

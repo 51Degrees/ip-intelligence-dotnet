@@ -69,6 +69,7 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
             IMissingPropertyService missingPropertyService)
             : base(logger, pipeline, engine, missingPropertyService)
         {
+            _asDict = new Lazy<IReadOnlyDictionary<string, object>>(AsStrippedDictionary);
         }
 
         #endregion
@@ -79,6 +80,8 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
             new FiftyOne.Pipeline.Engines.Data.AspectPropertyValue<System.Net.IPAddress>();
         private FiftyOne.Pipeline.Engines.Data.AspectPropertyValue<System.Net.IPAddress> _echoIpV6 =
             new FiftyOne.Pipeline.Engines.Data.AspectPropertyValue<System.Net.IPAddress>();
+
+        private readonly Lazy<IReadOnlyDictionary<string, object>> _asDict;
 
         /// <summary>
         /// Set the echo IP values captured from request evidence.
@@ -113,6 +116,33 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
         internal void SetResults(ResultsIpiSwig results)
         {
             Results.AddResult(results);
+        }
+
+        /// <summary>
+        /// Drops the Ip and IpV6 entries when the matching address is not in
+        /// evidence. Direct .NET accessors are unchanged.
+        /// </summary>
+        public override IReadOnlyDictionary<string, object> AsDictionary()
+            => _asDict.Value;
+
+        private IReadOnlyDictionary<string, object> AsStrippedDictionary()
+        {
+            return base.AsDictionary()
+                .Where(x =>
+                {
+                    if (string.Compare(x.Key, "ip", StringComparison.InvariantCultureIgnoreCase) == 0)
+                    {
+                        return _echoIp.HasValue;
+                    }
+                    if (string.Compare(x.Key, "ipv6", StringComparison.InvariantCultureIgnoreCase) == 0)
+                    {
+                        return _echoIpV6.HasValue;
+                    }
+                    return true;
+                }).ToDictionary(
+                    kv => kv.Key, kv => kv.Value,
+                    StringComparer.InvariantCultureIgnoreCase);
+            
         }
         #endregion
 

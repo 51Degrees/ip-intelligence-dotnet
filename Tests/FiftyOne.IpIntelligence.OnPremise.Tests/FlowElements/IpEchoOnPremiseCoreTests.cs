@@ -84,6 +84,12 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.FlowElements
                 Assert.IsTrue(data.Ip.HasValue, "Ip should have a value for IPv4 evidence.");
                 Assert.AreEqual(IPAddress.Parse("1.2.3.4"), data.Ip.Value);
                 Assert.IsFalse(data.IpV6.HasValue, "IpV6 should have no value for IPv4 evidence.");
+
+                var dict = data.AsDictionary();
+                Assert.IsTrue(dict.ContainsKey("ip"),
+                    "AsDictionary must contain 'ip' when IPv4 evidence is supplied.");
+                Assert.IsFalse(dict.ContainsKey("ipv6"),
+                    "AsDictionary must NOT contain 'ipv6' when only IPv4 evidence is supplied.");
             }
         }
 
@@ -99,6 +105,12 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.FlowElements
                 Assert.IsTrue(data.IpV6.HasValue, "IpV6 should have a value for IPv6 evidence.");
                 Assert.AreEqual(IPAddress.Parse("2001:db8::1"), data.IpV6.Value);
                 Assert.IsFalse(data.Ip.HasValue, "Ip should have no value for IPv6 evidence.");
+
+                var dict = data.AsDictionary();
+                Assert.IsFalse(dict.ContainsKey("ip"),
+                    "AsDictionary must NOT contain 'ip' when only IPv6 evidence is supplied.");
+                Assert.IsTrue(dict.ContainsKey("ipv6"),
+                    "AsDictionary must contain 'ipv6' when IPv6 evidence is supplied.");
             }
         }
 
@@ -115,6 +127,12 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.FlowElements
                 Assert.IsFalse(data.IpV6.HasValue, "IpV6 should be NoValue when no IP evidence is present.");
                 Assert.IsFalse(string.IsNullOrEmpty(data.Ip.NoValueMessage),
                     "NoValueMessage should be populated when no IP evidence is supplied.");
+
+                var dict = data.AsDictionary();
+                Assert.IsFalse(dict.ContainsKey("ip"),
+                    "AsDictionary must NOT contain 'ip' when no IP evidence is supplied.");
+                Assert.IsFalse(dict.ContainsKey("ipv6"),
+                    "AsDictionary must NOT contain 'ipv6' when no IP evidence is supplied.");
             }
         }
     }
