@@ -285,11 +285,18 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
         private IIpDataOnPremise CreateAspectData(IPipeline pipeline,
             FlowElementBase<IIpDataOnPremise, IFiftyOneAspectPropertyMetaData> engine)
         {
+            // On-premise engines use the base MissingPropertyService by design;
+            // MissingPropertyServiceCloud is only for cloud engines.
+            // Instance is marked obsolete to make the split between
+            // MissingPropertyService and MissingPropertyServiceCloud
+            // a conscious, compiler-caught decision.
+#pragma warning disable CS0618
             return new IpDataOnPremise(
                 _loggerFactory.CreateLogger<IpDataOnPremise>(),
                 pipeline,
                 engine as IpiOnPremiseEngine,
                 MissingPropertyService.Instance);
+#pragma warning restore CS0618
         }
     }
 }
