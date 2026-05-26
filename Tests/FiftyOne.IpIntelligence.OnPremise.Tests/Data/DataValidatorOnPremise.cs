@@ -56,9 +56,16 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Data
                 if (validEvidence)
                 {
                     if (!value.HasValue) {
+                        // Either the native engine's null-profile reason or
+                        // the synthetic Ip/IpV6 echo reason (when only one IP
+                        // family was supplied as evidence) is acceptable.
                         Assert.IsTrue(
-                            value.NoValueMessage.Contains(
-                                "The results contained a null profile"));
+                            value.NoValueMessage != null
+                            && (value.NoValueMessage.Contains(
+                                    "The results contained a null profile")
+                                || value.NoValueMessage.Contains(
+                                    "not supplied as evidence")),
+                            $"Property '{property.Name}' has unexpected NoValueMessage: '{value.NoValueMessage}'");
                     }
                 }
                 else
