@@ -64,7 +64,7 @@ namespace FiftyOne.IpIntelligence.Shared
 		/// name of the type.
 		/// </summary>
 		protected static readonly IReadOnlyDictionary<string, Type> PropertyTypes =
-			new Dictionary<string, Type>()
+			new Dictionary<string, Type>(StringComparer.OrdinalIgnoreCase)
 			{
 				{ "AccuracyRadiusMax", typeof(IAspectPropertyValue<int>) },
 				{ "AccuracyRadiusMin", typeof(IAspectPropertyValue<int>) },
