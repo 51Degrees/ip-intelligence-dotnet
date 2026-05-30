@@ -51,7 +51,17 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Data
             foreach (var property in _engine.Properties
                 .Where(p => p.Available))
             {
-                Assert.IsTrue(dict.ContainsKey(property.Name));
+                if (!dict.ContainsKey(property.Name))
+                {
+                    // Echo properties (Ip/IpV6) are only populated when the
+                    // matching IP family is supplied as evidence, so they are
+                    // legitimately absent otherwise. Any other missing
+                    // available property is a genuine failure.
+                    Assert.IsTrue(
+                        TestHelpers.Constants.EchoPropertyNames.Contains(property.Name),
+                        $"Property '{property.Name}' should be in the results.");
+                    continue;
+                }
                 IAspectPropertyValue value = dict[property.Name] as IAspectPropertyValue;
                 if (validEvidence)
                 {
