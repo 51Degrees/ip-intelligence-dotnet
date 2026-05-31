@@ -379,7 +379,7 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
             // ["ip"]) and resolve against the CloudV5* product entries.
             var networkComponent = new Data.ComponentMetaDataIpi("Network");
             var noDataTiers = new System.Collections.Generic.List<string>();
-            var noDefault = new Shared.Data.ValueMetaDataDefault("N/A");
+            var noDefault = new ValueMetaDataDefault("N/A");
 
             result.Add(new Data.FiftyOneAspectPropertyMetaDataIpi(
                 this,

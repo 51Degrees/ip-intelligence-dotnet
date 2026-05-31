@@ -74,6 +74,14 @@ namespace FiftyOne.IpIntelligence.TestHelpers.Data
             var elementData = data.Get(wrapper.GetEngine().ElementDataKey);
             foreach (var property in wrapper.GetEngine().Properties)
             {
+                // Echo properties are only populated when the matching IP
+                // family is supplied as evidence, so their presence is
+                // conditional and not tied to the Available flag.
+                if (Constants.EchoPropertyNames.Contains(property.Name))
+                {
+                    continue;
+                }
+
                 var dict = elementData.AsDictionary();
 
                 Assert.AreEqual(property.Available, dict.ContainsKey(property.Name),
