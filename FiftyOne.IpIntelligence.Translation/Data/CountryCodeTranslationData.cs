@@ -34,7 +34,12 @@ namespace FiftyOne.IpIntelligence.Translation.Data
     /// </summary>
     public class CountryCodeTranslationData : TranslationData, ICountryCodeTranslationData
     {
-        internal CountryCodeTranslationData(
+        /// <summary>
+        /// Constructor. Public so cloud-side gating subclasses of
+        /// <see cref="FlowElements.CountryCodeTranslationEngine"/> can supply
+        /// their own element-data factories.
+        /// </summary>
+        public CountryCodeTranslationData(
             ILogger<TranslationData> logger,
             IPipeline pipeline)
             : base(logger, pipeline)
@@ -52,17 +57,5 @@ namespace FiftyOne.IpIntelligence.Translation.Data
             CountryNamesPopulation =>
                 GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>(
                     nameof(CountryNamesPopulation));
-
-        /// <inheritdoc/>
-        public IAspectPropertyValue<IReadOnlyList<string>>
-            CountryNamesGeographicalAll =>
-                GetAs<IAspectPropertyValue<IReadOnlyList<string>>>(
-                    nameof(CountryNamesGeographicalAll));
-
-        /// <inheritdoc/>
-        public IAspectPropertyValue<IReadOnlyList<string>>
-            CountryNamesPopulationAll =>
-                GetAs<IAspectPropertyValue<IReadOnlyList<string>>>(
-                    nameof(CountryNamesPopulationAll));
     }
 }

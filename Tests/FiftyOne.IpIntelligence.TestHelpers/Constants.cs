@@ -36,6 +36,16 @@ namespace FiftyOne.IpIntelligence.TestHelpers
         public static string Ipv4Address = "8.8.8.8";
         public static string Ipv6Address = "2001:4860:4860::8888";
 
+        /// <summary>
+        /// Synthetic "echo" properties that the on-premise engine populates
+        /// only when the matching IP family is supplied as evidence. They are
+        /// legitimately absent from the results otherwise, so property
+        /// validators must treat their presence as conditional rather than
+        /// requiring every <c>Available</c> property to appear.
+        /// </summary>
+        public static readonly ISet<string> EchoPropertyNames =
+            new HashSet<string> { "Ip", "IpV6" };
+
         public static IEnumerable<PerformanceProfiles> TestableProfiles
         {
             get

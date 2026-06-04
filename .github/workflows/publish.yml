@@ -19,6 +19,7 @@ jobs:
       repo-name: ${{ github.event.repository.name }}
       org-name: ${{ github.event.repository.owner.login }}
       dryrun: ${{ inputs.dryrun || false }}
+      cache-assets: true
       skip-compare-performance: ${{ inputs.skip-compare-performance || false }}
       build-platform: windows-latest
     secrets:
@@ -29,9 +30,10 @@ jobs:
       CodeSigningKeyVaultTenantId: ${{ secrets.CODE_SIGNING_KEY_VAULT_TENANT_ID }}
       CodeSigningKeyVaultClientSecret: ${{ secrets.CODE_SIGNING_KEY_VAULT_CLIENT_SECRET }}
       CodeSigningKeyVaultCertificateName: ${{ secrets.CODE_SIGNING_KEY_VAULT_CERTIFICATE_NAME }}
-      DeviceDetection: ${{ secrets.DEVICE_DETECTION_KEY }}
-      DeviceDetectionUrl: ${{ secrets.IPI_DATA_FILE_URL }}
-      TestResourceKey: ${{ secrets.SUPER_RESOURCE_KEY}}
+      DeviceDetection: ${{ secrets.DEVICE_DETECTION_KEY }} # for examples
+      DeviceDetectionUrl: ${{ secrets.DEVICE_DETECTION_URL }}
+      IpIntelligenceUrl: ${{ secrets.IPI_DATA_FILE_URL }}
+      TestResourceKey: ${{ secrets.RESOURCE_KEY_CLOUD_V5_BESPOKE}}
       AcceptCHBrowserKey: ${{ secrets.ACCEPTCH_BROWSER_KEY}}
       AcceptCHHardwareKey: ${{ secrets.ACCEPTCH_HARDWARE_KEY}}
       AcceptCHPlatformKey: ${{ secrets.ACCEPTCH_PLATFORM_KEY}}

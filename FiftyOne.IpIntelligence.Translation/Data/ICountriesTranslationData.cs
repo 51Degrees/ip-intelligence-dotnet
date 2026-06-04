@@ -28,8 +28,9 @@ using System.Collections.Generic;
 namespace FiftyOne.IpIntelligence.Translation.Data
 {
     /// <summary>
-    /// Contains trawnslated country names for both the geographical and
-    /// population weighted lists from <see cref="ICountryCodeTranslationData"/>.
+    /// Contains translated country names and the complete ordered lists of
+    /// country names and codes combining the weighted results from IP
+    /// Intelligence with all known countries.
     /// </summary>
     public interface ICountriesTranslationData : ITranslationData
     {
@@ -50,19 +51,35 @@ namespace FiftyOne.IpIntelligence.Translation.Data
             CountryNamesPopulationTranslated { get; }
 
         /// <summary>
-        /// Translated list of country names based on the geographical list of
-        /// all countries from the IpCountriesElement. This is translated to
-        /// the browser language determined from the evidence.
+        /// Translated list of all country names ordered by geographical
+        /// weighting (descending), followed by remaining countries sorted
+        /// alphabetically by translated name.
         /// </summary>
         IAspectPropertyValue<IReadOnlyList<string>>
             CountryNamesGeographicalAllTranslated { get; }
 
         /// <summary>
-        /// Translated list of country names based on the population list of
-        /// all countries from the IpCountriesElement. This is translated to
-        /// the browser language determined from the evidence.
+        /// Translated list of all country names ordered by population
+        /// weighting (descending), followed by remaining countries sorted
+        /// alphabetically by translated name.
         /// </summary>
         IAspectPropertyValue<IReadOnlyList<string>>
             CountryNamesPopulationAllTranslated { get; }
+
+        /// <summary>
+        /// List of all country codes ordered by geographical weighting
+        /// (descending), followed by remaining country codes in alphabetical
+        /// order of their translated country names.
+        /// </summary>
+        IAspectPropertyValue<IReadOnlyList<string>>
+            CountryCodesGeographicalAll { get; }
+
+        /// <summary>
+        /// List of all country codes ordered by population weighting
+        /// (descending), followed by remaining country codes in alphabetical
+        /// order of their translated country names.
+        /// </summary>
+        IAspectPropertyValue<IReadOnlyList<string>>
+            CountryCodesPopulationAll { get; }
     }
 }

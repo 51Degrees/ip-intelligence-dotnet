@@ -21,16 +21,24 @@
  * ********************************************************************* */
 
 using FiftyOne.IpIntelligence.Translation.Data;
+using FiftyOne.IpIntelligence.Translation.Resources;
 using FiftyOne.Pipeline.Core.Data;
 using FiftyOne.Pipeline.Core.FlowElements;
+using FiftyOne.Pipeline.Translation.Data;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using YamlDotNet.Serialization;
 
 namespace FiftyOne.IpIntelligence.Translation.FlowElements
 {
     /// <summary>
     /// Builder for the <see cref="CountriesTranslationEngine"/> element.
-    /// This requires no configuration, as all the configuration for the base
-    /// translation engine is taken care of.
+    /// Loads the country code resource (countrycodes.en_GB.yml) which lists
+    /// all known country codes and their English names. The country name
+    /// translation resources (countries.*.yml) are handled by the base
+    /// <see cref="Pipeline.Translation.FlowElements.TranslationEngineBase{T}"/>.
     /// </summary>
     public class CountriesTranslationEngineBuilder
     {
@@ -42,28 +50,61 @@ namespace FiftyOne.IpIntelligence.Translation.FlowElements
         /// <param name="loggerFactory">
         /// Logger factory used by the engine and any element data created.
         /// </param>
-        public CountriesTranslationEngineBuilder(ILoggerFactory loggerFactory) 
+        public CountriesTranslationEngineBuilder(ILoggerFactory loggerFactory)
         {
             _loggerFactory = loggerFactory;
         }
 
         /// <summary>
-        /// Build a new instance of <see cref="CountryCodeTranslationEngine"/>.
+        /// Build a new instance of <see cref="CountriesTranslationEngine"/>.
         /// </summary>
         /// <returns></returns>
         public CountriesTranslationEngine Build()
         {
-            return new CountriesTranslationEngine(
+            var countryCodeResources =
+                Resources.Resources.GetCountryCodeResources();
+            var content = countryCodeResources.Values.FirstOrDefault();
+            var dict = content != null
+                ? DeserializeYaml(content)
+                : null;
+            var allCountries = dict?.ToList()
+                ?? new List<KeyValuePair<string, string>>();
+
+            return CreateEngine(
                 _loggerFactory.CreateLogger<CountriesTranslationEngine>(),
+                allCountries,
                 CreateData);
         }
 
         /// <summary>
-        /// Creates an instance of <see cref="CountriesTranslationData"/>.
+        /// Construct the engine instance. Subclasses can override this to
+        /// return a derived engine type while reusing the rest of
+        /// <see cref="Build"/>.
         /// </summary>
-        /// <param name="pipeline"></param>
-        /// <param name="flowElement"></param>
-        /// <returns></returns>
+        protected virtual CountriesTranslationEngine CreateEngine(
+            ILogger<FlowElementBase<
+                ICountriesTranslationData,
+                IElementPropertyMetaData>> logger,
+            IReadOnlyList<KeyValuePair<string, string>> allCountries,
+            Func<
+                IPipeline,
+                FlowElementBase<
+                    ICountriesTranslationData,
+                    IElementPropertyMetaData>,
+                ICountriesTranslationData> elementDataFactory)
+        {
+            return new CountriesTranslationEngine(
+                logger,
+                allCountries,
+                elementDataFactory);
+        }
+
+        private static IDictionary<string, string> DeserializeYaml(string inputYaml)
+            => new DeserializerBuilder()
+            .IgnoreUnmatchedProperties()
+            .Build()
+            .Deserialize<Dictionary<string, string>>(inputYaml);
+
         private ICountriesTranslationData CreateData(
             IPipeline pipeline,
             FlowElementBase<

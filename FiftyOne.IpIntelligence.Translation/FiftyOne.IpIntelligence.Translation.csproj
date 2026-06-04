@@ -37,7 +37,6 @@
   </ItemGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\FiftyOne.IpIntelligence.Countries\FiftyOne.IpIntelligence.Countries.csproj" />
     <ProjectReference Include="..\FiftyOne.IpIntelligence.Shared\FiftyOne.IpIntelligence.Shared.csproj" />
   </ItemGroup>
 
@@ -47,7 +46,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="FiftyOne.Pipeline.Translation" Version="4.5.26" />
+    <PackageReference Include="FiftyOne.Pipeline.Translation" Version="4.5.49" />
   </ItemGroup>
 
 </Project>

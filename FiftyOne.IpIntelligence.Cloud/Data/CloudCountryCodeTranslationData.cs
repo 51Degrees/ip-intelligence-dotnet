@@ -21,6 +21,7 @@
  * ********************************************************************* */
 
 using FiftyOne.IpIntelligence.Translation.Data;
+using FiftyOne.Pipeline.CloudRequestEngine.Services;
 using FiftyOne.Pipeline.Core.Data;
 using FiftyOne.Pipeline.Core.FlowElements;
 using FiftyOne.Pipeline.Engines.Data;
@@ -55,7 +56,7 @@ namespace FiftyOne.IpIntelligence.Cloud.Data
             ILogger<AspectDataBase> logger,
             IPipeline pipeline,
             IAspectEngine engine)
-            : base(logger, pipeline, engine, FiftyOne.Pipeline.Engines.Services.MissingPropertyService.Instance)
+            : base(logger, pipeline, engine, MissingPropertyServiceCloud.Instance)
         {
         }
 

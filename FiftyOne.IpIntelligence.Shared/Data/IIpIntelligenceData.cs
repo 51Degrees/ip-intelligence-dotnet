@@ -83,6 +83,14 @@ namespace FiftyOne.IpIntelligence
 		/// </summary>
 		IAspectPropertyValue<string> CountryCode3 { get; }
 		/// <summary>
+		/// A list of countries in ISO 3166-1 alpha-2 country code format that overlap with the area likely associated with the provided evidence, weighted and ordered by each country's proportion of the area. Administrative areas that cannot be cleanly resolved to the country level will not contribute to the resulting data.
+		/// </summary>
+		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> CountryCodesGeographical { get; }
+		/// <summary>
+		/// A list of countries in ISO 3166-1 alpha-2 country code format that overlap with the area likely associated with the provided evidence, weighted and ordered by each country's proportion of the total population within the area. Administrative areas that cannot be cleanly resolved to the country level will not contribute to the resulting data.
+		/// </summary>
+		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> CountryCodesPopulation { get; }
+		/// <summary>
 		/// The name of the county that the supplied location is in. In this case, a county is defined as an administrative sub-section of a country or state.
 		/// </summary>
 		IAspectPropertyValue<string> County { get; }
@@ -103,6 +111,10 @@ namespace FiftyOne.IpIntelligence
 		/// </summary>
 		IAspectPropertyValue<int> HumanProbability { get; }
 		/// <summary>
+		/// The IPv4 address of the request.
+		/// </summary>
+		IAspectPropertyValue<IPAddress> Ip { get; }
+		/// <summary>
 		/// End of the IP range to which the evidence IP belongs.
 		/// </summary>
 		IAspectPropertyValue<IPAddress> IpRangeEnd { get; }
@@ -110,6 +122,10 @@ namespace FiftyOne.IpIntelligence
 		/// Start of the IP range to which the evidence IP belongs.
 		/// </summary>
 		IAspectPropertyValue<IPAddress> IpRangeStart { get; }
+		/// <summary>
+		/// The IPv6 address of the request.
+		/// </summary>
+		IAspectPropertyValue<IPAddress> IpV6 { get; }
 		/// <summary>
 		/// Indicates whether the IP address is associated with a broadband connection. Includes DSL, Cable, Fibre, and Satellite connections.
 		/// </summary>
@@ -222,13 +238,5 @@ namespace FiftyOne.IpIntelligence
 		/// The zip or postal code that the supplied location falls under.
 		/// </summary>
 		IAspectPropertyValue<string> ZipCode { get; }
-		/// <summary>
-		/// Weighted list of country codes by geographical area coverage.
-		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> CountryCodesGeographical { get; }
-		/// <summary>
-		/// Weighted list of country codes by population distribution.
-		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> CountryCodesPopulation { get; }
 	}
 }

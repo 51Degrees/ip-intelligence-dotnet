@@ -46,19 +46,5 @@ namespace FiftyOne.IpIntelligence.Translation.Data
         /// </summary>
         IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>
             CountryNamesPopulation { get; }
-
-        /// <summary>
-        /// List of country names based on the geographical list of all country
-        /// codes from the IpCountriesEngine. 
-        /// </summary>
-        IAspectPropertyValue<IReadOnlyList<string>>
-            CountryNamesGeographicalAll { get; }
-
-        /// <summary>
-        /// List of country names based on the population list of all country
-        /// codes from the IpCountriesEngine. 
-        /// </summary>
-        IAspectPropertyValue<IReadOnlyList<string>>
-            CountryNamesPopulationAll { get; }
     }
 }
