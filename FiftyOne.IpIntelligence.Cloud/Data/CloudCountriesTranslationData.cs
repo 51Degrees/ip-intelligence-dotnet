@@ -25,20 +25,21 @@ using FiftyOne.Pipeline.CloudRequestEngine.Services;
 using FiftyOne.Pipeline.Core.Data;
 using FiftyOne.Pipeline.Core.FlowElements;
 using FiftyOne.Pipeline.Engines.Data;
-using FiftyOne.Pipeline.Engines.FiftyOne.Data;
 using FiftyOne.Pipeline.Engines.FlowElements;
-using FiftyOne.Pipeline.Engines.Services;
-using FiftyOne.Pipeline.Translation.Data;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 
 namespace FiftyOne.IpIntelligence.Cloud.Data
 {
     /// <summary>
-    /// A cloud-specific data class that implements IAspectData for use
-    /// with <see cref="FlowElements.IpiCloudTranslationEngine"/>.
+    /// Cloud counterpart of the on-premise
+    /// <see cref="FiftyOne.IpIntelligence.Translation.Data.CountriesTranslationData"/>.
+    /// Implements the same <see cref="ICountriesTranslationData"/> contract so
+    /// consumers see an identical surface whether the data came from the cloud
+    /// service or an on-premise pipeline. Populated by
+    /// <see cref="FlowElements.CloudCountriesTranslationEngine"/>.
     /// </summary>
-    public class CloudCountryCodeTranslationData : AspectDataBase, ICountryCodeTranslationData
+    public class CloudCountriesTranslationData : AspectDataBase, ICountriesTranslationData
     {
         /// <summary>
         /// Construct a new instance.
@@ -52,7 +53,7 @@ namespace FiftyOne.IpIntelligence.Cloud.Data
         /// <param name="engine">
         /// The engine that created this instance.
         /// </param>
-        public CloudCountryCodeTranslationData(
+        public CloudCountriesTranslationData(
             ILogger<AspectDataBase> logger,
             IPipeline pipeline,
             IAspectEngine engine)
@@ -62,26 +63,38 @@ namespace FiftyOne.IpIntelligence.Cloud.Data
 
         /// <inheritdoc/>
         public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>
-            CountryNamesGeographical =>
-                GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>(
-                    nameof(CountryNamesGeographical));
+            CountryNamesGeographicalTranslated =>
+            GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>(
+                nameof(CountryNamesGeographicalTranslated));
 
         /// <inheritdoc/>
         public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>
-            CountryNamesPopulation =>
-                GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>(
-                    nameof(CountryNamesPopulation));
+            CountryNamesPopulationTranslated =>
+            GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>(
+                nameof(CountryNamesPopulationTranslated));
 
         /// <inheritdoc/>
         public IAspectPropertyValue<IReadOnlyList<string>>
-            CountryNamesGeographicalAll =>
-                GetAs<IAspectPropertyValue<IReadOnlyList<string>>>(
-                    nameof(CountryNamesGeographicalAll));
+            CountryNamesGeographicalAllTranslated =>
+            GetAs<IAspectPropertyValue<IReadOnlyList<string>>>(
+                nameof(CountryNamesGeographicalAllTranslated));
 
         /// <inheritdoc/>
         public IAspectPropertyValue<IReadOnlyList<string>>
-            CountryNamesPopulationAll =>
-                GetAs<IAspectPropertyValue<IReadOnlyList<string>>>(
-                    nameof(CountryNamesPopulationAll));
+            CountryNamesPopulationAllTranslated =>
+            GetAs<IAspectPropertyValue<IReadOnlyList<string>>>(
+                nameof(CountryNamesPopulationAllTranslated));
+
+        /// <inheritdoc/>
+        public IAspectPropertyValue<IReadOnlyList<string>>
+            CountryCodesGeographicalAll =>
+            GetAs<IAspectPropertyValue<IReadOnlyList<string>>>(
+                nameof(CountryCodesGeographicalAll));
+
+        /// <inheritdoc/>
+        public IAspectPropertyValue<IReadOnlyList<string>>
+            CountryCodesPopulationAll =>
+            GetAs<IAspectPropertyValue<IReadOnlyList<string>>>(
+                nameof(CountryCodesPopulationAll));
     }
 }

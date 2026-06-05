@@ -25,21 +25,19 @@ using FiftyOne.Pipeline.Core.Data;
 using FiftyOne.Pipeline.Core.FlowElements;
 using FiftyOne.Pipeline.Engines.Data;
 using FiftyOne.Pipeline.Engines.FlowElements;
-using FiftyOne.Pipeline.Engines.Services;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Generic;
 
 namespace FiftyOne.IpIntelligence.Cloud.FlowElements
 {
     /// <summary>
-    /// Fluent builder used to create a cloud-based translation engine
+    /// Fluent builder used to create a cloud-based countries translation engine
     /// for IP intelligence country name translations.
     /// </summary>
-    public class IpiCloudTranslationEngineBuilder 
+    public class CloudCountriesTranslationEngineBuilder
         : AspectEngineBuilderBase<
-            IpiCloudTranslationEngineBuilder, 
-            IpiCloudTranslationEngine>
+            CloudCountriesTranslationEngineBuilder,
+            CloudCountriesTranslationEngine>
     {
         private readonly ILoggerFactory _loggerFactory;
 
@@ -49,7 +47,7 @@ namespace FiftyOne.IpIntelligence.Cloud.FlowElements
         /// <param name="loggerFactory">
         /// The factory to use when creating a logger.
         /// </param>
-        public IpiCloudTranslationEngineBuilder(ILoggerFactory loggerFactory)
+        public CloudCountriesTranslationEngineBuilder(ILoggerFactory loggerFactory)
         {
             _loggerFactory = loggerFactory;
         }
@@ -58,45 +56,45 @@ namespace FiftyOne.IpIntelligence.Cloud.FlowElements
         /// Build a new engine using the configured values.
         /// </summary>
         /// <returns>
-        /// A new <see cref="IpiCloudTranslationEngine"/>
+        /// A new <see cref="CloudCountriesTranslationEngine"/>
         /// </returns>
-        public IpiCloudTranslationEngine Build()
+        public CloudCountriesTranslationEngine Build()
         {
             return BuildEngine();
         }
 
         /// <summary>
         /// This method is called by the base class to create a new
-        /// <see cref="IpiCloudTranslationEngine"/> instance.
+        /// <see cref="CloudCountriesTranslationEngine"/> instance.
         /// </summary>
         /// <param name="properties">
         /// A string list of the properties that the engine should populate.
         /// </param>
         /// <returns>
-        /// A new <see cref="IpiCloudTranslationEngine"/> instance.
+        /// A new <see cref="CloudCountriesTranslationEngine"/> instance.
         /// </returns>
-        protected override IpiCloudTranslationEngine NewEngine(
+        protected override CloudCountriesTranslationEngine NewEngine(
             List<string> properties)
         {
-            return new IpiCloudTranslationEngine(
-                _loggerFactory.CreateLogger<IpiCloudTranslationEngine>(),
+            return new CloudCountriesTranslationEngine(
+                _loggerFactory.CreateLogger<CloudCountriesTranslationEngine>(),
                 CreateData);
         }
 
         /// <summary>
-        /// Create a default instance of this element's data. 
+        /// Create a default instance of this element's data.
         /// </summary>
         /// <param name="pipeline"></param>
         /// <param name="engine"></param>
         /// <returns></returns>
-        private CloudCountryCodeTranslationData CreateData(
+        private CloudCountriesTranslationData CreateData(
             IPipeline pipeline,
             FlowElementBase<
-                CloudCountryCodeTranslationData, 
+                CloudCountriesTranslationData,
                 IAspectPropertyMetaData> engine)
         {
-            return new CloudCountryCodeTranslationData(
-                _loggerFactory.CreateLogger<CloudCountryCodeTranslationData>(),
+            return new CloudCountriesTranslationData(
+                _loggerFactory.CreateLogger<CloudCountriesTranslationData>(),
                 pipeline,
                 (IAspectEngine)engine);
         }
