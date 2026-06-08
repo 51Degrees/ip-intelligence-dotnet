@@ -83,6 +83,14 @@ namespace FiftyOne.IpIntelligence.Translation.FlowElements
         private readonly IReadOnlyList<CountryCodeNamePair>
             _allCountries;
 
+        /// <summary>
+        /// The set of real country codes (keys of <see cref="_allCountries"/>),
+        /// used to drop the IP engine's no-match sentinel (e.g. "Unknown") from
+        /// the "All" lists. Computed once since <see cref="_allCountries"/> is
+        /// immutable.
+        /// </summary>
+        private readonly HashSet<string> _validCodes;
+
         private IList<IElementPropertyMetaData> _properties;
 
         /// <inheritdoc/>
@@ -145,6 +153,9 @@ namespace FiftyOne.IpIntelligence.Translation.FlowElements
         {
             _allCountries = allCountries
                 ?? throw new ArgumentNullException(nameof(allCountries));
+            _validCodes = new HashSet<string>(
+                _allCountries.Select(c => c.Key),
+                StringComparer.OrdinalIgnoreCase);
         }
 
         /// <inheritdoc/>
@@ -226,10 +237,16 @@ namespace FiftyOne.IpIntelligence.Translation.FlowElements
             string namesPropertyName,
             string codesPropertyName)
         {
+            // The IP engine emits a sentinel code (e.g. "Unknown") when the
+            // lookup yields no real country. Keep only codes that are real
+            // countries so the sentinel never leads the list and is never
+            // re-added by the remainingPairs step below.
             var weightedTuples = BuildWeightedTuples(
-                translatedWeightedNames,
-                weightedCodes,
-                comparer).ToList();
+                    translatedWeightedNames,
+                    weightedCodes,
+                    comparer)
+                .Where(t => _validCodes.Contains(t.Key))
+                .ToList();
 
             var errors = new List<Exception>();
             var remainingPairs = _allCountries
