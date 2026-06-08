@@ -173,6 +173,14 @@
             appear in countrycodes.en_GB.yml.
             </summary>
         </member>
+        <member name="F:FiftyOne.IpIntelligence.Translation.FlowElements.CountriesTranslationEngine._validCodes">
+            <summary>
+            The set of real country codes (keys of <see cref="F:FiftyOne.IpIntelligence.Translation.FlowElements.CountriesTranslationEngine._allCountries"/>),
+            used to drop the IP engine's no-match sentinel (e.g. "Unknown") from
+            the "All" lists. Computed once since <see cref="F:FiftyOne.IpIntelligence.Translation.FlowElements.CountriesTranslationEngine._allCountries"/> is
+            immutable.
+            </summary>
+        </member>
         <member name="P:FiftyOne.IpIntelligence.Translation.FlowElements.CountriesTranslationEngine.ElementDataKey">
             <inheritdoc/>
         </member>
