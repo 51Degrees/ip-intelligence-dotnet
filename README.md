@@ -57,6 +57,16 @@ to use the Cloud API, as described on our website. Get resource keys from
 our [configurator](https://configure.51degrees.com/), see our [documentation](https://51degrees.com/documentation/_concepts__configurator.html) on
 how to use this.
 
+The cloud property tiers changed in May 2026. Of the IP intelligence
+properties the examples display, the free tier includes only Country,
+LocationConfidence, Ip and IpV6, with a paid subscription needed for the
+rest, such as CountryCode, Region, Town, RegisteredName, Latitude and
+Longitude. A resource key selecting only the free tier properties can be
+created at https://configure.51degrees.com/Wkqxf3Bs, whilst
+https://configure.51degrees.com/hYzn3TV3 also includes the paid properties
+used by the examples. See https://51degrees.com/pricing to get a paid
+subscription with more properties.
+
 Examples and tests read the resource key from an environment variable called
 "51DEGREES_RESOURCE_KEY". The legacy environment variable names
 "51D_RESOURCE_KEY" and "SUPER_RESOURCE_KEY" are still supported, with the
