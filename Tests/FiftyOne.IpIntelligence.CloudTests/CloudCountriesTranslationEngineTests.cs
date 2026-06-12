@@ -43,7 +43,11 @@ namespace FiftyOne.IpIntelligence.CloudTests;
 public class CloudCountriesTranslationEngineTests
 {
     private IPipeline _pipeline;
-    private const string _resource_key_env_variable = "51D_RESOURCE_KEY";
+    // The aligned environment variable name is checked first. The legacy
+    // names are retained for backwards compatibility.
+    private const string _resource_key_env_variable = "51DEGREES_RESOURCE_KEY";
+    private const string _legacy_resource_key_env_variable = "51D_RESOURCE_KEY";
+    private const string _super_resource_key_env_variable = "SUPER_RESOURCE_KEY";
 
     /// <summary>
     /// Perform a simple gross error check by calling the cloud service
@@ -59,7 +63,11 @@ public class CloudCountriesTranslationEngineTests
     public void CloudIntegrationTest()
     {
         var resourceKey = System.Environment.GetEnvironmentVariable(
-            _resource_key_env_variable);
+            _resource_key_env_variable)
+            ?? System.Environment.GetEnvironmentVariable(
+                _legacy_resource_key_env_variable)
+            ?? System.Environment.GetEnvironmentVariable(
+                _super_resource_key_env_variable);
 
         if (resourceKey != null)
         {

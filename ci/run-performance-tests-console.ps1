@@ -46,6 +46,9 @@ $EnterpriseFile = [IO.Path]::Combine($EvidenceFiles, "51Degrees-EnterpriseIpiV41
 
 $env:IPINTELLIGENCEDATAFILE = (Get-ChildItem $EnterpriseFile).FullName
 # $env:IPINTELLIGENCEDATAFILE = (Get-ChildItem $EnterpriseFileDst).FullName
+# Aligned environment variable name. This is checked first by the examples
+# and tests. The legacy name above is retained for backwards compatibility.
+${env:51DEGREES_IPI_PATH} = $env:IPINTELLIGENCEDATAFILE
 Write-Debug "IPINTELLIGENCEDATAFILE = $env:IPINTELLIGENCEDATAFILE"
 
 # Write-Output "Moving evidence file"

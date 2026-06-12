@@ -39,12 +39,28 @@ data file.
 
 [ip-intelligence-data](https://github.com/51Degrees/ip-intelligence-data/) submodule repository instructs how to obtain a 'Lite' data file, otherwise [contact us](https://51degrees.com/contact-us) to obtain an 'Enterprise' data file.
 
+Tests that need a data file locate it in the following order:
+
+1. The "51DEGREES_IPI_PATH" environment variable, which can be set to an
+   explicit path to the data file. The legacy "IPINTELLIGENCEDATAFILE"
+   environment variable is also still supported, and is checked after
+   "51DEGREES_IPI_PATH".
+2. A search of the folder hierarchy, walking up from the working directory,
+   for the expected data file name.
+3. The free 'Lite' data file in its expected location, which is the
+   ip-intelligence-data submodule of this repository.
+
 #### Cloud (coming soon)
 
 You will require [resource keys](https://51degrees.com/documentation/_info__resource_keys.html)
 to use the Cloud API, as described on our website. Get resource keys from
 our [configurator](https://configure.51degrees.com/), see our [documentation](https://51degrees.com/documentation/_concepts__configurator.html) on
 how to use this.
+
+Examples and tests read the resource key from an environment variable called
+"51DEGREES_RESOURCE_KEY". The legacy environment variable names
+"51D_RESOURCE_KEY" and "SUPER_RESOURCE_KEY" are still supported, with the
+aligned "51DEGREES_RESOURCE_KEY" name checked first.
 
 ## Solutions and projects
 
