@@ -10,7 +10,7 @@
     <Authors>51Degrees Engineering</Authors>
     <Copyright>51Degrees Mobile Experts Limited</Copyright>
     <PackageLicenseExpression>EUPL-1.2</PackageLicenseExpression>
-    <PackageProjectUrl>www.51degrees.com</PackageProjectUrl>
+    <PackageProjectUrl>https://51degrees.com?utm_source=nuget&amp;utm_medium=package&amp;utm_campaign=ip-intelligence-dotnet&amp;utm_content=fiftyone.ipintelligence.cloud-fiftyone.ipintelligence.cloud.csproj&amp;utm_term=packageprojecturl</PackageProjectUrl>
     <PackageIcon>51d-logo.png</PackageIcon>
     <RepositoryUrl>https://github.com/51Degrees/ip-intelligence-dotnet</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
