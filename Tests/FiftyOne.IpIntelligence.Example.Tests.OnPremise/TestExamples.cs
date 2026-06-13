@@ -60,9 +60,16 @@ namespace FiftyOne.IpIntelligence.Example.Tests.OnPremise
             LicenseKey = string.IsNullOrWhiteSpace(licenseKey) == false ?
                 licenseKey: "!!YOUR_LICENSE_KEY!!";
 
-            // Set Device Data file
+            // Set IP intelligence data file. The aligned '51DEGREES_IPI_PATH'
+            // environment variable is checked first, followed by the legacy
+            // 'IPINTELLIGENCEDATAFILE' name.
             DataFile = Environment.GetEnvironmentVariable(
-                Constants.IP_INTELLIGENCE_DATA_FILE_ENV_VAR);
+                "51DEGREES_IPI_PATH");
+            if (string.IsNullOrWhiteSpace(DataFile))
+            {
+                DataFile = Environment.GetEnvironmentVariable(
+                    "IPINTELLIGENCEDATAFILE");
+            }
             if (string.IsNullOrWhiteSpace(DataFile))
             {
                 DataFile = ExampleUtils.FindFile(
