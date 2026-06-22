@@ -27,14 +27,4 @@ if ($IsLinux) {
 
 }
 
-$env:IPINTELLIGENCEDATAFILE = [IO.Path]::Combine($RepoPath, "FiftyOne.IpIntelligence.Engine.OnPremise", "ip-intelligence-cxx", "ip-intelligence-data", "51Degrees-EnterpriseIpiV41.ipi")
-# Aligned environment variable name. This is checked first by the tests. The
-# legacy name above is retained for backwards compatibility.
-${env:51DEGREES_IPI_PATH} = $env:IPINTELLIGENCEDATAFILE
-# $env:SUPER_RESOURCE_KEY = $Keys.TestResourceKey
-# ${env:51DEGREES_RESOURCE_KEY} = $Keys.TestResourceKey
-# $env:DEVICEDETECTIONLICENSEKEY_DOTNET = $Keys.DeviceDetection
-# $env:ACCEPTCH_BROWSER_KEY = $Keys.AcceptCHBrowserKey
-# $env:ACCEPTCH_HARDWARE_KEY = $Keys.AcceptCHHardwareKey
-# $env:ACCEPTCH_PLATFORM_KEY = $Keys.AcceptCHPlatformKey
-# $env:ACCEPTCH_NONE_KEY = $Keys.AcceptCHNoneKey
+$env:_51DEGREES_IPI_PATH = [IO.Path]::Combine($RepoPath, "FiftyOne.IpIntelligence.Engine.OnPremise", "ip-intelligence-cxx", "ip-intelligence-data", "51Degrees-EnterpriseIpiV41.ipi")

@@ -41,15 +41,11 @@ if ($(Test-Path -Path $ExamplesRepoName) -eq $False) {
 
 # Write-Output "Moving enterprise IPI file"
 $EnterpriseFile = [IO.Path]::Combine($EvidenceFiles, "51Degrees-EnterpriseIpiV41.ipi")
-# $EnterpriseFileDst = "ip-intelligence-dotnet-examples/ip-intelligence-data/51Degrees-EnterpriseIpiV41.ipi" 
+# $EnterpriseFileDst = "ip-intelligence-dotnet-examples/ip-intelligence-data/51Degrees-EnterpriseIpiV41.ipi"
 # Move-Item -Force $EnterpriseFile $EnterpriseFileDst
 
-$env:IPINTELLIGENCEDATAFILE = (Get-ChildItem $EnterpriseFile).FullName
-# $env:IPINTELLIGENCEDATAFILE = (Get-ChildItem $EnterpriseFileDst).FullName
-# Aligned environment variable name. This is checked first by the examples
-# and tests. The legacy name above is retained for backwards compatibility.
-${env:51DEGREES_IPI_PATH} = $env:IPINTELLIGENCEDATAFILE
-Write-Debug "IPINTELLIGENCEDATAFILE = $env:IPINTELLIGENCEDATAFILE"
+$env:_51DEGREES_IPI_PATH = (Get-ChildItem $EnterpriseFile).FullName
+Write-Debug "_51DEGREES_IPI_PATH = $env:_51DEGREES_IPI_PATH"
 
 # Write-Output "Moving evidence file"
 $EvidenceFile = [IO.Path]::Combine($EvidenceFiles, "evidence.yml")
@@ -62,7 +58,7 @@ function Edit-ExamplesCsprojRef {
         [string]$PackageInfix = "",
         [string]$ProjectInfix = ""
     )
-    
+
     $ExampleProject = [IO.Path]::Combine($ExamplesRepoPath, "Examples", "FiftyOne.IpIntelligence.Examples$ExampleInfix")
     $IpIntelligenceProject = [IO.Path]::Combine($RepoPath, "FiftyOne.IpIntelligence$ProjectInfix", "FiftyOne.IpIntelligence$ProjectInfix.csproj")
 
@@ -127,7 +123,7 @@ try {
     finally {
         Pop-Location
     }
-    
+
     if ($LASTEXITCODE -ne 0) {
         Write-Error "LASTEXITCODE = $LASTEXITCODE"
     }
