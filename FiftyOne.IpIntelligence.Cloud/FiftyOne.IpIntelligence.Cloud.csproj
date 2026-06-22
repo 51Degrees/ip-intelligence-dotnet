@@ -10,7 +10,7 @@
     <Authors>51Degrees Engineering</Authors>
     <Copyright>51Degrees Mobile Experts Limited</Copyright>
     <PackageLicenseExpression>EUPL-1.2</PackageLicenseExpression>
-    <PackageProjectUrl>www.51degrees.com</PackageProjectUrl>
+    <PackageProjectUrl>https://51degrees.com?utm_source=nuget&amp;utm_medium=package&amp;utm_campaign=ip-intelligence-dotnet&amp;utm_content=fiftyone.ipintelligence.cloud-fiftyone.ipintelligence.cloud.csproj&amp;utm_term=packageprojecturl</PackageProjectUrl>
     <PackageIcon>51d-logo.png</PackageIcon>
     <RepositoryUrl>https://github.com/51Degrees/ip-intelligence-dotnet</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
@@ -25,7 +25,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FiftyOne.Pipeline.CloudRequestEngine" Version="4.5.30" />
+    <PackageReference Include="FiftyOne.Pipeline.CloudRequestEngine" Version="4.5.57" />
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -34,6 +34,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FiftyOne.IpIntelligence.Shared\FiftyOne.IpIntelligence.Shared.csproj" />
+    <ProjectReference Include="..\FiftyOne.IpIntelligence.Translation\FiftyOne.IpIntelligence.Translation.csproj" />
   </ItemGroup>
 
   <ItemGroup>

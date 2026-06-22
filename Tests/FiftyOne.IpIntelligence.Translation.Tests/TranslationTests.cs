@@ -396,6 +396,125 @@ namespace FiftyOne.IpIntelligence.Translation.Tests
         }
 
         /// <summary>
+        /// When the IP lookup yields no real country (e.g. localhost / private
+        /// IP), the engine receives a sentinel "Unknown" code. "Unknown" must
+        /// never appear in any "All" list; with no real codes the lists should
+        /// be exactly all known countries ordered alphabetically, with codes
+        /// and names index-aligned.
+        /// </summary>
+        [TestMethod]
+        public void AllListsExcludeUnknownWhenNoRealCodes()
+        {
+            var ipElement = MockIpElement(
+                new[] { "Unknown" },
+                new[] { "Unknown" });
+            var codeTranslationElement =
+                new CountryCodeTranslationEngineBuilder(_loggerFactory)
+                .Build();
+            var nameTranslationElement =
+                new CountriesTranslationEngineBuilder(_loggerFactory)
+                .Build();
+            using var pipeline = new PipelineBuilder(_loggerFactory)
+                .AddFlowElement(ipElement)
+                .AddFlowElement(codeTranslationElement)
+                .AddFlowElement(nameTranslationElement)
+                .Build();
+
+            using var flowData = pipeline.CreateFlowData();
+            flowData.AddEvidence("header.Accept-Language", "de_DE");
+            flowData.Process();
+
+            var result = flowData.Get<ICountriesTranslationData>();
+            var comparer = GetComparer(flowData, out var cultureUsed);
+
+            // Establish the baseline of all known countries from a list that
+            // never had any weighted codes injected.
+            var expectedCount = result.CountryCodesGeographicalAll.Value.Count;
+            Assert.IsTrue(expectedCount > 200);
+
+            AssertAllCountriesAlphabetical(
+                result.CountryCodesGeographicalAll.Value,
+                result.CountryNamesGeographicalAllTranslated.Value,
+                expectedCount, comparer, cultureUsed);
+            AssertAllCountriesAlphabetical(
+                result.CountryCodesPopulationAll.Value,
+                result.CountryNamesPopulationAllTranslated.Value,
+                expectedCount, comparer, cultureUsed);
+        }
+
+        /// <summary>
+        /// With a mix of a real code and the "Unknown" sentinel, the real
+        /// country leads and "Unknown" is dropped entirely; the remainder is
+        /// alphabetical.
+        /// </summary>
+        [TestMethod]
+        public void AllListsExcludeUnknownWhenMixedWithRealCode()
+        {
+            var ipElement = MockIpElement(
+                new[] { "DE", "Unknown" },
+                new[] { "DE", "Unknown" });
+            var codeTranslationElement =
+                new CountryCodeTranslationEngineBuilder(_loggerFactory)
+                .Build();
+            var nameTranslationElement =
+                new CountriesTranslationEngineBuilder(_loggerFactory)
+                .Build();
+            using var pipeline = new PipelineBuilder(_loggerFactory)
+                .AddFlowElement(ipElement)
+                .AddFlowElement(codeTranslationElement)
+                .AddFlowElement(nameTranslationElement)
+                .Build();
+
+            using var flowData = pipeline.CreateFlowData();
+            flowData.AddEvidence("header.Accept-Language", "de_DE");
+            flowData.Process();
+
+            var result = flowData.Get<ICountriesTranslationData>();
+            var comparer = GetComparer(flowData, out var cultureUsed);
+
+            var namesAll = result.CountryNamesGeographicalAllTranslated.Value;
+            var codesAll = result.CountryCodesGeographicalAll.Value;
+
+            // Real country leads.
+            Assert.AreEqual("DE", codesAll[0]);
+            Assert.AreEqual("Deutschland", namesAll[0]);
+
+            // "Unknown" must not appear in either list.
+            Assert.IsFalse(codesAll.Contains("Unknown"));
+            Assert.IsFalse(namesAll.Contains("Unknown"));
+
+            Assert.AreEqual(namesAll.Count, codesAll.Count);
+
+            // Remainder (after the single real code) is alphabetical by name.
+            var remaining = namesAll.Skip(1).ToList();
+            for (int i = 1; i < remaining.Count; i++)
+            {
+                Assert.IsTrue(
+                    comparer.Compare(remaining[i - 1], remaining[i]) <= 0,
+                    $"Expected '{remaining[i - 1]}' <= '{remaining[i]}' -- using '{cultureUsed}'");
+            }
+        }
+
+        private static void AssertAllCountriesAlphabetical(
+            IReadOnlyList<string> codes,
+            IReadOnlyList<string> names,
+            int expectedCount,
+            StringComparer comparer,
+            string cultureUsed)
+        {
+            Assert.AreEqual(expectedCount, codes.Count);
+            Assert.AreEqual(expectedCount, names.Count);
+            Assert.IsFalse(codes.Contains("Unknown"));
+            Assert.IsFalse(names.Contains("Unknown"));
+            for (int i = 1; i < names.Count; i++)
+            {
+                Assert.IsTrue(
+                    comparer.Compare(names[i - 1], names[i]) <= 0,
+                    $"Expected '{names[i - 1]}' <= '{names[i]}' -- using '{cultureUsed}'");
+            }
+        }
+
+        /// <summary>
         /// Test that the population "All" lists work independently from
         /// geographical "All" lists.
         /// </summary>

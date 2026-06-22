@@ -1,8 +1,8 @@
 # 51Degrees IP Intelligence Engines
 
-![51Degrees](https://51degrees.com/img/logo.png?utm_source=github&utm_medium=repository&utm_content=readme_main&utm_campaign=dotnet-open-source "Data rewards the curious") **Pipeline API**
+![51Degrees](https://51degrees.com/img/logo.png?utm_source=github&utm_medium=readme&utm_campaign=ip-intelligence-dotnet&utm_content=readme.md&utm_term=51degrees-ip-intelligence-engines "Data rewards the curious") **Pipeline API**
 
-[Developer Documentation](https://51degrees.com/ip-intelligence-dotnet/4.1/index.html "developer documentation")
+[Developer Documentation](https://51degrees.com/ip-intelligence-dotnet/4.1/index.html?utm_source=github&utm_medium=readme&utm_campaign=ip-intelligence-dotnet&utm_content=readme.md&utm_term=51degrees-ip-intelligence-engines "developer documentation")
 
 ## Introduction
 
@@ -23,28 +23,54 @@ projects mostly target .NET 8.0 though in some cases, projects are available
 targeting other frameworks.
 
 For runtime dependencies, see our
-[dependencies](https://51degrees.com/documentation/_info__dependencies.html)
+[dependencies](https://51degrees.com/documentation/_info__dependencies.html?utm_source=github&utm_medium=readme&utm_campaign=ip-intelligence-dotnet&utm_content=readme.md&utm_term=dependencies)
 page. The `ci/options.json` file lists the tested and packaged .NET versions
 and operating systems automatic tests are performed with. The solution will
 likely operate with other versions.
 
 ### Data
 
-The API does detections using a local (on-premise) data file or cloud service (coming soon). 
+The API does detections using a local (on-premise) data file or cloud service (coming soon).
 
 #### On-Premise
 
 In order to perform IP intelligence on-premise, you will need to use a
 data file.
 
-[ip-intelligence-data](https://github.com/51Degrees/ip-intelligence-data/) submodule repository instructs how to obtain a 'Lite' data file, otherwise [contact us](https://51degrees.com/contact-us) to obtain an 'Enterprise' data file.
+[ip-intelligence-data](https://github.com/51Degrees/ip-intelligence-data/) submodule repository instructs how to obtain a 'Lite' data file, otherwise [contact us](https://51degrees.com/contact-us?utm_source=github&utm_medium=readme&utm_campaign=ip-intelligence-dotnet&utm_content=readme.md&utm_term=on-premise) to obtain an 'Enterprise' data file.
+
+Tests that need a data file locate it in the following order:
+
+1. The "_51DEGREES_IPI_PATH" environment variable, which can be set to an
+   explicit path to the data file. The legacy "IPINTELLIGENCEDATAFILE"
+   environment variable is also still supported, and is checked after
+   "_51DEGREES_IPI_PATH".
+2. A search of the folder hierarchy, walking up from the working directory,
+   for the expected data file name.
+3. The free 'Lite' data file in its expected location, which is the
+   ip-intelligence-data submodule of this repository.
 
 #### Cloud (coming soon)
 
-You will require [resource keys](https://51degrees.com/documentation/_info__resource_keys.html)
+You will require [resource keys](https://51degrees.com/documentation/_info__resource_keys.html?utm_source=github&utm_medium=readme&utm_campaign=ip-intelligence-dotnet&utm_content=readme.md&utm_term=cloud-coming-soon)
 to use the Cloud API, as described on our website. Get resource keys from
-our [configurator](https://configure.51degrees.com/), see our [documentation](https://51degrees.com/documentation/_concepts__configurator.html) on
+our [configurator](https://configure.51degrees.com/?utm_source=github&utm_medium=readme&utm_campaign=ip-intelligence-dotnet&utm_content=readme.md&utm_term=cloud-coming-soon), see our [documentation](https://51degrees.com/documentation/_concepts__configurator.html?utm_source=github&utm_medium=readme&utm_campaign=ip-intelligence-dotnet&utm_content=readme.md&utm_term=cloud-coming-soon) on
 how to use this.
+
+The cloud property tiers changed in May 2026. Of the IP intelligence
+properties the examples display, the free tier includes only Country,
+LocationConfidence, Ip and IpV6, with a paid subscription needed for the
+rest, such as CountryCode, Region, Town, RegisteredName, Latitude and
+Longitude. A resource key selecting only the free tier properties can be
+created at [https://configure.51degrees.com/Wkqxf3Bs](https://configure.51degrees.com/Wkqxf3Bs?utm_source=github&utm_medium=readme&utm_campaign=ip-intelligence-dotnet&utm_content=readme.md&utm_term=cloud-coming-soon), whilst
+[https://configure.51degrees.com/hYzn3TV3](https://configure.51degrees.com/hYzn3TV3?utm_source=github&utm_medium=readme&utm_campaign=ip-intelligence-dotnet&utm_content=readme.md&utm_term=cloud-coming-soon) also includes the paid properties
+used by the examples. See [https://51degrees.com/pricing](https://51degrees.com/pricing?utm_source=github&utm_medium=readme&utm_campaign=ip-intelligence-dotnet&utm_content=readme.md&utm_term=cloud-coming-soon) to get a paid
+subscription with more properties.
+
+Examples and tests read the resource key from an environment variable called
+"_51DEGREES_RESOURCE_KEY". The legacy environment variable names
+"51D_RESOURCE_KEY" and "SUPER_RESOURCE_KEY" are still supported, with the
+aligned "_51DEGREES_RESOURCE_KEY" name checked first.
 
 ## Solutions and projects
 
@@ -53,7 +79,7 @@ how to use this.
   - **FiftyOne.IpIntelligence.Shared** - Shared classes used by the IP intelligence engines.
   - **FiftyOne.IpIntelligence** - Contains IP intelligence engine builders.
   - **FiftyOne.IpIntelligence.Cloud** - A .NET engine which retrieves IP intelligence results by consuming the 51Degrees Cloud service. This can be swapped out with either the on-premise engine seamlessly.
-  
+
 ## Installation
 
 ### Nuget
@@ -149,10 +175,10 @@ Visual Studio or by using the `dotnet test` command line tool.
 Some tests require additional resources to run. These will either fail or return
 an 'inconclusive' result if these resources are not provided.
 
-- Some tests require an 'Enterprise' data file. This can be obtained by [purchasing a license](https://51degrees.com/pricing).
-- Tests using the Cloud service require resource keys with specific properties. A [license](https://51degrees.com/pricing) is required in order to access some properties.
+- Some tests require an 'Enterprise' data file. This can be obtained by [purchasing a license](https://51degrees.com/pricing?utm_source=github&utm_medium=readme&utm_campaign=ip-intelligence-dotnet&utm_content=readme.md&utm_term=tests).
+- Tests using the Cloud service require resource keys with specific properties. A [license](https://51degrees.com/pricing?utm_source=github&utm_medium=readme&utm_campaign=ip-intelligence-dotnet&utm_content=readme.md&utm_term=tests-2) is required in order to access some properties.
 
 ## Project documentation
 
 For complete documentation on the Pipeline API and associated engines, see the
-[51Degrees documentation site](https://51degrees.com/documentation/index.html).
+[51Degrees documentation site](https://51degrees.com/documentation/index.html?utm_source=github&utm_medium=readme&utm_campaign=ip-intelligence-dotnet&utm_content=readme.md&utm_term=project-documentation).

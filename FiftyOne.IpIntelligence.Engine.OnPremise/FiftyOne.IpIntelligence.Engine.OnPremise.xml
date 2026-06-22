@@ -158,7 +158,7 @@
             c# code rather than the native C/C++ code.
             </summary>
         </member>
-        <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.Data.FiftyOneAspectPropertyMetaDataIpi.#ctor(FiftyOne.Pipeline.Engines.FlowElements.IAspectEngine,System.String,System.Type,System.String,System.Collections.Generic.IList{System.String},System.Boolean,FiftyOne.IpIntelligence.Shared.Data.ComponentMetaDataDefault,FiftyOne.IpIntelligence.Shared.Data.ValueMetaDataDefault,System.String)">
+        <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.Data.FiftyOneAspectPropertyMetaDataIpi.#ctor(FiftyOne.Pipeline.Engines.FlowElements.IAspectEngine,System.String,System.Type,System.String,System.Collections.Generic.IList{System.String},System.Boolean,FiftyOne.Pipeline.Engines.FiftyOne.Data.ComponentMetaDataDefault,FiftyOne.Pipeline.Engines.FiftyOne.Data.ValueMetaDataDefault,System.String)">
             <summary>
             Constructor
             </summary>
@@ -172,7 +172,7 @@
             <param name="defaultValue"></param>
             <param name="description"></param>
         </member>
-        <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.Data.FiftyOneAspectPropertyMetaDataIpi.#ctor(FiftyOne.Pipeline.Engines.FlowElements.IAspectEngine,System.String,System.Type,System.String,System.Collections.Generic.IList{System.String},System.Boolean,FiftyOne.IpIntelligence.Shared.Data.ComponentMetaDataDefault,FiftyOne.IpIntelligence.Shared.Data.ValueMetaDataDefault,System.String,System.Byte,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.String)">
+        <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.Data.FiftyOneAspectPropertyMetaDataIpi.#ctor(FiftyOne.Pipeline.Engines.FlowElements.IAspectEngine,System.String,System.Type,System.String,System.Collections.Generic.IList{System.String},System.Boolean,FiftyOne.Pipeline.Engines.FiftyOne.Data.ComponentMetaDataDefault,FiftyOne.Pipeline.Engines.FiftyOne.Data.ValueMetaDataDefault,System.String,System.Byte,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.String)">
             <summary>
             Constructor
             </summary>
@@ -235,6 +235,20 @@
             The <see cref="T:FiftyOne.Pipeline.Engines.Services.IMissingPropertyService"/> to use if a requested
             property does not exist.
             </param>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.Data.IpDataOnPremise.SetEchoIp(System.Net.IPAddress,System.Net.IPAddress)">
+            <summary>
+            Set the echo IP values captured from request evidence.
+            Called by IpiOnPremiseEngine.ProcessEngine.
+            </summary>
+            <param name="ipv4">Parsed IPv4 address, or null if none.</param>
+            <param name="ipv6">Parsed IPv6 address, or null if none.</param>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.Data.IpDataOnPremise.AsDictionary">
+            <summary>
+            Drops the Ip and IpV6 entries when the matching address is not in
+            evidence. Direct .NET accessors are unchanged.
+            </summary>
         </member>
         <member name="T:FiftyOne.IpIntelligence.Engine.OnPremise.Data.ProfileMetaData">
             <summary>

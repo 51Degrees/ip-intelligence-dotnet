@@ -8,7 +8,9 @@ $PSNativeCommandUseErrorActionPreference = $true
 
 $perfTests = "$PSScriptRoot/../performance-tests"
 
-$env:PipelineOptions__Elements__0__BuildParameters__DataFile = $env:IPINTELLIGENCEDATAFILE
+# The aligned environment variable name is checked first. The legacy name is
+# retained for backwards compatibility.
+$env:PipelineOptions__Elements__0__BuildParameters__DataFile = $env:_51DEGREES_IPI_PATH
 
 dotnet build $perfTests -c $Configuration /p:Platform=$Arch
 try {

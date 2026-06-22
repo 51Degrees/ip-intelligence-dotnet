@@ -32,8 +32,8 @@ namespace FiftyOne.IpIntelligence.Example.Tests.OnPremise
     /// This test class ensures that the hash examples execute successfully.
     /// </summary>
     /// <remarks>
-    /// Note that these test do not generally ensure the correctness 
-    /// of the example, only that the example will run without 
+    /// Note that these test do not generally ensure the correctness
+    /// of the example, only that the example will run without
     /// crashing or throwing any unhandled exceptions.
     /// </remarks>
     [TestClass]
@@ -46,7 +46,7 @@ namespace FiftyOne.IpIntelligence.Example.Tests.OnPremise
         private string EvidenceFile;
 
         /// <summary>
-        /// Init method - specify License Key to run examples here or 
+        /// Init method - specify License Key to run examples here or
         /// set a License Key in an environment variable called 'ResourceKey'.
         /// Set data file for hash examples and additionally a User-Agents file
         /// for the performance example.
@@ -60,9 +60,16 @@ namespace FiftyOne.IpIntelligence.Example.Tests.OnPremise
             LicenseKey = string.IsNullOrWhiteSpace(licenseKey) == false ?
                 licenseKey: "!!YOUR_LICENSE_KEY!!";
 
-            // Set Device Data file
+            // Set IP intelligence data file. The aligned '_51DEGREES_IPI_PATH'
+            // environment variable is checked first, followed by the legacy
+            // 'IPINTELLIGENCEDATAFILE' name.
             DataFile = Environment.GetEnvironmentVariable(
-                Constants.IP_INTELLIGENCE_DATA_FILE_ENV_VAR);
+                "_51DEGREES_IPI_PATH");
+            if (string.IsNullOrWhiteSpace(DataFile))
+            {
+                DataFile = Environment.GetEnvironmentVariable(
+                    "IPINTELLIGENCEDATAFILE");
+            }
             if (string.IsNullOrWhiteSpace(DataFile))
             {
                 DataFile = ExampleUtils.FindFile(

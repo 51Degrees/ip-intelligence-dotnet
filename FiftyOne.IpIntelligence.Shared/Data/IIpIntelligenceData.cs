@@ -111,6 +111,10 @@ namespace FiftyOne.IpIntelligence
 		/// </summary>
 		IAspectPropertyValue<int> HumanProbability { get; }
 		/// <summary>
+		/// The IPv4 address of the request.
+		/// </summary>
+		IAspectPropertyValue<IPAddress> Ip { get; }
+		/// <summary>
 		/// End of the IP range to which the evidence IP belongs.
 		/// </summary>
 		IAspectPropertyValue<IPAddress> IpRangeEnd { get; }
@@ -118,6 +122,10 @@ namespace FiftyOne.IpIntelligence
 		/// Start of the IP range to which the evidence IP belongs.
 		/// </summary>
 		IAspectPropertyValue<IPAddress> IpRangeStart { get; }
+		/// <summary>
+		/// The IPv6 address of the request.
+		/// </summary>
+		IAspectPropertyValue<IPAddress> IpV6 { get; }
 		/// <summary>
 		/// Indicates whether the IP address is associated with a broadband connection. Includes DSL, Cable, Fibre, and Satellite connections.
 		/// </summary>
