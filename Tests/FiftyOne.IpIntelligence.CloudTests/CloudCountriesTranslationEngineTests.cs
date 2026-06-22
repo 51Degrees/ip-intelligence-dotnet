@@ -182,7 +182,7 @@ public class CloudCountriesTranslationEngineTests
     [TestMethod]
     public void Build_WithoutTranslationProperties_FailsFast()
     {
-        var ex = Assert.ThrowsException<PipelineException>(() =>
+        var ex = Assert.ThrowsExactly<PipelineException>(() =>
             BuildPipeline("{}", new Dictionary<string, ProductMetaData>()));
 
         StringAssert.Contains(ex.Message, Constants.CountryNamesTranslatedKey);

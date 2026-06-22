@@ -23,6 +23,7 @@
 using System;
 using System.Collections.Generic;
 using FiftyOne.IpIntelligence.Shared.Data;
+using FiftyOne.Pipeline.Engines.FiftyOne.Data;
 using FiftyOne.Pipeline.Engines.FlowElements;
 
 namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
