@@ -42,7 +42,7 @@ namespace FiftyOne.IpIntelligence.Cloud.Tests
         private IPipeline _pipeline;
         // The aligned environment variable name is checked first. The legacy
         // names are retained for backwards compatibility.
-        private const string _resource_key_env_variable = "51DEGREES_RESOURCE_KEY";
+        private const string _resource_key_env_variable = "_51DEGREES_RESOURCE_KEY";
         private const string _legacy_resource_key_env_variable = "51D_RESOURCE_KEY";
         private const string _super_resource_key_env_variable = "SUPER_RESOURCE_KEY";
 
@@ -79,7 +79,7 @@ namespace FiftyOne.IpIntelligence.Cloud.Tests
                 data.AddEvidence("query.client-ip-51d",
                     "185.28.167.78");
                 data.Process();
-        
+
                 var ipData = data.Get<IIpIntelligenceData>();
                 Assert.IsNotNull(ipData);
                 Assert.IsTrue(ipData.CountryCode.HasValue);
@@ -92,18 +92,18 @@ namespace FiftyOne.IpIntelligence.Cloud.Tests
         }
 
 
-        // TODO - The commented out section below is more how we should be testing. 
+        // TODO - The commented out section below is more how we should be testing.
         // i.e. not relying on the cloud request engine actually making a request.
         // Unfortunatley, everything its too tightly coupled for this to work right now.
-        // 
+        //
         // private IpiCloudEngine _engine;
         // private TestLoggerFactory _loggerFactory;
         // private Mock<IPipeline> _pipeline;
-        // 
+        //
         // private int _maxWarnings = 0;
         // private int _maxErrors = 0;
         // private string _testJson = "";
-        // 
+        //
         // [TestInitialize]
         // public void Init()
         // {
@@ -113,7 +113,7 @@ namespace FiftyOne.IpIntelligence.Cloud.Tests
         //         CreateIpData);
         //     _pipeline = new Mock<IPipeline>();
         // }
-        // 
+        //
         // private IpDataCloud CreateIpData(IPipeline pipeline, FlowElementBase<IpDataCloud, IAspectPropertyMetaData> engine)
         // {
         //     return new IpDataCloud(
@@ -128,14 +128,14 @@ namespace FiftyOne.IpIntelligence.Cloud.Tests
         //     data.JsonResponse = _testJson;
         //     return data;
         // }
-        // 
+        //
         // [TestCleanup]
         // public void Cleanup()
         // {
         //     _loggerFactory.AssertMaxErrors(_maxErrors);
         //     _loggerFactory.AssertMaxWarnings(_maxWarnings);
         // }
-        // 
+        //
         // [TestMethod]
         // public void TestMethod1()
         // {
@@ -189,10 +189,10 @@ namespace FiftyOne.IpIntelligence.Cloud.Tests
         //     }";
         //     TestPipeline pipeline = new TestPipeline(_pipeline.Object);
         //     TestFlowData testData = new TestFlowData(_loggerFactory.CreateLogger<TestFlowData>(), pipeline);
-        // 
+        //
         //     testData.GetOrAdd("cloudrequestdata", CreateTestData);
         //     _engine.Process(testData);
-        // 
+        //
         //     var result = testData.Get<IIpIntelligenceData>();
         //     Assert.IsNotNull(result);
         // }

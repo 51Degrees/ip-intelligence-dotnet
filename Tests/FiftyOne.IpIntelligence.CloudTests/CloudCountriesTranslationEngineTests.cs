@@ -45,7 +45,7 @@ public class CloudCountriesTranslationEngineTests
     private IPipeline _pipeline;
     // The aligned environment variable name is checked first. The legacy
     // names are retained for backwards compatibility.
-    private const string _resource_key_env_variable = "51DEGREES_RESOURCE_KEY";
+    private const string _resource_key_env_variable = "_51DEGREES_RESOURCE_KEY";
     private const string _legacy_resource_key_env_variable = "51D_RESOURCE_KEY";
     private const string _super_resource_key_env_variable = "SUPER_RESOURCE_KEY";
 
