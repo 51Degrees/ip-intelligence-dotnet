@@ -26,16 +26,16 @@ namespace FiftyOne.IpIntelligence.Translation
     /// <summary>
     /// Constants used by the translation flow elements.
     /// </summary>
-    internal class Constants
+    public class Constants
     {
         /// <summary>
-        /// Element key used by the
-        /// <see cref="FlowElements.CountriesTranslationEngine"/>.
+        /// Element-data key used by
+        /// <see cref="FlowElements.CountryCodeTranslationEngine"/>.
         /// </summary>
         public const string CountryNamesKey = "countrynames";
 
         /// <summary>
-        /// Element key used by the
+        /// Element-data key used by
         /// <see cref="FlowElements.CountriesTranslationEngine"/>.
         /// </summary>
         public const string CountryNamesTranslatedKey = "countrynamestranslated";

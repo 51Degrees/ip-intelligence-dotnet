@@ -83,14 +83,55 @@ namespace FiftyOne.IpIntelligence.Translation.FlowElements
         private readonly IReadOnlyList<CountryCodeNamePair>
             _allCountries;
 
+        /// <summary>
+        /// The set of real country codes (keys of <see cref="_allCountries"/>),
+        /// used to drop the IP engine's no-match sentinel (e.g. "Unknown") from
+        /// the "All" lists. Computed once since <see cref="_allCountries"/> is
+        /// immutable.
+        /// </summary>
+        private readonly HashSet<string> _validCodes;
+
+        private IList<IElementPropertyMetaData> _properties;
+
         /// <inheritdoc/>
         public override string ElementDataKey =>
             Constants.CountryNamesTranslatedKey;
 
         /// <summary>
-        /// Constructor which is only accessible by the builder.
+        /// Reflects over <see cref="ICountriesTranslationData"/> so each
+        /// property is advertised with the unwrapped <see cref="IAspectPropertyValue{T}"/>
+        /// type instead of the <see cref="TranslationEngineBase{T}"/> default of
+        /// <c>typeof(object)</c>. Covers both the weighted translations the base
+        /// class produces and the "All" / Codes-All lists computed here.
         /// </summary>
-        internal CountriesTranslationEngine(
+        public override IList<IElementPropertyMetaData> Properties
+        {
+            get
+            {
+                if (_properties == null)
+                {
+                    _properties = typeof(ICountriesTranslationData)
+                        .GetProperties()
+                        .Where(p => p.PropertyType.IsGenericType
+                            && p.PropertyType.GetGenericTypeDefinition()
+                                == typeof(IAspectPropertyValue<>))
+                        .Select(p =>
+                            (IElementPropertyMetaData)new ElementPropertyMetaData(
+                                this,
+                                p.Name,
+                                p.PropertyType.GetGenericArguments()[0],
+                                available: true))
+                        .ToList();
+                }
+                return _properties;
+            }
+        }
+
+        /// <summary>
+        /// Constructor. Accessible to the package builder and to subclasses
+        /// (e.g. cloud-side gating wrappers).
+        /// </summary>
+        protected internal CountriesTranslationEngine(
             ILogger<FlowElementBase<
                 ICountriesTranslationData,
                 IElementPropertyMetaData>> logger,
@@ -112,6 +153,9 @@ namespace FiftyOne.IpIntelligence.Translation.FlowElements
         {
             _allCountries = allCountries
                 ?? throw new ArgumentNullException(nameof(allCountries));
+            _validCodes = new HashSet<string>(
+                _allCountries.Select(c => c.Key),
+                StringComparer.OrdinalIgnoreCase);
         }
 
         /// <inheritdoc/>
@@ -193,10 +237,16 @@ namespace FiftyOne.IpIntelligence.Translation.FlowElements
             string namesPropertyName,
             string codesPropertyName)
         {
+            // The IP engine emits a sentinel code (e.g. "Unknown") when the
+            // lookup yields no real country. Keep only codes that are real
+            // countries so the sentinel never leads the list and is never
+            // re-added by the remainingPairs step below.
             var weightedTuples = BuildWeightedTuples(
-                translatedWeightedNames,
-                weightedCodes,
-                comparer).ToList();
+                    translatedWeightedNames,
+                    weightedCodes,
+                    comparer)
+                .Where(t => _validCodes.Contains(t.Key))
+                .ToList();
 
             var errors = new List<Exception>();
             var remainingPairs = _allCountries

@@ -23,6 +23,7 @@
 using System;
 using System.Collections.Generic;
 using FiftyOne.IpIntelligence.Shared.Data;
+using FiftyOne.Pipeline.Engines.FiftyOne.Data;
 using FiftyOne.Pipeline.Engines.FlowElements;
 
 namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
@@ -109,7 +110,7 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
             bool obsolete,
             bool show,
             bool showValues,
-            string url) : base(element, name, type, category, dataTiersWherePresent, available, component, defaultValue, description, displayOrder, list, mandatory, obsolete, show, showValues, url)
+            string url) : base(element, name, type, category, dataTiersWherePresent, available, component, defaultValue, new[] { defaultValue }, description, displayOrder, list, mandatory, obsolete, show, showValues, url)
         { }
     }
 }

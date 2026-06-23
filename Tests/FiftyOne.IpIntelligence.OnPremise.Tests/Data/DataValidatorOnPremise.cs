@@ -46,14 +46,31 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Data
             foreach (var property in _engine.Properties
                 .Where(p => p.Available))
             {
-                Assert.IsTrue(dict.ContainsKey(property.Name));
+                if (!dict.ContainsKey(property.Name))
+                {
+                    // Echo properties (Ip/IpV6) are only populated when the
+                    // matching IP family is supplied as evidence, so they are
+                    // legitimately absent otherwise. Any other missing
+                    // available property is a genuine failure.
+                    Assert.IsTrue(
+                        TestHelpers.Constants.EchoPropertyNames.Contains(property.Name),
+                        $"Property '{property.Name}' should be in the results.");
+                    continue;
+                }
                 IAspectPropertyValue value = dict[property.Name] as IAspectPropertyValue;
                 if (validEvidence)
                 {
                     if (!value.HasValue) {
-                        Assert.Contains(
-                            "The results contained a null profile", 
-                            value.NoValueMessage);
+                        // Either the native engine's null-profile reason or
+                        // the synthetic Ip/IpV6 echo reason (when only one IP
+                        // family was supplied as evidence) is acceptable.
+                        Assert.IsTrue(
+                            value.NoValueMessage != null
+                            && (value.NoValueMessage.Contains(
+                                    "The results contained a null profile")
+                                || value.NoValueMessage.Contains(
+                                    "not supplied as evidence")),
+                            $"Property '{property.Name}' has unexpected NoValueMessage: '{value.NoValueMessage}'");
                     }
                 }
                 else

@@ -1,4 +1,4 @@
-﻿/* *********************************************************************
+/* *********************************************************************
  * This Original Work is copyright of 51 Degrees Mobile Experts Limited.
  * Copyright 2026 51 Degrees Mobile Experts Limited, Davidson House,
  * Forbury Square, Reading, Berkshire, United Kingdom RG1 3EU.
@@ -20,29 +20,44 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
+using FiftyOne.IpIntelligence.Translation.Data;
+using FiftyOne.Pipeline.CloudRequestEngine.Services;
 using FiftyOne.Pipeline.Core.Data;
 using FiftyOne.Pipeline.Core.FlowElements;
 using FiftyOne.Pipeline.Engines.Data;
-using FiftyOne.Pipeline.Translation.Data;
+using FiftyOne.Pipeline.Engines.FlowElements;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 
-namespace FiftyOne.IpIntelligence.Translation.Data
+namespace FiftyOne.IpIntelligence.Cloud.Data
 {
     /// <summary>
-    /// Concrete implementation of <see cref="ICountriesTranslationData"/>. 
+    /// Cloud counterpart of the on-premise
+    /// <see cref="FiftyOne.IpIntelligence.Translation.Data.CountriesTranslationData"/>.
+    /// Implements the same <see cref="ICountriesTranslationData"/> contract so
+    /// consumers see an identical surface whether the data came from the cloud
+    /// service or an on-premise pipeline. Populated by
+    /// <see cref="FlowElements.CloudCountriesTranslationEngine"/>.
     /// </summary>
-    public class CountriesTranslationData : TranslationData, ICountriesTranslationData
+    public class CloudCountriesTranslationData : AspectDataBase, ICountriesTranslationData
     {
         /// <summary>
-        /// Constructor. Public so cloud-side gating subclasses of
-        /// <see cref="FlowElements.CountriesTranslationEngine"/> can supply
-        /// their own element-data factories.
+        /// Construct a new instance.
         /// </summary>
-        public CountriesTranslationData(
-            ILogger<TranslationData> logger,
-            IPipeline pipeline)
-            : base(logger, pipeline)
+        /// <param name="logger">
+        /// The logger instance to use.
+        /// </param>
+        /// <param name="pipeline">
+        /// The Pipeline that created this data instance.
+        /// </param>
+        /// <param name="engine">
+        /// The engine that created this instance.
+        /// </param>
+        public CloudCountriesTranslationData(
+            ILogger<AspectDataBase> logger,
+            IPipeline pipeline,
+            IAspectEngine engine)
+            : base(logger, pipeline, engine, MissingPropertyServiceCloud.Instance)
         {
         }
 
@@ -81,15 +96,5 @@ namespace FiftyOne.IpIntelligence.Translation.Data
             CountryCodesPopulationAll =>
             GetAs<IAspectPropertyValue<IReadOnlyList<string>>>(
                 nameof(CountryCodesPopulationAll));
-
-        /// <summary>
-        /// Stores the culture used by engine to sort the data.
-        /// Exposed for test purposes.
-        /// Not intended to be used by customers.
-        /// May be an empty string in case of
-        /// <see cref="System.Globalization.CultureInfo.InvariantCulture"/>.
-        /// </summary>
-        public string SortingCultureUsed =>
-            GetAs<string>(nameof(SortingCultureUsed));
     }
 }
