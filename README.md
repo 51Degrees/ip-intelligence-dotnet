@@ -62,9 +62,9 @@ properties the examples display, the free tier includes only Country,
 LocationConfidence, Ip and IpV6, with a paid subscription needed for the
 rest, such as CountryCode, Region, Town, RegisteredName, Latitude and
 Longitude. A resource key selecting only the free tier properties can be
-created at [https://configure.51degrees.com/Wkqxf3Bs](https://configure.51degrees.com/Wkqxf3Bs?utm_source=github&utm_medium=readme&utm_campaign=ip-intelligence-dotnet&utm_content=readme.md&utm_term=cloud-coming-soon), whilst
-[https://configure.51degrees.com/hYzn3TV3](https://configure.51degrees.com/hYzn3TV3?utm_source=github&utm_medium=readme&utm_campaign=ip-intelligence-dotnet&utm_content=readme.md&utm_term=cloud-coming-soon) also includes the paid properties
-used by the examples. See [https://51degrees.com/pricing](https://51degrees.com/pricing?utm_source=github&utm_medium=readme&utm_campaign=ip-intelligence-dotnet&utm_content=readme.md&utm_term=cloud-coming-soon) to get a paid
+[created here](https://configure.51degrees.com/Wkqxf3Bs?utm_source=github&utm_medium=readme&utm_campaign=ip-intelligence-dotnet&utm_content=readme.md&utm_term=cloud-coming-soon), whilst
+[this configuration](https://configure.51degrees.com/hYzn3TV3?utm_source=github&utm_medium=readme&utm_campaign=ip-intelligence-dotnet&utm_content=readme.md&utm_term=cloud-coming-soon) also includes the paid properties
+used by the examples. See our [pricing page](https://51degrees.com/pricing?utm_source=github&utm_medium=readme&utm_campaign=ip-intelligence-dotnet&utm_content=readme.md&utm_term=cloud-coming-soon) to get a paid
 subscription with more properties.
 
 Examples and tests read the resource key from an environment variable called

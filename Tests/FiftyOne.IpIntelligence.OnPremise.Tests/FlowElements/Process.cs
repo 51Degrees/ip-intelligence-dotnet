@@ -20,9 +20,12 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
+using FiftyOne.Caching;
 using FiftyOne.IpIntelligence.OnPremise.Tests.Data;
 using FiftyOne.IpIntelligence.TestHelpers.FlowElements;
+using FiftyOne.Pipeline.Core.Data;
 using FiftyOne.Pipeline.Engines;
+using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,7 +42,7 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Core.FlowElements
             .Where(x => x != PerformanceProfiles.BalancedTemp)
             .Select(x => new object[] { x });
 
-        [DataTestMethod]
+        [TestMethod]
         [DynamicData(nameof(ProfilesToTest))]
         public void Process_OnPremise_Core_NoEvidence(PerformanceProfiles profile)
         {
@@ -47,7 +50,7 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Core.FlowElements
             ProcessTests.NoEvidence(Wrapper, new DataValidatorOnPremise(Wrapper.Engine));
         }
 
-        [DataTestMethod]
+        [TestMethod]
         [DynamicData(nameof(ProfilesToTest))]
         public void Process_OnPremise_Core_EmptyIpAddress(PerformanceProfiles profile)
         {
@@ -55,7 +58,7 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Core.FlowElements
             ProcessTests.EmptyIpAddress(Wrapper, new DataValidatorOnPremise(Wrapper.Engine));
         }
 
-        [DataTestMethod]
+        [TestMethod]
         [DynamicData(nameof(ProfilesToTest))]
         public void Process_OnPremise_Core_NoHeaders(PerformanceProfiles profile)
         {
@@ -63,7 +66,7 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Core.FlowElements
             ProcessTests.NoHeaders(Wrapper, new DataValidatorOnPremise(Wrapper.Engine));
         }
 
-        [DataTestMethod]
+        [TestMethod]
         [DynamicData(nameof(ProfilesToTest))]
         public void Process_OnPremise_Core_NoUsefulHeaders(PerformanceProfiles profile)
         {
@@ -71,7 +74,7 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Core.FlowElements
             ProcessTests.NoUsefulHeaders(Wrapper, new DataValidatorOnPremise(Wrapper.Engine));
         }
 
-        [DataTestMethod]
+        [TestMethod]
         [DynamicData(nameof(ProfilesToTest))]
         public void Process_OnPremise_Core_CaseInsensitiveKeys(PerformanceProfiles profile)
         {
@@ -79,7 +82,7 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Core.FlowElements
             ProcessTests.CaseInsensitiveEvidenceKeys(Wrapper, new DataValidatorOnPremise(Wrapper.Engine));
         }
 
-        [DataTestMethod]
+        [TestMethod]
         [DynamicData(nameof(ProfilesToTest))]
         [Ignore("IDs are not finalized yet.")]
         public void Process_OnPremise_Core_MetaDataService_DefaultProfilesIds(PerformanceProfiles profile)
@@ -101,7 +104,7 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Core.FlowElements
         //     ProcessTests.MetaDataService_ComponentIdForProfile(Wrapper);
         // }
 
-        [DataTestMethod]
+        [TestMethod]
         [DynamicData(nameof(ProfilesToTest))]
         [Ignore("IDs are not finalized yet.")]
         public void Process_OnPremise_Core_MetaDataService_DefaultProfileIdForComponent(PerformanceProfiles profile)

@@ -27,7 +27,6 @@ using FiftyOne.Pipeline.Core.FlowElements;
 using FiftyOne.Pipeline.Engines;
 using FiftyOne.Pipeline.Engines.FiftyOne.Data;
 using FiftyOne.Pipeline.Engines.FiftyOne.FlowElements;
-using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -35,20 +34,32 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests
 {
     public class WrapperOnPremise : IWrapper
     {
-        protected static readonly TestLoggerFactory _logger = new TestLoggerFactory();
+        protected static readonly TestLoggerFactory _logger = 
+            new TestLoggerFactory();
 
         public IPipeline Pipeline { get; private set; }
 
         public IpiOnPremiseEngine Engine { get; private set; }
 
-        public WrapperOnPremise(FileInfo dataFile, PerformanceProfiles profile)
+        /// <summary>
+        /// A new wrapper instance
+        /// </summary>
+        /// <param name="dataFile">
+        /// Full path to the data file for the cache engine.
+        /// </param>
+        /// <param name="profile">
+        /// Performance profile for the test engine.
+        /// </param>
+        public WrapperOnPremise(
+            FileInfo dataFile, 
+            PerformanceProfiles profile)
         {
-            var builder = new IpiOnPremiseEngineBuilder(_logger, null)
+            Engine = new IpiOnPremiseEngineBuilder(_logger, null)
                 .SetPerformanceProfile(profile)
                 .SetAutoUpdate(false)
-                .SetDataFileSystemWatcher(false);
-            Engine = builder
-                .Build(dataFile.FullName, false);
+                .SetDataFileSystemWatcher(false).Build(
+                    dataFile.FullName, 
+                    false);
             Pipeline = new PipelineBuilder(_logger)
                 .AddFlowElement(Engine)
                 .Build();

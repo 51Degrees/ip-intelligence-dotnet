@@ -20,7 +20,6 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
-using FiftyOne.IpIntelligence.Engine.OnPremise.Data;
 using FiftyOne.Pipeline.Engines.FiftyOne.Data;
 using System;
 using System.Collections.Generic;

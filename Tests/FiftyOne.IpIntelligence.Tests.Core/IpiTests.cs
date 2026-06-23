@@ -20,22 +20,17 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
-using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
-using FiftyOne.Caching;
 using FiftyOne.IpIntelligence.TestHelpers;
 using FiftyOne.Pipeline.Core.Data;
 using FiftyOne.Pipeline.Engines;
 using FiftyOne.Pipeline.Engines.Services;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
@@ -102,7 +97,7 @@ namespace FiftyOne.IpIntelligence.Tests.Core
         private static IpAddressGenerator IP_ADDRESSES = new IpAddressGenerator(
             TestHelpers.Utils.GetFilePath(Constants.IP_FILE_NAME));
 
-        [DataTestMethod]
+        [TestMethod]
         [DynamicData(nameof(TestParams), DynamicDataDisplayName = nameof(DisplayNameForTestCase))]
         public void Ipi_AllConfigurations_100_IpAddresses(
             string datafileName,
@@ -174,13 +169,16 @@ namespace FiftyOne.IpIntelligence.Tests.Core
                 var options = new ParallelOptions()
                 {
                     CancellationToken = cancellationSource.Token,
-                    // The max parallelism is limited to 8 when the
-                    // multiThreaded flag is enabled.
+                    // The max parallelism is limited to
+                    // Environment.ProcessorCount when the multiThreaded flag
+                    // is enabled.
                     // This is because, if it is not limited, the lazy 
                     // loading tests will start all requests almost
                     // immediately and then some will take so long to
                     // complete that they exceed the configured timeout.
-                    MaxDegreeOfParallelism = (multiThreaded ? 8 : 1)
+                    MaxDegreeOfParallelism = multiThreaded ? 
+                        Environment.ProcessorCount : 
+                        1
                 };
 
 
@@ -202,7 +200,7 @@ namespace FiftyOne.IpIntelligence.Tests.Core
                         // cancel the parallel process.
                         if (flowData.Errors != null)
                         {
-                            Assert.AreEqual(0, flowData.Errors.Count,
+                            Assert.IsEmpty(flowData.Errors,
                                 $"Expected no errors but got {flowData.Errors.Count}" +
                                 $":{Environment.NewLine}{ReportErrors(flowData.Errors)}");
                             cancellationSource.Cancel();

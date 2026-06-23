@@ -24,7 +24,6 @@ using FiftyOne.IpIntelligence.Engine.OnPremise.Interop;
 using FiftyOne.Pipeline.Engines.FiftyOne.Data;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
 {

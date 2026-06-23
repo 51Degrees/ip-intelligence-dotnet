@@ -20,21 +20,10 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
-using FiftyOne.Common.TestHelpers;
-using FiftyOne.IpIntelligence.Cloud.Data;
 using FiftyOne.IpIntelligence.Cloud.FlowElements;
-using FiftyOne.Pipeline.Core.FlowElements;
-using FiftyOne.Pipeline.Engines.Data;
-using FiftyOne.Pipeline.Engines.FlowElements;
-using FiftyOne.Pipeline.Engines.Services;
 using FiftyOne.Pipeline.Core.Data;
-using FiftyOne.Pipeline.Engines.TestHelpers;
-using FiftyOne.Pipeline.CloudRequestEngine.Data;
-using Moq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 
 namespace FiftyOne.IpIntelligence.Cloud.Tests
@@ -90,7 +79,7 @@ namespace FiftyOne.IpIntelligence.Cloud.Tests
             var apvValue = IpiCloudEngine.ToValueForAPV(rawValue, typeof(IReadOnlyList<string>));
             var apvList = (IReadOnlyList<string>) apvValue;
             Assert.IsNotNull(apvList);
-            Assert.AreEqual(rawValue.Count, apvList.Count);
+            Assert.HasCount(rawValue.Count, apvList);
             for (int i = 0; i < rawValue.Count; i++)
             {
                 Assert.AreEqual(rawValue[i], apvList[i]);
@@ -109,7 +98,7 @@ namespace FiftyOne.IpIntelligence.Cloud.Tests
             var apvValue = IpiCloudEngine.ToValueForAPV(rawValue, typeof(IReadOnlyList<float>));
             var apvList = (IReadOnlyList<float>) apvValue;
             Assert.IsNotNull(apvList);
-            Assert.AreEqual(rawValue.Count, apvList.Count);
+            Assert.HasCount(rawValue.Count, apvList);
             for(int i = 0; i < rawValue.Count; i++)
             {
                 Assert.AreEqual(rawValue[i], apvList[i]);
@@ -128,7 +117,7 @@ namespace FiftyOne.IpIntelligence.Cloud.Tests
             var apvValue = IpiCloudEngine.ToValueForAPV(rawValue, typeof(IReadOnlyList<IPAddress>));
             var apvList = (IReadOnlyList<IPAddress>)apvValue;
             Assert.IsNotNull(apvList);
-            Assert.AreEqual(rawValue.Count, apvList.Count);
+            Assert.HasCount(rawValue.Count, apvList);
             for (int i = 0; i < rawValue.Count; i++)
             {
                 Assert.AreEqual(rawValue[i], apvList[i].ToString());
@@ -229,7 +218,7 @@ namespace FiftyOne.IpIntelligence.Cloud.Tests
             
             var valueList = typedApvValue.Value;
             Assert.IsNotNull(valueList);
-            Assert.AreEqual(stringList.Count, valueList.Count);
+            Assert.HasCount(stringList.Count, valueList);
             for (int i = 0; i < stringList.Count; i++)
             {
                 Assert.AreEqual(stringList[i], valueList[i]);
@@ -257,7 +246,7 @@ namespace FiftyOne.IpIntelligence.Cloud.Tests
             
             var valueList = typedApvValue.Value;
             Assert.IsNotNull(valueList);
-            Assert.AreEqual(floatList.Count, valueList.Count);
+            Assert.HasCount(floatList.Count, valueList);
             for (int i = 0; i < floatList.Count; i++)
             {
                 Assert.AreEqual(floatList[i], valueList[i]);
@@ -285,7 +274,7 @@ namespace FiftyOne.IpIntelligence.Cloud.Tests
             
             var valueList = typedApvValue.Value;
             Assert.IsNotNull(valueList);
-            Assert.AreEqual(ipStringList.Count, valueList.Count);
+            Assert.HasCount(ipStringList.Count, valueList);
             for (int i = 0; i < ipStringList.Count; i++)
             {
                 Assert.AreEqual(ipStringList[i], valueList[i].ToString());
@@ -318,7 +307,7 @@ namespace FiftyOne.IpIntelligence.Cloud.Tests
             var apvList = (IReadOnlyList<IWeightedValue<string>>)apvValue;
             
             Assert.IsNotNull(apvList);
-            Assert.AreEqual(weightedStringsList.Count, apvList.Count);
+            Assert.HasCount(weightedStringsList.Count, apvList);
             
             for (int i = 0; i < weightedStringsList.Count; i++)
             {
@@ -356,7 +345,7 @@ namespace FiftyOne.IpIntelligence.Cloud.Tests
             var apvList = (IReadOnlyList<IWeightedValue<float>>)apvValue;
             
             Assert.IsNotNull(apvList);
-            Assert.AreEqual(weightedFloatsList.Count, apvList.Count);
+            Assert.HasCount(weightedFloatsList.Count, apvList);
             
             for (int i = 0; i < weightedFloatsList.Count; i++)
             {
@@ -394,7 +383,7 @@ namespace FiftyOne.IpIntelligence.Cloud.Tests
             var apvList = (IReadOnlyList<IWeightedValue<IPAddress>>)apvValue;
             
             Assert.IsNotNull(apvList);
-            Assert.AreEqual(weightedIPList.Count, apvList.Count);
+            Assert.HasCount(weightedIPList.Count, apvList);
             
             for (int i = 0; i < weightedIPList.Count; i++)
             {

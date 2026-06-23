@@ -22,12 +22,9 @@
 
 using FiftyOne.IpIntelligence.Engine.OnPremise.Data;
 using FiftyOne.IpIntelligence.Engine.OnPremise.Interop;
-using FiftyOne.IpIntelligence.Shared.Data;
 using FiftyOne.Pipeline.Core.Data;
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 
 namespace FiftyOne.IpIntelligence.Engine.OnPremise.Wrappers
 {

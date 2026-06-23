@@ -22,7 +22,6 @@
 
 using FiftyOne.IpIntelligence.Shared.Data;
 using FiftyOne.Pipeline.Core.Data;
-using FiftyOne.Pipeline.Core.Data.Types;
 using FiftyOne.Pipeline.Core.FlowElements;
 using FiftyOne.Pipeline.Engines;
 using FiftyOne.Pipeline.Engines.Data;

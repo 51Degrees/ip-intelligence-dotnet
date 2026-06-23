@@ -21,20 +21,11 @@
  * ********************************************************************* */
 
 using FiftyOne.IpIntelligence.Engine.OnPremise.Data;
-using FiftyOne.IpIntelligence.Engine.OnPremise.Interop;
-using FiftyOne.IpIntelligence.Shared.FlowElements;
-using FiftyOne.Pipeline.Core.Data;
-using FiftyOne.Pipeline.Core.Exceptions;
 using FiftyOne.Pipeline.Core.FlowElements;
-using FiftyOne.Pipeline.Engines;
 using FiftyOne.Pipeline.Engines.FiftyOne.Data;
-using FiftyOne.Pipeline.Engines.FlowElements;
 using FiftyOne.Pipeline.Engines.Services;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using FiftyOne.IpIntelligence.Engine.OnPremise.Wrappers;
 
 namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
 {
@@ -94,11 +85,12 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
                 IIpDataOnPremise> deviceDataFactory,
             string tempDataFilePath)
         {
-
-            return new IpiOnPremiseEngine(
+            var engine = new IpiOnPremiseEngine(
                 loggerFactory,
                 deviceDataFactory,
                 tempDataFilePath);
+            // ConfigureEngine(engine);
+            return engine;
         }
 
         #endregion

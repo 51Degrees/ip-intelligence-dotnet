@@ -109,9 +109,8 @@ namespace FiftyOne.IpIntelligence.TestHelpers.Data
             IMetaDataHasher hasher,
             PerformanceProfiles profile)
         {
-            CancellationTokenSource cancelRefresh = new CancellationTokenSource();
+            var cancelRefresh = new CancellationTokenSource();
             var reloader = Refresh(wrapper, cancelRefresh.Token, profile);
-
             Reload(wrapper, hasher, reloader, cancelRefresh, false);
         }
 
@@ -171,7 +170,8 @@ namespace FiftyOne.IpIntelligence.TestHelpers.Data
                     r.FinishTime < h.FinishTime)));
             Console.WriteLine($"{refreshesDuringActiveHashTasks.Count()} " +
                 $"refreshes during active hash tasks");
-            Assert.IsTrue(refreshesDuringActiveHashTasks.Count() > 0,
+            Assert.IsGreaterThan(0,
+                refreshesDuringActiveHashTasks.Count(),
                 "At least 1 refresh needs to occur while hash tasks are " +
                 "active in order for this test to be valid. Check the " +
                 "ReloadDelay and HashTaskDelay settings. " +
@@ -211,10 +211,9 @@ namespace FiftyOne.IpIntelligence.TestHelpers.Data
 
             try
             {
-                hash = hasher.HashProperties(hash, wrapper);
-                hash = hasher.HashValues(hash, wrapper);
-                hash = hasher.HashComponents(hash, wrapper);
-                hash = hasher.HashProfiles(hash, wrapper);
+                hash ^= hasher.HashProperties(hash, wrapper);
+                hash ^= hasher.HashComponents(hash, wrapper);
+                hash ^= hasher.HashProfiles(hash, wrapper);
             }
             finally
             {

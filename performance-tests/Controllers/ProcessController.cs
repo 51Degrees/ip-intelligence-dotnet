@@ -20,11 +20,9 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
-using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using FiftyOne.Pipeline.Web.Services;
 using FiftyOne.IpIntelligence;
-using FiftyOne.Pipeline.Core.Data;
 
 namespace performance_tests.Controllers
 {

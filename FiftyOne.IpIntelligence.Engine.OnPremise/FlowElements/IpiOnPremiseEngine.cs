@@ -26,18 +26,13 @@ using FiftyOne.IpIntelligence.Engine.OnPremise.Wrappers;
 using FiftyOne.IpIntelligence.Shared.Data;
 using FiftyOne.IpIntelligence.Shared.FlowElements;
 using FiftyOne.Pipeline.Core.Data;
-using FiftyOne.Pipeline.Core.Exceptions;
 using FiftyOne.Pipeline.Core.FlowElements;
-using FiftyOne.Pipeline.Engines.Data;
 using FiftyOne.Pipeline.Engines.FiftyOne.Data;
-using FiftyOne.Pipeline.Engines.FiftyOne.FlowElements;
-using FiftyOne.Pipeline.Engines.Services;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
 {
@@ -80,10 +75,11 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
         /// </summary>
         internal IRequiredPropertiesConfigSwigWrapper PropertiesConfigSwig { get; set; }
 
-        private static Random _rng = new Random();
+        private static readonly Random _rng = new Random();
 
         // The component used for metric properties.
-        private ComponentMetaDataDefault _ipMetricsComponent = new ComponentMetaDataIpi("Metrics");
+        private readonly ComponentMetaDataDefault _ipMetricsComponent =
+            new ComponentMetaDataIpi("Metrics");
 
         /// <summary>
         /// This event is fired whenever the data that this engine makes use
@@ -98,17 +94,9 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
         /// <param name="ipDataFactory">
         /// Method used to get an aspect data instance
         /// </param>
-        /// <param name="dataFile">Meta data related to the data file</param>
-        /// <param name="config">Configuration instance</param>
-        /// <param name="properties">Properties to be initialised</param>
         /// <param name="tempDataFilePath">
         /// The directory to use when storing temporary copies of the 
         /// data file(s) used by this engine.
-        /// </param>
-        /// <param name="swigFactory">
-        /// The factory object to use when creating swig wrapper instances.
-        /// Usually a <see cref="Wrappers.SwigFactory"/> instance.
-        /// Unit tests can override this to mock behaviour as needed.
         /// </param>
         internal protected IpiOnPremiseEngine(
             ILoggerFactory loggerFactory,

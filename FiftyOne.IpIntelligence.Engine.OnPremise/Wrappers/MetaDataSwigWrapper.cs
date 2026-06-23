@@ -20,10 +20,8 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
-using FiftyOne.IpIntelligence.Engine.OnPremise.Data;
 using FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements;
 using FiftyOne.IpIntelligence.Engine.OnPremise.Interop;
-using FiftyOne.Pipeline.Engines.FiftyOne.Data;
 
 namespace FiftyOne.IpIntelligence.Engine.OnPremise.Wrappers
 {
