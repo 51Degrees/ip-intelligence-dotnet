@@ -449,6 +449,31 @@
             <param name="concurrency">Expected concurrent accesses</param>
             <returns>This builder</returns>
         </member>
+        <member name="T:FiftyOne.IpIntelligence.Shared.IpEvidenceValue">
+            <summary>
+            Parses IP address evidence values. Front ends commonly supply the
+            client address with a port suffix ("203.0.113.9:54321",
+            "[2001:db8::9]:443"), so values are accepted in bare, port
+            suffixed, and bracketed forms. An IPv6 address with an
+            unbracketed port suffix is inherently ambiguous and parses as an
+            address including the trailing group.
+            </summary>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Shared.IpEvidenceValue.TryParse(System.String,System.Net.IPAddress@)">
+            <summary>
+            Try to parse the evidence value as an IP address, accepting
+            bare, port suffixed, and bracketed forms.
+            </summary>
+            <param name="value">The raw evidence value.</param>
+            <param name="address">The parsed address, or null.</param>
+            <returns>True when an address was parsed.</returns>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Shared.IpEvidenceValue.IsPortSuffix(System.String,System.Int32)">
+            <summary>
+            True when the value from <paramref name="colonIndex"/> onward is
+            a colon followed by a decimal port number.
+            </summary>
+        </member>
         <member name="T:FiftyOne.IpIntelligence.Shared.IpIntelligenceData">
             <summary>
             Abstract base class for properties relating to an IP.

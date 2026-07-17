@@ -23,6 +23,7 @@
 using FiftyOne.IpIntelligence.Engine.OnPremise.Data;
 using FiftyOne.IpIntelligence.Engine.OnPremise.Interop;
 using FiftyOne.IpIntelligence.Engine.OnPremise.Wrappers;
+using FiftyOne.IpIntelligence.Shared;
 using FiftyOne.IpIntelligence.Shared.Data;
 using FiftyOne.IpIntelligence.Shared.FlowElements;
 using FiftyOne.Pipeline.Core.Data;
@@ -266,15 +267,30 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
             if (data == null) { throw new ArgumentNullException(nameof(data)); }
             if (ipData == null) { throw new ArgumentNullException(nameof(ipData)); }
 
+            bool ipEvidenceProvided = false;
             using (var relevantEvidence = new EvidenceIpiSwig())
             {
                 foreach (var evidenceItem in data.GetEvidence().AsDictionary())
                 {
                     if (EvidenceKeyFilter.Include(evidenceItem.Key))
                     {
+                        var value = evidenceItem.Value.ToString();
+                        if (string.IsNullOrWhiteSpace(value) == false)
+                        {
+                            ipEvidenceProvided = true;
+                        }
+                        // Front ends commonly supply the address with a
+                        // port suffix ("203.0.113.9:54321",
+                        // "[2001:db8::9]:443"). The native engine expects
+                        // a bare address, so pass the parsed form when the
+                        // value is readable and the raw string otherwise.
+                        if (IpEvidenceValue.TryParse(value, out var parsedValue))
+                        {
+                            value = parsedValue.ToString();
+                        }
                         relevantEvidence.Add(new KeyValuePair<string, string>(
                             evidenceItem.Key,
-                            evidenceItem.Value.ToString()));
+                            value));
                     }
                 }
                 (ipData as IpDataOnPremise).SetResults(_engine.process(relevantEvidence));
@@ -283,46 +299,41 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
             // Capture the IP used for the lookup so we can echo it back as
             // synthetic Ip / IpV6 properties. Priority mirrors the cloud's
             // existing NetworkElement (query.client-ip > server.client-ip
-            // > anything else parseable from filtered evidence).
-            System.Net.IPAddress echoV4 = null;
-            System.Net.IPAddress echoV6 = null;
-
-            string chosenIp = null;
-            if (data.TryGetEvidence("query.client-ip", out string queryIp))
-            {
-                chosenIp = queryIp;
-            }
-            else if (data.TryGetEvidence("server.client-ip", out string serverIp))
-            {
-                chosenIp = serverIp;
-            }
-            else
+            // > anything else parseable from filtered evidence). An
+            // unparseable higher priority value falls through, so a usable
+            // address elsewhere in the evidence still wins.
+            System.Net.IPAddress echo = null;
+            if ((data.TryGetEvidence("query.client-ip", out string queryIp) &&
+                IpEvidenceValue.TryParse(queryIp, out echo)) == false &&
+                (data.TryGetEvidence("server.client-ip", out string serverIp) &&
+                IpEvidenceValue.TryParse(serverIp, out echo)) == false)
             {
                 foreach (var evidenceItem in data.GetEvidence().AsDictionary())
                 {
                     if (EvidenceKeyFilter.Include(evidenceItem.Key) &&
                         evidenceItem.Value is string candidate &&
-                        System.Net.IPAddress.TryParse(candidate, out _))
+                        IpEvidenceValue.TryParse(candidate, out echo))
                     {
-                        chosenIp = candidate;
                         break;
                     }
                 }
             }
 
-            if (chosenIp != null && System.Net.IPAddress.TryParse(chosenIp, out var parsed))
+            System.Net.IPAddress echoV4 = null;
+            System.Net.IPAddress echoV6 = null;
+            if (echo != null)
             {
-                if (parsed.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                if (echo.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
                 {
-                    echoV4 = parsed;
+                    echoV4 = echo;
                 }
-                else if (parsed.AddressFamily == System.Net.Sockets.AddressFamily.InterNetworkV6)
+                else if (echo.AddressFamily == System.Net.Sockets.AddressFamily.InterNetworkV6)
                 {
-                    echoV6 = parsed;
+                    echoV6 = echo;
                 }
             }
 
-            (ipData as IpDataOnPremise).SetEchoIp(echoV4, echoV6);
+            (ipData as IpDataOnPremise).SetEchoIp(echoV4, echoV6, ipEvidenceProvided);
         }
 
         /// <summary>
