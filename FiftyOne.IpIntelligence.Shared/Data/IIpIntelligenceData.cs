@@ -63,7 +63,7 @@ namespace FiftyOne.IpIntelligence
 		/// </summary>
 		IAspectPropertyValue<string> ConnectionType { get; }
 		/// <summary>
-		/// The 3-character ISO 3166-1 continent code for the supplied location.
+		/// The 2-character ISO 3166-1 continent code for the supplied location.
 		/// </summary>
 		IAspectPropertyValue<string> ContinentCode2 { get; }
 		/// <summary>
@@ -227,7 +227,7 @@ namespace FiftyOne.IpIntelligence
 		/// </summary>
 		IAspectPropertyValue<string> TimeZoneIana { get; }
 		/// <summary>
-		/// The offset from UTC in minutes in the supplied location, at the time that the value is produced.
+		/// The offset from UTC in minutes in the supplied location, at the time that the value is produced. A value of -1 indicates unknown.
 		/// </summary>
 		IAspectPropertyValue<int> TimeZoneOffset { get; }
 		/// <summary>
