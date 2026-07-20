@@ -243,10 +243,10 @@
             </summary>
             <param name="ipv4">Parsed IPv4 address, or null if none.</param>
             <param name="ipv6">Parsed IPv6 address, or null if none.</param>
-            <param name="evidenceProvided">
-            True when IP evidence was present in the request, so a null
-            address means the evidence could not be parsed rather than
-            that none was supplied.
+            <param name="evidenceUnusable">
+            True when IP evidence was present in the request but none of
+            it was usable, so a null address means the evidence could not
+            be parsed rather than that none was supplied.
             </param>
         </member>
         <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.Data.IpDataOnPremise.AsDictionary">

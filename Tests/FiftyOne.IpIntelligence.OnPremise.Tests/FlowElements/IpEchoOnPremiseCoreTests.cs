@@ -161,6 +161,67 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.FlowElements
                 Assert.IsTrue(data.Ip.HasValue,
                     "An unparseable query.client-ip must not block a usable server.client-ip.");
                 Assert.AreEqual(IPAddress.Parse("85.118.2.126"), data.Ip.Value);
+                Assert.IsTrue(data.Country.HasValue,
+                    "The native lookup must also fall through to the usable evidence, " +
+                    "not only the echo.");
+            }
+        }
+
+        [TestMethod]
+        public void Process_ForwardedChainEvidence_UsesFirstEntry()
+        {
+            using (var flowData = Wrapper.Pipeline.CreateFlowData())
+            {
+                flowData.AddEvidence("server.client-ip", "85.118.2.126:53169, 10.0.0.1");
+                flowData.Process();
+
+                var data = flowData.Get<IIpIntelligenceData>();
+                Assert.IsTrue(data.Ip.HasValue,
+                    "A forwarded chain should echo its first entry.");
+                Assert.AreEqual(IPAddress.Parse("85.118.2.126"), data.Ip.Value);
+                Assert.IsTrue(data.Country.HasValue,
+                    "The native lookup reads the same first entry.");
+            }
+        }
+
+        [TestMethod]
+        public void Process_ChainWithUnparseableFirstEntry_FallsThroughToServer()
+        {
+            using (var flowData = Wrapper.Pipeline.CreateFlowData())
+            {
+                // The native parser reads only the first entry of a
+                // chain, so this value is unusable despite the second
+                // entry and must not be passed on, it would abort the
+                // native evidence walk.
+                flowData.AddEvidence("query.client-ip", "not-an-ip, 1.2.3.4");
+                flowData.AddEvidence("server.client-ip", "85.118.2.126");
+                flowData.Process();
+
+                var data = flowData.Get<IIpIntelligenceData>();
+                Assert.IsTrue(data.Ip.HasValue,
+                    "A chain whose first entry cannot be parsed must not block " +
+                    "usable lower priority evidence.");
+                Assert.AreEqual(IPAddress.Parse("85.118.2.126"), data.Ip.Value);
+                Assert.IsTrue(data.Country.HasValue,
+                    "The native lookup must fall through too.");
+            }
+        }
+
+        [TestMethod]
+        public void Process_CidrEvidence_EchoesPrefixAndResolves()
+        {
+            using (var flowData = Wrapper.Pipeline.CreateFlowData())
+            {
+                flowData.AddEvidence("server.client-ip", "85.118.2.126/24");
+                flowData.Process();
+
+                var data = flowData.Get<IIpIntelligenceData>();
+                Assert.IsTrue(data.Ip.HasValue,
+                    "The native parser stops at the slash and looks up the " +
+                    "prefix address, so the echo reports the same address.");
+                Assert.AreEqual(IPAddress.Parse("85.118.2.126"), data.Ip.Value);
+                Assert.IsTrue(data.Country.HasValue,
+                    "The prefix address should resolve.");
             }
         }
 

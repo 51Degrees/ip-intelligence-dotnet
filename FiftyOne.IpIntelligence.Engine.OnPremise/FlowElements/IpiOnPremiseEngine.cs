@@ -268,6 +268,7 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
             if (ipData == null) { throw new ArgumentNullException(nameof(ipData)); }
 
             bool ipEvidenceProvided = false;
+            bool ipEvidenceUsable = false;
             using (var relevantEvidence = new EvidenceIpiSwig())
             {
                 foreach (var evidenceItem in data.GetEvidence().AsDictionary())
@@ -279,18 +280,21 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
                         {
                             ipEvidenceProvided = true;
                         }
-                        // Front ends commonly supply the address with a
-                        // port suffix ("203.0.113.9:54321",
-                        // "[2001:db8::9]:443"). The native engine expects
-                        // a bare address, so pass the parsed form when the
-                        // value is readable and the raw string otherwise.
-                        if (IpEvidenceValue.TryParse(value, out var parsedValue))
+                        // The native engine reads a single address from
+                        // the start of the value, so port suffixes,
+                        // forwarded chains and CIDR ranges are handled
+                        // there. A value it would reject is skipped, it
+                        // would otherwise abort the native evidence walk
+                        // before lower priority evidence is tried. The
+                        // native parser takes the value verbatim, so
+                        // trim the whitespace it would trip over.
+                        if (IpEvidenceValue.TryParse(value, out _))
                         {
-                            value = parsedValue.ToString();
+                            ipEvidenceUsable = true;
+                            relevantEvidence.Add(new KeyValuePair<string, string>(
+                                evidenceItem.Key,
+                                value.Trim()));
                         }
-                        relevantEvidence.Add(new KeyValuePair<string, string>(
-                            evidenceItem.Key,
-                            value));
                     }
                 }
                 (ipData as IpDataOnPremise).SetResults(_engine.process(relevantEvidence));
@@ -333,7 +337,15 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
                 }
             }
 
-            (ipData as IpDataOnPremise).SetEchoIp(echoV4, echoV6, ipEvidenceProvided);
+            // Only claim the evidence was invalid when something was
+            // provided and none of it was usable. Evidence the native
+            // engine can use but the echo cannot represent, a CIDR range
+            // for example, must not be reported as invalid alongside
+            // populated lookup results.
+            (ipData as IpDataOnPremise).SetEchoIp(
+                echoV4,
+                echoV6,
+                ipEvidenceProvided && ipEvidenceUsable == false);
         }
 
         /// <summary>

@@ -20,24 +20,40 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
-using System.Globalization;
 using System.Net;
+using System.Net.Sockets;
 
 namespace FiftyOne.IpIntelligence.Shared
 {
     /// <summary>
-    /// Parses IP address evidence values. Front ends commonly supply the
-    /// client address with a port suffix ("203.0.113.9:54321",
-    /// "[2001:db8::9]:443"), so values are accepted in bare, port
-    /// suffixed, and bracketed forms. An IPv6 address with an
-    /// unbracketed port suffix is inherently ambiguous and parses as an
-    /// address including the trailing group.
+    /// Parses IP address evidence values the same way the native engine
+    /// does, so the managed layer and the native lookup always agree on
+    /// which address a value contains. The native parser reads a single
+    /// address from the start of the value and stops at the first break
+    /// character (comma, space, slash, closing bracket, newline, or a
+    /// colon once the address is known to be IPv4). Everything after the
+    /// break is ignored, which is what makes port suffixes
+    /// ("203.0.113.9:54321", "[2001:db8::9]:443"), forwarded chains
+    /// (first entry) and CIDR ranges (prefix address) parse.
+    /// One deliberate divergence: IPv4 is gated on a canonical dotted
+    /// quad, so legacy forms that would be reinterpreted ("85.118.2",
+    /// "192.168.015.1", "0x7f.0.0.1") fail here rather than resolving
+    /// to a different address than the sender meant.
     /// </summary>
     public static class IpEvidenceValue
     {
         /// <summary>
-        /// Try to parse the evidence value as an IP address, accepting
-        /// bare, port suffixed, and bracketed forms.
+        /// Characters at which the native parser stops reading an
+        /// address and ignores the remainder of the value.
+        /// </summary>
+        private static readonly char[] BreakChars =
+            new[] { ',', ' ', '/', ']', '\n' };
+
+        /// <summary>
+        /// Try to parse the evidence value as the IP address the native
+        /// engine would read from it. When this fails the native engine
+        /// would reject the value too, aborting its evidence walk, so a
+        /// failing value must not be handed to it.
         /// </summary>
         /// <param name="value">The raw evidence value.</param>
         /// <param name="address">The parsed address, or null.</param>
@@ -50,50 +66,82 @@ namespace FiftyOne.IpIntelligence.Shared
                 return false;
             }
             var candidate = value.Trim();
+
             if (candidate[0] == '[')
             {
-                // Bracketed IPv6 - "[2001:db8::9]" or "[2001:db8::9]:443".
+                // Bracketed IPv6 - the native parser skips the opening
+                // bracket and stops at the closing one.
                 var close = candidate.IndexOf(']');
-                if (close < 2 ||
-                    (close != candidate.Length - 1 &&
-                    IsPortSuffix(candidate, close + 1) == false))
-                {
-                    return false;
-                }
-                return IPAddress.TryParse(
-                    candidate.Substring(1, close - 1),
+                return TryParseIpv6(
+                    close > 0
+                        ? candidate.Substring(1, close - 1)
+                        : candidate.Substring(1),
                     out address);
             }
-            if (IPAddress.TryParse(candidate, out address))
+
+            var breakIndex = candidate.IndexOfAny(BreakChars);
+            var token = breakIndex >= 0
+                ? candidate.Substring(0, breakIndex)
+                : candidate;
+
+            var dot = token.IndexOf('.');
+            var colon = token.IndexOf(':');
+            if (colon >= 0 && (dot < 0 || colon < dot))
             {
-                return true;
+                // A colon before any dot marks IPv6, which also covers
+                // the IPv4 mapped form.
+                return TryParseIpv6(token, out address);
             }
-            // IPv4 with a port suffix has exactly one colon.
-            var colon = candidate.IndexOf(':');
-            if (colon > 0 &&
-                colon == candidate.LastIndexOf(':') &&
-                IsPortSuffix(candidate, colon) &&
-                IPAddress.TryParse(candidate.Substring(0, colon), out address))
+            if (colon >= 0)
             {
-                return true;
+                // In an IPv4 value the native parser treats a colon as
+                // the end of the address, conventionally a port suffix.
+                token = token.Substring(0, colon);
             }
+            return TryParseIpv4Strict(token, out address);
+        }
+
+        /// <summary>
+        /// Parse an IPv4 token gated on a canonical dotted quad. The
+        /// round trip rejects the legacy inet_aton notations (octal or
+        /// hex components, fewer than four parts, a bare integer) that
+        /// IPAddress.TryParse would silently reinterpret as a different
+        /// address.
+        /// </summary>
+        private static bool TryParseIpv4Strict(
+            string token,
+            out IPAddress address)
+        {
             address = null;
+            if (token.Length > 0 &&
+                IPAddress.TryParse(token, out var parsed) &&
+                parsed.AddressFamily == AddressFamily.InterNetwork &&
+                parsed.ToString() == token)
+            {
+                address = parsed;
+                return true;
+            }
             return false;
         }
 
         /// <summary>
-        /// True when the value from <paramref name="colonIndex"/> onward is
-        /// a colon followed by a decimal port number.
+        /// Parse an IPv6 token. A zone index is rejected, the native
+        /// parser treats '%' as an invalid character, and so must
+        /// anything that is not an IPv6 address, a bracketed IPv4 for
+        /// example.
         /// </summary>
-        private static bool IsPortSuffix(string value, int colonIndex)
+        private static bool TryParseIpv6(string token, out IPAddress address)
         {
-            return colonIndex < value.Length - 1 &&
-                value[colonIndex] == ':' &&
-                ushort.TryParse(
-                    value.Substring(colonIndex + 1),
-                    NumberStyles.None,
-                    CultureInfo.InvariantCulture,
-                    out _);
+            address = null;
+            if (token.Length > 0 &&
+                token.IndexOf('%') < 0 &&
+                IPAddress.TryParse(token, out var parsed) &&
+                parsed.AddressFamily == AddressFamily.InterNetworkV6)
+            {
+                address = parsed;
+                return true;
+            }
+            return false;
         }
     }
 }

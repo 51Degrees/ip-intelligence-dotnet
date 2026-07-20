@@ -34,10 +34,28 @@ namespace FiftyOne.IpIntelligence.Tests.Core
         [DataRow("85.118.2.126:53169", "85.118.2.126")]
         [DataRow("85.118.2.126:0", "85.118.2.126")]
         [DataRow(" 85.118.2.126:443 ", "85.118.2.126")]
+        // The native parser stops at the first break character and
+        // ignores the rest of the value, so a malformed suffix does not
+        // invalidate the address it follows.
+        [DataRow("85.118.2.126:banana", "85.118.2.126")]
+        [DataRow("85.118.2.126:99999", "85.118.2.126")]
+        [DataRow("85.118.2.126:", "85.118.2.126")]
         [DataRow("2001:db8::9", "2001:db8::9")]
         [DataRow("[2001:db8::9]", "2001:db8::9")]
         [DataRow("[2001:db8::9]:443", "2001:db8::9")]
+        [DataRow("[2001:db8::9]443", "2001:db8::9")]
+        [DataRow("[2001:db8::9", "2001:db8::9")]
         [DataRow("::1", "::1")]
+        [DataRow("::ffff:85.118.2.126", "::ffff:85.118.2.126")]
+        // Forwarded chains parse as their first entry, matching where
+        // the native parser stops.
+        [DataRow("85.118.2.126, 10.0.0.1", "85.118.2.126")]
+        [DataRow("85.118.2.126:53169, 10.0.0.1", "85.118.2.126")]
+        [DataRow("85.118.2.126 10.0.0.1", "85.118.2.126")]
+        // CIDR ranges parse as their prefix address, the native parser
+        // stops at the slash.
+        [DataRow("1.2.3.4/24", "1.2.3.4")]
+        [DataRow("2001:db8::/32", "2001:db8::")]
         public void TryParse_AcceptedForms(string value, string expected)
         {
             Assert.IsTrue(IpEvidenceValue.TryParse(value, out var address),
@@ -50,15 +68,21 @@ namespace FiftyOne.IpIntelligence.Tests.Core
         [DataRow("")]
         [DataRow("   ")]
         [DataRow("not-an-ip")]
-        [DataRow("85.118.2.126:banana")]
-        [DataRow("85.118.2.126:99999")]
-        [DataRow("85.118.2.126:")]
+        // The first entry is what the native parser reads, a later
+        // parseable entry cannot save the value.
+        [DataRow("not-an-ip, 85.118.2.126")]
+        [DataRow(", 85.118.2.126")]
         [DataRow("300.1.2.3:80")]
-        [DataRow("[2001:db8::9")]
-        [DataRow("[2001:db8::9]443")]
-        [DataRow("[2001:db8::9]:")]
+        [DataRow("85.118.2")]
+        [DataRow("85.118.2:53169")]
+        [DataRow("12345")]
+        [DataRow("12345:80")]
+        [DataRow("192.168.015.1")]
+        [DataRow("192.168.015.001:53169")]
+        [DataRow("0x7f.0.0.1")]
         [DataRow("[]:443")]
-        [DataRow("1.2.3.4, 5.6.7.8")]
+        [DataRow("[1.2.3.4]")]
+        [DataRow("fe80::1%eth0")]
         public void TryParse_RejectedForms(string value)
         {
             Assert.IsFalse(IpEvidenceValue.TryParse(value, out var address),
@@ -77,5 +101,6 @@ namespace FiftyOne.IpIntelligence.Tests.Core
             Assert.IsTrue(IpEvidenceValue.TryParse("2001:db8::9:443", out var address));
             Assert.AreEqual(IPAddress.Parse("2001:db8::9:443"), address);
         }
+
     }
 }
