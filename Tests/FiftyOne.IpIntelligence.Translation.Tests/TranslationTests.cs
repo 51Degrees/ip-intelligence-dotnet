@@ -24,6 +24,7 @@ using FiftyOne.IpIntelligence.Translation.Data;
 using FiftyOne.IpIntelligence.Translation.FlowElements;
 using FiftyOne.Pipeline.Core.Data;
 using FiftyOne.Pipeline.Core.FlowElements;
+using FiftyOne.Pipeline.Engines;
 using FiftyOne.Pipeline.Engines.Data;
 using Microsoft.Extensions.Logging;
 using Moq;
@@ -393,6 +394,67 @@ namespace FiftyOne.IpIntelligence.Translation.Tests
                     string.Compare(namesAll[i - 1], namesAll[i],
                         StringComparison.CurrentCulture), $"Expected '{namesAll[i - 1]}' <= '{namesAll[i]}'");
             }
+        }
+
+        /// <summary>
+        /// When the resource key does not grant the country code properties,
+        /// or the cloud request failed, reading them from the IP data throws
+        /// PropertyMissingException. The engine must treat that the same as
+        /// no value: no exception escapes and the "All" lists still contain
+        /// every known country.
+        /// </summary>
+        [TestMethod]
+        public void AllListsWhenIpPropertyAccessThrowsPropertyMissing()
+        {
+            var ipData = new Mock<IIpIntelligenceData>();
+            ipData.Setup(i => i["CountryCodesGeographical"])
+                .Returns(null);
+            ipData.Setup(i => i["CountryCodesPopulation"])
+                .Returns(null);
+            ipData.Setup(i => i.CountryCodesGeographical)
+                .Throws(new PropertyMissingException(
+                    "Property 'CountryCodesGeographical' not found in data " +
+                    "for element 'ip'."));
+            ipData.Setup(i => i.CountryCodesPopulation)
+                .Throws(new PropertyMissingException(
+                    "Property 'CountryCodesPopulation' not found in data " +
+                    "for element 'ip'."));
+
+            var element = new Mock<IFlowElement>();
+            element.SetupGet(i => i.Properties)
+                .Returns(new List<IElementPropertyMetaData>());
+            element.SetupGet(i => i.ElementDataKey).Returns("ip");
+            element.Setup(i => i.Process(It.IsAny<IFlowData>()))
+                .Callback<IFlowData>(data =>
+                {
+                    data.GetOrAdd(element.Object.ElementDataKey, p => ipData.Object);
+                });
+
+            var codeTranslationElement =
+                new CountryCodeTranslationEngineBuilder(_loggerFactory)
+                .Build();
+            var nameTranslationElement =
+                new CountriesTranslationEngineBuilder(_loggerFactory)
+                .Build();
+            using var pipeline = new PipelineBuilder(_loggerFactory)
+                .AddFlowElement(element.Object)
+                .AddFlowElement(codeTranslationElement)
+                .AddFlowElement(nameTranslationElement)
+                .Build();
+
+            using var flowData = pipeline.CreateFlowData();
+            flowData.AddEvidence("header.Accept-Language", "de_DE");
+            flowData.Process();
+
+            var result = flowData.Get<ICountriesTranslationData>();
+
+            Assert.IsTrue(
+                result.CountryNamesGeographicalAllTranslated.HasValue);
+            Assert.IsTrue(result.CountryCodesGeographicalAll.HasValue);
+            Assert.IsTrue(
+                result.CountryNamesGeographicalAllTranslated.Value.Count > 200);
+            Assert.IsTrue(
+                result.CountryCodesGeographicalAll.Value.Count > 200);
         }
 
         /// <summary>
