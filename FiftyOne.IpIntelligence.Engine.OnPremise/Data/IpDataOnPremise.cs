@@ -86,10 +86,20 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
         /// </summary>
         /// <param name="ipv4">Parsed IPv4 address, or null if none.</param>
         /// <param name="ipv6">Parsed IPv6 address, or null if none.</param>
-        internal void SetEchoIp(System.Net.IPAddress ipv4, System.Net.IPAddress ipv6)
+        /// <param name="evidenceUnusable">
+        /// True when IP evidence was present in the request but none of
+        /// it was usable, so a null address means the evidence could not
+        /// be parsed rather than that none was supplied.
+        /// </param>
+        internal void SetEchoIp(
+            System.Net.IPAddress ipv4,
+            System.Net.IPAddress ipv6,
+            bool evidenceUnusable)
         {
             _echoIp = new FiftyOne.Pipeline.Engines.Data.AspectPropertyValue<System.Net.IPAddress>();
             _echoIpV6 = new FiftyOne.Pipeline.Engines.Data.AspectPropertyValue<System.Net.IPAddress>();
+
+            var invalid = evidenceUnusable && ipv4 == null && ipv6 == null;
 
             if (ipv4 != null)
             {
@@ -97,7 +107,9 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
             }
             else
             {
-                _echoIp.NoValueMessage = "IPv4 was not supplied as evidence.";
+                _echoIp.NoValueMessage = invalid
+                    ? "The IP supplied as evidence was not valid."
+                    : "IPv4 was not supplied as evidence.";
             }
 
             if (ipv6 != null)
@@ -106,7 +118,9 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
             }
             else
             {
-                _echoIpV6.NoValueMessage = "IPv6 was not supplied as evidence.";
+                _echoIpV6.NoValueMessage = invalid
+                    ? "The IP supplied as evidence was not valid."
+                    : "IPv6 was not supplied as evidence.";
             }
         }
 

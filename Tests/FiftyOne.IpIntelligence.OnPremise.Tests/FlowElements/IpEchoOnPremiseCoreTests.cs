@@ -115,6 +115,162 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.FlowElements
         }
 
         [TestMethod]
+        [DataRow("query.client-ip")]
+        [DataRow("server.client-ip")]
+        public void Process_PortSuffixedIPv4Evidence_PopulatesIp(string key)
+        {
+            using (var flowData = Wrapper.Pipeline.CreateFlowData())
+            {
+                flowData.AddEvidence(key, "85.118.2.126:53169");
+                flowData.Process();
+
+                var data = flowData.Get<IIpIntelligenceData>();
+                Assert.IsTrue(data.Ip.HasValue,
+                    $"Ip should have a value for port suffixed IPv4 evidence on '{key}'.");
+                Assert.AreEqual(IPAddress.Parse("85.118.2.126"), data.Ip.Value);
+                Assert.IsFalse(data.IpV6.HasValue);
+            }
+        }
+
+        [TestMethod]
+        public void Process_BracketedIPv6WithPortEvidence_PopulatesIpV6()
+        {
+            using (var flowData = Wrapper.Pipeline.CreateFlowData())
+            {
+                flowData.AddEvidence("server.client-ip", "[2001:db8::1]:443");
+                flowData.Process();
+
+                var data = flowData.Get<IIpIntelligenceData>();
+                Assert.IsTrue(data.IpV6.HasValue,
+                    "IpV6 should have a value for bracketed IPv6 evidence with a port.");
+                Assert.AreEqual(IPAddress.Parse("2001:db8::1"), data.IpV6.Value);
+                Assert.IsFalse(data.Ip.HasValue);
+            }
+        }
+
+        [TestMethod]
+        public void Process_UnparseableQueryEvidence_FallsThroughToServer()
+        {
+            using (var flowData = Wrapper.Pipeline.CreateFlowData())
+            {
+                flowData.AddEvidence("query.client-ip", "not-an-ip");
+                flowData.AddEvidence("server.client-ip", "85.118.2.126");
+                flowData.Process();
+
+                var data = flowData.Get<IIpIntelligenceData>();
+                Assert.IsTrue(data.Ip.HasValue,
+                    "An unparseable query.client-ip must not block a usable server.client-ip.");
+                Assert.AreEqual(IPAddress.Parse("85.118.2.126"), data.Ip.Value);
+                Assert.IsTrue(data.Country.HasValue,
+                    "The native lookup must also fall through to the usable evidence, " +
+                    "not only the echo.");
+            }
+        }
+
+        [TestMethod]
+        public void Process_ForwardedChainEvidence_UsesFirstEntry()
+        {
+            using (var flowData = Wrapper.Pipeline.CreateFlowData())
+            {
+                flowData.AddEvidence("server.client-ip", "85.118.2.126:53169, 10.0.0.1");
+                flowData.Process();
+
+                var data = flowData.Get<IIpIntelligenceData>();
+                Assert.IsTrue(data.Ip.HasValue,
+                    "A forwarded chain should echo its first entry.");
+                Assert.AreEqual(IPAddress.Parse("85.118.2.126"), data.Ip.Value);
+                Assert.IsTrue(data.Country.HasValue,
+                    "The native lookup reads the same first entry.");
+            }
+        }
+
+        [TestMethod]
+        public void Process_ChainWithUnparseableFirstEntry_FallsThroughToServer()
+        {
+            using (var flowData = Wrapper.Pipeline.CreateFlowData())
+            {
+                // The native parser reads only the first entry of a
+                // chain, so this value is unusable despite the second
+                // entry and must not be passed on, it would abort the
+                // native evidence walk.
+                flowData.AddEvidence("query.client-ip", "not-an-ip, 1.2.3.4");
+                flowData.AddEvidence("server.client-ip", "85.118.2.126");
+                flowData.Process();
+
+                var data = flowData.Get<IIpIntelligenceData>();
+                Assert.IsTrue(data.Ip.HasValue,
+                    "A chain whose first entry cannot be parsed must not block " +
+                    "usable lower priority evidence.");
+                Assert.AreEqual(IPAddress.Parse("85.118.2.126"), data.Ip.Value);
+                Assert.IsTrue(data.Country.HasValue,
+                    "The native lookup must fall through too.");
+            }
+        }
+
+        [TestMethod]
+        public void Process_CidrEvidence_EchoesPrefixAndResolves()
+        {
+            using (var flowData = Wrapper.Pipeline.CreateFlowData())
+            {
+                flowData.AddEvidence("server.client-ip", "85.118.2.126/24");
+                flowData.Process();
+
+                var data = flowData.Get<IIpIntelligenceData>();
+                Assert.IsTrue(data.Ip.HasValue,
+                    "The native parser stops at the slash and looks up the " +
+                    "prefix address, so the echo reports the same address.");
+                Assert.AreEqual(IPAddress.Parse("85.118.2.126"), data.Ip.Value);
+                Assert.IsTrue(data.Country.HasValue,
+                    "The prefix address should resolve.");
+            }
+        }
+
+        [TestMethod]
+        public void Process_InvalidEvidenceOnly_NoValueMessageSaysInvalid()
+        {
+            using (var flowData = Wrapper.Pipeline.CreateFlowData())
+            {
+                flowData.AddEvidence("server.client-ip", "not-an-ip");
+                flowData.Process();
+
+                var data = flowData.Get<IIpIntelligenceData>();
+                Assert.IsFalse(data.Ip.HasValue);
+                Assert.IsFalse(data.IpV6.HasValue);
+                StringAssert.Contains(data.Ip.NoValueMessage, "not valid",
+                    "Provided but unusable evidence must be reported as invalid, " +
+                    "not as missing.");
+                StringAssert.Contains(data.IpV6.NoValueMessage, "not valid");
+            }
+        }
+
+        [TestMethod]
+        public void Process_PortSuffixedEvidence_SameLookupAsBareAddress()
+        {
+            string bareCountry;
+            using (var flowData = Wrapper.Pipeline.CreateFlowData())
+            {
+                flowData.AddEvidence("server.client-ip", "85.118.2.126");
+                flowData.Process();
+
+                var data = flowData.Get<IIpIntelligenceData>();
+                Assert.IsTrue(data.Country.HasValue,
+                    "Country should resolve for the bare address.");
+                bareCountry = data.Country.Value;
+            }
+            using (var flowData = Wrapper.Pipeline.CreateFlowData())
+            {
+                flowData.AddEvidence("server.client-ip", "85.118.2.126:53169");
+                flowData.Process();
+
+                var data = flowData.Get<IIpIntelligenceData>();
+                Assert.IsTrue(data.Country.HasValue,
+                    "Country should resolve for the port suffixed address.");
+                Assert.AreEqual(bareCountry, data.Country.Value,
+                    "A port suffix must not change the lookup result.");
+            }
+        }
+
+        [TestMethod]
         public void Process_NoIpEvidence_BothNoValue()
         {
             using (var flowData = Wrapper.Pipeline.CreateFlowData())
