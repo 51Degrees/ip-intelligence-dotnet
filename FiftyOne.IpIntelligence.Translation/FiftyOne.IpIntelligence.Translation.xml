@@ -202,6 +202,13 @@
         <member name="M:FiftyOne.IpIntelligence.Translation.FlowElements.CountriesTranslationEngine.ProcessInternal(FiftyOne.Pipeline.Core.Data.IFlowData)">
             <inheritdoc/>
         </member>
+        <member name="M:FiftyOne.IpIntelligence.Translation.FlowElements.CountriesTranslationEngine.GetWeightedOrEmpty(FiftyOne.IpIntelligence.Translation.Data.ICountriesTranslationData,System.String)">
+            <summary>
+            Reads a weighted string list property from the element data,
+            returning an empty list when the property is absent, has no
+            value, or holds a differently typed no-value placeholder.
+            </summary>
+        </member>
         <member name="M:FiftyOne.IpIntelligence.Translation.FlowElements.CountriesTranslationEngine.BuildAndStoreAllLists(FiftyOne.IpIntelligence.Translation.Data.ICountriesTranslationData,System.Collections.Generic.IReadOnlyList{FiftyOne.Pipeline.Core.Data.IWeightedValue{System.String}},System.Collections.Generic.IReadOnlyList{FiftyOne.Pipeline.Core.Data.IWeightedValue{System.String}},FiftyOne.Pipeline.Translation.Data.Translator,System.StringComparer,System.String,System.String)">
             <summary>
             Builds the complete "All" lists for one dimension (geographical

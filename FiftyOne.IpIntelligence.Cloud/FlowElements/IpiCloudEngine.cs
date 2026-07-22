@@ -26,7 +26,6 @@ using FiftyOne.Pipeline.CloudRequestEngine.Data;
 using FiftyOne.Pipeline.CloudRequestEngine.FlowElements;
 using FiftyOne.Pipeline.Core.Data;
 using FiftyOne.Pipeline.Core.Data.Types;
-using FiftyOne.Pipeline.Core.Exceptions;
 using FiftyOne.Pipeline.Core.FlowElements;
 using FiftyOne.Pipeline.Engines.Data;
 using Microsoft.Extensions.Logging;
@@ -83,57 +82,47 @@ namespace FiftyOne.IpIntelligence.Cloud.FlowElements
 
         /// <summary>
         /// Perform the processing for this engine:
-        /// 1. Get the JSON data from the <see cref="CloudRequestEngine"/> 
-        /// response.
-        /// 2. Extract properties relevant to this engine.
-        /// 3. Deserialize JSON data to populate a 
-        /// <see cref="IpDataCloud"/> instance.
+        /// 1. Extract the "ip" section from the cloud JSON.
+        /// 2. Deserialize it to populate a <see cref="IpDataCloud"/>
+        /// instance.
+        ///
+        /// The base <see cref="CloudAspectEngineBase{T}"/> handles fetching
+        /// the JSON from the <see cref="CloudRequestEngine"/>, the
+        /// missing-engine error and the empty-response (cloud request
+        /// failed) case, then calls this method with the JSON.
         /// </summary>
         /// <param name="data">
-        /// The <see cref="IFlowData"/> instance containing data for the 
+        /// The <see cref="IFlowData"/> instance containing data for the
         /// current request.
         /// </param>
         /// <param name="aspectData">
         /// The <see cref="IpDataCloud"/> instance to populate with
         /// values.
         /// </param>
+        /// <param name="json">
+        /// The JSON response from the <see cref="CloudRequestEngine"/>.
+        /// </param>
         /// <exception cref="ArgumentNullException">
         /// Thrown if a required parameter is null
         /// </exception>
-        protected override void ProcessEngine(IFlowData data, IpDataCloud aspectData)
+        protected override void ProcessCloudEngine(IFlowData data, IpDataCloud aspectData, string json)
         {
-            if (data == null) { throw new ArgumentNullException(nameof(data)); }
             if (aspectData == null) { throw new ArgumentNullException(nameof(aspectData)); }
 
-            var requestData = data.GetFromElement(RequestEngine.GetInstance());
-            var json = requestData?.JsonResponse;
+            var dictionary = JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
+            var propertyValues = JsonConvert.DeserializeObject<Dictionary<string, object>>(dictionary["ip"].ToString(),
+                new JsonSerializerSettings()
+                {
+                    Converters = JSON_CONVERTERS,
+                });
 
-            if (string.IsNullOrEmpty(json))
-            {
-                throw new PipelineConfigurationException(
-                    $"Json response from cloud request engine is null. " +
-                    $"This is probably because there is not a " +
-                    $"'CloudRequestEngine' before the '{GetType().Name}' " +
-                    $"in the Pipeline. This engine will be unable " +
-                    $"to produce results until this is corrected.");
-            }
-            else
-            {
-                var dictionary = JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
-                var propertyValues = JsonConvert.DeserializeObject<Dictionary<string, object>>(dictionary["ip"].ToString(),
-                    new JsonSerializerSettings()
-                    {
-                        Converters = JSON_CONVERTERS,
-                    });
-
-                var ip = CloudDataHelper.CreateAPVDictionary(
-                    propertyValues,
-                    Properties.ToList(),
-                    CloudDataHelper.IpTypeConverter,
-                    Logger,
-                    GetType().Name);
-                aspectData.PopulateFrom(ip);
-            }
+            var ip = CloudDataHelper.CreateAPVDictionary(
+                propertyValues,
+                Properties.ToList(),
+                CloudDataHelper.IpTypeConverter,
+                Logger,
+                GetType().Name);
+            aspectData.PopulateFrom(ip);
         }
 
         /// <summary>
