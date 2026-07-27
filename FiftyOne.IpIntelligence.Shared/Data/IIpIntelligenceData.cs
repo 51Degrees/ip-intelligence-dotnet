@@ -1,24 +1,4 @@
-/* *********************************************************************
- * This Original Work is copyright of 51 Degrees Mobile Experts Limited.
- * Copyright 2026 51 Degrees Mobile Experts Limited, Davidson House,
- * Forbury Square, Reading, Berkshire, United Kingdom RG1 3EU.
- *
- * This Original Work is licensed under the European Union Public Licence
- * (EUPL) v.1.2 and is subject to its terms as set out below.
- *
- * If a copy of the EUPL was not distributed with this file, You can obtain
- * one at https://opensource.org/licenses/EUPL-1.2.
- *
- * The 'Compatible Licences' set out in the Appendix to the EUPL (as may be
- * amended by the European Commission) shall be deemed incompatible for
- * the purposes of the Work and the provisions of the compatibility
- * clause in Article 5 of the EUPL shall not apply.
- *
- * If using the Work as, or as part of, a network application, by
- * including the attribution notice(s) required under Article 5 of the EUPL
- * in the end user terms of the application under an appropriate heading,
- * such notice(s) shall fulfill the requirements of that article.
- * ********************************************************************* */
+
 using System.Net;
 using FiftyOne.Pipeline.Core.Data;
 using FiftyOne.Pipeline.Engines.Data;
@@ -67,6 +47,10 @@ namespace FiftyOne.IpIntelligence
 		/// </summary>
 		IAspectPropertyValue<string> ContinentCode2 { get; }
 		/// <summary>
+		/// The GeoNames identifier of the continent associated with the supplied location.
+		/// </summary>
+		IAspectPropertyValue<string> ContinentGeoNameId { get; }
+		/// <summary>
 		/// The name of the continent the supplied location is in.
 		/// </summary>
 		IAspectPropertyValue<string> ContinentName { get; }
@@ -91,9 +75,17 @@ namespace FiftyOne.IpIntelligence
 		/// </summary>
 		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> CountryCodesPopulation { get; }
 		/// <summary>
+		/// The GeoNames identifier of the country associated with the supplied location.
+		/// </summary>
+		IAspectPropertyValue<string> CountryGeoNameId { get; }
+		/// <summary>
 		/// The name of the county that the supplied location is in. In this case, a county is defined as an administrative sub-section of a country or state.
 		/// </summary>
 		IAspectPropertyValue<string> County { get; }
+		/// <summary>
+		/// The GeoNames identifier of the county, a second-level administrative subdivision (admin2) associated with the supplied location.
+		/// </summary>
+		IAspectPropertyValue<string> CountyGeoNameId { get; }
 		/// <summary>
 		/// The Alpha-3 ISO 4217 code of the currency associated with the supplied location.
 		/// </summary>
@@ -219,6 +211,14 @@ namespace FiftyOne.IpIntelligence
 		/// </summary>
 		IAspectPropertyValue<string> State { get; }
 		/// <summary>
+		/// The GeoNames database identifier for the state (first-level administrative subdivision, admin1) that the supplied location is in.
+		/// </summary>
+		IAspectPropertyValue<string> StateGeoNameId { get; }
+		/// <summary>
+		/// A list of GeoNames state identifiers, first-level administrative subdivisions (admin1) that overlap within the area associated in the provided evidence. Results are weighted and ordered by each state's proportion of the overlapping area. Areas that cannot be resolved to the state level will not contribute to the resulting data.
+		/// </summary>
+		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> StateGeoNamesGeographical { get; }
+		/// <summary>
 		/// The name of the suburb that the supplied location is in.
 		/// </summary>
 		IAspectPropertyValue<string> Suburb { get; }
@@ -234,6 +234,10 @@ namespace FiftyOne.IpIntelligence
 		/// The name of the town that the supplied location is in.
 		/// </summary>
 		IAspectPropertyValue<string> Town { get; }
+		/// <summary>
+		/// The GeoNames identifier of the town or populated place nearest to the supplied location.
+		/// </summary>
+		IAspectPropertyValue<string> TownGeoNameId { get; }
 		/// <summary>
 		/// The zip or postal code that the supplied location falls under.
 		/// </summary>

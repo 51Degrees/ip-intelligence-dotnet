@@ -1,24 +1,4 @@
-/* *********************************************************************
- * This Original Work is copyright of 51 Degrees Mobile Experts Limited.
- * Copyright 2026 51 Degrees Mobile Experts Limited, Davidson House,
- * Forbury Square, Reading, Berkshire, United Kingdom RG1 3EU.
- *
- * This Original Work is licensed under the European Union Public Licence
- * (EUPL) v.1.2 and is subject to its terms as set out below.
- *
- * If a copy of the EUPL was not distributed with this file, You can obtain
- * one at https://opensource.org/licenses/EUPL-1.2.
- *
- * The 'Compatible Licences' set out in the Appendix to the EUPL (as may be
- * amended by the European Commission) shall be deemed incompatible for
- * the purposes of the Work and the provisions of the compatibility
- * clause in Article 5 of the EUPL shall not apply.
- *
- * If using the Work as, or as part of, a network application, by
- * including the attribution notice(s) required under Article 5 of the EUPL
- * in the end user terms of the application under an appropriate heading,
- * such notice(s) shall fulfill the requirements of that article.
- * ********************************************************************* */
+
 using System.Net;
 using FiftyOne.Pipeline.Core.Data;
 using FiftyOne.Pipeline.Core.FlowElements;
@@ -74,13 +54,16 @@ namespace FiftyOne.IpIntelligence.Shared
 				{ "BrowserDiversity", typeof(IAspectPropertyValue<int>) },
 				{ "ConnectionType", typeof(IAspectPropertyValue<string>) },
 				{ "ContinentCode2", typeof(IAspectPropertyValue<string>) },
+				{ "ContinentGeoNameId", typeof(IAspectPropertyValue<string>) },
 				{ "ContinentName", typeof(IAspectPropertyValue<string>) },
 				{ "Country", typeof(IAspectPropertyValue<string>) },
 				{ "CountryCode", typeof(IAspectPropertyValue<string>) },
 				{ "CountryCode3", typeof(IAspectPropertyValue<string>) },
 				{ "CountryCodesGeographical", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
 				{ "CountryCodesPopulation", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
+				{ "CountryGeoNameId", typeof(IAspectPropertyValue<string>) },
 				{ "County", typeof(IAspectPropertyValue<string>) },
+				{ "CountyGeoNameId", typeof(IAspectPropertyValue<string>) },
 				{ "CurrencyCode", typeof(IAspectPropertyValue<string>) },
 				{ "DialCode", typeof(IAspectPropertyValue<string>) },
 				{ "HardwareDiversity", typeof(IAspectPropertyValue<int>) },
@@ -112,10 +95,13 @@ namespace FiftyOne.IpIntelligence.Shared
 				{ "RegisteredName", typeof(IAspectPropertyValue<string>) },
 				{ "RegisteredOwner", typeof(IAspectPropertyValue<string>) },
 				{ "State", typeof(IAspectPropertyValue<string>) },
+				{ "StateGeoNameId", typeof(IAspectPropertyValue<string>) },
+				{ "StateGeoNamesGeographical", typeof(IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>) },
 				{ "Suburb", typeof(IAspectPropertyValue<string>) },
 				{ "TimeZoneIana", typeof(IAspectPropertyValue<string>) },
 				{ "TimeZoneOffset", typeof(IAspectPropertyValue<int>) },
 				{ "Town", typeof(IAspectPropertyValue<string>) },
+				{ "TownGeoNameId", typeof(IAspectPropertyValue<string>) },
 				{ "ZipCode", typeof(IAspectPropertyValue<string>) }
 			};
 
@@ -152,6 +138,10 @@ namespace FiftyOne.IpIntelligence.Shared
 		/// </summary>
 		public IAspectPropertyValue<string> ContinentCode2 { get { return GetAs<IAspectPropertyValue<string>>("ContinentCode2"); } }
 		/// <summary>
+		/// The GeoNames identifier of the continent associated with the supplied location.
+		/// </summary>
+		public IAspectPropertyValue<string> ContinentGeoNameId { get { return GetAs<IAspectPropertyValue<string>>("ContinentGeoNameId"); } }
+		/// <summary>
 		/// The name of the continent the supplied location is in.
 		/// </summary>
 		public IAspectPropertyValue<string> ContinentName { get { return GetAs<IAspectPropertyValue<string>>("ContinentName"); } }
@@ -176,9 +166,17 @@ namespace FiftyOne.IpIntelligence.Shared
 		/// </summary>
 		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> CountryCodesPopulation { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("CountryCodesPopulation"); } }
 		/// <summary>
+		/// The GeoNames identifier of the country associated with the supplied location.
+		/// </summary>
+		public IAspectPropertyValue<string> CountryGeoNameId { get { return GetAs<IAspectPropertyValue<string>>("CountryGeoNameId"); } }
+		/// <summary>
 		/// The name of the county that the supplied location is in. In this case, a county is defined as an administrative sub-section of a country or state.
 		/// </summary>
 		public IAspectPropertyValue<string> County { get { return GetAs<IAspectPropertyValue<string>>("County"); } }
+		/// <summary>
+		/// The GeoNames identifier of the county, a second-level administrative subdivision (admin2) associated with the supplied location.
+		/// </summary>
+		public IAspectPropertyValue<string> CountyGeoNameId { get { return GetAs<IAspectPropertyValue<string>>("CountyGeoNameId"); } }
 		/// <summary>
 		/// The Alpha-3 ISO 4217 code of the currency associated with the supplied location.
 		/// </summary>
@@ -304,6 +302,14 @@ namespace FiftyOne.IpIntelligence.Shared
 		/// </summary>
 		public IAspectPropertyValue<string> State { get { return GetAs<IAspectPropertyValue<string>>("State"); } }
 		/// <summary>
+		/// The GeoNames database identifier for the state (first-level administrative subdivision, admin1) that the supplied location is in.
+		/// </summary>
+		public IAspectPropertyValue<string> StateGeoNameId { get { return GetAs<IAspectPropertyValue<string>>("StateGeoNameId"); } }
+		/// <summary>
+		/// A list of GeoNames state identifiers, first-level administrative subdivisions (admin1) that overlap within the area associated in the provided evidence. Results are weighted and ordered by each state's proportion of the overlapping area. Areas that cannot be resolved to the state level will not contribute to the resulting data.
+		/// </summary>
+		public IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> StateGeoNamesGeographical { get { return GetAs<IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>>>("StateGeoNamesGeographical"); } }
+		/// <summary>
 		/// The name of the suburb that the supplied location is in.
 		/// </summary>
 		public IAspectPropertyValue<string> Suburb { get { return GetAs<IAspectPropertyValue<string>>("Suburb"); } }
@@ -319,6 +325,10 @@ namespace FiftyOne.IpIntelligence.Shared
 		/// The name of the town that the supplied location is in.
 		/// </summary>
 		public IAspectPropertyValue<string> Town { get { return GetAs<IAspectPropertyValue<string>>("Town"); } }
+		/// <summary>
+		/// The GeoNames identifier of the town or populated place nearest to the supplied location.
+		/// </summary>
+		public IAspectPropertyValue<string> TownGeoNameId { get { return GetAs<IAspectPropertyValue<string>>("TownGeoNameId"); } }
 		/// <summary>
 		/// The zip or postal code that the supplied location falls under.
 		/// </summary>
