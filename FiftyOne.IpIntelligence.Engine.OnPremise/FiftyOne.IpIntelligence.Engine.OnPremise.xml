@@ -4,6 +4,56 @@
         <name>FiftyOne.IpIntelligence.Engine.OnPremise</name>
     </assembly>
     <members>
+        <member name="T:FiftyOne.IpIntelligence.Engine.OnPremise.ClientIpParser">
+            <summary>
+            Parses the client IP address out of an evidence value.
+            <para>
+            Client IP evidence does not arrive in one shape. An edge may forward
+            it as a comma-separated list, and a connection-derived value routinely
+            carries a port (`82.132.237.238:34947`). Bare
+            <see cref="M:System.Net.IPAddress.TryParse(System.String,System.Net.IPAddress@)"/> rejects both,
+            so the same request could resolve elsewhere in the pipeline while this
+            engine saw no usable IP. This is the single tolerant parser used for
+            all client IP evidence.
+            </para>
+            </summary>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.ClientIpParser.TryParse(System.String,System.Net.IPAddress@,System.String@)">
+            <summary>
+            Reads an IP address from a raw client-ip evidence value.
+            </summary>
+            <param name="rawValue">
+            The evidence value. May be null, may carry a port, and may be a
+            comma-separated forwarded list of which the first entry is used.
+            </param>
+            <param name="address">The address read from the value.</param>
+            <param name="addressText">
+            The canonical textual form of <paramref name="address"/>, for
+            passing to services that take a string. Always canonical, never
+            the raw input: .NET accepts shapes the native engine's parser
+            rejects - an IPv6 zone index ("fe80::1%1"), inet_aton IPv4 forms
+            ("1.2.3", octal "012.1.2.3") - so forwarding the raw text would
+            reintroduce the native INCORRECT_IP_ADDRESS_FORMAT abort this
+            parser exists to prevent, and in the octal case would make the
+            forwarded value and the parsed address different addresses. A
+            zone index is stripped: it has no meaning to an IP lookup.
+            </param>
+            <returns>True when an address was read.</returns>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.ClientIpParser.TryParseBracketed(System.String,System.Net.IPAddress@,System.String@)">
+            <summary>
+            Parses "[address]" or "[address]:port" where the bracketed
+            address is IPv6.
+            </summary>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.ClientIpParser.StripZoneIndex(System.Net.IPAddress)">
+            <summary>
+            Returns the address without its IPv6 zone index ("fe80::1%1" ->
+            "fe80::1"). A zone index identifies the local interface the
+            address is reachable through; it has no meaning to an IP lookup,
+            and the native engine's parser rejects the '%' character.
+            </summary>
+        </member>
         <member name="T:FiftyOne.IpIntelligence.Engine.OnPremise.Data.ComponentMetaData">
             <summary>
             Data class that contains meta-data relating to a specific 

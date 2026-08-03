@@ -272,53 +272,78 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
                 {
                     if (EvidenceKeyFilter.Include(evidenceItem.Key))
                     {
-                        relevantEvidence.Add(new KeyValuePair<string, string>(
-                            evidenceItem.Key,
-                            evidenceItem.Value.ToString()));
+                        // The native engine raises
+                        // INCORRECT_IP_ADDRESS_FORMAT on a value it cannot
+                        // parse, which ends its processing before
+                        // lower-priority evidence prefixes are tried. Parse
+                        // here instead: a value the tolerant parser can read
+                        // is passed on (ported, listed and bracketed forms
+                        // in a bare-address form; already-bare values
+                        // unchanged), and a value it cannot read is treated
+                        // as "this source yielded nothing" so the native
+                        // fall-through still happens. Dropping such a value
+                        // cannot lose usable evidence: every key this filter
+                        // admits comes from the data file's IP headers, and
+                        // the native engine parses every value it consumes
+                        // as an IP address, so a value that does not parse
+                        // could never have contributed a result.
+                        if (ClientIpParser.TryParse(
+                            evidenceItem.Value?.ToString(),
+                            out _,
+                            out var addressText))
+                        {
+                            relevantEvidence.Add(new KeyValuePair<string, string>(
+                                evidenceItem.Key,
+                                addressText));
+                        }
                     }
                 }
                 (ipData as IpDataOnPremise).SetResults(_engine.process(relevantEvidence));
             }
 
-            // Capture the IP used for the lookup so we can echo it back as
-            // synthetic Ip / IpV6 properties. Priority mirrors the cloud's
-            // existing NetworkElement (query.client-ip > server.client-ip
-            // > anything else parseable from filtered evidence).
+            // Capture the client IP of the request so we can echo it back
+            // as synthetic Ip / IpV6 properties. Priority is
+            // query.client-ip > server.client-ip > anything else parseable
+            // from filtered evidence, but selection is by validity, not
+            // presence: a value that fails to parse lets the search
+            // continue to the next source instead of ending it.
             System.Net.IPAddress echoV4 = null;
             System.Net.IPAddress echoV6 = null;
 
-            string chosenIp = null;
-            if (data.TryGetEvidence("query.client-ip", out string queryIp))
+            System.Net.IPAddress chosenAddress = null;
+
+            bool TryUseEvidence(string evidenceKey)
             {
-                chosenIp = queryIp;
+                return data.TryGetEvidence(evidenceKey, out object rawValue) &&
+                    ClientIpParser.TryParse(
+                        rawValue?.ToString(), out chosenAddress, out _);
             }
-            else if (data.TryGetEvidence("server.client-ip", out string serverIp))
-            {
-                chosenIp = serverIp;
-            }
-            else
+
+            if (TryUseEvidence("query.client-ip") == false &&
+                TryUseEvidence("server.client-ip") == false)
             {
                 foreach (var evidenceItem in data.GetEvidence().AsDictionary())
                 {
                     if (EvidenceKeyFilter.Include(evidenceItem.Key) &&
-                        evidenceItem.Value is string candidate &&
-                        System.Net.IPAddress.TryParse(candidate, out _))
+                        ClientIpParser.TryParse(
+                            evidenceItem.Value?.ToString(),
+                            out chosenAddress,
+                            out _))
                     {
-                        chosenIp = candidate;
                         break;
                     }
                 }
             }
 
-            if (chosenIp != null && System.Net.IPAddress.TryParse(chosenIp, out var parsed))
+            if (chosenAddress != null)
             {
-                if (parsed.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                if (chosenAddress.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
                 {
-                    echoV4 = parsed;
+                    echoV4 = chosenAddress;
                 }
-                else if (parsed.AddressFamily == System.Net.Sockets.AddressFamily.InterNetworkV6)
+                else if (chosenAddress.AddressFamily == System.Net.Sockets.AddressFamily.InterNetworkV6)
                 {
-                    echoV6 = parsed;
+                    echoV6 = chosenAddress;
                 }
             }
 
