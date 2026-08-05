@@ -23,6 +23,7 @@
 using FiftyOne.IpIntelligence.Engine.OnPremise.Data;
 using FiftyOne.IpIntelligence.Engine.OnPremise.Interop;
 using FiftyOne.IpIntelligence.Engine.OnPremise.Wrappers;
+using FiftyOne.IpIntelligence.Shared;
 using FiftyOne.IpIntelligence.Shared.Data;
 using FiftyOne.IpIntelligence.Shared.FlowElements;
 using FiftyOne.Pipeline.Core.Data;
@@ -266,15 +267,34 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
             if (data == null) { throw new ArgumentNullException(nameof(data)); }
             if (ipData == null) { throw new ArgumentNullException(nameof(ipData)); }
 
+            bool ipEvidenceProvided = false;
+            bool ipEvidenceUsable = false;
             using (var relevantEvidence = new EvidenceIpiSwig())
             {
                 foreach (var evidenceItem in data.GetEvidence().AsDictionary())
                 {
                     if (EvidenceKeyFilter.Include(evidenceItem.Key))
                     {
-                        relevantEvidence.Add(new KeyValuePair<string, string>(
-                            evidenceItem.Key,
-                            evidenceItem.Value.ToString()));
+                        var value = evidenceItem.Value.ToString();
+                        if (string.IsNullOrWhiteSpace(value) == false)
+                        {
+                            ipEvidenceProvided = true;
+                        }
+                        // The native engine reads a single address from
+                        // the start of the value, so port suffixes,
+                        // forwarded chains and CIDR ranges are handled
+                        // there. A value it would reject is skipped, it
+                        // would otherwise abort the native evidence walk
+                        // before lower priority evidence is tried. The
+                        // native parser takes the value verbatim, so
+                        // trim the whitespace it would trip over.
+                        if (IpEvidenceValue.TryParse(value, out _))
+                        {
+                            ipEvidenceUsable = true;
+                            relevantEvidence.Add(new KeyValuePair<string, string>(
+                                evidenceItem.Key,
+                                value.Trim()));
+                        }
                     }
                 }
                 (ipData as IpDataOnPremise).SetResults(_engine.process(relevantEvidence));
@@ -283,46 +303,49 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
             // Capture the IP used for the lookup so we can echo it back as
             // synthetic Ip / IpV6 properties. Priority mirrors the cloud's
             // existing NetworkElement (query.client-ip > server.client-ip
-            // > anything else parseable from filtered evidence).
-            System.Net.IPAddress echoV4 = null;
-            System.Net.IPAddress echoV6 = null;
-
-            string chosenIp = null;
-            if (data.TryGetEvidence("query.client-ip", out string queryIp))
-            {
-                chosenIp = queryIp;
-            }
-            else if (data.TryGetEvidence("server.client-ip", out string serverIp))
-            {
-                chosenIp = serverIp;
-            }
-            else
+            // > anything else parseable from filtered evidence). An
+            // unparseable higher priority value falls through, so a usable
+            // address elsewhere in the evidence still wins.
+            System.Net.IPAddress echo = null;
+            if ((data.TryGetEvidence("query.client-ip", out string queryIp) &&
+                IpEvidenceValue.TryParse(queryIp, out echo)) == false &&
+                (data.TryGetEvidence("server.client-ip", out string serverIp) &&
+                IpEvidenceValue.TryParse(serverIp, out echo)) == false)
             {
                 foreach (var evidenceItem in data.GetEvidence().AsDictionary())
                 {
                     if (EvidenceKeyFilter.Include(evidenceItem.Key) &&
                         evidenceItem.Value is string candidate &&
-                        System.Net.IPAddress.TryParse(candidate, out _))
+                        IpEvidenceValue.TryParse(candidate, out echo))
                     {
-                        chosenIp = candidate;
                         break;
                     }
                 }
             }
 
-            if (chosenIp != null && System.Net.IPAddress.TryParse(chosenIp, out var parsed))
+            System.Net.IPAddress echoV4 = null;
+            System.Net.IPAddress echoV6 = null;
+            if (echo != null)
             {
-                if (parsed.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                if (echo.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
                 {
-                    echoV4 = parsed;
+                    echoV4 = echo;
                 }
-                else if (parsed.AddressFamily == System.Net.Sockets.AddressFamily.InterNetworkV6)
+                else if (echo.AddressFamily == System.Net.Sockets.AddressFamily.InterNetworkV6)
                 {
-                    echoV6 = parsed;
+                    echoV6 = echo;
                 }
             }
 
-            (ipData as IpDataOnPremise).SetEchoIp(echoV4, echoV6);
+            // Only claim the evidence was invalid when something was
+            // provided and none of it was usable. Evidence the native
+            // engine can use but the echo cannot represent, a CIDR range
+            // for example, must not be reported as invalid alongside
+            // populated lookup results.
+            (ipData as IpDataOnPremise).SetEchoIp(
+                echoV4,
+                echoV6,
+                ipEvidenceProvided && ipEvidenceUsable == false);
         }
 
         /// <summary>

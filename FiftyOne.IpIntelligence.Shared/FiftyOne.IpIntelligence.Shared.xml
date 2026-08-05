@@ -449,6 +449,57 @@
             <param name="concurrency">Expected concurrent accesses</param>
             <returns>This builder</returns>
         </member>
+        <member name="T:FiftyOne.IpIntelligence.Shared.IpEvidenceValue">
+            <summary>
+            Parses IP address evidence values the same way the native engine
+            does, so the managed layer and the native lookup always agree on
+            which address a value contains. The native parser reads a single
+            address from the start of the value and stops at the first break
+            character (comma, space, slash, closing bracket, newline, or a
+            colon once the address is known to be IPv4). Everything after the
+            break is ignored, which is what makes port suffixes
+            ("203.0.113.9:54321", "[2001:db8::9]:443"), forwarded chains
+            (first entry) and CIDR ranges (prefix address) parse.
+            One deliberate divergence: IPv4 is gated on a canonical dotted
+            quad, so legacy forms that would be reinterpreted ("85.118.2",
+            "192.168.015.1", "0x7f.0.0.1") fail here rather than resolving
+            to a different address than the sender meant.
+            </summary>
+        </member>
+        <member name="F:FiftyOne.IpIntelligence.Shared.IpEvidenceValue.BreakChars">
+            <summary>
+            Characters at which the native parser stops reading an
+            address and ignores the remainder of the value.
+            </summary>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Shared.IpEvidenceValue.TryParse(System.String,System.Net.IPAddress@)">
+            <summary>
+            Try to parse the evidence value as the IP address the native
+            engine would read from it. When this fails the native engine
+            would reject the value too, aborting its evidence walk, so a
+            failing value must not be handed to it.
+            </summary>
+            <param name="value">The raw evidence value.</param>
+            <param name="address">The parsed address, or null.</param>
+            <returns>True when an address was parsed.</returns>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Shared.IpEvidenceValue.TryParseIpv4Strict(System.String,System.Net.IPAddress@)">
+            <summary>
+            Parse an IPv4 token gated on a canonical dotted quad. The
+            round trip rejects the legacy inet_aton notations (octal or
+            hex components, fewer than four parts, a bare integer) that
+            IPAddress.TryParse would silently reinterpret as a different
+            address.
+            </summary>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Shared.IpEvidenceValue.TryParseIpv6(System.String,System.Net.IPAddress@)">
+            <summary>
+            Parse an IPv6 token. A zone index is rejected, the native
+            parser treats '%' as an invalid character, and so must
+            anything that is not an IPv6 address, a bracketed IPv4 for
+            example.
+            </summary>
+        </member>
         <member name="T:FiftyOne.IpIntelligence.Shared.IpIntelligenceData">
             <summary>
             Abstract base class for properties relating to an IP.
