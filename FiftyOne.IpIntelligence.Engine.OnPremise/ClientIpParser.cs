@@ -51,13 +51,11 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise
         /// <param name="addressText">
         /// The canonical textual form of <paramref name="address"/>, for
         /// passing to services that take a string. Always canonical, never
-        /// the raw input: .NET accepts shapes the native engine's parser
-        /// rejects - an IPv6 zone index ("fe80::1%1"), inet_aton IPv4 forms
-        /// ("1.2.3", octal "012.1.2.3") - so forwarding the raw text would
-        /// reintroduce the native INCORRECT_IP_ADDRESS_FORMAT abort this
-        /// parser exists to prevent, and in the octal case would make the
-        /// forwarded value and the parsed address different addresses. A
-        /// zone index is stripped: it has no meaning to an IP lookup.
+        /// the raw input: .NET accepts an IPv6 zone index ("fe80::1%1")
+        /// which the native engine's parser rejects, so forwarding the raw
+        /// text would reintroduce the native INCORRECT_IP_ADDRESS_FORMAT
+        /// abort this parser exists to prevent. The zone index is stripped
+        /// rather than kept: it has no meaning to an IP lookup.
         /// </param>
         /// <returns>True when an address was read.</returns>
         public static bool TryParse(
@@ -95,7 +93,8 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise
 
             // A bare address. The text reported is the canonical form, not
             // the supplied text - see the addressText doc for why.
-            if (IPAddress.TryParse(candidate, out address))
+            if (IsDottedQuadOrIpV6(candidate) &&
+                IPAddress.TryParse(candidate, out address))
             {
                 address = StripZoneIndex(address);
                 addressText = address.ToString();
@@ -112,7 +111,8 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise
                 IsValidPort(candidate.Substring(portSeparatorIndex + 1)))
             {
                 var addressPart = candidate.Substring(0, portSeparatorIndex);
-                if (IPAddress.TryParse(addressPart, out address) &&
+                if (IsDottedQuadOrIpV6(addressPart) &&
+                    IPAddress.TryParse(addressPart, out address) &&
                     address.AddressFamily == AddressFamily.InterNetwork)
                 {
                     addressText = address.ToString();
@@ -175,6 +175,47 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise
                 address.ScopeId != 0
                 ? new IPAddress(address.GetAddressBytes())
                 : address;
+        }
+
+        /// <summary>
+        /// True when the text is a plain dotted-quad IPv4 address, or holds
+        /// a ':' and so can only be an IPv6 value. .NET additionally accepts
+        /// inet_aton IPv4 forms - a bare number ("3232235521" -> 192.168.0.1),
+        /// fewer than four parts ("1.2.3"), and octal octets ("012.1.2.3" ->
+        /// 10.1.2.3, which the native engine's atoi reads as 12.1.2.3). None
+        /// of those are a client IP: accepting them lets numeric junk count
+        /// as a valid address and outrank a real one, and resolves a
+        /// different address than the native lookup.
+        /// </summary>
+        private static bool IsDottedQuadOrIpV6(string text)
+        {
+            if (text.IndexOf(':') >= 0)
+            {
+                return true;
+            }
+
+            var octets = text.Split('.');
+            if (octets.Length != 4)
+            {
+                return false;
+            }
+
+            foreach (var octet in octets)
+            {
+                if (octet.Length == 0 || octet.Length > 3 ||
+                    (octet.Length > 1 && octet[0] == '0'))
+                {
+                    return false;
+                }
+                foreach (var character in octet)
+                {
+                    if (character < '0' || character > '9')
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
         }
 
         private static bool IsValidPort(string portText)

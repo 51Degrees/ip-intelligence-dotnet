@@ -277,16 +277,17 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
                         // parse, which ends its processing before
                         // lower-priority evidence prefixes are tried. Parse
                         // here instead: a value the tolerant parser can read
-                        // is passed on (ported, listed and bracketed forms
-                        // in a bare-address form; already-bare values
-                        // unchanged), and a value it cannot read is treated
-                        // as "this source yielded nothing" so the native
-                        // fall-through still happens. Dropping such a value
-                        // cannot lose usable evidence: every key this filter
-                        // admits comes from the data file's IP headers, and
-                        // the native engine parses every value it consumes
-                        // as an IP address, so a value that does not parse
-                        // could never have contributed a result.
+                        // is passed on in canonical bare-address form, and a
+                        // value it cannot read is treated as "this source
+                        // yielded nothing" so the native
+                        // fall-through still happens. This is deliberately
+                        // stricter than the native parser, which stops at a
+                        // '/' or ' ' and so resolved "1.2.3.4/24" and
+                        // "1.2.3.4 x" as 1.2.3.4; those now yield no result.
+                        // Requiring a whole, valid address is what lets a
+                        // malformed high-priority value fall through to a
+                        // valid lower-priority one, which is the point of
+                        // the change.
                         if (ClientIpParser.TryParse(
                             evidenceItem.Value?.ToString(),
                             out _,

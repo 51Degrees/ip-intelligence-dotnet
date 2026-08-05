@@ -41,14 +41,16 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests
         [DataRow("1.2.3.4", "1.2.3.4", "1.2.3.4")]
         [DataRow("2001:db8::1", "2001:db8::1", "2001:db8::1")]
         [DataRow("2001:DB8::1", "2001:db8::1", "2001:db8::1")]
-        // Shapes .NET accepts but the native engine's parser rejects - the
-        // canonical text is what keeps them usable: an IPv6 zone index is
-        // stripped (it has no meaning to a lookup), and inet_aton IPv4
-        // forms (partial, octal) are expanded to the dotted quad .NET read
-        // them as, so the forwarded value and the parsed address agree.
+        // A shape .NET accepts but the native engine's parser rejects: the
+        // canonical text is what keeps it usable. The zone index is
+        // stripped, as it has no meaning to a lookup.
         [DataRow("fe80::1%1", "fe80::1", "fe80::1")]
-        [DataRow("1.2.3", "1.2.0.3", "1.2.0.3")]
-        [DataRow("012.1.2.3", "10.1.2.3", "10.1.2.3")]
+        // IPv4-mapped IPv6 stays in v6 form, so a v4 client arriving this
+        // way echoes as IpV6 with Ip NoValue, and is looked up in v6 form.
+        // Pinned so the choice is deliberate; unmapping it would be a
+        // parser change, not a test change.
+        [DataRow("::ffff:8.8.8.8", "::ffff:8.8.8.8", "::ffff:8.8.8.8")]
+        [DataRow("[::ffff:8.8.8.8]:443", "::ffff:8.8.8.8", "::ffff:8.8.8.8")]
         // IPv4 with a port.
         [DataRow("82.132.237.238:34947", "82.132.237.238", "82.132.237.238")]
         [DataRow("1.2.3.4:0", "1.2.3.4", "1.2.3.4")]
@@ -82,6 +84,14 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests
         [DataRow("not-an-ip")]
         // Out-of-range octet - the value from the original report.
         [DataRow("82.12.343.23")]
+        // inet_aton shapes .NET would parse but which are not client IPs:
+        // a bare number, fewer than four parts, and an octal octet the
+        // native engine would read as decimal.
+        [DataRow("12345")]
+        [DataRow("3232235521")]
+        [DataRow("1.2.3")]
+        [DataRow("012.1.2.3")]
+        [DataRow("12345:80")]
         // Port out of range, signed, or empty.
         [DataRow("1.2.3.4:65536")]
         [DataRow("1.2.3.4:-1")]
