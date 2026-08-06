@@ -23,6 +23,7 @@
 using FiftyOne.IpIntelligence.Translation.Data;
 using FiftyOne.Pipeline.Core.Data;
 using FiftyOne.Pipeline.Core.FlowElements;
+using FiftyOne.Pipeline.Engines;
 using FiftyOne.Pipeline.Engines.Data;
 using FiftyOne.Pipeline.Translation.Data;
 using FiftyOne.Pipeline.Translation.FlowElements;
@@ -178,7 +179,10 @@ namespace FiftyOne.IpIntelligence.Translation.FlowElements
 
             elementData[nameof(CountriesTranslationData.SortingCultureUsed)] = cultureUsed;
 
-            // Get weighted codes from IP engine.
+            // Get weighted codes from IP engine. The IP data or either
+            // property can be absent, most commonly when the cloud request
+            // failed, so treat every "not there" signal as no value rather
+            // than letting it escape as a per-request exception.
             IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> geoCodesWeighted = null;
             IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> popCodesWeighted = null;
             IIpIntelligenceData ipData = null;
@@ -190,17 +194,26 @@ namespace FiftyOne.IpIntelligence.Translation.FlowElements
             }
             catch (KeyNotFoundException) { }
             catch (PipelineException) { }
+            catch (PropertyMissingException) { }
 
-            // Get the weighted names (translated or pass-through English).
-            var geoTranslated = elementData.CountryNamesGeographicalTranslated;
-            var popTranslated = elementData.CountryNamesPopulationTranslated;
+            // Get the weighted names (translated or pass-through English)
+            // written by the base class. When the source properties were
+            // missing the base stores a no-value placeholder that is not
+            // necessarily of the weighted list type, so read defensively
+            // rather than through the typed getters.
+            var geoTranslated = GetWeightedOrEmpty(
+                elementData,
+                nameof(ICountriesTranslationData
+                    .CountryNamesGeographicalTranslated));
+            var popTranslated = GetWeightedOrEmpty(
+                elementData,
+                nameof(ICountriesTranslationData
+                    .CountryNamesPopulationTranslated));
 
             BuildAndStoreAllLists(
                 elementData,
-                geoTranslated.HasValue 
-                    ? geoTranslated.Value
-                    : Array.Empty<IWeightedValue<string>>(),
-                geoCodesWeighted.HasValue 
+                geoTranslated,
+                geoCodesWeighted?.HasValue == true
                     ? geoCodesWeighted.Value
                     : Array.Empty<IWeightedValue<string>>(),
                 translator, comparer,
@@ -211,10 +224,8 @@ namespace FiftyOne.IpIntelligence.Translation.FlowElements
 
             BuildAndStoreAllLists(
                 elementData,
-                popTranslated.HasValue 
-                    ? popTranslated.Value
-                    : Array.Empty<IWeightedValue<string>>(),
-                popCodesWeighted.HasValue 
+                popTranslated,
+                popCodesWeighted?.HasValue == true
                     ? popCodesWeighted.Value
                     : Array.Empty<IWeightedValue<string>>(),
                 translator, comparer,
@@ -222,6 +233,26 @@ namespace FiftyOne.IpIntelligence.Translation.FlowElements
                     .CountryNamesPopulationAllTranslated),
                 nameof(ICountriesTranslationData
                     .CountryCodesPopulationAll));
+        }
+
+        /// <summary>
+        /// Reads a weighted string list property from the element data,
+        /// returning an empty list when the property is absent, has no
+        /// value, or holds a differently typed no-value placeholder.
+        /// </summary>
+        private static IReadOnlyList<IWeightedValue<string>> GetWeightedOrEmpty(
+            ICountriesTranslationData elementData,
+            string propertyName)
+        {
+            if (elementData.AsDictionary()
+                    .TryGetValue(propertyName, out var value) &&
+                value is IAspectPropertyValue<
+                    IReadOnlyList<IWeightedValue<string>>> weighted &&
+                weighted.HasValue)
+            {
+                return weighted.Value;
+            }
+            return Array.Empty<IWeightedValue<string>>();
         }
 
         /// <summary>
