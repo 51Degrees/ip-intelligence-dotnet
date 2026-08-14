@@ -20,6 +20,7 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
+using FiftyOne.IpIntelligence.Engine.OnPremise.Data;
 using FiftyOne.Pipeline.Engines;
 using FiftyOne.Pipeline.Engines.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -198,6 +199,14 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.FlowElements
                     "Ip should be NoValue when every source is invalid.");
                 Assert.IsFalse(data.IpV6.HasValue,
                     "IpV6 should be NoValue when every source is invalid.");
+
+                // Issue #332 - NoValue here is "supplied and rejected", not
+                // "never supplied".
+                Assert.AreEqual(
+                    IpDataOnPremise.InvalidIpEvidenceMessage,
+                    data.Ip.NoValueMessage,
+                    "Exhausting every source must report the supplied IP " +
+                    "as invalid, not as absent.");
             }
         }
     }

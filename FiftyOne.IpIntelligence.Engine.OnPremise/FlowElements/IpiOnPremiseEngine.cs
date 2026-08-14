@@ -313,11 +313,35 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
 
             System.Net.IPAddress chosenAddress = null;
 
+            // Whether the request offered a client IP at all, tracked
+            // alongside the search so that "nothing resolved" can be told
+            // apart from "nothing was offered". Every key the filter admits
+            // is a client IP header - the whitelist is built from the data
+            // file's unique headers under the 'query.' and 'server.'
+            // prefixes - so a non-empty value none of these sources could
+            // parse means the IP supplied was invalid, which is reported
+            // differently. See SetEchoIp.
+            var clientIpSupplied = false;
+
+            void NoteSupplied(string rawText)
+            {
+                // A blank value is nothing offered rather than something
+                // unreadable, so it must not be reported as invalid.
+                if (string.IsNullOrWhiteSpace(rawText) == false)
+                {
+                    clientIpSupplied = true;
+                }
+            }
+
             bool TryUseEvidence(string evidenceKey)
             {
-                return data.TryGetEvidence(evidenceKey, out object rawValue) &&
-                    ClientIpParser.TryParse(
-                        rawValue?.ToString(), out chosenAddress, out _);
+                if (data.TryGetEvidence(evidenceKey, out object rawValue) == false)
+                {
+                    return false;
+                }
+                var rawText = rawValue?.ToString();
+                NoteSupplied(rawText);
+                return ClientIpParser.TryParse(rawText, out chosenAddress, out _);
             }
 
             if (TryUseEvidence("query.client-ip") == false &&
@@ -325,11 +349,13 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
             {
                 foreach (var evidenceItem in data.GetEvidence().AsDictionary())
                 {
-                    if (EvidenceKeyFilter.Include(evidenceItem.Key) &&
-                        ClientIpParser.TryParse(
-                            evidenceItem.Value?.ToString(),
-                            out chosenAddress,
-                            out _))
+                    if (EvidenceKeyFilter.Include(evidenceItem.Key) == false)
+                    {
+                        continue;
+                    }
+                    var rawText = evidenceItem.Value?.ToString();
+                    NoteSupplied(rawText);
+                    if (ClientIpParser.TryParse(rawText, out chosenAddress, out _))
                     {
                         break;
                     }
@@ -348,7 +374,8 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
                 }
             }
 
-            (ipData as IpDataOnPremise).SetEchoIp(echoV4, echoV6);
+            (ipData as IpDataOnPremise).SetEchoIp(
+                echoV4, echoV6, clientIpSupplied);
         }
 
         /// <summary>

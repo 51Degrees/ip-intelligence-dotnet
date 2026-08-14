@@ -26,6 +26,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 using System.Net;
 using FiftyOne.IpIntelligence;
+using FiftyOne.IpIntelligence.Engine.OnPremise.Data;
 
 namespace FiftyOne.IpIntelligence.OnPremise.Tests.FlowElements
 {
@@ -133,6 +134,135 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.FlowElements
                     "AsDictionary must NOT contain 'ip' when no IP evidence is supplied.");
                 Assert.IsFalse(dict.ContainsKey("ipv6"),
                     "AsDictionary must NOT contain 'ipv6' when no IP evidence is supplied.");
+            }
+        }
+
+        /// <summary>
+        /// https://github.com/51Degrees/ip-intelligence-dotnet/issues/332
+        /// - the reported repro. An IP was supplied and rejected, so saying
+        /// it was never supplied sends the caller looking for a header that
+        /// is in fact present.
+        /// </summary>
+        [TestMethod]
+        public void Process_UnparseableIpEvidence_ReportsInvalidNotMissing()
+        {
+            using (var flowData = Wrapper.Pipeline.CreateFlowData())
+            {
+                flowData.AddEvidence("server.client-ip", "not-an-ip");
+                flowData.Process();
+
+                var data = flowData.Get<IIpIntelligenceData>();
+                Assert.IsFalse(data.Ip.HasValue,
+                    "Ip should be NoValue for an unparseable client IP.");
+                Assert.IsFalse(data.IpV6.HasValue,
+                    "IpV6 should be NoValue for an unparseable client IP.");
+
+                Assert.AreEqual(
+                    IpDataOnPremise.InvalidIpEvidenceMessage,
+                    data.Ip.NoValueMessage,
+                    "Ip must report the supplied IP as invalid, not absent.");
+                Assert.AreEqual(
+                    IpDataOnPremise.InvalidIpEvidenceMessage,
+                    data.IpV6.NoValueMessage,
+                    "IpV6 must report the supplied IP as invalid, not absent.");
+            }
+        }
+
+        [TestMethod]
+        public void Process_EveryIpSourceUnparseable_ReportsInvalidNotMissing()
+        {
+            using (var flowData = Wrapper.Pipeline.CreateFlowData())
+            {
+                flowData.AddEvidence("query.client-ip", "82.12.343.23");
+                flowData.AddEvidence("server.client-ip", "not-an-ip");
+                flowData.Process();
+
+                var data = flowData.Get<IIpIntelligenceData>();
+                Assert.AreEqual(
+                    IpDataOnPremise.InvalidIpEvidenceMessage,
+                    data.Ip.NoValueMessage,
+                    "Exhausting every source without a parse is still " +
+                    "evidence supplied and rejected.");
+            }
+        }
+
+        [TestMethod]
+        public void Process_NoIpEvidence_ReportsNotSupplied()
+        {
+            using (var flowData = Wrapper.Pipeline.CreateFlowData())
+            {
+                // intentionally no IP evidence
+                flowData.Process();
+
+                var data = flowData.Get<IIpIntelligenceData>();
+                Assert.AreNotEqual(
+                    IpDataOnPremise.InvalidIpEvidenceMessage,
+                    data.Ip.NoValueMessage,
+                    "An absent client IP must not be reported as invalid.");
+                Assert.IsTrue(
+                    data.Ip.NoValueMessage.Contains("not supplied as evidence"),
+                    $"Unexpected Ip NoValueMessage: '{data.Ip.NoValueMessage}'");
+                Assert.IsTrue(
+                    data.IpV6.NoValueMessage.Contains("not supplied as evidence"),
+                    $"Unexpected IpV6 NoValueMessage: '{data.IpV6.NoValueMessage}'");
+            }
+        }
+
+        [TestMethod]
+        public void Process_BlankIpEvidence_ReportsNotSupplied()
+        {
+            using (var flowData = Wrapper.Pipeline.CreateFlowData())
+            {
+                // A blank header is nothing offered, not something
+                // unreadable, so it keeps the "not supplied" wording.
+                flowData.AddEvidence("server.client-ip", "   ");
+                flowData.Process();
+
+                var data = flowData.Get<IIpIntelligenceData>();
+                Assert.IsTrue(
+                    data.Ip.NoValueMessage.Contains("not supplied as evidence"),
+                    $"Unexpected Ip NoValueMessage: '{data.Ip.NoValueMessage}'");
+            }
+        }
+
+        [TestMethod]
+        public void Process_ValidIPv4Evidence_IpV6ReportsNotSupplied()
+        {
+            using (var flowData = Wrapper.Pipeline.CreateFlowData())
+            {
+                // The address parsed, so the family that did not resolve is
+                // absent from the request rather than invalid. Reporting it
+                // as invalid would be the same misreport in the opposite
+                // direction.
+                flowData.AddEvidence("server.client-ip", "1.2.3.4");
+                flowData.Process();
+
+                var data = flowData.Get<IIpIntelligenceData>();
+                Assert.IsTrue(data.Ip.HasValue);
+                Assert.AreEqual(
+                    "IPv6 was not supplied as evidence.",
+                    data.IpV6.NoValueMessage,
+                    "A valid IPv4 must leave IpV6 reported as not supplied.");
+            }
+        }
+
+        [TestMethod]
+        public void Process_InvalidThenValidIpEvidence_IpV6ReportsNotSupplied()
+        {
+            using (var flowData = Wrapper.Pipeline.CreateFlowData())
+            {
+                flowData.AddEvidence("query.client-ip", "82.12.343.23");
+                flowData.AddEvidence("server.client-ip", "1.2.3.4");
+                flowData.Process();
+
+                var data = flowData.Get<IIpIntelligenceData>();
+                Assert.IsTrue(data.Ip.HasValue);
+                Assert.AreEqual(
+                    "IPv6 was not supplied as evidence.",
+                    data.IpV6.NoValueMessage,
+                    "A rejected value elsewhere on the request must not " +
+                    "make the unresolved family read as invalid once " +
+                    "another source resolved.");
             }
         }
     }
