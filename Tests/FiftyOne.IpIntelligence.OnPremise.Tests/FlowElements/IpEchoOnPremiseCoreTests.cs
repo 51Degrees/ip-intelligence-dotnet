@@ -168,23 +168,10 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.FlowElements
             }
         }
 
-        [TestMethod]
-        public void Process_EveryIpSourceUnparseable_ReportsInvalidNotMissing()
-        {
-            using (var flowData = Wrapper.Pipeline.CreateFlowData())
-            {
-                flowData.AddEvidence("query.client-ip", "82.12.343.23");
-                flowData.AddEvidence("server.client-ip", "not-an-ip");
-                flowData.Process();
-
-                var data = flowData.Get<IIpIntelligenceData>();
-                Assert.AreEqual(
-                    IpDataOnPremise.InvalidIpEvidenceMessage,
-                    data.Ip.NoValueMessage,
-                    "Exhausting every source without a parse is still " +
-                    "evidence supplied and rejected.");
-            }
-        }
+        // The multi-source case - every source supplied and rejected - is
+        // covered by ClientIpSelectionOnPremiseTests
+        // .Process_EverySourceInvalid_BothNoValueAndNoThrow, which asserts
+        // the same message on the same evidence plus both HasValue flags.
 
         [TestMethod]
         public void Process_NoIpEvidence_ReportsNotSupplied()
