@@ -81,15 +81,41 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
         private readonly Lazy<IReadOnlyDictionary<string, object>> _asDict;
 
         /// <summary>
+        /// The reason reported for both echo properties when the request did
+        /// carry a client IP but none of the supplied values could be read as
+        /// an address.
+        /// </summary>
+        internal const string InvalidIpEvidenceMessage =
+            "The IP supplied as evidence was not valid.";
+
+        /// <summary>
         /// Set the echo IP values captured from request evidence.
         /// Called by IpiOnPremiseEngine.ProcessEngine.
         /// </summary>
         /// <param name="ipv4">Parsed IPv4 address, or null if none.</param>
         /// <param name="ipv6">Parsed IPv6 address, or null if none.</param>
-        internal void SetEchoIp(System.Net.IPAddress ipv4, System.Net.IPAddress ipv6)
+        /// <param name="clientIpSupplied">
+        /// True when the request carried a non-blank client IP value,
+        /// whatever its content. It separates the two reasons an echo
+        /// property can have no value: nothing was supplied, or what was
+        /// supplied could not be read as an IP address. Reporting the second
+        /// as the first sends the caller looking for a header that is in fact
+        /// present - see issue #332.
+        /// </param>
+        internal void SetEchoIp(
+            System.Net.IPAddress ipv4,
+            System.Net.IPAddress ipv6,
+            bool clientIpSupplied)
         {
             _echoIp = new FiftyOne.Pipeline.Engines.Data.AspectPropertyValue<System.Net.IPAddress>();
             _echoIpV6 = new FiftyOne.Pipeline.Engines.Data.AspectPropertyValue<System.Net.IPAddress>();
+
+            // Only when NEITHER family resolved does supplied evidence mean
+            // the supplied evidence was bad. If one family resolved, the
+            // other is genuinely absent from the request rather than
+            // invalid, and "was not valid" would misreport it.
+            var suppliedButInvalid =
+                clientIpSupplied && ipv4 == null && ipv6 == null;
 
             if (ipv4 != null)
             {
@@ -97,7 +123,9 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
             }
             else
             {
-                _echoIp.NoValueMessage = "IPv4 was not supplied as evidence.";
+                _echoIp.NoValueMessage = suppliedButInvalid
+                    ? InvalidIpEvidenceMessage
+                    : "IPv4 was not supplied as evidence.";
             }
 
             if (ipv6 != null)
@@ -106,7 +134,9 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
             }
             else
             {
-                _echoIpV6.NoValueMessage = "IPv6 was not supplied as evidence.";
+                _echoIpV6.NoValueMessage = suppliedButInvalid
+                    ? InvalidIpEvidenceMessage
+                    : "IPv6 was not supplied as evidence.";
             }
         }
 

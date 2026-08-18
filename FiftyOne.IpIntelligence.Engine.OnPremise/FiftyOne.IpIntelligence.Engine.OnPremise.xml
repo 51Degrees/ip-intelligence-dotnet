@@ -296,13 +296,28 @@
             property does not exist.
             </param>
         </member>
-        <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.Data.IpDataOnPremise.SetEchoIp(System.Net.IPAddress,System.Net.IPAddress)">
+        <member name="F:FiftyOne.IpIntelligence.Engine.OnPremise.Data.IpDataOnPremise.InvalidIpEvidenceMessage">
+            <summary>
+            The reason reported for both echo properties when the request did
+            carry a client IP but none of the supplied values could be read as
+            an address.
+            </summary>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.Data.IpDataOnPremise.SetEchoIp(System.Net.IPAddress,System.Net.IPAddress,System.Boolean)">
             <summary>
             Set the echo IP values captured from request evidence.
             Called by IpiOnPremiseEngine.ProcessEngine.
             </summary>
             <param name="ipv4">Parsed IPv4 address, or null if none.</param>
             <param name="ipv6">Parsed IPv6 address, or null if none.</param>
+            <param name="clientIpSupplied">
+            True when the request carried a non-blank client IP value,
+            whatever its content. It separates the two reasons an echo
+            property can have no value: nothing was supplied, or what was
+            supplied could not be read as an IP address. Reporting the second
+            as the first sends the caller looking for a header that is in fact
+            present - see issue #332.
+            </param>
         </member>
         <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.Data.IpDataOnPremise.AsDictionary">
             <summary>
