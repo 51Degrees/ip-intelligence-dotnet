@@ -59,10 +59,13 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
 
         /// <summary>
         /// The evidence keys the engine accepts, in the order the native
-        /// lookup consults them. See
+        /// lookup consults them. ProcessEngine walks this list both to
+        /// select the evidence handed to the native engine and to pick the
+        /// echoed client IP - changing it changes what reaches the lookup,
+        /// not just the echo. See
         /// <see cref="OrderEvidenceKeysAsNativeEngine"/>.
         /// </summary>
-        private string[] _echoEvidenceKeys;
+        private string[] _orderedEvidenceKeys;
 
         /// <summary>
         /// The evidence prefixes the native lookup reads, in the order it
@@ -286,8 +289,9 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
             if (ipData == null) { throw new ArgumentNullException(nameof(ipData)); }
 
             // Walk the client IP evidence keys in the order the native
-            // lookup consults them (see OrderEvidenceKeysAsNativeEngine),
-            // doing two things in the one pass:
+            // lookup consults them - see OrderEvidenceKeysAsNativeEngine
+            // for how that order is derived - doing two things in the one
+            // pass:
             //
             // 1. Hand every readable value to the native engine. It raises
             //    INCORRECT_IP_ADDRESS_FORMAT on a value it cannot parse,
@@ -323,7 +327,7 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
 
             using (var relevantEvidence = new EvidenceIpiSwig())
             {
-                foreach (var evidenceKey in _echoEvidenceKeys)
+                foreach (var evidenceKey in _orderedEvidenceKeys)
                 {
                     if (data.TryGetEvidence(evidenceKey, out object rawValue) == false)
                     {
@@ -354,22 +358,14 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
                 (ipData as IpDataOnPremise).SetResults(_engine.process(relevantEvidence));
             }
 
-            System.Net.IPAddress echoV4 = null;
-            System.Net.IPAddress echoV6 = null;
-            if (chosenAddress != null)
-            {
-                if (chosenAddress.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
-                {
-                    echoV4 = chosenAddress;
-                }
-                else if (chosenAddress.AddressFamily == System.Net.Sockets.AddressFamily.InterNetworkV6)
-                {
-                    echoV6 = chosenAddress;
-                }
-            }
-
             (ipData as IpDataOnPremise).SetEchoIp(
-                echoV4, echoV6, clientIpSupplied);
+                chosenAddress?.AddressFamily ==
+                    System.Net.Sockets.AddressFamily.InterNetwork
+                    ? chosenAddress : null,
+                chosenAddress?.AddressFamily ==
+                    System.Net.Sockets.AddressFamily.InterNetworkV6
+                    ? chosenAddress : null,
+                clientIpSupplied);
         }
 
         /// <summary>
@@ -477,10 +473,14 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
         private void InitEngineMetaData()
         {
             var engineKeys = new List<string>(_engine.getKeys());
+            // OrdinalIgnoreCase to match the comparer of the evidence
+            // dictionary the ProcessEngine walk reads through
+            // (FlowData.TryGetEvidence), so a key the filter admits is
+            // always a key the walk can find.
             _evidenceKeyFilter = new EvidenceKeyFilterWhitelist(
                 engineKeys,
-                StringComparer.InvariantCultureIgnoreCase);
-            _echoEvidenceKeys = OrderEvidenceKeysAsNativeEngine(engineKeys);
+                StringComparer.OrdinalIgnoreCase);
+            _orderedEvidenceKeys = OrderEvidenceKeysAsNativeEngine(engineKeys);
 
             _properties = ConstructProperties();
             _components = ConstructComponents();

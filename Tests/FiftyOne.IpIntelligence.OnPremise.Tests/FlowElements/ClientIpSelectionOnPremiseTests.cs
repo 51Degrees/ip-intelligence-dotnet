@@ -25,6 +25,7 @@ using FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements;
 using FiftyOne.Pipeline.Engines;
 using FiftyOne.Pipeline.Engines.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -204,6 +205,8 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.FlowElements
         {
             const string queryAddress = "5.6.7.8";
             const string serverAddress = "85.118.2.126";
+            RequireEvidenceKeys(
+                "query.client-ip", "query.client-ip-51d", "server.client-ip");
 
             using (var flowData = Wrapper.Pipeline.CreateFlowData())
             {
@@ -239,6 +242,7 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.FlowElements
                 { "query.client-ip-51d", "5.6.7.8" },
                 { "server.client-ip", "85.118.2.126" },
             };
+            RequireEvidenceKeys(suppliedAddresses.Keys.ToArray());
 
             using (var flowData = Wrapper.Pipeline.CreateFlowData())
             {
@@ -272,6 +276,7 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.FlowElements
         public void Process_UpperCasePrefix_LookupUsesTheEchoedAddress()
         {
             const string address = "5.6.7.8";
+            RequireEvidenceKeys("query.client-ip");
 
             using (var flowData = Wrapper.Pipeline.CreateFlowData())
             {
@@ -356,10 +361,11 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.FlowElements
         /// <summary>
         /// Assert that the lookup result beside the echo describes the
         /// echoed address: the echo must lie inside the IP range the lookup
-        /// resolved. The other supplied addresses must lie outside that
-        /// range for the check to have teeth; if the current data file puts
-        /// two of them in one range the test cannot tell which was looked
-        /// up, which is a property of the data rather than a defect.
+        /// resolved. Conditions that belong to the data file rather than
+        /// the code under test end the test as Inconclusive instead:
+        /// no range resolved for the address at all, or a range so wide it
+        /// also covers another supplied address, so the test cannot tell
+        /// which one was looked up.
         /// </summary>
         private static void AssertLookupDescribesEcho(
             IIpIntelligenceData data,
@@ -367,10 +373,15 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.FlowElements
         {
             Assert.IsTrue(data.Ip.HasValue,
                 "The echo must have a value for its lookup to be checked.");
-            Assert.IsTrue(data.IpRangeStart.HasValue && data.IpRangeEnd.HasValue,
-                "The lookup must resolve an IP range for the echo to be " +
-                "checked against.");
             var echoedAddress = data.Ip.Value;
+            if (data.IpRangeStart.HasValue == false ||
+                data.IpRangeEnd.HasValue == false)
+            {
+                Assert.Inconclusive(
+                    $"The data file resolves no IP range for " +
+                    $"{echoedAddress}, so the echo cannot be checked " +
+                    "against the lookup. Choose covered test addresses.");
+            }
             var rangeStart = data.IpRangeStart.Value;
             var rangeEnd = data.IpRangeEnd.Value;
 
@@ -394,30 +405,45 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.FlowElements
             }
         }
 
+        /// <summary>
+        /// Whether the address lies inside the range, comparing everything
+        /// in IPv6 form (MapToIPv6 is the identity for IPv6 addresses) so
+        /// an IPv4 echo still matches a range a data file reports as
+        /// IPv4-mapped IPv6 endpoints.
+        /// </summary>
         private static bool IsWithinRange(
             IPAddress address,
             IPAddress rangeStart,
             IPAddress rangeEnd)
         {
-            return address.AddressFamily == rangeStart.AddressFamily &&
-                address.AddressFamily == rangeEnd.AddressFamily &&
-                CompareAddressBytes(address, rangeStart) >= 0 &&
-                CompareAddressBytes(address, rangeEnd) <= 0;
+            var addressBytes = address.MapToIPv6().GetAddressBytes();
+            return addressBytes.AsSpan().SequenceCompareTo(
+                    rangeStart.MapToIPv6().GetAddressBytes()) >= 0 &&
+                addressBytes.AsSpan().SequenceCompareTo(
+                    rangeEnd.MapToIPv6().GetAddressBytes()) <= 0;
         }
 
-        private static int CompareAddressBytes(IPAddress left, IPAddress right)
+        /// <summary>
+        /// End the test as Inconclusive when the engine's evidence key
+        /// filter does not accept every key the test supplies - the key
+        /// set comes from the data file's unique headers, so a file
+        /// without one of these headers cannot exercise what the test
+        /// checks, and processing would silently ignore that evidence and
+        /// fail an assertion for the wrong reason.
+        /// </summary>
+        private void RequireEvidenceKeys(params string[] evidenceKeys)
         {
-            var leftBytes = left.GetAddressBytes();
-            var rightBytes = right.GetAddressBytes();
-            for (var index = 0; index < leftBytes.Length; index++)
+            var missingKeys = evidenceKeys
+                .Where(evidenceKey =>
+                    Wrapper.Engine.EvidenceKeyFilter.Include(evidenceKey) == false)
+                .ToList();
+            if (missingKeys.Count > 0)
             {
-                var comparison = leftBytes[index].CompareTo(rightBytes[index]);
-                if (comparison != 0)
-                {
-                    return comparison;
-                }
+                Assert.Inconclusive(
+                    "The data file's unique headers do not include " +
+                    $"{string.Join(", ", missingKeys)}, so this test " +
+                    "cannot run against it.");
             }
-            return 0;
         }
 
         [TestMethod]

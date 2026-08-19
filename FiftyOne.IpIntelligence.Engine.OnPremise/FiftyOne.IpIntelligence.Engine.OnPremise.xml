@@ -834,10 +834,13 @@
             Must be set after construction and before usage.
             </remarks>
         </member>
-        <member name="F:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine._echoEvidenceKeys">
+        <member name="F:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine._orderedEvidenceKeys">
             <summary>
             The evidence keys the engine accepts, in the order the native
-            lookup consults them. See
+            lookup consults them. ProcessEngine walks this list both to
+            select the evidence handed to the native engine and to pick the
+            echoed client IP - changing it changes what reaches the lookup,
+            not just the echo. See
             <see cref="M:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine.OrderEvidenceKeysAsNativeEngine(System.Collections.Generic.IReadOnlyCollection{System.String})"/>.
             </summary>
         </member>
