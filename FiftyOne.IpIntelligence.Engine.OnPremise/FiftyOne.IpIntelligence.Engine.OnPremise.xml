@@ -834,6 +834,19 @@
             Must be set after construction and before usage.
             </remarks>
         </member>
+        <member name="F:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine._echoEvidenceKeys">
+            <summary>
+            The evidence keys the engine accepts, in the order the native
+            lookup consults them. See
+            <see cref="M:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine.OrderEvidenceKeysAsNativeEngine(System.Collections.Generic.IReadOnlyCollection{System.String})"/>.
+            </summary>
+        </member>
+        <member name="F:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine._nativeEvidencePrefixPriority">
+            <summary>
+            The evidence prefixes the native lookup reads, in the order it
+            reads them. See <see cref="M:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine.OrderEvidenceKeysAsNativeEngine(System.Collections.Generic.IReadOnlyCollection{System.String})"/>.
+            </summary>
+        </member>
         <member name="P:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine.Config">
             <summary>
             Wrapper to pass general configuration from managed code to unmanaged 
@@ -961,6 +974,33 @@
             <summary>
             Dispose of any unmanaged resources.
             </summary>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine.OrderEvidenceKeysAsNativeEngine(System.Collections.Generic.IReadOnlyCollection{System.String})">
+            <summary>
+            Order the engine's evidence keys the way the native lookup
+            consults them, so that a walk over the result meets the keys in
+            the order fiftyoneDegreesResultsIpiFromEvidence does.
+            </summary>
+            <remarks>
+            The native engine lists its keys header by header, in the
+            priority order the data file defines, giving each header under
+            every prefix in turn: query.h0, server.h0, query.h1, server.h1,
+            ... (EngineIpi::initHttpHeaderKeys). It does not search evidence
+            in that interleaved order: fiftyoneDegreesResultsIpiFromEvidence
+            runs a full pass over the 'query.' prefix, walking the headers
+            in priority order, and only falls back to a 'server.' pass when
+            that produced nothing. This regroups the keys by prefix, keeping
+            the header order within each group.
+            </remarks>
+            <param name="engineKeys">
+            The keys as reported by the native engine.
+            </param>
+            <returns>
+            The keys grouped by <see cref="F:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine._nativeEvidencePrefixPriority"/>,
+            in their original relative order within each group. A key under
+            no known prefix is left out: the native lookup never reads such
+            evidence, so it must neither reach the lookup nor drive the echo.
+            </returns>
         </member>
         <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine.GetDataDownloadType(System.String)">
             <summary>
