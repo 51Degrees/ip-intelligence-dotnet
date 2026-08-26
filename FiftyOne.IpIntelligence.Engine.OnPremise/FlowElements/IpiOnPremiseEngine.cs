@@ -57,6 +57,28 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
 
         private IEvidenceKeyFilter _evidenceKeyFilter;
 
+        /// <summary>
+        /// The evidence keys the engine accepts, in the order the native
+        /// lookup consults them. ProcessEngine walks this list both to
+        /// select the evidence handed to the native engine and to pick the
+        /// echoed client IP - changing it changes what reaches the lookup,
+        /// not just the echo. See
+        /// <see cref="OrderEvidenceKeysAsNativeEngine"/>.
+        /// </summary>
+        private string[] _orderedEvidenceKeys;
+
+        /// <summary>
+        /// The evidence prefixes the native lookup reads, in the order it
+        /// reads them. See <see cref="OrderEvidenceKeysAsNativeEngine"/>.
+        /// </summary>
+        private static readonly string[] _nativeEvidencePrefixPriority =
+        {
+            Pipeline.Core.Constants.EVIDENCE_QUERY_PREFIX +
+                Pipeline.Core.Constants.EVIDENCE_SEPERATOR,
+            Pipeline.Core.Constants.EVIDENCE_SERVER_PREFIX +
+                Pipeline.Core.Constants.EVIDENCE_SEPERATOR,
+        };
+
         private IList<IFiftyOneAspectPropertyMetaData> _properties;
         private IList<IComponentMetaData> _components;
 
@@ -266,116 +288,84 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
             if (data == null) { throw new ArgumentNullException(nameof(data)); }
             if (ipData == null) { throw new ArgumentNullException(nameof(ipData)); }
 
+            // Walk the client IP evidence keys in the order the native
+            // lookup consults them - see OrderEvidenceKeysAsNativeEngine
+            // for how that order is derived - doing two things in the one
+            // pass:
+            //
+            // 1. Hand every readable value to the native engine. It raises
+            //    INCORRECT_IP_ADDRESS_FORMAT on a value it cannot parse,
+            //    which ends its processing before lower-priority evidence
+            //    is tried, so parse here instead: a value the tolerant
+            //    parser can read is passed on in canonical bare-address
+            //    form, and a value it cannot read is left out so the native
+            //    fall-through still happens. This is deliberately stricter
+            //    than the native parser, which stops at a '/' or ' ' and so
+            //    resolved "1.2.3.4/24" and "1.2.3.4 x" as 1.2.3.4; those
+            //    now yield no result. Requiring a whole, valid address is
+            //    what lets a malformed high-priority value fall through to
+            //    a valid lower-priority one (issue #319). The value goes
+            //    under the engine's own spelling of the key: the filter
+            //    admits any casing, but the native prefix match is
+            //    case-sensitive and would silently drop "Query.client-ip".
+            //
+            // 2. Capture the client IP to echo back as the synthetic Ip /
+            //    IpV6 properties. The first readable value in this order is
+            //    the one the native lookup resolves, so the echo names the
+            //    address the location properties beside it describe
+            //    (issue #333). Selection is by validity, not presence: an
+            //    unreadable value lets the search continue.
+            System.Net.IPAddress chosenAddress = null;
+
+            // Whether the request offered a client IP at all, so that
+            // "nothing resolved" can be told apart from "nothing was
+            // offered". Every key walked here is a client IP header, so a
+            // non-blank value none of them could parse means the IP
+            // supplied was invalid, which is reported differently. See
+            // SetEchoIp.
+            var clientIpSupplied = false;
+
             using (var relevantEvidence = new EvidenceIpiSwig())
             {
-                foreach (var evidenceItem in data.GetEvidence().AsDictionary())
+                foreach (var evidenceKey in _orderedEvidenceKeys)
                 {
-                    if (EvidenceKeyFilter.Include(evidenceItem.Key))
+                    if (data.TryGetEvidence(evidenceKey, out object rawValue) == false)
                     {
-                        // The native engine raises
-                        // INCORRECT_IP_ADDRESS_FORMAT on a value it cannot
-                        // parse, which ends its processing before
-                        // lower-priority evidence prefixes are tried. Parse
-                        // here instead: a value the tolerant parser can read
-                        // is passed on in canonical bare-address form, and a
-                        // value it cannot read is treated as "this source
-                        // yielded nothing" so the native
-                        // fall-through still happens. This is deliberately
-                        // stricter than the native parser, which stops at a
-                        // '/' or ' ' and so resolved "1.2.3.4/24" and
-                        // "1.2.3.4 x" as 1.2.3.4; those now yield no result.
-                        // Requiring a whole, valid address is what lets a
-                        // malformed high-priority value fall through to a
-                        // valid lower-priority one, which is the point of
-                        // the change.
-                        if (ClientIpParser.TryParse(
-                            evidenceItem.Value?.ToString(),
-                            out _,
-                            out var addressText))
+                        continue;
+                    }
+                    var rawText = rawValue?.ToString();
+                    // A blank value is nothing offered rather than
+                    // something unreadable, so it must not be reported as
+                    // invalid.
+                    if (string.IsNullOrWhiteSpace(rawText) == false)
+                    {
+                        clientIpSupplied = true;
+                    }
+                    if (ClientIpParser.TryParse(
+                        rawText,
+                        out var address,
+                        out var addressText))
+                    {
+                        relevantEvidence.Add(new KeyValuePair<string, string>(
+                            evidenceKey,
+                            addressText));
+                        if (chosenAddress == null)
                         {
-                            relevantEvidence.Add(new KeyValuePair<string, string>(
-                                evidenceItem.Key,
-                                addressText));
+                            chosenAddress = address;
                         }
                     }
                 }
                 (ipData as IpDataOnPremise).SetResults(_engine.process(relevantEvidence));
             }
 
-            // Capture the client IP of the request so we can echo it back
-            // as synthetic Ip / IpV6 properties. Priority is
-            // query.client-ip > server.client-ip > anything else parseable
-            // from filtered evidence, but selection is by validity, not
-            // presence: a value that fails to parse lets the search
-            // continue to the next source instead of ending it.
-            System.Net.IPAddress echoV4 = null;
-            System.Net.IPAddress echoV6 = null;
-
-            System.Net.IPAddress chosenAddress = null;
-
-            // Whether the request offered a client IP at all, tracked
-            // alongside the search so that "nothing resolved" can be told
-            // apart from "nothing was offered". Every key the filter admits
-            // is a client IP header - the whitelist is built from the data
-            // file's unique headers under the 'query.' and 'server.'
-            // prefixes - so a non-empty value none of these sources could
-            // parse means the IP supplied was invalid, which is reported
-            // differently. See SetEchoIp.
-            var clientIpSupplied = false;
-
-            void NoteSupplied(string rawText)
-            {
-                // A blank value is nothing offered rather than something
-                // unreadable, so it must not be reported as invalid.
-                if (string.IsNullOrWhiteSpace(rawText) == false)
-                {
-                    clientIpSupplied = true;
-                }
-            }
-
-            bool TryUseEvidence(string evidenceKey)
-            {
-                if (data.TryGetEvidence(evidenceKey, out object rawValue) == false)
-                {
-                    return false;
-                }
-                var rawText = rawValue?.ToString();
-                NoteSupplied(rawText);
-                return ClientIpParser.TryParse(rawText, out chosenAddress, out _);
-            }
-
-            if (TryUseEvidence("query.client-ip") == false &&
-                TryUseEvidence("server.client-ip") == false)
-            {
-                foreach (var evidenceItem in data.GetEvidence().AsDictionary())
-                {
-                    if (EvidenceKeyFilter.Include(evidenceItem.Key) == false)
-                    {
-                        continue;
-                    }
-                    var rawText = evidenceItem.Value?.ToString();
-                    NoteSupplied(rawText);
-                    if (ClientIpParser.TryParse(rawText, out chosenAddress, out _))
-                    {
-                        break;
-                    }
-                }
-            }
-
-            if (chosenAddress != null)
-            {
-                if (chosenAddress.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
-                {
-                    echoV4 = chosenAddress;
-                }
-                else if (chosenAddress.AddressFamily == System.Net.Sockets.AddressFamily.InterNetworkV6)
-                {
-                    echoV6 = chosenAddress;
-                }
-            }
-
             (ipData as IpDataOnPremise).SetEchoIp(
-                echoV4, echoV6, clientIpSupplied);
+                chosenAddress?.AddressFamily ==
+                    System.Net.Sockets.AddressFamily.InterNetwork
+                    ? chosenAddress : null,
+                chosenAddress?.AddressFamily ==
+                    System.Net.Sockets.AddressFamily.InterNetworkV6
+                    ? chosenAddress : null,
+                clientIpSupplied);
         }
 
         /// <summary>
@@ -446,12 +436,51 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
             return result;
         }
 
+        /// <summary>
+        /// Order the engine's evidence keys the way the native lookup
+        /// consults them, so that a walk over the result meets the keys in
+        /// the order fiftyoneDegreesResultsIpiFromEvidence does.
+        /// </summary>
+        /// <remarks>
+        /// The native engine lists its keys header by header, in the
+        /// priority order the data file defines, giving each header under
+        /// every prefix in turn: query.h0, server.h0, query.h1, server.h1,
+        /// ... (EngineIpi::initHttpHeaderKeys). It does not search evidence
+        /// in that interleaved order: fiftyoneDegreesResultsIpiFromEvidence
+        /// runs a full pass over the 'query.' prefix, walking the headers
+        /// in priority order, and only falls back to a 'server.' pass when
+        /// that produced nothing. This regroups the keys by prefix, keeping
+        /// the header order within each group.
+        /// </remarks>
+        /// <param name="engineKeys">
+        /// The keys as reported by the native engine.
+        /// </param>
+        /// <returns>
+        /// The keys grouped by <see cref="_nativeEvidencePrefixPriority"/>,
+        /// in their original relative order within each group. A key under
+        /// no known prefix is left out: the native lookup never reads such
+        /// evidence, so it must neither reach the lookup nor drive the echo.
+        /// </returns>
+        internal static string[] OrderEvidenceKeysAsNativeEngine(
+            IReadOnlyCollection<string> engineKeys)
+        {
+            return _nativeEvidencePrefixPriority
+                .SelectMany(prefix => engineKeys.Where(evidenceKey =>
+                    evidenceKey.StartsWith(prefix, StringComparison.OrdinalIgnoreCase)))
+                .ToArray();
+        }
+
         private void InitEngineMetaData()
         {
+            var engineKeys = new List<string>(_engine.getKeys());
+            // OrdinalIgnoreCase to match the comparer of the evidence
+            // dictionary the ProcessEngine walk reads through
+            // (FlowData.TryGetEvidence), so a key the filter admits is
+            // always a key the walk can find.
             _evidenceKeyFilter = new EvidenceKeyFilterWhitelist(
-                new List<string>(_engine.getKeys()),
-                // new List<string>(_engine.getKeys()),
-                StringComparer.InvariantCultureIgnoreCase);
+                engineKeys,
+                StringComparer.OrdinalIgnoreCase);
+            _orderedEvidenceKeys = OrderEvidenceKeysAsNativeEngine(engineKeys);
 
             _properties = ConstructProperties();
             _components = ConstructComponents();
