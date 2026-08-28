@@ -130,14 +130,29 @@ namespace FiftyOne.IpIntelligence.Shared
 		/// <summary>
 		/// Any shapes associated with the location. Usually this is the area which the IP range covers. This is returned as a WKT String stored as a reduced format of WKB.
 		/// </summary>
+		/// <remarks>
+		/// <para>
+		/// See <see href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry</see> for more information.
+		/// </para>
+		/// </remarks>
 		public IAspectPropertyValue<WktString> Areas { get { return GetAs<IAspectPropertyValue<WktString>>("Areas"); } }
 		/// <summary>
 		/// Autonomous System Number associated with the IP address.
 		/// </summary>
+		/// <remarks>
+		/// <para>
+		/// See <see href="https://en.wikipedia.org/wiki/Autonomous_system_(Internet)">https://en.wikipedia.org/wiki/Autonomous_system_(Internet)</see> for more information.
+		/// </para>
+		/// </remarks>
 		public IAspectPropertyValue<string> Asn { get { return GetAs<IAspectPropertyValue<string>>("Asn"); } }
 		/// <summary>
 		/// The name registered to the Asn associated with the IP address.
 		/// </summary>
+		/// <remarks>
+		/// <para>
+		/// See <see href="https://en.wikipedia.org/wiki/Autonomous_system_(Internet)">https://en.wikipedia.org/wiki/Autonomous_system_(Internet)</see> for more information.
+		/// </para>
+		/// </remarks>
 		public IAspectPropertyValue<string> AsnName { get { return GetAs<IAspectPropertyValue<string>>("AsnName"); } }
 		/// <summary>
 		/// Refers to the diversity of browsers observed from the IP range. An integer between 1-10, a lower value indicates a low number of browsers seen per IP address, while a higher value indicates a high number of browsers seen per IP address. A 0 value indicates that the probability is unknown.
