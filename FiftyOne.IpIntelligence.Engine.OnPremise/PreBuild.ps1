@@ -60,7 +60,7 @@ try {
 		if ($Arch -eq "x86") {
 			$Is32 = "on"
 		}
-		cmake ../../.. "-D32bit=$Is32" "-DCMAKE_BUILD_TYPE=$BuildType" -DRebuildSwig=Off -DBUILD_TESTING=Off
+		cmake ../../.. "-D32bit=$Is32" "-DCMAKE_BUILD_TYPE=$BuildType" -DRebuildSwig=Off -DBUILD_TESTING=Off -DLargeDataFileSupport:BOOL=ON
 		cmake --build . -t fiftyone-ipi-dotnet $Jargs
 
 	}
