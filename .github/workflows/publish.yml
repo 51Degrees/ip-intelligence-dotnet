@@ -10,6 +10,14 @@ on:
         description: '🦆 Performance'
         type: boolean
         default: false
+      skip-tests:
+        description: '⚠️ Release without running the test matrix'
+        type: boolean
+        default: false
+      skip-web-performance:
+        description: 'Skip the web performance test only'
+        type: boolean
+        default: false
 
 jobs:
   Publish:
@@ -21,6 +29,8 @@ jobs:
       dryrun: ${{ inputs.dryrun || false }}
       cache-assets: true
       skip-compare-performance: ${{ inputs.skip-compare-performance || false }}
+      skip-tests: ${{ inputs.skip-tests || false }}
+      skip-web-performance: ${{ inputs.skip-web-performance || false }}
       build-platform: windows-latest
     secrets:
       token: ${{ secrets.ACCESS_TOKEN }}
