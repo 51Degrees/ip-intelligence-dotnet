@@ -23,6 +23,7 @@
 using FiftyOne.Pipeline.Engines;
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 namespace FiftyOne.IpIntelligence.TestHelpers
 {
@@ -45,12 +46,30 @@ namespace FiftyOne.IpIntelligence.TestHelpers
         public static readonly ISet<string> EchoPropertyNames =
             new HashSet<string> { "Ip", "IpV6" };
 
+        /// <summary>
+        /// These profiles hold some or all of the data file in memory, and
+        /// the macOS runners report less RAM available than the data file is
+        /// big, so every test using one spends its time thrashing rather
+        /// than testing: on macOS arm64 they cost 733s of the on-premise
+        /// suite against ~1.8s per test on Ubuntu. macOS is not a primary
+        /// platform for the engine, so it exercises only LowMemory, which
+        /// streams from disk. Linux and Windows keep the full matrix.
+        /// </summary>
+        private static readonly bool SkipHeavyProfiles =
+            RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
+
+        private static bool IsHeavyProfile(PerformanceProfiles profile)
+            => profile == PerformanceProfiles.MaxPerformance
+            || profile == PerformanceProfiles.HighPerformance
+            || profile == PerformanceProfiles.Balanced;
+
         public static IEnumerable<PerformanceProfiles> TestableProfiles
         {
             get
             {
                 foreach(var x in Enum.GetValues(typeof(PerformanceProfiles)))
-                    if (x is PerformanceProfiles profile)
+                    if (x is PerformanceProfiles profile
+                        && !(SkipHeavyProfiles && IsHeavyProfile(profile)))
                         yield return profile;
             }
         }

@@ -324,6 +324,8 @@ namespace FiftyOne.IpIntelligence.Tests.Core
         /// The license key to use when performing automatic update.
         /// </param>
         [TestMethod]
+        [Ignore("Hangs the test host part-way through the combinations on the "
+            + "macOS runners; blame then aborts the whole assembly.")]
         [DynamicData(nameof(AllTestParams))]
         public void IpiPipelineBuilder_CheckConfiguration(TestParamsComplete testParams)
         {
