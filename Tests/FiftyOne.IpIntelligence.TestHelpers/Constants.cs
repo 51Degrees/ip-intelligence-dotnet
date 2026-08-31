@@ -47,20 +47,21 @@ namespace FiftyOne.IpIntelligence.TestHelpers
             new HashSet<string> { "Ip", "IpV6" };
 
         /// <summary>
-        /// MaxPerformance and HighPerformance load the whole data file into
-        /// memory. The macOS runners have less RAM available than the data
-        /// file is big, so on those two profiles every test spends tens of
-        /// seconds thrashing - together they account for over 80% of the
-        /// on-premise suite's runtime there. macOS is not a primary platform
-        /// for the engine, so it settles for the profiles that stream from
-        /// disk while Linux and Windows keep the full matrix.
+        /// These profiles hold some or all of the data file in memory, and
+        /// the macOS runners report less RAM available than the data file is
+        /// big, so every test using one spends its time thrashing rather
+        /// than testing: on macOS arm64 they cost 733s of the on-premise
+        /// suite against ~1.8s per test on Ubuntu. macOS is not a primary
+        /// platform for the engine, so it exercises only LowMemory, which
+        /// streams from disk. Linux and Windows keep the full matrix.
         /// </summary>
-        private static readonly bool SkipMemoryHungryProfiles =
+        private static readonly bool SkipHeavyProfiles =
             RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
 
-        private static bool IsMemoryHungry(PerformanceProfiles profile)
+        private static bool IsHeavyProfile(PerformanceProfiles profile)
             => profile == PerformanceProfiles.MaxPerformance
-            || profile == PerformanceProfiles.HighPerformance;
+            || profile == PerformanceProfiles.HighPerformance
+            || profile == PerformanceProfiles.Balanced;
 
         public static IEnumerable<PerformanceProfiles> TestableProfiles
         {
@@ -68,7 +69,7 @@ namespace FiftyOne.IpIntelligence.TestHelpers
             {
                 foreach(var x in Enum.GetValues(typeof(PerformanceProfiles)))
                     if (x is PerformanceProfiles profile
-                        && !(SkipMemoryHungryProfiles && IsMemoryHungry(profile)))
+                        && !(SkipHeavyProfiles && IsHeavyProfile(profile)))
                         yield return profile;
             }
         }
