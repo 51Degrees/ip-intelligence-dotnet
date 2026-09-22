@@ -29,6 +29,11 @@ Write-Debug "env:IPINTELLIGENCEDATAFILE = <$($env:IPINTELLIGENCEDATAFILE)>"
 
 Write-Host "Fetching examples..."
 ./steps/clone-repo.ps1 -RepoName $ExamplesRepo -OrgName $OrgName -Branch $ExamplesBranch
+
+$ExamplesCommit = (git -C $ExamplesRepo rev-parse HEAD).Trim()
+Write-Host "Examples repo '$ExamplesRepo' branch '$ExamplesBranch' checked out at commit: $ExamplesCommit"
+git -C $ExamplesRepo log -1 --format="  %H%n  %an <%ae>%n  %ci%n  %s"
+
 & "./$ExamplesRepo/ci/fetch-assets.ps1" -RepoName $ExamplesRepo -DeviceDetection $DeviceDetection -DeviceDetectionUrl $DeviceDetectionUrl
 
 Push-Location package
