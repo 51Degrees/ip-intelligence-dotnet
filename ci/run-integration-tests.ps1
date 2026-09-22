@@ -30,6 +30,24 @@ Write-Debug "env:IPINTELLIGENCEDATAFILE = <$($env:IPINTELLIGENCEDATAFILE)>"
 Write-Host "Fetching examples..."
 ./steps/clone-repo.ps1 -RepoName $ExamplesRepo -OrgName $OrgName -Branch $ExamplesBranch
 
+# Shorten the checkout directory name to keep native DLL paths under the Windows
+# MAX_PATH (260) limit. The GettingStartedAPI.Tests output nests the native
+# engine under
+#   <dir>\bin\x64\Release\net10.0\runtimes\win-x64\native\FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll
+# which is already 255 chars with the full 31-char repo name; when the loader
+# resolves that DLL's own dependency in the same folder the constructed path
+# exceeds 260 and fails with 0x800700CE (ERROR_FILENAME_EXCED_RANGE). Enabling
+# LongPathsEnabled (see examples ci/setup-environment.ps1) does not cover the
+# native dependency loader, so drop 29 chars from every path by renaming the
+# checkout to 'ex' and use that as $ExamplesRepo from here on (all downstream
+# scripts treat it purely as a directory name).
+$ExamplesShortDir = "ex"
+if (Test-Path $ExamplesShortDir) {
+    Remove-Item -Recurse -Force $ExamplesShortDir
+}
+Rename-Item $ExamplesRepo $ExamplesShortDir
+$ExamplesRepo = $ExamplesShortDir
+
 $ExamplesCommit = (git -C $ExamplesRepo rev-parse HEAD).Trim()
 Write-Host "Examples repo '$ExamplesRepo' branch '$ExamplesBranch' checked out at commit: $ExamplesCommit"
 git -C $ExamplesRepo log -1 --format="  %H%n  %an <%ae>%n  %ci%n  %s"
