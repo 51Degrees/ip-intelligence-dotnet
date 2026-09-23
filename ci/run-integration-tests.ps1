@@ -11,7 +11,7 @@ param(
     [string]$Version,
     [string]$BuildMethod = "dotnet",
     [string]$Branch = "main",
-    [string]$ExamplesBranch = "feature/vstest-variant-1",
+    [string]$ExamplesBranch = "main",
     [string]$ExamplesRepo = "ip-intelligence-dotnet-examples",
     [hashtable]$Keys
 )
