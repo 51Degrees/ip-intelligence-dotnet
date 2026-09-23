@@ -208,10 +208,9 @@ $BuildTestsArgs = @{
 }
 & ./$ExamplesRepo/ci/build-project.ps1 @BuildTestsArgs
 
-# The example tests always run through dotnet test.
-$RunTestsArgs = $BuildTestsArgs.Clone()
-$RunTestsArgs.BuildMethod = "dotnet"
-$RunTestsArgs.OutputFolder = "integration"
+$RunTestsArgs = $BuildTestsArgs + @{
+    OutputFolder = "integration"
+}
 try {
     $ErrorActionPreference = "Continue"
     & ./$ExamplesRepo/ci/run-unit-tests.ps1 @RunTestsArgs
