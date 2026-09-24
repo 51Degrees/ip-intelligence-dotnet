@@ -850,6 +850,25 @@
             reads them. See <see cref="M:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine.OrderEvidenceKeysAsNativeEngine(System.Collections.Generic.IReadOnlyCollection{System.String})"/>.
             </summary>
         </member>
+        <member name="F:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine._requiredPropertyIndexes">
+            <summary>
+            Property name to required property index, built in
+            <see cref="M:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine.InitEngineMetaData"/> from the native engine. The
+            required property list is fixed when the engine is built and a
+            data file refresh does not change it. Compared ignoring case,
+            which matches the pipeline's property dictionaries and the
+            native name lookup.
+            </summary>
+        </member>
+        <member name="F:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine._cacheSet">
+            <summary>
+            True once <see cref="M:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine.SetCache(FiftyOne.Pipeline.Engines.Caching.IFlowCache)"/> has been called.
+            The filtered
+            <see cref="M:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine.ProcessEngine(FiftyOne.Pipeline.Core.Data.IFlowData,FiftyOne.IpIntelligence.Engine.OnPremise.Data.IIpDataOnPremise,System.Int32[])"/>
+            refuses to run with a cache, because the cache is keyed on
+            evidence alone.
+            </summary>
+        </member>
         <member name="P:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine.Config">
             <summary>
             Wrapper to pass general configuration from managed code to unmanaged 
@@ -889,6 +908,25 @@
             The key to use for this element's data in a 
             <see cref="T:FiftyOne.Pipeline.Core.Data.IFlowData"/> instance.
             </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine.RequiredPropertyIndexes">
+            <summary>
+            Property name to required property index for every property the
+            engine was built with. Pass the indexes of the properties that
+            will be read to
+            <see cref="M:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine.ProcessEngine(FiftyOne.Pipeline.Core.Data.IFlowData,FiftyOne.IpIntelligence.Engine.OnPremise.Data.IIpDataOnPremise,System.Int32[])"/>
+            so only the graphs those properties need are evaluated. Resolve
+            names once after the engine is built and keep the array. Names
+            are compared ignoring case.
+            </summary>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine.SetCache(FiftyOne.Pipeline.Engines.Caching.IFlowCache)">
+            <summary>
+            Records that a results cache is in use so the filtered
+            <see cref="M:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine.ProcessEngine(FiftyOne.Pipeline.Core.Data.IFlowData,FiftyOne.IpIntelligence.Engine.OnPremise.Data.IIpDataOnPremise,System.Int32[])"/>
+            can refuse to run. The unfiltered path is unaffected.
+            </summary>
+            <param name="cache">The cache.</param>
         </member>
         <member name="P:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine.Properties">
             <summary>
@@ -973,6 +1011,41 @@
             Thrown if a required parameter is null
             </exception>
         </member>
+        <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine.ProcessEngine(FiftyOne.Pipeline.Core.Data.IFlowData,FiftyOne.IpIntelligence.Engine.OnPremise.Data.IIpDataOnPremise,System.Int32[])">
+            <summary>
+            Perform processing for this engine evaluating only the graphs
+            needed by the given required property indexes.
+            </summary>
+            <remarks>
+            A property whose graph was not evaluated has no value, with a
+            message that reports a null profile. That is the caller's
+            responsibility, since the caller said it would not read it. The
+            native mask is 32 bits, so a data file with more than 32
+            components is filtered for the first 32 only and the rest are
+            always evaluated. That limit is accepted for performance.
+            </remarks>
+            <param name="data">
+            The <see cref="T:FiftyOne.Pipeline.Core.Data.IFlowData"/> instance containing data for the
+            current request.
+            </param>
+            <param name="ipData">
+            The <see cref="T:FiftyOne.IpIntelligence.Engine.OnPremise.Data.IIpDataOnPremise"/> instance to populate with
+            property values
+            </param>
+            <param name="requiredPropertyIndexes">
+            Indexes from <see cref="P:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine.RequiredPropertyIndexes"/> for the
+            properties that will be read. Null evaluates every graph. An
+            empty array evaluates none. Indexes outside the required
+            properties are ignored.
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown if a required parameter is null
+            </exception>
+            <exception cref="T:System.InvalidOperationException">
+            Thrown if a results cache has been set on the engine and
+            <paramref name="requiredPropertyIndexes"/> is not null.
+            </exception>
+        </member>
         <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine.UnmanagedResourcesCleanup">
             <summary>
             Dispose of any unmanaged resources.
@@ -1004,6 +1077,13 @@
             no known prefix is left out: the native lookup never reads such
             evidence, so it must neither reach the lookup nor drive the echo.
             </returns>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine.ConstructRequiredPropertyIndexes">
+            <summary>
+            One native call returns the required property names in index
+            order, so the position of each name is its index. A wrapper that
+            supplies no list, such as a test double, leaves the map empty.
+            </summary>
         </member>
         <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine.GetDataDownloadType(System.String)">
             <summary>
@@ -1235,6 +1315,23 @@
         <member name="P:FiftyOne.IpIntelligence.Engine.OnPremise.Messages.ExceptionIncompatibleType">
             <summary>
               Looks up a localized string similar to UTF8Marshaler must be used on a string..
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Engine.OnPremise.Messages.ExceptionGraphFilterWithCache">
+            <summary>
+              Looks up a localized string similar to The filtered ProcessEngine overload cannot be used when a results cache has been set on the engine, because the cache is keyed on evidence alone and would return a result produced for fewer properties to a caller that needs more..
+            </summary>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.Wrappers.IEngineSwigWrapper.process(FiftyOne.IpIntelligence.Engine.OnPremise.Interop.EvidenceIpiSwig,System.Int32[])">
+            <summary>
+            Process the evidence evaluating only the graphs needed by the
+            required property indexes. Null evaluates every graph, an empty
+            array evaluates none.
+            </summary>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.Wrappers.IEngineSwigWrapper.getRequiredProperties">
+            <summary>
+            Required property names in required property index order.
             </summary>
         </member>
     </members>
