@@ -143,6 +143,12 @@ internal class ResultsIpiSwig : ResultsBaseSwig {
     return ret;
   }
 
+  public IpAddressValueSwig getTargetIpAddress() {
+    IpAddressValueSwig ret = new IpAddressValueSwig(IpIntelligenceEngineModulePINVOKE.ResultsIpiSwig_getTargetIpAddress(swigCPtr), true);
+    if (IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Pending) throw IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Retrieve();
+    return ret;
+  }
+
 }
 
 }
