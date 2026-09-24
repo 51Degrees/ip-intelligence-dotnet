@@ -43,6 +43,23 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Wrappers
             return _object.process(evidence);
         }
 
+        public ResultsIpiSwig process(
+            EvidenceIpiSwig evidence,
+            int[] requiredPropertyIndexes)
+        {
+            // A negative count tells the native code to evaluate every graph,
+            // so a null array never depends on how the marshaller passes it.
+            return _object.process(
+                evidence,
+                requiredPropertyIndexes,
+                requiredPropertyIndexes == null ? -1 : requiredPropertyIndexes.Length);
+        }
+
+        public VectorStringSwig getRequiredProperties()
+        {
+            return _object.getRequiredProperties();
+        }
+
         public void refreshData()
         {
             _object.refreshData();

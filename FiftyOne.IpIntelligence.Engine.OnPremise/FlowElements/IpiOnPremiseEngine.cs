@@ -27,6 +27,7 @@ using FiftyOne.IpIntelligence.Shared.Data;
 using FiftyOne.IpIntelligence.Shared.FlowElements;
 using FiftyOne.Pipeline.Core.Data;
 using FiftyOne.Pipeline.Core.FlowElements;
+using FiftyOne.Pipeline.Engines.Caching;
 using FiftyOne.Pipeline.Engines.FiftyOne.Data;
 using Microsoft.Extensions.Logging;
 using System;
@@ -83,6 +84,26 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
         private IList<IComponentMetaData> _components;
 
         /// <summary>
+        /// Property name to required property index, built in
+        /// <see cref="InitEngineMetaData"/> from the native engine. The
+        /// required property list is fixed when the engine is built and a
+        /// data file refresh does not change it. Compared ignoring case,
+        /// which matches the pipeline's property dictionaries and the
+        /// native name lookup.
+        /// </summary>
+        private IReadOnlyDictionary<string, int> _requiredPropertyIndexes =
+            new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+
+        /// <summary>
+        /// True once <see cref="SetCache(IFlowCache)"/> has been called.
+        /// The filtered
+        /// <see cref="ProcessEngine(IFlowData, IIpDataOnPremise, int[])"/>
+        /// refuses to run with a cache, because the cache is keyed on
+        /// evidence alone.
+        /// </summary>
+        private bool _cacheSet;
+
+        /// <summary>
         /// Wrapper to pass general configuration from managed code to unmanaged 
         /// code.
         /// </summary>
@@ -136,6 +157,30 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
         /// <see cref="IFlowData"/> instance.
         /// </summary>
         public override string ElementDataKey => "ip";
+
+        /// <summary>
+        /// Property name to required property index for every property the
+        /// engine was built with. Pass the indexes of the properties that
+        /// will be read to
+        /// <see cref="ProcessEngine(IFlowData, IIpDataOnPremise, int[])"/>
+        /// so only the graphs those properties need are evaluated. Resolve
+        /// names once after the engine is built and keep the array. Names
+        /// are compared ignoring case.
+        /// </summary>
+        public IReadOnlyDictionary<string, int> RequiredPropertyIndexes =>
+            _requiredPropertyIndexes;
+
+        /// <summary>
+        /// Records that a results cache is in use so the filtered
+        /// <see cref="ProcessEngine(IFlowData, IIpDataOnPremise, int[])"/>
+        /// can refuse to run. The unfiltered path is unaffected.
+        /// </summary>
+        /// <param name="cache">The cache.</param>
+        public override void SetCache(IFlowCache cache)
+        {
+            base.SetCache(cache);
+            _cacheSet = true;
+        }
 
         internal IMetaDataSwigWrapper MetaData => _engine.getMetaData();
 
@@ -285,8 +330,53 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
         /// </exception>
         protected override void ProcessEngine(IFlowData data, IIpDataOnPremise ipData)
         {
+            ProcessEngine(data, ipData, null);
+        }
+
+        /// <summary>
+        /// Perform processing for this engine evaluating only the graphs
+        /// needed by the given required property indexes.
+        /// </summary>
+        /// <remarks>
+        /// A property whose graph was not evaluated has no value, with a
+        /// message that reports a null profile. That is the caller's
+        /// responsibility, since the caller said it would not read it. The
+        /// native mask is 32 bits, so a data file with more than 32
+        /// components is filtered for the first 32 only and the rest are
+        /// always evaluated. That limit is accepted for performance.
+        /// </remarks>
+        /// <param name="data">
+        /// The <see cref="IFlowData"/> instance containing data for the
+        /// current request.
+        /// </param>
+        /// <param name="ipData">
+        /// The <see cref="IIpDataOnPremise"/> instance to populate with
+        /// property values
+        /// </param>
+        /// <param name="requiredPropertyIndexes">
+        /// Indexes from <see cref="RequiredPropertyIndexes"/> for the
+        /// properties that will be read. Null evaluates every graph. An
+        /// empty array evaluates none. Indexes outside the required
+        /// properties are ignored.
+        /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown if a required parameter is null
+        /// </exception>
+        /// <exception cref="InvalidOperationException">
+        /// Thrown if a results cache has been set on the engine and
+        /// <paramref name="requiredPropertyIndexes"/> is not null.
+        /// </exception>
+        protected void ProcessEngine(
+            IFlowData data,
+            IIpDataOnPremise ipData,
+            int[] requiredPropertyIndexes)
+        {
             if (data == null) { throw new ArgumentNullException(nameof(data)); }
             if (ipData == null) { throw new ArgumentNullException(nameof(ipData)); }
+            if (requiredPropertyIndexes != null && _cacheSet)
+            {
+                throw new InvalidOperationException(Messages.ExceptionGraphFilterWithCache);
+            }
 
             // Walk the client IP evidence keys in the order the native
             // lookup consults them - see OrderEvidenceKeysAsNativeEngine
@@ -355,7 +445,8 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
                         }
                     }
                 }
-                (ipData as IpDataOnPremise).SetResults(_engine.process(relevantEvidence));
+                (ipData as IpDataOnPremise).SetResults(
+                    _engine.process(relevantEvidence, requiredPropertyIndexes));
             }
 
             (ipData as IpDataOnPremise).SetEchoIp(
@@ -470,6 +561,25 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
                 .ToArray();
         }
 
+        /// <summary>
+        /// One native call returns the required property names in index
+        /// order, so the position of each name is its index. A wrapper that
+        /// supplies no list, such as a test double, leaves the map empty.
+        /// </summary>
+        private IReadOnlyDictionary<string, int> ConstructRequiredPropertyIndexes()
+        {
+            var result = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+            using (var names = _engine.getRequiredProperties())
+            {
+                int count = names == null ? 0 : names.Count;
+                for (int i = 0; i < count; i++)
+                {
+                    result[names[i]] = i;
+                }
+            }
+            return result;
+        }
+
         private void InitEngineMetaData()
         {
             var engineKeys = new List<string>(_engine.getKeys());
@@ -484,6 +594,7 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
 
             _properties = ConstructProperties();
             _components = ConstructComponents();
+            _requiredPropertyIndexes = ConstructRequiredPropertyIndexes();
 
             // Populate these data file properties from the native engine.
             var dataFileMetaData = GetDataFileMetaData() as IFiftyOneDataFile;

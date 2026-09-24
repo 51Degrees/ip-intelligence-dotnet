@@ -1,0 +1,282 @@
+/* *********************************************************************
+ * This Original Work is copyright of 51 Degrees Mobile Experts Limited.
+ * Copyright 2026 51 Degrees Mobile Experts Limited, Davidson House,
+ * Forbury Square, Reading, Berkshire, United Kingdom RG1 3EU.
+ *
+ * This Original Work is licensed under the European Union Public Licence
+ * (EUPL) v.1.2 and is subject to its terms as set out below.
+ *
+ * If a copy of the EUPL was not distributed with this file, You can obtain
+ * one at https://opensource.org/licenses/EUPL-1.2.
+ *
+ * The 'Compatible Licences' set out in the Appendix to the EUPL (as may be
+ * amended by the European Commission) shall be deemed incompatible for
+ * the purposes of the Work and the provisions of the compatibility
+ * clause in Article 5 of the EUPL shall not apply.
+ *
+ * If using the Work as, or as part of, a network application, by
+ * including the attribution notice(s) required under Article 5 of the EUPL
+ * in the end user terms of the application under an appropriate heading,
+ * such notice(s) shall fulfill the requirements of that article.
+ * ********************************************************************* */
+
+using FiftyOne.Common.TestHelpers;
+using FiftyOne.IpIntelligence.Engine.OnPremise.Data;
+using FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements;
+using FiftyOne.IpIntelligence.TestHelpers;
+using FiftyOne.Pipeline.Core.Data;
+using FiftyOne.Pipeline.Core.FlowElements;
+using FiftyOne.Pipeline.Engines.Caching;
+using FiftyOne.Pipeline.Engines.Configuration;
+using FiftyOne.Pipeline.Engines.FiftyOne.Data;
+using Microsoft.Extensions.Logging;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using Constants = FiftyOne.IpIntelligence.TestHelpers.Constants;
+
+namespace FiftyOne.IpIntelligence.OnPremise.Tests.FlowElements
+{
+    /// <summary>
+    /// An engine that forwards a fixed set of required property indexes to
+    /// the filtered ProcessEngine, standing in for a caller that knows which
+    /// properties it will read.
+    /// </summary>
+    internal class FilteredIpiEngine : IpiOnPremiseEngine
+    {
+        /// <summary>
+        /// Indexes passed to the filtered overload on every request. Null
+        /// evaluates every graph, an empty array evaluates none.
+        /// </summary>
+        public int[] Indexes { get; set; }
+
+        internal FilteredIpiEngine(
+            ILoggerFactory loggerFactory,
+            Func<IPipeline, FlowElementBase<IIpDataOnPremise, IFiftyOneAspectPropertyMetaData>, IIpDataOnPremise> ipDataFactory,
+            string tempDataFilePath)
+            : base(loggerFactory, ipDataFactory, tempDataFilePath)
+        {
+        }
+
+        protected override void ProcessEngine(IFlowData data, IIpDataOnPremise ipData)
+        {
+            ProcessEngine(data, ipData, Indexes);
+        }
+    }
+
+    /// <summary>
+    /// Builder for <see cref="FilteredIpiEngine"/>, identical to the standard
+    /// builder except for the engine type it creates.
+    /// </summary>
+    internal class FilteredIpiEngineBuilder : IpiOnPremiseEngineBuilderBase<FilteredIpiEngine>
+    {
+        public FilteredIpiEngineBuilder(ILoggerFactory loggerFactory)
+            : base(loggerFactory, null)
+        {
+        }
+
+        protected override FilteredIpiEngine CreateEngine(
+            ILoggerFactory loggerFactory,
+            Func<IPipeline, FlowElementBase<IIpDataOnPremise, IFiftyOneAspectPropertyMetaData>, IIpDataOnPremise> deviceDataFactory,
+            string tempDataFilePath)
+        {
+            return new FilteredIpiEngine(loggerFactory, deviceDataFactory, tempDataFilePath);
+        }
+    }
+
+    /// <summary>
+    /// Tests for the filtered ProcessEngine overload and the
+    /// RequiredPropertyIndexes map that feeds it.
+    /// </summary>
+    [TestClass]
+    [TestCategory("Core")]
+    [TestCategory("GraphFilter")]
+    public class GraphFilterTests
+    {
+        private static readonly TestLoggerFactory _logger = new TestLoggerFactory();
+
+        // A public address from the evidence file that ships with the data.
+        private const string IpAddress = "50.154.29.201";
+
+        private FilteredIpiEngine _engine;
+        private IPipeline _pipeline;
+
+        /// <summary>
+        /// The enterprise file when present, otherwise the Lite file the
+        /// native tests use, so the tests run on either. Looked up by walking
+        /// up from the test assembly to the data folders the repository
+        /// keeps, because a recursive search of the whole engine folder can
+        /// time out once native build output is present.
+        /// </summary>
+        private static FileInfo DataFile()
+        {
+            var names = new[] { Constants.IPI_DATA_FILE_NAME, "51Degrees-LiteV41.ipi" };
+            var folders = new[]
+            {
+                "ip-intelligence-data",
+                Path.Combine(
+                    "FiftyOne.IpIntelligence.Engine.OnPremise",
+                    "ip-intelligence-cxx",
+                    "ip-intelligence-data")
+            };
+            var current = new DirectoryInfo(AppContext.BaseDirectory);
+            while (current != null)
+            {
+                foreach (var name in names)
+                {
+                    foreach (var folder in folders)
+                    {
+                        var candidate = new FileInfo(Path.Combine(current.FullName, folder, name));
+                        if (candidate.Exists)
+                        {
+                            return candidate;
+                        }
+                    }
+                }
+                current = current.Parent;
+            }
+            Assert.Inconclusive("No IP intelligence data file was found.");
+            return null;
+        }
+
+        [TestInitialize]
+        public void Init()
+        {
+            _engine = new FilteredIpiEngineBuilder(_logger)
+                .SetAutoUpdate(false)
+                .SetDataFileSystemWatcher(false)
+                .Build(DataFile().FullName, false);
+            _pipeline = new PipelineBuilder(_logger).AddFlowElement(_engine).Build();
+        }
+
+        [TestCleanup]
+        public void Cleanup()
+        {
+            _pipeline?.Dispose();
+            _engine?.Dispose();
+        }
+
+        private IIpDataOnPremise Detect()
+        {
+            var data = _pipeline.CreateFlowData();
+            data.AddEvidence("query.client-ip", IpAddress);
+            data.Process();
+            return data.Get<IIpDataOnPremise>();
+        }
+
+        /// <summary>
+        /// Names of properties in the required list, one per component, in
+        /// the order the components appear. Metric properties are not in the
+        /// native list and are left out, as are properties that are mandatory
+        /// with a default value, because those read as the default when their
+        /// component produced no profile, exactly as for an unmatched
+        /// component today.
+        /// </summary>
+        private List<string> OnePropertyPerComponent()
+        {
+            var map = _engine.RequiredPropertyIndexes;
+            return _engine.Properties
+                .Where(p => map.ContainsKey(p.Name) && p.Component != null)
+                .Where(p => p.Mandatory == false || p.DefaultValue == null)
+                .GroupBy(p => p.Component.Name)
+                .Select(g => g.First().Name)
+                .ToList();
+        }
+
+        [TestMethod]
+        public void GraphFilter_RequiredPropertyIndexes_OnePerBuiltProperty()
+        {
+            var map = _engine.RequiredPropertyIndexes;
+            Assert.IsNotEmpty(map);
+            var first = map.Keys.First();
+            Assert.IsTrue(map.ContainsKey(first.ToUpperInvariant()), "Lookup must ignore case.");
+            Assert.HasCount(map.Count, map.Values.Distinct().ToList(), "Indexes must be distinct.");
+            Assert.IsTrue(map.Values.All(i => i >= 0 && i < map.Count));
+        }
+
+        [TestMethod]
+        public void GraphFilter_Null_MatchesEveryIndex()
+        {
+            var names = OnePropertyPerComponent();
+            _engine.Indexes = null;
+            var fromNull = Detect();
+            // Passing every index must give the same answer as passing null.
+            _engine.Indexes = _engine.RequiredPropertyIndexes.Values.ToArray();
+            var fromAll = Detect();
+            foreach (var name in names)
+            {
+                var a = fromAll.GetValues(name);
+                var n = fromNull.GetValues(name);
+                Assert.AreEqual(a.HasValue, n.HasValue, name);
+                if (a.HasValue && n.HasValue)
+                {
+                    CollectionAssert.AreEqual(a.Value.ToList(), n.Value.ToList(), name);
+                }
+            }
+        }
+
+        [TestMethod]
+        public void GraphFilter_OneProperty_GivesOnlyItsComponent()
+        {
+            var names = OnePropertyPerComponent();
+            if (names.Count < 2)
+            {
+                Assert.Inconclusive("The data file has properties on one component only.");
+            }
+            _engine.Indexes = null;
+            var all = Detect();
+            if (all.GetValues(names[0]).HasValue == false)
+            {
+                Assert.Inconclusive("The address has no value for " + names[0] + " even unfiltered.");
+            }
+            _engine.Indexes = new[] { _engine.RequiredPropertyIndexes[names[0]] };
+            var some = Detect();
+            Assert.IsTrue(some.GetValues(names[0]).HasValue, names[0]);
+            for (int i = 1; i < names.Count; i++)
+            {
+                var skipped = some.GetValues(names[i]);
+                Assert.IsFalse(skipped.HasValue, names[i]);
+                Assert.IsFalse(string.IsNullOrEmpty(skipped.NoValueMessage),
+                    "A skipped property must explain why it has no value.");
+            }
+        }
+
+        [TestMethod]
+        public void GraphFilter_Empty_GivesNoValue()
+        {
+            var names = OnePropertyPerComponent();
+            _engine.Indexes = new int[0];
+            var ip = Detect();
+            foreach (var name in names)
+            {
+                Assert.IsFalse(ip.GetValues(name).HasValue, name);
+            }
+        }
+
+        [TestMethod]
+        public void GraphFilter_ThrowsWhenCacheSet()
+        {
+            _engine.SetCache(new DefaultFlowCache(new CacheConfiguration() { Size = 10 }));
+            _engine.Indexes = new[] { _engine.RequiredPropertyIndexes.Values.First() };
+            var data = _pipeline.CreateFlowData();
+            data.AddEvidence("query.client-ip", IpAddress);
+            // The pipeline collects element exceptions and rethrows them
+            // together, so look inside the aggregate for the refusal.
+            var aggregate = Assert.ThrowsExactly<AggregateException>(() => data.Process());
+            Assert.IsTrue(
+                aggregate.Flatten().InnerExceptions.Any(e => e is InvalidOperationException),
+                "Expected an InvalidOperationException, got: " + aggregate);
+        }
+
+        [TestMethod]
+        public void GraphFilter_Unfiltered_StillWorksWhenCacheSet()
+        {
+            _engine.SetCache(new DefaultFlowCache(new CacheConfiguration() { Size = 10 }));
+            _engine.Indexes = null;
+            var ip = Detect();
+            Assert.IsNotNull(ip);
+        }
+    }
+}
