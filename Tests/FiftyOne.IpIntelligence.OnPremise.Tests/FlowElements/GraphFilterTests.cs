@@ -26,6 +26,7 @@ using FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements;
 using FiftyOne.IpIntelligence.TestHelpers;
 using FiftyOne.Pipeline.Core.Data;
 using FiftyOne.Pipeline.Core.FlowElements;
+using FiftyOne.Pipeline.Engines;
 using FiftyOne.Pipeline.Engines.Caching;
 using FiftyOne.Pipeline.Engines.Configuration;
 using FiftyOne.Pipeline.Engines.FiftyOne.Data;
@@ -145,6 +146,10 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.FlowElements
         public void Init()
         {
             _engine = new FilteredIpiEngineBuilder(_logger)
+                // Balanced rather than the in memory default, so a test does
+                // not hold the whole data file, which is several gigabytes
+                // for the enterprise file.
+                .SetPerformanceProfile(PerformanceProfiles.Balanced)
                 .SetAutoUpdate(false)
                 .SetDataFileSystemWatcher(false)
                 .Build(DataFile().FullName, false);
@@ -160,10 +165,111 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.FlowElements
 
         private IIpDataOnPremise Detect()
         {
-            var data = _pipeline.CreateFlowData();
+            return Detect(_pipeline);
+        }
+
+        private static IIpDataOnPremise Detect(IPipeline pipeline)
+        {
+            var data = pipeline.CreateFlowData();
             data.AddEvidence("query.client-ip", IpAddress);
             data.Process();
             return data.Get<IIpDataOnPremise>();
+        }
+
+        /// <summary>
+        /// Every required property's values as text, so two results can be
+        /// compared even after the cache has handed back the same instance.
+        /// </summary>
+        private static Dictionary<string, string> Snapshot(
+            FilteredIpiEngine engine,
+            IIpDataOnPremise ip)
+        {
+            return engine.RequiredPropertyIndexes.Keys.ToDictionary(
+                name => name,
+                name =>
+                {
+                    var values = ip.GetValues(name);
+                    return values.HasValue ?
+                        string.Join("|", values.Value) :
+                        "no value";
+                },
+                StringComparer.OrdinalIgnoreCase);
+        }
+
+        private static void AssertSameValues(
+            Dictionary<string, string> expected,
+            Dictionary<string, string> actual)
+        {
+            Assert.HasCount(expected.Count, actual);
+            foreach (var pair in expected)
+            {
+                Assert.AreEqual(pair.Value, actual[pair.Key], pair.Key);
+            }
+        }
+
+        /// <summary>
+        /// Builds a second engine with a results cache configured on the
+        /// builder, which is how a deployment turns the cache on, and runs
+        /// the test against it. Cache hits are flagged on the results.
+        /// </summary>
+        private static void WithBuilderCache(
+            Action<FilteredIpiEngine, IPipeline> test,
+            LazyLoadingConfiguration lazyLoading = null)
+        {
+            var builder = new FilteredIpiEngineBuilder(_logger)
+                .SetPerformanceProfile(PerformanceProfiles.Balanced)
+                .SetAutoUpdate(false)
+                .SetDataFileSystemWatcher(false)
+                .SetCache(new CacheConfiguration() { Size = 10 })
+                .SetCacheHitOrMiss(true);
+            if (lazyLoading != null)
+            {
+                builder.SetLazyLoading(lazyLoading);
+            }
+            using (var engine = builder.Build(DataFile().FullName, false))
+            using (var pipeline = new PipelineBuilder(_logger).AddFlowElement(engine).Build())
+            {
+                test(engine, pipeline);
+            }
+        }
+
+        /// <summary>
+        /// Processes the IP address and checks the engine refused the
+        /// filtered request because a cache is set.
+        /// </summary>
+        private static void AssertRefused(IPipeline pipeline)
+        {
+            var data = pipeline.CreateFlowData();
+            data.AddEvidence("query.client-ip", IpAddress);
+            // The pipeline collects element exceptions and rethrows them
+            // together, so look inside the aggregate for the refusal.
+            var aggregate = Assert.ThrowsExactly<AggregateException>(() => data.Process());
+            Assert.IsTrue(IsRefusal(aggregate), "Expected the refusal, got: " + aggregate);
+        }
+
+        /// <summary>
+        /// True if the exception, or one it wraps, is the engine refusing to
+        /// filter because a cache is set. Matched on the message so another
+        /// InvalidOperationException, such as ObjectDisposedException, does
+        /// not count.
+        /// </summary>
+        private static bool IsRefusal(Exception e)
+        {
+            if (e == null)
+            {
+                return false;
+            }
+            if (e is InvalidOperationException && e.Message ==
+                global::FiftyOne.IpIntelligence.Engine.OnPremise.Messages.ExceptionGraphFilterWithCache)
+            {
+                return true;
+            }
+            if (e is AggregateException aggregate &&
+                aggregate.InnerExceptions.Any(IsRefusal))
+            {
+                return true;
+            }
+            return IsRefusal(e.InnerException);
         }
 
         /// <summary>
@@ -220,39 +326,64 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.FlowElements
         [TestMethod]
         public void GraphFilter_OneProperty_GivesOnlyItsComponent()
         {
-            var names = OnePropertyPerComponent();
-            if (names.Count < 2)
+            var map = _engine.RequiredPropertyIndexes;
+            var byComponent = _engine.Properties
+                .Where(p => map.ContainsKey(p.Name) && p.Component != null)
+                .GroupBy(p => p.Component.Name)
+                .ToList();
+            if (byComponent.Count < 2)
             {
                 Assert.Inconclusive("The data file has properties on one component only.");
             }
+            var kept = byComponent[0].First().Name;
             _engine.Indexes = null;
-            var all = Detect();
-            if (all.GetValues(names[0]).HasValue == false)
+            var all = Snapshot(_engine, Detect());
+            _engine.Indexes = new int[0];
+            var none = Snapshot(_engine, Detect());
+            _engine.Indexes = new[] { map[kept] };
+            var some = Snapshot(_engine, Detect());
+            // Every property on the evaluated component matches the
+            // unfiltered detection.
+            foreach (var property in byComponent[0])
             {
-                Assert.Inconclusive("The address has no value for " + names[0] + " even unfiltered.");
+                Assert.AreEqual(all[property.Name], some[property.Name], property.Name);
             }
-            _engine.Indexes = new[] { _engine.RequiredPropertyIndexes[names[0]] };
-            var some = Detect();
-            Assert.IsTrue(some.GetValues(names[0]).HasValue, names[0]);
-            for (int i = 1; i < names.Count; i++)
+            // Every property on another component reads as it does when no
+            // graph is evaluated, which is no value or its mandatory default.
+            var skipped = byComponent.Skip(1)
+                .SelectMany(g => g)
+                .Select(p => p.Name)
+                .ToList();
+            foreach (var name in skipped)
             {
-                var skipped = some.GetValues(names[i]);
-                Assert.IsFalse(skipped.HasValue, names[i]);
-                Assert.IsFalse(string.IsNullOrEmpty(skipped.NoValueMessage),
-                    "A skipped property must explain why it has no value.");
+                Assert.AreEqual(none[name], some[name], name);
             }
+            Assert.IsTrue(skipped.Any(name => all[name] != none[name]),
+                "The address must give another component a value when " +
+                "unfiltered, or the checks above prove nothing.");
         }
 
         [TestMethod]
         public void GraphFilter_Empty_GivesNoValue()
         {
-            var names = OnePropertyPerComponent();
+            _engine.Indexes = null;
+            var all = Snapshot(_engine, Detect());
             _engine.Indexes = new int[0];
             var ip = Detect();
-            foreach (var name in names)
+            var none = Snapshot(_engine, ip);
+            // Properties without a mandatory default have no value.
+            foreach (var name in OnePropertyPerComponent())
             {
                 Assert.IsFalse(ip.GetValues(name).HasValue, name);
             }
+            // Properties with one read as that default, so compare with the
+            // unfiltered detection to show the graphs were skipped.
+            Assert.IsTrue(all.Keys.Any(name => all[name] != none[name]),
+                "No value changed when every graph was skipped.");
+            // Indexes that are all out of range are ignored, which leaves the
+            // same as an empty array.
+            _engine.Indexes = new[] { -1, _engine.RequiredPropertyIndexes.Count };
+            AssertSameValues(none, Snapshot(_engine, Detect()));
         }
 
         [TestMethod]
@@ -260,23 +391,91 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.FlowElements
         {
             _engine.SetCache(new DefaultFlowCache(new CacheConfiguration() { Size = 10 }));
             _engine.Indexes = new[] { _engine.RequiredPropertyIndexes.Values.First() };
-            var data = _pipeline.CreateFlowData();
-            data.AddEvidence("query.client-ip", IpAddress);
-            // The pipeline collects element exceptions and rethrows them
-            // together, so look inside the aggregate for the refusal.
-            var aggregate = Assert.ThrowsExactly<AggregateException>(() => data.Process());
-            Assert.IsTrue(
-                aggregate.Flatten().InnerExceptions.Any(e => e is InvalidOperationException),
-                "Expected an InvalidOperationException, got: " + aggregate);
+            AssertRefused(_pipeline);
         }
 
         [TestMethod]
         public void GraphFilter_Unfiltered_StillWorksWhenCacheSet()
         {
-            _engine.SetCache(new DefaultFlowCache(new CacheConfiguration() { Size = 10 }));
             _engine.Indexes = null;
-            var ip = Detect();
-            Assert.IsNotNull(ip);
+            var expected = Snapshot(_engine, Detect());
+            _engine.SetCache(new DefaultFlowCache(new CacheConfiguration() { Size = 10 }));
+            AssertSameValues(expected, Snapshot(_engine, Detect()));
+        }
+
+        [TestMethod]
+        public void GraphFilter_ThrowsWhenCacheSetByBuilder()
+        {
+            WithBuilderCache((engine, pipeline) =>
+            {
+                engine.Indexes = new[] { engine.RequiredPropertyIndexes.Values.First() };
+                AssertRefused(pipeline);
+            });
+        }
+
+        [TestMethod]
+        public void GraphFilter_RefusalLeavesNothingInCache()
+        {
+            _engine.Indexes = null;
+            var expected = Snapshot(_engine, Detect());
+            WithBuilderCache((engine, pipeline) =>
+            {
+                engine.Indexes = new[] { engine.RequiredPropertyIndexes.Values.First() };
+                AssertRefused(pipeline);
+                // The same evidence unfiltered must be a miss with every
+                // value, not a filtered result left behind by the refusal.
+                engine.Indexes = null;
+                var ip = Detect(pipeline);
+                Assert.IsFalse(ip.CacheHit,
+                    "The refused request must not have stored a result.");
+                AssertSameValues(expected, Snapshot(engine, ip));
+            });
+        }
+
+        [TestMethod]
+        public void GraphFilter_Unfiltered_ServedFromCache()
+        {
+            WithBuilderCache((engine, pipeline) =>
+            {
+                engine.Indexes = null;
+                var first = Detect(pipeline);
+                // The cache hands back the same instance and flags it, so
+                // read the first answer before the second request.
+                Assert.IsFalse(first.CacheHit);
+                var expected = Snapshot(engine, first);
+                var second = Detect(pipeline);
+                Assert.IsTrue(second.CacheHit,
+                    "The second request should be served from the cache.");
+                AssertSameValues(expected, Snapshot(engine, second));
+            });
+        }
+
+        [TestMethod]
+        public void GraphFilter_LazyLoading_RefusalSurfacesOnReadAndIsCached()
+        {
+            WithBuilderCache((engine, pipeline) =>
+            {
+                var name = engine.RequiredPropertyIndexes.Keys.First();
+                engine.Indexes = new[] { engine.RequiredPropertyIndexes[name] };
+                // Processing runs on a task, so the refusal is raised when a
+                // value is read rather than by Process. The indexer waits for
+                // the task, which GetValues does not.
+                var ip = Detect(pipeline);
+                var error = Assert.Throws<Exception>(() => ip[name]);
+                Assert.IsTrue(IsRefusal(error), "Expected the refusal, got: " + error);
+                // The pipeline cached the result before the task failed, so
+                // the same evidence fails the same way even unfiltered until
+                // the entry is evicted. The documentation says so.
+                engine.Indexes = null;
+                var after = Detect(pipeline);
+                Assert.IsTrue(after.CacheHit);
+                var cached = Assert.Throws<Exception>(() => after[name]);
+                Assert.IsTrue(IsRefusal(cached), "Expected the refusal, got: " + cached);
+            },
+            // A long wait so the task always finishes first. A wait that times
+            // out without a cancellation token fails inside the pipeline with
+            // "Nullable object must have a value" rather than a timeout.
+            new LazyLoadingConfiguration(60000));
         }
     }
 }
