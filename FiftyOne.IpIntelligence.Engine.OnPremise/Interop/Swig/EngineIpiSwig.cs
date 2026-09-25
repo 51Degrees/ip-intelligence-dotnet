@@ -115,6 +115,27 @@ internal class EngineIpiSwig : EngineBaseSwig {
     return ret;
   }
 
+  public ResultsIpiSwig process(EvidenceIpiSwig evidence, int[] requiredPropertyIndexes, int requiredPropertyIndexesCount) {
+    global::System.IntPtr cPtr = IpIntelligenceEngineModulePINVOKE.EngineIpiSwig_process__SWIG_3(swigCPtr, EvidenceIpiSwig.getCPtr(evidence), requiredPropertyIndexes, requiredPropertyIndexesCount);
+    ResultsIpiSwig ret = (cPtr == global::System.IntPtr.Zero) ? null : new ResultsIpiSwig(cPtr, true);
+    if (IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Pending) throw IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Retrieve();
+    return ret;
+  }
+
+  public ResultsIpiSwig process(string ipAddress, int[] requiredPropertyIndexes, int requiredPropertyIndexesCount) {
+    global::System.IntPtr cPtr = IpIntelligenceEngineModulePINVOKE.EngineIpiSwig_process__SWIG_4(swigCPtr, ipAddress, requiredPropertyIndexes, requiredPropertyIndexesCount);
+    ResultsIpiSwig ret = (cPtr == global::System.IntPtr.Zero) ? null : new ResultsIpiSwig(cPtr, true);
+    if (IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Pending) throw IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Retrieve();
+    return ret;
+  }
+
+  public ResultsIpiSwig process(byte[] ipAddress, int length, IpTypeSwig type, int[] requiredPropertyIndexes, int requiredPropertyIndexesCount) {
+    global::System.IntPtr cPtr = IpIntelligenceEngineModulePINVOKE.EngineIpiSwig_process__SWIG_5(swigCPtr, ipAddress, length, (int)type, requiredPropertyIndexes, requiredPropertyIndexesCount);
+    ResultsIpiSwig ret = (cPtr == global::System.IntPtr.Zero) ? null : new ResultsIpiSwig(cPtr, true);
+    if (IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Pending) throw IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Retrieve();
+    return ret;
+  }
+
   public override ResultsBaseSwig processBase(EvidenceBaseSwig evidence) {
     global::System.IntPtr cPtr = IpIntelligenceEngineModulePINVOKE.EngineIpiSwig_processBase(swigCPtr, EvidenceBaseSwig.getCPtr(evidence));
     ResultsBaseSwig ret = (cPtr == global::System.IntPtr.Zero) ? null : new ResultsBaseSwig(cPtr, true);

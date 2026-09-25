@@ -151,6 +151,12 @@ internal class EngineBaseSwig : global::System.IDisposable {
     return ret;
   }
 
+  public VectorStringSwig getRequiredProperties() {
+    VectorStringSwig ret = new VectorStringSwig(IpIntelligenceEngineModulePINVOKE.EngineBaseSwig_getRequiredProperties(swigCPtr), true);
+    if (IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Pending) throw IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Retrieve();
+    return ret;
+  }
+
   public bool getIsThreadSafe() {
     bool ret = IpIntelligenceEngineModulePINVOKE.EngineBaseSwig_getIsThreadSafe(swigCPtr);
     if (IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Pending) throw IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Retrieve();
