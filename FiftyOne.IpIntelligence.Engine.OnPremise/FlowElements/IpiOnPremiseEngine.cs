@@ -94,15 +94,6 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
             new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
 
         /// <summary>
-        /// True once <see cref="SetCache(IFlowCache)"/> has been called.
-        /// The filtered
-        /// <see cref="ProcessEngine(IFlowData, IIpDataOnPremise, int[])"/>
-        /// refuses to run with a cache, because the cache is keyed on
-        /// evidence alone.
-        /// </summary>
-        private bool _cacheSet;
-
-        /// <summary>
         /// Wrapper to pass general configuration from managed code to unmanaged 
         /// code.
         /// </summary>
@@ -179,15 +170,38 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
             _requiredPropertyIndexes;
 
         /// <summary>
-        /// Records that a results cache is in use so the filtered
-        /// <see cref="ProcessEngine(IFlowData, IIpDataOnPremise, int[])"/>
-        /// can refuse to run. The unfiltered path is unaffected.
+        /// True for a subclass that calls the filtered
+        /// <see cref="ProcessEngine(IFlowData, IIpDataOnPremise, int[])"/>.
+        /// Such an engine cannot have a results cache, because the cache is
+        /// keyed on evidence alone and would serve a result produced for
+        /// fewer properties to a caller that needs more.
+        /// </summary>
+        /// <remarks>
+        /// The combination is refused in <see cref="SetCache(IFlowCache)"/>,
+        /// when the engine is configured, rather than when a request is
+        /// processed. With lazy loading the pipeline caches the result before
+        /// ProcessEngine runs, so a refusal made there would itself be cached
+        /// and served to every later request with the same evidence,
+        /// unfiltered ones included.
+        /// </remarks>
+        protected virtual bool FiltersGraphs => false;
+
+        /// <summary>
+        /// Sets the results cache, which an engine that filters graphs
+        /// cannot have. See <see cref="FiltersGraphs"/>.
         /// </summary>
         /// <param name="cache">The cache.</param>
+        /// <exception cref="InvalidOperationException">
+        /// Thrown if <see cref="FiltersGraphs"/> is true.
+        /// </exception>
         public override void SetCache(IFlowCache cache)
         {
+            if (FiltersGraphs == true)
+            {
+                throw new InvalidOperationException(
+                    Messages.ExceptionGraphFilterWithCache);
+            }
             base.SetCache(cache);
-            _cacheSet = true;
         }
 
         internal IMetaDataSwigWrapper MetaData => _engine.getMetaData();
@@ -348,7 +362,9 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
         /// <remarks>
         /// This is for a subclass used by a service that knows, for every
         /// request, which properties it will read. Other callers have no
-        /// need of it.
+        /// need of it. The subclass must override
+        /// <see cref="FiltersGraphs"/> to return true, which also stops a
+        /// results cache from being set on it.
         /// A property whose graph was not evaluated has no value, with a
         /// message that reports a null profile. That is the caller's
         /// responsibility, since the caller said it would not read it. A
@@ -376,13 +392,10 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
         /// Thrown if a required parameter is null
         /// </exception>
         /// <exception cref="InvalidOperationException">
-        /// Thrown if a results cache has been set on the engine and
-        /// <paramref name="requiredPropertyIndexes"/> is not null. The check
-        /// comes before any processing, so nothing is stored in the cache.
-        /// With lazy loading the exception is raised when a value is read
-        /// instead, and the pipeline has by then cached that failed result,
-        /// so later requests with the same evidence fail the same way until
-        /// the entry is evicted.
+        /// Thrown if <paramref name="requiredPropertyIndexes"/> is not null
+        /// and <see cref="FiltersGraphs"/> is false. Without that declaration
+        /// the engine could have a results cache, which would serve the
+        /// filtered result to callers that need every property.
         /// </exception>
         protected void ProcessEngine(
             IFlowData data,
@@ -391,9 +404,10 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
         {
             if (data == null) { throw new ArgumentNullException(nameof(data)); }
             if (ipData == null) { throw new ArgumentNullException(nameof(ipData)); }
-            if (requiredPropertyIndexes != null && _cacheSet)
+            if (requiredPropertyIndexes != null && FiltersGraphs == false)
             {
-                throw new InvalidOperationException(Messages.ExceptionGraphFilterWithCache);
+                throw new InvalidOperationException(
+                    Messages.ExceptionGraphFilterNotDeclared);
             }
 
             // Walk the client IP evidence keys in the order the native

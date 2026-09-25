@@ -255,6 +255,34 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
         }
 
         /// <summary>
+        /// Configures the engine as the base class does, disposing of it if
+        /// configuration fails.
+        /// </summary>
+        /// <remarks>
+        /// By this point <see cref="NewEngine(List{string})"/> has loaded
+        /// the data file into the native engine, and a failed build never
+        /// hands the engine to the caller, so nothing else could release
+        /// that memory. The failure this guards against is
+        /// <see cref="IpiOnPremiseEngine.SetCache"/> refusing a results
+        /// cache for an engine that filters graphs.
+        /// </remarks>
+        /// <param name="engine">
+        /// The engine to configure.
+        /// </param>
+        protected override void ConfigureEngine(TEngine engine)
+        {
+            try
+            {
+                base.ConfigureEngine(engine);
+            }
+            catch (Exception)
+            {
+                engine?.Dispose();
+                throw;
+            }
+        }
+
+        /// <summary>
         /// Get the default value for the 'Type' parameter that is passed
         /// to the 51Degrees Distributor service when checking for updated
         /// data files.

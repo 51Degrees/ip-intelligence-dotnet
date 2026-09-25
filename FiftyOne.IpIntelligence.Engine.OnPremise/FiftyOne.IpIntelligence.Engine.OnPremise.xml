@@ -859,15 +859,6 @@
             dictionaries and the native name lookup.
             </summary>
         </member>
-        <member name="F:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine._cacheSet">
-            <summary>
-            True once <see cref="M:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine.SetCache(FiftyOne.Pipeline.Engines.Caching.IFlowCache)"/> has been called.
-            The filtered
-            <see cref="M:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine.ProcessEngine(FiftyOne.Pipeline.Core.Data.IFlowData,FiftyOne.IpIntelligence.Engine.OnPremise.Data.IIpDataOnPremise,System.Int32[])"/>
-            refuses to run with a cache, because the cache is keyed on
-            evidence alone.
-            </summary>
-        </member>
         <member name="P:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine.Config">
             <summary>
             Wrapper to pass general configuration from managed code to unmanaged 
@@ -928,13 +919,32 @@
             use the new data file with indexes from the old map.
             </remarks>
         </member>
+        <member name="P:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine.FiltersGraphs">
+            <summary>
+            True for a subclass that calls the filtered
+            <see cref="M:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine.ProcessEngine(FiftyOne.Pipeline.Core.Data.IFlowData,FiftyOne.IpIntelligence.Engine.OnPremise.Data.IIpDataOnPremise,System.Int32[])"/>.
+            Such an engine cannot have a results cache, because the cache is
+            keyed on evidence alone and would serve a result produced for
+            fewer properties to a caller that needs more.
+            </summary>
+            <remarks>
+            The combination is refused in <see cref="M:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine.SetCache(FiftyOne.Pipeline.Engines.Caching.IFlowCache)"/>,
+            when the engine is configured, rather than when a request is
+            processed. With lazy loading the pipeline caches the result before
+            ProcessEngine runs, so a refusal made there would itself be cached
+            and served to every later request with the same evidence,
+            unfiltered ones included.
+            </remarks>
+        </member>
         <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine.SetCache(FiftyOne.Pipeline.Engines.Caching.IFlowCache)">
             <summary>
-            Records that a results cache is in use so the filtered
-            <see cref="M:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine.ProcessEngine(FiftyOne.Pipeline.Core.Data.IFlowData,FiftyOne.IpIntelligence.Engine.OnPremise.Data.IIpDataOnPremise,System.Int32[])"/>
-            can refuse to run. The unfiltered path is unaffected.
+            Sets the results cache, which an engine that filters graphs
+            cannot have. See <see cref="P:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine.FiltersGraphs"/>.
             </summary>
             <param name="cache">The cache.</param>
+            <exception cref="T:System.InvalidOperationException">
+            Thrown if <see cref="P:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine.FiltersGraphs"/> is true.
+            </exception>
         </member>
         <member name="P:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine.Properties">
             <summary>
@@ -1027,7 +1037,9 @@
             <remarks>
             This is for a subclass used by a service that knows, for every
             request, which properties it will read. Other callers have no
-            need of it.
+            need of it. The subclass must override
+            <see cref="P:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine.FiltersGraphs"/> to return true, which also stops a
+            results cache from being set on it.
             A property whose graph was not evaluated has no value, with a
             message that reports a null profile. That is the caller's
             responsibility, since the caller said it would not read it. A
@@ -1055,13 +1067,10 @@
             Thrown if a required parameter is null
             </exception>
             <exception cref="T:System.InvalidOperationException">
-            Thrown if a results cache has been set on the engine and
-            <paramref name="requiredPropertyIndexes"/> is not null. The check
-            comes before any processing, so nothing is stored in the cache.
-            With lazy loading the exception is raised when a value is read
-            instead, and the pipeline has by then cached that failed result,
-            so later requests with the same evidence fail the same way until
-            the entry is evicted.
+            Thrown if <paramref name="requiredPropertyIndexes"/> is not null
+            and <see cref="P:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine.FiltersGraphs"/> is false. Without that declaration
+            the engine could have a results cache, which would serve the
+            filtered result to callers that need every property.
             </exception>
         </member>
         <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine.UnmanagedResourcesCleanup">
@@ -1217,6 +1226,23 @@
             An <see cref="T:FiftyOne.Pipeline.Engines.FlowElements.IAspectEngine"/>.
             </returns>
         </member>
+        <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngineBuilderBase`1.ConfigureEngine(`0)">
+            <summary>
+            Configures the engine as the base class does, disposing of it if
+            configuration fails.
+            </summary>
+            <remarks>
+            By this point <see cref="M:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngineBuilderBase`1.NewEngine(System.Collections.Generic.List{System.String})"/> has loaded
+            the data file into the native engine, and a failed build never
+            hands the engine to the caller, so nothing else could release
+            that memory. The failure this guards against is
+            <see cref="M:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine.SetCache(FiftyOne.Pipeline.Engines.Caching.IFlowCache)"/> refusing a results
+            cache for an engine that filters graphs.
+            </remarks>
+            <param name="engine">
+            The engine to configure.
+            </param>
+        </member>
         <member name="P:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngineBuilderBase`1.DefaultDataDownloadType">
             <summary>
             Get the default value for the 'Type' parameter that is passed
@@ -1337,7 +1363,12 @@
         </member>
         <member name="P:FiftyOne.IpIntelligence.Engine.OnPremise.Messages.ExceptionGraphFilterWithCache">
             <summary>
-              Looks up a localized string similar to The filtered ProcessEngine overload cannot be used when a results cache has been set on the engine, because the cache is keyed on evidence alone and would return a result produced for fewer properties to a caller that needs more..
+              Looks up a localized string similar to A results cache cannot be set on an engine that filters graphs, because the cache is keyed on evidence alone and would return a result produced for fewer properties to a caller that needs more..
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Engine.OnPremise.Messages.ExceptionGraphFilterNotDeclared">
+            <summary>
+              Looks up a localized string similar to The filtered ProcessEngine overload can only be used by an engine that overrides FiltersGraphs to return true, which stops a results cache from being set on it..
             </summary>
         </member>
         <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.Wrappers.IEngineSwigWrapper.process(FiftyOne.IpIntelligence.Engine.OnPremise.Interop.EvidenceIpiSwig,System.Int32[])">

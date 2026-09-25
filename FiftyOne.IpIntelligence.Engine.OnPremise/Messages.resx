@@ -121,6 +121,9 @@
     <value>UTF8Marshaler must be used on a string.</value>
   </data>
   <data name="ExceptionGraphFilterWithCache" xml:space="preserve">
-    <value>The filtered ProcessEngine overload cannot be used when a results cache has been set on the engine, because the cache is keyed on evidence alone and would return a result produced for fewer properties to a caller that needs more.</value>
+    <value>A results cache cannot be set on an engine that filters graphs, because the cache is keyed on evidence alone and would return a result produced for fewer properties to a caller that needs more.</value>
+  </data>
+  <data name="ExceptionGraphFilterNotDeclared" xml:space="preserve">
+    <value>The filtered ProcessEngine overload can only be used by an engine that overrides FiltersGraphs to return true, which stops a results cache from being set on it.</value>
   </data>
 </root>
