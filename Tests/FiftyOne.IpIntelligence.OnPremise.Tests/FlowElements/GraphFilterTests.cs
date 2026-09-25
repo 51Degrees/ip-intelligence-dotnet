@@ -365,17 +365,16 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.FlowElements
         /// <summary>
         /// Names of properties in the required list, one per component, in
         /// the order the components appear. Metric properties are not in the
-        /// native list and are left out, as are properties that are mandatory
-        /// with a default value, because those read as the default when their
-        /// component produced no profile, exactly as for an unmatched
-        /// component today.
+        /// native list and are left out, as are mandatory properties, because
+        /// those can read as their default when their component produced no
+        /// profile, exactly as for an unmatched component today.
         /// </summary>
         private List<string> OnePropertyPerComponent()
         {
             var map = _engine.RequiredPropertyIndexes;
             return _engine.Properties
                 .Where(p => map.ContainsKey(p.Name) && p.Component != null)
-                .Where(p => p.Mandatory == false || p.DefaultValue == null)
+                .Where(p => p.Mandatory == false)
                 .GroupBy(p => p.Component.Name)
                 .Select(g => g.First().Name)
                 .ToList();
