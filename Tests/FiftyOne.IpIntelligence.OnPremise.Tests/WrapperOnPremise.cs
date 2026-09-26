@@ -45,7 +45,7 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests
         /// A new wrapper instance
         /// </summary>
         /// <param name="dataFile">
-        /// Full path to the data file for the cache engine.
+        /// Full path to the data file for the test engine.
         /// </param>
         /// <param name="profile">
         /// Performance profile for the test engine.

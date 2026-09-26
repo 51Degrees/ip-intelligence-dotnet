@@ -485,7 +485,8 @@ namespace FiftyOne.IpIntelligence
             where TBuilder : OnPremiseIpiEngineBuilderBase<TBuilder, TEngine>
             where TEngine : IFiftyOneAspectEngine
         {
-            // Configure caching
+            // The engine builder refuses a results cache, so UseResultsCache
+            // fails here rather than being ignored.
             if (ResultsCache)
             {
                 builder.SetCache(new CacheConfiguration() { Size = ResultsCacheSize });
