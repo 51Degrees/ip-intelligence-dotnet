@@ -70,20 +70,11 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A results cache cannot be set on an engine that filters graphs, because the cache is keyed on evidence alone and would return a result produced for fewer properties to a caller that needs more..
+        ///   Looks up a localized string similar to A results cache cannot be configured in the IP Intelligence engine. Its results refer to native memory, which is not safe to share between requests..
         /// </summary>
-        internal static string ExceptionGraphFilterWithCache {
+        internal static string ExceptionSetCache {
             get {
-                return ResourceManager.GetString("ExceptionGraphFilterWithCache", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The filtered ProcessEngine overload can only be used by an engine that overrides FiltersGraphs to return true, which stops a results cache from being set on it..
-        /// </summary>
-        internal static string ExceptionGraphFilterNotDeclared {
-            get {
-                return ResourceManager.GetString("ExceptionGraphFilterNotDeclared", resourceCulture);
+                return ResourceManager.GetString("ExceptionSetCache", resourceCulture);
             }
         }
     }
