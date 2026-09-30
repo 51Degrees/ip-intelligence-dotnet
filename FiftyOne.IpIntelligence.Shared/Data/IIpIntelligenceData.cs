@@ -82,6 +82,10 @@ namespace FiftyOne.IpIntelligence
 		/// </summary>
 		IAspectPropertyValue<string> ContinentCode2 { get; }
 		/// <summary>
+		/// The GeoNames identifier of the continent associated with the supplied location.
+		/// </summary>
+		IAspectPropertyValue<string> ContinentGeoNameId { get; }
+		/// <summary>
 		/// The name of the continent the supplied location is in.
 		/// </summary>
 		IAspectPropertyValue<string> ContinentName { get; }
@@ -106,9 +110,21 @@ namespace FiftyOne.IpIntelligence
 		/// </summary>
 		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> CountryCodesPopulation { get; }
 		/// <summary>
+		/// The GeoNames identifier of the country associated with the supplied location.
+		/// </summary>
+		IAspectPropertyValue<string> CountryGeoNameId { get; }
+		/// <summary>
+		/// A list of GeoNames country identifiers that overlap within the area associated in the provided evidence. Results are weighted and ordered by each country's proportion of the overlapping area. Areas that cannot be resolved will not contribute to the resulting data.
+		/// </summary>
+		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> CountryGeoNamesGeographical { get; }
+		/// <summary>
 		/// The name of the county that the supplied location is in. In this case, a county is defined as an administrative sub-section of a country or state.
 		/// </summary>
 		IAspectPropertyValue<string> County { get; }
+		/// <summary>
+		/// The GeoNames identifier of the county, a second-level administrative subdivision (admin2) associated with the supplied location.
+		/// </summary>
+		IAspectPropertyValue<string> CountyGeoNameId { get; }
 		/// <summary>
 		/// The Alpha-3 ISO 4217 code of the currency associated with the supplied location.
 		/// </summary>
@@ -233,6 +249,10 @@ namespace FiftyOne.IpIntelligence
 		/// </summary>
 		IAspectPropertyValue<string> RegisteredCountry { get; }
 		/// <summary>
+		/// The GeoNames identifier of the country in which the IP address range is registered.
+		/// </summary>
+		IAspectPropertyValue<string> RegisteredCountryGeoNameId { get; }
+		/// <summary>
 		/// Name of the IP range. This is usually the owner.
 		/// </summary>
 		IAspectPropertyValue<string> RegisteredName { get; }
@@ -244,6 +264,14 @@ namespace FiftyOne.IpIntelligence
 		/// The name of the state that the supplied location is in.
 		/// </summary>
 		IAspectPropertyValue<string> State { get; }
+		/// <summary>
+		/// The GeoNames database identifier for the state (first-level administrative subdivision, admin1) that the supplied location is in.
+		/// </summary>
+		IAspectPropertyValue<string> StateGeoNameId { get; }
+		/// <summary>
+		/// A list of GeoNames state identifiers, first-level administrative subdivisions (admin1) that overlap within the area associated in the provided evidence. Results are weighted and ordered by each state's proportion of the overlapping area. Areas that cannot be resolved to the state level will not contribute to the resulting data.
+		/// </summary>
+		IAspectPropertyValue<IReadOnlyList<IWeightedValue<string>>> StateGeoNamesGeographical { get; }
 		/// <summary>
 		/// The name of the suburb that the supplied location is in.
 		/// </summary>
@@ -260,6 +288,10 @@ namespace FiftyOne.IpIntelligence
 		/// The name of the town that the supplied location is in.
 		/// </summary>
 		IAspectPropertyValue<string> Town { get; }
+		/// <summary>
+		/// The GeoNames identifier of the town or populated place nearest to the supplied location.
+		/// </summary>
+		IAspectPropertyValue<string> TownGeoNameId { get; }
 		/// <summary>
 		/// The zip or postal code that the supplied location falls under.
 		/// </summary>
