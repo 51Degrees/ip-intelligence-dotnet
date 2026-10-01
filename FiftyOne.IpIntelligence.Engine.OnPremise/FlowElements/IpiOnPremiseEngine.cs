@@ -84,11 +84,8 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
         private IList<IComponentMetaData> _components;
 
         /// <summary>
-        /// Property name to required property index, rebuilt in
-        /// <see cref="InitEngineMetaData"/> from the native engine each time
-        /// data is loaded, because the indexes come from the data file.
-        /// Compared ignoring case, which matches the pipeline's property
-        /// dictionaries and the native name lookup.
+        /// Required property index for each property name, rebuilt whenever
+        /// data is loaded.
         /// </summary>
         private IReadOnlyDictionary<string, int> _requiredPropertyIndexes =
             new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
@@ -149,59 +146,27 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
         public override string ElementDataKey => "ip";
 
         /// <summary>
-        /// Property name to required property index for every property the
-        /// engine was built with that the data file contains. Pass the
-        /// indexes of the properties that will be read to
-        /// <see cref="ProcessEngine(IFlowData, IIpDataOnPremise, int[])"/>
-        /// so only the graphs those properties need are evaluated. Names are
-        /// compared ignoring case.
+        /// Required property index for each property name, compared ignoring
+        /// case. Pass the indexes of the properties a request will read to
+        /// <see cref="ProcessEngine(IFlowData, IIpDataOnPremise, int[])"/>.
         /// </summary>
         /// <remarks>
-        /// An index is a position in the data file's required properties,
-        /// which are sorted by name, so a refresh that loads a data file
-        /// which gains or loses a required property moves the indexes. The
-        /// map is replaced after every refresh and before
-        /// <see cref="RefreshCompleted"/> is raised, so an array of indexes
-        /// stays valid for as long as this property returns the same
-        /// instance. A request that runs while a refresh is completing can
-        /// use the new data file with indexes from the old map.
+        /// Indexes come from the loaded data file, so a refresh can change
+        /// them. The map is replaced before <see cref="RefreshCompleted"/> is
+        /// raised.
         /// </remarks>
         public IReadOnlyDictionary<string, int> RequiredPropertyIndexes =>
             _requiredPropertyIndexes;
 
         /// <summary>
-        /// True for a subclass that calls the filtered
-        /// <see cref="ProcessEngine(IFlowData, IIpDataOnPremise, int[])"/>.
-        /// Such an engine cannot have a results cache, because the cache is
-        /// keyed on evidence alone and would serve a result produced for
-        /// fewer properties to a caller that needs more.
+        /// Not supported. Results refer to native memory, which is not safe
+        /// to share between requests through a cache.
         /// </summary>
-        /// <remarks>
-        /// The combination is refused in <see cref="SetCache(IFlowCache)"/>,
-        /// when the engine is configured, rather than when a request is
-        /// processed. With lazy loading the pipeline caches the result before
-        /// ProcessEngine runs, so a refusal made there would itself be cached
-        /// and served to every later request with the same evidence,
-        /// unfiltered ones included.
-        /// </remarks>
-        protected virtual bool FiltersGraphs => false;
-
-        /// <summary>
-        /// Sets the results cache, which an engine that filters graphs
-        /// cannot have. See <see cref="FiltersGraphs"/>.
-        /// </summary>
-        /// <param name="cache">The cache.</param>
-        /// <exception cref="InvalidOperationException">
-        /// Thrown if <see cref="FiltersGraphs"/> is true.
-        /// </exception>
+        /// <param name="cache">Not used.</param>
+        /// <exception cref="NotSupportedException">Always thrown.</exception>
         public override void SetCache(IFlowCache cache)
         {
-            if (FiltersGraphs == true)
-            {
-                throw new InvalidOperationException(
-                    Messages.ExceptionGraphFilterWithCache);
-            }
-            base.SetCache(cache);
+            throw new NotSupportedException(Messages.ExceptionSetCache);
         }
 
         internal IMetaDataSwigWrapper MetaData => _engine.getMetaData();
@@ -356,46 +321,25 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
         }
 
         /// <summary>
-        /// Perform processing for this engine evaluating only the graphs
-        /// needed by the given required property indexes.
+        /// Processes the request, evaluating only the graphs that the given
+        /// required properties need. For subclasses that know which
+        /// properties each request reads.
         /// </summary>
         /// <remarks>
-        /// This is for a subclass used by a service that knows, for every
-        /// request, which properties it will read. Other callers have no
-        /// need of it. The subclass must override
-        /// <see cref="FiltersGraphs"/> to return true, which also stops a
-        /// results cache from being set on it.
-        /// A property whose graph was not evaluated has no value, with a
-        /// message that reports a null profile. That is the caller's
-        /// responsibility, since the caller said it would not read it. A
-        /// property that is mandatory with a default value reads as that
-        /// default instead, as it does for a component that produced no
-        /// profile. The native mask is 32 bits, so a data file with more
-        /// than 32 components is filtered for the first 32 only and the rest
-        /// are always evaluated. That limit is accepted for performance.
+        /// A property whose graph was skipped has no value and reports a null
+        /// profile, unless it is mandatory with a default value, which it then
+        /// reads as. Only the first 32 components can be skipped.
         /// </remarks>
-        /// <param name="data">
-        /// The <see cref="IFlowData"/> instance containing data for the
-        /// current request.
-        /// </param>
-        /// <param name="ipData">
-        /// The <see cref="IIpDataOnPremise"/> instance to populate with
-        /// property values
-        /// </param>
+        /// <param name="data">The flow data for the request.</param>
+        /// <param name="ipData">The IP data to populate.</param>
         /// <param name="requiredPropertyIndexes">
         /// Indexes from <see cref="RequiredPropertyIndexes"/> for the
-        /// properties that will be read. Null evaluates every graph. An
-        /// empty array evaluates none. Indexes outside the required
-        /// properties are ignored.
+        /// properties that will be read. Null evaluates every graph and an
+        /// empty array none. Indexes that are not required properties are
+        /// ignored.
         /// </param>
         /// <exception cref="ArgumentNullException">
-        /// Thrown if a required parameter is null
-        /// </exception>
-        /// <exception cref="InvalidOperationException">
-        /// Thrown if <paramref name="requiredPropertyIndexes"/> is not null
-        /// and <see cref="FiltersGraphs"/> is false. Without that declaration
-        /// the engine could have a results cache, which would serve the
-        /// filtered result to callers that need every property.
+        /// Thrown if a required parameter is null.
         /// </exception>
         protected void ProcessEngine(
             IFlowData data,
@@ -404,11 +348,6 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
         {
             if (data == null) { throw new ArgumentNullException(nameof(data)); }
             if (ipData == null) { throw new ArgumentNullException(nameof(ipData)); }
-            if (requiredPropertyIndexes != null && FiltersGraphs == false)
-            {
-                throw new InvalidOperationException(
-                    Messages.ExceptionGraphFilterNotDeclared);
-            }
 
             // Walk the client IP evidence keys in the order the native
             // lookup consults them - see OrderEvidenceKeysAsNativeEngine

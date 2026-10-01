@@ -74,13 +74,11 @@ namespace FiftyOne.IpIntelligence.Tests.Core
 
         private static IEnumerable<object[]> TestParams
             => from profile in Constants.TestableProfiles
-               from useCache in AllBools
                from useLazyLoading in AllBools
                from multiThreaded in AllBools
                select new object[] {
                    Constants.IPI_DATA_FILE_NAME,
                    profile, 
-                   useCache, 
                    useLazyLoading, 
                    multiThreaded,
                };
@@ -88,10 +86,9 @@ namespace FiftyOne.IpIntelligence.Tests.Core
         public static string DisplayNameForTestCase(MethodInfo methodInfo, object[] data)
         {
             var profile = (PerformanceProfiles)data[1];
-            var useCache = (((bool)data[2]) ? "" : "No") + "Cache";
-            var useLazyLoading = (((bool)data[3]) ? "" : "No") + "LazyLoad";
-            var multiThreaded = (((bool)data[4]) ? "Multi" : "Single") + "Thread";
-            return $"Ipi-{profile}_{useCache}_{useLazyLoading}_{multiThreaded}";
+            var useLazyLoading = (((bool)data[2]) ? "" : "No") + "LazyLoad";
+            var multiThreaded = (((bool)data[3]) ? "Multi" : "Single") + "Thread";
+            return $"Ipi-{profile}_{useLazyLoading}_{multiThreaded}";
         }
 
         private static IpAddressGenerator IP_ADDRESSES = new IpAddressGenerator(
@@ -102,13 +99,11 @@ namespace FiftyOne.IpIntelligence.Tests.Core
         public void Ipi_AllConfigurations_100_IpAddresses(
             string datafileName,
             PerformanceProfiles performanceProfile,
-            bool useCache,
             bool useLazyLoading,
             bool multiThreaded)
         {
             TestOnPremise_AllConfigurations_100_IpAddresses(datafileName,
                 performanceProfile,
-                useCache,
                 useLazyLoading,
                 multiThreaded);
         }
@@ -125,9 +120,6 @@ namespace FiftyOne.IpIntelligence.Tests.Core
         /// <param name="performanceProfile">
         /// The performance profile to use.
         /// </param>
-        /// <param name="useCache">
-        /// Whether or not to use a c# cache results cache in the pipeline.
-        /// </param>
         /// <param name="useLazyLoading">
         /// Whether or not to use the lazy loading feature.
         /// </param>
@@ -138,7 +130,6 @@ namespace FiftyOne.IpIntelligence.Tests.Core
         public void TestOnPremise_AllConfigurations_100_IpAddresses(
             string datafileName,
             PerformanceProfiles performanceProfile,
-            bool useCache,
             bool useLazyLoading,
             bool multiThreaded)
         {
@@ -153,10 +144,6 @@ namespace FiftyOne.IpIntelligence.Tests.Core
                 .SetPerformanceProfile(performanceProfile)
                 .SetShareUsage(false)
                 .SetDataFileSystemWatcher(false);
-            if (useCache)
-            {
-                builder.UseResultsCache();
-            }
             if (useLazyLoading)
             {
                 builder.UseLazyLoading();

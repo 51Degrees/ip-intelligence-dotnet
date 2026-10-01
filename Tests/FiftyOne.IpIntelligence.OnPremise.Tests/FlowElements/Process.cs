@@ -20,7 +20,6 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
-using FiftyOne.Caching;
 using FiftyOne.IpIntelligence.OnPremise.Tests.Data;
 using FiftyOne.IpIntelligence.TestHelpers.FlowElements;
 using FiftyOne.Pipeline.Core.Data;

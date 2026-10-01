@@ -23,9 +23,11 @@
 using FiftyOne.IpIntelligence.Engine.OnPremise.Data;
 using FiftyOne.IpIntelligence.Engine.OnPremise.Interop;
 using FiftyOne.IpIntelligence.Shared.FlowElements;
+using FiftyOne.Pipeline.Core.Attributes;
 using FiftyOne.Pipeline.Core.Exceptions;
 using FiftyOne.Pipeline.Core.FlowElements;
 using FiftyOne.Pipeline.Engines;
+using FiftyOne.Pipeline.Engines.Configuration;
 using FiftyOne.Pipeline.Engines.FiftyOne.Data;
 using FiftyOne.Pipeline.Engines.FlowElements;
 using FiftyOne.Pipeline.Engines.Services;
@@ -255,31 +257,27 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
         }
 
         /// <summary>
-        /// Configures the engine as the base class does, disposing of it if
-        /// configuration fails.
+        /// Not supported, because this engine cannot have a results cache.
         /// </summary>
-        /// <remarks>
-        /// By this point <see cref="NewEngine(List{string})"/> has loaded
-        /// the data file into the native engine, and a failed build never
-        /// hands the engine to the caller, so nothing else could release
-        /// that memory. The failure this guards against is
-        /// <see cref="IpiOnPremiseEngine.SetCache"/> refusing a results
-        /// cache for an engine that filters graphs.
-        /// </remarks>
-        /// <param name="engine">
-        /// The engine to configure.
-        /// </param>
-        protected override void ConfigureEngine(TEngine engine)
+        /// <param name="cacheConfig">Not used.</param>
+        /// <exception cref="NotSupportedException">Always thrown.</exception>
+        [CodeConfigOnly]
+        public override IpiOnPremiseEngineBuilderBase<TEngine> SetCache(
+            CacheConfiguration cacheConfig)
         {
-            try
-            {
-                base.ConfigureEngine(engine);
-            }
-            catch (Exception)
-            {
-                engine?.Dispose();
-                throw;
-            }
+            throw new NotSupportedException(Messages.ExceptionSetCache);
+        }
+
+        /// <summary>
+        /// Not supported, because this engine cannot have a results cache.
+        /// </summary>
+        /// <param name="cacheSize">Not used.</param>
+        /// <exception cref="NotSupportedException">Always thrown.</exception>
+        [DefaultValue("Not supported")]
+        public override IpiOnPremiseEngineBuilderBase<TEngine> SetCacheSize(
+            int cacheSize)
+        {
+            throw new NotSupportedException(Messages.ExceptionSetCache);
         }
 
         /// <summary>

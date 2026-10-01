@@ -23,10 +23,13 @@
 using FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements;
 using FiftyOne.IpIntelligence.Engine.OnPremise.Interop;
 using FiftyOne.IpIntelligence.Engine.OnPremise.Wrappers;
+using FiftyOne.Pipeline.Engines.Caching;
+using FiftyOne.Pipeline.Engines.Configuration;
 using FiftyOne.Pipeline.Engines.FiftyOne.Data;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -88,6 +91,43 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.Core.FlowElements
         {
             var engine = _builder.Build(new MemoryStream());
             Assert.AreEqual(engine, engine.DataFiles.ElementAt(0).Engine);
+        }
+
+        /// <summary>
+        /// The builder refuses a results cache size.
+        /// </summary>
+        [TestMethod]
+        public void EngineBuilder_CacheSizeDisabled()
+        {
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                _ = _builder.SetCacheSize(100);
+            });
+        }
+
+        /// <summary>
+        /// The builder refuses a results cache.
+        /// </summary>
+        [TestMethod]
+        public void EngineBuilder_CacheDisabled()
+        {
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                _ = _builder.SetCache(new CacheConfiguration());
+            });
+        }
+
+        /// <summary>
+        /// The engine refuses a results cache set on it directly.
+        /// </summary>
+        [TestMethod]
+        public void Engine_CacheDisabled()
+        {
+            var engine = _builder.Build(new MemoryStream());
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                engine.SetCache(new DefaultFlowCache(new CacheConfiguration()));
+            });
         }
     }
 }

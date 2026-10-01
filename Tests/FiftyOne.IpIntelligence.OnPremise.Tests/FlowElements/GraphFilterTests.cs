@@ -27,8 +27,6 @@ using FiftyOne.IpIntelligence.TestHelpers;
 using FiftyOne.Pipeline.Core.Data;
 using FiftyOne.Pipeline.Core.FlowElements;
 using FiftyOne.Pipeline.Engines;
-using FiftyOne.Pipeline.Engines.Caching;
-using FiftyOne.Pipeline.Engines.Configuration;
 using FiftyOne.Pipeline.Engines.FiftyOne.Data;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -37,54 +35,23 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Constants = FiftyOne.IpIntelligence.TestHelpers.Constants;
-using Messages = FiftyOne.IpIntelligence.Engine.OnPremise.Messages;
 
 namespace FiftyOne.IpIntelligence.OnPremise.Tests.FlowElements
 {
     /// <summary>
-    /// An engine that forwards a fixed set of required property indexes to
-    /// the filtered ProcessEngine, standing in for a caller that knows which
-    /// properties it will read. It declares that it filters graphs, as such
-    /// a subclass must.
+    /// An engine that passes a fixed set of required property indexes to the
+    /// filtered ProcessEngine, standing in for a caller that knows which
+    /// properties it will read.
     /// </summary>
     internal class FilteredIpiEngine : IpiOnPremiseEngine
     {
         /// <summary>
-        /// Indexes passed to the filtered overload on every request. Null
-        /// evaluates every graph, an empty array evaluates none.
+        /// Indexes passed on every request. Null evaluates every graph and an
+        /// empty array none.
         /// </summary>
         public int[] Indexes { get; set; }
 
         internal FilteredIpiEngine(
-            ILoggerFactory loggerFactory,
-            Func<IPipeline,
-                FlowElementBase<IIpDataOnPremise, IFiftyOneAspectPropertyMetaData>,
-                IIpDataOnPremise> ipDataFactory,
-            string tempDataFilePath)
-            : base(loggerFactory, ipDataFactory, tempDataFilePath)
-        {
-        }
-
-        protected override bool FiltersGraphs => true;
-
-        protected override void ProcessEngine(IFlowData data, IIpDataOnPremise ipData)
-        {
-            ProcessEngine(data, ipData, Indexes);
-        }
-    }
-
-    /// <summary>
-    /// A subclass that calls the filtered ProcessEngine without declaring
-    /// that it filters graphs, which the engine must refuse.
-    /// </summary>
-    internal class UndeclaredFilterIpiEngine : IpiOnPremiseEngine
-    {
-        /// <summary>
-        /// Indexes passed to the filtered overload on every request.
-        /// </summary>
-        public int[] Indexes { get; set; }
-
-        internal UndeclaredFilterIpiEngine(
             ILoggerFactory loggerFactory,
             Func<IPipeline,
                 FlowElementBase<IIpDataOnPremise, IFiftyOneAspectPropertyMetaData>,
@@ -102,8 +69,7 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.FlowElements
 
     /// <summary>
     /// Builder for a test engine, identical to the standard builder except
-    /// for the engine type it creates. It keeps the engine it created so a
-    /// test can check what happened to it when the build fails.
+    /// for the engine type it creates.
     /// </summary>
     internal class TestIpiEngineBuilder<TEngine>
         : IpiOnPremiseEngineBuilderBase<TEngine>
@@ -113,12 +79,6 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.FlowElements
                 FlowElementBase<IIpDataOnPremise, IFiftyOneAspectPropertyMetaData>,
                 IIpDataOnPremise>, string, TEngine>
             _engineFactory;
-
-        /// <summary>
-        /// The engine created by the last build, whether or not the build
-        /// completed.
-        /// </summary>
-        public TEngine CreatedEngine { get; private set; }
 
         public TestIpiEngineBuilder(
             ILoggerFactory loggerFactory,
@@ -137,11 +97,7 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.FlowElements
                 IIpDataOnPremise> ipDataFactory,
             string tempDataFilePath)
         {
-            CreatedEngine = _engineFactory(
-                loggerFactory,
-                ipDataFactory,
-                tempDataFilePath);
-            return CreatedEngine;
+            return _engineFactory(loggerFactory, ipDataFactory, tempDataFilePath);
         }
     }
 
@@ -230,7 +186,7 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.FlowElements
 
         /// <summary>
         /// Every required property's values as text, so two results can be
-        /// compared even after the cache has handed back the same instance.
+        /// compared.
         /// </summary>
         private static Dictionary<string, string> Snapshot(
             IpiOnPremiseEngine engine,
@@ -272,19 +228,6 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.FlowElements
                 tempDataFilePath);
         }
 
-        private static UndeclaredFilterIpiEngine UndeclaredEngine(
-            ILoggerFactory loggerFactory,
-            Func<IPipeline,
-                FlowElementBase<IIpDataOnPremise, IFiftyOneAspectPropertyMetaData>,
-                IIpDataOnPremise> ipDataFactory,
-            string tempDataFilePath)
-        {
-            return new UndeclaredFilterIpiEngine(
-                loggerFactory,
-                ipDataFactory,
-                tempDataFilePath);
-        }
-
         /// <summary>
         /// A builder for a test engine with the settings every test here
         /// uses. Balanced rather than the in memory default, so a test does
@@ -308,66 +251,11 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.FlowElements
         }
 
         /// <summary>
-        /// Builds a standard engine, which does not filter graphs, with a
-        /// results cache configured on the builder, which is how a
-        /// deployment turns the cache on, and runs the test against it.
-        /// Cache hits are flagged on the results.
-        /// </summary>
-        private static void WithStandardEngineCache(
-            Action<IpiOnPremiseEngine, IPipeline> test,
-            LazyLoadingConfiguration lazyLoading = null)
-        {
-            var builder = new IpiOnPremiseEngineBuilder(_logger)
-                .SetPerformanceProfile(PerformanceProfiles.Balanced)
-                .SetAutoUpdate(false)
-                .SetDataFileSystemWatcher(false)
-                .SetCache(new CacheConfiguration() { Size = 10 })
-                .SetCacheHitOrMiss(true);
-            if (lazyLoading != null)
-            {
-                builder.SetLazyLoading(lazyLoading);
-            }
-            using (var engine = builder.Build(DataFile().FullName, false))
-            using (var pipeline = new PipelineBuilder(_logger)
-                .AddFlowElement(engine)
-                .Build())
-            {
-                test(engine, pipeline);
-            }
-        }
-
-        /// <summary>
-        /// True if the exception, or one it wraps, is an
-        /// InvalidOperationException with the message given. Matched on the
-        /// message so another InvalidOperationException, such as
-        /// ObjectDisposedException, does not count.
-        /// </summary>
-        private static bool IsRefusal(Exception exception, string message)
-        {
-            if (exception == null)
-            {
-                return false;
-            }
-            if (exception is InvalidOperationException &&
-                exception.Message == message)
-            {
-                return true;
-            }
-            if (exception is AggregateException aggregate &&
-                aggregate.InnerExceptions.Any(
-                    inner => IsRefusal(inner, message)))
-            {
-                return true;
-            }
-            return IsRefusal(exception.InnerException, message);
-        }
-
-        /// <summary>
         /// Names of properties in the required list, one per component, in
         /// the order the components appear. Metric properties are not in the
         /// native list and are left out, as are mandatory properties, because
         /// those can read as their default when their component produced no
-        /// profile, exactly as for an unmatched component today.
+        /// profile, as for an unmatched component.
         /// </summary>
         private List<string> OnePropertyPerComponent()
         {
@@ -473,149 +361,6 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.FlowElements
             // same as an empty array.
             _engine.Indexes = new[] { -1, _engine.RequiredPropertyIndexes.Count };
             AssertSameValues(none, Snapshot(_engine, Detect()));
-        }
-
-        /// <summary>
-        /// A cache set directly on an engine that filters graphs is refused,
-        /// so a filtered result can never be stored and served to a caller
-        /// that needs every property.
-        /// </summary>
-        [TestMethod]
-        public void GraphFilter_SetCache_RefusedOnFilteringEngine()
-        {
-            var refusal = Assert.ThrowsExactly<InvalidOperationException>(
-                () => _engine.SetCache(new DefaultFlowCache(
-                    new CacheConfiguration() { Size = 10 })));
-            Assert.AreEqual(
-                Messages.ExceptionGraphFilterWithCache,
-                refusal.Message);
-        }
-
-        /// <summary>
-        /// A cache configured on the builder, which is how a deployment turns
-        /// the cache on, fails the build, and the engine the build had
-        /// created is disposed so its native data is released.
-        /// </summary>
-        [TestMethod]
-        public void GraphFilter_BuilderCache_RefusedAndEngineDisposed()
-        {
-            var builder = NewBuilder(FilteredEngine);
-            builder.SetCache(new CacheConfiguration() { Size = 10 });
-            var refusal = Assert.ThrowsExactly<InvalidOperationException>(
-                () => builder.Build(DataFile().FullName, false));
-            Assert.AreEqual(
-                Messages.ExceptionGraphFilterWithCache,
-                refusal.Message);
-            Assert.IsNotNull(builder.CreatedEngine);
-            Assert.IsTrue(builder.CreatedEngine.IsDisposed,
-                "The engine from the failed build must be disposed.");
-        }
-
-        /// <summary>
-        /// The combination that used to poison the cache: a cache and lazy
-        /// loading. With lazy loading the pipeline caches the result before
-        /// ProcessEngine runs, so the engine must be refused at build time,
-        /// before any request can reach the cache.
-        /// </summary>
-        [TestMethod]
-        public void GraphFilter_BuilderCacheWithLazyLoading_Refused()
-        {
-            var builder = NewBuilder(FilteredEngine);
-            builder
-                .SetCache(new CacheConfiguration() { Size = 10 })
-                .SetLazyLoading(new LazyLoadingConfiguration(60000));
-            var refusal = Assert.ThrowsExactly<InvalidOperationException>(
-                () => builder.Build(DataFile().FullName, false));
-            Assert.AreEqual(
-                Messages.ExceptionGraphFilterWithCache,
-                refusal.Message);
-            Assert.IsTrue(builder.CreatedEngine.IsDisposed);
-        }
-
-        /// <summary>
-        /// A subclass that filters without declaring it could be given a
-        /// cache, so its filtered requests are refused. Its unfiltered
-        /// requests still work.
-        /// </summary>
-        [TestMethod]
-        public void GraphFilter_UndeclaredFilter_Refused()
-        {
-            using (var engine = NewBuilder(UndeclaredEngine)
-                .Build(DataFile().FullName, false))
-            using (var pipeline = new PipelineBuilder(_logger)
-                .AddFlowElement(engine)
-                .Build())
-            {
-                engine.Indexes = new[] { engine.RequiredPropertyIndexes.Values.First() };
-                var data = pipeline.CreateFlowData();
-                data.AddEvidence("query.client-ip", IpAddress);
-                // The pipeline collects element exceptions and rethrows them
-                // together, so look inside the aggregate for the refusal.
-                var aggregate = Assert.ThrowsExactly<AggregateException>(
-                    () => data.Process());
-                Assert.IsTrue(
-                    IsRefusal(aggregate, Messages.ExceptionGraphFilterNotDeclared),
-                    "Expected the refusal, got: " + aggregate);
-
-                engine.Indexes = null;
-                _engine.Indexes = null;
-                AssertSameValues(
-                    Snapshot(_engine, Detect()),
-                    Snapshot(engine, Detect(pipeline)));
-            }
-        }
-
-        /// <summary>
-        /// An engine that does not filter keeps its results cache.
-        /// </summary>
-        [TestMethod]
-        public void GraphFilter_StandardEngine_ServedFromCache()
-        {
-            _engine.Indexes = null;
-            var expected = Snapshot(_engine, Detect());
-            WithStandardEngineCache((engine, pipeline) =>
-            {
-                var first = Detect(pipeline);
-                // The cache hands back the same instance and flags it, so
-                // read the first answer before the second request.
-                Assert.IsFalse(first.CacheHit);
-                AssertSameValues(expected, Snapshot(engine, first));
-                var second = Detect(pipeline);
-                Assert.IsTrue(second.CacheHit,
-                    "The second request should be served from the cache.");
-                AssertSameValues(expected, Snapshot(engine, second));
-            });
-        }
-
-        /// <summary>
-        /// An engine that does not filter keeps its results cache with lazy
-        /// loading, the combination the filtering engine now refuses.
-        /// </summary>
-        [TestMethod]
-        public void GraphFilter_StandardEngine_LazyLoadingServedFromCache()
-        {
-            _engine.Indexes = null;
-            var expected = Snapshot(_engine, Detect());
-            WithStandardEngineCache((engine, pipeline) =>
-            {
-                var name = engine.RequiredPropertyIndexes.Keys.First();
-                var first = Detect(pipeline);
-                // Processing runs on a task. The indexer waits for it, which
-                // GetValues does not, so read through it before comparing.
-                Assert.IsNotNull(first[name]);
-                Assert.IsFalse(first.CacheHit);
-                AssertSameValues(expected, Snapshot(engine, first));
-                var second = Detect(pipeline);
-                Assert.IsNotNull(second[name]);
-                Assert.IsTrue(second.CacheHit,
-                    "The second request should be served from the cache.");
-                AssertSameValues(expected, Snapshot(engine, second));
-            },
-            // A long wait so the task always finishes first. A wait that times
-            // out without a cancellation token fails inside the pipeline with
-            // "Nullable object must have a value" rather than a timeout, see
-            // 51Degrees/pipeline-dotnet#437.
-            new LazyLoadingConfiguration(60000));
         }
     }
 }
