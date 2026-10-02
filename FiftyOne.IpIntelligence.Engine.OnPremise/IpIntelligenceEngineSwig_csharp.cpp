@@ -23601,6 +23601,28 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefIn
 }
 
 
+SWIGEXPORT int SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ResultsIpiSwig_copyValueAsUTF8String___(void * jarg1, int jarg2, unsigned char * jarg3, int jarg4) {
+  ResultsIpi *arg1 = (ResultsIpi *)jarg1;
+  try {
+    Value< std::vector< uint8_t > > value = arg1->getValueAsUTF8String(jarg2);
+    if (!value.hasValue()) {
+      return -1;
+    }
+    std::vector< uint8_t > bytes = value.getValue();
+    int required = (int)bytes.size();
+    if (jarg3 != nullptr && jarg4 >= required) {
+      for (int i = 0; i < required; i++) {
+        jarg3[i] = bytes[i];
+      }
+    }
+    return required;
+  }
+  catch (std::exception& e) {
+    SWIG_CSharpException(SWIG_RuntimeError, e.what());
+    return -1;
+  }
+}
+
 SWIGEXPORT void * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ResultsIpiSwig_getValuesAsWeightedWKTStringList__SWIG_0___(void * jarg1, const char * jarg2, unsigned char jarg3) {
   void * jresult ;
   ResultsIpi *arg1 = 0 ;
@@ -27907,6 +27929,17 @@ SWIGEXPORT void SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInte
 }
 
 
+SWIGEXPORT int SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_UTF8StringSwig_copyToArray___(void * jarg1, unsigned char * jarg2, int jarg3) {
+  std::vector<uint8_t> *source = (std::vector<uint8_t> *)jarg1;
+  if (source == 0 || jarg2 == 0 || jarg3 <= 0) {
+    return 0;
+  }
+  int count = jarg3 < (int)source->size() ? jarg3 : (int)source->size();
+  for (int i = 0; i < count; i++) {
+    jarg2[i] = (*source)[i];
+  }
+  return count;
+}
 SWIGEXPORT ResultsBase * SWIGSTDCALL CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ResultsIpiSwig_SWIGUpcast___(ResultsIpi *jarg1) {
     return (ResultsBase *)jarg1;
 }

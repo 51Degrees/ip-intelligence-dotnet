@@ -124,6 +124,11 @@ internal class UTF8StringSwig : global::System.IDisposable, global::System.Colle
     }
   }
 
+  public int copyToArray(byte[] copy, int length) {
+    int ret = IpIntelligenceEngineModulePINVOKE.UTF8StringSwig_copyToArray(swigCPtr, copy, length);
+    if (IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Pending) throw IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Retrieve();
+    return ret;
+  }
   public void CopyTo(byte[] array)
   {
     CopyTo(0, array, 0, this.Count);

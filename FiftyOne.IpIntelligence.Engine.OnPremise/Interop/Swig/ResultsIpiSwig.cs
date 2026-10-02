@@ -83,6 +83,12 @@ internal class ResultsIpiSwig : ResultsBaseSwig {
     return ret;
   }
 
+  public int copyValueAsUTF8String(int requiredPropertyIndex, byte[] copy, int length) {
+    int ret = IpIntelligenceEngineModulePINVOKE.ResultsIpiSwig_copyValueAsUTF8String(swigCPtr, requiredPropertyIndex, copy, length);
+    if (IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Pending) throw IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Retrieve();
+    return ret;
+  }
+
   public WeightedStringListValueSwig getValuesAsWeightedWKTStringList(string propertyName, byte decimalPlaces) {
     WeightedStringListValueSwig ret = new WeightedStringListValueSwig(IpIntelligenceEngineModulePINVOKE.ResultsIpiSwig_getValuesAsWeightedWKTStringList__SWIG_0(swigCPtr, propertyName, decimalPlaces), true);
     if (IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Pending) throw IpIntelligenceEngineModulePINVOKE.SWIGPendingException.Retrieve();

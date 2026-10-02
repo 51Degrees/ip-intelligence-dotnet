@@ -81,6 +81,20 @@
             Dispose
             </summary>
         </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.Data.IpDataBaseOnPremise`1.PropertyGetLock">
+            <summary>
+            Lock used while materializing a property value from native results.
+            </summary>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Shared.Data.IpDataBaseOnPremise`1.TryGetStoredValue``1(System.String,``0@)">
+            <summary>
+            Try to get a value already written to this data instance.
+            </summary>
+            <typeparam name="T">Value type.</typeparam>
+            <param name="propertyName">Property name.</param>
+            <param name="value">Stored value when present.</param>
+            <returns>True when a stored value was found.</returns>
+        </member>
         <member name="P:FiftyOne.IpIntelligence.Shared.Data.IpDataBaseOnPremise`1.Results">
             <summary>
             A <see cref="T:FiftyOne.IpIntelligence.Shared.Data.IpDataBaseOnPremise`1.ResultsManager"/> instance, which can be used
@@ -347,6 +361,19 @@
             Thrown if the value was not of the expected type.
             </exception>
         </member>
+        <member name="M:FiftyOne.IpIntelligence.Shared.Data.IpDataBaseOnPremise`1.Dispose(System.Boolean)">
+            <summary>
+            Release resources owned by this data instance.
+            </summary>
+            <param name="disposing">
+            True when called from <see cref="M:FiftyOne.IpIntelligence.Shared.Data.IpDataBaseOnPremise`1.Dispose"/>.
+            </param>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Shared.Data.IpDataBaseOnPremise`1.Dispose">
+            <summary>
+            Release the native result objects owned by this data instance.
+            </summary>
+        </member>
         <member name="T:FiftyOne.IpIntelligence.Shared.FlowElements.IOnPremiseIpiEngine">
             <summary>
             Interface for additional members that are unique to 
@@ -493,16 +520,31 @@
             <summary>
             Any shapes associated with the location. Usually this is the area which the IP range covers. This is returned as a WKT String stored as a reduced format of WKB.
             </summary>
+            <remarks>
+            <para>
+            See <see href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry</see> for more information.
+            </para>
+            </remarks>
         </member>
         <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.Asn">
             <summary>
             Autonomous System Number associated with the IP address.
             </summary>
+            <remarks>
+            <para>
+            See <see href="https://en.wikipedia.org/wiki/Autonomous_system_(Internet)">https://en.wikipedia.org/wiki/Autonomous_system_(Internet)</see> for more information.
+            </para>
+            </remarks>
         </member>
         <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.AsnName">
             <summary>
             The name registered to the Asn associated with the IP address.
             </summary>
+            <remarks>
+            <para>
+            See <see href="https://en.wikipedia.org/wiki/Autonomous_system_(Internet)">https://en.wikipedia.org/wiki/Autonomous_system_(Internet)</see> for more information.
+            </para>
+            </remarks>
         </member>
         <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.BrowserDiversity">
             <summary>
@@ -516,7 +558,12 @@
         </member>
         <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.ContinentCode2">
             <summary>
-            The 3-character ISO 3166-1 continent code for the supplied location.
+            The 2-character ISO 3166-1 continent code for the supplied location.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.ContinentGeoNameId">
+            <summary>
+            The GeoNames identifier of the continent associated with the supplied location.
             </summary>
         </member>
         <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.ContinentName">
@@ -549,9 +596,24 @@
             A list of countries in ISO 3166-1 alpha-2 country code format that overlap with the area likely associated with the provided evidence, weighted and ordered by each country's proportion of the total population within the area. Administrative areas that cannot be cleanly resolved to the country level will not contribute to the resulting data.
             </summary>
         </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.CountryGeoNameId">
+            <summary>
+            The GeoNames identifier of the country associated with the supplied location.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.CountryGeoNamesGeographical">
+            <summary>
+            A list of GeoNames country identifiers that overlap within the area associated in the provided evidence. Results are weighted and ordered by each country's proportion of the overlapping area. Areas that cannot be resolved will not contribute to the resulting data.
+            </summary>
+        </member>
         <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.County">
             <summary>
             The name of the county that the supplied location is in. In this case, a county is defined as an administrative sub-section of a country or state.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.CountyGeoNameId">
+            <summary>
+            The GeoNames identifier of the county, a second-level administrative subdivision (admin2) associated with the supplied location.
             </summary>
         </member>
         <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.CurrencyCode">
@@ -666,8 +728,19 @@
         </member>
         <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.LocationConfidence">
             <summary>
-            The confidence in the town and country provided.
+            The confidence in the town and country provided. Returns one of High, Medium, Low, or Unknown. The confidence must be checked before using the returned location values.
             </summary>
+            <remarks>
+            <para>
+            Possible values:
+            </para>
+            <code>
+            High      High confidence results can be relied upon and considered useful for all practical purposes.
+            Medium    Medium confidence results might be useful where the use case can tolerate a degree of inaccuracy.
+            Low       Low confidence results should be discarded when the results might be used to make consequential decisions.
+            Unknown   Unknown confidence results should be treated in the same way as Low and discarded when the results might be used to m...
+            </code>
+            </remarks>
         </member>
         <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.Longitude">
             <summary>
@@ -694,6 +767,11 @@
             Country code of the registered range.
             </summary>
         </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.RegisteredCountryGeoNameId">
+            <summary>
+            The GeoNames identifier of the country in which the IP address range is registered.
+            </summary>
+        </member>
         <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.RegisteredName">
             <summary>
             Name of the IP range. This is usually the owner.
@@ -709,6 +787,16 @@
             The name of the state that the supplied location is in.
             </summary>
         </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.StateGeoNameId">
+            <summary>
+            The GeoNames database identifier for the state (first-level administrative subdivision, admin1) that the supplied location is in.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.StateGeoNamesGeographical">
+            <summary>
+            A list of GeoNames state identifiers, first-level administrative subdivisions (admin1) that overlap within the area associated in the provided evidence. Results are weighted and ordered by each state's proportion of the overlapping area. Areas that cannot be resolved to the state level will not contribute to the resulting data.
+            </summary>
+        </member>
         <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.Suburb">
             <summary>
             The name of the suburb that the supplied location is in.
@@ -721,12 +809,17 @@
         </member>
         <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.TimeZoneOffset">
             <summary>
-            The offset from UTC in minutes in the supplied location, at the time that the value is produced.
+            The offset from UTC in minutes in the supplied location, at the time that the value is produced. A value of -1 means the offset is unknown and is only returned when no location can be determined for the IP address. Real offsets are whole multiples of 15 minutes, so -1 never collides with a genuine value.
             </summary>
         </member>
         <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.Town">
             <summary>
             The name of the town that the supplied location is in.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.TownGeoNameId">
+            <summary>
+            The GeoNames identifier of the town or populated place nearest to the supplied location.
             </summary>
         </member>
         <member name="P:FiftyOne.IpIntelligence.Shared.IpIntelligenceData.ZipCode">
@@ -894,16 +987,31 @@
             <summary>
             Any shapes associated with the location. Usually this is the area which the IP range covers. This is returned as a WKT String stored as a reduced format of WKB.
             </summary>
+            <remarks>
+            <para>
+            See <see href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry</see> for more information.
+            </para>
+            </remarks>
         </member>
         <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.Asn">
             <summary>
             Autonomous System Number associated with the IP address.
             </summary>
+            <remarks>
+            <para>
+            See <see href="https://en.wikipedia.org/wiki/Autonomous_system_(Internet)">https://en.wikipedia.org/wiki/Autonomous_system_(Internet)</see> for more information.
+            </para>
+            </remarks>
         </member>
         <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.AsnName">
             <summary>
             The name registered to the Asn associated with the IP address.
             </summary>
+            <remarks>
+            <para>
+            See <see href="https://en.wikipedia.org/wiki/Autonomous_system_(Internet)">https://en.wikipedia.org/wiki/Autonomous_system_(Internet)</see> for more information.
+            </para>
+            </remarks>
         </member>
         <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.BrowserDiversity">
             <summary>
@@ -917,7 +1025,12 @@
         </member>
         <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.ContinentCode2">
             <summary>
-            The 3-character ISO 3166-1 continent code for the supplied location.
+            The 2-character ISO 3166-1 continent code for the supplied location.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.ContinentGeoNameId">
+            <summary>
+            The GeoNames identifier of the continent associated with the supplied location.
             </summary>
         </member>
         <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.ContinentName">
@@ -950,9 +1063,24 @@
             A list of countries in ISO 3166-1 alpha-2 country code format that overlap with the area likely associated with the provided evidence, weighted and ordered by each country's proportion of the total population within the area. Administrative areas that cannot be cleanly resolved to the country level will not contribute to the resulting data.
             </summary>
         </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.CountryGeoNameId">
+            <summary>
+            The GeoNames identifier of the country associated with the supplied location.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.CountryGeoNamesGeographical">
+            <summary>
+            A list of GeoNames country identifiers that overlap within the area associated in the provided evidence. Results are weighted and ordered by each country's proportion of the overlapping area. Areas that cannot be resolved will not contribute to the resulting data.
+            </summary>
+        </member>
         <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.County">
             <summary>
             The name of the county that the supplied location is in. In this case, a county is defined as an administrative sub-section of a country or state.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.CountyGeoNameId">
+            <summary>
+            The GeoNames identifier of the county, a second-level administrative subdivision (admin2) associated with the supplied location.
             </summary>
         </member>
         <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.CurrencyCode">
@@ -1067,8 +1195,19 @@
         </member>
         <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.LocationConfidence">
             <summary>
-            The confidence in the town and country provided.
+            The confidence in the town and country provided. Returns one of High, Medium, Low, or Unknown. The confidence must be checked before using the returned location values.
             </summary>
+            <remarks>
+            <para>
+            Possible values:
+            </para>
+            <code>
+            High      High confidence results can be relied upon and considered useful for all practical purposes.
+            Medium    Medium confidence results might be useful where the use case can tolerate a degree of inaccuracy.
+            Low       Low confidence results should be discarded when the results might be used to make consequential decisions.
+            Unknown   Unknown confidence results should be treated in the same way as Low and discarded when the results might be used to m...
+            </code>
+            </remarks>
         </member>
         <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.Longitude">
             <summary>
@@ -1095,6 +1234,11 @@
             Country code of the registered range.
             </summary>
         </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.RegisteredCountryGeoNameId">
+            <summary>
+            The GeoNames identifier of the country in which the IP address range is registered.
+            </summary>
+        </member>
         <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.RegisteredName">
             <summary>
             Name of the IP range. This is usually the owner.
@@ -1110,6 +1254,16 @@
             The name of the state that the supplied location is in.
             </summary>
         </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.StateGeoNameId">
+            <summary>
+            The GeoNames database identifier for the state (first-level administrative subdivision, admin1) that the supplied location is in.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.StateGeoNamesGeographical">
+            <summary>
+            A list of GeoNames state identifiers, first-level administrative subdivisions (admin1) that overlap within the area associated in the provided evidence. Results are weighted and ordered by each state's proportion of the overlapping area. Areas that cannot be resolved to the state level will not contribute to the resulting data.
+            </summary>
+        </member>
         <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.Suburb">
             <summary>
             The name of the suburb that the supplied location is in.
@@ -1122,12 +1276,17 @@
         </member>
         <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.TimeZoneOffset">
             <summary>
-            The offset from UTC in minutes in the supplied location, at the time that the value is produced.
+            The offset from UTC in minutes in the supplied location, at the time that the value is produced. A value of -1 means the offset is unknown and is only returned when no location can be determined for the IP address. Real offsets are whole multiples of 15 minutes, so -1 never collides with a genuine value.
             </summary>
         </member>
         <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.Town">
             <summary>
             The name of the town that the supplied location is in.
+            </summary>
+        </member>
+        <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.TownGeoNameId">
+            <summary>
+            The GeoNames identifier of the town or populated place nearest to the supplied location.
             </summary>
         </member>
         <member name="P:FiftyOne.IpIntelligence.IIpIntelligenceData.ZipCode">

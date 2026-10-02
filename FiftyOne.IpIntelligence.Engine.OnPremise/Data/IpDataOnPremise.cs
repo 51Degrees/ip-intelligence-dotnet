@@ -30,9 +30,11 @@ using FiftyOne.Pipeline.Engines.Data;
 using FiftyOne.Pipeline.Engines.Services;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Buffers;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Text;
 
 namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
 {
@@ -67,6 +69,7 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
             : base(logger, pipeline, engine, missingPropertyService)
         {
             _asDict = new Lazy<IReadOnlyDictionary<string, object>>(AsStrippedDictionary);
+            _engine = engine;
         }
 
         #endregion
@@ -79,6 +82,7 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
             new FiftyOne.Pipeline.Engines.Data.AspectPropertyValue<System.Net.IPAddress>();
 
         private readonly Lazy<IReadOnlyDictionary<string, object>> _asDict;
+        private readonly IpiOnPremiseEngine _engine;
 
         /// <summary>
         /// The reason reported for both echo properties when the request did
@@ -177,7 +181,13 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
 
         private ResultsIpiSwig GetResultsContainingProperty(string propertyName)
         {
-            foreach (var results in Results.ResultsList)
+            var resultsList = Results.ResultsList;
+            if (_engine.RequiredPropertyIndexes.TryGetValue(propertyName, out _) &&
+                resultsList.Count > 0)
+            {
+                return resultsList[0];
+            }
+            foreach (var results in resultsList)
             {
                 if (results.containsProperty(propertyName))
                 {
@@ -316,11 +326,69 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
             return result;
         }
 
+        /// <summary>
+        /// Reads a typed string property straight from the native results
+        /// by required property index. Every other type takes the base
+        /// path unchanged.
+        /// </summary>
+        /// <remarks>
+        /// The generated accessors, CountryCode and RegisteredName among
+        /// them, ask for IAspectPropertyValue&lt;string&gt;, and a bulk
+        /// caller reads a handful of them per request. The base path
+        /// resolves the property through the dictionary, which hashes the
+        /// name, dispatches on the type and resolves the name natively
+        /// again. This reads the value with one native copy into a pooled
+        /// buffer instead. A value already stored on the instance, by
+        /// PopulateFrom for example, still wins, and a property that is not
+        /// a required property of the loaded data file still reports the
+        /// missing property reason the base path produces.
+        ///
+        /// Overriding here rather than in the generated accessor file keeps
+        /// the fast path out of the way of ci/generate-accessors.ps1, which
+        /// rewrites that file from a template.
+        /// </remarks>
+        protected override T GetAs<T>(string key)
+        {
+            if (typeof(T) == typeof(IAspectPropertyValue<string>))
+            {
+                if (TryGetStoredValue(
+                    key,
+                    out IAspectPropertyValue<string> storedValue))
+                {
+                    return (T)(object)storedValue;
+                }
+                if (Results.HasResults() &&
+                    _engine.RequiredPropertyIndexes.TryGetValue(
+                        key,
+                        out var requiredPropertyIndex))
+                {
+                    var resultsList = Results.ResultsList;
+                    if (resultsList.Count > 0)
+                    {
+                        lock (PropertyGetLock)
+                        {
+                            return (T)(object)GetValueAsString(
+                                resultsList[0],
+                                requiredPropertyIndex);
+                        }
+                    }
+                }
+            }
+            return base.GetAs<T>(key);
+        }
+
         protected override IAspectPropertyValue<string> GetValueAsString(string propertyName)
         {
-            var result = new AspectPropertyValue<string>();
             var results = GetResultsContainingProperty(propertyName);
+            if (results != null &&
+                _engine.RequiredPropertyIndexes.TryGetValue(
+                    propertyName,
+                    out var requiredPropertyIndex))
+            {
+                return GetValueAsString(results, requiredPropertyIndex);
+            }
 
+            var result = new AspectPropertyValue<string>();
             if (results != null)
             {
                 using (var value = results.getValueAsUTF8String(propertyName))
@@ -341,6 +409,49 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
             return result;
         }
 
+        private static IAspectPropertyValue<string> GetValueAsString(
+            ResultsIpiSwig results,
+            int requiredPropertyIndex)
+        {
+            var result = new AspectPropertyValue<string>();
+            var buffer = ArrayPool<byte>.Shared.Rent(256);
+            try
+            {
+                var length = results.copyValueAsUTF8String(
+                    requiredPropertyIndex,
+                    buffer,
+                    buffer.Length);
+                if (length > buffer.Length)
+                {
+                    var largerBuffer = ArrayPool<byte>.Shared.Rent(length);
+                    ArrayPool<byte>.Shared.Return(buffer);
+                    buffer = largerBuffer;
+                    length = results.copyValueAsUTF8String(
+                        requiredPropertyIndex,
+                        buffer,
+                        buffer.Length);
+                }
+                if (length >= 0)
+                {
+                    result.Value = Encoding.UTF8.GetString(
+                        buffer,
+                        0,
+                        length);
+                    return result;
+                }
+            }
+            finally
+            {
+                ArrayPool<byte>.Shared.Return(buffer);
+            }
+
+            using (var value = results.getValueAsUTF8String(
+                requiredPropertyIndex))
+            {
+                result.NoValueMessage = value.getNoValueMessage();
+            }
+            return result;
+        }
         protected override IAspectPropertyValue<WktString> GetValueAsWktString(string propertyName)
         {
             var result = new AspectPropertyValue<WktString>();
