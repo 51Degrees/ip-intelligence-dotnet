@@ -55,6 +55,22 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Wrappers
                 requiredPropertyIndexes == null ? -1 : requiredPropertyIndexes.Length);
         }
 
+        public ResultsIpiSwig process(
+            byte[] ipAddress,
+            int length,
+            IpTypeSwig type,
+            int[] requiredPropertyIndexes)
+        {
+            // As above, a null array crosses as a null pointer with a
+            // negative count, which the native code reads as every graph.
+            return _object.process(
+                ipAddress,
+                length,
+                type,
+                requiredPropertyIndexes,
+                requiredPropertyIndexes == null ? -1 : requiredPropertyIndexes.Length);
+        }
+
         public VectorStringSwig getRequiredProperties()
         {
             return _object.getRequiredProperties();
