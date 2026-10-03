@@ -41,6 +41,14 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise
     internal static class ClientIpParser
     {
         /// <summary>
+        /// Reads an IP address without formatting a second string copy.
+        /// </summary>
+        public static bool TryParse(string rawValue, out IPAddress address)
+        {
+            return TryParse(rawValue, out address, out _, false);
+        }
+
+        /// <summary>
         /// Reads an IP address from a raw client-ip evidence value.
         /// </summary>
         /// <param name="rawValue">
@@ -62,6 +70,15 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise
             string rawValue,
             out IPAddress address,
             out string addressText)
+        {
+            return TryParse(rawValue, out address, out addressText, true);
+        }
+
+        private static bool TryParse(
+            string rawValue,
+            out IPAddress address,
+            out string addressText,
+            bool formatAddress)
         {
             address = null;
             addressText = null;
@@ -88,7 +105,11 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise
             // in canonical form.
             if (candidate[0] == '[')
             {
-                return TryParseBracketed(candidate, out address, out addressText);
+                return TryParseBracketed(
+                    candidate,
+                    out address,
+                    out addressText,
+                    formatAddress);
             }
 
             // A bare address. The text reported is the canonical form, not
@@ -97,7 +118,7 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise
                 IPAddress.TryParse(candidate, out address))
             {
                 address = StripZoneIndex(address);
-                addressText = address.ToString();
+                addressText = formatAddress ? address.ToString() : null;
                 return true;
             }
 
@@ -115,7 +136,7 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise
                     IPAddress.TryParse(addressPart, out address) &&
                     address.AddressFamily == AddressFamily.InterNetwork)
                 {
-                    addressText = address.ToString();
+                    addressText = formatAddress ? address.ToString() : null;
                     return true;
                 }
             }
@@ -131,7 +152,8 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise
         private static bool TryParseBracketed(
             string candidate,
             out IPAddress address,
-            out string addressText)
+            out string addressText,
+            bool formatAddress)
         {
             address = null;
             addressText = null;
@@ -155,7 +177,7 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise
                 address.AddressFamily == AddressFamily.InterNetworkV6)
             {
                 address = StripZoneIndex(address);
-                addressText = address.ToString();
+                addressText = formatAddress ? address.ToString() : null;
                 return true;
             }
 

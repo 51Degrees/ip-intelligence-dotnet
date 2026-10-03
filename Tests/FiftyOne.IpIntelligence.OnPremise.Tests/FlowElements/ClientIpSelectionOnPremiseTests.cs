@@ -57,6 +57,36 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.FlowElements
         }
 
         [TestMethod]
+        public void Process_BinaryClientIp_IsAccepted()
+        {
+            using (var flowData = Wrapper.Pipeline.CreateFlowData())
+            {
+                var address = IPAddress.Parse("82.132.237.238");
+                flowData.AddEvidence("server.client-ip", address);
+                flowData.Process();
+
+                var data = flowData.Get<IIpIntelligenceData>();
+                Assert.IsTrue(data.Ip.HasValue);
+                Assert.AreEqual(address, data.Ip.Value);
+            }
+        }
+
+        [TestMethod]
+        public void Process_ScopedBinaryIpV6_StripsScopeFromEcho()
+        {
+            using (var flowData = Wrapper.Pipeline.CreateFlowData())
+            {
+                var address = IPAddress.Parse("fe80::1%1");
+                flowData.AddEvidence("server.client-ip", address);
+                flowData.Process();
+
+                var data = flowData.Get<IIpIntelligenceData>();
+                Assert.IsTrue(data.IpV6.HasValue);
+                Assert.AreEqual(IPAddress.Parse("fe80::1"), data.IpV6.Value);
+            }
+        }
+
+        [TestMethod]
         public void Process_InvalidQueryClientIp_FallsBackToServerClientIp()
         {
             using (var flowData = Wrapper.Pipeline.CreateFlowData())

@@ -37,7 +37,7 @@ namespace FiftyOne.IpIntelligence.Shared.Data
     /// <summary>
     /// Base class used for all 51Degrees on-premise results classes.
     /// </summary>
-    public abstract class IpDataBaseOnPremise<TResult> : IpIntelligenceData
+    public abstract class IpDataBaseOnPremise<TResult> : IpIntelligenceData, IDisposable
         where TResult : IDisposable
     {
         /// <summary>
@@ -173,8 +173,24 @@ namespace FiftyOne.IpIntelligence.Shared.Data
         #region Private Properties
 
         private object _dataLock = new object();
-        private object _getLock = new object();
+        private readonly object _getLock = new object();
 
+        /// <summary>
+        /// Lock used while materializing a property value from native results.
+        /// </summary>
+        protected object PropertyGetLock => _getLock;
+
+        /// <summary>
+        /// Try to get a value already written to this data instance.
+        /// </summary>
+        /// <typeparam name="T">Value type.</typeparam>
+        /// <param name="propertyName">Property name.</param>
+        /// <param name="value">Stored value when present.</param>
+        /// <returns>True when a stored value was found.</returns>
+        protected bool TryGetStoredValue<T>(string propertyName, out T value)
+        {
+            return base.TryGetValue(propertyName, out value);
+        }
         private bool _dictionaryPopulated = false;
 
         /// <summary>
@@ -701,6 +717,29 @@ namespace FiftyOne.IpIntelligence.Shared.Data
             return false;
         }
         #endregion
+
+        /// <summary>
+        /// Release resources owned by this data instance.
+        /// </summary>
+        /// <param name="disposing">
+        /// True when called from <see cref="Dispose()"/>.
+        /// </param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                Results.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// Release the native result objects owned by this data instance.
+        /// </summary>
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
 
         private static void AppendPrettyTypeName(Type type, StringBuilder typeNameBuilder)
         {

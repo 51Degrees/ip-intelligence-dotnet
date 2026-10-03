@@ -49,6 +49,18 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Wrappers
             int[] requiredPropertyIndexes);
 
         /// <summary>
+        /// Process an address already held as bytes, in network order,
+        /// evaluating only the graphs needed by the required property
+        /// indexes. Null evaluates every graph, an empty array evaluates
+        /// none.
+        /// </summary>
+        ResultsIpiSwig process(
+            byte[] ipAddress,
+            int length,
+            IpTypeSwig type,
+            int[] requiredPropertyIndexes);
+
+        /// <summary>
         /// Required property names in required property index order.
         /// </summary>
         VectorStringSwig getRequiredProperties();

@@ -20,18 +20,34 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
+using FiftyOne.IpIntelligence.Engine.OnPremise.Data;
 using FiftyOne.IpIntelligence.Engine.OnPremise.Interop;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Text;
 
-namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
+namespace FiftyOne.IpIntelligence.OnPremise.Tests.Data
 {
-    internal static class UTF8StringSwigExtensions
+    [TestClass]
+    public class UTF8StringSwigExtensionsTests
     {
-        public static string ToUTF8String(this UTF8StringSwig stringSwig)
+        [TestMethod]
+        public void ToUTF8String_CopiesCompleteMultibyteValue()
         {
-            var bytes = new byte[stringSwig.Count];
-            var copied = stringSwig.copyToArray(bytes, bytes.Length);
-            return Encoding.UTF8.GetString(bytes, 0, copied);
+            const string expected = "Päijät-Häme المنطقة الشرقية";
+            using (var source = new UTF8StringSwig(
+                Encoding.UTF8.GetBytes(expected)))
+            {
+                Assert.AreEqual(expected, source.ToUTF8String());
+            }
+        }
+
+        [TestMethod]
+        public void ToUTF8String_EmptyValueIsEmpty()
+        {
+            using (var source = new UTF8StringSwig())
+            {
+                Assert.AreEqual(string.Empty, source.ToUTF8String());
+            }
         }
     }
 }

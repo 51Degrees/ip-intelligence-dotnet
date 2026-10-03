@@ -1386,6 +1386,9 @@ class IpIntelligenceEngineModulePINVOKE {
   [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ResultsIpiSwig_getValueAsUTF8String__SWIG_1___")]
   public static extern global::System.IntPtr ResultsIpiSwig_getValueAsUTF8String__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ResultsIpiSwig_copyValueAsUTF8String___")]
+  public static extern int ResultsIpiSwig_copyValueAsUTF8String(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, byte[] jarg3, int jarg4);
+
   [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ResultsIpiSwig_getValuesAsWeightedWKTStringList__SWIG_0___")]
   public static extern global::System.IntPtr ResultsIpiSwig_getValuesAsWeightedWKTStringList__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1, string jarg2, byte jarg3);
 
@@ -1596,6 +1599,8 @@ class IpIntelligenceEngineModulePINVOKE {
   [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_delete_EngineIpiSwig___")]
   public static extern void delete_EngineIpiSwig(global::System.Runtime.InteropServices.HandleRef jarg1);
 
+  [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_UTF8StringSwig_copyToArray___")]
+  public static extern int UTF8StringSwig_copyToArray(global::System.Runtime.InteropServices.HandleRef jarg1, byte[] jarg2, int jarg3);
   [global::System.Runtime.InteropServices.DllImport("FiftyOne.IpIntelligence.Engine.OnPremise.Native.dll", EntryPoint="CSharp_FiftyOnefIpIntelligencefEnginefOnPremisefInterop_ResultsIpiSwig_SWIGUpcast___")]
   public static extern global::System.IntPtr ResultsIpiSwig_SWIGUpcast(global::System.IntPtr jarg1);
 
