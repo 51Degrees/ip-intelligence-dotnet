@@ -84,11 +84,19 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
         private IList<IComponentMetaData> _components;
 
         /// <summary>
-        /// Required property index for each property name, rebuilt whenever
-        /// data is loaded.
+        /// Empty index map. Results tagged with it read properties by name.
         /// </summary>
-        private IReadOnlyDictionary<string, int> _requiredPropertyIndexes =
+        internal static readonly IReadOnlyDictionary<string, int> NoPropertyIndexes =
             new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+
+        /// <summary>
+        /// Required property index for each property name, rebuilt whenever
+        /// data is loaded. Cleared before the native data is swapped so that
+        /// ProcessEngine can tell whether results came from the data set
+        /// this map describes.
+        /// </summary>
+        private volatile IReadOnlyDictionary<string, int> _requiredPropertyIndexes =
+            NoPropertyIndexes;
 
         /// <summary>
         /// Wrapper to pass general configuration from managed code to unmanaged 
@@ -265,6 +273,7 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
             }
             else
             {
+                _requiredPropertyIndexes = NoPropertyIndexes;
                 _engine.refreshData();
             }
             InitEngineMetaData();
@@ -295,6 +304,7 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
             }
             else
             {
+                _requiredPropertyIndexes = NoPropertyIndexes;
                 _engine.refreshData(data, data.Length);
             }
             InitEngineMetaData();
@@ -348,6 +358,12 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
         {
             if (data == null) { throw new ArgumentNullException(nameof(data)); }
             if (ipData == null) { throw new ArgumentNullException(nameof(ipData)); }
+
+            // A refresh clears the map, swaps the native data and then
+            // publishes a new map. If the same map is published before and
+            // after processing, the results came from the data set it
+            // describes. Otherwise the results read properties by name.
+            var indexesBefore = _requiredPropertyIndexes;
 
             // Walk the client IP evidence keys in the order the native
             // lookup consults them - see OrderEvidenceKeysAsNativeEngine
@@ -419,6 +435,7 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
                 }
             }
 
+            ResultsIpiSwig results;
             if (chosenAddress == null)
             {
                 // Nothing readable was offered. The native engine is still
@@ -426,23 +443,26 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements
                 // no value reasons it always has.
                 using (var emptyEvidence = new EvidenceIpiSwig())
                 {
-                    (ipData as IpDataOnPremise).SetResults(
-                        _engine.process(emptyEvidence, requiredPropertyIndexes));
+                    results = _engine.process(emptyEvidence, requiredPropertyIndexes);
                 }
             }
             else
             {
                 var addressBytes = chosenAddress.GetAddressBytes();
-                (ipData as IpDataOnPremise).SetResults(
-                    _engine.process(
-                        addressBytes,
-                        addressBytes.Length,
-                        chosenAddress.AddressFamily ==
-                            System.Net.Sockets.AddressFamily.InterNetwork
-                            ? IpTypeSwig.FIFTYONE_DEGREES_IP_TYPE_IPV4
-                            : IpTypeSwig.FIFTYONE_DEGREES_IP_TYPE_IPV6,
-                        requiredPropertyIndexes));
+                results = _engine.process(
+                    addressBytes,
+                    addressBytes.Length,
+                    chosenAddress.AddressFamily ==
+                        System.Net.Sockets.AddressFamily.InterNetwork
+                        ? IpTypeSwig.FIFTYONE_DEGREES_IP_TYPE_IPV4
+                        : IpTypeSwig.FIFTYONE_DEGREES_IP_TYPE_IPV6,
+                    requiredPropertyIndexes);
             }
+            (ipData as IpDataOnPremise).SetResults(
+                results,
+                ReferenceEquals(indexesBefore, _requiredPropertyIndexes)
+                    ? indexesBefore
+                    : NoPropertyIndexes);
 
             (ipData as IpDataOnPremise).SetEchoIp(
                 chosenAddress?.AddressFamily ==

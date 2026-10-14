@@ -324,6 +324,12 @@
             present - see issue #332.
             </param>
         </member>
+        <member name="F:FiftyOne.IpIntelligence.Engine.OnPremise.Data.IpDataOnPremise._requiredPropertyIndexes">
+            <summary>
+            Required property indexes of the data set the results came from.
+            The engine's map can already describe a newer data set.
+            </summary>
+        </member>
         <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.Data.IpDataOnPremise.AsDictionary">
             <summary>
             Drops the Ip and IpV6 entries when the matching address is not in
@@ -878,10 +884,17 @@
             reads them. See <see cref="M:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine.OrderEvidenceKeysAsNativeEngine(System.Collections.Generic.IReadOnlyCollection{System.String})"/>.
             </summary>
         </member>
+        <member name="F:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine.NoPropertyIndexes">
+            <summary>
+            Empty index map. Results tagged with it read properties by name.
+            </summary>
+        </member>
         <member name="F:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine._requiredPropertyIndexes">
             <summary>
             Required property index for each property name, rebuilt whenever
-            data is loaded.
+            data is loaded. Cleared before the native data is swapped so that
+            ProcessEngine can tell whether results came from the data set
+            this map describes.
             </summary>
         </member>
         <member name="P:FiftyOne.IpIntelligence.Engine.OnPremise.FlowElements.IpiOnPremiseEngine.Config">

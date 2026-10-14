@@ -144,8 +144,18 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
             }
         }
 
-        internal void SetResults(ResultsIpiSwig results)
+        /// <summary>
+        /// Required property indexes of the data set the results came from.
+        /// The engine's map can already describe a newer data set.
+        /// </summary>
+        private IReadOnlyDictionary<string, int> _requiredPropertyIndexes =
+            IpiOnPremiseEngine.NoPropertyIndexes;
+
+        internal void SetResults(
+            ResultsIpiSwig results,
+            IReadOnlyDictionary<string, int> requiredPropertyIndexes)
         {
+            _requiredPropertyIndexes = requiredPropertyIndexes;
             Results.AddResult(results);
         }
 
@@ -182,7 +192,7 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
         private ResultsIpiSwig GetResultsContainingProperty(string propertyName)
         {
             var resultsList = Results.ResultsList;
-            if (_engine.RequiredPropertyIndexes.TryGetValue(propertyName, out _) &&
+            if (_requiredPropertyIndexes.TryGetValue(propertyName, out _) &&
                 resultsList.Count > 0)
             {
                 return resultsList[0];
@@ -358,7 +368,7 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
                     return (T)(object)storedValue;
                 }
                 if (Results.HasResults() &&
-                    _engine.RequiredPropertyIndexes.TryGetValue(
+                    _requiredPropertyIndexes.TryGetValue(
                         key,
                         out var requiredPropertyIndex))
                 {
@@ -381,7 +391,7 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise.Data
         {
             var results = GetResultsContainingProperty(propertyName);
             if (results != null &&
-                _engine.RequiredPropertyIndexes.TryGetValue(
+                _requiredPropertyIndexes.TryGetValue(
                     propertyName,
                     out var requiredPropertyIndex))
             {
