@@ -29,3 +29,5 @@ if ($IsLinux) {
 }
 
 $env:_51DEGREES_IPI_PATH = [IO.Path]::Combine($RepoPath, "FiftyOne.IpIntelligence.Engine.OnPremise", "ip-intelligence-cxx", "ip-intelligence-data", "51Degrees-EnterpriseIpiV41.ipi")
+# The cloud tests read _51DEGREES_RESOURCE_KEY and are inconclusive without it.
+$env:_51DEGREES_RESOURCE_KEY = $Keys.TestResourceKey
