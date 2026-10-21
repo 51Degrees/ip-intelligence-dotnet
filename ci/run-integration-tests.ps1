@@ -41,11 +41,21 @@ Write-Host "Fetching examples..."
 # native dependency loader, so drop 29 chars from every path by renaming the
 # checkout to 'ex' and use that as $ExamplesRepo from here on (all downstream
 # scripts treat it purely as a directory name).
-$ExamplesShortDir = "ex"
+#
+# The short name alone stopped being enough once the runner image moved to
+# MSBuild 18.11 (win25-vs2026/20261018.275): it writes
+#   ex\Tests\FiftyOne.IpIntelligence.Examples.OnPremise.GettingStartedAPI.Tests\obj\x64\Release\net10.0\FiftyOne.IpIntelligence.Examples.OnPremise.GettingStartedAPI.Tests.gentestingplatformentrypointinputcache.cache
+# through .NET Framework's legacy path handling, ignoring LongPathsEnabled,
+# and at 262 chars that fails with PathTooLongException (MSB4018). So also
+# move the checkout one directory up, out of the workspace (which repeats the
+# repo name), saving another 23 chars. Downstream scripts combine the name
+# with $pwd and Push-Location into it, so the relative '../ex' resolves to the
+# short absolute path before MSBuild ever sees it.
+$ExamplesShortDir = "../ex"
 if (Test-Path $ExamplesShortDir) {
     Remove-Item -Recurse -Force $ExamplesShortDir
 }
-Rename-Item $ExamplesRepo $ExamplesShortDir
+Move-Item $ExamplesRepo $ExamplesShortDir
 $ExamplesRepo = $ExamplesShortDir
 
 $ExamplesCommit = (git -C $ExamplesRepo rev-parse HEAD).Trim()
