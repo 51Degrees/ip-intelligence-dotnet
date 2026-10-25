@@ -128,22 +128,21 @@ try {
         Write-Error "LASTEXITCODE = $LASTEXITCODE"
     }
 
-    # Write out the results for comparison. The example runs only the
-    # LowMemory profile, because the IP Intelligence data file is several
-    # gigabytes.
+    # Write out the results for comparison. The graphs always use the
+    # MaxPerformance result, the fastest configuration.
     Write-Output "Writing performance test results"
     $Summary = Get-Content ./output/summary.json -Raw
     $Results = $Summary | ConvertFrom-Json
-    $LowMemory = $Results.LowMemory
-    if ($null -eq $LowMemory.DetectionsPerSecond -or $null -eq $LowMemory.MsPerDetection) {
-        throw "summary.json has no LowMemory result: $Summary"
+    $MaxPerformance = $Results.MaxPerformance
+    if ($null -eq $MaxPerformance.DetectionsPerSecond -or $null -eq $MaxPerformance.MsPerDetection) {
+        throw "summary.json has no MaxPerformance result: $Summary"
     }
     $PerfResults = "{
         'HigherIsBetter': {
-            'DetectionsPerSecond': $($LowMemory.DetectionsPerSecond)
+            'DetectionsPerSecond': $($MaxPerformance.DetectionsPerSecond)
         },
         'LowerIsBetter': {
-            'MsPerDetection': $($LowMemory.MsPerDetection)
+            'MsPerDetection': $($MaxPerformance.MsPerDetection)
         }
     }"
     Write-Debug "--- RESULTS BEGIN ---"
