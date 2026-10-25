@@ -128,15 +128,22 @@ try {
         Write-Error "LASTEXITCODE = $LASTEXITCODE"
     }
 
-    # Write out the results for comparison
+    # Write out the results for comparison. The example runs only the
+    # LowMemory profile, because the IP Intelligence data file is several
+    # gigabytes.
     Write-Output "Writing performance test results"
-    $Results = Get-Content ./output/summary.json | ConvertFrom-Json
+    $Summary = Get-Content ./output/summary.json -Raw
+    $Results = $Summary | ConvertFrom-Json
+    $LowMemory = $Results.LowMemory
+    if ($null -eq $LowMemory.DetectionsPerSecond -or $null -eq $LowMemory.MsPerDetection) {
+        throw "summary.json has no LowMemory result: $Summary"
+    }
     $PerfResults = "{
         'HigherIsBetter': {
-            'DetectionsPerSecond': $($Results.MaxPerformance.DetectionsPerSecond)
+            'DetectionsPerSecond': $($LowMemory.DetectionsPerSecond)
         },
         'LowerIsBetter': {
-            'MsPerDetection': $($Results.MaxPerformance.MsPerDetection)
+            'MsPerDetection': $($LowMemory.MsPerDetection)
         }
     }"
     Write-Debug "--- RESULTS BEGIN ---"
