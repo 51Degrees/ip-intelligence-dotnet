@@ -62,7 +62,7 @@ jobs:
     if: ${{ !cancelled() }}
     needs: [DataFileChange, PackageUpdate, SubmoduleUpdate]
     name: Nightly Pull Requests
-    uses: 51Degrees/common-ci/.github/workflows/nightly-pull-requests.yml@main
+    uses: 51Degrees/common-ci/.github/workflows/nightly-pull-requests.yml@feature/examples-branch-input
     with:
       repo-name: ${{ github.event.repository.name }}
       org-name: ${{ github.event.repository.owner.login }}
@@ -86,7 +86,7 @@ jobs:
     if: ${{ !cancelled() }}
     needs: PullRequests
     name: Nightly Publish
-    uses: 51Degrees/common-ci/.github/workflows/nightly-publish.yml@main
+    uses: 51Degrees/common-ci/.github/workflows/nightly-publish.yml@feature/examples-branch-input
     with:
       repo-name: ${{ github.event.repository.name }}
       org-name: ${{ github.event.repository.owner.login }}

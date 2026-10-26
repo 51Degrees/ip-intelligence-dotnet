@@ -26,7 +26,7 @@ on:
 jobs:
   Publish:
     name: Publish
-    uses: 51Degrees/common-ci/.github/workflows/nightly-publish.yml@main
+    uses: 51Degrees/common-ci/.github/workflows/nightly-publish.yml@feature/examples-branch-input
     with:
       repo-name: ${{ github.event.repository.name }}
       org-name: ${{ github.event.repository.owner.login }}
