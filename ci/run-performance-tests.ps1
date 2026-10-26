@@ -3,11 +3,12 @@ param(
     [string]$OrgName,
     [string]$Name = "Release_x64",
     [string]$Configuration = "Release",
-    [string]$Arch = "x64"
+    [string]$Arch = "x64",
+    [string]$ExamplesBranch = "main"
 )
 
 Write-Host "Running console performance tests..."
-& $PSScriptRoot/run-performance-tests-console.ps1 -Debug -RepoName:$RepoName -OrgName:$OrgName -Name:$Name -Configuration:$Configuration -Arch:$Arch
+& $PSScriptRoot/run-performance-tests-console.ps1 -Debug -RepoName:$RepoName -OrgName:$OrgName -Name:$Name -Configuration:$Configuration -Arch:$Arch -ExamplesBranch:$ExamplesBranch
 
 if ($env:SKIP_WEB_PERFORMANCE -eq 'true') {
     Write-Host "Skipping web performance tests (SKIP_WEB_PERFORMANCE)."
