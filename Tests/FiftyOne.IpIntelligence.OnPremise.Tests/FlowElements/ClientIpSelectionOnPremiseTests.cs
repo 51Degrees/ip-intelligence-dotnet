@@ -33,15 +33,13 @@ using System.Net;
 namespace FiftyOne.IpIntelligence.OnPremise.Tests.FlowElements
 {
     /// <summary>
-    /// Tests for https://github.com/51Degrees/ip-intelligence-dotnet/issues/319
-    /// - the client IP echoed as the synthetic Ip / IpV6 properties must be
+    /// The client IP echoed as the synthetic Ip / IpV6 properties must be
     /// selected by validity, not presence, and the parser must accept the
     /// shapes that arrive in production (a value carrying a port, a
-    /// comma-separated forwarded list) - and for
-    /// https://github.com/51Degrees/ip-intelligence-dotnet/issues/333 - the
-    /// echoed address must be the one the native lookup used, so the echo
-    /// must follow the native prefix and header priority across every
-    /// accepted evidence key rather than a fixed pair of key names.
+    /// comma-separated forwarded list). The echoed address must be the one
+    /// the native lookup used, so the echo must follow the native prefix and
+    /// header priority across every accepted evidence key rather than a
+    /// fixed pair of key names.
     /// </summary>
     [TestClass]
     [TestCategory("IpIntelligence")]
@@ -61,8 +59,8 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.FlowElements
         {
             using (var flowData = Wrapper.Pipeline.CreateFlowData())
             {
-                // The value from the original report - an IPv4 shape with an
-                // out-of-range octet, so it fails to parse.
+                // An IPv4 shape with an out-of-range octet, so it fails to
+                // parse.
                 flowData.AddEvidence("query.client-ip", "82.12.343.23");
                 flowData.AddEvidence("server.client-ip", "1.2.3.4");
                 flowData.Process();
@@ -308,12 +306,12 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.FlowElements
         }
 
         /// <summary>
-        /// Issue #333 - the report's repro. query.client-ip is unusable but
-        /// another 'query.' key holds a valid address, and a valid
-        /// server.client-ip is also present. The native engine makes a full
-        /// pass over 'query.' keys before it looks at 'server.' keys, so it
-        /// resolves the client-ip-51d value; the echo must name that same
-        /// address, not fall straight through to server.client-ip.
+        /// query.client-ip is unusable but another 'query.' key holds a valid
+        /// address, and a valid server.client-ip is also present. The native
+        /// engine makes a full pass over 'query.' keys before it looks at
+        /// 'server.' keys, so it resolves the client-ip-51d value; the echo
+        /// must name that same address, not fall straight through to
+        /// server.client-ip.
         /// </summary>
         [TestMethod]
         public void Process_InvalidQueryClientIp_OtherQueryKeyBeatsServerClientIp()
@@ -342,11 +340,11 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.FlowElements
         }
 
         /// <summary>
-        /// Issue #333 - with several valid client IP keys on one request the
-        /// echo must name whichever address the native lookup used, so the
-        /// location properties beside it describe that address. This does
-        /// not pin the winner: the header priority is defined by the data
-        /// file, so the check is only that the echo and the lookup agree.
+        /// With several valid client IP keys on one request the echo must
+        /// name whichever address the native lookup used, so the location
+        /// properties beside it describe that address. This does not pin the
+        /// winner: the header priority is defined by the data file, so the
+        /// check is only that the echo and the lookup agree.
         /// </summary>
         [TestMethod]
         public void Process_SeveralValidClientIpKeys_EchoMatchesLookup()
@@ -380,12 +378,11 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.FlowElements
         }
 
         /// <summary>
-        /// Issue #333 - a key whose prefix is not in the engine's own casing
-        /// is admitted by the (case-insensitive) evidence key filter but the
-        /// native prefix match is case-sensitive, so on its own such a value
-        /// used to be echoed while the lookup silently ignored it. The value
-        /// must now reach the lookup under the engine's spelling of the key,
-        /// so the location beside the echo is that of the echoed address.
+        /// A key whose prefix is not in the engine's own casing is admitted
+        /// by the (case-insensitive) evidence key filter but the native
+        /// prefix match is case-sensitive. The value must reach the lookup
+        /// under the engine's spelling of the key, so the location beside the
+        /// echo is that of the echoed address.
         /// </summary>
         [TestMethod]
         public void Process_UpperCasePrefix_LookupUsesTheEchoedAddress()
@@ -408,11 +405,11 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.FlowElements
         }
 
         /// <summary>
-        /// Issue #333 - the echo walks the engine's evidence keys in the
-        /// order the native engine consults them: a full 'query.' pass then
-        /// a 'server.' pass, each in the header priority order the native
-        /// engine listed the keys in. The native key list interleaves the
-        /// prefixes per header, so it has to be regrouped.
+        /// The echo walks the engine's evidence keys in the order the native
+        /// engine consults them: a full 'query.' pass then a 'server.' pass,
+        /// each in the header priority order the native engine listed the
+        /// keys in. The native key list interleaves the prefixes per header,
+        /// so it has to be regrouped.
         /// </summary>
         [TestMethod]
         public void OrderEvidenceKeysAsNativeEngine_GroupsByPrefixKeepingHeaderOrder()
@@ -625,8 +622,8 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.FlowElements
                 Assert.IsFalse(data.IpV6.HasValue,
                     "IpV6 should be NoValue when every source is invalid.");
 
-                // Issue #332 - NoValue here is "supplied and rejected", not
-                // "never supplied".
+                // NoValue here is "supplied and rejected", not "never
+                // supplied".
                 Assert.AreEqual(
                     IpDataOnPremise.InvalidIpEvidenceMessage,
                     data.Ip.NoValueMessage,

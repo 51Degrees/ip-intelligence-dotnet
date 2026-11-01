@@ -77,7 +77,7 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests
         [DataRow("")]
         [DataRow("   ")]
         [DataRow("not-an-ip")]
-        // Out-of-range octet - the value from the original report.
+        // Out-of-range octet.
         [DataRow("82.12.343.23")]
         // inet_aton shapes .NET would parse but which are not client IPs:
         // a bare number, fewer than four parts, and an octal octet the
