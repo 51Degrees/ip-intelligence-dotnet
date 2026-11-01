@@ -23,6 +23,7 @@
 using FiftyOne.IpIntelligence.Engine.OnPremise;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Net;
+using System.Net.Sockets;
 
 namespace FiftyOne.IpIntelligence.OnPremise.Tests
 {
@@ -45,12 +46,6 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests
         // canonical text is what keeps it usable. The zone index is
         // stripped, as it has no meaning to a lookup.
         [DataRow("fe80::1%1", "fe80::1", "fe80::1")]
-        // IPv4-mapped IPv6 stays in v6 form, so a v4 client arriving this
-        // way echoes as IpV6 with Ip NoValue, and is looked up in v6 form.
-        // Pinned so the choice is deliberate; unmapping it would be a
-        // parser change, not a test change.
-        [DataRow("::ffff:8.8.8.8", "::ffff:8.8.8.8", "::ffff:8.8.8.8")]
-        [DataRow("[::ffff:8.8.8.8]:443", "::ffff:8.8.8.8", "::ffff:8.8.8.8")]
         // IPv4 with a port.
         [DataRow("82.132.237.238:34947", "82.132.237.238", "82.132.237.238")]
         [DataRow("1.2.3.4:0", "1.2.3.4", "1.2.3.4")]
@@ -107,6 +102,14 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests
         [DataRow("[]")]
         [DataRow("[2001:db8::1]443")]
         [DataRow("[2001:db8::1]:")]
+        // An IPv4-mapped address follows the same rules, so no port is split
+        // off it without brackets, and a broken bracket form is refused.
+        [DataRow("::ffff:8.8.8.8:443")]
+        [DataRow("0:0:0:0:0:ffff:808:808:443")]
+        [DataRow("[::ffff:8.8.8.8")]
+        [DataRow("[::ffff:8.8.8.8]443")]
+        [DataRow("[::ffff:8.8.8.8]:")]
+        [DataRow("[::ffff:8.8.8.8]:65536")]
         // A list whose first entry is empty is not rescued by later entries;
         // the first entry is the client, and it is missing.
         [DataRow(", 1.2.3.4")]
@@ -118,6 +121,83 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests
             Assert.IsFalse(parsed, $"'{rawValue}' should not parse.");
             Assert.IsNull(address);
             Assert.IsNull(addressText);
+        }
+
+        /// <summary>
+        /// An IPv4-mapped address is its IPv4 address, however it is written.
+        /// The
+        /// <see href="https://github.com/51Degrees/specifications/blob/main/ip-intelligence-specification/pipeline-elements/ip-intelligence-on-premise.md#address-forms">specification</see>
+        /// defines the forms.
+        /// </summary>
+        [TestMethod]
+        [DataRow("::ffff:8.8.8.8", "8.8.8.8")]
+        [DataRow("::FFFF:8.8.8.8", "8.8.8.8")]
+        [DataRow("::ffff:808:808", "8.8.8.8")]
+        [DataRow("0:0:0:0:0:ffff:808:808", "8.8.8.8")]
+        [DataRow("0000:0000:0000:0000:0000:ffff:0808:0808", "8.8.8.8")]
+        // Bracketed, with and without a port.
+        [DataRow("[::ffff:8.8.8.8]", "8.8.8.8")]
+        [DataRow("[::ffff:8.8.8.8]:443", "8.8.8.8")]
+        [DataRow("[0:0:0:0:0:ffff:808:808]:443", "8.8.8.8")]
+        // A zone index goes with the IPv6 form.
+        [DataRow("::ffff:8.8.8.8%1", "8.8.8.8")]
+        [DataRow("[::ffff:8.8.8.8%1]:443", "8.8.8.8")]
+        // A forwarded list, where the first entry is the client.
+        [DataRow("::ffff:8.8.8.8, 5.6.7.8", "8.8.8.8")]
+        [DataRow(" ::ffff:8.8.8.8 , 2001:db8::1", "8.8.8.8")]
+        [DataRow("[::ffff:8.8.8.8]:443, 5.6.7.8", "8.8.8.8")]
+        // The ends of the IPv4 range, and a private address.
+        [DataRow("::ffff:0.0.0.0", "0.0.0.0")]
+        [DataRow("::ffff:0:0", "0.0.0.0")]
+        [DataRow("::ffff:255.255.255.255", "255.255.255.255")]
+        [DataRow("::ffff:10.0.0.1", "10.0.0.1")]
+        public void TryParse_Ipv4Mapped_IsItsIpv4Address(
+            string rawValue,
+            string expected)
+        {
+            var parsed = ClientIpParser.TryParse(
+                rawValue, out var address, out var addressText);
+
+            Assert.IsTrue(parsed, $"'{rawValue}' should parse.");
+            Assert.AreEqual(AddressFamily.InterNetwork, address.AddressFamily);
+            Assert.AreEqual(IPAddress.Parse(expected), address);
+            Assert.AreEqual(expected, addressText);
+        }
+
+        /// <summary>
+        /// Only ::ffff:0:0/96 is mapped. MapToIPv4 would turn every address
+        /// here into an IPv4 address, so these fail if its guard is lost.
+        /// </summary>
+        [TestMethod]
+        // IPv4-compatible, which is deprecated.
+        [DataRow("::8.8.8.8", "::8.8.8.8")]
+        [DataRow("[::8.8.8.8]:443", "::8.8.8.8")]
+        // IPv4-embedded, with the well-known prefix.
+        [DataRow("64:ff9b::8.8.8.8", "64:ff9b::808:808")]
+        [DataRow("64:ff9b::808:808", "64:ff9b::808:808")]
+        [DataRow("[64:ff9b::8.8.8.8]", "64:ff9b::808:808")]
+        // Loopback and unspecified.
+        [DataRow("::1", "::1")]
+        [DataRow("::", "::")]
+        // Just outside the mapped block.
+        [DataRow("::ffff:0:8.8.8.8", "::ffff:0:8.8.8.8")]
+        [DataRow("::fffe:8.8.8.8", "::fffe:808:808")]
+        [DataRow("1::ffff:8.8.8.8", "1::ffff:808:808")]
+        // Reads like a mapped address and a port, but is one IPv6 address.
+        [DataRow("::ffff:808:808:443", "::ffff:808:808:443")]
+        public void TryParse_NotIpv4Mapped_StaysIpv6(
+            string rawValue,
+            string expectedText)
+        {
+            var parsed = ClientIpParser.TryParse(
+                rawValue, out var address, out var addressText);
+
+            Assert.IsTrue(parsed, $"'{rawValue}' should parse.");
+            Assert.AreEqual(
+                AddressFamily.InterNetworkV6,
+                address.AddressFamily);
+            Assert.AreEqual(IPAddress.Parse(expectedText), address);
+            Assert.AreEqual(expectedText, addressText);
         }
 
         [TestMethod]

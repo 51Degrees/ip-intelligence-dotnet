@@ -143,6 +143,121 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.FlowElements
             }
         }
 
+        /// <summary>
+        /// An IPv4-mapped address is its IPv4 address, so the echo reports
+        /// the IPv4 address and the lookup resolves the range that address
+        /// resolves. The
+        /// <see href="https://github.com/51Degrees/specifications/blob/main/ip-intelligence-specification/pipeline-elements/ip-intelligence-on-premise.md#address-forms">specification</see>
+        /// requires both.
+        /// </summary>
+        [TestMethod]
+        [DataRow("query.client-ip", "::ffff:8.8.8.8")]
+        [DataRow("server.client-ip", "::ffff:8.8.8.8")]
+        [DataRow("query.client-ip", "0:0:0:0:0:ffff:808:808")]
+        [DataRow("server.client-ip", "[::ffff:8.8.8.8]:443")]
+        public void Process_Ipv4MappedClientIp_IsItsIpv4Address(
+            string evidenceKey,
+            string mappedAddress)
+        {
+            using (var flowData = Wrapper.Pipeline.CreateFlowData())
+            {
+                flowData.AddEvidence(evidenceKey, mappedAddress);
+                flowData.Process();
+
+                AssertIsIpv4Address(
+                    flowData.Get<IIpIntelligenceData>(),
+                    "8.8.8.8");
+            }
+        }
+
+        /// <summary>
+        /// Evidence that is already an address object takes the same path as
+        /// text, so an address read from a dual stack socket is unmapped too.
+        /// </summary>
+        [TestMethod]
+        public void Process_Ipv4MappedAddressObject_IsItsIpv4Address()
+        {
+            using (var flowData = Wrapper.Pipeline.CreateFlowData())
+            {
+                flowData.AddEvidence(
+                    "server.client-ip",
+                    IPAddress.Parse("::ffff:8.8.8.8"));
+                flowData.Process();
+
+                AssertIsIpv4Address(
+                    flowData.Get<IIpIntelligenceData>(),
+                    "8.8.8.8");
+            }
+        }
+
+        [TestMethod]
+        public void Process_Ipv4MappedQueryClientIp_BeatsInvalidServerClientIp()
+        {
+            using (var flowData = Wrapper.Pipeline.CreateFlowData())
+            {
+                flowData.AddEvidence("query.client-ip", "::ffff:8.8.8.8");
+                flowData.AddEvidence("server.client-ip", "82.12.343.23");
+                flowData.Process();
+
+                AssertIsIpv4Address(
+                    flowData.Get<IIpIntelligenceData>(),
+                    "8.8.8.8");
+            }
+        }
+
+        [TestMethod]
+        public void Process_InvalidQueryClientIp_FallsBackToIpv4MappedServerClientIp()
+        {
+            using (var flowData = Wrapper.Pipeline.CreateFlowData())
+            {
+                flowData.AddEvidence("query.client-ip", "82.12.343.23");
+                flowData.AddEvidence("server.client-ip", "::ffff:8.8.8.8");
+                flowData.Process();
+
+                AssertIsIpv4Address(
+                    flowData.Get<IIpIntelligenceData>(),
+                    "8.8.8.8");
+            }
+        }
+
+        [TestMethod]
+        public void Process_Ipv4MappedQueryClientIp_KeepsPriorityOverServerClientIp()
+        {
+            using (var flowData = Wrapper.Pipeline.CreateFlowData())
+            {
+                flowData.AddEvidence("query.client-ip", "::ffff:8.8.8.8");
+                flowData.AddEvidence("server.client-ip", "1.2.3.4");
+                flowData.Process();
+
+                AssertIsIpv4Address(
+                    flowData.Get<IIpIntelligenceData>(),
+                    "8.8.8.8");
+            }
+        }
+
+        /// <summary>
+        /// Forms that hold an IPv4 address without being mapped stay IPv6 all
+        /// the way through to the echo.
+        /// </summary>
+        [TestMethod]
+        [DataRow("::8.8.8.8")]
+        [DataRow("64:ff9b::8.8.8.8")]
+        public void Process_NotIpv4Mapped_EchoesIpV6(string address)
+        {
+            using (var flowData = Wrapper.Pipeline.CreateFlowData())
+            {
+                flowData.AddEvidence("server.client-ip", address);
+                flowData.Process();
+
+                var data = flowData.Get<IIpIntelligenceData>();
+                Assert.IsTrue(data.IpV6.HasValue,
+                    "IpV6 should have a value for an unmapped IPv6 address.");
+                Assert.AreEqual(IPAddress.Parse(address), data.IpV6.Value);
+                Assert.IsFalse(data.Ip.HasValue,
+                    "Ip should have no value for an unmapped IPv6 address.");
+            }
+        }
+
         [TestMethod]
         public void Process_InvalidQueryClientIp_NativeLookupStillRuns()
         {
@@ -356,6 +471,55 @@ namespace FiftyOne.IpIntelligence.OnPremise.Tests.FlowElements
                 .OrderEvidenceKeysAsNativeEngine(new List<string>());
 
             Assert.AreEqual(0, ordered.Length);
+        }
+
+        /// <summary>
+        /// Assert that the data is what the plain IPv4 address gives, so Ip
+        /// holds the address, IpV6 and its dictionary entry are absent, and
+        /// the IP range is the one the plain address resolves. The range is
+        /// compared because the mapped block's own range would also contain
+        /// the address, so being inside the range would not show that the
+        /// lookup used the IPv4 form.
+        /// </summary>
+        private void AssertIsIpv4Address(
+            IIpIntelligenceData data,
+            string ipv4Address)
+        {
+            Assert.IsTrue(data.Ip.HasValue,
+                "Ip should have a value for an IPv4-mapped address.");
+            Assert.AreEqual(IPAddress.Parse(ipv4Address), data.Ip.Value);
+            Assert.IsFalse(data.IpV6.HasValue,
+                "IpV6 should have no value for an IPv4-mapped address.");
+
+            var dictionary = data.AsDictionary();
+            Assert.IsTrue(dictionary.ContainsKey("ip"),
+                "AsDictionary must contain 'ip' for an IPv4-mapped address.");
+            Assert.IsFalse(dictionary.ContainsKey("ipv6"),
+                "AsDictionary must not contain 'ipv6' for an IPv4-mapped " +
+                "address.");
+
+            using (var flowData = Wrapper.Pipeline.CreateFlowData())
+            {
+                flowData.AddEvidence("query.client-ip", ipv4Address);
+                flowData.Process();
+                var expected = flowData.Get<IIpIntelligenceData>();
+                if (expected.IpRangeStart.HasValue == false ||
+                    expected.IpRangeEnd.HasValue == false)
+                {
+                    Assert.Inconclusive(
+                        "The data file resolves no IP range for " +
+                        $"{ipv4Address}, so the lookup cannot be compared. " +
+                        "Choose a covered test address.");
+                }
+                Assert.AreEqual(
+                    expected.IpRangeStart.Value,
+                    data.IpRangeStart.Value,
+                    "The lookup must use the IPv4 address.");
+                Assert.AreEqual(
+                    expected.IpRangeEnd.Value,
+                    data.IpRangeEnd.Value,
+                    "The lookup must use the IPv4 address.");
+            }
         }
 
         /// <summary>
