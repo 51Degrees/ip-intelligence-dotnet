@@ -47,7 +47,10 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise
         /// The evidence value. May be null, may carry a port, and may be a
         /// comma-separated forwarded list of which the first entry is used.
         /// </param>
-        /// <param name="address">The address read from the value.</param>
+        /// <param name="address">
+        /// The address read from the value. An IPv4-mapped address is its
+        /// IPv4 address.
+        /// </param>
         /// <param name="addressText">
         /// The canonical textual form of <paramref name="address"/>, for
         /// passing to services that take a string. Always canonical, never
@@ -96,7 +99,7 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise
             if (IsDottedQuadOrIpV6(candidate) &&
                 IPAddress.TryParse(candidate, out address))
             {
-                address = StripZoneIndex(address);
+                address = ToLookupAddress(address);
                 addressText = address.ToString();
                 return true;
             }
@@ -154,13 +157,28 @@ namespace FiftyOne.IpIntelligence.Engine.OnPremise
             if (IPAddress.TryParse(bracketedAddress, out address) &&
                 address.AddressFamily == AddressFamily.InterNetworkV6)
             {
-                address = StripZoneIndex(address);
+                address = ToLookupAddress(address);
                 addressText = address.ToString();
                 return true;
             }
 
             address = null;
             return false;
+        }
+
+        /// <summary>
+        /// Returns the address a lookup uses, which is the IPv4 address for
+        /// an IPv4-mapped address and otherwise the address without its zone
+        /// index. MapToIPv4 takes the last four bytes of any IPv6 address, so
+        /// it is only called on a mapped one. The
+        /// <see href="https://github.com/51Degrees/specifications/blob/main/ip-intelligence-specification/pipeline-elements/ip-intelligence-on-premise.md#address-forms">specification</see>
+        /// defines which forms are mapped.
+        /// </summary>
+        private static IPAddress ToLookupAddress(IPAddress address)
+        {
+            return address.IsIPv4MappedToIPv6
+                ? address.MapToIPv4()
+                : StripZoneIndex(address);
         }
 
         /// <summary>

@@ -26,7 +26,10 @@
             The evidence value. May be null, may carry a port, and may be a
             comma-separated forwarded list of which the first entry is used.
             </param>
-            <param name="address">The address read from the value.</param>
+            <param name="address">
+            The address read from the value. An IPv4-mapped address is its
+            IPv4 address.
+            </param>
             <param name="addressText">
             The canonical textual form of <paramref name="address"/>, for
             passing to services that take a string. Always canonical, never
@@ -42,6 +45,16 @@
             <summary>
             Parses "[address]" or "[address]:port" where the bracketed
             address is IPv6.
+            </summary>
+        </member>
+        <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.ClientIpParser.ToLookupAddress(System.Net.IPAddress)">
+            <summary>
+            Returns the address a lookup uses, which is the IPv4 address for
+            an IPv4-mapped address and otherwise the address without its zone
+            index. MapToIPv4 takes the last four bytes of any IPv6 address, so
+            it is only called on a mapped one. The
+            <see href="https://github.com/51Degrees/specifications/blob/main/ip-intelligence-specification/pipeline-elements/ip-intelligence-on-premise.md#address-forms">specification</see>
+            defines which forms are mapped.
             </summary>
         </member>
         <member name="M:FiftyOne.IpIntelligence.Engine.OnPremise.ClientIpParser.StripZoneIndex(System.Net.IPAddress)">
