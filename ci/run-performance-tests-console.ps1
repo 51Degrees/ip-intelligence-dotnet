@@ -128,15 +128,21 @@ try {
         Write-Error "LASTEXITCODE = $LASTEXITCODE"
     }
 
-    # Write out the results for comparison
+    # Write out the results for comparison. The graphs always use the
+    # MaxPerformance result, the fastest configuration.
     Write-Output "Writing performance test results"
-    $Results = Get-Content ./output/summary.json | ConvertFrom-Json
+    $Summary = Get-Content ./output/summary.json -Raw
+    $Results = $Summary | ConvertFrom-Json
+    $MaxPerformance = $Results.MaxPerformance
+    if ($null -eq $MaxPerformance.DetectionsPerSecond -or $null -eq $MaxPerformance.MsPerDetection) {
+        throw "summary.json has no MaxPerformance result: $Summary"
+    }
     $PerfResults = "{
         'HigherIsBetter': {
-            'DetectionsPerSecond': $($Results.MaxPerformance.DetectionsPerSecond)
+            'DetectionsPerSecond': $($MaxPerformance.DetectionsPerSecond)
         },
         'LowerIsBetter': {
-            'MsPerDetection': $($Results.MaxPerformance.MsPerDetection)
+            'MsPerDetection': $($MaxPerformance.MsPerDetection)
         }
     }"
     Write-Debug "--- RESULTS BEGIN ---"
