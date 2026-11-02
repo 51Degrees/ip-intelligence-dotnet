@@ -10,6 +10,10 @@ on:
         description: '🦆 Performance'
         type: boolean
         default: false
+      examples-branch:
+        description: 'ip-intelligence-dotnet-examples branch to test against (empty = main)'
+        type: string
+        default: ''
 
 jobs:
   PullRequests:
@@ -21,6 +25,7 @@ jobs:
       dryrun: ${{ inputs.dryrun || false }}
       cache-assets: true
       skip-compare-performance: ${{ inputs.skip-compare-performance || false }}
+      examples-branch: ${{ inputs.examples-branch || '' }}
       build-test-timeout-minutes: 300
     secrets:
       token: ${{ secrets.ACCESS_TOKEN }}

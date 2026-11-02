@@ -18,6 +18,10 @@ on:
         description: 'Skip the web performance test only'
         type: boolean
         default: false
+      examples-branch:
+        description: 'ip-intelligence-dotnet-examples branch to test against (empty = main)'
+        type: string
+        default: ''
 
 jobs:
   Publish:
@@ -31,6 +35,7 @@ jobs:
       skip-compare-performance: ${{ inputs.skip-compare-performance || false }}
       skip-tests: ${{ inputs.skip-tests || false }}
       skip-web-performance: ${{ inputs.skip-web-performance || false }}
+      examples-branch: ${{ inputs.examples-branch || '' }}
       build-platform: windows-latest
     secrets:
       token: ${{ secrets.ACCESS_TOKEN }}
