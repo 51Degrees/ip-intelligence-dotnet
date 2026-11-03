@@ -1,3 +1,6 @@
+> [!IMPORTANT]
+> This repo has been merged into the monorepo https://github.com/51Degrees/51degrees-dotnet, under `ip-intelligence/`. Please refer to the new monorepository for issues and PRs. The NuGet packages keep their names and are published from there.
+
 # 51Degrees IP Intelligence Engines
 
 ![51Degrees](https://51degrees.com/img/logo.png?utm_source=github&utm_medium=readme&utm_campaign=ip-intelligence-dotnet&utm_content=readme.md&utm_term=51degrees-ip-intelligence-engines "Data rewards the curious") **Pipeline API**
